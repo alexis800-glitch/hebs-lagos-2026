@@ -2,19 +2,20 @@
 
 import { motion } from "framer-motion";
 import { Trophy, Calendar, Users } from "lucide-react";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const prizes = [
   { place: "1st Place", amount: "$20,000", gradient: "linear-gradient(135deg, #FFD700, #FFA500)" },
   { place: "2nd Place", amount: "$10,000", gradient: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
-  { place: "3rd Place", amount: "$5,000", gradient: "linear-gradient(135deg, #CD7F32, #A0522D)" },
+  { place: "3rd Place", amount: "$5,000",  gradient: "linear-gradient(135deg, #CD7F32, #A0522D)" },
 ];
 
 const team = [
-  { role: "Hairstylist", icon: "✂️" },
-  { role: "Barber", icon: "💈" },
-  { role: "Makeup Artist", icon: "💄" },
+  { role: "Hairstylist",      icon: "✂️" },
+  { role: "Barber",           icon: "💈" },
+  { role: "Makeup Artist",    icon: "💄" },
   { role: "Fashion Designer", icon: "👗" },
 ];
 
@@ -29,15 +30,13 @@ const container = {
 };
 
 export default function Competition() {
+  const mounted = useMounted();
+
   return (
-    <section
-      id="competition"
-      className="py-24 px-4"
-      style={{ background: "#0d0d0d" }}
-    >
+    <section id="competition" className="py-24 px-4" style={{ background: "#0d0d0d" }}>
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -64,7 +63,7 @@ export default function Competition() {
         {/* Prize table */}
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-14"
@@ -93,7 +92,7 @@ export default function Competition() {
 
         {/* Team composition */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: EASE }}
@@ -105,16 +104,17 @@ export default function Competition() {
         >
           <div className="flex items-center gap-3 mb-6">
             <Users size={22} style={{ color: "#9b59b6" }} />
-            <h3 className="font-playfair font-bold text-xl text-white">
-              Team Composition
-            </h3>
+            <h3 className="font-playfair font-bold text-xl text-white">Team Composition</h3>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {team.map((member) => (
               <div
                 key={member.role}
                 className="flex flex-col items-center gap-2 p-4 rounded-xl"
-                style={{ background: "rgba(22,22,22,0.6)", border: "1px solid rgba(255,255,255,0.06)" }}
+                style={{
+                  background: "rgba(22,22,22,0.6)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
               >
                 <span className="text-3xl">{member.icon}</span>
                 <span className="text-sm font-semibold text-white text-center font-inter">
@@ -127,7 +127,7 @@ export default function Competition() {
 
         {/* Registration deadline + CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={mounted ? { opacity: 0, y: 25 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.7, ease: EASE }}

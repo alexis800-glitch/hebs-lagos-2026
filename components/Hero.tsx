@@ -2,12 +2,15 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import { useMounted } from "@/hooks/useMounted";
 
 const CountdownTimer = dynamic(() => import("./CountdownTimer"), { ssr: false });
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 export default function Hero() {
+  const mounted = useMounted();
+
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 text-center"
@@ -18,8 +21,7 @@ export default function Hero() {
         aria-hidden
         className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(circle, rgba(155,89,182,0.35) 0%, rgba(155,89,182,0) 70%)",
+          background: "radial-gradient(circle, rgba(155,89,182,0.35) 0%, rgba(155,89,182,0) 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -28,8 +30,7 @@ export default function Hero() {
         aria-hidden
         className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(circle, rgba(233,30,140,0.3) 0%, rgba(233,30,140,0) 70%)",
+          background: "radial-gradient(circle, rgba(233,30,140,0.3) 0%, rgba(233,30,140,0) 70%)",
           filter: "blur(60px)",
         }}
       />
@@ -38,24 +39,20 @@ export default function Hero() {
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(155,89,182,0.12) 0%, rgba(233,30,140,0.08) 100%)",
+          background: "linear-gradient(180deg, rgba(155,89,182,0.12) 0%, rgba(233,30,140,0.08) 100%)",
         }}
       />
 
       <div className="relative z-10 flex flex-col items-center gap-6 max-w-5xl mx-auto">
         {/* Prize badge */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={mounted ? { opacity: 0, y: -20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
+          transition={{ duration: 0.7, ease: EASE, delay: mounted ? 0.1 : 0 }}
         >
           <span
             className="inline-block px-5 py-2 rounded-full text-sm font-semibold tracking-wide font-inter"
-            style={{
-              background: "linear-gradient(135deg, #9b59b6, #e91e8c)",
-              color: "#fff",
-            }}
+            style={{ background: "linear-gradient(135deg, #9b59b6, #e91e8c)", color: "#fff" }}
           >
             $35,000 in Prizes
           </span>
@@ -63,9 +60,9 @@ export default function Hero() {
 
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.2 : 0 }}
           className="font-playfair font-bold text-white leading-tight"
           style={{ fontSize: "clamp(2.4rem, 7vw, 5.5rem)" }}
         >
@@ -76,9 +73,9 @@ export default function Hero() {
 
         {/* Sub-headline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={mounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}
+          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.35 : 0 }}
           className="font-inter text-lg md:text-2xl font-medium"
           style={{ color: "#aaaaaa" }}
         >
@@ -87,9 +84,9 @@ export default function Hero() {
 
         {/* Countdown */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={mounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
+          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.5 : 0 }}
           className="my-4 w-full"
         >
           <CountdownTimer />
@@ -97,9 +94,9 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={mounted ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.65 }}
+          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.65 : 0 }}
           className="flex flex-col sm:flex-row gap-4 mt-2"
         >
           <a
@@ -110,10 +107,7 @@ export default function Hero() {
           >
             Get Your Tickets
           </a>
-          <a
-            href="#competition"
-            className="btn-outline text-base md:text-lg"
-          >
+          <a href="#competition" className="btn-outline text-base md:text-lg">
             View Competitions
           </a>
         </motion.div>
@@ -121,9 +115,9 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={mounted ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
+        transition={{ delay: mounted ? 1.2 : 0, duration: 0.8 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-xs tracking-widest uppercase font-inter" style={{ color: "#555" }}>

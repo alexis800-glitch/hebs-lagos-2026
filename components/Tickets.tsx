@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check, Star } from "lucide-react";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -53,15 +54,13 @@ const card = {
 };
 
 export default function Tickets() {
+  const mounted = useMounted();
+
   return (
-    <section
-      id="tickets"
-      className="py-24 px-4"
-      style={{ background: "#080808" }}
-    >
+    <section id="tickets" className="py-24 px-4" style={{ background: "#080808" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -74,17 +73,16 @@ export default function Tickets() {
             Tickets
           </p>
           <h2 className="section-title text-white mb-6">
-            Choose Your{" "}
-            <span className="gradient-text italic">Experience</span>
+            Choose Your <span className="gradient-text italic">Experience</span>
           </h2>
           <p className="section-subtitle max-w-xl mx-auto">
             Early bird pricing available for a limited time. Secure your spot before prices increase.
           </p>
         </motion.div>
 
-        {/* Pricing toggle label */}
+        {/* Pricing label row */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={mounted ? { opacity: 0 } : false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: EASE }}
@@ -96,9 +94,7 @@ export default function Tickets() {
           >
             Early Bird
           </span>
-          <span className="text-sm font-inter" style={{ color: "#aaaaaa" }}>
-            vs
-          </span>
+          <span className="text-sm font-inter" style={{ color: "#aaaaaa" }}>vs</span>
           <span
             className="px-4 py-1.5 rounded-full text-sm font-semibold font-inter"
             style={{ border: "1px solid rgba(255,255,255,0.2)", color: "#aaaaaa" }}
@@ -109,7 +105,7 @@ export default function Tickets() {
 
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
@@ -154,9 +150,7 @@ export default function Tickets() {
                 >
                   {ticket.earlyBird}
                 </span>
-                <span className="text-xs font-inter" style={{ color: "#aaaaaa" }}>
-                  early bird
-                </span>
+                <span className="text-xs font-inter" style={{ color: "#aaaaaa" }}>early bird</span>
               </div>
               <p className="text-sm mb-6 font-inter" style={{ color: "#555" }}>
                 {ticket.standard} standard
@@ -164,7 +158,11 @@ export default function Tickets() {
 
               <ul className="flex flex-col gap-2.5 mb-8 flex-1">
                 {ticket.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm font-inter" style={{ color: "#aaaaaa" }}>
+                  <li
+                    key={f}
+                    className="flex items-start gap-2 text-sm font-inter"
+                    style={{ color: "#aaaaaa" }}
+                  >
                     <Check size={15} className="mt-0.5 shrink-0" style={{ color: "#9b59b6" }} />
                     {f}
                   </li>

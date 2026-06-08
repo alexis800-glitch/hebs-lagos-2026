@@ -1,14 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Sparkles,
-  GraduationCap,
-  MessageSquare,
-  Trophy,
-  Users,
-  HandMetal,
-} from "lucide-react";
+import { Sparkles, GraduationCap, MessageSquare, Trophy, Users, HandMetal } from "lucide-react";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -56,15 +50,13 @@ const item = {
 };
 
 export default function EventHighlights() {
+  const mounted = useMounted();
+
   return (
-    <section
-      id="highlights"
-      className="py-24 px-4"
-      style={{ background: "#080808" }}
-    >
+    <section id="highlights" className="py-24 px-4" style={{ background: "#080808" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -76,9 +68,7 @@ export default function EventHighlights() {
           >
             What to Expect
           </p>
-          <h2 className="section-title text-white mb-6">
-            Event Highlights
-          </h2>
+          <h2 className="section-title text-white mb-6">Event Highlights</h2>
           <p className="section-subtitle max-w-2xl mx-auto">
             Three days of immersive beauty education, fierce competition, and global connection.
           </p>
@@ -86,7 +76,7 @@ export default function EventHighlights() {
 
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"

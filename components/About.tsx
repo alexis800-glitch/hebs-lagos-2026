@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -36,11 +37,13 @@ const card = {
 };
 
 export default function About() {
+  const mounted = useMounted();
+
   return (
     <section id="about" className="py-24 px-4" style={{ background: "#0d0d0d" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -65,7 +68,7 @@ export default function About() {
 
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6"

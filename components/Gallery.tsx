@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Camera } from "lucide-react";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -25,15 +26,13 @@ const item = {
 };
 
 export default function Gallery() {
+  const mounted = useMounted();
+
   return (
-    <section
-      id="gallery"
-      className="py-24 px-4"
-      style={{ background: "#080808" }}
-    >
+    <section id="gallery" className="py-24 px-4" style={{ background: "#080808" }}>
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -45,9 +44,7 @@ export default function Gallery() {
           >
             Gallery
           </p>
-          <h2 className="section-title text-white mb-4">
-            Relive the Magic
-          </h2>
+          <h2 className="section-title text-white mb-4">Relive the Magic</h2>
           <p className="section-subtitle max-w-xl mx-auto">
             Photos from HEBS 2024 &amp; 2025
           </p>
@@ -55,7 +52,7 @@ export default function Gallery() {
 
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-2 sm:grid-cols-3 gap-4"
@@ -87,8 +84,7 @@ export default function Gallery() {
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background:
-                    "linear-gradient(to top, rgba(13,13,13,0.6) 0%, transparent 50%)",
+                  background: "linear-gradient(to top, rgba(13,13,13,0.6) 0%, transparent 50%)",
                 }}
               />
             </motion.div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -24,7 +25,16 @@ function YoutubeIcon({ size = 20 }: { size?: number }) {
 
 function InstagramIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -41,13 +51,15 @@ function TikTokIcon({ size = 20 }: { size?: number }) {
 }
 
 const socials = [
-  { name: "Facebook", Icon: FacebookIcon, href: "https://facebook.com/thehebs", color: "#1877F2" },
-  { name: "YouTube", Icon: YoutubeIcon, href: "https://youtube.com/@thehebs", color: "#FF0000" },
+  { name: "Facebook",  Icon: FacebookIcon,  href: "https://facebook.com/thehebs",  color: "#1877F2" },
+  { name: "YouTube",   Icon: YoutubeIcon,   href: "https://youtube.com/@thehebs",  color: "#FF0000" },
   { name: "Instagram", Icon: InstagramIcon, href: "https://instagram.com/thehebs", color: "#E1306C" },
-  { name: "TikTok", Icon: TikTokIcon, href: "https://tiktok.com/@thehebs", color: "#ffffff" },
+  { name: "TikTok",    Icon: TikTokIcon,    href: "https://tiktok.com/@thehebs",   color: "#ffffff" },
 ];
 
 export default function Footer() {
+  const mounted = useMounted();
+
   return (
     <footer
       className="relative py-20 px-4"
@@ -55,7 +67,7 @@ export default function Footer() {
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -154,7 +166,6 @@ export default function Footer() {
                 484-357-1812
               </a>
             </div>
-
             <a
               href="https://hebseventportal.com"
               target="_blank"
@@ -169,7 +180,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={mounted ? { opacity: 0 } : false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: EASE }}

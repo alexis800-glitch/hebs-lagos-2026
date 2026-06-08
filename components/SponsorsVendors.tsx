@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Handshake, ShoppingBag, ArrowRight } from "lucide-react";
+import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -37,15 +38,13 @@ const card = {
 };
 
 export default function SponsorsVendors() {
+  const mounted = useMounted();
+
   return (
-    <section
-      id="sponsors"
-      className="py-24 px-4"
-      style={{ background: "#0d0d0d" }}
-    >
+    <section id="sponsors" className="py-24 px-4" style={{ background: "#0d0d0d" }}>
       <div className="max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
@@ -68,7 +67,7 @@ export default function SponsorsVendors() {
 
         <motion.div
           variants={container}
-          initial="hidden"
+          initial={mounted ? "hidden" : false}
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
