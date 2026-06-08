@@ -17,6 +17,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* offset anchor targets below the fixed 64px navbar */
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -92,6 +94,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--subtext);
   font-size: 1.125rem;
   line-height: 1.7;
+}
+
+/* Input placeholder color */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
 }
 
 @layer utilities {

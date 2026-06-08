@@ -13,33 +13,39 @@ export default function Hero() {
 
   return (
     <section
+      id="home"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 text-center"
       style={{ background: "#0d0d0d" }}
     >
-      {/* Purple gradient blob top-left */}
+      {/* Top-left corner accent — purple, max 12% */}
       <div
         aria-hidden
-        className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full pointer-events-none"
+        className="absolute top-0 left-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(155,89,182,0.35) 0%, rgba(155,89,182,0) 70%)",
-          filter: "blur(60px)",
+          width: "480px",
+          height: "480px",
+          background:
+            "radial-gradient(ellipse at top left, rgba(155,89,182,0.12) 0%, transparent 65%)",
         }}
       />
-      {/* Pink gradient blob bottom-right */}
+      {/* Bottom-right corner accent — pink, max 10% */}
       <div
         aria-hidden
-        className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full pointer-events-none"
+        className="absolute bottom-0 right-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(233,30,140,0.3) 0%, rgba(233,30,140,0) 70%)",
-          filter: "blur(60px)",
+          width: "440px",
+          height: "440px",
+          background:
+            "radial-gradient(ellipse at bottom right, rgba(233,30,140,0.10) 0%, transparent 65%)",
         }}
       />
-      {/* Purple→pink gradient overlay strip */}
+      {/* Very subtle diagonal vignette to give depth without glow */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, rgba(155,89,182,0.12) 0%, rgba(233,30,140,0.08) 100%)",
+          background:
+            "linear-gradient(135deg, rgba(155,89,182,0.05) 0%, transparent 40%, transparent 60%, rgba(233,30,140,0.05) 100%)",
         }}
       />
 
@@ -52,7 +58,10 @@ export default function Hero() {
         >
           <span
             className="inline-block px-5 py-2 rounded-full text-sm font-semibold tracking-wide font-inter"
-            style={{ background: "linear-gradient(135deg, #9b59b6, #e91e8c)", color: "#fff" }}
+            style={{
+              background: "linear-gradient(135deg, #9b59b6, #e91e8c)",
+              color: "#fff",
+            }}
           >
             $35,000 in Prizes
           </span>
@@ -120,14 +129,14 @@ export default function Hero() {
         transition={{ delay: mounted ? 1.2 : 0, duration: 0.8 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-xs tracking-widest uppercase font-inter" style={{ color: "#555" }}>
+        <span className="text-xs tracking-widest uppercase font-inter" style={{ color: "#444" }}>
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           className="w-px h-8"
-          style={{ background: "linear-gradient(to bottom, #9b59b6, transparent)" }}
+          style={{ background: "linear-gradient(to bottom, rgba(155,89,182,0.6), transparent)" }}
         />
       </motion.div>
     </section>
