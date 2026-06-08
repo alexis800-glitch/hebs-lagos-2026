@@ -3,21 +3,95 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0d0d0d;
+  --purple: #9b59b6;
+  --pink: #e91e8c;
+  --white: #ffffff;
+  --subtext: #aaaaaa;
+  --card: #161616;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--white);
+  font-family: var(--font-inter), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #9b59b6, #e91e8c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: rgba(22, 22, 22, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(155, 89, 182, 0.2);
+}
+
+.btn-pink {
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 14px 32px;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-pink:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 14px 32px;
+  display: inline-block;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.section-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  color: var(--subtext);
+  font-size: 1.125rem;
+  line-height: 1.7;
 }
 
 @layer utilities {

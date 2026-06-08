@@ -9,8 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        bg: "#0d0d0d",
+        "bg-card": "#161616",
+        "hebs-purple": "#9b59b6",
+        "hebs-pink": "#e91e8c",
+        subtext: "#aaaaaa",
+      },
+      fontFamily: {
+        playfair: ["var(--font-playfair)", "serif"],
+        inter: ["var(--font-inter)", "sans-serif"],
       },
     },
   },
