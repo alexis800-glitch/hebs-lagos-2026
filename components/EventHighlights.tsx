@@ -54,17 +54,17 @@ export default function EventHighlights() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="border-b border-neutral-900 pb-10 mb-0 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          className="border-b border-neutral-900 pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
         >
           <div>
             <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">
               What to Expect
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
-              Event <em className="font-normal italic">Highlights</em>
+              Event <span className="italic font-normal">Highlights</span>
             </h2>
           </div>
-          <p className="font-sans text-sm font-light text-neutral-400 max-w-xs leading-relaxed">
+          <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed md:text-right">
             Three days of immersive education, fierce competition, and global connection.
           </p>
         </motion.div>
