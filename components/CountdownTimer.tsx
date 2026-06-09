@@ -63,24 +63,13 @@ export default function CountdownTimer() {
   ];
 
   return (
-    <div className="flex gap-3 md:gap-6 justify-center flex-wrap">
+    <div className="flex gap-3 md:gap-4 justify-center flex-wrap">
       {units.map(({ label, value }) => (
         <div key={label} className="flex flex-col items-center">
-          <div
-            className="text-3xl md:text-5xl font-bold rounded-2xl px-4 md:px-6 py-3 md:py-4 text-white tabular-nums min-w-[64px] md:min-w-[80px] text-center"
-            style={{
-              background: "rgba(155, 89, 182, 0.25)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              border: "1px solid rgba(155, 89, 182, 0.4)",
-            }}
-          >
+          <div className="font-sans text-3xl md:text-5xl font-medium rounded-none bg-[#0a0a0a] border border-white/5 p-4 md:p-6 text-white tabular-nums min-w-[72px] md:min-w-[96px] text-center">
             {String(value).padStart(2, "0")}
           </div>
-          <span
-            className="text-xs mt-2 uppercase tracking-[0.15em] font-inter"
-            style={{ color: "#aaaaaa" }}
-          >
+          <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-500 mt-2">
             {label}
           </span>
         </div>
