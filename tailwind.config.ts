@@ -19,8 +19,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
+        sans: ["var(--font-geist-sans)", "sans-serif"],
+        serif: ["var(--font-serif)", "serif"],
+        mono: ["var(--font-geist-mono)", "monospace"],
       },
       boxShadow: {
         // Wipe every Tailwind shadow preset that uses spread/color tricks.
