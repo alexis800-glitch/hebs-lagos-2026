@@ -7,7 +7,7 @@ import Competition from "@/components/Competition";
 import PrizeGrid from "@/components/PrizeGrid";
 import Tickets from "@/components/Tickets";
 import SponsorsVendors from "@/components/SponsorsVendors";
-import Gallery from "@/components/Gallery";
+import GalleryGridBlock from "@/components/GalleryGridBlock";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -25,7 +25,7 @@ export default function Home() {
         <PrizeGrid />
         <Tickets />
         <SponsorsVendors />
-        <Gallery />
+        <GalleryGridBlock />
         <Contact />
         <Footer />
         <WhatsAppButton />
