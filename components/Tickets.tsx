@@ -34,7 +34,7 @@ const ticketTiers = [
 
 export default function Tickets() {
   return (
-    <section id="tickets" className="pt-10 pb-32 px-6 max-w-6xl mx-auto bg-[#050505]">
+    <section id="tickets" className="pt-8 pb-32 px-6 max-w-6xl mx-auto bg-[#050505]">
       {/* Header Layout */}
       <FadeIn>
         <div className="border-b border-neutral-900 pb-8 mb-6 md:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
