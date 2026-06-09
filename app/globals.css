@@ -102,6 +102,52 @@ textarea::placeholder {
   color: rgba(255, 255, 255, 0.2);
 }
 
+/* ─── Crisp rectangular buttons — no rounded corners, instant invert ─── */
+.btn-crisp-primary {
+  background: #ffffff;
+  color: #050505;
+  border: 1px solid #ffffff;
+  padding: 13px 38px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  transition: none; /* snap — no fade */
+}
+
+.btn-crisp-primary:hover {
+  background: #050505;
+  color: #ffffff;
+}
+
+.btn-crisp-secondary {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 13px 38px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  transition: none; /* snap — no fade */
+}
+
+.btn-crisp-secondary:hover {
+  background: #ffffff;
+  color: #050505;
+  border-color: #ffffff;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

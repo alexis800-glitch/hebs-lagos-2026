@@ -14,109 +14,90 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 text-center"
-      style={{ background: "#0d0d0d" }}
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center"
+      style={{ background: "#050505" }}
     >
-      {/* Top-left corner accent — purple, max 12% */}
-      <div
-        aria-hidden
-        className="absolute top-0 left-0 pointer-events-none"
-        style={{
-          width: "480px",
-          height: "480px",
-          background:
-            "radial-gradient(ellipse at top left, rgba(155,89,182,0.12) 0%, transparent 65%)",
-        }}
-      />
-      {/* Bottom-right corner accent — pink, max 10% */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 right-0 pointer-events-none"
-        style={{
-          width: "440px",
-          height: "440px",
-          background:
-            "radial-gradient(ellipse at bottom right, rgba(233,30,140,0.10) 0%, transparent 65%)",
-        }}
-      />
-      {/* Very subtle diagonal vignette to give depth without glow */}
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(155,89,182,0.05) 0%, transparent 40%, transparent 60%, rgba(233,30,140,0.05) 100%)",
-        }}
-      />
+      <div className="flex flex-col items-center gap-7 max-w-5xl mx-auto w-full">
 
-      <div className="relative z-10 flex flex-col items-center gap-6 max-w-5xl mx-auto">
-        {/* Prize badge */}
-        <motion.div
-          initial={mounted ? { opacity: 0, y: -20 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: mounted ? 0.1 : 0 }}
+        {/* Eyebrow */}
+        <motion.p
+          initial={mounted ? { opacity: 0 } : false}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.05 : 0 }}
+          className="font-sans text-xs uppercase tracking-widest text-neutral-400"
         >
-          <span
-            className="inline-block px-5 py-2 rounded-full text-sm font-semibold tracking-wide font-inter"
-            style={{
-              background: "linear-gradient(135deg, #9b59b6, #e91e8c)",
-              color: "#fff",
-            }}
-          >
-            $35,000 in Prizes
-          </span>
-        </motion.div>
+          The Hair Education Beauty Summit
+        </motion.p>
 
-        {/* Headline */}
+        {/* Main heading */}
         <motion.h1
-          initial={mounted ? { opacity: 0, y: 30 } : false}
+          initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="font-playfair font-bold text-white leading-tight"
-          style={{ fontSize: "clamp(2.4rem, 7vw, 5.5rem)" }}
+          transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.15 : 0 }}
+          className="font-serif font-bold text-white tracking-tight leading-none"
+          style={{ fontSize: "clamp(3.6rem, 9vw, 8rem)", lineHeight: 0.93 }}
         >
-          The Hair Education
+          Where Talent Meets
           <br />
-          <span className="gradient-text italic">Beauty Summit</span>
+          <em className="not-italic" style={{ fontStyle: "italic" }}>Global Stage</em>
         </motion.h1>
 
-        {/* Sub-headline */}
+        {/* Date / location subheader */}
         <motion.p
-          initial={mounted ? { opacity: 0, y: 20 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.35 : 0 }}
-          className="font-inter text-lg md:text-2xl font-medium"
-          style={{ color: "#aaaaaa" }}
+          initial={mounted ? { opacity: 0 } : false}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.3 : 0 }}
+          className="font-sans text-xs uppercase tracking-widest text-neutral-400"
         >
-          Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
+          Lagos, Nigeria &nbsp;•&nbsp; October 23–25, 2026
         </motion.p>
+
+        {/* Divider */}
+        <motion.div
+          initial={mounted ? { scaleX: 0 } : false}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.5, ease: EASE, delay: mounted ? 0.4 : 0 }}
+          className="w-16 origin-left"
+          style={{ height: "1px", background: "rgba(255,255,255,0.15)" }}
+        />
 
         {/* Countdown */}
         <motion.div
-          initial={mounted ? { opacity: 0, y: 20 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.5 : 0 }}
-          className="my-4 w-full"
+          initial={mounted ? { opacity: 0 } : false}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.45 : 0 }}
+          className="w-full"
         >
           <CountdownTimer />
         </motion.div>
 
-        {/* CTAs */}
+        {/* Prize label */}
+        <motion.p
+          initial={mounted ? { opacity: 0 } : false}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.55 : 0 }}
+          className="font-sans text-xs uppercase tracking-widest"
+          style={{ color: "#666" }}
+        >
+          $35,000 in prizes
+        </motion.p>
+
+        {/* CTAs — crisp rectangular, instant invert */}
         <motion.div
-          initial={mounted ? { opacity: 0, y: 20 } : false}
+          initial={mounted ? { opacity: 0, y: 12 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: mounted ? 0.65 : 0 }}
-          className="flex flex-col sm:flex-row gap-4 mt-2"
+          transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.65 : 0 }}
+          className="flex flex-col sm:flex-row gap-3 mt-2"
         >
           <a
             href="https://hebseventportal.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-pink text-base md:text-lg"
+            className="btn-crisp-primary"
           >
             Get Your Tickets
           </a>
-          <a href="#competition" className="btn-outline text-base md:text-lg">
+          <a href="#competition" className="btn-crisp-secondary">
             View Competitions
           </a>
         </motion.div>
@@ -126,17 +107,19 @@ export default function Hero() {
       <motion.div
         initial={mounted ? { opacity: 0 } : false}
         animate={{ opacity: 1 }}
-        transition={{ delay: mounted ? 1.2 : 0, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        transition={{ delay: mounted ? 1.1 : 0, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        <span className="text-xs tracking-widest uppercase font-inter" style={{ color: "#444" }}>
+        <span
+          className="font-sans text-[10px] uppercase tracking-[0.22em]"
+          style={{ color: "#333" }}
+        >
           Scroll
         </span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-8"
-          style={{ background: "linear-gradient(to bottom, rgba(155,89,182,0.6), transparent)" }}
+          animate={{ y: [0, 7, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ width: "1px", height: "32px", background: "rgba(255,255,255,0.12)" }}
         />
       </motion.div>
     </section>
