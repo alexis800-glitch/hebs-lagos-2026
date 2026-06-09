@@ -7,37 +7,37 @@ import { ZoomIn, ChevronLeft, ChevronRight, X } from "lucide-react";
 const galleryImages = [
   {
     id: 1,
-    url: "https://unsplash.com",
+    url: "https://images.pexels.com/photos/13057832/pexels-photo-13057832.jpeg",
     title: "High-Fashion Editorial Runway",
     category: "Runway",
   },
   {
     id: 2,
-    url: "https://unsplash.com",
+    url: "https://images.pexels.com/photos/7922651/pexels-photo-7922651.jpeg",
     title: "Precision Barbering Masterclass",
     category: "Barbering",
   },
   {
     id: 3,
-    url: "https://unsplash.com",
+    url: "https://images.pexels.com/photos/5149734/pexels-photo-5149734.jpeg",
     title: "Avant-Garde Glamour Makeup",
     category: "Makeup",
   },
   {
     id: 4,
-    url: "https://unsplash.com",
+    url: "https://images.pexels.com/photos/2301842/pexels-photo-2301842.jpeg",
     title: "Avant-Garde Hair Silhouette",
     category: "Hairstyling",
   },
   {
     id: 5,
-    url: "https://unsplash.com",
+    url: "https://images.pexels.com/photos/11188303/pexels-photo-11188303.jpeg",
     title: "Luxury Pre-Gala Showcase",
     category: "Runway",
   },
   {
     id: 6,
-    url: "https://unsplash.com",
+    url: "https://images.pexels.com/photos/29858712/pexels-photo-29858712.jpeg",
     title: "Elite Masterclass Masterminds",
     category: "Hairstyling",
   },
