@@ -90,7 +90,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-3 mt-2"
         >
           <a
-            href="https://hebseventportal.com"
+            href="https://hebseventportal.net"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-crisp-primary"

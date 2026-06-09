@@ -88,7 +88,7 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <a
-              href="https://hebseventportal.com"
+              href="https://hebseventportal.net"
               target="_blank"
               rel="noopener noreferrer"
               className="font-inter font-semibold text-sm px-5 py-2.5 rounded-lg text-white transition-all duration-200"
@@ -155,7 +155,7 @@ export default function Navbar() {
               ))}
               <li className="mt-3 px-4 pb-2">
                 <a
-                  href="https://hebseventportal.com"
+                  href="https://hebseventportal.net"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}

@@ -92,9 +92,14 @@ export default function Tickets() {
               </div>
 
               {/* Minimalist Flat CTA Trigger */}
-              <button className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-all duration-150 rounded-xs shrink-0">
-                Purchase
-              </button>
+              <a
+                href="https://hebseventportal.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-all duration-150 rounded-xs shrink-0"
+              >
+                Secure Pass ↗
+              </a>
             </div>
           </div>
         ))}
