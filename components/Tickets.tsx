@@ -1,186 +1,104 @@
-"use client";
+import React from 'react'
 
-import { motion } from "framer-motion";
-import { Check, Star } from "lucide-react";
-import { useMounted } from "@/hooks/useMounted";
-
-const EASE = [0.25, 0.4, 0.25, 1] as const;
-
-const tickets = [
+const ticketTiers = [
   {
     name: "1-Day Pass",
-    earlyBird: "$45",
-    standard: "$65",
-    features: ["Access to one day", "General sessions", "Networking"],
-    featured: false,
+    earlyPrice: "$45",
+    standardPrice: "$65",
+    perks: ["Access to one event day", "General sessions", "Floor networking"],
+    tag: ""
   },
   {
     name: "2-Day Pass",
-    earlyBird: "$80",
-    standard: "$110",
-    features: ["Access to two days", "All general sessions", "Networking events"],
-    featured: false,
+    earlyPrice: "$80",
+    standardPrice: "$110",
+    perks: ["Access to two continuous days", "All general stage sessions", "Networking events inclusion"],
+    tag: ""
   },
   {
     name: "3-Day All-Inclusive",
-    earlyBird: "$175",
-    standard: "$250",
-    features: ["Full 3-day access", "Masterclasses", "Competitions", "Networking & gala"],
-    featured: true,
+    earlyPrice: "$175",
+    standardPrice: "$250",
+    perks: ["Full 3-day complete access", "All Masterclasses & Workshops", "Competitions viewing", "Networking & Gala Entry"],
+    tag: "Best Value"
   },
   {
     name: "VIP Experience",
-    earlyBird: "$400",
-    standard: "$600",
-    features: [
-      "Full 3-day VIP access",
-      "Priority seating",
-      "Exclusive VIP lounge",
-      "Meet & greet access",
-      "Merchandise package",
-    ],
-    featured: false,
-  },
-];
-
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
-};
+    earlyPrice: "$400",
+    standardPrice: "$600",
+    perks: ["Full 3-day VIP clearance", "Front-row priority seating", "Exclusive VIP lounge access", "Celebrity Meet & Greet", "Official Merchandise Package"],
+    tag: "Premium Clearance"
+  }
+]
 
 export default function Tickets() {
-  const mounted = useMounted();
-
   return (
-    <section id="tickets" className="py-24 px-4" style={{ background: "#080808" }}>
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 30 } : false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: EASE }}
-          className="text-center mb-16"
-        >
-          <p
-            className="text-sm font-semibold uppercase tracking-[0.2em] mb-4 font-inter"
-            style={{ color: "#9b59b6" }}
-          >
-            Tickets
-          </p>
-          <h2 className="section-title text-white mb-6">
-            Choose Your <span className="gradient-text italic">Experience</span>
+    <section className="py-32 px-6 max-w-6xl mx-auto bg-[#050505]">
+      {/* Header Layout */}
+      <div className="border-b border-neutral-900 pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+          <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">Registration Portals</p>
+          <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
+            Choose Your <span className="italic font-normal">Experience</span>
           </h2>
-          <p className="section-subtitle max-w-xl mx-auto">
-            Early bird pricing available for a limited time. Secure your spot before prices increase.
-          </p>
-        </motion.div>
+        </div>
+        <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed">
+          Early bird rates are available for a limited window. Secure placement before tier limits expire.
+        </p>
+      </div>
 
-        {/* Pricing label row */}
-        <motion.div
-          initial={mounted ? { opacity: 0 } : false}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="flex items-center justify-center gap-6 mb-10"
-        >
-          <span
-            className="px-4 py-1.5 rounded-full text-sm font-semibold font-inter"
-            style={{ background: "linear-gradient(135deg,#9b59b6,#e91e8c)", color: "#fff" }}
+      {/* Stripe-Style Structural Rows */}
+      <div className="flex flex-col border-t border-neutral-900">
+        {ticketTiers.map((tier, index) => (
+          <div
+            key={index}
+            className="group flex flex-col lg:flex-row lg:items-center justify-between py-8 border-b border-neutral-900 hover:bg-neutral-950/40 transition-colors duration-200 px-4 -mx-4 rounded-sm"
           >
-            Early Bird
-          </span>
-          <span className="text-sm font-inter" style={{ color: "#aaaaaa" }}>vs</span>
-          <span
-            className="px-4 py-1.5 rounded-full text-sm font-semibold font-inter"
-            style={{ border: "1px solid rgba(255,255,255,0.2)", color: "#aaaaaa" }}
-          >
-            Standard
-          </span>
-        </motion.div>
-
-        <motion.div
-          variants={container}
-          initial={mounted ? "hidden" : false}
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-        >
-          {tickets.map((ticket) => (
-            <motion.div
-              key={ticket.name}
-              variants={card}
-              className="relative rounded-2xl p-7 flex flex-col"
-              style={{
-                background: ticket.featured
-                  ? "linear-gradient(145deg, rgba(155,89,182,0.25), rgba(233,30,140,0.15))"
-                  : "rgba(22,22,22,0.7)",
-                backdropFilter: "blur(20px)",
-                WebkitBackdropFilter: "blur(20px)",
-                border: ticket.featured
-                  ? "1px solid rgba(233,30,140,0.5)"
-                  : "1px solid rgba(155,89,182,0.18)",
-              }}
-            >
-              {ticket.featured && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold font-inter"
-                  style={{ background: "linear-gradient(135deg, #9b59b6, #e91e8c)", color: "#fff" }}
-                >
-                  <Star size={11} fill="currentColor" />
-                  Best Value
-                </div>
-              )}
-
-              <h3 className="font-playfair font-bold text-lg text-white mb-5">{ticket.name}</h3>
-
-              <div className="flex items-baseline gap-2 mb-1">
-                <span
-                  className="text-3xl font-bold font-playfair"
-                  style={{
-                    background: "linear-gradient(135deg, #9b59b6, #e91e8c)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {ticket.earlyBird}
-                </span>
-                <span className="text-xs font-inter" style={{ color: "#aaaaaa" }}>early bird</span>
+            {/* Title & Badge column */}
+            <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
+              <div className="flex items-center gap-3">
+                <h3 className="font-serif text-2xl text-white font-light group-hover:text-amber-400 transition-colors">{tier.name}</h3>
+                {tier.tag && (
+                  <span className="font-sans text-[10px] tracking-wider uppercase bg-neutral-900 border border-neutral-800 px-2 py-0.5 text-neutral-400 font-medium rounded-sm">
+                    {tier.tag}
+                  </span>
+                )}
               </div>
-              <p className="text-sm mb-6 font-inter" style={{ color: "#555" }}>
-                {ticket.standard} standard
-              </p>
+            </div>
 
-              <ul className="flex flex-col gap-2.5 mb-8 flex-1">
-                {ticket.features.map((f) => (
-                  <li
-                    key={f}
-                    className="flex items-start gap-2 text-sm font-inter"
-                    style={{ color: "#aaaaaa" }}
-                  >
-                    <Check size={15} className="mt-0.5 shrink-0" style={{ color: "#9b59b6" }} />
-                    {f}
+            {/* Inclusions Detail column */}
+            <div className="w-full lg:w-2/5 mb-6 lg:mb-0">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                {tier.perks.map((perk, pIdx) => (
+                  <li key={pIdx} className="font-sans text-xs text-neutral-400 flex items-center font-light">
+                    <span className="w-1 h-1 bg-neutral-700 rounded-full mr-2"></span>
+                    {perk}
                   </li>
                 ))}
               </ul>
+            </div>
 
-              <a
-                href="https://hebseventportal.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={ticket.featured ? "btn-pink text-sm" : "btn-outline text-sm"}
-              >
-                Buy Tickets Now
-              </a>
-            </motion.div>
-          ))}
-        </motion.div>
+            {/* Pricing Ledger column */}
+            <div className="w-full lg:w-1/3 flex items-center justify-between lg:justify-end gap-12">
+              <div className="flex gap-8">
+                <div>
+                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">Early Pricing</span>
+                  <span className="font-sans text-lg font-medium text-white">{tier.earlyPrice}</span>
+                </div>
+                <div className="border-l border-neutral-950 pl-8">
+                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">Standard Rate</span>
+                  <span className="font-sans text-sm font-light text-neutral-500 line-through">{tier.standardPrice}</span>
+                </div>
+              </div>
+
+              {/* Minimalist Flat CTA Trigger */}
+              <button className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-all duration-150 rounded-xs shrink-0">
+                Purchase
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
-  );
+  )
 }

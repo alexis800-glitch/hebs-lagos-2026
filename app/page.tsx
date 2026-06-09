@@ -4,6 +4,7 @@ import SocialProofBar from "@/components/SocialProofBar";
 import About from "@/components/About";
 import EventHighlights from "@/components/EventHighlights";
 import Competition from "@/components/Competition";
+import PrizeGrid from "@/components/PrizeGrid";
 import Tickets from "@/components/Tickets";
 import SponsorsVendors from "@/components/SponsorsVendors";
 import Gallery from "@/components/Gallery";
@@ -21,6 +22,7 @@ export default function Home() {
         <About />
         <EventHighlights />
         <Competition />
+        <PrizeGrid />
         <Tickets />
         <SponsorsVendors />
         <Gallery />

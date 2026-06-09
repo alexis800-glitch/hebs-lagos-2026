@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Geist, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
+  variable: "--font-sans",
 });
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  weight: ["400", "600", "700", "800", "900"],
+  variable: "--font-serif",
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
 });
 
@@ -42,8 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${cormorant.variable} antialiased bg-[#050505] text-white`}>
+        {children}
+      </body>
     </html>
   );
 }

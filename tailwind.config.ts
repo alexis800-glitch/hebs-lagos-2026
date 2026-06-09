@@ -19,11 +19,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "sans-serif"],
-        serif: ["var(--font-playfair)", "Cormorant Garamond", "Playfair Display", "serif"],
-        // retain named aliases for backwards-compat with existing utility classes
-        playfair: ["var(--font-playfair)", "Cormorant Garamond", "Playfair Display", "serif"],
-        inter: ["var(--font-inter)", "Inter", "sans-serif"],
+        sans: ["var(--font-sans)"],
+        serif: ["var(--font-serif)"],
       },
       boxShadow: {
         // Wipe every Tailwind shadow preset that uses spread/color tricks.
