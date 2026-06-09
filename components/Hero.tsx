@@ -91,7 +91,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 12 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.65 : 0 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md mx-auto"
+          className="mt-10 mb-16 md:mb-20 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md mx-auto"
         >
           <a
             href="https://hebseventportal.net"

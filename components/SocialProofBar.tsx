@@ -10,7 +10,7 @@ export default function SocialProofBar() {
 
   return (
     <section
-      className="relative py-8 px-4 overflow-hidden"
+      className="pt-12 pb-12 px-4 w-full relative block overflow-hidden"
       style={{
         background: "linear-gradient(135deg, rgba(155,89,182,0.15), rgba(233,30,140,0.1))",
         borderTop: "1px solid rgba(155,89,182,0.25)",
