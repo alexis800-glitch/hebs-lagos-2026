@@ -33,7 +33,7 @@ export default function Competition() {
   const mounted = useMounted();
 
   return (
-    <section id="competition" className="py-24 px-4" style={{ background: "#0d0d0d" }}>
+    <section id="competition" className="pt-24 pb-8 px-4" style={{ background: "#0d0d0d" }}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={mounted ? { opacity: 0, y: 30 } : false}

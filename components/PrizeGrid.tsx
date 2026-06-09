@@ -3,7 +3,7 @@ import FadeIn from './FadeIn'
 
 export default function PrizeGrid() {
   return (
-    <section className="pt-32 pb-8 px-6 max-w-6xl mx-auto bg-[#050505]">
+    <section className="pt-8 pb-32 px-6 max-w-6xl mx-auto bg-[#050505]">
       {/* Header Block */}
       <FadeIn>
         <div className="border-b border-neutral-900 pb-8 mb-16">
