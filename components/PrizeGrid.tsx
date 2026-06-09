@@ -32,16 +32,16 @@ export default function PrizeGrid() {
               </p>
               <div className="flex gap-6 shrink-0">
                 <div>
-                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">1st Place</span>
-                  <span className="font-sans text-sm font-medium text-white">$20,000</span>
+                  <span className="block font-sans text-[10px] uppercase tracking-widest text-neutral-400 mb-1">1st Place</span>
+                  <span className="font-sans text-xl font-bold text-white">$20,000</span>
                 </div>
-                <div className="border-l border-neutral-950 pl-6">
-                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">2nd Place</span>
-                  <span className="font-sans text-sm font-light text-neutral-400">$10,000</span>
+                <div className="border-l border-neutral-800 pl-6">
+                  <span className="block font-sans text-[10px] uppercase tracking-widest text-neutral-400 mb-1">2nd Place</span>
+                  <span className="font-sans text-xl font-medium text-white">$10,000</span>
                 </div>
-                <div className="border-l border-neutral-950 pl-6">
-                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">3rd Place</span>
-                  <span className="font-sans text-sm font-light text-neutral-500">$5,000</span>
+                <div className="border-l border-neutral-800 pl-6">
+                  <span className="block font-sans text-[10px] uppercase tracking-widest text-neutral-400 mb-1">3rd Place</span>
+                  <span className="font-sans text-xl font-light text-neutral-200">$5,000</span>
                 </div>
               </div>
             </div>
