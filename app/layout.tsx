@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Cormorant_Garamond } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -41,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${cormorant.variable} antialiased bg-[#050505] text-white`}>
+      <body className={`${inter.variable} ${cormorant.variable} antialiased bg-[#050505] text-white`}>
         {children}
       </body>
     </html>
