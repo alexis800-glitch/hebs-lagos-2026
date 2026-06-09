@@ -23,13 +23,13 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating dock wrapper — sits above everything, never collapses into the page */}
-      <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none">
+      {/* Full-width fixed bar — edge-to-edge, isolates nav from hero content */}
+      <div className="w-full fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-md border-b border-neutral-900/50">
         <motion.nav
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="pointer-events-auto mx-4 mt-4 w-full max-w-5xl px-6 py-3 flex items-center justify-between bg-[#050505]/70 backdrop-blur-md border border-white/5 rounded-full shadow-xl shadow-black/40"
+          className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
         >
           {/* Logo */}
           <a

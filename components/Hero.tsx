@@ -18,7 +18,7 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center"
       style={{ background: "#050505" }}
     >
-      <div className="flex flex-col items-center gap-7 max-w-5xl mx-auto w-full">
+      <div className="flex flex-col items-center gap-7 max-w-5xl mx-auto w-full pt-24 md:pt-28">
 
         {/* Eyebrow */}
         <motion.p
