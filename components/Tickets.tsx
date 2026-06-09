@@ -37,7 +37,7 @@ export default function Tickets() {
     <section id="tickets" className="py-32 px-6 max-w-6xl mx-auto bg-[#050505]">
       {/* Header Layout */}
       <FadeIn>
-        <div className="border-b border-neutral-900 pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="border-b border-neutral-900 pb-8 mb-6 md:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">Registration Portals</p>
             <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
