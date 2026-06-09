@@ -108,25 +108,6 @@ export default function Hero() {
         </FadeIn>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={mounted ? { opacity: 0 } : false}
-        animate={{ opacity: 1 }}
-        transition={{ delay: mounted ? 1.1 : 0, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-      >
-        <span
-          className="font-sans text-[10px] uppercase tracking-[0.22em]"
-          style={{ color: "#333" }}
-        >
-          Scroll
-        </span>
-        <motion.div
-          animate={{ y: [0, 7, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ width: "1px", height: "32px", background: "rgba(255,255,255,0.12)" }}
-        />
-      </motion.div>
     </section>
   );
 }
