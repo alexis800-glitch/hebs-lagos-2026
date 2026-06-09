@@ -57,22 +57,22 @@ export default function PrizeGrid() {
               </p>
             </div>
 
-            <ul className="mt-6 flex flex-col gap-2.5 border-t border-neutral-950 pt-4">
-              <li className="flex items-center justify-between font-sans text-xs text-neutral-300">
-                <span className="flex items-center gap-2"><span className="text-neutral-600">01</span> Hairstylist Specialist</span>
-                <span className="text-[10px] uppercase text-neutral-600 tracking-wider">Elite Cut</span>
+            <ul className="mt-6 flex flex-col gap-3 border-t border-neutral-950 pt-4">
+              <li className="flex items-center justify-between font-sans text-sm text-neutral-200 py-1.5">
+                <span className="flex items-center gap-3"><span className="text-neutral-600 font-mono text-xs">01</span> Hairstylist Specialist</span>
+                <span className="font-mono text-[10px] uppercase text-amber-400 tracking-wider bg-neutral-900/60 border border-amber-500/20 px-2 py-0.5 rounded-sm">Elite Cut</span>
               </li>
-              <li className="flex items-center justify-between font-sans text-xs text-neutral-300">
-                <span className="flex items-center gap-2"><span className="text-neutral-600">02</span> Master Barber Technician</span>
-                <span className="text-[10px] uppercase text-neutral-600 tracking-wider">Precision Line</span>
+              <li className="flex items-center justify-between font-sans text-sm text-neutral-200 py-1.5">
+                <span className="flex items-center gap-3"><span className="text-neutral-600 font-mono text-xs">02</span> Master Barber Technician</span>
+                <span className="font-mono text-[10px] uppercase text-neutral-300 tracking-wider bg-neutral-900/60 border border-neutral-800 px-2 py-0.5 rounded-sm">Precision Line</span>
               </li>
-              <li className="flex items-center justify-between font-sans text-xs text-neutral-300">
-                <span className="flex items-center gap-2"><span className="text-neutral-600">03</span> Avant-Garde Makeup Artist</span>
-                <span className="text-[10px] uppercase text-neutral-600 tracking-wider">Visual Form</span>
+              <li className="flex items-center justify-between font-sans text-sm text-neutral-200 py-1.5">
+                <span className="flex items-center gap-3"><span className="text-neutral-600 font-mono text-xs">03</span> Avant-Garde Makeup Artist</span>
+                <span className="font-mono text-[10px] uppercase text-neutral-300 tracking-wider bg-neutral-900/60 border border-neutral-800 px-2 py-0.5 rounded-sm">Visual Form</span>
               </li>
-              <li className="flex items-center justify-between font-sans text-xs text-neutral-300">
-                <span className="flex items-center gap-2"><span className="text-neutral-600">04</span> High-Fashion Designer</span>
-                <span className="text-[10px] uppercase text-neutral-600 tracking-wider">Structural Silhouette</span>
+              <li className="flex items-center justify-between font-sans text-sm text-neutral-200 py-1.5">
+                <span className="flex items-center gap-3"><span className="text-neutral-600 font-mono text-xs">04</span> High-Fashion Designer</span>
+                <span className="font-mono text-[10px] uppercase text-neutral-300 tracking-wider bg-neutral-900/60 border border-neutral-800 px-2 py-0.5 rounded-sm">Structural Silhouette</span>
               </li>
             </ul>
           </div>
