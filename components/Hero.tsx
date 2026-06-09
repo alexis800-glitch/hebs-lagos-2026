@@ -91,17 +91,17 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 12 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.65 : 0 }}
-          className="flex flex-col sm:flex-row gap-3 mt-2"
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md mx-auto"
         >
           <a
             href="https://hebseventportal.net"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-crisp-primary"
+            className="btn-crisp-primary w-full sm:w-auto text-center font-sans"
           >
             Get Your Tickets
           </a>
-          <a href="#competition" className="btn-crisp-secondary">
+          <a href="#competition" className="btn-crisp-secondary w-full sm:w-auto text-center font-sans">
             View Competitions
           </a>
         </motion.div>
