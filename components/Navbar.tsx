@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
@@ -18,38 +18,23 @@ const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 export default function Navbar() {
   const mounted = useMounted();
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", handler, { passive: true });
-    handler();
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
-      <motion.header
-        initial={mounted ? { y: -80, opacity: 0 } : false}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: EASE }}
-        className="fixed top-0 inset-x-0 z-50 transition-all duration-300"
-        style={{
-          background: scrolled ? "rgba(13,13,13,0.96)" : "transparent",
-          backdropFilter: scrolled ? "blur(20px)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
-        }}
-      >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      {/* Floating dock wrapper — sits above everything, never collapses into the page */}
+      <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none">
+        <motion.nav
+          initial={mounted ? { y: -64, opacity: 0 } : false}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="pointer-events-auto mx-4 mt-4 w-full max-w-5xl px-6 py-3 flex items-center justify-between bg-[#050505]/70 backdrop-blur-md border border-white/5 rounded-full shadow-xl shadow-black/40"
+        >
           {/* Logo */}
           <a
             href="#home"
-            className="font-playfair font-bold text-xl text-white tracking-wide"
-            style={{ letterSpacing: "0.02em" }}
+            className="font-sans font-semibold text-sm text-white tracking-wide shrink-0"
           >
             HEBS{" "}
             <span
@@ -70,14 +55,7 @@ export default function Navbar() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="px-3 py-2 rounded-lg text-sm font-medium font-inter transition-colors duration-200"
-                  style={{ color: "#aaaaaa" }}
-                  onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLAnchorElement).style.color = "#aaaaaa")
-                  }
+                  className="px-3 py-1.5 font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200"
                 >
                   {link.label}
                 </a>
@@ -86,80 +64,60 @@ export default function Navbar() {
           </ul>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <a
-              href="https://hebseventportal.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-inter font-semibold text-sm px-5 py-2.5 rounded-lg text-white transition-all duration-200"
-              style={{
-                background: "linear-gradient(135deg, #e91e8c, #c2185b)",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.88")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")
-              }
-            >
-              Get Tickets
-            </a>
-          </div>
+          <a
+            href="https://hebseventportal.net"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-block font-sans text-xs px-4 py-2 bg-white text-black hover:bg-neutral-200 font-medium tracking-wide rounded-full transition-all duration-200 shrink-0"
+          >
+            Get Tickets
+          </a>
 
-          {/* Hamburger */}
+          {/* Hamburger — mobile only */}
           <button
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors"
-            style={{ color: "#ffffff" }}
+            className="md:hidden flex items-center justify-center w-8 h-8 text-white"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle menu"
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
-        </nav>
-      </motion.header>
+        </motion.nav>
+      </div>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown — anchored just below the floating dock */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22, ease: EASE }}
-            className="fixed top-16 inset-x-0 z-40 md:hidden"
+            transition={{ duration: 0.2, ease: EASE }}
+            className="fixed top-20 inset-x-4 z-40 md:hidden max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/5"
             style={{
-              background: "rgba(13,13,13,0.98)",
+              background: "rgba(5,5,5,0.96)",
               backdropFilter: "blur(24px)",
               WebkitBackdropFilter: "blur(24px)",
-              borderBottom: "1px solid rgba(255,255,255,0.07)",
             }}
           >
-            <ul className="flex flex-col py-4 px-4 gap-1">
+            <ul className="flex flex-col py-3 px-2">
               {navLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
                     onClick={closeMenu}
-                    className="block px-4 py-3 rounded-lg text-sm font-medium font-inter transition-colors"
-                    style={{ color: "#aaaaaa" }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLAnchorElement).style.color = "#fff")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLAnchorElement).style.color = "#aaaaaa")
-                    }
+                    className="block px-4 py-3 font-sans text-xs tracking-wide text-neutral-400 hover:text-white transition-colors rounded-xl"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
-              <li className="mt-3 px-4 pb-2">
+              <li className="mt-2 px-2 pb-2">
                 <a
                   href="https://hebseventportal.net"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
-                  className="btn-pink text-sm w-full text-center block"
+                  className="block w-full text-center font-sans text-xs px-4 py-2.5 bg-white text-black hover:bg-neutral-200 font-medium tracking-wide rounded-full transition-all duration-200"
                 >
                   Get Tickets
                 </a>
