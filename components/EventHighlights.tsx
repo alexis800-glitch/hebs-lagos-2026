@@ -1,39 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, GraduationCap, MessageSquare, Trophy, Users, HandMetal } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const highlights = [
   {
-    icon: Sparkles,
     title: "Luxury Pre-Gala Party",
     desc: "Kick off the summit in style with an exclusive pre-gala celebration featuring live entertainment and networking.",
   },
   {
-    icon: GraduationCap,
     title: "Immersive Masterclasses",
     desc: "Learn cutting-edge techniques from world-class educators across hair, beauty, and fashion disciplines.",
   },
   {
-    icon: MessageSquare,
     title: "Panel Discussions",
     desc: "Gain insight from industry leaders on trends, business growth, and the future of the beauty industry.",
   },
   {
-    icon: Trophy,
     title: "Creative Competitions",
     desc: "Compete in high-stakes creative challenges with $35,000 in prizes up for grabs.",
   },
   {
-    icon: Users,
     title: "Networking",
     desc: "Connect with hundreds of professionals, brands, and collaborators from around the world.",
   },
   {
-    icon: HandMetal,
     title: "Hands-On Learning",
     desc: "Participate in live demonstrations and interactive workshops to sharpen your skills.",
   },
@@ -41,81 +34,70 @@ const highlights = [
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
+const row = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
 };
 
 export default function EventHighlights() {
   const mounted = useMounted();
 
   return (
-    <section id="highlights" className="py-24 px-4" style={{ background: "#080808" }}>
+    <section id="highlights" className="py-24 px-4 bg-[#080808]">
       <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="text-center mb-16"
+          className="border-b border-neutral-900 pb-10 mb-0 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
-          <p
-            className="text-sm font-semibold uppercase tracking-[0.2em] mb-4 font-inter"
-            style={{ color: "#e91e8c" }}
-          >
-            What to Expect
-          </p>
-          <h2 className="section-title text-white mb-6">Event Highlights</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Three days of immersive beauty education, fierce competition, and global connection.
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">
+              What to Expect
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
+              Event <em className="font-normal italic">Highlights</em>
+            </h2>
+          </div>
+          <p className="font-sans text-sm font-light text-neutral-400 max-w-xs leading-relaxed">
+            Three days of immersive education, fierce competition, and global connection.
           </p>
         </motion.div>
 
+        {/* Flat linear panel list */}
         <motion.div
           variants={container}
           initial={mounted ? "hidden" : false}
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          viewport={{ once: true, amount: 0.1 }}
         >
-          {highlights.map((h) => {
-            const Icon = h.icon;
-            return (
-              <motion.div
-                key={h.title}
-                variants={item}
-                className="rounded-2xl p-7 group transition-all duration-300"
-                style={{
-                  background: "rgba(22,22,22,0.6)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  border: "1px solid rgba(155,89,182,0.18)",
-                }}
-                whileHover={{
-                  borderColor: "rgba(233,30,140,0.45)",
-                  y: -4,
-                  transition: { duration: 0.25 },
-                }}
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                  style={{
-                    background: "linear-gradient(135deg, rgba(155,89,182,0.3), rgba(233,30,140,0.2))",
-                    border: "1px solid rgba(155,89,182,0.3)",
-                  }}
-                >
-                  <Icon size={22} style={{ color: "#e91e8c" }} />
-                </div>
-                <h3 className="font-playfair font-bold text-lg text-white mb-3">{h.title}</h3>
-                <p className="text-sm font-inter leading-relaxed" style={{ color: "#aaaaaa" }}>
+          {highlights.map((h, index) => (
+            <motion.div
+              key={h.title}
+              variants={row}
+              className="group flex flex-col md:flex-row md:items-start gap-4 md:gap-12 border-b border-neutral-900 py-8"
+            >
+              {/* Serial index */}
+              <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-700 md:w-20 shrink-0 pt-1">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              {/* Content */}
+              <div className="flex-1">
+                <h3 className="font-serif text-xl font-light text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
+                  {h.title}
+                </h3>
+                <p className="font-sans text-sm font-light text-neutral-500 leading-relaxed">
                   {h.desc}
                 </p>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

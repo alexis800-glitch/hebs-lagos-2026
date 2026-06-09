@@ -1,115 +1,80 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Handshake, ShoppingBag, ArrowRight } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const opportunities = [
   {
-    icon: Handshake,
+    tag: "01 / Sponsor",
     title: "Sponsor Opportunities",
     desc: "Align your brand with the premier beauty summit in Africa. Reach thousands of professionals, influencers, and industry leaders.",
-    cta: "Become a Sponsor",
-    gradient: "linear-gradient(135deg, rgba(155,89,182,0.25), rgba(155,89,182,0.08))",
-    border: "rgba(155,89,182,0.4)",
-    iconColor: "#9b59b6",
+    cta: "Become a Sponsor →",
   },
   {
-    icon: ShoppingBag,
+    tag: "02 / Vendor",
     title: "Vendor Opportunities",
     desc: "Showcase your products and services to an engaged audience of beauty professionals, students, and enthusiasts from around the globe.",
-    cta: "Reserve Your Booth",
-    gradient: "linear-gradient(135deg, rgba(233,30,140,0.2), rgba(233,30,140,0.06))",
-    border: "rgba(233,30,140,0.4)",
-    iconColor: "#e91e8c",
+    cta: "Reserve Your Booth →",
   },
 ];
-
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
 
 export default function SponsorsVendors() {
   const mounted = useMounted();
 
   return (
-    <section id="sponsors" className="py-24 px-4" style={{ background: "#0d0d0d" }}>
-      <div className="max-w-5xl mx-auto">
+    <section id="sponsors" className="py-24 px-4 bg-[#0d0d0d]">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: EASE }}
-          className="text-center mb-16"
+          className="border-b border-neutral-900 pb-10 mb-0 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
-          <p
-            className="text-sm font-semibold uppercase tracking-[0.2em] mb-4 font-inter"
-            style={{ color: "#9b59b6" }}
-          >
-            Partnerships
-          </p>
-          <h2 className="section-title text-white mb-6">
-            Grow Your Brand at{" "}
-            <span className="gradient-text italic">HEBS 2026</span>
-          </h2>
-          <p className="section-subtitle max-w-xl mx-auto">
+          <div>
+            <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">
+              Partnerships
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
+              Grow Your Brand at{" "}
+              <em className="font-normal italic">HEBS 2026</em>
+            </h2>
+          </div>
+          <p className="font-sans text-sm font-light text-neutral-400 max-w-xs leading-relaxed">
             Join the brands and vendors that power the most exciting beauty summit in the world.
           </p>
         </motion.div>
 
+        {/* Asymmetric split-screen row */}
         <motion.div
-          variants={container}
-          initial={mounted ? "hidden" : false}
-          whileInView="visible"
+          initial={mounted ? { opacity: 0, y: 20 } : false}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          transition={{ duration: 0.7, ease: EASE }}
+          className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-neutral-900 border-b border-neutral-900"
         >
-          {opportunities.map((opp) => {
-            const Icon = opp.icon;
-            return (
-              <motion.div
-                key={opp.title}
-                variants={card}
-                className="rounded-2xl p-8 flex flex-col gap-5"
-                style={{
-                  background: opp.gradient,
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  border: `1px solid ${opp.border}`,
-                }}
-                whileHover={{ y: -4, transition: { duration: 0.25 } }}
+          {opportunities.map((opp) => (
+            <div key={opp.title} className="p-10 md:p-12 flex flex-col gap-6">
+              <p className="font-sans text-[10px] uppercase tracking-widest text-neutral-600">
+                {opp.tag}
+              </p>
+              <h3 className="font-serif text-2xl font-light text-white tracking-tight">
+                {opp.title}
+              </h3>
+              <p className="font-sans text-sm font-light text-neutral-400 leading-relaxed">
+                {opp.desc}
+              </p>
+              <a
+                href="mailto:info@thehebs.com"
+                className="font-sans text-xs uppercase tracking-wider text-white border-b border-neutral-700 hover:border-white pb-1 w-fit transition-colors duration-200 mt-auto"
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ background: "rgba(22,22,22,0.5)", border: `1px solid ${opp.border}` }}
-                >
-                  <Icon size={24} style={{ color: opp.iconColor }} />
-                </div>
-                <div>
-                  <h3 className="font-playfair font-bold text-2xl text-white mb-3">{opp.title}</h3>
-                  <p className="font-inter text-sm leading-relaxed" style={{ color: "#aaaaaa" }}>
-                    {opp.desc}
-                  </p>
-                </div>
-                <a
-                  href="mailto:info@thehebs.com"
-                  className="inline-flex items-center gap-2 font-semibold text-sm font-inter mt-auto"
-                  style={{ color: opp.iconColor }}
-                >
-                  {opp.cta}
-                  <ArrowRight size={16} />
-                </a>
-              </motion.div>
-            );
-          })}
+                {opp.cta}
+              </a>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
