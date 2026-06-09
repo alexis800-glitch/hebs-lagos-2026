@@ -47,7 +47,7 @@ export default function GalleryGridBlock() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>("All");
 
-  const categories = ["All", ...new Set(galleryImages.map((img) => img.category))];
+  const categories = ["All", ...Array.from(new Set(galleryImages.map((img) => img.category)))];
 
   const filteredImages = filter === "All"
     ? galleryImages
