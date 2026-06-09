@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useMounted } from "@/hooks/useMounted";
+import FadeIn from "./FadeIn";
 
 const CountdownTimer = dynamic(() => import("./CountdownTimer"), { ssr: false });
 
@@ -62,14 +63,16 @@ export default function Hero() {
         />
 
         {/* Countdown */}
-        <motion.div
-          initial={mounted ? { opacity: 0 } : false}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.45 : 0 }}
-          className="w-full"
-        >
-          <CountdownTimer />
-        </motion.div>
+        <FadeIn delay={0.1}>
+          <motion.div
+            initial={mounted ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.45 : 0 }}
+            className="w-full"
+          >
+            <CountdownTimer />
+          </motion.div>
+        </FadeIn>
 
         {/* Prize label */}
         <motion.p
@@ -83,6 +86,7 @@ export default function Hero() {
         </motion.p>
 
         {/* CTAs — crisp rectangular, instant invert */}
+        <FadeIn delay={0.2}>
         <motion.div
           initial={mounted ? { opacity: 0, y: 12 } : false}
           animate={{ opacity: 1, y: 0 }}
@@ -101,6 +105,7 @@ export default function Hero() {
             View Competitions
           </a>
         </motion.div>
+        </FadeIn>
       </div>
 
       {/* Scroll indicator */}
