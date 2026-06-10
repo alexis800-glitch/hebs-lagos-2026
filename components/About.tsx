@@ -37,7 +37,7 @@ export default function About() {
         <h2 className="font-serif text-3xl md:text-5xl font-light text-white tracking-tight leading-tight">
           Where Hair, Beauty, Fashion & Innovation Converge. The Global Hub for <span className="italic font-normal">Education, Creativity, and Industry Networking.</span>
         </h2>
-        <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-8 max-w-3xl mx-auto">
+        <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed mt-8 max-w-3xl mx-auto">
           The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
         </p>
       </div>
@@ -57,7 +57,7 @@ export default function About() {
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">01</span>
               <h4 className="font-serif text-lg text-white font-light mb-2">First-of-Its-Kind Industry Fusion</h4>
-              <p className="font-sans text-[11px] text-neutral-400 font-light leading-relaxed">
+              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
                 A Unified Beauty, Fashion & Education Platform where hairstylists, barbers, makeup artists, nail techs, fashion designers, and educators collaborate under one roof alongside top-tier global influencers.
               </p>
             </div>
@@ -68,7 +68,7 @@ export default function About() {
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">02</span>
               <h4 className="font-serif text-lg text-white font-light mb-2">High-Value, Hands-On Learning</h4>
-              <p className="font-sans text-[11px] text-neutral-400 font-light leading-relaxed">
+              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
                 Focused entirely on technical education and real-world skills, ensuring every session is interactive, impactful, and delivers practical knowledge attendees can immediately apply to scale their business.
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function About() {
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">03</span>
               <h4 className="font-serif text-lg text-white font-light mb-2">Elite Competitive Championship</h4>
-              <p className="font-sans text-[11px] text-neutral-400 font-light leading-relaxed">
+              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
                 Featuring a $35,000 global cumulative prize stakes pool—the highest stakes beauty competition globally. The event transforms raw competition into a full-scale runway production with music, lights, and energy.
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function About() {
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">04</span>
               <h4 className="font-serif text-lg text-white font-light mb-2">A Truly Global Experience</h4>
-              <p className="font-sans text-[11px] text-neutral-400 font-light leading-relaxed">
+              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
                 Bringing diverse international beauty trends to Lagos, Nigeria to blend with local African influences, creating an unparalleled creative exchange and global networking opportunity.
               </p>
             </div>
@@ -114,7 +114,7 @@ export default function About() {
               <BookOpen className="h-5 w-5 text-amber-400 shrink-0 stroke-[1.25]" />
               <h4 className="font-serif text-xl text-white font-light">Bridging Education with Opportunity</h4>
             </div>
-            <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed max-w-2xl w-full">
+            <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed max-w-2xl w-full">
               Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.
             </p>
           </div>
@@ -125,7 +125,7 @@ export default function About() {
               <Globe className="h-5 w-5 text-neutral-400 shrink-0 stroke-[1.25]" />
               <h4 className="font-serif text-xl text-white font-light">Connecting Professionals Worldwide</h4>
             </div>
-            <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed max-w-2xl w-full">
+            <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed max-w-2xl w-full">
               Creating a dynamic global network and physical hub where hairstylists, masters barbers, creative makeup artists, fashion stylists, educators, and global brand leaders can seamlessly collaborate, share narratives, and grow collectively.
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function About() {
               <Sparkles className="h-5 w-5 text-neutral-400 shrink-0 stroke-[1.25]" />
               <h4 className="font-serif text-xl text-white font-light">Empowering the Next Generation</h4>
             </div>
-            <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed max-w-2xl w-full">
+            <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed max-w-2xl w-full">
               Ensuring that the collective future of beauty, grooming, and high-fashion remains completely inclusive, boundary-pushing, hyper-innovative, and continuously driven by technical excellence.
             </p>
           </div>
@@ -146,7 +146,7 @@ export default function About() {
 
       {/* Why Attend Footer Banner text layout */}
       <div className="mt-16 border border-neutral-900 bg-neutral-950/20 p-8 rounded-sm flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
-        <p className="font-sans text-xs text-neutral-400 max-w-2xl font-light leading-relaxed">
+        <p className="font-sans text-sm text-neutral-300 max-w-2xl font-light leading-relaxed">
           <span className="text-white font-medium block mb-1">Why HEBS is a Must-Attend Event</span>
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.
         </p>

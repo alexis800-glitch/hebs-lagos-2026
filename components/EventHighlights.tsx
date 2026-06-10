@@ -84,7 +84,7 @@ export default function EventHighlights() {
                 <h3 className="font-serif text-xl font-light text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
                   {h.title}
                 </h3>
-                <p className="font-sans text-sm font-light text-neutral-500 leading-relaxed">
+                <p className="font-sans text-sm md:text-base font-light text-neutral-400 leading-relaxed">
                   {h.desc}
                 </p>
               </div>

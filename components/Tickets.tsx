@@ -73,7 +73,7 @@ export default function Tickets() {
               <div className="w-full lg:w-2/5 mb-6 lg:mb-0">
                 <ul className="flex flex-wrap gap-x-6 gap-y-2">
                   {tier.perks.map((perk, pIdx) => (
-                    <li key={pIdx} className="font-sans text-xs text-neutral-400 flex items-center font-light">
+                    <li key={pIdx} className="font-sans text-sm text-neutral-300 flex items-center font-light">
                       <span className="w-1 h-1 bg-neutral-700 rounded-full mr-2"></span>
                       {perk}
                     </li>
