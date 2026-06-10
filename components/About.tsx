@@ -1,4 +1,5 @@
 import React from 'react'
+import { BookOpen, Globe, Sparkles } from 'lucide-react'
 
 export default function About() {
   return (
@@ -69,6 +70,51 @@ export default function About() {
                 Bringing diverse international beauty trends to Lagos, Nigeria to blend with local African influences, creating an unparalleled creative exchange and global networking opportunity.
               </p>
             </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Part 3: Our Mission Linear Matrix Stack */}
+      <div className="border-t border-neutral-900 pt-16 mt-24">
+        <div className="mb-12">
+          <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-2">Our Core Purpose</p>
+          <h3 className="font-serif text-3xl text-white font-light">Our Mission</h3>
+        </div>
+
+        <div className="flex flex-col border-t border-neutral-900">
+
+          {/* Row 1 / Bridging Education */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-8 border-b border-neutral-900 gap-4 md:gap-12">
+            <div className="flex items-center gap-4 w-full md:w-1/3 shrink-0">
+              <BookOpen className="h-5 w-5 text-amber-400 shrink-0 stroke-[1.25]" />
+              <h4 className="font-serif text-xl text-white font-light">Bridging Education with Opportunity</h4>
+            </div>
+            <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed max-w-2xl w-full">
+              Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.
+            </p>
+          </div>
+
+          {/* Row 2 / Connecting Professionals */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-8 border-b border-neutral-900 gap-4 md:gap-12">
+            <div className="flex items-center gap-4 w-full md:w-1/3 shrink-0">
+              <Globe className="h-5 w-5 text-neutral-400 shrink-0 stroke-[1.25]" />
+              <h4 className="font-serif text-xl text-white font-light">Connecting Professionals Worldwide</h4>
+            </div>
+            <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed max-w-2xl w-full">
+              Creating a dynamic global network and physical hub where hairstylists, masters barbers, creative makeup artists, fashion stylists, educators, and global brand leaders can seamlessly collaborate, share narratives, and grow collectively.
+            </p>
+          </div>
+
+          {/* Row 3 / Empowering Next Gen */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-8 border-b border-neutral-900 gap-4 md:gap-12">
+            <div className="flex items-center gap-4 w-full md:w-1/3 shrink-0">
+              <Sparkles className="h-5 w-5 text-neutral-400 shrink-0 stroke-[1.25]" />
+              <h4 className="font-serif text-xl text-white font-light">Empowering the Next Generation</h4>
+            </div>
+            <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed max-w-2xl w-full">
+              Ensuring that the collective future of beauty, grooming, and high-fashion remains completely inclusive, boundary-pushing, hyper-innovative, and continuously driven by technical excellence.
+            </p>
           </div>
 
         </div>
