@@ -5,6 +5,19 @@ export default function About() {
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto bg-[#050505] border-t border-neutral-900" id="about">
 
+      {/* Part 0: Our Legacy Global Timeline Row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 border-b border-neutral-900 pb-12 mb-20 items-start">
+        <div>
+          <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest block mb-2">Our History</span>
+          <h3 className="font-serif text-3xl text-white font-light">Our Legacy</h3>
+        </div>
+        <div className="md:col-span-2">
+          <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
+            HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. After hosting two exceptionally successful events in <span className="text-white font-medium">NY/NJ, USA</span>, we are now expanding dynamically to Africa—offering an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+          </p>
+        </div>
+      </div>
+
       {/* Part 1: High-Contrast Core Mission Statement */}
       <div className="text-center max-w-4xl mx-auto mb-28">
         <p className="font-sans text-xs uppercase tracking-[0.25em] text-amber-500 font-medium mb-4">
