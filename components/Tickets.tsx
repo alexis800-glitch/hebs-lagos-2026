@@ -98,8 +98,7 @@ export default function Tickets() {
               {/* Secure Direct Link */}
               <a
                 href={tier.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_self"
                 className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-xs shrink-0 block text-center min-w-[140px]"
               >
                 SECURE PASS ↗
