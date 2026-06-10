@@ -137,7 +137,7 @@ export default function PrizeGrid() {
               <div className="mt-8 border-t border-neutral-900 pt-6">
                 <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest">Creative Mandate</span>
                 <p className="font-sans text-xs text-neutral-400 font-light leading-relaxed mt-3">
-                  Each team's visual narrative must be fully cohesive — from the first model's look to the final stage moment. Judges will evaluate the depth of concept interpretation across all five disciplines as a single unified vision.
+                  Each team&apos;s visual narrative must be fully cohesive — from the first model&apos;s look to the final stage moment. Judges will evaluate the depth of concept interpretation across all five disciplines as a single unified vision.
                 </p>
               </div>
             </div>
