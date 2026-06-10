@@ -5,16 +5,27 @@ export default function About() {
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto bg-[#050505] border-t border-neutral-900" id="about">
 
-      {/* Part 0: Our Legacy Global Timeline Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 border-b border-neutral-900 pb-12 mb-20 items-start">
-        <div>
-          <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest block mb-2">Our History</span>
-          <h3 className="font-serif text-3xl text-white font-light">Our Legacy</h3>
-        </div>
-        <div className="md:col-span-2">
-          <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
-            HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. After hosting two exceptionally successful events in <span className="text-white font-medium">NY/NJ, USA</span>, we are now expanding dynamically to Africa—offering an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
-          </p>
+      {/* Part 0: Our Legacy Global Timeline Block */}
+      <div className="border-y border-neutral-900/80 bg-neutral-950/20 py-24 my-16 px-4 -mx-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 items-start">
+
+          {/* Left Column: Heading & Dense Visual Counter */}
+          <div className="flex flex-col gap-2">
+            <span className="font-mono text-[10px] uppercase text-amber-500 tracking-[0.25em] font-medium block">
+              Timeline Matrix / 03
+            </span>
+            <h3 className="font-serif text-4xl text-white font-light tracking-tight mt-1">
+              Our <span className="italic font-normal">Legacy</span>
+            </h3>
+          </div>
+
+          {/* Right Column: Expansive, Highly Legible Text Block */}
+          <div className="md:col-span-2">
+            <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
+              HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. After hosting two exceptionally successful events in <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">NY/NJ, USA</span>, we are now expanding dynamically to Africa—offering an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+            </p>
+          </div>
+
         </div>
       </div>
 
