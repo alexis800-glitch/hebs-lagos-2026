@@ -93,14 +93,14 @@ export default function Tickets() {
                 </div>
               </div>
 
-              {/* Secure Link Integration */}
+              {/* Link Wrapper */}
               <a
                 href="https://hebseventportal.net"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-all duration-150 rounded-xs shrink-0 block text-center"
+                className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-xs shrink-0 block text-center min-w-[140px]"
               >
-                Secure Pass ↗
+                SECURE PASS ↗
               </a>
             </div>
           </div>
