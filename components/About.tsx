@@ -56,8 +56,8 @@ export default function About() {
           <div className="bg-[#050505] p-6 flex flex-col justify-between min-h-[260px]">
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">01</span>
-              <h4 className="font-serif text-lg text-white font-light mb-2">First-of-Its-Kind Industry Fusion</h4>
-              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
+              <h4 className="font-serif text-xl font-light text-white mb-3 tracking-tight">First-of-Its-Kind Industry Fusion</h4>
+              <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed">
                 A Unified Beauty, Fashion & Education Platform where hairstylists, barbers, makeup artists, nail techs, fashion designers, and educators collaborate under one roof alongside top-tier global influencers.
               </p>
             </div>
@@ -67,8 +67,8 @@ export default function About() {
           <div className="bg-[#050505] p-6 flex flex-col justify-between min-h-[260px]">
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">02</span>
-              <h4 className="font-serif text-lg text-white font-light mb-2">High-Value, Hands-On Learning</h4>
-              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
+              <h4 className="font-serif text-xl font-light text-white mb-3 tracking-tight">High-Value, Hands-On Learning</h4>
+              <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed">
                 Focused entirely on technical education and real-world skills, ensuring every session is interactive, impactful, and delivers practical knowledge attendees can immediately apply to scale their business.
               </p>
             </div>
@@ -78,8 +78,8 @@ export default function About() {
           <div className="bg-[#050505] p-6 flex flex-col justify-between min-h-[260px]">
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">03</span>
-              <h4 className="font-serif text-lg text-white font-light mb-2">Elite Competitive Championship</h4>
-              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
+              <h4 className="font-serif text-xl font-light text-white mb-3 tracking-tight">Elite Competitive Championship</h4>
+              <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed">
                 Featuring a $35,000 global cumulative prize stakes pool—the highest stakes beauty competition globally. The event transforms raw competition into a full-scale runway production with music, lights, and energy.
               </p>
             </div>
@@ -89,8 +89,8 @@ export default function About() {
           <div className="bg-[#050505] p-6 flex flex-col justify-between min-h-[260px]">
             <div>
               <span className="font-mono text-xs text-neutral-600 block mb-4">04</span>
-              <h4 className="font-serif text-lg text-white font-light mb-2">A Truly Global Experience</h4>
-              <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed">
+              <h4 className="font-serif text-xl font-light text-white mb-3 tracking-tight">A Truly Global Experience</h4>
+              <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed">
                 Bringing diverse international beauty trends to Lagos, Nigeria to blend with local African influences, creating an unparalleled creative exchange and global networking opportunity.
               </p>
             </div>
