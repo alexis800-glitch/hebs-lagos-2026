@@ -75,21 +75,39 @@ export default function Navbar() {
                         transition={{ duration: 0.15 }}
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/90 backdrop-blur-md border border-neutral-900 rounded-sm p-2 shadow-2xl z-50 flex flex-col gap-0.5"
                       >
-                        <a
-                          href="#championship?tab=crowned"
-                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
+                        {/* Option 01 / Crowned Icons */}
+                        <button
+                          onClick={() => {
+                            const element = document.getElementById('championship');
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                              window.dispatchEvent(new CustomEvent('switchTab', { detail: 'crowned' }));
+                            }
+                            setIsDropdownOpen(false);
+                          }}
+                          className="w-full text-left font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
                         >
                           <span className="font-serif text-sm font-light text-white">Crowned Icons Showdown</span>
                           <span className="text-[10px] tracking-wide text-neutral-500 font-light">Global Team Runway Championship</span>
-                        </a>
+                        </button>
+
                         <div className="border-t border-neutral-900/60 my-1"></div>
-                        <a
-                          href="#championship?tab=barber"
-                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
+
+                        {/* Option 02 / Barber Battles */}
+                        <button
+                          onClick={() => {
+                            const element = document.getElementById('championship');
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                              window.dispatchEvent(new CustomEvent('switchTab', { detail: 'barber' }));
+                            }
+                            setIsDropdownOpen(false);
+                          }}
+                          className="w-full text-left font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
                         >
                           <span className="font-serif text-sm font-light text-white">Barber & Stylist Battles</span>
                           <span className="text-[10px] tracking-wide text-neutral-500 font-light">6 Individual Technical Showdowns</span>
-                        </a>
+                        </button>
                       </motion.div>
                     )}
                   </AnimatePresence>
