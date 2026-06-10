@@ -50,62 +50,60 @@ export default function Tickets() {
         </div>
       </FadeIn>
 
-      {/* Stripe-Style Structural Rows */}
       <div className="flex flex-col border-t border-neutral-900">
         {ticketTiers.map((tier, index) => (
-          <FadeIn key={index} delay={index * 0.07}>
-            <div
-              className="group flex flex-col lg:flex-row lg:items-center justify-between py-8 border-b border-neutral-900 hover:bg-neutral-950/40 transition-colors duration-200 px-4 -mx-4 rounded-sm"
-            >
-              {/* Title & Badge column */}
-              <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
-                <div className="flex items-center gap-3">
-                  <h3 className="font-serif text-2xl text-white font-light group-hover:text-amber-400 transition-colors">{tier.name}</h3>
-                  {tier.tag && (
-                    <span className="font-sans text-[10px] tracking-wider uppercase bg-neutral-900 border border-neutral-800 px-2 py-0.5 text-neutral-400 font-medium rounded-sm">
-                      {tier.tag}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Inclusions Detail column - Perfect Vertically Aligned Stack */}
-              <div className="w-full lg:w-2/5 mb-6 lg:mb-0 flex flex-col justify-center min-h-[64px]">
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full">
-                  {tier.perks.map((perk, pIdx) => (
-                    <li key={pIdx} className="font-sans text-sm text-neutral-300 flex items-start font-light leading-normal">
-                      <span className="w-1.5 h-1.5 bg-amber-400 rounded-full mt-1.5 mr-2 shrink-0 animate-pulse"></span>
-                      <span>{perk}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Pricing Ledger column */}
-              <div className="w-full lg:w-1/3 flex items-center justify-between lg:justify-end gap-12">
-                <div className="flex gap-8">
-                  <div>
-                    <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">Early Pricing</span>
-                    <span className="font-sans text-lg font-medium text-white">{tier.earlyPrice}</span>
-                  </div>
-                  <div className="border-l border-neutral-950 pl-8">
-                    <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-600">Standard Rate</span>
-                    <span className="font-sans text-sm font-light text-neutral-500 line-through">{tier.standardPrice}</span>
-                  </div>
-                </div>
-
-                {/* Minimalist Flat CTA Trigger */}
-                <a
-                  href="https://hebseventportal.net"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-all duration-150 rounded-xs shrink-0"
-                >
-                  Secure Pass ↗
-                </a>
+          <div
+            key={index}
+            className="group flex flex-col lg:flex-row lg:items-center justify-between py-8 border-b border-neutral-900 hover:bg-neutral-950/40 transition-colors duration-200 px-4 -mx-4 rounded-sm"
+          >
+            {/* Title & Badge column */}
+            <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
+              <div className="flex items-center gap-3">
+                <h3 className="font-serif text-2xl text-white font-light group-hover:text-amber-400 transition-colors">{tier.name}</h3>
+                {tier.tag && (
+                  <span className="font-sans text-[10px] tracking-wider uppercase bg-neutral-900 border border-neutral-800 px-2 py-0.5 text-neutral-400 font-medium rounded-sm">
+                    {tier.tag}
+                  </span>
+                )}
               </div>
             </div>
-          </FadeIn>
+
+            {/* Inclusions Detail column */}
+            <div className="w-full lg:w-2/5 mb-6 lg:mb-0 flex flex-col justify-center min-h-[64px]">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full">
+                {tier.perks.map((perk, pIdx) => (
+                  <li key={pIdx} className="font-sans text-sm text-neutral-300 flex items-start font-light leading-normal">
+                    <span className="w-1.5 h-1.5 bg-amber-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
+                    <span>{perk}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Pricing Ledger column - Fixed Legibility and Contrast Labels */}
+            <div className="w-full lg:w-1/3 flex items-center justify-between lg:justify-end gap-12">
+              <div className="flex gap-8">
+                <div>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Early Pricing</span>
+                  <span className="font-sans text-xl font-bold text-white">{tier.earlyPrice}</span>
+                </div>
+                <div className="border-l border-neutral-800 pl-8">
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Standard Rate</span>
+                  <span className="font-sans text-sm font-light text-neutral-400 line-through">{tier.standardPrice}</span>
+                </div>
+              </div>
+
+              {/* Secure Link Integration */}
+              <a
+                href="https://hebseventportal.net"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-all duration-150 rounded-xs shrink-0 block text-center"
+              >
+                Secure Pass ↗
+              </a>
+            </div>
+          </div>
         ))}
       </div>
     </section>
