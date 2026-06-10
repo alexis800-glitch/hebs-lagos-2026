@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 export default function PrizeGrid() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'theme' | 'stages'>('overview')
+  const [activeTab, setActiveTab] = useState<'crowned' | 'barber'>('crowned')
 
   const battleCategories = [
     {
@@ -57,61 +57,52 @@ export default function PrizeGrid() {
 
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto bg-[#050505] border-t border-neutral-900" id="championship">
-      {/* Premium Split Section Header */}
+
+      {/* Section Header */}
       <div className="border-b border-neutral-900 pb-8 mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
         <div>
-          <p className="font-sans text-xs uppercase tracking-widest text-amber-500 mb-3 font-medium">Signature Main Stage Event</p>
+          <p className="font-sans text-xs uppercase tracking-widest text-amber-500 mb-3 font-medium">Live Competition Events</p>
           <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
-            Crowned Icons <span className="italic font-normal">Showdown</span>
+            The <span className="italic font-normal">Championship</span>
           </h2>
         </div>
         <p className="font-sans text-sm md:text-base text-neutral-300 max-w-md font-light leading-relaxed">
-          A high-fashion, high-drama global showdown where runway meets theatre, fusing the creative energy of the Met Gala and Paris Fashion Week.
+          Two distinct competitive tracks. One global stage. Choose a category to explore the full event structure, prizes, and entry requirements.
         </p>
       </div>
 
-      {/* Modern Tab Navigation Bar */}
+      {/* Primary 2-Tab Navigation */}
       <div className="flex border-b border-neutral-900 mb-12 gap-8">
         <button
-          onClick={() => setActiveTab('overview')}
+          onClick={() => setActiveTab('crowned')}
           className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
-            activeTab === 'overview' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+            activeTab === 'crowned' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
           }`}
         >
-          01 / Overview & Payouts
+          01 / Crowned Icons Showdown
         </button>
         <button
-          onClick={() => setActiveTab('theme')}
+          onClick={() => setActiveTab('barber')}
           className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
-            activeTab === 'theme' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+            activeTab === 'barber' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
           }`}
         >
-          02 / 2026 Theme Specs
-        </button>
-        <button
-          onClick={() => setActiveTab('stages')}
-          className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
-            activeTab === 'stages' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
-          }`}
-        >
-          03 / Entry & Stages
+          02 / Barbering & Styling Battles
         </button>
       </div>
 
-      {/* Tab Content Display Matrix */}
-      <div className="min-h-[400px]">
+      {/* TAB 1: CROWNED ICONS SHOWDOWN */}
+      {activeTab === 'crowned' && (
+        <div className="flex flex-col gap-16">
 
-        {/* TAB 1: OVERVIEW & PAYOUTS */}
-        {activeTab === 'overview' && (
+          {/* The Movement + Payout Ledger + Judging */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Core Info */}
             <div className="lg:col-span-2 flex flex-col justify-between">
               <div>
                 <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest">The Movement</span>
                 <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed mt-4">
                   Stylists become directors. Models become performers. Beauty becomes performance art. Each team delivers a full-scale 7–10 minute immersive visual masterpiece showcasing collaborative technical mastery across five creative tracks:
                 </p>
-
                 <ul className="mt-6 flex flex-col gap-2.5 border-t border-neutral-900 pt-4">
                   <li className="flex justify-between text-sm font-sans text-neutral-300">
                     <span className="text-neutral-200">01 / Hairstyling</span>
@@ -135,8 +126,7 @@ export default function PrizeGrid() {
                   </li>
                 </ul>
               </div>
-
-              {/* High Contrast Payout Ledger */}
+              {/* Payout Ledger */}
               <div className="border-t border-neutral-900 pt-8 mt-8 grid grid-cols-3 gap-4">
                 <div>
                   <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-500 mb-1">1st Place Icon</span>
@@ -156,7 +146,7 @@ export default function PrizeGrid() {
               </div>
             </div>
 
-            {/* Judging Panel Block */}
+            {/* Judging Panel */}
             <div className="bg-neutral-950/40 border border-neutral-900 p-8 rounded-sm flex flex-col justify-between">
               <div>
                 <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest">Evaluation Metrics</span>
@@ -174,11 +164,9 @@ export default function PrizeGrid() {
               </div>
             </div>
           </div>
-        )}
 
-        {/* TAB 2: 2026 THEME SPECS */}
-        {activeTab === 'theme' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* 2026 Theme Specs */}
+          <div className="border-t border-neutral-900 pt-12 grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <span className="font-mono text-[10px] uppercase text-amber-500 tracking-widest font-medium">Official 2026 Theme</span>
               <h3 className="font-serif text-4xl text-white font-light mt-4 tracking-tight">THE FUTURE REIMAGINED</h3>
@@ -215,16 +203,12 @@ export default function PrizeGrid() {
               </div>
             </div>
           </div>
-        )}
 
-        {/* TAB 3: ENTRY & STAGES */}
-        {activeTab === 'stages' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Stage Timeline */}
+          {/* Entry & Stages */}
+          <div className="border-t border-neutral-900 pt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest">Competition Roadmap</span>
               <div className="mt-6 flex flex-col gap-0">
-
                 <div className="flex gap-6 pb-8 border-b border-neutral-900">
                   <div className="flex flex-col items-center gap-1 shrink-0">
                     <span className="font-mono text-[10px] text-amber-400">01</span>
@@ -236,7 +220,6 @@ export default function PrizeGrid() {
                     <span className="font-mono text-[10px] text-amber-500 mt-2 block">Opens: Summer 2026</span>
                   </div>
                 </div>
-
                 <div className="flex gap-6 py-8 border-b border-neutral-900">
                   <div className="flex flex-col items-center gap-1 shrink-0">
                     <span className="font-mono text-[10px] text-neutral-500">02</span>
@@ -248,7 +231,6 @@ export default function PrizeGrid() {
                     <span className="font-mono text-[10px] text-neutral-500 mt-2 block">Deadline: September 2026</span>
                   </div>
                 </div>
-
                 <div className="flex gap-6 py-8 border-b border-neutral-900">
                   <div className="flex flex-col items-center gap-1 shrink-0">
                     <span className="font-mono text-[10px] text-neutral-500">03</span>
@@ -260,7 +242,6 @@ export default function PrizeGrid() {
                     <span className="font-mono text-[10px] text-neutral-500 mt-2 block">October 23, 2026</span>
                   </div>
                 </div>
-
                 <div className="flex gap-6 pt-8">
                   <div className="flex flex-col items-center gap-1 shrink-0">
                     <span className="font-mono text-[10px] text-amber-400">04</span>
@@ -271,11 +252,10 @@ export default function PrizeGrid() {
                     <span className="font-mono text-[10px] text-amber-500 mt-2 block">October 24–25, 2026 · NJS Royale Convention & Suites</span>
                   </div>
                 </div>
-
               </div>
             </div>
 
-            {/* Entry Requirements Panel */}
+            {/* Entry Requirements */}
             <div className="bg-neutral-950/40 border border-neutral-900 p-8 rounded-sm flex flex-col gap-6">
               <div>
                 <span className="font-mono text-[10px] uppercase text-neutral-500 tracking-widest">Entry Requirements</span>
@@ -300,69 +280,64 @@ export default function PrizeGrid() {
               </div>
             </div>
           </div>
-        )}
 
-      </div>
-
-      {/* Part 4: Barbering & Styling Battles Technical Grid */}
-      <div className="border-t border-neutral-900 pt-20 mt-24">
-        <div className="mb-12">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-neutral-500 mb-2">Solo Showdowns</p>
-          <h3 className="font-serif text-3xl text-white font-light">Barbering & Styling Battles</h3>
-          <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-2 max-w-xl">
-            Six hyper-focused individual battle fields structured to test precision speed, complex partitioning, and elite creative craftsmanship.
-          </p>
         </div>
+      )}
 
-        {/* 3-Column Luxury Photo Panel Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-900 border border-neutral-900 overflow-hidden rounded-sm">
-          {battleCategories.map((battle) => (
-            <div key={battle.id} className="bg-[#050505] p-6 flex flex-col justify-between group min-h-[460px]">
+      {/* TAB 2: BARBERING & STYLING BATTLES */}
+      {activeTab === 'barber' && (
+        <div>
+          <div className="mb-12">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-neutral-500 mb-2">Solo Showdowns</p>
+            <h3 className="font-serif text-3xl text-white font-light">Barbering & Styling Battles</h3>
+            <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-2 max-w-xl">
+              Six hyper-focused individual battle fields structured to test precision speed, complex partitioning, and elite creative craftsmanship.
+            </p>
+          </div>
 
-              {/* Image Card Container */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden border border-neutral-900 bg-neutral-950 rounded-xs mb-6">
-                <img
-                  src={battle.image}
-                  alt={battle.title}
-                  className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                />
-                <div className="absolute top-3 left-3 font-mono text-[9px] tracking-wider uppercase bg-black/80 border border-neutral-800 px-2 py-0.5 text-neutral-400 rounded-xs">
-                  {battle.number}
-                </div>
-              </div>
-
-              {/* Text Meta Fields Block */}
-              <div className="flex-1 flex flex-col justify-between">
-                <div>
-                  <h4 className="font-serif text-xl text-white font-light group-hover:text-amber-400 transition-colors tracking-tight">
-                    {battle.title}
-                  </h4>
-                  <p className="font-sans text-xs text-neutral-400 mt-2 font-light leading-relaxed min-h-[60px]">
-                    {battle.desc}
-                  </p>
-                </div>
-
-                {/* Footer Price ledger & Direct Action Tag */}
-                <div className="border-t border-neutral-900/60 pt-4 mt-6 flex items-center justify-between">
-                  <div>
-                    <span className="block font-mono text-[8px] uppercase tracking-wider text-neutral-600">Entry Stake</span>
-                    <span className="font-sans text-sm font-medium text-white">{battle.price}</span>
+          {/* 3-Column Photo Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-900 border border-neutral-900 overflow-hidden rounded-sm">
+            {battleCategories.map((battle) => (
+              <div key={battle.id} className="bg-[#050505] p-6 flex flex-col justify-between group min-h-[460px]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden border border-neutral-900 bg-neutral-950 rounded-xs mb-6">
+                  <img
+                    src={battle.image}
+                    alt={battle.title}
+                    className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  />
+                  <div className="absolute top-3 left-3 font-mono text-[9px] tracking-wider uppercase bg-black/80 border border-neutral-800 px-2 py-0.5 text-neutral-400 rounded-xs">
+                    {battle.number}
                   </div>
-                  <a
-                    href="https://hebseventportal.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-sans text-[10px] uppercase tracking-widest border border-neutral-800 text-neutral-300 hover:bg-white hover:text-black hover:border-white px-4 py-2 transition-all rounded-xs"
-                  >
-                    Enter Battle ↗
-                  </a>
+                </div>
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-serif text-xl text-white font-light group-hover:text-amber-400 transition-colors tracking-tight">
+                      {battle.title}
+                    </h4>
+                    <p className="font-sans text-xs text-neutral-400 mt-2 font-light leading-relaxed min-h-[60px]">
+                      {battle.desc}
+                    </p>
+                  </div>
+                  <div className="border-t border-neutral-900/60 pt-4 mt-6 flex items-center justify-between">
+                    <div>
+                      <span className="block font-mono text-[8px] uppercase tracking-wider text-neutral-600">Entry Stake</span>
+                      <span className="font-sans text-sm font-medium text-white">{battle.price}</span>
+                    </div>
+                    <a
+                      href="https://hebseventportal.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-[10px] uppercase tracking-widest border border-neutral-800 text-neutral-300 hover:bg-white hover:text-black hover:border-white px-4 py-2 transition-all rounded-xs"
+                    >
+                      Enter Battle ↗
+                    </a>
+                  </div>
                 </div>
               </div>
-
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
     </section>
   )
