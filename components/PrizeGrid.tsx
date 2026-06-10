@@ -1,8 +1,20 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function PrizeGrid() {
   const [activeTab, setActiveTab] = useState<'crowned' | 'barber'>('crowned')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const handleHashChange = () => {
+        if (window.location.hash.includes('tab=crowned')) setActiveTab('crowned')
+        if (window.location.hash.includes('tab=barber')) setActiveTab('barber')
+      }
+      window.addEventListener('hashchange', handleHashChange)
+      handleHashChange()
+      return () => window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
 
   const battleCategories = [
     {

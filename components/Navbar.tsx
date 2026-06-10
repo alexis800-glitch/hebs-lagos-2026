@@ -19,6 +19,7 @@ const EASE = [0.25, 0.4, 0.25, 1] as const;
 export default function Navbar() {
   const mounted = useMounted();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -51,16 +52,59 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <ul className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="px-3 py-1.5 font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200"
+            {navLinks.map((link) =>
+              link.label === 'Competition' ? (
+                <li
+                  key={link.label}
+                  className="relative"
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                  onMouseLeave={() => setIsDropdownOpen(false)}
                 >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+                  <a
+                    href={link.href}
+                    className="px-3 py-1.5 font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200 block"
+                  >
+                    {link.label}
+                  </a>
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 5 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/90 backdrop-blur-md border border-neutral-900 rounded-sm p-2 shadow-2xl z-50 flex flex-col gap-0.5"
+                      >
+                        <a
+                          href="#championship?tab=crowned"
+                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
+                        >
+                          <span className="font-serif text-sm font-light text-white">Crowned Icons Showdown</span>
+                          <span className="text-[10px] tracking-wide text-neutral-500 font-light">Global Team Runway Championship</span>
+                        </a>
+                        <div className="border-t border-neutral-900/60 my-1"></div>
+                        <a
+                          href="#championship?tab=barber"
+                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
+                        >
+                          <span className="font-serif text-sm font-light text-white">Barber & Stylist Battles</span>
+                          <span className="text-[10px] tracking-wide text-neutral-500 font-light">6 Individual Technical Showdowns</span>
+                        </a>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              ) : (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="px-3 py-1.5 font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              )
+            )}
           </ul>
 
           {/* Desktop CTA */}
