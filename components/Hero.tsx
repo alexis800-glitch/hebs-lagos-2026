@@ -79,8 +79,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.55 : 0 }}
-          className="font-sans text-xs uppercase tracking-widest"
-          style={{ color: "#666" }}
+          className="font-sans text-xs uppercase tracking-widest text-[#D4AF37] font-medium"
         >
           $35,000 in prizes
         </motion.p>
