@@ -25,7 +25,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.05 : 0 }}
-          className="font-sans text-xs uppercase tracking-widest text-neutral-400"
+          className="font-sans text-xs uppercase tracking-widest text-[#D4AF37]"
         >
           The Hair Education Beauty Summit
         </motion.p>
