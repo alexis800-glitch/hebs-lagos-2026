@@ -4,6 +4,57 @@ import React, { useState } from 'react'
 export default function PrizeGrid() {
   const [activeTab, setActiveTab] = useState<'overview' | 'theme' | 'stages'>('overview')
 
+  const battleCategories = [
+    {
+      id: 1,
+      title: "Fast & Flawless",
+      price: "$50.00",
+      number: "Category 01",
+      image: "https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg",
+      desc: "An intense, high-speed showdown focusing on raw execution velocity, flawless blending transitions, and clean line work under an aggressive clock."
+    },
+    {
+      id: 2,
+      title: "Freestyle Fusion",
+      price: "$50.00",
+      number: "Category 02",
+      image: "https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg",
+      desc: "Unrestricted creative warfare. Competitors blend geometric hair portraits, abstract lines, and custom dye expressions live on stage."
+    },
+    {
+      id: 3,
+      title: "Vintage Vibe Tag Team",
+      price: "$50.00",
+      number: "Category 03",
+      image: "https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg",
+      desc: "A coordinated dual-stylist clash resurrecting classic, old-school silhouettes and timeless historical cuts updated with sharp modern flair."
+    },
+    {
+      id: 4,
+      title: "Braids & Fades",
+      price: "$50.00",
+      number: "Category 04",
+      image: "https://images.pexels.com/photos/3738338/pexels-photo-3738338.jpeg",
+      desc: "The ultimate technical crossover battle requiring flawless razor skin-fading paired with tight, symmetrical, and complex braid parting maps."
+    },
+    {
+      id: 5,
+      title: "Loc Retwist & Style Challenge",
+      price: "$50.00",
+      number: "Category 05",
+      image: "https://images.pexels.com/photos/7697227/pexels-photo-7697227.jpeg",
+      desc: "Celebrating structural locked texture. Stylists execute immaculate, crisp row maintenance alongside a visionary avant-garde locked formal shape style."
+    },
+    {
+      id: 6,
+      title: "Neatbraid Precision Maze Challenge",
+      price: "$50.00",
+      number: "Category 06",
+      image: "https://images.pexels.com/photos/3065171/pexels-photo-3065171.jpeg",
+      desc: "A meticulous test of absolute parting perfection. Contenders construct complex, multi-directional labyrinth braid patterns with immaculate tension."
+    }
+  ]
+
   return (
     <section className="py-24 px-6 max-w-6xl mx-auto bg-[#050505] border-t border-neutral-900" id="championship">
       {/* Premium Split Section Header */}
@@ -252,6 +303,67 @@ export default function PrizeGrid() {
         )}
 
       </div>
+
+      {/* Part 4: Barbering & Styling Battles Technical Grid */}
+      <div className="border-t border-neutral-900 pt-20 mt-24">
+        <div className="mb-12">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-neutral-500 mb-2">Solo Showdowns</p>
+          <h3 className="font-serif text-3xl text-white font-light">Barbering & Styling Battles</h3>
+          <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-2 max-w-xl">
+            Six hyper-focused individual battle fields structured to test precision speed, complex partitioning, and elite creative craftsmanship.
+          </p>
+        </div>
+
+        {/* 3-Column Luxury Photo Panel Matrix */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-900 border border-neutral-900 overflow-hidden rounded-sm">
+          {battleCategories.map((battle) => (
+            <div key={battle.id} className="bg-[#050505] p-6 flex flex-col justify-between group min-h-[460px]">
+
+              {/* Image Card Container */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden border border-neutral-900 bg-neutral-950 rounded-xs mb-6">
+                <img
+                  src={battle.image}
+                  alt={battle.title}
+                  className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                />
+                <div className="absolute top-3 left-3 font-mono text-[9px] tracking-wider uppercase bg-black/80 border border-neutral-800 px-2 py-0.5 text-neutral-400 rounded-xs">
+                  {battle.number}
+                </div>
+              </div>
+
+              {/* Text Meta Fields Block */}
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <h4 className="font-serif text-xl text-white font-light group-hover:text-amber-400 transition-colors tracking-tight">
+                    {battle.title}
+                  </h4>
+                  <p className="font-sans text-xs text-neutral-400 mt-2 font-light leading-relaxed min-h-[60px]">
+                    {battle.desc}
+                  </p>
+                </div>
+
+                {/* Footer Price ledger & Direct Action Tag */}
+                <div className="border-t border-neutral-900/60 pt-4 mt-6 flex items-center justify-between">
+                  <div>
+                    <span className="block font-mono text-[8px] uppercase tracking-wider text-neutral-600">Entry Stake</span>
+                    <span className="font-sans text-sm font-medium text-white">{battle.price}</span>
+                  </div>
+                  <a
+                    href="https://hebseventportal.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans text-[10px] uppercase tracking-widest border border-neutral-800 text-neutral-300 hover:bg-white hover:text-black hover:border-white px-4 py-2 transition-all rounded-xs"
+                  >
+                    Enter Battle ↗
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   )
 }
