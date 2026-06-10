@@ -65,7 +65,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <a
-            href="https://hebseventportal.net"
+            href="https://hebseventportal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-block font-sans text-xs px-4 py-2 bg-white text-black hover:bg-neutral-200 font-medium tracking-wide rounded-full transition-all duration-200 shrink-0"
@@ -113,7 +113,7 @@ export default function Navbar() {
               ))}
               <li className="mt-2 px-2 pb-2">
                 <a
-                  href="https://hebseventportal.net"
+                  href="https://hebseventportal.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}

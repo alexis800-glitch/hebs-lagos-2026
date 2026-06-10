@@ -239,7 +239,7 @@ export default function PrizeGrid() {
               </ul>
               <div className="border-t border-neutral-900 pt-4 mt-auto">
                 <a
-                  href="https://hebseventportal.net"
+                  href="https://hebseventportal.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center font-sans text-xs uppercase tracking-widest text-black bg-white hover:bg-amber-400 transition-colors py-3 rounded-sm font-medium"

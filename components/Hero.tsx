@@ -93,7 +93,7 @@ export default function Hero() {
           className="mt-10 mb-16 md:mb-20 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md mx-auto"
         >
           <a
-            href="https://hebseventportal.net"
+            href="https://hebseventportal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-crisp-primary w-full sm:w-auto text-center font-sans"

@@ -7,7 +7,7 @@ const ticketTiers = [
     standardPrice: "$65",
     perks: ["Access to one event day", "General sessions", "Floor networking"],
     tag: "",
-    link: "https://hebseventportal.net"
+    link: "https://hebseventportal.com"
   },
   {
     name: "2-Day Pass",
@@ -15,7 +15,7 @@ const ticketTiers = [
     standardPrice: "$110",
     perks: ["Access to two continuous days", "All general stage sessions", "Networking events inclusion"],
     tag: "",
-    link: "https://hebseventportal.net"
+    link: "https://hebseventportal.com"
   },
   {
     name: "3-Day All-Inclusive",
@@ -23,7 +23,7 @@ const ticketTiers = [
     standardPrice: "$250",
     perks: ["Full 3-day complete access", "All Masterclasses & Workshops", "Competitions viewing", "Networking & Gala Entry"],
     tag: "Best Value",
-    link: "https://hebseventportal.net"
+    link: "https://hebseventportal.com"
   },
   {
     name: "VIP Experience",
@@ -31,7 +31,7 @@ const ticketTiers = [
     standardPrice: "$600",
     perks: ["Full 3-day VIP clearance", "Front-row priority seating", "Exclusive VIP lounge access", "Celebrity Meet & Greet", "Official Merchandise Package"],
     tag: "Premium Clearance",
-    link: "https://hebseventportal.net"
+    link: "https://hebseventportal.com"
   }
 ]
 
@@ -98,7 +98,8 @@ export default function Tickets() {
               {/* Secure Direct Link */}
               <a
                 href={tier.link}
-                target="_self"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-xs shrink-0 block text-center min-w-[140px]"
               >
                 SECURE PASS ↗

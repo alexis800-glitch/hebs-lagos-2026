@@ -150,7 +150,7 @@ export default function About() {
           <span className="text-white font-medium block mb-1">Why HEBS is a Must-Attend Event</span>
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.
         </p>
-        <a href="https://hebseventportal.net" target="_blank" rel="noopener noreferrer" className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-colors rounded-xs shrink-0 whitespace-nowrap">
+        <a href="https://hebseventportal.com" target="_blank" rel="noopener noreferrer" className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-colors rounded-xs shrink-0 whitespace-nowrap">
           Secure Your Placement ↗
         </a>
       </div>
