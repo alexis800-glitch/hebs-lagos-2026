@@ -1,5 +1,4 @@
 import React from 'react'
-import FadeIn from './FadeIn'
 
 const ticketTiers = [
   {
@@ -7,56 +6,59 @@ const ticketTiers = [
     earlyPrice: "$45",
     standardPrice: "$65",
     perks: ["Access to one event day", "General sessions", "Floor networking"],
-    tag: ""
+    tag: "",
+    link: "https://hebseventportal.net"
   },
   {
     name: "2-Day Pass",
     earlyPrice: "$80",
     standardPrice: "$110",
     perks: ["Access to two continuous days", "All general stage sessions", "Networking events inclusion"],
-    tag: ""
+    tag: "",
+    link: "https://hebseventportal.net"
   },
   {
     name: "3-Day All-Inclusive",
     earlyPrice: "$175",
     standardPrice: "$250",
     perks: ["Full 3-day complete access", "All Masterclasses & Workshops", "Competitions viewing", "Networking & Gala Entry"],
-    tag: "Best Value"
+    tag: "Best Value",
+    link: "https://hebseventportal.net"
   },
   {
     name: "VIP Experience",
     earlyPrice: "$400",
     standardPrice: "$600",
     perks: ["Full 3-day VIP clearance", "Front-row priority seating", "Exclusive VIP lounge access", "Celebrity Meet & Greet", "Official Merchandise Package"],
-    tag: "Premium Clearance"
+    tag: "Premium Clearance",
+    link: "https://hebseventportal.net"
   }
 ]
 
 export default function Tickets() {
   return (
-    <section id="tickets" className="pt-8 pb-32 px-6 max-w-6xl mx-auto bg-[#050505]">
+    <section className="pt-8 pb-32 px-6 max-w-6xl mx-auto bg-[#050505]" id="tickets">
       {/* Header Layout */}
-      <FadeIn>
-        <div className="border-b border-neutral-900 pb-8 mb-6 md:mb-8 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-          <div>
-            <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">Registration Portals</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
-              Choose Your <span className="italic font-normal">Experience</span>
-            </h2>
-          </div>
-          <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed">
-            Early bird rates are available for a limited window. Secure placement before tier limits expire.
-          </p>
+      <div className="border-b border-neutral-900 pb-8 mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-widest text-neutral-400 font-medium mb-3">Registration Portals</p>
+          <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
+            Choose Your <span className="italic font-normal">Experience</span>
+          </h2>
         </div>
-      </FadeIn>
+        <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed">
+          Early bird rates are available for a limited window. Secure placement before tier limits expire.
+        </p>
+      </div>
 
+      {/* Rows Matrix */}
       <div className="flex flex-col border-t border-neutral-900">
         {ticketTiers.map((tier, index) => (
           <div
             key={index}
             className="group flex flex-col lg:flex-row lg:items-center justify-between py-8 border-b border-neutral-900 hover:bg-neutral-950/40 transition-colors duration-200 px-4 -mx-4 rounded-sm"
           >
-            {/* Title & Badge column */}
+            {/* Title */}
             <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
               <div className="flex items-center gap-3">
                 <h3 className="font-serif text-2xl text-white font-light group-hover:text-amber-400 transition-colors">{tier.name}</h3>
@@ -68,7 +70,7 @@ export default function Tickets() {
               </div>
             </div>
 
-            {/* Inclusions Detail column */}
+            {/* Inclusions Stack */}
             <div className="w-full lg:w-2/5 mb-6 lg:mb-0 flex flex-col justify-center min-h-[64px]">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full">
                 {tier.perks.map((perk, pIdx) => (
@@ -80,7 +82,7 @@ export default function Tickets() {
               </ul>
             </div>
 
-            {/* Pricing Ledger column - Fixed Legibility and Contrast Labels */}
+            {/* Pricing Details */}
             <div className="w-full lg:w-1/3 flex items-center justify-between lg:justify-end gap-12">
               <div className="flex gap-8">
                 <div>
@@ -93,9 +95,9 @@ export default function Tickets() {
                 </div>
               </div>
 
-              {/* Link Wrapper */}
+              {/* Secure Direct Link */}
               <a
-                href="https://hebseventportal.net"
+                href={tier.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-xs shrink-0 block text-center min-w-[140px]"
