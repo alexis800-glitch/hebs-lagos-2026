@@ -9,6 +9,7 @@ import Tickets from "@/components/Tickets";
 import SponsorsVendors from "@/components/SponsorsVendors";
 import PricingGrid from "@/components/PricingGrid";
 import VendorMatrix from "@/components/VendorMatrix";
+import SponsorshipGrid from "@/components/SponsorshipGrid";
 import GalleryGridBlock from "@/components/GalleryGridBlock";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -29,6 +30,7 @@ export default function Home() {
         <SponsorsVendors />
         <PricingGrid />
         <VendorMatrix />
+        <SponsorshipGrid />
         <GalleryGridBlock />
         <Contact />
         <Footer />
