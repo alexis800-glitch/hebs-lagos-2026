@@ -51,7 +51,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center justify-center gap-6">
+          <ul className="hidden md:flex items-center justify-center gap-6 h-full">
             {navLinks.map((link) =>
               link.label === 'Competition' ? (
                 <li
@@ -64,9 +64,9 @@ export default function Navbar() {
                     href={link.href}
                     className="font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200 block"
                   >
-                    <span className="flex items-center gap-1.5 cursor-pointer">
+                    <span className="inline-flex items-center justify-center gap-1.5 align-middle h-full">
                       Competition
-                      <ChevronDown className="h-3 w-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+                      <ChevronDown className="h-3 w-3 text-white stroke-[2] shrink-0" />
                     </span>
                   </a>
                   <AnimatePresence>
