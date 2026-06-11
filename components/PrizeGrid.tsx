@@ -121,26 +121,31 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                 <p className="font-sans text-sm text-neutral-300 font-light leading-relaxed mt-4">
                   Stylists become directors. Models become performers. Beauty becomes performance art. Each team delivers a full-scale 7–10 minute immersive visual masterpiece showcasing collaborative technical mastery across five creative tracks:
                 </p>
-                <ul className="mt-6 flex flex-col gap-2.5 border-t border-neutral-900 pt-4">
-                  <li className="flex justify-between text-sm font-sans text-neutral-300">
-                    <span className="text-neutral-200">01 / Hairstyling</span>
-                    <span className="font-mono text-[10px]">Avant-Garde Focus</span>
+                <ul className="mt-6 border-t border-neutral-900 pt-4">
+                  <li className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] items-start md:items-center py-4 border-b border-zinc-900 last:border-0 gap-x-4 gap-y-1">
+                    <span className="text-zinc-600 font-mono text-sm leading-none pt-0.5 md:pt-0">01</span>
+                    <div className="text-white text-base font-medium tracking-tight pr-4">Hairstyling</div>
+                    <div className="col-start-2 md:col-start-3 text-zinc-400 text-xs md:text-sm font-mono tracking-wide md:text-right mt-0.5 md:mt-0">Avant-Garde Focus</div>
                   </li>
-                  <li className="flex justify-between text-sm font-sans text-neutral-300">
-                    <span className="text-neutral-200">02 / Makeup Artistry</span>
-                    <span className="font-mono text-[10px]">Editorial Mastery</span>
+                  <li className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] items-start md:items-center py-4 border-b border-zinc-900 last:border-0 gap-x-4 gap-y-1">
+                    <span className="text-zinc-600 font-mono text-sm leading-none pt-0.5 md:pt-0">02</span>
+                    <div className="text-white text-base font-medium tracking-tight pr-4">Makeup Artistry</div>
+                    <div className="col-start-2 md:col-start-3 text-zinc-400 text-xs md:text-sm font-mono tracking-wide md:text-right mt-0.5 md:mt-0">Editorial Mastery</div>
                   </li>
-                  <li className="flex justify-between text-sm font-sans text-neutral-300">
-                    <span className="text-neutral-200">03 / Fashion & Couture</span>
-                    <span className="font-mono text-[10px]">Original Designer Collaboration</span>
+                  <li className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] items-start md:items-center py-4 border-b border-zinc-900 last:border-0 gap-x-4 gap-y-1">
+                    <span className="text-zinc-600 font-mono text-sm leading-none pt-0.5 md:pt-0">03</span>
+                    <div className="text-white text-base font-medium tracking-tight pr-4">Fashion &amp; Couture</div>
+                    <div className="col-start-2 md:col-start-3 text-zinc-400 text-xs md:text-sm font-mono tracking-wide md:text-right mt-0.5 md:mt-0">Original Designer Collaboration</div>
                   </li>
-                  <li className="flex justify-between text-sm font-sans text-neutral-300">
-                    <span className="text-neutral-200">04 / Nail Art</span>
-                    <span className="font-mono text-[10px]">Precision Details</span>
+                  <li className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] items-start md:items-center py-4 border-b border-zinc-900 last:border-0 gap-x-4 gap-y-1">
+                    <span className="text-zinc-600 font-mono text-sm leading-none pt-0.5 md:pt-0">04</span>
+                    <div className="text-white text-base font-medium tracking-tight pr-4">Nail Art</div>
+                    <div className="col-start-2 md:col-start-3 text-zinc-400 text-xs md:text-sm font-mono tracking-wide md:text-right mt-0.5 md:mt-0">Precision Details</div>
                   </li>
-                  <li className="flex justify-between text-sm font-sans text-neutral-300">
-                    <span className="text-neutral-200">05 / Stage Production</span>
-                    <span className="font-mono text-[10px]">Choreography, Set Design & Audio</span>
+                  <li className="grid grid-cols-[auto_1fr] md:grid-cols-[auto_1fr_auto] items-start md:items-center py-4 border-b border-zinc-900 last:border-0 gap-x-4 gap-y-1">
+                    <span className="text-zinc-600 font-mono text-sm leading-none pt-0.5 md:pt-0">05</span>
+                    <div className="text-white text-base font-medium tracking-tight pr-4">Stage Production</div>
+                    <div className="col-start-2 md:col-start-3 text-zinc-400 text-xs md:text-sm font-mono tracking-wide md:text-right mt-0.5 md:mt-0">Choreography, Set Design &amp; Audio</div>
                   </li>
                 </ul>
               </div>
