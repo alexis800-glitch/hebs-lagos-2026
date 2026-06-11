@@ -22,7 +22,7 @@ export default function Hero() {
         }
         .animate-text-rotate {
           animation: textRotate 4s ease-in-out infinite;
-          display: inline-block;
+          display: inline;
         }
       `}</style>
       <section
@@ -102,7 +102,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-center leading-[1.1] max-w-4xl mx-auto font-sans text-white"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-center leading-[1.2] max-w-5xl mx-auto text-white"
         >
           <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0s" }}>Where </span>
           <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0.8s" }}>Talent </span>
