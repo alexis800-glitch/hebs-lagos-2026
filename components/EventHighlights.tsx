@@ -49,7 +49,8 @@ export default function EventHighlights() {
     <section id="highlights" className="py-24 px-4 bg-[#080808]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="border-b border-neutral-900 pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative">
+          <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div>
             <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">What to Expect</p>
             <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
@@ -72,7 +73,7 @@ export default function EventHighlights() {
             <motion.div
               key={h.title}
               variants={row}
-              className="group flex flex-col md:flex-row md:items-start gap-4 md:gap-12 border-b border-neutral-900 py-8"
+              className="group flex flex-col md:flex-row md:items-start gap-4 md:gap-12 border-b border-white/10 py-8"
             >
               {/* Serial index */}
               <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-700 md:w-20 shrink-0 pt-1">

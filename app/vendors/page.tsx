@@ -136,7 +136,7 @@ export default function VendorsPage() {
               <div
                 key={booth.name}
                 className={`bg-zinc-950/40 border rounded-2xl p-8 flex flex-col justify-between hover:border-zinc-700 transition-all duration-300 shadow-xl relative overflow-hidden ${
-                  booth.featured ? 'border-amber-500/30 hover:border-amber-400/50' : 'border-zinc-900'
+                  booth.featured ? 'border-amber-500/40 hover:border-amber-400/60' : 'border-white/15 hover:border-white/25'
                 }`}
               >
                 {/* Featured badge */}
@@ -230,7 +230,7 @@ export default function VendorsPage() {
             { label: 'Setup Window', value: 'October 22, 2026', note: 'Full day pre-event booth setup access' },
             { label: 'Event Dates', value: 'Oct 23–25, 2026', note: 'NJS Royale Convention & Suites, Lagos' },
           ].map((item) => (
-            <div key={item.label} className="border border-zinc-900 rounded-xl p-5">
+            <div key={item.label} className="border border-white/15 bg-zinc-950/40 rounded-xl p-5 backdrop-blur-sm shadow-sm">
               <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-1">{item.label}</span>
               <span className="font-sans text-sm font-medium text-white block">{item.value}</span>
               <span className="font-sans text-xs text-zinc-500 font-light">{item.note}</span>
@@ -239,7 +239,7 @@ export default function VendorsPage() {
         </div>
 
         {/* Footer CTA */}
-        <div className="max-w-6xl mx-auto mt-10 border border-zinc-900 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="max-w-6xl mx-auto mt-10 border border-white/15 bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
           <div>
             <p className="font-sans text-sm text-white font-medium mb-1">Ready to Exhibit at HEBS 2026?</p>
             <p className="font-sans text-xs text-zinc-400 font-light">
