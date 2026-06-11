@@ -15,8 +15,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden"
-      style={{ background: "#050505" }}
+      className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden bg-black"
     >
 
       {/* ── Layer 0: Cinematic video background ── */}
@@ -26,9 +25,13 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-20 brightness-[0.4] contrast-[1.1]"
+          className="w-full h-full object-cover opacity-30 brightness-[0.5] contrast-[1.2]"
         >
-          {/* Replace src with your own video placed in /public, e.g. /hero-bg.mp4 */}
+          {/* Replace with your own video file in /public for production */}
+          <source
+            src="https://assets.mixkit.co/videos/preview/mixkit-ink-smoke-blot-on-black-background-20958-large.mp4"
+            type="video/mp4"
+          />
           <source
             src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4"
             type="video/mp4"
@@ -58,7 +61,7 @@ export default function Hero() {
       <div className="absolute top-[72px] left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
       <div className="absolute bottom-0 left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
 
-      <div className="relative z-10 flex flex-col items-center gap-7 max-w-5xl mx-auto w-full pt-24 md:pt-28">
+      <div className="relative z-10 w-full flex flex-col items-center gap-7 max-w-5xl mx-auto pt-24 md:pt-28">
 
         {/* Prize pool badge */}
         <motion.div
