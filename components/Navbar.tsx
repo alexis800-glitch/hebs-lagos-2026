@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
 
 const navLinks = [
@@ -51,20 +51,23 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden md:flex items-center justify-center gap-6">
             {navLinks.map((link) =>
               link.label === 'Competition' ? (
                 <li
                   key={link.label}
-                  className="relative"
+                  className="relative group"
                   onMouseEnter={() => setIsDropdownOpen(true)}
                   onMouseLeave={() => setIsDropdownOpen(false)}
                 >
                   <a
                     href={link.href}
-                    className="px-3 py-1.5 font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200 block"
+                    className="font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200 block"
                   >
-                    {link.label}
+                    <span className="flex items-center gap-1.5 cursor-pointer">
+                      Competition
+                      <ChevronDown className="h-3 w-3 opacity-50 group-hover:opacity-100 transition-opacity" />
+                    </span>
                   </a>
                   <AnimatePresence>
                     {isDropdownOpen && (
@@ -76,38 +79,26 @@ export default function Navbar() {
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/90 backdrop-blur-md border border-neutral-900 rounded-sm p-2 shadow-2xl z-50 flex flex-col gap-0.5"
                       >
                         {/* Option 01 / Crowned Icons */}
-                        <button
-                          onClick={() => {
-                            const element = document.getElementById('championship');
-                            if (element) {
-                              element.scrollIntoView({ behavior: 'smooth' });
-                              window.dispatchEvent(new CustomEvent('switchTab', { detail: 'crowned' }));
-                            }
-                            setIsDropdownOpen(false);
-                          }}
-                          className="w-full text-left font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
+                        <a
+                          href="/competition/crowned-icons"
+                          onClick={() => setIsDropdownOpen(false)}
+                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
                         >
                           <span className="font-serif text-sm font-light text-white">Crowned Icons Showdown</span>
                           <span className="text-[10px] tracking-wide text-neutral-500 font-light">Global Team Runway Championship</span>
-                        </button>
+                        </a>
 
                         <div className="border-t border-neutral-900/60 my-1"></div>
 
                         {/* Option 02 / Barber Battles */}
-                        <button
-                          onClick={() => {
-                            const element = document.getElementById('championship');
-                            if (element) {
-                              element.scrollIntoView({ behavior: 'smooth' });
-                              window.dispatchEvent(new CustomEvent('switchTab', { detail: 'barber' }));
-                            }
-                            setIsDropdownOpen(false);
-                          }}
-                          className="w-full text-left font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
+                        <a
+                          href="/competition/barber-battles"
+                          onClick={() => setIsDropdownOpen(false)}
+                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
                         >
                           <span className="font-serif text-sm font-light text-white">Barber & Stylist Battles</span>
                           <span className="text-[10px] tracking-wide text-neutral-500 font-light">6 Individual Technical Showdowns</span>
-                        </button>
+                        </a>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -116,7 +107,7 @@ export default function Navbar() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="px-3 py-1.5 font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200"
+                    className="font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200"
                   >
                     {link.label}
                   </a>

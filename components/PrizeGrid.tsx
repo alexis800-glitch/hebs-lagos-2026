@@ -1,8 +1,13 @@
 'use client'
 import React, { useState } from 'react'
 
-export default function PrizeGrid() {
-  const [activeTab, setActiveTab] = useState<'crowned' | 'barber'>('crowned')
+interface PrizeGridProps {
+  initialTab?: 'crowned' | 'barber'
+  isSubPage?: boolean
+}
+
+export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }: PrizeGridProps) {
+  const [activeTab, setActiveTab] = useState<'crowned' | 'barber'>(initialTab)
 
   React.useEffect(() => {
     const handleTabEvent = (e: Event) => {
@@ -83,24 +88,26 @@ export default function PrizeGrid() {
       </div>
 
       {/* Primary 2-Tab Navigation */}
-      <div className="flex border-b border-neutral-900 mb-12 gap-8">
-        <button
-          onClick={() => setActiveTab('crowned')}
-          className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
-            activeTab === 'crowned' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
-          }`}
-        >
-          01 / Crowned Icons Showdown
-        </button>
-        <button
-          onClick={() => setActiveTab('barber')}
-          className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
-            activeTab === 'barber' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
-          }`}
-        >
-          02 / Barbering & Styling Battles
-        </button>
-      </div>
+      {!isSubPage && (
+        <div className="flex border-b border-neutral-900 mb-12 gap-8">
+          <button
+            onClick={() => setActiveTab('crowned')}
+            className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
+              activeTab === 'crowned' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+            }`}
+          >
+            01 / Crowned Icons Showdown
+          </button>
+          <button
+            onClick={() => setActiveTab('barber')}
+            className={`pb-4 text-xs uppercase tracking-wider font-sans transition-all border-b-2 ${
+              activeTab === 'barber' ? 'border-amber-400 text-white font-medium' : 'border-transparent text-neutral-500 hover:text-neutral-300'
+            }`}
+          >
+            02 / Barbering & Styling Battles
+          </button>
+        </div>
+      )}
 
       {/* TAB 1: CROWNED ICONS SHOWDOWN */}
       {activeTab === 'crowned' && (
