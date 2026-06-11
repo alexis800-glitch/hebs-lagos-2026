@@ -90,8 +90,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="font-serif font-bold text-white tracking-tight leading-none"
-          style={{ fontSize: "clamp(3.6rem, 9vw, 8rem)", lineHeight: 0.93 }}
+          className="text-white text-4xl md:text-6xl font-light tracking-tight text-center leading-tight max-w-5xl mx-auto font-serif"
         >
           Where Talent Meets
           <br />
