@@ -3,10 +3,10 @@ import { BookOpen, Globe, Sparkles } from 'lucide-react'
 
 export default function About() {
   return (
-    <section className="py-24 px-6 max-w-6xl mx-auto bg-[#050505] border-t border-neutral-900" id="about">
+    <section className="pb-24 px-6 max-w-6xl mx-auto bg-[#050505]" id="about">
 
       {/* Part 0: Our Legacy Global Timeline Block */}
-      <div className="border-y border-neutral-900/80 bg-neutral-950/20 py-24 my-16 px-4 -mx-4">
+      <div className="border-y border-neutral-900/80 bg-neutral-950/20 py-16 px-4 -mx-4">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 items-start">
 
           {/* Left Column: Heading & Dense Visual Counter */}
