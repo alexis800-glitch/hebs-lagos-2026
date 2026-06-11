@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { Check, ChevronRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
+import PartnershipContact from '@/components/PartnershipContact'
 
 type Currency = 'USD' | 'NGN'
 
@@ -252,6 +253,8 @@ export default function VendorsPage() {
             Book Your Booth ↗
           </a>
         </div>
+
+        <PartnershipContact />
 
       </main>
     </>

@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Check, ChevronRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
+import PartnershipContact from '@/components/PartnershipContact'
 
 export const metadata = {
   title: 'Sponsorship Opportunities — HEBS Lagos 2026',
@@ -237,6 +238,8 @@ export default function SponsorsPage() {
             Contact Us ↗
           </a>
         </div>
+
+        <PartnershipContact />
 
       </main>
     </>
