@@ -19,7 +19,7 @@ const navLinks = [
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const linkClass =
-  "flex items-center gap-1 text-[13px] font-medium text-zinc-400 hover:text-white transition-colors duration-200 h-full cursor-pointer py-4";
+  "flex items-center text-[15px] font-medium text-zinc-400 hover:text-white transition-colors duration-200 py-4 h-full pointer-events-auto";
 
 export default function Navbar() {
   const mounted = useMounted();
@@ -131,7 +131,7 @@ export default function Navbar() {
                     onMouseEnter={() => setIsPartnershipsOpen(true)}
                     onMouseLeave={() => setIsPartnershipsOpen(false)}
                   >
-                    <div className="flex items-center gap-1 hover:text-white transition-colors duration-200 py-4 text-[13px] font-medium text-zinc-400 cursor-pointer">
+                    <div className="flex items-center gap-1 hover:text-white transition-colors duration-200 py-4 text-[15px] font-medium text-zinc-400 pointer-events-auto">
                       <span className="leading-none">Partnerships</span>
                       <ChevronDown
                         className={`h-3 w-3 text-zinc-400 shrink-0 transition-transform duration-300 ease-out ${
