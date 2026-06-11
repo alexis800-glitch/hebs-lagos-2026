@@ -54,54 +54,66 @@ export default function Navbar() {
           <ul className="hidden md:flex items-center justify-center gap-6 h-full">
             {navLinks.map((link) =>
               link.label === 'Competition' ? (
-                <li
-                  key={link.label}
-                  className="relative group"
-                  onMouseEnter={() => setIsDropdownOpen(true)}
-                  onMouseLeave={() => setIsDropdownOpen(false)}
-                >
-                  <a
-                    href={link.href}
-                    className="font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200 block"
+                <li key={link.label} className="relative flex items-center h-full">
+                  <div
+                    className="relative flex items-center h-full cursor-pointer"
+                    onMouseEnter={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
                   >
-                    <span className="inline-flex items-center justify-center gap-1.5 align-middle h-full">
+                    <a
+                      href={link.href}
+                      className="font-sans text-xs tracking-wide font-normal text-neutral-400 flex items-center gap-1 hover:text-white transition-colors duration-200 py-2"
+                    >
                       Competition
-                      <ChevronDown className="h-3 w-3 text-white stroke-[2] shrink-0" />
-                    </span>
-                  </a>
-                  <AnimatePresence>
-                    {isDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 5 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#0a0a0a]/90 backdrop-blur-md border border-neutral-900 rounded-sm p-2 shadow-2xl z-50 flex flex-col gap-0.5"
-                      >
-                        {/* Option 01 / Crowned Icons */}
-                        <a
-                          href="/competition/crowned-icons"
-                          onClick={() => setIsDropdownOpen(false)}
-                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
-                        >
-                          <span className="font-serif text-sm font-light text-white">Crowned Icons Showdown</span>
-                          <span className="text-[10px] tracking-wide text-neutral-500 font-light">Global Team Runway Championship</span>
-                        </a>
+                      <ChevronDown className={`h-3 w-3 text-white stroke-[2.5] shrink-0 transition-transform duration-300 ease-out ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
+                    </a>
 
-                        <div className="border-t border-neutral-900/60 my-1"></div>
-
-                        {/* Option 02 / Barber Battles */}
-                        <a
-                          href="/competition/barber-battles"
-                          onClick={() => setIsDropdownOpen(false)}
-                          className="font-sans text-xs text-neutral-400 hover:text-white hover:bg-neutral-900/60 p-2.5 rounded-xs transition-colors flex flex-col gap-0.5"
-                        >
-                          <span className="font-serif text-sm font-light text-white">Barber & Stylist Battles</span>
-                          <span className="text-[10px] tracking-wide text-neutral-500 font-light">6 Individual Technical Showdowns</span>
-                        </a>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    {/* Stripe-style dropdown panel */}
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[480px] z-50 transition-all duration-300 ease-out origin-top ${
+                        isDropdownOpen
+                          ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
+                          : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+                      }`}
+                    >
+                      <div className="bg-zinc-900 border border-neutral-800 rounded-lg shadow-2xl overflow-hidden">
+                        <div className="grid grid-cols-2 gap-px bg-neutral-800">
+                          {/* Col 1 — Crowned Icons */}
+                          <a
+                            href="/competition/crowned-icons"
+                            onClick={() => setIsDropdownOpen(false)}
+                            className="bg-zinc-900 hover:bg-zinc-800 p-5 flex flex-col gap-2 transition-colors group/item"
+                          >
+                            <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 font-medium">Track 01</span>
+                            <span className="font-serif text-base font-light text-white group-hover/item:text-amber-400 transition-colors">Crowned Icons Showdown</span>
+                            <span className="font-sans text-xs text-neutral-400 font-light leading-relaxed">Global Team Runway Championship. 5-discipline teams compete live on stage for $35,000 in prizes.</span>
+                          </a>
+                          {/* Col 2 — Barber Battles */}
+                          <a
+                            href="/competition/barber-battles"
+                            onClick={() => setIsDropdownOpen(false)}
+                            className="bg-zinc-900 hover:bg-zinc-800 p-5 flex flex-col gap-2 transition-colors group/item"
+                          >
+                            <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-500 font-medium">Track 02</span>
+                            <span className="font-serif text-base font-light text-white group-hover/item:text-amber-400 transition-colors">Barber & Stylist Battles</span>
+                            <span className="font-sans text-xs text-neutral-400 font-light leading-relaxed">6 hyper-focused individual showdowns testing precision speed, complex partitioning, and elite craftsmanship.</span>
+                          </a>
+                        </div>
+                        {/* Footer strip */}
+                        <div className="px-5 py-3 bg-zinc-950 border-t border-neutral-800 flex items-center justify-between">
+                          <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-500">HEBS Lagos · Oct 23–25, 2026</span>
+                          <a
+                            href="https://hebseventportal.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-sans text-[10px] uppercase tracking-wider text-neutral-300 hover:text-white transition-colors"
+                          >
+                            Register to Compete ↗
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </li>
               ) : (
                 <li key={link.label}>
