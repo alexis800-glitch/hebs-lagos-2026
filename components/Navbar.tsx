@@ -16,21 +16,24 @@ const navLinks = [
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
+const linkClass =
+  "flex items-center gap-1 text-[13px] font-medium text-zinc-400 hover:text-white transition-colors duration-200 h-full cursor-pointer py-4";
+
 export default function Navbar() {
   const mounted = useMounted();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isCompetitionOpen, setIsCompetitionOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
-      {/* Full-width fixed bar — edge-to-edge, isolates nav from hero content */}
+      {/* Full-width fixed bar */}
       <div className="w-full fixed top-0 left-0 right-0 z-50 bg-[#050505]/80 backdrop-blur-md border-b border-neutral-900/50">
         <motion.nav
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
+          className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14"
         >
           {/* Logo */}
           <a
@@ -51,62 +54,83 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center justify-center gap-6 h-full">
+          <ul className="hidden md:flex items-center justify-center gap-8 h-full">
             {navLinks.map((link) =>
-              link.label === 'Competition' ? (
+              link.label === "Competition" ? (
                 <li key={link.label} className="relative flex items-center h-full">
                   <div
                     className="relative flex items-center h-full cursor-pointer"
-                    onMouseEnter={() => setIsDropdownOpen(true)}
-                    onMouseLeave={() => setIsDropdownOpen(false)}
+                    onMouseEnter={() => setIsCompetitionOpen(true)}
+                    onMouseLeave={() => setIsCompetitionOpen(false)}
                   >
-                    <a
-                      href={link.href}
-                      className="font-sans text-xs tracking-wide font-normal text-neutral-400 flex items-center gap-1 hover:text-white transition-colors duration-200 py-2"
-                    >
+                    {/* Trigger label — same class as all other links */}
+                    <a href={link.href} className={linkClass}>
                       Competition
-                      <ChevronDown className={`h-3 w-3 text-white stroke-[2.5] shrink-0 transition-transform duration-300 ease-out ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`} />
+                      <ChevronDown
+                        className={`h-3 w-3 text-zinc-400 shrink-0 transition-transform duration-300 ${
+                          isCompetitionOpen
+                            ? "rotate-180 -translate-y-[1px] text-white"
+                            : "rotate-0 translate-y-0"
+                        }`}
+                      />
                     </a>
 
-                    {/* Stripe-style dropdown panel */}
+                    {/* Stripe-style mega menu */}
                     <div
-                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[480px] z-50 transition-all duration-300 ease-out origin-top ${
-                        isDropdownOpen
-                          ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
-                          : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[520px] z-50 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-top ${
+                        isCompetitionOpen
+                          ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                          : "opacity-0 scale-[0.98] -translate-y-2 pointer-events-none"
                       }`}
                     >
-                      <div className="bg-zinc-900 border border-neutral-800 rounded-lg shadow-2xl overflow-hidden">
-                        <div className="grid grid-cols-2 gap-px bg-neutral-800">
+                      <div className="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden">
+                        {/* 2-column card grid */}
+                        <div className="grid grid-cols-2 gap-px bg-zinc-800">
                           {/* Col 1 — Crowned Icons */}
                           <a
                             href="/competition/crowned-icons"
-                            onClick={() => setIsDropdownOpen(false)}
-                            className="bg-zinc-900 hover:bg-zinc-800 p-5 flex flex-col gap-2 transition-colors group/item"
+                            onClick={() => setIsCompetitionOpen(false)}
+                            className="bg-zinc-900 hover:bg-zinc-800/80 p-5 flex flex-col gap-2 transition-colors group/item"
                           >
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 font-medium">Track 01</span>
-                            <span className="font-serif text-base font-light text-white group-hover/item:text-amber-400 transition-colors">Crowned Icons Showdown</span>
-                            <span className="font-sans text-xs text-neutral-400 font-light leading-relaxed">Global Team Runway Championship. 5-discipline teams compete live on stage for $35,000 in prizes.</span>
+                            <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 font-medium">
+                              Track 01
+                            </span>
+                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">
+                              Crowned Icons Showdown
+                            </span>
+                            <span className="font-sans text-xs text-zinc-400 font-light leading-relaxed">
+                              Global Team Runway Championship. 5-discipline teams compete live on stage for $35,000 in prizes.
+                            </span>
                           </a>
+
                           {/* Col 2 — Barber Battles */}
                           <a
                             href="/competition/barber-battles"
-                            onClick={() => setIsDropdownOpen(false)}
-                            className="bg-zinc-900 hover:bg-zinc-800 p-5 flex flex-col gap-2 transition-colors group/item"
+                            onClick={() => setIsCompetitionOpen(false)}
+                            className="bg-zinc-900 hover:bg-zinc-800/80 p-5 flex flex-col gap-2 transition-colors group/item"
                           >
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-500 font-medium">Track 02</span>
-                            <span className="font-serif text-base font-light text-white group-hover/item:text-amber-400 transition-colors">Barber & Stylist Battles</span>
-                            <span className="font-sans text-xs text-neutral-400 font-light leading-relaxed">6 hyper-focused individual showdowns testing precision speed, complex partitioning, and elite craftsmanship.</span>
+                            <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 font-medium">
+                              Track 02
+                            </span>
+                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">
+                              Barber &amp; Stylist Battles
+                            </span>
+                            <span className="font-sans text-xs text-zinc-400 font-light leading-relaxed">
+                              6 hyper-focused individual showdowns testing precision speed, complex partitioning, and elite craftsmanship.
+                            </span>
                           </a>
                         </div>
+
                         {/* Footer strip */}
-                        <div className="px-5 py-3 bg-zinc-950 border-t border-neutral-800 flex items-center justify-between">
-                          <span className="font-mono text-[9px] uppercase tracking-widest text-neutral-500">HEBS Lagos · Oct 23–25, 2026</span>
+                        <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between">
+                          <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">
+                            HEBS Lagos · Oct 23–25, 2026
+                          </span>
                           <a
                             href="https://hebseventportal.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-sans text-[10px] uppercase tracking-wider text-neutral-300 hover:text-white transition-colors"
+                            className="font-sans text-[10px] uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
                           >
                             Register to Compete ↗
                           </a>
@@ -116,11 +140,8 @@ export default function Navbar() {
                   </div>
                 </li>
               ) : (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="font-sans text-xs tracking-wide font-normal text-neutral-400 hover:text-white transition-colors duration-200"
-                  >
+                <li key={link.label} className="flex items-center h-full">
+                  <a href={link.href} className={linkClass}>
                     {link.label}
                   </a>
                 </li>
@@ -149,7 +170,7 @@ export default function Navbar() {
         </motion.nav>
       </div>
 
-      {/* Mobile dropdown — anchored just below the floating dock */}
+      {/* Mobile dropdown */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -157,7 +178,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: EASE }}
-            className="fixed top-20 inset-x-4 z-40 md:hidden max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/5"
+            className="fixed top-14 inset-x-4 z-40 md:hidden max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/5"
             style={{
               background: "rgba(5,5,5,0.96)",
               backdropFilter: "blur(24px)",
