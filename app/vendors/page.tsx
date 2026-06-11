@@ -248,7 +248,7 @@ export default function VendorsPage() {
           </div>
           <a
             href="mailto:info@thehebs.com"
-            className="bg-white text-black font-medium px-6 py-3 rounded-xl hover:bg-zinc-200 transition-all text-xs tracking-wider inline-flex items-center gap-1 shrink-0"
+            className="bg-white text-black font-medium px-6 py-3 rounded-xl hover:bg-zinc-200 transition-all text-xs tracking-wider inline-flex items-center gap-1 shrink-0 cursor-pointer relative z-50 pointer-events-auto"
           >
             <span>CONTACT US</span>
             <span className="text-sm font-light">↗</span>
