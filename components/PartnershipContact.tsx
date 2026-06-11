@@ -18,8 +18,9 @@ export default function PartnershipContact() {
           Secure Your Opportunity
         </h2>
 
-        <span className="inline-block bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono px-3 py-1 rounded-full mb-6">
-          20% deposit required to lock in booth space
+        <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-medium text-xs font-mono px-3 py-1.5 rounded-full mb-6 tracking-wide">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          <span>20% deposit required to lock in booth space</span>
         </span>
 
         <p className="text-zinc-300 font-medium text-sm mb-4">
@@ -55,11 +56,11 @@ export default function PartnershipContact() {
           Important Dates &amp; Deadlines
         </h2>
 
-        <div className="relative border-l border-zinc-800 pl-5 space-y-8">
+        <div className="relative border-l border-zinc-800 pl-6 space-y-8 ml-2">
           {deadlines.map((item, i) => (
             <div key={i} className="relative">
-              <span className="absolute -left-[6px] mt-1.5 w-2.5 h-2.5 rounded-full bg-zinc-700" />
-              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 block mb-1">
+              <span className="absolute -left-[5px] mt-1.5 w-2 h-2 rounded-full bg-zinc-600 border border-black" />
+              <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-semibold block mb-0.5">
                 {item.date}
               </span>
               <span className="font-sans text-sm text-zinc-300">{item.label}</span>
