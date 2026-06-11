@@ -148,6 +148,11 @@ textarea::placeholder {
   border-color: #ffffff;
 }
 
+::selection {
+  background-color: rgb(39 39 42);
+  color: rgb(255 255 255);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
