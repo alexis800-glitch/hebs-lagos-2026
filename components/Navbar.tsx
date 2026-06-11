@@ -7,13 +7,13 @@ import Link from "next/link";
 import { useMounted } from "@/hooks/useMounted";
 
 const navLinks = [
-  { label: "Home",         href: "#home" },
-  { label: "About",        href: "#about" },
+  { label: "Home",         href: "/" },
+  { label: "About",        href: "/about" },
   { label: "Competition",  href: "#competition" },
   { label: "Partnerships", href: "#sponsors" },
-  { label: "Tickets",      href: "#tickets" },
+  { label: "Tickets",      href: "/tickets" },
   { label: "Gallery",      href: "#gallery" },
-  { label: "Contact",      href: "#contact" },
+  { label: "Contact",      href: "/contact" },
 ];
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -189,9 +189,9 @@ export default function Navbar() {
                 </li>
               ) : (
                 <li key={link.label} className="flex items-center h-full">
-                  <a href={link.href} className={linkClass}>
+                  <Link href={link.href} className={linkClass}>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               )
             )}
@@ -310,7 +310,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 onClick={closeMenu}
@@ -324,7 +324,7 @@ export default function Navbar() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             )
           )}
         </nav>
