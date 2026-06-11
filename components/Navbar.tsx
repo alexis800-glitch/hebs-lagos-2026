@@ -27,8 +27,9 @@ export default function Navbar() {
   const [isCompetitionOpen, setIsCompetitionOpen] = useState(false);
   const [isPartnershipsOpen, setIsPartnershipsOpen] = useState(false);
   const [isMobileCompOpen, setIsMobileCompOpen] = useState(false);
+  const [isMobilePartnershipsOpen, setIsMobilePartnershipsOpen] = useState(false);
 
-  const closeMenu = () => { setMenuOpen(false); setIsMobileCompOpen(false); };
+  const closeMenu = () => { setMenuOpen(false); setIsMobileCompOpen(false); setIsMobilePartnershipsOpen(false); };
 
   return (
     <>
@@ -240,7 +241,7 @@ export default function Navbar() {
 
       {/* Full-screen mobile overlay — slides in from right */}
       <div
-        className={`fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex flex-col justify-between p-8 transition-transform duration-500 ease-out md:hidden ${
+        className={`fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex flex-col justify-between py-8 px-6 overflow-y-auto transition-transform duration-500 ease-out md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -261,7 +262,7 @@ export default function Navbar() {
                 {/* Accordion trigger */}
                 <button
                   onClick={() => setIsMobileCompOpen((o) => !o)}
-                  className="w-full flex items-center justify-between text-4xl font-semibold tracking-tight text-white py-2 hover:text-zinc-400 transition-colors"
+                  className="w-full flex items-center justify-between text-xl font-medium tracking-tight text-white py-1.5 hover:text-zinc-400 transition-colors duration-200"
                 >
                   Competition
                   <ChevronDown
@@ -309,6 +310,47 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
+            ) : link.label === "Partnerships" ? (
+              <div
+                key={link.label}
+                style={{ transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms" }}
+                className={`border-b border-zinc-900 transition-all duration-500 ${
+                  menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                }`}
+              >
+                <div className="w-full flex flex-col">
+                  <button
+                    onClick={() => setIsMobilePartnershipsOpen(!isMobilePartnershipsOpen)}
+                    className="w-full flex items-center justify-between text-xl font-medium text-white py-1.5 hover:text-zinc-400 transition-colors duration-200"
+                  >
+                    <span>Partnerships</span>
+                    <ChevronDown
+                      className={`h-4 w-4 text-zinc-400 transition-transform duration-300 ${
+                        isMobilePartnershipsOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {isMobilePartnershipsOpen && (
+                    <div className="pl-4 flex flex-col gap-3 mt-2 mb-3 border-l border-zinc-800">
+                      <Link
+                        href="/sponsors"
+                        onClick={closeMenu}
+                        className="text-sm text-zinc-400 hover:text-white py-1 transition-colors"
+                      >
+                        Sponsor Opportunities
+                      </Link>
+                      <Link
+                        href="/vendors"
+                        onClick={closeMenu}
+                        className="text-sm text-zinc-400 hover:text-white py-1 transition-colors"
+                      >
+                        Vendor Opportunities
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
             ) : (
               <Link
                 key={link.label}
@@ -317,7 +359,7 @@ export default function Navbar() {
                 style={{
                   transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms",
                 }}
-                className={`block text-4xl font-semibold tracking-tight text-white py-2 hover:text-zinc-400 transition-all duration-500 border-b border-zinc-900 ${
+                className={`block text-xl font-medium tracking-tight text-white py-1.5 hover:text-zinc-400 transition-all duration-500 border-b border-zinc-900 ${
                   menuOpen
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-6"
