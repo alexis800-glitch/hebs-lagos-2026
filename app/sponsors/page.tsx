@@ -232,10 +232,11 @@ export default function SponsorsPage() {
             </p>
           </div>
           <a
-            href="mailto:info@thehebs.com?subject=Sponsorship Inquiry — HEBS Lagos 2026"
-            className="shrink-0 font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-zinc-200 px-6 py-3 rounded-xl font-medium transition-all duration-200"
+            href="mailto:info@thehebs.com"
+            className="bg-white text-black font-medium px-6 py-3 rounded-xl hover:bg-zinc-200 transition-all text-xs tracking-wider inline-flex items-center gap-1 shrink-0"
           >
-            Contact Us ↗
+            <span>CONTACT US</span>
+            <span className="text-sm font-light">↗</span>
           </a>
         </div>
 
