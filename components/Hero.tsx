@@ -90,13 +90,13 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-center leading-[1.05] max-w-5xl mx-auto font-sans text-white"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tighter text-center leading-[1.02] max-w-5xl mx-auto uppercase font-sans text-white"
         >
-          <span>Where Talent</span>{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ff4b72] via-[#ff4bbb] to-[#bc4bff]">
-            Meets
-          </span>{" "}
-          <span>Global Stage.</span>
+          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0s" }}>Where</span>{" "}
+          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-500 to-white bg-[length:200%_auto]" style={{ animationDelay: "1s" }}>Talent</span>{" "}
+          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-500 to-white bg-[length:200%_auto]" style={{ animationDelay: "2s" }}>Meets</span>{" "}
+          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "3s" }}>Global</span>{" "}
+          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "4s" }}>Stage.</span>
         </motion.h1>
 
         {/* Date / location */}

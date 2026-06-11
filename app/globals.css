@@ -158,3 +158,12 @@ textarea::placeholder {
     text-wrap: balance;
   }
 }
+
+@keyframes word-glow {
+  0%, 100% { background-position: 0% center; filter: brightness(1); }
+  50% { background-position: 200% center; filter: brightness(1.4); }
+}
+
+.animate-word-glow {
+  animation: word-glow 5s ease-in-out infinite;
+}
