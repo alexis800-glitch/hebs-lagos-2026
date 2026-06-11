@@ -35,7 +35,7 @@ export default function Navbar() {
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14"
+          className="relative z-50 max-w-6xl mx-auto px-6 flex items-center justify-between h-14 w-full"
         >
           {/* Logo */}
           <a
@@ -57,7 +57,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center justify-center gap-8 h-full">
+          <ul className="hidden md:flex items-center justify-center gap-8 h-full relative z-50">
             {navLinks.map((link) =>
               link.label === "Competition" ? (
                 <li key={link.label} className="relative flex items-center h-full">
