@@ -90,11 +90,13 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-light tracking-tighter text-center leading-[1.05] max-w-6xl mx-auto"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-center leading-[1.05] max-w-5xl mx-auto font-sans text-white"
         >
-          Where Talent Meets
-          <br />
-          <em className="italic">Global Stage</em>
+          <span>Where Talent</span>{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#ff4b72] via-[#ff4bbb] to-[#bc4bff]">
+            Meets
+          </span>{" "}
+          <span>Global Stage.</span>
         </motion.h1>
 
         {/* Date / location */}
