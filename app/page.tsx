@@ -8,6 +8,7 @@ import PrizeGrid from "@/components/PrizeGrid";
 import Tickets from "@/components/Tickets";
 import SponsorsVendors from "@/components/SponsorsVendors";
 import PricingGrid from "@/components/PricingGrid";
+import VendorMatrix from "@/components/VendorMatrix";
 import GalleryGridBlock from "@/components/GalleryGridBlock";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -27,6 +28,7 @@ export default function Home() {
         <Tickets />
         <SponsorsVendors />
         <PricingGrid />
+        <VendorMatrix />
         <GalleryGridBlock />
         <Contact />
         <Footer />
