@@ -61,7 +61,7 @@ export default function Hero() {
       <div className="absolute top-[72px] left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
       <div className="absolute bottom-0 left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
 
-      <div className="relative z-10 w-full flex flex-col items-center gap-7 max-w-5xl mx-auto pt-24 md:pt-28">
+      <div className="relative z-10 w-full pointer-events-auto flex flex-col items-center gap-7 max-w-5xl mx-auto pt-24 md:pt-28">
 
         {/* Prize pool badge */}
         <motion.div

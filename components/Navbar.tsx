@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <>
       {/* Fixed nav bar — sits above the mobile overlay */}
-      <div className="w-full fixed top-0 left-0 right-0 z-[100] bg-[#050505]/80 backdrop-blur-md border-b border-neutral-900/50">
+      <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-black/80 backdrop-blur-md border-b border-neutral-900/50">
         <motion.nav
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
@@ -57,7 +57,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center justify-center gap-8 h-full relative z-50">
+          <ul className="hidden md:flex items-center justify-center gap-8 h-full relative z-[101] pointer-events-auto">
             {navLinks.map((link) =>
               link.label === "Competition" ? (
                 <li key={link.label} className="relative flex items-center h-full">

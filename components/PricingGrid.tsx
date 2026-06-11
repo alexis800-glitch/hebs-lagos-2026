@@ -91,7 +91,7 @@ function PricingCard({ tier, currency }: { tier: Tier; currency: Currency }) {
     >
       {/* Cursor spotlight */}
       <div
-        className="absolute inset-0 z-0 pointer-events-none select-none blur-md transition-opacity duration-300"
+        className="absolute inset-0 z-0 pointer-events-none select-none blur-md transition-opacity duration-300 mix-blend-screen"
         style={{
           opacity: spot.visible ? 1 : 0,
           background: `radial-gradient(circle 280px at ${spot.x}px ${spot.y}px, rgba(161,161,170,0.13), transparent 70%)`,
