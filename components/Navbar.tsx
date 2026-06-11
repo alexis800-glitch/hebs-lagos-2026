@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
 
@@ -23,8 +23,9 @@ export default function Navbar() {
   const mounted = useMounted();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isCompetitionOpen, setIsCompetitionOpen] = useState(false);
+  const [isMobileCompOpen, setIsMobileCompOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = () => { setMenuOpen(false); setIsMobileCompOpen(false); };
 
   return (
     <>
@@ -182,49 +183,84 @@ export default function Navbar() {
 
         {/* Cascading nav links */}
         <nav className="flex flex-col gap-2 flex-1 justify-center">
-          {navLinks.map((link, i) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={closeMenu}
-              style={{
-                transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms",
-              }}
-              className={`block text-4xl font-semibold tracking-tight text-white py-2 hover:text-zinc-400 transition-all duration-500 border-b border-zinc-900 ${
-                menuOpen
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link, i) =>
+            link.label === "Competition" ? (
+              <div
+                key={link.label}
+                style={{ transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms" }}
+                className={`border-b border-zinc-900 transition-all duration-500 ${
+                  menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                }`}
+              >
+                {/* Accordion trigger */}
+                <button
+                  onClick={() => setIsMobileCompOpen((o) => !o)}
+                  className="w-full flex items-center justify-between text-4xl font-semibold tracking-tight text-white py-2 hover:text-zinc-400 transition-colors"
+                >
+                  Competition
+                  <ChevronDown
+                    className={`h-5 w-5 text-zinc-500 shrink-0 transition-transform duration-300 ${
+                      isMobileCompOpen ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </button>
 
-          {/* Competition sub-links */}
-          <div
-            style={{ transitionDelay: menuOpen ? `${navLinks.length * 55 + 80}ms` : "0ms" }}
-            className={`mt-6 flex flex-col gap-3 transition-all duration-500 ${
-              menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
-            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">Competition Tracks</p>
-            <a
-              href="/competition/crowned-icons"
-              onClick={closeMenu}
-              className="font-sans text-sm text-zinc-300 hover:text-white transition-colors flex items-center gap-2"
-            >
-              <span className="w-1 h-1 bg-amber-400 rounded-full shrink-0" />
-              Crowned Icons Showdown
-            </a>
-            <a
-              href="/competition/barber-battles"
-              onClick={closeMenu}
-              className="font-sans text-sm text-zinc-400 hover:text-white transition-colors flex items-center gap-2"
-            >
-              <span className="w-1 h-1 bg-zinc-600 rounded-full shrink-0" />
-              Barber &amp; Stylist Battles
-            </a>
-          </div>
+                {/* Accordion body */}
+                <AnimatePresence initial={false}>
+                  {isMobileCompOpen && (
+                    <motion.div
+                      key="mobile-comp"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-4 flex flex-col gap-1">
+                        <a
+                          href="/competition/crowned-icons"
+                          onClick={closeMenu}
+                          className="block text-zinc-400 hover:text-white text-lg pl-4 py-2 transition-colors"
+                        >
+                          Crowned Icons Showdown
+                        </a>
+                        <a
+                          href="/competition/barber-battles"
+                          onClick={closeMenu}
+                          className="block text-zinc-400 hover:text-white text-lg pl-4 py-2 transition-colors"
+                        >
+                          Barbering Battles
+                        </a>
+                        <a
+                          href="/competition/barber-battles"
+                          onClick={closeMenu}
+                          className="block text-zinc-400 hover:text-white text-lg pl-4 py-2 transition-colors"
+                        >
+                          Styling Battles
+                        </a>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={closeMenu}
+                style={{
+                  transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms",
+                }}
+                className={`block text-4xl font-semibold tracking-tight text-white py-2 hover:text-zinc-400 transition-all duration-500 border-b border-zinc-900 ${
+                  menuOpen
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
+                }`}
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Bottom — CTA + event info */}
