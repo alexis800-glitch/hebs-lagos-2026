@@ -69,7 +69,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE, delay: mounted ? 0.0 : 0 }}
         >
-          <span className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-800/80 px-4 py-1.5 rounded-full text-xs font-sans font-medium tracking-wide text-zinc-300 backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-800/80 px-4 py-1.5 rounded-full backdrop-blur-sm font-mono text-xs tracking-widest text-zinc-500">
             <span className="w-1.5 h-1.5 bg-amber-400 rounded-full shrink-0" />
             $35,000 Grand Prize Pool
           </span>
@@ -90,13 +90,13 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-[90px] font-black tracking-tighter text-center leading-[1.02] max-w-5xl mx-auto uppercase font-sans text-white"
+          className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-center leading-[1.1] max-w-4xl mx-auto font-sans"
         >
-          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0s" }}>Where</span>{" "}
-          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-500 to-white bg-[length:200%_auto]" style={{ animationDelay: "1s" }}>Talent</span>{" "}
-          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-500 to-white bg-[length:200%_auto]" style={{ animationDelay: "2s" }}>Meets</span>{" "}
-          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "3s" }}>Global</span>{" "}
-          <span className="animate-word-glow bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "4s" }}>Stage.</span>
+          <span className="text-white font-light">Where </span>
+          <span className="text-white font-light">Talent </span>
+          <span className="font-normal bg-clip-text text-transparent bg-gradient-to-r from-zinc-200 via-zinc-400 to-white bg-[length:200%_auto] animate-pulse">Meets </span>
+          <span className="text-white font-light">Global </span>
+          <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100">Stage.</span>
         </motion.h1>
 
         {/* Date / location */}
@@ -104,7 +104,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.32 : 0 }}
-          className="font-sans text-xs uppercase tracking-widest text-neutral-400"
+          className="font-mono text-xs tracking-widest text-zinc-500"
         >
           Lagos, Nigeria &nbsp;•&nbsp; October 23–25, 2026
         </motion.p>
