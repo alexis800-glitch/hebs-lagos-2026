@@ -3,15 +3,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import { useMounted } from "@/hooks/useMounted";
 
 const navLinks = [
-  { label: "Home",        href: "#home" },
-  { label: "About",       href: "#about" },
-  { label: "Competition", href: "#competition" },
-  { label: "Tickets",     href: "#tickets" },
-  { label: "Gallery",     href: "#gallery" },
-  { label: "Contact",     href: "#contact" },
+  { label: "Home",         href: "#home" },
+  { label: "About",        href: "#about" },
+  { label: "Competition",  href: "#competition" },
+  { label: "Partnerships", href: "#sponsors" },
+  { label: "Tickets",      href: "#tickets" },
+  { label: "Gallery",      href: "#gallery" },
+  { label: "Contact",      href: "#contact" },
 ];
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -23,6 +25,7 @@ export default function Navbar() {
   const mounted = useMounted();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isCompetitionOpen, setIsCompetitionOpen] = useState(false);
+  const [isPartnershipsOpen, setIsPartnershipsOpen] = useState(false);
   const [isMobileCompOpen, setIsMobileCompOpen] = useState(false);
 
   const closeMenu = () => { setMenuOpen(false); setIsMobileCompOpen(false); };
@@ -117,6 +120,69 @@ export default function Navbar() {
                             Register to Compete ↗
                           </a>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ) : link.label === "Partnerships" ? (
+                <li key={link.label} className="relative flex items-center h-full">
+                  <div
+                    className="relative flex items-center h-full cursor-pointer"
+                    onMouseEnter={() => setIsPartnershipsOpen(true)}
+                    onMouseLeave={() => setIsPartnershipsOpen(false)}
+                  >
+                    <div className="flex items-center gap-1 hover:text-white transition-colors duration-200 py-4 text-[13px] font-medium text-zinc-400 cursor-pointer">
+                      <span className="leading-none">Partnerships</span>
+                      <ChevronDown
+                        className={`h-3 w-3 text-zinc-400 shrink-0 transition-transform duration-300 ease-out ${
+                          isPartnershipsOpen
+                            ? "rotate-180 -translate-y-[1px] text-white"
+                            : "rotate-0 translate-y-0"
+                        }`}
+                      />
+                    </div>
+
+                    {/* Partnerships dropdown */}
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[460px] z-50 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-top ${
+                        isPartnershipsOpen
+                          ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                          : "opacity-0 scale-[0.98] -translate-y-2 pointer-events-none"
+                      }`}
+                    >
+                      <div className="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl p-6 grid grid-cols-2 gap-6">
+                        {/* Col 1 — Sponsor */}
+                        <Link
+                          href="/sponsors"
+                          onClick={() => setIsPartnershipsOpen(false)}
+                          className="group block p-2 rounded-lg hover:bg-zinc-800/50 transition-all"
+                        >
+                          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase block mb-1">01 / Sponsor</span>
+                          <h4 className="text-white text-sm font-medium group-hover:text-amber-400 transition-colors">Sponsor Opportunities</h4>
+                          <p className="text-zinc-400 text-xs mt-1 leading-relaxed">Align your brand with the premier beauty summit in Africa.</p>
+                        </Link>
+
+                        {/* Col 2 — Vendor */}
+                        <Link
+                          href="/vendors"
+                          onClick={() => setIsPartnershipsOpen(false)}
+                          className="group block p-2 rounded-lg hover:bg-zinc-800/50 transition-all"
+                        >
+                          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase block mb-1">02 / Vendor</span>
+                          <h4 className="text-white text-sm font-medium group-hover:text-amber-400 transition-colors">Vendor Opportunities</h4>
+                          <p className="text-zinc-400 text-xs mt-1 leading-relaxed">Showcase your products &amp; booths to thousands of global buyers.</p>
+                        </Link>
+                      </div>
+
+                      {/* Footer strip */}
+                      <div className="px-5 py-3 bg-zinc-950 border border-t-0 border-zinc-800 rounded-b-xl flex items-center justify-between">
+                        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">HEBS Lagos · Oct 23–25, 2026</span>
+                        <a
+                          href="mailto:info@thehebs.com"
+                          className="font-sans text-[10px] uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
+                        >
+                          Inquire Now ↗
+                        </a>
                       </div>
                     </div>
                   </div>
