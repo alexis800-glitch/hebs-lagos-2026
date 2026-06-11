@@ -19,15 +19,44 @@ export default function Hero() {
       style={{ background: "#050505" }}
     >
 
-      {/* Background depth — radial glow behind heading */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-zinc-900/20 blur-[120px] rounded-full pointer-events-none select-none" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-zinc-800/10 blur-[80px] rounded-full pointer-events-none select-none" />
+      {/* ── Layer 0: Cinematic video background ── */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-20 brightness-[0.4] contrast-[1.1]"
+        >
+          {/* Replace src with your own video placed in /public, e.g. /hero-bg.mp4 */}
+          <source
+            src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4"
+            type="video/mp4"
+          />
+        </video>
 
-      {/* Top line work */}
-      <div className="absolute top-[72px] left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none" />
+        {/* Cinematic grain overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            backgroundRepeat: "repeat",
+            backgroundSize: "200px 200px",
+          }}
+        />
+      </div>
 
-      {/* Bottom line work */}
-      <div className="absolute bottom-0 left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none" />
+      {/* ── Layer 1: Bottom fade — blends video into sections below ── */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black z-[1] pointer-events-none" />
+
+      {/* ── Layer 2: Radial depth glows ── */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-zinc-900/20 blur-[120px] rounded-full pointer-events-none select-none z-[2]" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-zinc-800/10 blur-[80px] rounded-full pointer-events-none select-none z-[2]" />
+
+      {/* ── Layer 2: Line work ── */}
+      <div className="absolute top-[72px] left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
+      <div className="absolute bottom-0 left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
 
       <div className="relative z-10 flex flex-col items-center gap-7 max-w-5xl mx-auto w-full pt-24 md:pt-28">
 
