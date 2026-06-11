@@ -69,7 +69,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE, delay: mounted ? 0.0 : 0 }}
         >
-          <span className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-800/80 px-4 py-1.5 rounded-full text-xs font-medium tracking-wide text-zinc-300 backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-800/80 px-4 py-1.5 rounded-full text-xs font-sans font-medium tracking-wide text-zinc-300 backdrop-blur-sm">
             <span className="w-1.5 h-1.5 bg-amber-400 rounded-full shrink-0" />
             $35,000 Grand Prize Pool
           </span>
@@ -90,11 +90,11 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-white text-4xl md:text-6xl font-light tracking-tight text-center leading-tight max-w-5xl mx-auto font-serif"
+          className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-light tracking-tighter text-center leading-[1.05] max-w-6xl mx-auto"
         >
           Where Talent Meets
           <br />
-          <em className="not-italic" style={{ fontStyle: "italic" }}>Global Stage</em>
+          <em className="italic">Global Stage</em>
         </motion.h1>
 
         {/* Date / location */}
