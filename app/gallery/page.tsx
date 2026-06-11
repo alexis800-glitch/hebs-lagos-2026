@@ -4,56 +4,133 @@ import { useState } from "react"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
-const logos = ["LOGO_01", "LOGO_02", "LOGO_03", "LOGO_04", "LOGO_05"]
-
 const filters = [
-  { label: "All Categories",          value: "all" },
+  { label: "All Categories",           value: "all" },
   { label: "Barber & Stylist Battles", value: "barber-stylist" },
-  { label: "Global Beauty Showdown",  value: "beauty-showdown" },
-  { label: "Masterclasses & BTS",     value: "masterclass" },
+  { label: "Global Beauty Showdown",   value: "beauty-showdown" },
+  { label: "Masterclasses & BTS",      value: "masterclass" },
 ]
 
-const galleryCards = [
+const galleryItems = [
+  // ── Barber & Stylist Battles (5) ──────────────────────────────
   {
-    id: "01",
-    label: "HAIR & BREAKTHROUGH CHALLENGE",
-    col: "md:col-span-8",
-    height: "h-96",
-    src: "https://picsum.photos/seed/hebs-g01/900/384",
+    id: "bs-01",
+    imageUrl: "https://picsum.photos/seed/hebs-bs-01/800/640",
     category: "barber-stylist",
+    tagLabel: "Barber & Stylist Battles",
+    title: "The Razor's Edge",
   },
   {
-    id: "02",
-    label: "BARBERING BATTLES SHOT",
-    col: "md:col-span-4",
-    height: "h-96",
-    src: "https://picsum.photos/seed/hebs-g02/500/384",
+    id: "bs-02",
+    imageUrl: "https://picsum.photos/seed/hebs-bs-02/800/640",
     category: "barber-stylist",
+    tagLabel: "Barber & Stylist Battles",
+    title: "Speed Cut Championship",
   },
   {
-    id: "03",
-    label: "RUNWAY SHOWCASE",
-    col: "md:col-span-4",
-    height: "h-64",
-    src: "https://picsum.photos/seed/hebs-g03/500/256",
+    id: "bs-03",
+    imageUrl: "https://picsum.photos/seed/hebs-bs-03/800/640",
+    category: "barber-stylist",
+    tagLabel: "Barber & Stylist Battles",
+    title: "Master Fade Technique",
+  },
+  {
+    id: "bs-04",
+    imageUrl: "https://picsum.photos/seed/hebs-bs-04/800/640",
+    category: "barber-stylist",
+    tagLabel: "Barber & Stylist Battles",
+    title: "Precision Blade Work",
+  },
+  {
+    id: "bs-05",
+    imageUrl: "https://picsum.photos/seed/hebs-bs-05/800/640",
+    category: "barber-stylist",
+    tagLabel: "Barber & Stylist Battles",
+    title: "Elite Barber Showcase",
+  },
+
+  // ── Global Beauty Showdown (5) ────────────────────────────────
+  {
+    id: "gbs-01",
+    imageUrl: "https://picsum.photos/seed/hebs-gbs-01/800/640",
     category: "beauty-showdown",
+    tagLabel: "Global Beauty Showdown",
+    title: "Global Runway Showcase",
   },
   {
-    id: "04",
-    label: "MASTERCLASS BTS SESSION",
-    col: "md:col-span-8",
-    height: "h-64",
-    src: "https://picsum.photos/seed/hebs-g04/900/256",
+    id: "gbs-02",
+    imageUrl: "https://picsum.photos/seed/hebs-gbs-02/800/640",
+    category: "beauty-showdown",
+    tagLabel: "Global Beauty Showdown",
+    title: "Crowned Icons Finalist",
+  },
+  {
+    id: "gbs-03",
+    imageUrl: "https://picsum.photos/seed/hebs-gbs-03/800/640",
+    category: "beauty-showdown",
+    tagLabel: "Global Beauty Showdown",
+    title: "Beauty Breakthrough Moment",
+  },
+  {
+    id: "gbs-04",
+    imageUrl: "https://picsum.photos/seed/hebs-gbs-04/800/640",
+    category: "beauty-showdown",
+    tagLabel: "Global Beauty Showdown",
+    title: "High Fashion on Stage",
+  },
+  {
+    id: "gbs-05",
+    imageUrl: "https://picsum.photos/seed/hebs-gbs-05/800/640",
+    category: "beauty-showdown",
+    tagLabel: "Global Beauty Showdown",
+    title: "Live Runway Competition",
+  },
+
+  // ── Masterclasses & BTS (5) ───────────────────────────────────
+  {
+    id: "mc-01",
+    imageUrl: "https://picsum.photos/seed/hebs-mc-01/800/640",
     category: "masterclass",
+    tagLabel: "Masterclasses & BTS",
+    title: "Backstage BTS Session",
+  },
+  {
+    id: "mc-02",
+    imageUrl: "https://picsum.photos/seed/hebs-mc-02/800/640",
+    category: "masterclass",
+    tagLabel: "Masterclasses & BTS",
+    title: "Education Workshop Live",
+  },
+  {
+    id: "mc-03",
+    imageUrl: "https://picsum.photos/seed/hebs-mc-03/800/640",
+    category: "masterclass",
+    tagLabel: "Masterclasses & BTS",
+    title: "Advanced Technique Class",
+  },
+  {
+    id: "mc-04",
+    imageUrl: "https://picsum.photos/seed/hebs-mc-04/800/640",
+    category: "masterclass",
+    tagLabel: "Masterclasses & BTS",
+    title: "Expert Demo on Stage",
+  },
+  {
+    id: "mc-05",
+    imageUrl: "https://picsum.photos/seed/hebs-mc-05/800/640",
+    category: "masterclass",
+    tagLabel: "Masterclasses & BTS",
+    title: "Behind the Scenes Access",
   },
 ]
 
 export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState('all')
 
-  const visibleCards = galleryCards.filter(
-    (card) => activeFilter === 'all' || card.category === activeFilter
-  )
+  const filteredItems =
+    activeFilter === 'all'
+      ? galleryItems
+      : galleryItems.filter((item) => item.category === activeFilter)
 
   return (
     <>
@@ -88,43 +165,31 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Logo Showcase */}
-        <div className="w-full border border-white/10 bg-zinc-950/40 rounded-2xl p-8 mb-16 flex flex-wrap items-center justify-center gap-12 backdrop-blur-sm">
-          {logos.map((logo) => (
+        {/* Photo Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {filteredItems.map((item) => (
             <div
-              key={logo}
-              className="h-10 w-32 bg-zinc-900/60 border border-white/5 rounded-lg flex items-center justify-center text-zinc-600 text-xs font-mono tracking-wider font-semibold"
-            >
-              {logo}
-            </div>
-          ))}
-        </div>
-
-        {/* Bento Photo Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
-          {visibleCards.map((card) => (
-            <div
-              key={card.id}
-              className={`group relative ${card.col} ${card.height} bg-zinc-900 border border-white/15 rounded-2xl overflow-hidden shadow-xl transition-all duration-500 ease-in-out transform`}
+              key={item.id}
+              className="group relative h-80 bg-zinc-950 border border-white/15 rounded-2xl overflow-hidden shadow-xl transition-all duration-500 ease-in-out"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={card.src}
-                alt={card.label}
-                className="w-full h-full object-cover opacity-40 transition-transform duration-500 group-hover:scale-105 filter grayscale"
+                src={item.imageUrl}
+                alt={item.title}
+                className="w-full h-full object-cover opacity-50 transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/60 to-transparent text-left">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-1">
-                  {card.id}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent text-left">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+                  {item.tagLabel}
                 </span>
-                <p className="font-sans text-sm font-medium text-white leading-snug">{card.label}</p>
+                <h4 className="text-white text-base font-medium tracking-tight">{item.title}</h4>
               </div>
             </div>
           ))}
         </div>
 
         {/* Empty state */}
-        {visibleCards.length === 0 && (
+        {filteredItems.length === 0 && (
           <div className="text-center py-24">
             <p className="font-mono text-xs uppercase tracking-widest text-zinc-600">
               No media in this category yet
