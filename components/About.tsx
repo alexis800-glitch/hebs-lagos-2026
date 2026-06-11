@@ -10,7 +10,7 @@ export default function About() {
     <section className="pb-24 px-6 max-w-6xl mx-auto" id="about">
 
       {/* Part 0: Our Legacy */}
-      <div className="border border-white/15 bg-zinc-950/40 rounded-xl backdrop-blur-sm shadow-sm p-8 md:p-12 mt-4">
+      <div className="border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-xl backdrop-blur-sm shadow-sm p-8 md:p-12 mt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 items-start">
           <div className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase text-amber-500 tracking-[0.25em] font-medium block">
@@ -33,7 +33,7 @@ export default function About() {
       <GradientDivider />
 
       {/* Part 1: Core Mission Statement */}
-      <div className="max-w-5xl mx-auto mt-12 mb-16 p-8 md:p-12 bg-zinc-950/50 border border-white/20 rounded-2xl flex flex-col items-center justify-center text-center backdrop-blur-md shadow-2xl">
+      <div className="max-w-5xl mx-auto mt-12 mb-16 p-8 md:p-12 bg-zinc-950/50 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl flex flex-col items-center justify-center text-center backdrop-blur-md shadow-2xl">
         <p className="text-amber-500 font-mono text-[10px] tracking-widest uppercase text-center mb-6">
           A Premier International Beauty Event
         </p>
@@ -55,7 +55,7 @@ export default function About() {
           <h3 className="font-serif text-3xl text-white font-light">What Sets HEBS Apart?</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/15 overflow-hidden rounded-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] overflow-hidden rounded-xl">
           {[
             { n: '01', title: 'First-of-Its-Kind Industry Fusion', body: 'A Unified Beauty, Fashion & Education Platform where hairstylists, barbers, makeup artists, nail techs, fashion designers, and educators collaborate under one roof alongside top-tier global influencers.' },
             { n: '02', title: 'High-Value, Hands-On Learning', body: 'Focused entirely on technical education and real-world skills, ensuring every session is interactive, impactful, and delivers practical knowledge attendees can immediately apply to scale their business.' },
@@ -102,7 +102,7 @@ export default function About() {
       </div>
 
       {/* Why Attend Footer Banner */}
-      <div className="mt-16 border border-white/15 bg-zinc-950/40 backdrop-blur-sm shadow-sm rounded-xl p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
+      <div className="mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 backdrop-blur-sm shadow-sm rounded-xl p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
         <p className="font-sans text-sm text-neutral-300 max-w-2xl font-light leading-relaxed">
           <span className="text-white font-medium block mb-1">Why HEBS is a Must-Attend Event</span>
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.

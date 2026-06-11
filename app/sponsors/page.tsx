@@ -110,7 +110,7 @@ export default function SponsorsPage() {
         </div>
 
         {/* ── Diamond Tier — full-width hero card ── */}
-        <div className="max-w-5xl mx-auto bg-gradient-to-br from-zinc-900 via-black to-zinc-900 border border-white/15 rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden shadow-2xl">
+        <div className="max-w-5xl mx-auto bg-gradient-to-br from-zinc-900 via-black to-zinc-900 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden shadow-2xl">
 
           {/* Ambient glow */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/4 blur-[120px] rounded-full pointer-events-none select-none" />
@@ -183,7 +183,7 @@ export default function SponsorsPage() {
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className="bg-zinc-950/40 border border-white/15 rounded-2xl p-8 flex flex-col justify-between hover:border-white/25 transition-all duration-300 backdrop-blur-sm shadow-sm"
+              className="bg-zinc-950/40 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl p-8 flex flex-col justify-between hover:border-white/25 transition-all duration-300 backdrop-blur-sm shadow-sm"
             >
               <div>
                 <div className="mb-6">
@@ -224,7 +224,7 @@ export default function SponsorsPage() {
         </div>
 
         {/* Footer CTA strip */}
-        <div className="max-w-5xl mx-auto mt-16 border border-white/15 bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
+        <div className="max-w-5xl mx-auto mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
           <div>
             <p className="font-sans text-sm text-white font-medium mb-1">Ready to Partner with HEBS 2026?</p>
             <p className="font-sans text-xs text-zinc-400 font-light">

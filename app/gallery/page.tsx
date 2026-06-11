@@ -170,7 +170,7 @@ export default function GalleryPage() {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="group relative h-80 bg-zinc-950 border border-white/15 rounded-2xl overflow-hidden shadow-xl transition-all duration-500 ease-in-out"
+              className="group relative h-80 bg-zinc-950 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl overflow-hidden shadow-xl transition-all duration-500 ease-in-out"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
