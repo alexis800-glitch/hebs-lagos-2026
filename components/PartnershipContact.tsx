@@ -58,8 +58,8 @@ export default function PartnershipContact() {
 
         <div className="relative border-l border-zinc-800 pl-6 space-y-8 ml-2">
           {deadlines.map((item, i) => (
-            <div key={i} className="relative">
-              <span className="absolute -left-[5px] mt-1.5 w-2 h-2 rounded-full bg-zinc-600 border border-black" />
+            <div key={i} className="relative pl-2">
+              <span className="absolute top-1.5 -left-[29px] w-2 h-2 rounded-full bg-zinc-500 border border-black z-10" />
               <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-semibold block mb-0.5">
                 {item.date}
               </span>
