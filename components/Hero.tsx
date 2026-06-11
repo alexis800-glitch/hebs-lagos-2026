@@ -13,10 +13,22 @@ export default function Hero() {
   const mounted = useMounted();
 
   return (
-    <section
-      id="home"
-      className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden bg-black"
-    >
+    <>
+      <style jsx global>{`
+        @keyframes textRotate {
+          0%   { background-position: 0% center; }
+          50%  { background-position: 100% center; }
+          100% { background-position: 0% center; }
+        }
+        .animate-text-rotate {
+          animation: textRotate 4s ease-in-out infinite;
+          display: inline-block;
+        }
+      `}</style>
+      <section
+        id="home"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden bg-black"
+      >
 
       {/* ── Layer 0: Cinematic video background ── */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
@@ -90,13 +102,13 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-center leading-[1.1] max-w-4xl mx-auto font-sans"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-center leading-[1.1] max-w-4xl mx-auto font-sans text-white"
         >
-          <span className="text-white font-light">Where </span>
-          <span className="text-white font-light">Talent </span>
-          <span className="font-normal bg-clip-text text-transparent bg-gradient-to-r from-zinc-200 via-zinc-400 to-white bg-[length:200%_auto] animate-pulse">Meets </span>
-          <span className="text-white font-light">Global </span>
-          <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100">Stage.</span>
+          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0s" }}>Where </span>
+          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0.8s" }}>Talent </span>
+          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "1.6s" }}>Meets </span>
+          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "2.4s" }}>Global </span>
+          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "3.2s" }}>Stage.</span>
         </motion.h1>
 
         {/* Date / location */}
@@ -155,6 +167,7 @@ export default function Hero() {
         </FadeIn>
 
       </div>
-    </section>
+      </section>
+    </>
   );
 }
