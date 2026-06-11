@@ -30,12 +30,12 @@ export default function Navbar() {
   return (
     <>
       {/* Fixed nav bar — sits above the mobile overlay */}
-      <div className="w-full fixed top-0 left-0 right-0 z-[60] bg-[#050505]/80 backdrop-blur-md border-b border-neutral-900/50">
+      <div className="w-full fixed top-0 left-0 right-0 z-[100] bg-[#050505]/80 backdrop-blur-md border-b border-neutral-900/50">
         <motion.nav
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="relative z-50 max-w-6xl mx-auto px-6 flex items-center justify-between h-14 w-full"
+          className="relative z-[100] w-full max-w-6xl mx-auto px-6 flex items-center justify-between h-14"
         >
           {/* Logo */}
           <a
