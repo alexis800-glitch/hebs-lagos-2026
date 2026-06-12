@@ -56,24 +56,28 @@ export default function CountdownTimer() {
   if (!timeLeft) return null;
 
   const units = [
-    { label: "Days", value: timeLeft.days },
-    { label: "Hours", value: timeLeft.hours },
+    { label: "Days",    value: timeLeft.days },
+    { label: "Hours",   value: timeLeft.hours },
     { label: "Minutes", value: timeLeft.minutes },
     { label: "Seconds", value: timeLeft.seconds },
   ];
 
   return (
-    <div className="flex gap-3 md:gap-4 justify-center flex-wrap">
+    <div className="flex items-center justify-center gap-4 md:gap-8 max-w-3xl mx-auto py-8">
       {units.map(({ label, value }) => (
-        <div key={label} className="flex flex-col items-center">
-          <div className="flex flex-col items-center bg-[#0D0D0D] border border-neutral-800 rounded-sm p-4 md:p-6 min-w-[72px] md:min-w-[96px]">
-            <span className="font-sans text-3xl md:text-5xl font-medium text-white tabular-nums">
-              {String(value).padStart(2, "0")}
-            </span>
-            <span className="font-sans text-[10px] uppercase tracking-widest text-zinc-400 mt-2">
-              {label}
-            </span>
-          </div>
+        <div
+          key={label}
+          className="relative min-w-[80px] md:min-w-[110px] p-4 bg-zinc-950/30 border border-white/10 rounded-2xl flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+        >
+          {/* Radial glow accent */}
+          <div className="absolute -z-10 w-40 h-40 bg-zinc-800/10 blur-[60px] rounded-full pointer-events-none" />
+
+          <span className="text-white text-4xl md:text-6xl font-light tracking-tighter font-mono tabular-nums">
+            {String(value).padStart(2, "0")}
+          </span>
+          <span className="text-zinc-400 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase mt-2 block">
+            {label}
+          </span>
         </div>
       ))}
     </div>
