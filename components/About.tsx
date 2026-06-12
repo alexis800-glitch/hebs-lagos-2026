@@ -111,7 +111,7 @@ export default function About() {
           href="https://hebseventportal.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full sm:w-auto bg-red-600 text-white font-medium hover:bg-red-700 transition-all text-sm tracking-wide inline-flex items-center justify-center gap-1 px-6 py-3.5 rounded-xl whitespace-nowrap cursor-pointer font-sans text-center"
+          className="w-full sm:w-auto bg-red-600 text-white font-medium hover:bg-red-700 transition-all text-sm tracking-wide inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl whitespace-nowrap cursor-pointer font-sans text-center"
         >
           Secure Your Placement ↗
         </a>
