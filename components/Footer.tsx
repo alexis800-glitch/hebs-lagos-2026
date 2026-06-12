@@ -76,12 +76,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <div>
-              <h3 className="font-playfair font-bold text-2xl text-white mb-1">HEBS 2026</h3>
+              <h3 className="font-playfair font-bold text-2xl text-zinc-50 mb-1">HEBS 2026</h3>
               <p className="text-sm font-inter" style={{ color: "#9b59b6" }}>
                 Hair Education Beauty Summit
               </p>
             </div>
-            <p className="text-zinc-200 text-sm md:text-base font-medium leading-relaxed mt-4 max-w-sm text-left tracking-wide">
+            <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed mt-4 max-w-sm text-left tracking-wide">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
             <div className="flex items-center gap-3 mt-2">
@@ -116,11 +116,11 @@ export default function Footer() {
 
           {/* Venue */}
           <div className="flex flex-col gap-4">
-            <h4 className="text-white font-semibold text-lg tracking-tight mb-2">Venue</h4>
+            <h4 className="text-zinc-50 font-semibold text-lg tracking-tight mb-2">Venue</h4>
             <div className="flex items-start gap-3">
               <MapPin size={18} className="mt-0.5 shrink-0" style={{ color: "#e91e8c" }} />
               <div>
-                <p className="text-zinc-200 text-sm font-medium">
+                <p className="text-zinc-400 text-sm font-medium">
                   NJS Royale Convention &amp; Suites
                 </p>
                 <p className="text-sm font-inter mt-1" style={{ color: "#aaaaaa" }}>
@@ -135,7 +135,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <h4 className="font-playfair font-bold text-white text-lg">Contact (US)</h4>
+            <h4 className="font-playfair font-bold text-zinc-50 text-lg">Contact (US)</h4>
             <div className="flex flex-col gap-3">
               <a
                 href="mailto:info@thehebs.com"

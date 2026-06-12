@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <>
       {/* Fixed nav bar — sits above the mobile overlay */}
-      <div className="fixed top-0 left-0 right-0 z-[100] w-full bg-black/80 backdrop-blur-md border-b border-neutral-900/50">
+      <div className="fixed top-0 left-0 right-0 z-50 w-full bg-black/60 backdrop-blur-md border-b border-white/[0.06]">
         <motion.nav
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}

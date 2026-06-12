@@ -16,7 +16,7 @@ export default function Hero() {
     <>
       <section
         id="home"
-        className="relative w-full min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden bg-black"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden bg-zinc-950"
       >
 
       {/* ── Layer 0: Cinematic video background ── */}
@@ -91,20 +91,11 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-[25px] sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter sm:tracking-tight text-center leading-[1.3] max-w-5xl mx-auto font-sans text-white flex flex-col items-center justify-center"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-center leading-[1.2] max-w-4xl mx-auto font-sans text-zinc-50"
         >
-          {/* Row 1: Keeps "Where Talent Meets Global" on a single row, scaled to fit perfectly on mobile */}
-          <span className="block whitespace-nowrap">
-            <span>Where</span>{" "}
-            <span>Talent</span>{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#c084fc] to-[#fca5a5] font-semibold animate-pulse">Meets</span>{" "}
-            <span>Global</span>
-          </span>
-
-          {/* Row 2: Drops "Stage." down and centers it dead-center underneath Row 1 */}
-          <span className="block mt-1 sm:mt-2 text-white font-medium whitespace-nowrap">
-            Stage.
-          </span>
+          Where Talent{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#c084fc] to-[#fca5a5] font-semibold">Meets</span>{" "}
+          Global Stage.
         </motion.h1>
 
         {/* Date / location */}
@@ -112,7 +103,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.32 : 0 }}
-          className="text-white font-semibold text-xs sm:text-sm tracking-widest text-center mt-6 block uppercase font-mono"
+          className="text-zinc-400 font-semibold text-xs sm:text-sm tracking-widest text-center mt-6 block uppercase font-mono"
         >
           Lagos, Nigeria &nbsp;•&nbsp; October 23–25, 2026
         </motion.p>
@@ -152,7 +143,7 @@ export default function Hero() {
               href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full md:w-auto bg-white text-black font-semibold text-sm tracking-wide py-3 md:py-2.5 px-6 rounded-lg border border-white/10 whitespace-nowrap inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.99] transition-transform cursor-pointer font-sans touch-manipulation select-none"
+              className="w-full md:w-auto bg-white text-black font-semibold text-sm tracking-wide py-3 md:py-2.5 px-6 rounded-lg border border-white/10 whitespace-nowrap inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.98] transition-transform cursor-pointer font-sans touch-manipulation select-none"
             >
               Get Your Tickets
             </a>

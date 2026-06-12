@@ -52,7 +52,7 @@ export default function EventHighlights() {
   const mounted = useMounted();
 
   return (
-    <section id="highlights" className="py-20 md:py-24 px-5 sm:px-8 md:px-12 bg-[#080808]">
+    <section id="highlights" className="py-20 md:py-24 px-5 sm:px-8 md:px-12 bg-zinc-950">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="pb-8 mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 relative">
@@ -80,7 +80,7 @@ export default function EventHighlights() {
             <motion.div
               key={h.title}
               variants={card}
-              className="group bg-zinc-950/40 border border-white/10 hover:border-white/20 rounded-2xl p-6 flex flex-col gap-3 transition-colors duration-300 min-h-[160px]"
+              className="group bg-zinc-900/40 backdrop-blur-sm border border-white/[0.06] hover:border-white/[0.12] rounded-2xl p-6 flex flex-col gap-3 transition-all duration-300 min-h-[160px]"
             >
               <span className="font-mono text-[10px] tracking-widest text-zinc-500 uppercase">{h.index}</span>
               <h3 className="text-white font-semibold text-lg tracking-tight leading-snug group-hover:text-zinc-200 transition-colors duration-200">
