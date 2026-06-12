@@ -81,7 +81,7 @@ export default function Footer() {
                 Hair Education Beauty Summit
               </p>
             </div>
-            <p className="text-zinc-300 text-sm leading-relaxed mt-4 max-w-sm text-left">
+            <p className="text-zinc-300 text-sm md:text-base leading-relaxed mt-4 max-w-sm">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
             <div className="flex items-center gap-3 mt-2">
@@ -116,11 +116,11 @@ export default function Footer() {
 
           {/* Venue */}
           <div className="flex flex-col gap-4">
-            <h4 className="font-playfair font-bold text-white text-lg">Venue</h4>
+            <h4 className="text-white font-semibold text-lg tracking-tight mb-2">Venue</h4>
             <div className="flex items-start gap-3">
               <MapPin size={18} className="mt-0.5 shrink-0" style={{ color: "#e91e8c" }} />
               <div>
-                <p className="font-semibold text-sm text-white font-inter">
+                <p className="text-zinc-200 text-sm font-medium">
                   NJS Royale Convention &amp; Suites
                 </p>
                 <p className="text-sm font-inter mt-1" style={{ color: "#aaaaaa" }}>
