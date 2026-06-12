@@ -81,7 +81,7 @@ export default function Footer() {
                 Hair Education Beauty Summit
               </p>
             </div>
-            <p className="text-sm font-inter leading-relaxed" style={{ color: "#aaaaaa" }}>
+            <p className="text-zinc-300 text-sm leading-relaxed mt-4 max-w-sm text-left">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
             <div className="flex items-center gap-3 mt-2">
