@@ -73,7 +73,7 @@ export default function TicketsPage() {
                 Choose Your{" "}
                 <span className="italic font-normal">Experience</span>
               </h1>
-              <p className="font-sans text-sm text-zinc-300 leading-relaxed max-w-md">
+              <p className="font-sans text-sm text-zinc-200 leading-relaxed max-w-md">
                 Early bird rates are available for a limited window. Secure
                 placement before tier limits expire.
               </p>
@@ -114,7 +114,7 @@ export default function TicketsPage() {
                       {pass.perks.map((perk, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-2 font-sans text-xs text-zinc-300"
+                          className="flex items-start gap-2 font-sans text-xs text-zinc-200"
                         >
                           <span className="w-1 h-1 rounded-full bg-amber-400 mt-1.5 shrink-0" />
                           {perk}
@@ -143,14 +143,14 @@ export default function TicketsPage() {
                 href="https://hebseventportal.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-zinc-300 hover:text-white transition-colors"
+                className="text-zinc-200 hover:text-white transition-colors"
               >
                 hebseventportal.com
               </a>
               . Questions?{" "}
               <a
                 href="mailto:info@thehebs.com"
-                className="text-zinc-300 hover:text-white transition-colors"
+                className="text-zinc-200 hover:text-white transition-colors"
               >
                 info@thehebs.com
               </a>

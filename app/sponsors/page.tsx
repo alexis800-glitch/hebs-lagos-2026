@@ -27,7 +27,7 @@ const tiers = [
     tag: '02',
     name: 'Platinum Sponsor',
     price: '$15,000',
-    accent: 'text-zinc-300',
+    accent: 'text-zinc-200',
     perks: [
       'VIP Lounge presenting sponsor — full naming rights',
       'Stage branding across all main sessions',
@@ -103,7 +103,7 @@ export default function SponsorsPage() {
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-center mb-6 font-serif">
             Sponsorship <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-300 leading-relaxed text-left md:text-center">
+          <p className="font-sans text-sm text-zinc-200 leading-relaxed text-left md:text-center">
             Align your brand with the premier beauty summit in Africa. Five exclusive packages designed
             to deliver measurable visibility, qualified audience access, and lasting industry impact.
           </p>
@@ -132,7 +132,7 @@ export default function SponsorsPage() {
                     Exclusive Partner
                   </span>
                 </div>
-                <p className="font-sans text-sm text-zinc-300 leading-relaxed">
+                <p className="font-sans text-sm text-zinc-200 leading-relaxed">
                   <strong className="text-white font-semibold">Diamond Partner.</strong> The ultimate presenting partnership at HEBS Lagos 2026. One slot available. Total event integration across every channel, stage, and media asset.
                 </p>
               </div>
@@ -166,7 +166,7 @@ export default function SponsorsPage() {
               <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mb-6">
                 Exclusive inclusions
               </p>
-              <ul className="text-sm text-zinc-300 space-y-3">
+              <ul className="text-sm text-zinc-200 space-y-3">
                 {diamondPerks.map((perk, i) => (
                   <li key={i} className="flex items-start gap-2.5">
                     <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5 stroke-[2]" />
@@ -203,7 +203,7 @@ export default function SponsorsPage() {
                   </div>
                 </div>
 
-                <ul className="text-sm text-zinc-300 space-y-3">
+                <ul className="text-sm text-zinc-200 space-y-3">
                   {tier.perks.map((perk, i) => (
                     <li key={i} className="flex items-start gap-2.5">
                       <Check className={`h-3.5 w-3.5 ${tier.accent} shrink-0 mt-0.5 stroke-[2]`} />
@@ -227,7 +227,7 @@ export default function SponsorsPage() {
         <div className="max-w-5xl mx-auto mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
           <div>
             <p className="font-sans text-sm text-white font-medium mb-1">Ready to Partner with HEBS 2026?</p>
-            <p className="font-sans text-xs text-zinc-300">
+            <p className="font-sans text-xs text-zinc-200">
               All packages are confirmed via email. A proposal and invoice will be sent within 48 hours.
             </p>
           </div>

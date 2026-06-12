@@ -78,7 +78,7 @@ export default function Contact() {
               <em className="font-normal italic">Inquiries</em>
             </h2>
           </div>
-          <p className="font-sans text-sm text-zinc-300 max-w-xs leading-relaxed">
+          <p className="font-sans text-sm text-zinc-200 max-w-xs leading-relaxed">
             Have questions about HEBS 2026? We&apos;d love to hear from you.
           </p>
         </motion.div>
@@ -108,12 +108,12 @@ export default function Contact() {
                         href={href}
                         target={href.startsWith("http") ? "_blank" : undefined}
                         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="font-sans text-sm text-zinc-300 hover:text-white transition-colors duration-200"
+                        className="font-sans text-sm text-zinc-200 hover:text-white transition-colors duration-200"
                       >
                         {value}
                       </a>
                     ) : (
-                      <p className="font-sans text-sm text-zinc-300">{value}</p>
+                      <p className="font-sans text-sm text-zinc-200">{value}</p>
                     )}
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function Contact() {
               >
                 <CheckCircle size={32} className="text-zinc-400" />
                 <h3 className="font-serif text-2xl font-light text-white">Message Sent</h3>
-                <p className="font-sans text-sm text-zinc-300">
+                <p className="font-sans text-sm text-zinc-200">
                   Thank you for reaching out. We&apos;ll get back to you shortly.
                 </p>
                 <button

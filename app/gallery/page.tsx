@@ -144,7 +144,7 @@ export default function GalleryPage() {
         <h1 className="text-3xl md:text-5xl font-semibold text-white tracking-tight text-center mb-4 font-serif">
           Media &amp; Event <span className="italic font-normal">Gallery</span>
         </h1>
-        <p className="text-zinc-300 text-sm md:text-base text-left md:text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-zinc-200 text-sm md:text-base text-left md:text-center max-w-2xl mx-auto mb-10 leading-relaxed">
           Explore the visual milestones, competitor showdowns, and high-fashion highlights of HEBS.
         </p>
 

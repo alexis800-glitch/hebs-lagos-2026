@@ -82,7 +82,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
             The <span className="italic font-normal">Championship</span>
           </h2>
         </div>
-        <p className="font-sans text-sm md:text-base text-zinc-300 max-w-md leading-relaxed">
+        <p className="font-sans text-sm md:text-base text-zinc-200 max-w-md leading-relaxed">
           Two distinct competitive tracks. One global stage. Choose a category to explore the full event structure, prizes, and entry requirements.
         </p>
       </div>
@@ -118,7 +118,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
             <div className="lg:col-span-2 flex flex-col justify-between">
               <div>
                 <span className="font-mono text-[10px] uppercase text-zinc-400 tracking-widest">The Movement</span>
-                <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-4">
+                <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-4">
                   Stylists become directors. Models become performers. Beauty becomes performance art. Each team delivers a full-scale 7–10 minute immersive visual masterpiece showcasing collaborative technical mastery across five creative tracks:
                 </p>
                 <ul className="mt-6 border-t border-neutral-900 pt-4">
@@ -163,7 +163,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                 </div>
                 <div className="border-l border-neutral-900 pl-4">
                   <span className="block font-sans text-[9px] uppercase tracking-wider text-zinc-400 mb-1">3rd Place Revolutionist</span>
-                  <span className="font-sans text-base font-medium text-neutral-300 block">$5,000</span>
+                  <span className="font-sans text-base font-medium text-zinc-200 block">$5,000</span>
                   <span className="font-mono text-[9px] text-zinc-400">or ₦7.3M + Trophy</span>
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
               <div>
                 <span className="font-mono text-[10px] uppercase text-zinc-400 tracking-widest">Evaluation Metrics</span>
                 <h4 className="font-serif text-xl text-white font-semibold mt-2 mb-6">Rigorous Judging Criteria</h4>
-                <ul className="flex flex-col gap-3 font-sans text-sm text-zinc-300">
+                <ul className="flex flex-col gap-3 font-sans text-sm text-zinc-200">
                   <li className="flex items-center gap-2"><span className="w-1 h-1 bg-amber-400 rounded-full shrink-0"></span> Innovation & Theme Execution</li>
                   <li className="flex items-center gap-2"><span className="w-1 h-1 bg-neutral-700 rounded-full shrink-0"></span> Technical Excellence across disciplines</li>
                   <li className="flex items-center gap-2"><span className="w-1 h-1 bg-neutral-700 rounded-full shrink-0"></span> Visual Storytelling & Stage Impact</li>
@@ -193,12 +193,12 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
             <div>
               <span className="font-mono text-[10px] uppercase text-amber-500 tracking-widest font-medium">Official 2026 Theme</span>
               <h3 className="font-serif text-4xl text-white font-semibold mt-4 tracking-tight">THE FUTURE REIMAGINED</h3>
-              <p className="font-sans text-sm md:text-base text-zinc-300 leading-relaxed mt-4">
+              <p className="font-sans text-sm md:text-base text-zinc-200 leading-relaxed mt-4">
                 Step into tomorrow. Entries should feel like living art installations—deeply rooted in imagination, cultural preservation, and bold avant-garde aesthetics. Contestants must interpret the timeline through four key perspectives:
               </p>
               <div className="mt-8 border-t border-neutral-900 pt-6">
                 <span className="font-mono text-[10px] uppercase text-zinc-400 tracking-widest">Creative Mandate</span>
-                <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-3">
+                <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-3">
                   Each team&apos;s visual narrative must be fully cohesive — from the first model&apos;s look to the final stage moment. Judges will evaluate the depth of concept interpretation across all five disciplines as a single unified vision.
                 </p>
               </div>
@@ -207,22 +207,22 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">01</span>
                 <span className="font-serif text-lg text-white font-light">Cultural Heritage</span>
-                <p className="font-sans text-sm text-zinc-300 mt-2 leading-relaxed">Rooted in ancestral legacy and African identity expressed through modern technique.</p>
+                <p className="font-sans text-sm text-zinc-200 mt-2 leading-relaxed">Rooted in ancestral legacy and African identity expressed through modern technique.</p>
               </div>
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">02</span>
                 <span className="font-serif text-lg text-white font-light">Nature & Sustainability</span>
-                <p className="font-sans text-sm text-zinc-300 mt-2 leading-relaxed">Organic forms, earth materials, and ecological storytelling on the runway.</p>
+                <p className="font-sans text-sm text-zinc-200 mt-2 leading-relaxed">Organic forms, earth materials, and ecological storytelling on the runway.</p>
               </div>
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">03</span>
                 <span className="font-serif text-lg text-white font-light">Sci-Fi & Futurism</span>
-                <p className="font-sans text-sm text-zinc-300 mt-2 leading-relaxed">Bold, architectural, and otherworldly concepts that push the limits of construction.</p>
+                <p className="font-sans text-sm text-zinc-200 mt-2 leading-relaxed">Bold, architectural, and otherworldly concepts that push the limits of construction.</p>
               </div>
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">04</span>
                 <span className="font-serif text-lg text-white font-light">Fantasy & Mythology</span>
-                <p className="font-sans text-sm text-zinc-300 mt-2 leading-relaxed">Surreal, narrative-driven looks drawn from legend, folklore, and the imagination.</p>
+                <p className="font-sans text-sm text-zinc-200 mt-2 leading-relaxed">Surreal, narrative-driven looks drawn from legend, folklore, and the imagination.</p>
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   </div>
                   <div className="pb-2">
                     <span className="font-sans text-xs uppercase tracking-wider text-white font-medium">Open Registration</span>
-                    <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-1">Teams of 5 register via the official HEBS portal. All disciplines must be confirmed at time of entry. Entry fee applies per team.</p>
+                    <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-1">Teams of 5 register via the official HEBS portal. All disciplines must be confirmed at time of entry. Entry fee applies per team.</p>
                     <span className="font-mono text-[10px] text-amber-500 mt-2 block">Opens: Summer 2026</span>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   </div>
                   <div className="pb-2">
                     <span className="font-sans text-xs uppercase tracking-wider text-white font-medium">Concept Submission</span>
-                    <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-1">Teams submit a detailed mood board, theme interpretation brief, and discipline breakdown for judge pre-screening and stage slot allocation.</p>
+                    <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-1">Teams submit a detailed mood board, theme interpretation brief, and discipline breakdown for judge pre-screening and stage slot allocation.</p>
                     <span className="font-mono text-[10px] text-zinc-400 mt-2 block">Deadline: September 2026</span>
                   </div>
                 </div>
@@ -261,7 +261,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   </div>
                   <div className="pb-2">
                     <span className="font-sans text-xs uppercase tracking-wider text-white font-medium">Live Rehearsal Day</span>
-                    <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-1">Confirmed teams attend the NJS Royale venue for a timed stage walk-through, lighting cue checks, and audio synchronisation with production crew.</p>
+                    <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-1">Confirmed teams attend the NJS Royale venue for a timed stage walk-through, lighting cue checks, and audio synchronisation with production crew.</p>
                     <span className="font-mono text-[10px] text-zinc-400 mt-2 block">October 23, 2026</span>
                   </div>
                 </div>
@@ -271,7 +271,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   </div>
                   <div>
                     <span className="font-sans text-xs uppercase tracking-wider text-white font-medium">Grand Championship Night</span>
-                    <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-1">All teams perform live before a panel of celebrity judges and a packed audience. Winners announced on stage at the closing ceremony.</p>
+                    <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-1">All teams perform live before a panel of celebrity judges and a packed audience. Winners announced on stage at the closing ceremony.</p>
                     <span className="font-mono text-[10px] text-amber-500 mt-2 block">October 24–25, 2026 · NJS Royale Convention & Suites</span>
                   </div>
                 </div>
@@ -284,7 +284,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                 <span className="font-mono text-[10px] uppercase text-zinc-400 tracking-widest">Entry Requirements</span>
                 <h4 className="font-serif text-xl text-white font-semibold mt-2">Who Can Enter</h4>
               </div>
-              <ul className="flex flex-col gap-3 font-sans text-sm text-zinc-300">
+              <ul className="flex flex-col gap-3 font-sans text-sm text-zinc-200">
                 <li className="flex items-start gap-2"><span className="w-1 h-1 bg-amber-400 rounded-full mt-1.5 shrink-0"></span> Open to professional and emerging artists internationally</li>
                 <li className="flex items-start gap-2"><span className="w-1 h-1 bg-neutral-700 rounded-full mt-1.5 shrink-0"></span> Teams must have exactly 5 members across the 5 disciplines</li>
                 <li className="flex items-start gap-2"><span className="w-1 h-1 bg-neutral-700 rounded-full mt-1.5 shrink-0"></span> All materials, garments, and props must be original to the team</li>
@@ -313,7 +313,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
           <div className="mb-12">
             <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-2">Solo Showdowns</p>
             <h3 className="font-serif text-3xl text-white font-semibold">Barbering & Styling Battles</h3>
-            <p className="font-sans text-sm text-zinc-300 leading-relaxed mt-2 max-w-xl">
+            <p className="font-sans text-sm text-zinc-200 leading-relaxed mt-2 max-w-xl">
               Six hyper-focused individual battle fields structured to test precision speed, complex partitioning, and elite creative craftsmanship.
             </p>
           </div>
@@ -337,7 +337,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                     <h4 className="font-serif text-xl text-white font-semibold group-hover:text-amber-400 transition-colors tracking-tight">
                       {battle.title}
                     </h4>
-                    <p className="font-sans text-sm text-zinc-300 mt-2 leading-relaxed min-h-[60px]">
+                    <p className="font-sans text-sm text-zinc-200 mt-2 leading-relaxed min-h-[60px]">
                       {battle.desc}
                     </p>
                   </div>
@@ -350,7 +350,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                       href="https://hebseventportal.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-sans text-[10px] uppercase tracking-widest border border-neutral-800 text-zinc-300 hover:bg-white hover:text-black hover:border-white px-4 py-2 transition-all rounded-xs"
+                      className="font-sans text-[10px] uppercase tracking-widest border border-neutral-800 text-zinc-200 hover:bg-white hover:text-black hover:border-white px-4 py-2 transition-all rounded-xs"
                     >
                       Enter Battle ↗
                     </a>

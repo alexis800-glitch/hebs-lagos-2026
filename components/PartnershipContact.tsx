@@ -23,7 +23,7 @@ export default function PartnershipContact() {
           <span>20% deposit required to lock in booth space</span>
         </span>
 
-        <p className="text-zinc-300 font-medium text-sm mb-4">
+        <p className="text-zinc-200 font-medium text-sm mb-4">
           HEBS Sponsorship &amp; Vendor Relations Desk
         </p>
 
@@ -63,7 +63,7 @@ export default function PartnershipContact() {
               <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-semibold block mb-0.5">
                 {item.date}
               </span>
-              <span className="font-sans text-sm text-zinc-300">{item.label}</span>
+              <span className="font-sans text-sm text-zinc-200">{item.label}</span>
             </div>
           ))}
         </div>

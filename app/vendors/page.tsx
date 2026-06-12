@@ -91,7 +91,7 @@ export default function VendorsPage() {
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-center mb-6 font-serif">
             Vendor <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-300 leading-relaxed text-left md:text-center">
+          <p className="font-sans text-sm text-zinc-200 leading-relaxed text-left md:text-center">
             Secure your booth at Africa&apos;s premier beauty summit. Three exhibition sizes with
             early-bird and standard pricing. All booths include full event-day floor access.
           </p>
@@ -162,7 +162,7 @@ export default function VendorsPage() {
                     <h2 className="font-serif text-xl font-semibold text-white tracking-tight mb-2">
                       {booth.name}
                     </h2>
-                    <p className="font-sans text-sm text-zinc-300 leading-relaxed">
+                    <p className="font-sans text-sm text-zinc-200 leading-relaxed">
                       {booth.description}
                     </p>
                   </div>
@@ -193,7 +193,7 @@ export default function VendorsPage() {
                   </div>
 
                   {/* Perks */}
-                  <ul className="text-sm text-zinc-300 space-y-3">
+                  <ul className="text-sm text-zinc-200 space-y-3">
                     {booth.perks.map((perk, i) => (
                       <li key={i} className="flex items-start gap-2.5">
                         <Check
@@ -233,7 +233,7 @@ export default function VendorsPage() {
             <div key={item.label} className="border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-xl p-5 backdrop-blur-sm shadow-sm">
               <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-1">{item.label}</span>
               <span className="font-sans text-sm font-medium text-white block">{item.value}</span>
-              <span className="font-sans text-xs text-zinc-300">{item.note}</span>
+              <span className="font-sans text-xs text-zinc-200">{item.note}</span>
             </div>
           ))}
         </div>
@@ -242,7 +242,7 @@ export default function VendorsPage() {
         <div className="max-w-6xl mx-auto mt-10 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
           <div>
             <p className="font-sans text-sm text-white font-medium mb-1">Ready to Exhibit at HEBS 2026?</p>
-            <p className="font-sans text-xs text-zinc-300">
+            <p className="font-sans text-xs text-zinc-200">
               Booth confirmations are sent within 48 hours. All rates are per-event and non-transferable.
             </p>
           </div>

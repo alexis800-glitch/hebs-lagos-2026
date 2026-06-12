@@ -43,7 +43,7 @@ export default function SponsorsVendors() {
               <em className="font-normal italic">HEBS 2026</em>
             </h2>
           </div>
-          <p className="font-sans text-sm font-light text-neutral-400 max-w-xs leading-relaxed">
+          <p className="font-sans text-sm font-light text-zinc-200 max-w-xs leading-relaxed">
             Join the brands and vendors that power the most exciting beauty summit in the world.
           </p>
         </motion.div>
@@ -64,7 +64,7 @@ export default function SponsorsVendors() {
               <h3 className="font-serif text-2xl font-light text-white tracking-tight">
                 {opp.title}
               </h3>
-              <p className="font-sans text-sm font-light text-neutral-400 leading-relaxed">
+              <p className="font-sans text-sm font-light text-zinc-200 leading-relaxed">
                 {opp.desc}
               </p>
               <a

@@ -90,7 +90,7 @@ export default function GalleryGridBlock() {
               Relive the <span className="italic font-normal">Magic</span>
             </h2>
           </div>
-          <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed">
+          <p className="font-sans text-sm text-zinc-200 max-w-xs font-light leading-relaxed">
             A look back at the intense creativity, live championships, and energy defining the HEBS legacy.
           </p>
         </div>

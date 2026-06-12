@@ -57,7 +57,7 @@ export default function EventHighlights() {
               Event <span className="italic font-normal">Highlights</span>
             </h2>
           </div>
-          <p className="font-sans text-sm text-zinc-300 max-w-xs leading-relaxed text-left">
+          <p className="font-sans text-sm text-zinc-200 max-w-xs leading-relaxed text-left">
             Three days of immersive education, fierce competition, and global connection.
           </p>
         </div>

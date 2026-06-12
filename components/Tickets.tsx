@@ -46,7 +46,7 @@ export default function Tickets() {
             Choose Your <span className="italic font-normal">Experience</span>
           </h2>
         </div>
-        <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed">
+        <p className="font-sans text-sm text-zinc-200 max-w-xs font-light leading-relaxed">
           Early bird rates are available for a limited window. Secure placement before tier limits expire.
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function Tickets() {
             <div className="w-full lg:w-2/5 mb-6 lg:mb-0 flex flex-col justify-center min-h-[64px]">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full">
                 {tier.perks.map((perk, pIdx) => (
-                  <li key={pIdx} className="font-sans text-sm text-neutral-300 flex items-start font-light leading-normal">
+                  <li key={pIdx} className="font-sans text-sm text-zinc-200 flex items-start font-light leading-normal">
                     <span className="w-1.5 h-1.5 bg-amber-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                     <span>{perk}</span>
                   </li>

@@ -201,7 +201,7 @@ export default function SponsorshipGrid() {
           Sponsorship packages are subject to availability. All inquiries handled directly via email.
           <br />
           Contact:{' '}
-          <a href="mailto:info@thehebs.com" className="text-zinc-300 hover:text-white transition-colors">
+          <a href="mailto:info@thehebs.com" className="text-zinc-200 hover:text-white transition-colors">
             info@thehebs.com
           </a>
         </p>

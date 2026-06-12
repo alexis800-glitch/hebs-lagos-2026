@@ -116,7 +116,7 @@ export default function Navbar() {
                             href="https://hebseventportal.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-sans text-[10px] uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
+                            className="font-sans text-[10px] uppercase tracking-wider text-zinc-200 hover:text-white transition-colors"
                           >
                             Register to Compete ↗
                           </a>
@@ -180,7 +180,7 @@ export default function Navbar() {
                         <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">HEBS Lagos · Oct 23–25, 2026</span>
                         <a
                           href="mailto:info@thehebs.com"
-                          className="font-sans text-[10px] uppercase tracking-wider text-zinc-300 hover:text-white transition-colors"
+                          className="font-sans text-[10px] uppercase tracking-wider text-zinc-200 hover:text-white transition-colors"
                         >
                           Inquire Now ↗
                         </a>

@@ -115,7 +115,7 @@ function PricingCard({ tier, currency }: { tier: Tier; currency: Currency }) {
         <h3 className="font-serif text-xl font-light text-white tracking-tight mb-3">
           {tier.name}
         </h3>
-        <p className="font-sans text-xs text-zinc-300 leading-relaxed">
+        <p className="font-sans text-xs text-zinc-200 leading-relaxed">
           {tier.description}
         </p>
       </div>
@@ -133,7 +133,7 @@ function PricingCard({ tier, currency }: { tier: Tier; currency: Currency }) {
       {/* Feature list */}
       <ul className="flex flex-col gap-3 mb-10 flex-1 relative z-10">
         {tier.features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-2.5 font-sans text-xs text-zinc-300 font-light">
+          <li key={i} className="flex items-start gap-2.5 font-sans text-xs text-zinc-200 font-light">
             <span
               className={`w-1 h-1 rounded-full mt-1.5 shrink-0 ${
                 tier.featured ? 'bg-amber-400' : 'bg-zinc-500'
@@ -175,7 +175,7 @@ export default function PricingGrid() {
             Grow Your Brand at{' '}
             <span className="italic font-normal">HEBS 2026</span>
           </h2>
-          <p className="font-sans text-sm text-zinc-300 leading-relaxed max-w-xl mx-auto">
+          <p className="font-sans text-sm text-zinc-200 leading-relaxed max-w-xl mx-auto">
             Secure your booth or brand partnership at the premier beauty summit in Africa.
             All packages include full event-day floor access.
           </p>
@@ -218,11 +218,11 @@ export default function PricingGrid() {
         </div>
 
         {/* Footer note */}
-        <p className="text-center font-sans text-xs text-zinc-300 mt-12 leading-loose">
+        <p className="text-center font-sans text-xs text-zinc-200 mt-12 leading-loose">
           All vendor inquiries are processed via email. A confirmation and invoice will be sent within 48 hours.
           <br />
           Contact:{' '}
-          <a href="mailto:info@thehebs.com" className="text-zinc-300 hover:text-white transition-colors">
+          <a href="mailto:info@thehebs.com" className="text-zinc-200 hover:text-white transition-colors">
             info@thehebs.com
           </a>
         </p>

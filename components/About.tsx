@@ -21,7 +21,7 @@ export default function About() {
             </h3>
           </div>
           <div className="md:col-span-2">
-            <p className="font-sans text-sm md:text-base text-zinc-300 leading-relaxed tracking-wide">
+            <p className="font-sans text-sm md:text-base text-zinc-200 leading-relaxed tracking-wide">
               HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. After hosting two exceptionally successful events in{' '}
               <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">NY/NJ, USA</span>,
               we are now expanding dynamically to Africa—offering an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
@@ -41,7 +41,7 @@ export default function About() {
           Where Hair, Beauty, Fashion &amp; Innovation Converge. The Global Hub for{' '}
           <span className="italic font-normal">Education, Creativity, and Industry Networking.</span>
         </h2>
-        <p className="text-zinc-300 text-sm md:text-base text-left md:text-center leading-relaxed max-w-3xl mx-auto mt-6 tracking-wide">
+        <p className="text-zinc-200 text-sm md:text-base text-left md:text-center leading-relaxed max-w-3xl mx-auto mt-6 tracking-wide">
           The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function About() {
               <div>
                 <span className="font-mono text-xs text-zinc-400 block mb-4">{card.n}</span>
                 <h4 className="font-serif text-xl font-semibold text-white mb-3 tracking-tight">{card.title}</h4>
-                <p className="font-sans text-sm text-zinc-300 leading-relaxed">{card.body}</p>
+                <p className="font-sans text-sm text-zinc-200 leading-relaxed">{card.body}</p>
               </div>
             </div>
           ))}
@@ -95,7 +95,7 @@ export default function About() {
                 <Icon className={`h-5 w-5 ${iconClass} shrink-0 stroke-[1.25]`} />
                 <h4 className="font-serif text-xl font-semibold text-white tracking-tight">{title}</h4>
               </div>
-              <p className="font-sans text-sm text-zinc-300 leading-relaxed max-w-2xl w-full">{body}</p>
+              <p className="font-sans text-sm text-zinc-200 leading-relaxed max-w-2xl w-full">{body}</p>
             </div>
           ))}
         </div>
@@ -103,7 +103,7 @@ export default function About() {
 
       {/* Why Attend Footer Banner */}
       <div className="mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 backdrop-blur-sm shadow-sm rounded-xl p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
-        <p className="font-sans text-sm text-zinc-300 max-w-2xl leading-relaxed">
+        <p className="font-sans text-sm text-zinc-200 max-w-2xl leading-relaxed">
           <span className="text-white font-semibold block mb-1">Why HEBS is a Must-Attend Event</span>
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.
         </p>
