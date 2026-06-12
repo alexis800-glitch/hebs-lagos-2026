@@ -14,19 +14,6 @@ export default function Hero() {
 
   return (
     <>
-      <style jsx global>{`
-        @keyframes shimmerWave {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        .animate-text-rotate {
-          animation: shimmerWave 6s linear infinite;
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          display: inline-block;
-        }
-      `}</style>
       <section
         id="home"
         className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden bg-black"
@@ -104,13 +91,13 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-center leading-[1.2] max-w-5xl mx-auto text-white filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.05)]"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-center leading-[1.15] max-w-4xl mx-auto font-sans text-white"
         >
-          <span className="animate-text-rotate bg-gradient-to-r from-white via-zinc-200 to-white" style={{ animationDelay: "0s" }}>Where </span>
-          <span className="animate-text-rotate bg-gradient-to-r from-white via-amber-200 to-white" style={{ animationDelay: "0.8s" }}>Talent </span>
-          <span className="animate-text-rotate bg-gradient-to-r from-white via-zinc-300 to-white" style={{ animationDelay: "1.6s" }}>Meets </span>
-          <span className="animate-text-rotate bg-gradient-to-r from-white via-rose-200 to-white" style={{ animationDelay: "2.4s" }}>Global </span>
-          <span className="animate-text-rotate bg-gradient-to-r from-white via-amber-300 to-white" style={{ animationDelay: "3.2s" }}>Stage.</span>
+          <span>Where</span>{" "}
+          <span>Talent</span>{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#c084fc] to-[#fca5a5]">Meets</span>{" "}
+          <span>Global</span>{" "}
+          <span>Stage.</span>
         </motion.h1>
 
         {/* Date / location */}
