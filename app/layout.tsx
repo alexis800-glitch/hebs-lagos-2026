@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.variable} ${GeistMono.variable} ${cormorant.variable} font-sans antialiased bg-[#050505] text-white`}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} ${cormorant.variable} font-sans antialiased bg-zinc-950 text-white`}>
         {children}
       </body>
     </html>

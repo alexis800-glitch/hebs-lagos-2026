@@ -91,7 +91,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-center leading-[1.2] max-w-4xl mx-auto font-sans text-zinc-50"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-center leading-[1.2] max-w-4xl mx-auto font-sans bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400"
         >
           Where Talent{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#c084fc] to-[#fca5a5] font-semibold">Meets</span>{" "}

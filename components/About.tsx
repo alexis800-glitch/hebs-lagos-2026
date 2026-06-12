@@ -7,10 +7,10 @@ const GradientDivider = () => (
 
 export default function About() {
   return (
-    <section className="pb-24 px-6 max-w-6xl mx-auto" id="about">
+    <section className="pb-24 px-5 sm:px-8 max-w-6xl mx-auto" id="about">
 
       {/* Part 0: Our Legacy */}
-      <div className="border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-xl backdrop-blur-sm shadow-sm p-8 md:p-12 mt-4">
+      <div className="border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 bg-zinc-900/50 backdrop-blur-md rounded-2xl p-8 md:p-12 mt-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 items-start">
           <div className="flex flex-col gap-2">
             <span className="font-mono text-[10px] uppercase text-amber-500 tracking-[0.25em] font-medium block">
@@ -33,7 +33,7 @@ export default function About() {
       <GradientDivider />
 
       {/* Part 1: Core Mission Statement */}
-      <div className="max-w-5xl mx-auto mt-12 mb-16 p-6 sm:p-8 md:p-12 bg-zinc-950/50 border border-white/20 rounded-2xl flex flex-col backdrop-blur-md shadow-2xl">
+      <div className="max-w-5xl mx-auto mt-12 mb-16 p-6 sm:p-8 md:p-12 bg-zinc-900/50 border border-white/[0.06] rounded-2xl flex flex-col backdrop-blur-md">
         <p className="text-amber-500 font-mono text-[10px] tracking-widest uppercase text-center mb-4 block w-full">
           A Premier International Beauty Event
         </p>
@@ -55,18 +55,18 @@ export default function About() {
           <h3 className="font-serif text-3xl text-white font-semibold">What Sets HEBS Apart?</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] overflow-hidden rounded-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 overflow-hidden rounded-2xl">
           {[
             { n: '01', title: 'First-of-Its-Kind Industry Fusion', body: 'A Unified Beauty, Fashion & Education Platform where hairstylists, barbers, makeup artists, nail techs, fashion designers, and educators collaborate under one roof alongside top-tier global influencers.' },
             { n: '02', title: 'High-Value, Hands-On Learning', body: 'Focused entirely on technical education and real-world skills, ensuring every session is interactive, impactful, and delivers practical knowledge attendees can immediately apply to scale their business.' },
             { n: '03', title: 'Elite Competitive Championship', body: 'Featuring a $35,000 global cumulative prize stakes pool—the highest stakes beauty competition globally. The event transforms raw competition into a full-scale runway production with music, lights, and energy.' },
             { n: '04', title: 'A Truly Global Experience', body: 'Bringing diverse international beauty trends to Lagos, Nigeria to blend with local African influences, creating an unparalleled creative exchange and global networking opportunity.' },
           ].map((card) => (
-            <div key={card.n} className="bg-zinc-950/60 p-6 flex flex-col justify-between min-h-[260px]">
+            <div key={card.n} className="bg-zinc-900/50 p-6 flex flex-col justify-between min-h-[260px]">
               <div>
                 <span className="font-mono text-xs text-zinc-400 block mb-4">{card.n}</span>
                 <h4 className="font-serif text-xl font-semibold text-white mb-3 tracking-tight">{card.title}</h4>
-                <p className="font-sans text-sm text-zinc-200 leading-relaxed">{card.body}</p>
+                <p className="font-sans text-sm text-zinc-400 leading-relaxed">{card.body}</p>
               </div>
             </div>
           ))}
@@ -102,8 +102,8 @@ export default function About() {
       </div>
 
       {/* Why Attend Footer Banner */}
-      <div className="mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 backdrop-blur-sm shadow-sm rounded-xl p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
-        <p className="font-sans text-sm text-zinc-200 max-w-2xl leading-relaxed">
+      <div className="mt-16 border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300 bg-zinc-900/50 backdrop-blur-md rounded-2xl p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
+        <p className="font-sans text-sm text-zinc-400 max-w-2xl leading-relaxed">
           <span className="text-white font-semibold block mb-1">Why HEBS is a Must-Attend Event</span>
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.
         </p>
@@ -111,7 +111,7 @@ export default function About() {
           href="https://hebseventportal.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full sm:w-auto bg-gradient-to-r from-[#d91b5c] via-[#c41263] to-[#a30b54] text-white font-semibold text-sm tracking-wide px-8 py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-lg transition-transform duration-200 active:scale-[0.98] cursor-pointer font-sans"
+          className="w-full sm:w-auto bg-gradient-to-r from-[#d91b5c] via-[#c41263] to-[#a30b54] text-white font-semibold text-sm tracking-wide px-8 py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-lg transition-transform duration-200 active:scale-[0.98] cursor-pointer font-sans touch-manipulation select-none"
         >
           Secure Your Placement ↗
         </a>
