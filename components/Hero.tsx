@@ -70,8 +70,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE, delay: mounted ? 0.0 : 0 }}
         >
-          <span className="inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-800/80 px-4 py-1.5 rounded-full backdrop-blur-sm font-mono text-xs tracking-widest text-zinc-500">
-            <span className="w-1.5 h-1.5 bg-amber-400 rounded-full shrink-0" />
+          <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-semibold text-xs font-mono px-4 py-1.5 rounded-full mb-6 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
             $35,000 Grand Prize Pool
           </span>
         </motion.div>
@@ -81,7 +81,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.1 : 0 }}
-          className="font-sans text-xs uppercase tracking-widest text-[#D4AF37]"
+          className="text-zinc-800 dark:text-zinc-700 font-sans font-bold text-xs sm:text-sm tracking-[0.15em] uppercase mb-4 block text-center"
         >
           The Hair Education Beauty Summit
         </motion.p>
@@ -105,7 +105,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.32 : 0 }}
-          className="font-mono text-xs tracking-widest text-zinc-400"
+          className="text-white font-semibold text-xs sm:text-sm tracking-widest text-center mt-6 block uppercase font-mono"
         >
           Lagos, Nigeria &nbsp;•&nbsp; October 23–25, 2026
         </motion.p>
