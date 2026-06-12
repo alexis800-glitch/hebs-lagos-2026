@@ -91,7 +91,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-[28px] sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-center leading-[1.3] max-w-5xl mx-auto font-sans text-white flex flex-col items-center justify-center"
+          className="text-[25px] sm:text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter sm:tracking-tight text-center leading-[1.3] max-w-5xl mx-auto font-sans text-white flex flex-col items-center justify-center"
         >
           {/* Row 1: Keeps "Where Talent Meets Global" on a single row, scaled to fit perfectly on mobile */}
           <span className="block whitespace-nowrap">
