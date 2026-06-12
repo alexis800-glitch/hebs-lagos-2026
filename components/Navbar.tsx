@@ -210,7 +210,7 @@ export default function Navbar() {
 
           {/* Hamburger — morphs into X on open */}
           <button
-            className="md:hidden relative z-10 flex items-center justify-center w-8 h-8"
+            className="md:hidden relative z-10 flex items-center justify-center w-11 h-11 touch-manipulation select-none"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle menu"
           >
@@ -376,7 +376,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
-            className="block w-full text-center font-sans text-sm font-medium py-4 bg-white text-black hover:bg-zinc-200 rounded-full transition-all duration-200 tracking-wide"
+            className="block w-full text-center font-sans text-sm font-medium py-4 bg-white text-black hover:bg-zinc-200 rounded-full transition-all duration-200 tracking-wide touch-manipulation select-none"
           >
             Get Tickets ↗
           </a>

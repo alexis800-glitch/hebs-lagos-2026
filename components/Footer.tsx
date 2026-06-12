@@ -62,7 +62,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative py-20 px-4"
+      className="relative py-20 px-5 sm:px-8"
       style={{ background: "#0a0a0a", borderTop: "1px solid rgba(155,89,182,0.2)" }}
     >
       <div className="max-w-6xl mx-auto">

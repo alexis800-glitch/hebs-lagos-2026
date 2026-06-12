@@ -16,7 +16,7 @@ export default function Hero() {
     <>
       <section
         id="home"
-        className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden bg-black"
+        className="relative w-full min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 text-center overflow-hidden bg-black"
       >
 
       {/* ── Layer 0: Cinematic video background ── */}
@@ -152,7 +152,7 @@ export default function Hero() {
               href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full md:w-auto bg-white text-black font-semibold text-sm tracking-wide py-3 md:py-2.5 px-6 rounded-lg border border-white/10 whitespace-nowrap inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.99] transition-transform cursor-pointer font-sans"
+              className="w-full md:w-auto bg-white text-black font-semibold text-sm tracking-wide py-3 md:py-2.5 px-6 rounded-lg border border-white/10 whitespace-nowrap inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.99] transition-transform cursor-pointer font-sans touch-manipulation select-none"
             >
               Get Your Tickets
             </a>
