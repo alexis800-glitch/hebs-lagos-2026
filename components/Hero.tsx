@@ -15,14 +15,16 @@ export default function Hero() {
   return (
     <>
       <style jsx global>{`
-        @keyframes textRotate {
-          0%   { background-position: 0% center; }
-          50%  { background-position: 100% center; }
-          100% { background-position: 0% center; }
+        @keyframes shimmerWave {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
         }
         .animate-text-rotate {
-          animation: textRotate 4s ease-in-out infinite;
-          display: inline;
+          animation: shimmerWave 6s linear infinite;
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          display: inline-block;
         }
       `}</style>
       <section
@@ -102,13 +104,13 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-center leading-[1.2] max-w-5xl mx-auto text-white"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-center leading-[1.2] max-w-5xl mx-auto text-white filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.05)]"
         >
-          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0s" }}>Where </span>
-          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "0.8s" }}>Talent </span>
-          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "1.6s" }}>Meets </span>
-          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "2.4s" }}>Global </span>
-          <span className="animate-text-rotate bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-400 to-white bg-[length:200%_auto]" style={{ animationDelay: "3.2s" }}>Stage.</span>
+          <span className="animate-text-rotate bg-gradient-to-r from-white via-zinc-200 to-white" style={{ animationDelay: "0s" }}>Where </span>
+          <span className="animate-text-rotate bg-gradient-to-r from-white via-amber-200 to-white" style={{ animationDelay: "0.8s" }}>Talent </span>
+          <span className="animate-text-rotate bg-gradient-to-r from-white via-zinc-300 to-white" style={{ animationDelay: "1.6s" }}>Meets </span>
+          <span className="animate-text-rotate bg-gradient-to-r from-white via-rose-200 to-white" style={{ animationDelay: "2.4s" }}>Global </span>
+          <span className="animate-text-rotate bg-gradient-to-r from-white via-amber-300 to-white" style={{ animationDelay: "3.2s" }}>Stage.</span>
         </motion.h1>
 
         {/* Date / location */}
