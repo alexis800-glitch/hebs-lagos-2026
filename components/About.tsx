@@ -44,6 +44,14 @@ export default function About() {
         <p className="text-base sm:text-lg text-zinc-400 w-full mt-6 leading-relaxed">
           The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
         </p>
+        <a
+          href="https://hebseventportal.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-8 mx-auto w-full sm:w-auto px-8 py-3 sm:py-2.5 bg-white text-black text-sm font-medium tracking-tight rounded-md border border-white/10 inline-flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-[1.01] active:scale-[0.99] touch-manipulation select-none"
+        >
+          Get Your Tickets
+        </a>
       </div>
 
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16" />
