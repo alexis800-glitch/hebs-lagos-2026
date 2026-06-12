@@ -206,23 +206,23 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
             <div className="grid grid-cols-2 gap-4">
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">01</span>
-                <h3 className="text-white text-xl md:text-2xl font-bold tracking-tight mb-3">Cultural Heritage</h3>
-                <p className="font-sans text-sm text-zinc-200 leading-relaxed">Rooted in ancestral legacy and African identity expressed through modern technique.</p>
+                <h3 className="text-white text-lg md:text-xl font-bold tracking-tight mb-3">Cultural Heritage</h3>
+                <p className="text-zinc-200 text-sm leading-relaxed">Rooted in ancestral legacy and African identity expressed through modern technique.</p>
               </div>
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">02</span>
-                <h3 className="text-white text-xl md:text-2xl font-bold tracking-tight mb-3">Nature & Sustainability</h3>
-                <p className="font-sans text-sm text-zinc-200 leading-relaxed">Organic forms, earth materials, and ecological storytelling on the runway.</p>
+                <h3 className="text-white text-lg md:text-xl font-bold tracking-tight mb-3">Nature & Sustainability</h3>
+                <p className="text-zinc-200 text-sm leading-relaxed">Organic forms, earth materials, and ecological storytelling on the runway.</p>
               </div>
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">03</span>
-                <h3 className="text-white text-xl md:text-2xl font-bold tracking-tight mb-3">Sci-Fi & Futurism</h3>
-                <p className="font-sans text-sm text-zinc-200 leading-relaxed">Bold, architectural, and otherworldly concepts that push the limits of construction.</p>
+                <h3 className="text-white text-lg md:text-xl font-bold tracking-tight mb-3">Sci-Fi & Futurism</h3>
+                <p className="text-zinc-200 text-sm leading-relaxed">Bold, architectural, and otherworldly concepts that push the limits of construction.</p>
               </div>
               <div className="border border-neutral-900 p-5 rounded-sm">
                 <span className="font-mono text-xs text-zinc-400 block mb-1">04</span>
-                <h3 className="text-white text-xl md:text-2xl font-bold tracking-tight mb-3">Fantasy & Mythology</h3>
-                <p className="font-sans text-sm text-zinc-200 leading-relaxed">Surreal, narrative-driven looks drawn from legend, folklore, and the imagination.</p>
+                <h3 className="text-white text-lg md:text-xl font-bold tracking-tight mb-3">Fantasy & Mythology</h3>
+                <p className="text-zinc-200 text-sm leading-relaxed">Surreal, narrative-driven looks drawn from legend, folklore, and the imagination.</p>
               </div>
             </div>
           </div>
