@@ -135,7 +135,7 @@ export default function GalleryPage() {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen bg-black text-white pt-36 pb-24 px-6 max-w-7xl mx-auto">
+      <main className="w-full min-h-screen bg-zinc-950 text-white pt-36 pb-24 px-6">
 
         {/* Header */}
         <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase mb-2 block text-center">

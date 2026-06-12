@@ -12,7 +12,7 @@ export default function AboutPage() {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen bg-black text-white pt-36 pb-16 px-6 max-w-6xl mx-auto">
+      <main className="w-full min-h-screen bg-zinc-950 text-white pt-36 pb-16">
         <About />
         <Footer />
       </main>
