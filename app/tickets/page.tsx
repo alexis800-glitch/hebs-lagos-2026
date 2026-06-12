@@ -62,18 +62,18 @@ export default function TicketsPage() {
     <>
       <Navbar />
       <main className="min-h-screen bg-[#050505] pt-14">
-        <section className="py-24 px-4">
+        <section className="py-24 px-5 md:px-8">
           <div className="max-w-5xl mx-auto">
             {/* Header */}
             <div className="mb-16 border-b border-zinc-900 pb-10">
               <p className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium mb-4">
                 Registration Portals
               </p>
-              <h1 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight mb-4">
+              <h1 className="font-serif text-4xl md:text-5xl font-semibold text-white tracking-tight mb-4">
                 Choose Your{" "}
                 <span className="italic font-normal">Experience</span>
               </h1>
-              <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed max-w-md">
+              <p className="font-sans text-sm text-zinc-300 leading-relaxed max-w-md">
                 Early bird rates are available for a limited window. Secure
                 placement before tier limits expire.
               </p>
@@ -92,7 +92,7 @@ export default function TicketsPage() {
                         {pass.tag}
                       </span>
                     )}
-                    <h2 className="font-serif text-xl font-light text-white tracking-tight mb-4">
+                    <h2 className="font-serif text-xl font-semibold text-white tracking-tight mb-4">
                       {pass.name}
                     </h2>
 
@@ -114,7 +114,7 @@ export default function TicketsPage() {
                       {pass.perks.map((perk, i) => (
                         <li
                           key={i}
-                          className="flex items-start gap-2 font-sans text-xs text-zinc-300 font-light"
+                          className="flex items-start gap-2 font-sans text-xs text-zinc-300"
                         >
                           <span className="w-1 h-1 rounded-full bg-amber-400 mt-1.5 shrink-0" />
                           {perk}
@@ -137,7 +137,7 @@ export default function TicketsPage() {
             </div>
 
             {/* Footer note */}
-            <p className="text-center font-sans text-xs text-zinc-500 font-light mt-12">
+            <p className="text-center font-sans text-xs text-zinc-400 mt-12">
               All passes are issued via{" "}
               <a
                 href="https://hebseventportal.com"

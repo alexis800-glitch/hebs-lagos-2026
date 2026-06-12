@@ -53,11 +53,11 @@ export default function EventHighlights() {
           <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div>
             <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">What to Expect</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-white tracking-tight">
               Event <span className="italic font-normal">Highlights</span>
             </h2>
           </div>
-          <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed md:text-left">
+          <p className="font-sans text-sm text-zinc-300 max-w-xs leading-relaxed text-left">
             Three days of immersive education, fierce competition, and global connection.
           </p>
         </div>
@@ -82,10 +82,10 @@ export default function EventHighlights() {
 
               {/* Content */}
               <div className="flex-1">
-                <h3 className="font-serif text-xl font-light text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
+                <h3 className="font-serif text-xl font-semibold text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
                   {h.title}
                 </h3>
-                <p className="font-sans text-sm md:text-base font-light text-neutral-400 leading-relaxed">
+                <p className="font-sans text-sm md:text-base text-zinc-300 leading-relaxed">
                   {h.desc}
                 </p>
               </div>
