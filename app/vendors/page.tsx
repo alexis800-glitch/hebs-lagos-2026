@@ -74,7 +74,7 @@ export default function VendorsPage() {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen bg-black text-white pt-32 px-4 pb-24">
+      <main className="w-full min-h-screen bg-black text-white pt-32 px-5 md:px-8 pb-24">
 
         {/* Breadcrumb */}
         <div className="max-w-6xl mx-auto mb-12 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-600">
@@ -85,13 +85,13 @@ export default function VendorsPage() {
 
         {/* Header */}
         <div className="text-center mb-6 max-w-2xl mx-auto">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center">
+          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center w-full">
             Exhibition Booths
           </span>
           <h1 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-6 font-serif">
             Vendor <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed">
+          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-left md:text-center">
             Secure your booth at Africa&apos;s premier beauty summit. Three exhibition sizes with
             early-bird and standard pricing. All booths include full event-day floor access.
           </p>

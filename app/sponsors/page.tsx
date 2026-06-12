@@ -86,7 +86,7 @@ export default function SponsorsPage() {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen bg-black text-white pt-32 px-4 pb-24">
+      <main className="w-full min-h-screen bg-black text-white pt-32 px-5 md:px-8 pb-24">
 
         {/* Breadcrumb */}
         <div className="max-w-5xl mx-auto mb-12 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-600">
@@ -97,13 +97,13 @@ export default function SponsorsPage() {
 
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center">
+          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center w-full">
             Partnerships
           </span>
           <h1 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-6 font-serif">
             Sponsorship <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed">
+          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-left md:text-center">
             Align your brand with the premier beauty summit in Africa. Five exclusive packages designed
             to deliver measurable visibility, qualified audience access, and lasting industry impact.
           </p>
