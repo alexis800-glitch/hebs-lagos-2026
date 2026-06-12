@@ -146,19 +146,19 @@ export default function Hero() {
             initial={mounted ? { opacity: 0, y: 12 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.6 : 0 }}
-            className="mt-4 mb-16 md:mb-20 flex flex-col items-center w-full max-w-sm mx-auto"
+            className="flex flex-row items-center justify-center gap-3 w-full max-w-md mx-auto px-2 mt-8 mb-16 md:mb-20"
           >
             <a
               href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full max-w-sm mx-auto bg-gradient-to-r from-[#d91b5c] via-[#c41263] to-[#a30b54] text-white font-semibold text-sm tracking-wide py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer font-sans"
+              className="flex-1 bg-gradient-to-r from-[#d91b5c] via-[#c41263] to-[#a30b54] text-white font-semibold text-xs sm:text-sm tracking-wide py-3.5 px-2 rounded-xl whitespace-nowrap inline-flex items-center justify-center shadow-lg transition-transform active:scale-[0.98]"
             >
               Get Your Tickets
             </a>
             <a
               href="#competition"
-              className="w-full max-w-sm mx-auto mt-3 bg-zinc-900/40 border border-white/10 hover:border-white/20 text-white font-semibold text-sm tracking-wide py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2 cursor-pointer font-sans transition-colors"
+              className="flex-1 bg-zinc-900/40 border border-white/10 hover:border-white/20 text-white font-semibold text-xs sm:text-sm tracking-wide py-3.5 px-2 rounded-xl whitespace-nowrap inline-flex items-center justify-center transition-colors"
             >
               View Competitions
             </a>
