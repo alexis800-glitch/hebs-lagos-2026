@@ -285,25 +285,18 @@ export default function Navbar() {
                     >
                       <div className="pb-4 flex flex-col gap-1">
                         <a
-                          href="/competition/crowned-icons"
+                          href="/crown-icons"
                           onClick={closeMenu}
-                          className="block text-zinc-400 hover:text-white text-lg pl-4 py-2 transition-colors"
+                          className="block text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans"
                         >
                           Crowned Icons Showdown
                         </a>
                         <a
-                          href="/competition/barber-battles"
+                          href="/barber-stylist"
                           onClick={closeMenu}
-                          className="block text-zinc-400 hover:text-white text-lg pl-4 py-2 transition-colors"
+                          className="block text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans"
                         >
-                          Barbering Battles
-                        </a>
-                        <a
-                          href="/competition/barber-battles"
-                          onClick={closeMenu}
-                          className="block text-zinc-400 hover:text-white text-lg pl-4 py-2 transition-colors"
-                        >
-                          Styling Battles
+                          Barber &amp; Stylist Battles
                         </a>
                       </div>
                     </motion.div>
@@ -332,18 +325,18 @@ export default function Navbar() {
                   </button>
 
                   {isMobilePartnershipsOpen && (
-                    <div className="pl-4 flex flex-col gap-3 mt-2 mb-3 border-l border-zinc-800">
+                    <div className="pl-4 flex flex-col gap-1 mt-2 mb-3 border-l border-zinc-800">
                       <Link
                         href="/sponsors"
                         onClick={closeMenu}
-                        className="text-sm text-zinc-400 hover:text-white py-1 transition-colors"
+                        className="block text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans"
                       >
                         Sponsor Opportunities
                       </Link>
                       <Link
                         href="/vendors"
                         onClick={closeMenu}
-                        className="text-sm text-zinc-400 hover:text-white py-1 transition-colors"
+                        className="block text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans"
                       >
                         Vendor Opportunities
                       </Link>
