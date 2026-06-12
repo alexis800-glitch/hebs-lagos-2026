@@ -109,13 +109,13 @@ function PricingCard({ tier, currency }: { tier: Tier; currency: Currency }) {
 
       {/* Card header */}
       <div className="mb-8 relative z-10">
-        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-3">
+        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-3">
           {tier.tag}
         </span>
         <h3 className="font-serif text-xl font-light text-white tracking-tight mb-3">
           {tier.name}
         </h3>
-        <p className="font-sans text-xs text-zinc-400 font-light leading-relaxed">
+        <p className="font-sans text-xs text-zinc-300 leading-relaxed">
           {tier.description}
         </p>
       </div>
@@ -125,7 +125,7 @@ function PricingCard({ tier, currency }: { tier: Tier; currency: Currency }) {
         <span className="font-sans text-5xl font-light tracking-tight text-white leading-none block">
           {currency === 'USD' ? tier.usd : tier.ngn}
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-2 block">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-2 block">
           one-time · per event
         </span>
       </div>
@@ -175,7 +175,7 @@ export default function PricingGrid() {
             Grow Your Brand at{' '}
             <span className="italic font-normal">HEBS 2026</span>
           </h2>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed max-w-xl mx-auto">
+          <p className="font-sans text-sm text-zinc-300 leading-relaxed max-w-xl mx-auto">
             Secure your booth or brand partnership at the premier beauty summit in Africa.
             All packages include full event-day floor access.
           </p>
@@ -218,7 +218,7 @@ export default function PricingGrid() {
         </div>
 
         {/* Footer note */}
-        <p className="text-center font-sans text-xs text-zinc-500 font-light mt-12 leading-loose">
+        <p className="text-center font-sans text-xs text-zinc-300 mt-12 leading-loose">
           All vendor inquiries are processed via email. A confirmation and invoice will be sent within 48 hours.
           <br />
           Contact:{' '}

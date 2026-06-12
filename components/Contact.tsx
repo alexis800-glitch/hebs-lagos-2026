@@ -36,7 +36,7 @@ const contactItems = [
 const inputClass =
   "bg-transparent border-b border-neutral-800 focus:border-white rounded-none outline-none py-3 w-full transition-colors duration-200 font-sans text-sm text-white placeholder:text-neutral-600";
 
-const labelClass = "block font-sans text-[10px] uppercase tracking-widest text-neutral-600 mb-2";
+const labelClass = "block font-sans text-[10px] uppercase tracking-widest text-zinc-400 mb-2";
 
 export default function Contact() {
   const mounted = useMounted();
@@ -70,7 +70,7 @@ export default function Contact() {
           className="border-b border-neutral-900 pb-10 mb-0 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">
+            <p className="font-sans text-xs uppercase tracking-widest text-zinc-400 mb-3">
               Get In Touch
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
@@ -78,7 +78,7 @@ export default function Contact() {
               <em className="font-normal italic">Inquiries</em>
             </h2>
           </div>
-          <p className="font-sans text-sm font-light text-neutral-400 max-w-xs leading-relaxed">
+          <p className="font-sans text-sm text-zinc-300 max-w-xs leading-relaxed">
             Have questions about HEBS 2026? We&apos;d love to hear from you.
           </p>
         </motion.div>
@@ -98,9 +98,9 @@ export default function Contact() {
             <div className="flex flex-col divide-y divide-neutral-900">
               {contactItems.map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-start gap-4 py-5">
-                  <Icon size={14} className="text-neutral-600 mt-0.5 shrink-0" />
+                  <Icon size={14} className="text-zinc-400 mt-0.5 shrink-0" />
                   <div>
-                    <p className="font-sans text-[10px] uppercase tracking-widest text-neutral-600 mb-1">
+                    <p className="font-sans text-[10px] uppercase tracking-widest text-zinc-400 mb-1">
                       {label}
                     </p>
                     {href ? (
@@ -108,12 +108,12 @@ export default function Contact() {
                         href={href}
                         target={href.startsWith("http") ? "_blank" : undefined}
                         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="font-sans text-sm text-neutral-300 hover:text-white transition-colors duration-200"
+                        className="font-sans text-sm text-zinc-300 hover:text-white transition-colors duration-200"
                       >
                         {value}
                       </a>
                     ) : (
-                      <p className="font-sans text-sm text-neutral-300">{value}</p>
+                      <p className="font-sans text-sm text-zinc-300">{value}</p>
                     )}
                   </div>
                 </div>
@@ -136,9 +136,9 @@ export default function Contact() {
                 transition={{ duration: 0.4, ease: EASE }}
                 className="flex flex-col gap-4 py-12"
               >
-                <CheckCircle size={32} className="text-neutral-400" />
+                <CheckCircle size={32} className="text-zinc-400" />
                 <h3 className="font-serif text-2xl font-light text-white">Message Sent</h3>
-                <p className="font-sans text-sm font-light text-neutral-500">
+                <p className="font-sans text-sm text-zinc-300">
                   Thank you for reaching out. We&apos;ll get back to you shortly.
                 </p>
                 <button

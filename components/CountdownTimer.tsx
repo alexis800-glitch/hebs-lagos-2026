@@ -70,7 +70,7 @@ export default function CountdownTimer() {
             <span className="font-sans text-3xl md:text-5xl font-medium text-white tabular-nums">
               {String(value).padStart(2, "0")}
             </span>
-            <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-500 mt-2">
+            <span className="font-sans text-[10px] uppercase tracking-widest text-zinc-400 mt-2">
               {label}
             </span>
           </div>

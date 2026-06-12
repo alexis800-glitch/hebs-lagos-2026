@@ -138,13 +138,13 @@ export default function GalleryPage() {
       <main className="w-full min-h-screen bg-black text-white pt-36 pb-24 px-6 max-w-7xl mx-auto">
 
         {/* Header */}
-        <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center">
+        <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase mb-2 block text-center">
           Exhibition Archive
         </span>
-        <h1 className="text-3xl md:text-5xl font-light text-white tracking-tight text-center mb-4 font-serif">
+        <h1 className="text-3xl md:text-5xl font-semibold text-white tracking-tight text-center mb-4 font-serif">
           Media &amp; Event <span className="italic font-normal">Gallery</span>
         </h1>
-        <p className="text-zinc-400 text-sm md:text-base text-center max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-zinc-300 text-sm md:text-base text-left md:text-center max-w-2xl mx-auto mb-10 leading-relaxed">
           Explore the visual milestones, competitor showdowns, and high-fashion highlights of HEBS.
         </p>
 
@@ -179,7 +179,7 @@ export default function GalleryPage() {
                 className="w-full h-full object-cover opacity-50 transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent text-left">
-                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
+                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest block mb-1">
                   {item.tagLabel}
                 </span>
                 <h4 className="text-white text-base font-medium tracking-tight">{item.title}</h4>
@@ -191,7 +191,7 @@ export default function GalleryPage() {
         {/* Empty state */}
         {filteredItems.length === 0 && (
           <div className="text-center py-24">
-            <p className="font-mono text-xs uppercase tracking-widest text-zinc-600">
+            <p className="font-mono text-xs uppercase tracking-widest text-zinc-400">
               No media in this category yet
             </p>
           </div>

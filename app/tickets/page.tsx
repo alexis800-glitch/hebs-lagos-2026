@@ -101,7 +101,7 @@ export default function TicketsPage() {
                       <span className="text-2xl sm:text-3xl font-light tracking-tight text-white block leading-none">
                         {pass.price}
                       </span>
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mt-1.5 block">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mt-1.5 block">
                         Early bird ·{" "}
                         <span className="line-through text-zinc-600">
                           {pass.standardPrice} standard

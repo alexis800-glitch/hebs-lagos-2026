@@ -51,7 +51,7 @@ export default function About() {
       {/* Part 2: What Sets HEBS Apart */}
       <div>
         <div className="mb-12">
-          <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-2">Our Architecture</p>
+          <p className="font-sans text-xs uppercase tracking-widest text-zinc-400 mb-2">Our Architecture</p>
           <h3 className="font-serif text-3xl text-white font-semibold">What Sets HEBS Apart?</h3>
         </div>
 
@@ -64,7 +64,7 @@ export default function About() {
           ].map((card) => (
             <div key={card.n} className="bg-zinc-950/60 p-6 flex flex-col justify-between min-h-[260px]">
               <div>
-                <span className="font-mono text-xs text-neutral-600 block mb-4">{card.n}</span>
+                <span className="font-mono text-xs text-zinc-400 block mb-4">{card.n}</span>
                 <h4 className="font-serif text-xl font-semibold text-white mb-3 tracking-tight">{card.title}</h4>
                 <p className="font-sans text-sm text-zinc-300 leading-relaxed">{card.body}</p>
               </div>
@@ -78,7 +78,7 @@ export default function About() {
       {/* Part 3: Our Mission */}
       <div>
         <div className="mb-12">
-          <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-2">Our Core Purpose</p>
+          <p className="font-sans text-xs uppercase tracking-widest text-zinc-400 mb-2">Our Core Purpose</p>
           <h3 className="font-serif text-3xl text-white font-semibold">Our Mission</h3>
         </div>
 

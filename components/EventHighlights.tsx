@@ -52,7 +52,7 @@ export default function EventHighlights() {
         <div className="pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative">
           <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">What to Expect</p>
+            <p className="font-sans text-xs uppercase tracking-widest text-zinc-400 mb-3">What to Expect</p>
             <h2 className="font-serif text-4xl md:text-5xl font-semibold text-white tracking-tight">
               Event <span className="italic font-normal">Highlights</span>
             </h2>

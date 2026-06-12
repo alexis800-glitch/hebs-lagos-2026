@@ -77,7 +77,7 @@ export default function VendorsPage() {
       <main className="w-full min-h-screen bg-black text-white pt-32 px-5 md:px-8 pb-24">
 
         {/* Breadcrumb */}
-        <div className="max-w-6xl mx-auto mb-12 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+        <div className="max-w-6xl mx-auto mb-12 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-400">
           <Link href="/" className="hover:text-zinc-400 transition-colors">Home</Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-zinc-400">Vendors</span>
@@ -85,7 +85,7 @@ export default function VendorsPage() {
 
         {/* Header */}
         <div className="text-center mb-6 max-w-2xl mx-auto">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center w-full">
+          <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase mb-2 block text-center w-full">
             Exhibition Booths
           </span>
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-center mb-6 font-serif">
@@ -152,10 +152,10 @@ export default function VendorsPage() {
                   {/* Header */}
                   <div className="mb-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400">
                         {booth.tag}
                       </span>
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 border border-zinc-800 px-2 py-0.5 rounded-full">
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 border border-zinc-800 px-2 py-0.5 rounded-full">
                         {booth.size}
                       </span>
                     </div>
@@ -179,7 +179,7 @@ export default function VendorsPage() {
                         </span>
                       </div>
                       <div className="border-l border-zinc-800 pl-6">
-                        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 block mb-1">
+                        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-1">
                           Standard
                         </span>
                         <span className="font-sans text-lg font-light text-zinc-500 line-through leading-none">
@@ -187,7 +187,7 @@ export default function VendorsPage() {
                         </span>
                       </div>
                     </div>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 mt-2 block">
+                    <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mt-2 block">
                       {currency === 'USD' ? 'USD' : 'NGN'} · one-time · per event
                     </span>
                   </div>
@@ -198,7 +198,7 @@ export default function VendorsPage() {
                       <li key={i} className="flex items-start gap-2.5">
                         <Check
                           className={`h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2] ${
-                            booth.featured ? 'text-amber-500' : 'text-zinc-600'
+                            booth.featured ? 'text-amber-500' : 'text-zinc-400'
                           }`}
                         />
                         {perk}
@@ -231,9 +231,9 @@ export default function VendorsPage() {
             { label: 'Event Dates', value: 'Oct 23–25, 2026', note: 'NJS Royale Convention & Suites, Lagos' },
           ].map((item) => (
             <div key={item.label} className="border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-xl p-5 backdrop-blur-sm shadow-sm">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-1">{item.label}</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-1">{item.label}</span>
               <span className="font-sans text-sm font-medium text-white block">{item.value}</span>
-              <span className="font-sans text-xs text-zinc-500 font-light">{item.note}</span>
+              <span className="font-sans text-xs text-zinc-300">{item.note}</span>
             </div>
           ))}
         </div>

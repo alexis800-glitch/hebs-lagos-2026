@@ -105,7 +105,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.32 : 0 }}
-          className="font-mono text-xs tracking-widest text-zinc-500"
+          className="font-mono text-xs tracking-widest text-zinc-400"
         >
           Lagos, Nigeria &nbsp;•&nbsp; October 23–25, 2026
         </motion.p>

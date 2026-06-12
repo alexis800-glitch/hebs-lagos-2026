@@ -89,7 +89,7 @@ export default function SponsorsPage() {
       <main className="w-full min-h-screen bg-black text-white pt-32 px-5 md:px-8 pb-24">
 
         {/* Breadcrumb */}
-        <div className="max-w-5xl mx-auto mb-12 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-600">
+        <div className="max-w-5xl mx-auto mb-12 flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-zinc-400">
           <Link href="/" className="hover:text-zinc-400 transition-colors">Home</Link>
           <ChevronRight className="h-3 w-3" />
           <span className="text-zinc-400">Sponsors</span>
@@ -97,7 +97,7 @@ export default function SponsorsPage() {
 
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center w-full">
+          <span className="text-[10px] font-mono tracking-widest text-zinc-400 uppercase mb-2 block text-center w-full">
             Partnerships
           </span>
           <h1 className="text-3xl md:text-5xl font-semibold tracking-tight text-center mb-6 font-serif">
@@ -121,7 +121,7 @@ export default function SponsorsPage() {
             {/* Left — identity + price + CTA */}
             <div className="flex flex-col justify-between gap-8">
               <div>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-4">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-4">
                   01 · Exclusive Tier
                 </span>
                 <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -141,7 +141,7 @@ export default function SponsorsPage() {
                 <span className="font-sans text-5xl font-light tracking-tight text-white leading-none block">
                   $25,000
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-2 block">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-2 block">
                   USD · one exclusive slot · HEBS Lagos 2026
                 </span>
                 <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -163,7 +163,7 @@ export default function SponsorsPage() {
 
             {/* Right — perks */}
             <div className="border-t md:border-t-0 md:border-l border-zinc-800 pt-8 md:pt-0 md:pl-10">
-              <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-6">
+              <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mb-6">
                 Exclusive inclusions
               </p>
               <ul className="text-sm text-zinc-300 space-y-3">
@@ -187,7 +187,7 @@ export default function SponsorsPage() {
             >
               <div>
                 <div className="mb-6">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 block mb-3">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 block mb-3">
                     {tier.tag}
                   </span>
                   <h3 className="font-serif text-xl font-semibold text-white tracking-tight mb-2">
@@ -197,7 +197,7 @@ export default function SponsorsPage() {
                     <span className="text-4xl font-light tracking-tight text-white block font-sans">
                       {tier.price}
                     </span>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1 block">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1 block">
                       USD · one-time · per event
                     </span>
                   </div>
