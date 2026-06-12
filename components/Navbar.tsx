@@ -39,7 +39,7 @@ export default function Navbar() {
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="relative z-[100] w-full max-w-6xl mx-auto px-6 flex items-center justify-between h-14"
+          className="relative z-[100] w-full max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
         >
           {/* Logo */}
           <a
