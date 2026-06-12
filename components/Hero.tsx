@@ -81,7 +81,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.1 : 0 }}
-          className="text-zinc-800 dark:text-zinc-700 font-sans font-bold text-xs sm:text-sm tracking-[0.15em] uppercase mb-4 block text-center"
+          className="text-white font-sans font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 block text-center"
         >
           The Hair Education Beauty Summit
         </motion.p>
