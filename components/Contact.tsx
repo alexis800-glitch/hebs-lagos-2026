@@ -205,6 +205,29 @@ export default function Contact() {
             )}
           </motion.div>
         </div>
+
+        {/* Instagram Reel embed */}
+        <div className="max-w-xl mx-auto mt-16 p-4 bg-zinc-950/40 border border-white/10 rounded-2xl backdrop-blur-sm shadow-xl flex flex-col items-center">
+          <div className="w-full aspect-[9/16] max-h-[640px] rounded-xl overflow-hidden bg-black border border-white/5 relative">
+            <iframe
+              src="https://www.instagram.com/reel/DTx-6-Sj698/embed/"
+              className="w-full h-full border-0 absolute inset-0"
+              allowTransparency={true}
+              allow="encrypted-media"
+              scrolling="no"
+            />
+          </div>
+          <a
+            href="https://www.instagram.com/reel/DTx-6-Sj698/?igsh=YjY1OXA5bjhwcWln"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 text-xs font-mono tracking-widest text-zinc-400 hover:text-white transition-colors duration-200 uppercase inline-flex items-center gap-1.5"
+          >
+            <span>View Reel on Instagram</span>
+            <span className="text-sm font-light">↗</span>
+          </a>
+        </div>
+
       </div>
     </section>
   );
