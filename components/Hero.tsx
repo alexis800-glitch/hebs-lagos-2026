@@ -152,7 +152,7 @@ export default function Hero() {
               href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full bg-gradient-to-r from-[#d91b5c] via-[#c41263] to-[#a30b54] text-white font-semibold text-sm tracking-wide py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center shadow-lg transition-transform active:scale-[0.98] cursor-pointer font-sans"
+              className="w-full md:w-auto bg-white text-black font-semibold text-sm tracking-wide py-3 md:py-2.5 px-6 rounded-lg border border-white/10 whitespace-nowrap inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.99] transition-transform cursor-pointer font-sans"
             >
               Get Your Tickets
             </a>
