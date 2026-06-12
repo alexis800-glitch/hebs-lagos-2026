@@ -91,19 +91,19 @@ export default function Hero() {
           initial={mounted ? { opacity: 0, y: 24 } : false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease: EASE, delay: mounted ? 0.2 : 0 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-center leading-[1.3] max-w-4xl mx-auto font-sans text-white flex flex-col items-center justify-center"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-center leading-[1.25] max-w-4xl mx-auto font-sans text-white flex flex-col items-center justify-center"
         >
-          {/* Row 1: Left-aligned words block on mobile */}
+          {/* Row 1: The main phrase on mobile viewports */}
           <span className="block sm:inline whitespace-nowrap">
             <span>Where</span>{" "}
-            <span>Talent</span>
+            <span>Talent</span>{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#c084fc] to-[#fca5a5] font-semibold animate-pulse">Meets</span>{" "}
+            <span>Global</span>
           </span>
 
-          {/* Row 2: Centers "Meets the Stage." directly below row 1 */}
-          <span className="block sm:inline mt-1 sm:mt-0 whitespace-nowrap">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#93c5fd] via-[#c084fc] to-[#fca5a5] font-semibold animate-pulse">Meets</span>{" "}
-            <span className="text-zinc-400 font-light lowercase">the</span>{" "}
-            <span className="text-white font-medium">Stage.</span>
+          {/* Row 2: Centers "Stage." directly under the text grid above */}
+          <span className="block sm:inline mt-1 sm:mt-0 text-white font-medium">
+            Stage.
           </span>
         </motion.h1>
 
