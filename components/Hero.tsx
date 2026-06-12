@@ -146,17 +146,20 @@ export default function Hero() {
             initial={mounted ? { opacity: 0, y: 12 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE, delay: mounted ? 0.6 : 0 }}
-            className="mt-4 mb-16 md:mb-20 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full max-w-md mx-auto"
+            className="mt-4 mb-16 md:mb-20 flex flex-col items-center w-full max-w-sm mx-auto"
           >
             <a
               href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-crisp-primary w-full sm:w-auto text-center font-sans"
+              className="w-full max-w-sm mx-auto bg-gradient-to-r from-[#d91b5c] via-[#c41263] to-[#a30b54] text-white font-semibold text-sm tracking-wide py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer font-sans"
             >
               Get Your Tickets
             </a>
-            <a href="#competition" className="btn-crisp-secondary w-full sm:w-auto text-center font-sans">
+            <a
+              href="#competition"
+              className="w-full max-w-sm mx-auto mt-3 bg-zinc-900/40 border border-white/10 hover:border-white/20 text-white font-semibold text-sm tracking-wide py-4 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2 cursor-pointer font-sans transition-colors"
+            >
               View Competitions
             </a>
           </motion.div>

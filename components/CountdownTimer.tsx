@@ -63,19 +63,19 @@ export default function CountdownTimer() {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-4 md:gap-8 max-w-3xl mx-auto py-8">
+    <div className="flex items-center justify-center gap-2 sm:gap-6 max-w-full mx-auto px-2 mt-8">
       {units.map(({ label, value }) => (
         <div
           key={label}
-          className="relative min-w-[80px] md:min-w-[110px] p-4 bg-zinc-950/30 border border-white/10 rounded-2xl flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300 hover:border-white/20"
+          className="relative flex-1 min-w-[70px] max-w-[85px] sm:min-w-[100px] p-2.5 sm:p-4 bg-zinc-950/30 border border-white/10 rounded-xl sm:rounded-2xl flex flex-col items-center justify-center backdrop-blur-sm"
         >
           {/* Radial glow accent */}
           <div className="absolute -z-10 w-40 h-40 bg-zinc-800/10 blur-[60px] rounded-full pointer-events-none" />
 
-          <span className="text-white text-4xl md:text-6xl font-light tracking-tighter font-mono tabular-nums">
+          <span className="text-white text-2xl sm:text-4xl md:text-5xl font-light tracking-tight font-mono tabular-nums">
             {String(value).padStart(2, "0")}
           </span>
-          <span className="text-zinc-400 font-mono text-[10px] md:text-[11px] tracking-[0.2em] uppercase mt-2 block">
+          <span className="text-zinc-400 font-mono text-[9px] sm:text-[11px] tracking-wider uppercase mt-1 block">
             {label}
           </span>
         </div>
