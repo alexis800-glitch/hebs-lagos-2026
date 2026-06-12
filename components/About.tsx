@@ -86,14 +86,14 @@ export default function About() {
           <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
           {[
-            { Icon: BookOpen, iconClass: 'text-amber-400', title: 'Bridging Education with Opportunity', body: 'Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.' },
-            { Icon: Globe, iconClass: 'text-neutral-400', title: 'Connecting Professionals Worldwide', body: 'Creating a dynamic global network and physical hub where hairstylists, masters barbers, creative makeup artists, fashion stylists, educators, and global brand leaders can seamlessly collaborate, share narratives, and grow collectively.' },
-            { Icon: Sparkles, iconClass: 'text-neutral-400', title: 'Empowering the Next Generation', body: 'Ensuring that the collective future of beauty, grooming, and high-fashion remains completely inclusive, boundary-pushing, hyper-innovative, and continuously driven by technical excellence.' },
-          ].map(({ Icon, iconClass, title, body }) => (
+            { Icon: BookOpen, title: 'Bridging Education with Opportunity', body: 'Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.' },
+            { Icon: Globe, title: 'Connecting Professionals Worldwide', body: 'Creating a dynamic global network and physical hub where hairstylists, masters barbers, creative makeup artists, fashion stylists, educators, and global brand leaders can seamlessly collaborate, share narratives, and grow collectively.' },
+            { Icon: Sparkles, title: 'Empowering the Next Generation', body: 'Ensuring that the collective future of beauty, grooming, and high-fashion remains completely inclusive, boundary-pushing, hyper-innovative, and continuously driven by technical excellence.' },
+          ].map(({ Icon, title, body }) => (
             <div key={title} className="flex flex-col md:flex-row items-start md:items-center justify-between py-8 border-b border-white/10 gap-4 md:gap-12">
               <div className="flex items-center gap-4 w-full md:w-1/3 shrink-0">
-                <Icon className={`h-5 w-5 ${iconClass} shrink-0 stroke-[1.25]`} />
-                <h4 className="font-serif text-xl font-semibold text-white tracking-tight">{title}</h4>
+                <Icon className="text-amber-500 h-5 w-5 shrink-0" />
+                <h4 className="text-white text-base md:text-lg font-medium tracking-tight">{title}</h4>
               </div>
               <p className="font-sans text-sm text-zinc-200 leading-relaxed max-w-2xl w-full">{body}</p>
             </div>
