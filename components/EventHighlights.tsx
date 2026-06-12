@@ -76,16 +76,16 @@ export default function EventHighlights() {
               className="group flex flex-col md:flex-row md:items-start gap-4 md:gap-12 border-b border-white/10 py-8"
             >
               {/* Serial index */}
-              <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-700 md:w-20 shrink-0 pt-1">
+              <span className="text-zinc-400 font-mono text-xs tracking-wider mb-1 block md:w-20 shrink-0 pt-1">
                 {String(index + 1).padStart(2, "0")}
               </span>
 
               {/* Content */}
               <div className="flex-1">
-                <h3 className="font-serif text-xl font-semibold text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
+                <h3 className="text-white font-semibold text-xl tracking-tight uppercase group-hover:text-neutral-300 transition-colors duration-200 mb-2">
                   {h.title}
                 </h3>
-                <p className="font-sans text-sm md:text-base text-zinc-300 leading-relaxed">
+                <p className="text-zinc-200 text-sm md:text-base text-left leading-relaxed mt-2 block">
                   {h.desc}
                 </p>
               </div>
