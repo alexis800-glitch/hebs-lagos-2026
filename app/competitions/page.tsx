@@ -31,7 +31,7 @@ const GLOBAL_STAGES = [
     n: '03',
     title: 'Live Championship Finals',
     deadline: 'October 25, 2026',
-    desc: 'The 12 finalists each get 10 minutes on the main stage at NJS Royale Events Center — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
+    desc: 'The 12 finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
   },
 ]
 
@@ -69,7 +69,7 @@ const BARBER_DIVISIONS: Division[] = [
   {
     n: '01',
     title: 'Fast & Flawless Challenge™',
-    subtitle: 'The Ultimate Speed Competition',
+    subtitle: 'The Ultimate Speed Competition · 15 min',
     entry: '$50 USD',
     time: '15 min',
     prizePool: '$5,000',
@@ -79,7 +79,7 @@ const BARBER_DIVISIONS: Division[] = [
   {
     n: '02',
     title: 'Battle of the Fades™',
-    subtitle: 'The Ultimate Fade Championship',
+    subtitle: 'The Ultimate Fade Championship · 30 min',
     entry: '$50 USD',
     time: '30 min',
     prizePool: '$5,000',
@@ -89,7 +89,7 @@ const BARBER_DIVISIONS: Division[] = [
   {
     n: '03',
     title: 'Freestyle Design Battle™',
-    subtitle: 'Art Meets Barbering',
+    subtitle: 'Art Meets Barbering · 60 min',
     entry: '$75 USD',
     time: '60 min',
     prizePool: '$7,500',
@@ -99,7 +99,7 @@ const BARBER_DIVISIONS: Division[] = [
   {
     n: '04',
     title: 'Barber Game™',
-    subtitle: 'The Ultimate Team Battle',
+    subtitle: 'The Ultimate Team Battle · 2 Hours',
     entry: '$100 / team',
     time: '2 hrs',
     prizePool: '$10,000',
@@ -132,7 +132,7 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
   {
     n: '02',
     title: 'Braids & Fades Showdown™',
-    subtitle: 'The Ultimate Collaboration Battle',
+    subtitle: 'Dual Discipline Team Track · $50 per Team of 1 Barber + 1 Braider',
     format: '1 Barber + 1 Braider',
     entry: '$50 / team',
     time: '60 min',
@@ -368,8 +368,8 @@ export default function CompetitionsPage() {
                       <span className="text-[10px] font-mono tracking-widest uppercase text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-3 py-1">
                         Lagos, Nigeria
                       </span>
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
-                        NJS Royale Events Center
+                      <span className="text-[10px] font-mono tracking-widest text-zinc-500 border border-white/[0.08] rounded-lg px-3 py-1 leading-snug">
+                        NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos
                       </span>
                     </div>
                   </div>
@@ -474,6 +474,9 @@ export default function CompetitionsPage() {
                 <p className="text-zinc-600 text-xs font-mono">
                   Non-refundable · Deadline August 5, 2026 · questions: competitions@hebslagos.com
                 </p>
+                <p className="text-zinc-600 text-[11px] font-mono text-center max-w-md leading-relaxed mt-1">
+                  * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.
+                </p>
               </div>
             </div>
           )}
@@ -495,7 +498,7 @@ export default function CompetitionsPage() {
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
-                    Oct 24, 2026 · 1:00 PM – 7:00 PM
+                    October 24, 2026 | 1:00 PM – 7:00 PM
                   </span>
                   <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
                     NJS Royale Beach Resort · Lagos
@@ -511,7 +514,20 @@ export default function CompetitionsPage() {
                 note="All competitors use HEBS-supplied Men't Pro Tools. Personal clippers and trimmers are not permitted during competition rounds."
               />
 
-              {/* Rules callout */}
+              {/* Equipment Regulation */}
+              <div className="border border-zinc-600/50 bg-zinc-900 rounded-xl px-6 py-5">
+                <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mb-2.5">
+                  Equipment Regulation
+                </p>
+                <p className="text-sm text-zinc-200 leading-relaxed">
+                  Powered by{' '}
+                  <span className="text-white font-semibold">Men&apos;t Pro Tools™</span>.
+                  All barbers will be supplied official clippers and trimmers on stage.{' '}
+                  <span className="text-white font-semibold">Personal cutting machinery is strictly prohibited.</span>
+                </p>
+              </div>
+
+              {/* General rules */}
               <div className="bg-zinc-900/30 border border-white/[0.06] rounded-xl px-6 py-4">
                 <p className="text-sm text-zinc-400 leading-relaxed">
                   Must bring your own models.{' '}
@@ -576,7 +592,7 @@ export default function CompetitionsPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-amber-400 font-semibold text-sm tracking-wide">
-                      Coming May 2027 — Not Part of October 2026
+                      Scheduled for May 24, 2027 — Independent Spring Track
                     </p>
                     <p className="text-zinc-400 text-xs mt-1 leading-relaxed">
                       The Braiding Championships are a separate event scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos. Registration details will be announced closer to the date.
@@ -614,6 +630,19 @@ export default function CompetitionsPage() {
                 role="Official Styling Partner"
                 note="All styling and finishing products used during competition must be official PureO products. Own combs, brushes, tools, and extensions are permitted."
               />
+
+              {/* Product Regulation */}
+              <div className="border border-zinc-600/50 bg-zinc-900 rounded-xl px-6 py-5">
+                <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mb-2.5">
+                  Product Regulation
+                </p>
+                <p className="text-sm text-zinc-200 leading-relaxed">
+                  Powered by{' '}
+                  <span className="text-white font-semibold">PureO Natural Products™</span>.
+                  Finishing and styling gels will be provided by HEBS.{' '}
+                  <span className="text-white font-medium">Competitors bring personal combs and extension hair pieces.</span>
+                </p>
+              </div>
 
               {/* Divisions grid */}
               <div>
