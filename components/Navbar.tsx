@@ -9,7 +9,7 @@ import { useMounted } from "@/hooks/useMounted";
 const navLinks = [
   { label: "Home",         href: "/" },
   { label: "About",        href: "/about" },
-  { label: "Competition",  href: "#competition" },
+  { label: "Competition",  href: "/competitions" },
   { label: "Partnerships", href: "#sponsors" },
   { label: "Tickets",      href: "/tickets" },
   { label: "Gallery",      href: "/gallery" },
@@ -70,7 +70,7 @@ export default function Navbar() {
                     onMouseEnter={() => setIsCompetitionOpen(true)}
                     onMouseLeave={() => setIsCompetitionOpen(false)}
                   >
-                    <a href={link.href} className={linkClass}>
+                    <Link href="/competitions" className={linkClass}>
                       Competition
                       <ChevronDown
                         className={`h-3 w-3 text-zinc-400 shrink-0 transition-transform duration-300 ${
@@ -79,7 +79,7 @@ export default function Navbar() {
                             : "rotate-0 translate-y-0"
                         }`}
                       />
-                    </a>
+                    </Link>
 
                     {/* Stripe-style mega menu */}
                     <div
@@ -260,17 +260,26 @@ export default function Navbar() {
                 }`}
               >
                 {/* Accordion trigger */}
-                <button
-                  onClick={() => setIsMobileCompOpen((o) => !o)}
-                  className="w-full flex items-center justify-between text-xl font-medium tracking-tight text-white py-1.5 hover:text-zinc-400 transition-colors duration-200"
-                >
-                  Competition
-                  <ChevronDown
-                    className={`h-5 w-5 text-zinc-500 shrink-0 transition-transform duration-300 ${
-                      isMobileCompOpen ? "rotate-180" : "rotate-0"
-                    }`}
-                  />
-                </button>
+                <div className="w-full flex items-center justify-between py-1.5">
+                  <Link
+                    href="/competitions"
+                    onClick={closeMenu}
+                    className="text-xl font-medium tracking-tight text-white hover:text-zinc-400 transition-colors duration-200"
+                  >
+                    Competition
+                  </Link>
+                  <button
+                    onClick={() => setIsMobileCompOpen((o) => !o)}
+                    className="p-1 touch-manipulation select-none"
+                    aria-label="Toggle competition sub-menu"
+                  >
+                    <ChevronDown
+                      className={`h-5 w-5 text-zinc-500 shrink-0 transition-transform duration-300 ${
+                        isMobileCompOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                    />
+                  </button>
+                </div>
 
                 {/* Accordion body */}
                 <AnimatePresence initial={false}>
