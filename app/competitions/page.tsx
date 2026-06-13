@@ -280,7 +280,7 @@ function PrimaryCTA({ href, children }: { href: string; children: React.ReactNod
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-full sm:w-auto bg-white text-black font-semibold text-sm tracking-wide px-10 py-3 rounded-lg inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.98] transition-transform cursor-pointer touch-manipulation select-none"
+      className="w-full sm:w-auto bg-white text-black font-semibold text-sm tracking-wide px-10 py-3 md:py-2.5 rounded-lg inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.98] transition-transform cursor-pointer touch-manipulation select-none"
     >
       {children}
     </a>
@@ -309,7 +309,7 @@ export default function CompetitionsPage() {
           <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-3 block">
             HEBS Lagos 2026 — Competition Tracks
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-semibold text-white tracking-tight leading-[1.1] max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-semibold text-white tracking-tight leading-[1.15] max-w-3xl mx-auto">
             Compete for{' '}
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
@@ -355,7 +355,7 @@ export default function CompetitionsPage() {
                     <span className="text-[10px] font-mono tracking-widest text-amber-500/80 uppercase">
                       Global Crown Championship™
                     </span>
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-semibold tracking-tight leading-tight">
+                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-semibold tracking-tight leading-[1.15]">
                       Roots to Royalty™
                     </h2>
                     <p className="text-zinc-400 text-sm leading-relaxed max-w-md">
@@ -377,7 +377,7 @@ export default function CompetitionsPage() {
                   {/* Right: prize pool */}
                   <div className="flex-shrink-0 md:text-right">
                     <p className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2">Total Prize Pool</p>
-                    <p className="text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
+                    <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
                       $35,000
                     </p>
                     <p className="text-zinc-600 text-xs font-mono mt-1 mb-4">USD</p>
@@ -487,7 +487,7 @@ export default function CompetitionsPage() {
               {/* Header */}
               <div>
                 <SectionLabel>Track 2 — October 24, 2026</SectionLabel>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-3 mt-1">
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.15] mb-3 mt-1">
                   Barber Championships™
                 </h2>
                 <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
@@ -525,7 +525,7 @@ export default function CompetitionsPage() {
               <div>
                 <SectionLabel>Competition Divisions</SectionLabel>
                 <SectionHeading>4 Divisions · $27,500 in Prizes</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full px-4 md:px-0">
                   {BARBER_DIVISIONS.map((div) => (
                     <DivisionCard key={div.n} div={div} />
                   ))}
@@ -591,7 +591,7 @@ export default function CompetitionsPage() {
               {/* Header */}
               <div>
                 <SectionLabel>Track 3 — May 24, 2027</SectionLabel>
-                <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-3 mt-1">
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.15] mb-3 mt-1">
                   Braiding Championships™
                 </h2>
                 <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
@@ -619,7 +619,7 @@ export default function CompetitionsPage() {
               <div>
                 <SectionLabel>Competition Divisions</SectionLabel>
                 <SectionHeading>4 Divisions · $30,000 in Prizes</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full px-4 md:px-0">
                   {BRAIDING_DIVISIONS.map((div) => (
                     <DivisionCard key={div.n} div={div} featured={div.featured} />
                   ))}
