@@ -159,6 +159,15 @@ textarea::placeholder {
   }
 }
 
+/* Hide scrollbar track across all browsers while keeping scroll behaviour */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes word-glow {
   0%, 100% { background-position: 0% center; filter: brightness(1); }
   50% { background-position: 200% center; filter: brightness(1.4); }
