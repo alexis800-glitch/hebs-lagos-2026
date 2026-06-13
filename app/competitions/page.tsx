@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -291,6 +291,13 @@ function PrimaryCTA({ href, children }: { href: string; children: React.ReactNod
 
 export default function CompetitionsPage() {
   const [activeTab, setActiveTab] = useState<Tab>('global-crown')
+
+  useEffect(() => {
+    const tab = new URLSearchParams(window.location.search).get('tab')
+    if (tab === 'global-crown' || tab === 'barber' || tab === 'braiding') {
+      setActiveTab(tab)
+    }
+  }, [])
 
   return (
     <>
