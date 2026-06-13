@@ -34,22 +34,22 @@ export default function About() {
 
       {/* Part 1: Core Mission Statement */}
       <div className="w-full bg-zinc-950 text-center py-16 md:py-24 px-6 md:px-12 mt-12 mb-16">
-        <div className="max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
+        <div className="w-full max-w-5xl mx-auto px-6 text-center flex flex-col items-center justify-center">
           <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-amber-500/90 bg-amber-500/[0.06] border border-amber-500/20 px-3 py-1 rounded-full inline-block mb-4">
             A Premier International Beauty Event
           </span>
-          <h2 className="text-3xl md:text-6xl font-serif text-zinc-100 tracking-tight leading-[1.15] max-w-4xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif text-zinc-100 tracking-tight leading-[1.2] max-w-4xl mx-auto block">
             Where Hair, Beauty, Fashion &amp; Innovation Converge. The Global Hub for{' '}
             <span className="italic font-normal">Education, Creativity, and Industry Networking.</span>
           </h2>
-          <p className="text-sm md:text-base text-zinc-400 leading-relaxed w-full max-w-2xl md:max-w-3xl mx-auto mt-8 px-4 md:px-0 text-center">
+          <p className="text-sm sm:text-base text-zinc-400 font-sans tracking-normal leading-relaxed text-center max-w-2xl sm:max-w-3xl mx-auto mt-8 block">
             The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
           </p>
           <a
             href="https://hebseventportal.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-10 w-full sm:w-auto px-8 py-3 sm:py-2.5 bg-white text-black font-medium text-sm rounded-md border border-white/10 inline-flex items-center justify-center hover:bg-zinc-100 transition-all duration-200 active:scale-[0.98] shadow-sm touch-manipulation select-none"
+            className="mt-10 inline-block w-full sm:w-auto px-8 py-3 bg-white text-black font-medium text-sm rounded-md shadow-sm transition-transform active:scale-[0.98] touch-manipulation select-none"
           >
             Get Your Tickets
           </a>
