@@ -33,25 +33,27 @@ export default function About() {
       <GradientDivider />
 
       {/* Part 1: Core Mission Statement */}
-      <div className="w-full max-w-5xl mx-auto mt-12 mb-16 px-6 md:px-12 py-10 md:py-14 bg-zinc-900/50 border border-white/[0.06] rounded-2xl flex flex-col items-center backdrop-blur-md text-center">
-        <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-amber-500/90 bg-amber-500/[0.06] border border-amber-500/20 px-3 py-1 rounded-full inline-block mb-4">
-          A Premier International Beauty Event
-        </span>
-        <h2 className="text-zinc-100 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-tight lg:leading-[1.1] font-serif w-full">
-          Where Hair, Beauty, Fashion &amp; Innovation Converge. The Global Hub for{' '}
-          <span className="italic font-normal">Education, Creativity, and Industry Networking.</span>
-        </h2>
-        <p className="text-sm sm:text-base md:text-lg text-zinc-400 w-full max-w-none md:max-w-3xl mx-auto px-2 md:px-0 mt-6 leading-relaxed text-left md:text-center">
-          The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
-        </p>
-        <a
-          href="https://hebseventportal.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-8 mx-auto w-full sm:w-auto px-8 py-3 sm:py-2.5 bg-white text-black text-sm font-medium tracking-tight rounded-md border border-white/10 inline-flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-[1.01] active:scale-[0.99] touch-manipulation select-none"
-        >
-          Get Your Tickets
-        </a>
+      <div className="w-full bg-zinc-950 text-center py-16 md:py-24 px-6 md:px-12 mt-12 mb-16">
+        <div className="max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
+          <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-amber-500/90 bg-amber-500/[0.06] border border-amber-500/20 px-3 py-1 rounded-full inline-block mb-4">
+            A Premier International Beauty Event
+          </span>
+          <h2 className="text-3xl md:text-6xl font-serif text-zinc-100 tracking-tight leading-[1.15] max-w-4xl mx-auto">
+            Where Hair, Beauty, Fashion &amp; Innovation Converge. The Global Hub for{' '}
+            <span className="italic font-normal">Education, Creativity, and Industry Networking.</span>
+          </h2>
+          <p className="text-sm md:text-base text-zinc-400 leading-relaxed max-w-2xl md:max-w-3xl mx-auto mt-8 px-2 md:px-0">
+            The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
+          </p>
+          <a
+            href="https://hebseventportal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 w-full sm:w-auto px-8 py-3 sm:py-2.5 bg-white text-black font-medium text-sm rounded-md border border-white/10 inline-flex items-center justify-center hover:bg-zinc-100 transition-all duration-200 active:scale-[0.98] shadow-sm touch-manipulation select-none"
+          >
+            Get Your Tickets
+          </a>
+        </div>
       </div>
 
       <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16" />
