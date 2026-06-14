@@ -53,7 +53,7 @@ export default function Navbar() {
               alt="HEBS Lagos 2026 Logo"
               width={200}
               height={200}
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain flex-shrink-0 block"
+              className="h-8 md:h-10 w-auto object-contain flex-shrink-0 block"
               priority
             />
           </Link>
