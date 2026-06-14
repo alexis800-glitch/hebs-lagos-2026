@@ -74,9 +74,9 @@ export default function Hero() {
           <Image
             src="/assets/hebs_logo_transparent.png"
             alt="HEBS Lagos 2026 Logo"
-            width={320}
-            height={320}
-            className="h-24 md:h-32 w-auto object-contain mx-auto mb-6 block scale-[1.6] md:scale-[1.75]"
+            width={340}
+            height={340}
+            className="w-[220px] sm:w-[280px] md:w-[340px] h-auto object-contain mx-auto mb-8 block transition-transform duration-300 hover:scale-[1.02]"
             priority
           />
         </motion.div>

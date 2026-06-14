@@ -80,9 +80,9 @@ export default function Footer() {
               <Image
                 src="/assets/hebs_logo_transparent.png"
                 alt="HEBS Lagos 2026 Logo"
-                width={160}
-                height={54}
-                className="h-12 w-auto object-contain"
+                width={220}
+                height={220}
+                className="w-[180px] sm:w-[220px] h-auto object-contain mx-auto mb-4 block opacity-90"
               />
             </div>
             <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed mt-4 max-w-sm text-left tracking-wide">
