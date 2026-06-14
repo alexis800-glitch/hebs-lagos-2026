@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
-import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -76,13 +75,6 @@ export default function Footer() {
         >
           {/* Brand */}
           <div className="flex flex-col items-start justify-start text-left w-full gap-4">
-            <Image
-              src="/assets/hebs_logo_transparent.png"
-              alt="HEBS Lagos 2026 Logo"
-              width={160}
-              height={160}
-              className="w-[160px] h-auto object-contain block mr-auto -ml-3"
-            />
             <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-sm text-left tracking-wide mr-auto">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
