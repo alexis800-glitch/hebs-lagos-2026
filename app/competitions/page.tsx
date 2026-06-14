@@ -309,7 +309,7 @@ export default function CompetitionsPage() {
           <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-3 block">
             HEBS Lagos 2026 — Competition Tracks
           </span>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif font-semibold text-white tracking-tight leading-[1.15] max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-semibold text-white tracking-tight leading-tight max-w-4xl mx-auto">
             Compete for{' '}
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
@@ -338,7 +338,7 @@ export default function CompetitionsPage() {
         </div>
 
         {/* ── Tab Content ──────────────────────────────────────────────────── */}
-        <div className="px-5 sm:px-8 py-14 max-w-6xl mx-auto">
+        <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 py-14">
 
           {/* ════════════════════════════════════════════════════════════════ */}
           {/* TRACK 1: GLOBAL CROWN CHAMPIONSHIP                              */}
@@ -355,7 +355,7 @@ export default function CompetitionsPage() {
                     <span className="text-[10px] font-mono tracking-widest text-amber-500/80 uppercase">
                       Global Crown Championship™
                     </span>
-                    <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-white font-semibold tracking-tight leading-[1.15]">
+                    <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-semibold tracking-tight leading-tight">
                       Roots to Royalty™
                     </h2>
                     <p className="text-zinc-400 text-sm leading-relaxed max-w-md">
@@ -490,7 +490,7 @@ export default function CompetitionsPage() {
               {/* Header */}
               <div>
                 <SectionLabel>Track 2 — October 24, 2026</SectionLabel>
-                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.15] mb-3 mt-1">
+                <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
                   Barber Championships™
                 </h2>
                 <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
@@ -541,7 +541,7 @@ export default function CompetitionsPage() {
               <div>
                 <SectionLabel>Competition Divisions</SectionLabel>
                 <SectionHeading>4 Divisions · $27,500 in Prizes</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full px-4 md:px-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                   {BARBER_DIVISIONS.map((div) => (
                     <DivisionCard key={div.n} div={div} />
                   ))}
@@ -607,7 +607,7 @@ export default function CompetitionsPage() {
               {/* Header */}
               <div>
                 <SectionLabel>Track 3 — May 24, 2027</SectionLabel>
-                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white tracking-tight leading-[1.15] mb-3 mt-1">
+                <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
                   Braiding Championships™
                 </h2>
                 <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
@@ -648,7 +648,7 @@ export default function CompetitionsPage() {
               <div>
                 <SectionLabel>Competition Divisions</SectionLabel>
                 <SectionHeading>4 Divisions · $30,000 in Prizes</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full px-4 md:px-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                   {BRAIDING_DIVISIONS.map((div) => (
                     <DivisionCard key={div.n} div={div} featured={div.featured} />
                   ))}
