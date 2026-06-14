@@ -49,11 +49,11 @@ export default function Navbar() {
             className="relative z-10 flex items-center"
           >
             <Image
-              src="/assets/hebs_logo_transparent.png"
+              src="/assets/logos/hebs_logo_nav.png"
               alt="HEBS Lagos 2026 Logo"
-              width={240}
-              height={240}
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain flex-shrink-0 block max-w-[160px] sm:max-w-[200px] md:max-w-[240px]"
+              width={634}
+              height={529}
+              className="h-10 md:h-12 w-auto object-contain flex-shrink-0 block"
               priority
             />
           </Link>
