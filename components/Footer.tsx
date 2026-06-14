@@ -76,6 +76,13 @@ export default function Footer() {
         >
           {/* Brand */}
           <div className="flex flex-col gap-4">
+            <Image
+              src="/assets/hebs_logo_transparent.png"
+              alt="HEBS Lagos 2026 Logo"
+              width={180}
+              height={180}
+              className="w-[160px] sm:w-[180px] h-auto object-contain block mb-4"
+            />
             <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-sm text-left tracking-wide">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
@@ -179,24 +186,15 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="pt-8 flex flex-col items-center gap-4"
+          className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
-          <Image
-            src="/assets/hebs_logo_transparent.png"
-            alt="HEBS Lagos 2026 Logo"
-            width={220}
-            height={220}
-            className="w-[180px] sm:w-[220px] h-auto object-contain mx-auto mb-6 block opacity-80 transition-opacity hover:opacity-100"
-          />
-          <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-inter" style={{ color: "#555" }}>
             © {new Date().getFullYear()} Hair Education Beauty Summit. All rights reserved.
           </p>
           <p className="text-xs font-inter" style={{ color: "#555" }}>
             Lagos, Nigeria · October 23–25, 2026
           </p>
-          </div>
         </motion.div>
       </div>
     </footer>
