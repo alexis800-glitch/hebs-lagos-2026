@@ -215,7 +215,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="hidden md:inline-block font-sans text-xs px-4 py-2 bg-white text-black hover:bg-neutral-200 font-medium tracking-wide rounded-full transition-all duration-200 shrink-0"
           >
-            Get Tickets
+            Register Now
           </a>
 
           {/* Mobile inline CTA — visible only on mobile, hidden on md+ */}

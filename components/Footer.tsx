@@ -167,7 +167,7 @@ export default function Footer() {
               className="btn-pink text-sm mt-2 inline-block"
               style={{ width: "fit-content" }}
             >
-              Get Your Tickets
+              Register Now
             </a>
           </div>
         </motion.div>
