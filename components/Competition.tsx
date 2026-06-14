@@ -143,7 +143,7 @@ export default function Competition() {
             </p>
           </div>
           <a
-            href="https://hebseventportal.com"
+            href="https://hebseventportal.com/register/contestant"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-pink text-base md:text-lg"

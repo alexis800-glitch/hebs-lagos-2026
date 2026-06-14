@@ -468,7 +468,7 @@ export default function CompetitionsPage() {
 
               {/* CTA */}
               <div className="flex flex-col items-center gap-3 pt-2">
-                <PrimaryCTA href="https://hebseventportal.com">
+                <PrimaryCTA href="https://hebseventportal.com/register/contestant">
                   Register Now — $50 Entry Fee
                 </PrimaryCTA>
                 <p className="text-zinc-600 text-xs font-mono">
@@ -570,7 +570,7 @@ export default function CompetitionsPage() {
 
               {/* CTA */}
               <div className="flex flex-col items-center gap-3 pt-2">
-                <PrimaryCTA href="https://hebseventportal.com">
+                <PrimaryCTA href="https://hebseventportal.com/register/contestant">
                   Register for Barber Championships
                 </PrimaryCTA>
                 <p className="text-zinc-600 text-xs font-mono">Entry fees from $50 USD per division</p>

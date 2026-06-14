@@ -123,7 +123,7 @@ export default function Navbar() {
                         <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-center gap-6">
                           <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">HEBS Lagos · Oct 23–25, 2026</span>
                           <a
-                            href="https://hebseventportal.com"
+                            href="https://hebseventportal.com/register/contestant"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-sans text-[10px] uppercase tracking-wider text-zinc-200 hover:text-white transition-colors"
@@ -210,7 +210,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <a
-            href="https://hebseventportal.com"
+            href="https://hebseventportal.com/register/contestant"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-block font-sans text-xs px-4 py-2 bg-white text-black hover:bg-neutral-200 font-medium tracking-wide rounded-full transition-all duration-200 shrink-0"
@@ -220,7 +220,7 @@ export default function Navbar() {
 
           {/* Mobile inline CTA — visible only on mobile, hidden on md+ */}
           <a
-            href="https://hebseventportal.com"
+            href="https://hebseventportal.com/register/contestant"
             target="_blank"
             rel="noopener noreferrer"
             className="md:hidden font-sans text-xs px-3.5 py-2 bg-white text-black font-medium tracking-wide rounded-full shrink-0 touch-manipulation select-none"
@@ -409,7 +409,7 @@ export default function Navbar() {
           }`}
         >
           <a
-            href="https://hebseventportal.com"
+            href="https://hebseventportal.com/register/contestant"
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}

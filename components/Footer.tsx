@@ -161,7 +161,7 @@ export default function Footer() {
               </a>
             </div>
             <a
-              href="https://hebseventportal.com"
+              href="https://hebseventportal.com/register/contestant"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-pink text-sm mt-2 inline-block"

@@ -293,7 +293,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
               </ul>
               <div className="border-t border-neutral-900 pt-4 mt-auto">
                 <a
-                  href="https://hebseventportal.com"
+                  href="https://hebseventportal.com/register/contestant"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full text-center font-sans text-xs uppercase tracking-widest text-black bg-white hover:bg-amber-400 transition-colors py-3 rounded-sm font-medium"
@@ -347,7 +347,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                       <span className="font-sans text-sm font-medium text-white">{battle.price}</span>
                     </div>
                     <a
-                      href="https://hebseventportal.com"
+                      href="https://hebseventportal.com/register/contestant"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="font-sans text-[10px] uppercase tracking-widest border border-neutral-800 text-zinc-200 hover:bg-white hover:text-black hover:border-white px-4 py-2 transition-all rounded-xs"
