@@ -75,18 +75,18 @@ export default function Footer() {
           className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16"
         >
           {/* Brand */}
-          <div className="flex flex-col items-start gap-4">
+          <div className="flex flex-col items-start justify-start text-left w-full gap-4">
             <Image
               src="/assets/hebs_logo_transparent.png"
               alt="HEBS Lagos 2026 Logo"
-              width={180}
-              height={180}
-              className="block w-auto h-16 object-contain"
+              width={160}
+              height={160}
+              className="w-[160px] h-auto object-contain block mr-auto -ml-3"
             />
-            <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-sm text-left tracking-wide">
+            <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-sm text-left tracking-wide mr-auto">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center justify-start gap-3 mt-2 mr-auto">
               {socials.map(({ name, Icon, href, color }) => (
                 <a
                   key={name}
