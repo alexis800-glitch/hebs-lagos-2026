@@ -37,10 +37,10 @@ export default function Navbar() {
       {/* Fixed nav bar — sits above the mobile overlay */}
       <div className="fixed top-0 left-0 right-0 z-50 w-full bg-black/60 backdrop-blur-md border-b border-white/[0.06]">
         <motion.nav
-          initial={mounted ? { y: -64, opacity: 0 } : false}
+          initial={mounted ? { y: -80, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="relative z-[100] w-full max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between"
+          className="relative z-[100] w-full max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between"
         >
           {/* Logo */}
           <Link
@@ -53,7 +53,7 @@ export default function Navbar() {
               alt="HEBS Lagos 2026 Logo"
               width={200}
               height={200}
-              className="h-10 sm:h-12 w-auto object-contain flex-shrink-0"
+              className="h-10 sm:h-12 md:h-14 w-auto object-contain flex-shrink-0 block"
               priority
             />
           </Link>

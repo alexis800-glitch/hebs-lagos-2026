@@ -17,8 +17,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* offset anchor targets below the fixed 64px navbar */
-  scroll-padding-top: 72px;
+  /* offset anchor targets below the fixed 80px navbar */
+  scroll-padding-top: 88px;
 }
 
 body {

@@ -59,7 +59,7 @@ export default function Hero() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-zinc-800/10 blur-[80px] rounded-full pointer-events-none select-none z-[2]" />
 
       {/* ── Layer 2: Line work ── */}
-      <div className="absolute top-[72px] left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
+      <div className="absolute top-[80px] left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
       <div className="absolute bottom-0 left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
 
       <div className="relative z-10 w-full pointer-events-auto flex flex-col items-center gap-7 max-w-5xl mx-auto pt-24 md:pt-28">

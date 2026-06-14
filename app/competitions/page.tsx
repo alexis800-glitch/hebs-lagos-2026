@@ -319,7 +319,7 @@ export default function CompetitionsPage() {
         </div>
 
         {/* ── Tab Navigation ───────────────────────────────────────────────── */}
-        <div className="sticky top-16 z-40 bg-zinc-950/90 backdrop-blur-md">
+        <div className="sticky top-20 z-40 bg-zinc-950/90 backdrop-blur-md">
           <div className="w-full flex items-center justify-start md:justify-center overflow-x-auto scrollbar-none whitespace-nowrap gap-2 md:gap-6 border-b border-white/[0.06] pb-px px-4 md:px-0">
             {TABS.map((tab) => (
               <button
