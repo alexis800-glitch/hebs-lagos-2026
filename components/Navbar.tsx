@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 
 const navLinks = [
@@ -42,23 +43,20 @@ export default function Navbar() {
           className="relative z-[100] w-full max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
         >
           {/* Logo */}
-          <a
-            href="#home"
+          <Link
+            href="/"
             onClick={closeMenu}
-            className="font-sans font-semibold text-sm text-white tracking-wide shrink-0 relative z-10"
+            className="shrink-0 relative z-10 flex items-center"
           >
-            HEBS{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #9b59b6, #e91e8c)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              2026
-            </span>
-          </a>
+            <Image
+              src="/assets/hebs_logo_transparent.png"
+              alt="HEBS Lagos 2026 Logo"
+              width={120}
+              height={40}
+              className="h-8 w-auto object-contain"
+              priority
+            />
+          </Link>
 
           {/* Desktop links */}
           <ul className="hidden md:flex items-center justify-center gap-8 h-full relative z-[101] pointer-events-auto">

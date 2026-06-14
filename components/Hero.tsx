@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 import FadeIn from "./FadeIn";
 
@@ -63,6 +64,22 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-zinc-800 to-transparent pointer-events-none z-[2]" />
 
       <div className="relative z-10 w-full pointer-events-auto flex flex-col items-center gap-7 max-w-5xl mx-auto pt-24 md:pt-28">
+
+        {/* Logo accent */}
+        <motion.div
+          initial={mounted ? { opacity: 0, y: -6 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE, delay: mounted ? 0.0 : 0 }}
+        >
+          <Image
+            src="/assets/hebs_logo_transparent.png"
+            alt="HEBS Lagos 2026 Logo"
+            width={180}
+            height={60}
+            className="h-14 w-auto object-contain mx-auto opacity-90"
+            priority
+          />
+        </motion.div>
 
         {/* Prize pool badge */}
         <motion.div

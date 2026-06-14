@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -76,10 +77,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <div>
-              <h3 className="font-playfair font-bold text-2xl text-zinc-50 mb-1">HEBS 2026</h3>
-              <p className="text-sm font-inter" style={{ color: "#9b59b6" }}>
-                Hair Education Beauty Summit
-              </p>
+              <Image
+                src="/assets/hebs_logo_transparent.png"
+                alt="HEBS Lagos 2026 Logo"
+                width={160}
+                height={54}
+                className="h-12 w-auto object-contain"
+              />
             </div>
             <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed mt-4 max-w-sm text-left tracking-wide">
               The premier international platform for beauty, hair, and fashion professionals.
