@@ -40,20 +40,20 @@ export default function Navbar() {
           initial={mounted ? { y: -64, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="relative z-[100] w-full max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
+          className="relative z-[100] w-full max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between"
         >
           {/* Logo */}
           <Link
             href="/"
             onClick={closeMenu}
-            className="shrink-0 relative z-10 flex items-center"
+            className="relative z-10 flex items-center"
           >
             <Image
               src="/assets/hebs_logo_transparent.png"
               alt="HEBS Lagos 2026 Logo"
               width={200}
               height={200}
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain max-w-[160px] sm:max-w-[200px] block"
+              className="h-10 sm:h-12 w-auto object-contain flex-shrink-0"
               priority
             />
           </Link>
