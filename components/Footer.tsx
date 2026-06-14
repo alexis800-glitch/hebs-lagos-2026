@@ -63,10 +63,10 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative py-20 px-5 sm:px-8"
+      className="relative py-20"
       style={{ background: "#0a0a0a", borderTop: "1px solid rgba(155,89,182,0.2)" }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <motion.div
           initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,13 +76,15 @@ export default function Footer() {
         >
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <Image
-              src="/assets/hebs_logo_transparent.png"
-              alt="HEBS Lagos 2026 Logo"
-              width={180}
-              height={180}
-              className="w-[160px] sm:w-[180px] h-auto object-contain block mb-4"
-            />
+            <div className="flex justify-start items-start">
+              <Image
+                src="/assets/hebs_logo_transparent.png"
+                alt="HEBS Lagos 2026 Logo"
+                width={180}
+                height={180}
+                className="block w-auto h-16 object-contain"
+              />
+            </div>
             <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-sm text-left tracking-wide">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
