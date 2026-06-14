@@ -218,6 +218,16 @@ export default function Navbar() {
             Get Tickets
           </a>
 
+          {/* Mobile inline CTA — visible only on mobile, hidden on md+ */}
+          <a
+            href="https://hebseventportal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden font-sans text-xs px-3.5 py-2 bg-white text-black font-medium tracking-wide rounded-full shrink-0 touch-manipulation select-none"
+          >
+            Register
+          </a>
+
           {/* Hamburger — morphs into X on open */}
           <button
             className="md:hidden relative z-10 flex items-center justify-center w-11 h-11 touch-manipulation select-none"
@@ -405,7 +415,7 @@ export default function Navbar() {
             onClick={closeMenu}
             className="block w-full text-center font-sans text-sm font-medium py-4 bg-white text-black hover:bg-zinc-200 rounded-full transition-all duration-200 tracking-wide touch-manipulation select-none"
           >
-            Get Tickets ↗
+            Register Now ↗
           </a>
           <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600 text-center">
             Lagos, Nigeria · October 23–25, 2026
