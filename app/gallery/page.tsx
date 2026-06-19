@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Image from "next/image"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
@@ -12,115 +13,115 @@ const filters = [
 ]
 
 const galleryItems = [
-  // ── Barber & Stylist Battles (5) ──────────────────────────────
+  // ── Barber & Stylist Battles ──────────────────────────────────
   {
     id: "bs-01",
-    imageUrl: "https://picsum.photos/seed/hebs-bs-01/800/640",
+    imageUrl: "/images/hebs-2025/competition/competition-barbering.png",
     category: "barber-stylist",
     tagLabel: "Barber & Stylist Battles",
     title: "The Razor's Edge",
   },
   {
     id: "bs-02",
-    imageUrl: "https://picsum.photos/seed/hebs-bs-02/800/640",
+    imageUrl: "/images/hebs-2025/categories-winners/winner-barbering.png",
     category: "barber-stylist",
     tagLabel: "Barber & Stylist Battles",
-    title: "Speed Cut Championship",
+    title: "Championship Winner — Barbering",
   },
   {
     id: "bs-03",
-    imageUrl: "https://picsum.photos/seed/hebs-bs-03/800/640",
+    imageUrl: "/images/hebs-2025/competition/competition-hair-styling.png",
     category: "barber-stylist",
     tagLabel: "Barber & Stylist Battles",
-    title: "Master Fade Technique",
+    title: "Live Hair Styling Showdown",
   },
   {
     id: "bs-04",
-    imageUrl: "https://picsum.photos/seed/hebs-bs-04/800/640",
+    imageUrl: "/images/hebs-2025/categories-winners/winner-hair-styling.png",
     category: "barber-stylist",
     tagLabel: "Barber & Stylist Battles",
-    title: "Precision Blade Work",
+    title: "Hair Styling Champion",
   },
   {
     id: "bs-05",
-    imageUrl: "https://picsum.photos/seed/hebs-bs-05/800/640",
+    imageUrl: "/images/hebs-2025/competition/competition-avant-garde.png",
     category: "barber-stylist",
     tagLabel: "Barber & Stylist Battles",
-    title: "Elite Barber Showcase",
+    title: "Avant-Garde Artistry",
   },
 
-  // ── Global Beauty Showdown (5) ────────────────────────────────
+  // ── Global Beauty Showdown ────────────────────────────────────
   {
     id: "gbs-01",
-    imageUrl: "https://picsum.photos/seed/hebs-gbs-01/800/640",
+    imageUrl: "/images/gallery/gallery-event-01.png",
     category: "beauty-showdown",
     tagLabel: "Global Beauty Showdown",
-    title: "Global Runway Showcase",
+    title: "HEBS 2025 Opening Night",
   },
   {
     id: "gbs-02",
-    imageUrl: "https://picsum.photos/seed/hebs-gbs-02/800/640",
+    imageUrl: "/images/gallery/gallery-event-02.png",
     category: "beauty-showdown",
     tagLabel: "Global Beauty Showdown",
-    title: "Crowned Icons Finalist",
+    title: "Global Stage Moments",
   },
   {
     id: "gbs-03",
-    imageUrl: "https://picsum.photos/seed/hebs-gbs-03/800/640",
+    imageUrl: "/images/gallery/gallery-event-03.png",
     category: "beauty-showdown",
     tagLabel: "Global Beauty Showdown",
-    title: "Beauty Breakthrough Moment",
+    title: "Beauty Excellence on Display",
   },
   {
     id: "gbs-04",
-    imageUrl: "https://picsum.photos/seed/hebs-gbs-04/800/640",
+    imageUrl: "/images/gallery/gallery-event-04.png",
     category: "beauty-showdown",
     tagLabel: "Global Beauty Showdown",
-    title: "High Fashion on Stage",
+    title: "International Competitors",
   },
   {
     id: "gbs-05",
-    imageUrl: "https://picsum.photos/seed/hebs-gbs-05/800/640",
+    imageUrl: "/images/gallery/gallery-event-05.png",
     category: "beauty-showdown",
     tagLabel: "Global Beauty Showdown",
-    title: "Live Runway Competition",
+    title: "Awards & Recognition",
   },
 
-  // ── Masterclasses & BTS (5) ───────────────────────────────────
+  // ── Masterclasses & BTS ───────────────────────────────────────
   {
     id: "mc-01",
-    imageUrl: "https://picsum.photos/seed/hebs-mc-01/800/640",
+    imageUrl: "/images/hebs-2025/backstage/backstage-01.png",
     category: "masterclass",
     tagLabel: "Masterclasses & BTS",
-    title: "Backstage BTS Session",
+    title: "Behind the Scenes",
   },
   {
     id: "mc-02",
-    imageUrl: "https://picsum.photos/seed/hebs-mc-02/800/640",
+    imageUrl: "/images/hebs-2025/backstage/backstage-02.png",
     category: "masterclass",
     tagLabel: "Masterclasses & BTS",
-    title: "Education Workshop Live",
+    title: "Backstage Prep",
   },
   {
     id: "mc-03",
-    imageUrl: "https://picsum.photos/seed/hebs-mc-03/800/640",
+    imageUrl: "/images/hebs-2025/backstage/backstage-03.png",
     category: "masterclass",
     tagLabel: "Masterclasses & BTS",
-    title: "Advanced Technique Class",
+    title: "Team & Talent Prep",
   },
   {
     id: "mc-04",
-    imageUrl: "https://picsum.photos/seed/hebs-mc-04/800/640",
+    imageUrl: "/images/hebs-2025/competition/competition-education.png",
     category: "masterclass",
     tagLabel: "Masterclasses & BTS",
-    title: "Expert Demo on Stage",
+    title: "Education Masterclass Session",
   },
   {
     id: "mc-05",
-    imageUrl: "https://picsum.photos/seed/hebs-mc-05/800/640",
+    imageUrl: "/images/hebs-2025/crowd/crowd-audience.png",
     category: "masterclass",
     tagLabel: "Masterclasses & BTS",
-    title: "Behind the Scenes Access",
+    title: "Full House — Live Audience",
   },
 ]
 
@@ -170,13 +171,14 @@ export default function GalleryPage() {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="group relative h-80 bg-zinc-950 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl overflow-hidden shadow-xl transition-all duration-500 ease-in-out"
+              className="group relative h-80 bg-zinc-950 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl overflow-hidden"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={item.imageUrl}
                 alt={item.title}
-                className="w-full h-full object-cover opacity-50 transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover opacity-80 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-100"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent text-left">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block mb-1">
@@ -188,7 +190,6 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Empty state */}
         {filteredItems.length === 0 && (
           <div className="text-center py-24">
             <p className="font-mono text-xs uppercase tracking-widest text-zinc-600">

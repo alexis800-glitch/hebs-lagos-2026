@@ -283,8 +283,8 @@ export default function TestimonialsSection() {
         Right: Dribbble-inspired stacked card cluster with hover spread
         ══════════════════════════════════════════════════════
       */}
-      <div className="hidden md:block relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+      <div className="hidden md:block relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_560px] gap-12 xl:gap-16 items-center">
 
           {/* Left — section header */}
           <motion.div
@@ -350,7 +350,7 @@ export default function TestimonialsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center xl:justify-start"
           >
             <TestimonialCards cards={cards} autoRotateInterval={5000} />
           </motion.div>

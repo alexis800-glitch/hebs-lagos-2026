@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/840 g5/OneDrive/Documents/**)",
+      "Bash(nslookup hebslagos.com)",
+      "Bash(nslookup www.hebslagos.com)",
+      "Bash(nslookup -type=NS hebslagos.com 8.8.8.8)",
+      "Bash(nslookup -type=A hebslagos.com 8.8.8.8)",
+      "Bash(nslookup -type=CNAME www.hebslagos.com 8.8.8.8)",
+      "Bash(nslookup -type=A www.hebslagos.com 8.8.8.8)",
+      "Bash(grep -r \"src=\\\\|href=\\\\|'/\\\\|\\\\\"/\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\Hero.tsx\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\CompetitionCategories.tsx\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\WhyAttend.tsx\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\GallerySection.tsx\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\EventHighlights.tsx\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\Navbar.tsx\")",
+      "Bash(grep -r \"src=\\\\|href=\\\\|'/\\\\|\\\\\"/\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\WhyAttend.tsx\" \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\\\\components\\\\GallerySection.tsx\")",
+      "PowerShell(git -C \"c:\\\\Users\\\\840 g5\\\\OneDrive\\\\Documents\\\\Hebs 2026\" ls-remote origin master 2>&1)",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\840 g5\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-840-g5-OneDrive-Documents-Hebs-2026\\\\f35860ad-0e8c-472a-bba2-b76074cf015f\\\\tasks\\\\b3n7uweup.output\" -ErrorAction SilentlyContinue; Write-Host \"lines: $\\(\\(Get-Content 'C:\\\\Users\\\\840 g5\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-840-g5-OneDrive-Documents-Hebs-2026\\\\f35860ad-0e8c-472a-bba2-b76074cf015f\\\\tasks\\\\b3n7uweup.output' -ErrorAction SilentlyContinue | Measure-Object -Line\\).Lines\\)\")",
+      "PowerShell($f = \"C:\\\\Users\\\\840 g5\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-840-g5-OneDrive-Documents-Hebs-2026\\\\f35860ad-0e8c-472a-bba2-b76074cf015f\\\\tasks\\\\b3n7uweup.output\"; \\(Get-Item $f\\).Length)",
+      "PowerShell($f = \"C:\\\\Users\\\\840 g5\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-840-g5-OneDrive-Documents-Hebs-2026\\\\f35860ad-0e8c-472a-bba2-b76074cf015f\\\\tasks\\\\bgy6xzwos.output\"; \\(Get-Item $f\\).Length; Get-Content $f | Select-Object -Last 5)"
+    ]
+  }
+}

@@ -7,7 +7,6 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GallerySection from "@/components/GallerySection";
 import HEBSAssistant from "@/components/HEBSAssistant";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
@@ -22,7 +21,6 @@ export default function Home() {
         <GallerySection />
         <HEBSAssistant />
         <Footer />
-        <WhatsAppButton />
       </main>
     </>
   );
