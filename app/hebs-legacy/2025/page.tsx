@@ -74,55 +74,55 @@ const CROWD_IMAGES = [
 const WINNERS: WinnerData[] = [
   {
     src: "/images/hebs-2025/categories-winners/winner-barbering.png",
-    name: "Sophia Martinez",
-    origin: "United States",
-    flag: "🇺🇸",
-    category: "Barbering Champion",
+    name: "Barbering Champion",
+    origin: "",
+    flag: "",
+    category: "Barbering",
     color: "#9b59b6",
     hasPhoto: true,
   },
   {
     src: "/images/hebs-2025/categories-winners/winner-hair-styling.png",
-    name: "Isabella Garcia",
-    origin: "Spain",
-    flag: "🇪🇸",
-    category: "Hair Styling Champion",
+    name: "Hair Styling Champion",
+    origin: "",
+    flag: "",
+    category: "Hair Styling",
     color: "#f59e0b",
     hasPhoto: true,
   },
   {
     src: "/images/hebs-2025/categories-winners/winner-nail-art.png",
-    name: "Olivia Carter",
-    origin: "Canada",
-    flag: "🇨🇦",
-    category: "Nail Art Champion",
+    name: "Nail Art Champion",
+    origin: "",
+    flag: "",
+    category: "Nail Art",
     color: "#e91e8c",
     hasPhoto: true,
   },
   {
     src: "/images/hebs-2025/categories-winners/winner-makeup.png",
-    name: "Mia Thompson",
-    origin: "Australia",
-    flag: "🇦🇺",
-    category: "Makeup Artistry Champion",
+    name: "Makeup Artistry Champion",
+    origin: "",
+    flag: "",
+    category: "Makeup Artistry",
     color: "#f59e0b",
     hasPhoto: true,
   },
   {
     src: "/images/hebs-2025/categories-winners/winner-avant-garde.png",
-    name: "Emma Laurent",
-    origin: "France",
-    flag: "🇫🇷",
-    category: "Avant-Garde Champion",
+    name: "Avant-Garde Champion",
+    origin: "",
+    flag: "",
+    category: "Avant-Garde",
     color: "#9b59b6",
     hasPhoto: true,
   },
   {
     src: "/images/hebs-2025/winners/winner-education-optimized.webp",
-    name: "Emma Richardson",
-    origin: "United Kingdom",
-    flag: "🇬🇧",
-    category: "Education Award",
+    name: "Education Award",
+    origin: "",
+    flag: "",
+    category: "Education",
     color: "#e91e8c",
     hasPhoto: true,
   },
@@ -525,9 +525,9 @@ export default function Hebs2025Page() {
                       <Image src={w.src} alt={w.name} fill loading="lazy" className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" sizes="33vw" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <p className="font-mono text-[8px] tracking-[0.22em] uppercase mb-1" style={{ color: `${w.color}` }}>{w.category}</p>
+                        <p className="font-mono text-[10px] tracking-[0.22em] uppercase mb-1" style={{ color: `${w.color}` }}>{w.category}</p>
                         <h3 className="font-serif text-xl text-white font-medium leading-tight">{w.name}</h3>
-                        <p className="text-zinc-400 text-xs mt-0.5">{w.flag} {w.origin}</p>
+                        {w.origin && <p className="text-zinc-400 text-xs mt-0.5">{w.flag} {w.origin}</p>}
                       </div>
                       {/* Accent line */}
                       <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(to right, ${w.color}, transparent 70%)` }} />
@@ -555,7 +555,7 @@ export default function Hebs2025Page() {
 
                       <div>
                         <h3 className="font-serif text-2xl text-white font-medium leading-tight mb-1">{w.name}</h3>
-                        <p className="text-zinc-500 text-xs">{w.flag} {w.origin}</p>
+                        {w.origin && <p className="text-zinc-500 text-xs">{w.flag} {w.origin}</p>}
                         <div className="mt-4 h-px w-10 rounded-full" style={{ background: `linear-gradient(to right, ${w.color}70, transparent)` }} />
                       </div>
                     </div>
@@ -900,17 +900,17 @@ export default function Hebs2025Page() {
               {[
                 {
                   quote: "HEBS 2025 completely transformed my career. The international exposure was unlike anything I had experienced on the African continent.",
-                  name: "Sophia Martinez",
-                  role: "Barbering Champion, HEBS 2025",
+                  name: "HEBS 2025 Champion",
+                  role: "Barbering Category, HEBS 2025",
                 },
                 {
                   quote: "The level of talent on that stage was world-class. HEBS is elevating the African beauty industry on a truly global scale.",
-                  name: "Michael Chen",
-                  role: "International Judge",
+                  name: "Industry Leader",
+                  role: "International Judge, HEBS 2025",
                 },
                 {
                   quote: "I came to learn and ended up competing. The education sessions alone were worth every moment of the three days.",
-                  name: "Blessing Nwachukwu",
+                  name: "HEBS 2025 Competitor",
                   role: "Attendee & Competitor",
                 },
               ].map((t, i) => (

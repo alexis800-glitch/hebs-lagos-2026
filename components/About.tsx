@@ -37,12 +37,15 @@ export default function About() {
         <p className="text-amber-500 font-mono text-[10px] tracking-widest uppercase text-center mb-6">
           A Premier International Beauty Event
         </p>
-        <h2 className="text-white text-3xl md:text-5xl font-light tracking-tight text-center leading-tight max-w-4xl mx-auto font-serif">
-          Where Hair, Beauty, Fashion &amp; Innovation Converge. The Global Hub for{' '}
-          <span className="italic font-normal">Education, Creativity, and Industry Networking.</span>
+        <h2 className="text-white text-3xl md:text-5xl font-light tracking-tight text-center leading-tight max-w-3xl mx-auto font-serif">
+          Where Hair, Beauty, Fashion &amp; Innovation{' '}
+          <span className="italic font-normal">Converge.</span>
         </h2>
-        <p className="text-zinc-300 text-sm md:text-base text-center leading-relaxed max-w-3xl mx-auto mt-8 font-sans font-light">
-          The Hair Education Beauty Summit (HEBS) is not just another beauty event—it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With a dynamic blend of cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking opportunities, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
+        <p className="text-zinc-400 text-sm md:text-base text-center leading-relaxed max-w-xl mx-auto mt-4 font-sans font-light">
+          The global hub for education, high-stakes competition, and industry networking.
+        </p>
+        <p className="text-zinc-300 text-sm md:text-base text-center leading-relaxed max-w-2xl mx-auto mt-6 font-sans font-light px-2 sm:px-0">
+          The Hair Education Beauty Summit (HEBS) is not just another beauty event — it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
         </p>
       </div>
 

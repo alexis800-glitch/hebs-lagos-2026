@@ -92,7 +92,7 @@ export default function VendorsPage() {
           <h1 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-6 font-serif">
             Vendor <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed">
+          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-center px-2 sm:px-0">
             Secure your booth at Africa&apos;s premier beauty summit. Three exhibition sizes with
             early-bird and standard pricing. All booths include full event-day floor access.
           </p>

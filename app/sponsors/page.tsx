@@ -105,7 +105,7 @@ export default function SponsorsPage() {
           <h1 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-6 font-serif">
             Sponsorship <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed">
+          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-center px-2 sm:px-0">
             Align your brand with the premier beauty summit in Africa. Five exclusive packages designed
             to deliver measurable visibility, qualified audience access, and lasting industry impact.
           </p>

@@ -49,7 +49,7 @@ export default function Gallery() {
             </p>
             <h2 className="section-title text-white mb-4">Relive the Magic</h2>
             <p className="section-subtitle max-w-xl mx-auto">
-              Photos from HEBS 2024 &amp; 2025 — click any photo to expand
+              Legacy Highlights from HEBS 2024 &amp; 2025 — click any photo to expand
             </p>
           </motion.div>
 
@@ -148,7 +148,7 @@ export default function Gallery() {
                     className="text-xs uppercase tracking-widest font-inter"
                     style={{ color: "rgba(255,255,255,0.3)" }}
                   >
-                    HEBS 2024 &amp; 2025
+                    HEBS Legacy Highlights — 2024 &amp; 2025
                   </p>
                 </div>
               </div>

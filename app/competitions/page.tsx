@@ -345,7 +345,7 @@ function CompetitionsContent() {
             Compete for{' '}
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
-          <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-lg mx-auto leading-relaxed">
+          <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-2xl mx-auto leading-relaxed text-center px-2 sm:px-0">
             Three championship tracks. $85,000+ in prizes. One stage. Lagos, Nigeria — October 2026.
           </p>
         </div>

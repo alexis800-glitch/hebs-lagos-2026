@@ -16,11 +16,11 @@ const data: LegacyEventData = {
     { value: 5, label: "Categories", color: "#f59e0b" },
   ],
   winners: [
-    { category: "Hair Styling", name: "Kemi Adewale", origin: "Lagos, Nigeria", color: "#f59e0b" },
-    { category: "Barbering", name: "Tunde Fashola", origin: "Lagos, Nigeria", color: "#9b59b6" },
-    { category: "Nail Art", name: "Ngozi Eze", origin: "Abuja, Nigeria", color: "#e91e8c" },
-    { category: "Makeup Artistry", name: "Amaka Obi", origin: "Port Harcourt, Nigeria", color: "#f59e0b" },
-    { category: "Education Award", name: "Prof. James Okafor", origin: "United States", color: "#9b59b6" },
+    { category: "Hair Styling", name: "Hair Styling Champion", origin: "Lagos, Nigeria", color: "#f59e0b" },
+    { category: "Barbering", name: "Barbering Champion", origin: "Lagos, Nigeria", color: "#9b59b6" },
+    { category: "Nail Art", name: "Nail Art Champion", origin: "Nigeria", color: "#e91e8c" },
+    { category: "Makeup Artistry", name: "Makeup Artistry Champion", origin: "Nigeria", color: "#f59e0b" },
+    { category: "Education Award", name: "Education Award", origin: "", color: "#9b59b6" },
   ],
   competitionHighlights: [
     { src: "/images/highlights/hairstylist-competition-03.png", caption: "Hair Artistry" },
@@ -33,18 +33,18 @@ const data: LegacyEventData = {
   testimonials: [
     {
       quote: "HEBS 2024 was a game-changer for Nigerian beauty. The fact that it happened at all was historic. The execution was flawless.",
-      name: "Kemi Adewale",
-      role: "Hair Styling Champion, HEBS 2024",
+      name: "HEBS 2024 Champion",
+      role: "Hair Styling Category, HEBS 2024",
     },
     {
       quote: "I knew from the very first HEBS that this would be an institution. The organisation, the talent, the energy — exceptional.",
-      name: "Dr. Chioma Nwosu",
-      role: "Industry Leader & Educator",
+      name: "Industry Leader",
+      role: "Educator & Industry Professional",
     },
     {
       quote: "Competing at HEBS 2024 gave me the confidence to enter global competitions. It was the launchpad I needed.",
-      name: "Tunde Fashola",
-      role: "Barber Champion, HEBS 2024",
+      name: "HEBS 2024 Competitor",
+      role: "Barbering Category, HEBS 2024",
     },
   ],
   galleryImages: [
