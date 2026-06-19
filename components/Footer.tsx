@@ -42,19 +42,11 @@ function InstagramIcon({ size = 20 }: { size?: number }) {
   );
 }
 
-function TikTokIcon({ size = 20 }: { size?: number }) {
-  return (
-    <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.95a8.16 8.16 0 004.77 1.52V7.02a4.85 4.85 0 01-1-.33z" />
-    </svg>
-  );
-}
 
 const socials = [
-  { name: "Facebook",  Icon: FacebookIcon,  href: "https://facebook.com/thehebs",  color: "#1877F2" },
-  { name: "YouTube",   Icon: YoutubeIcon,   href: "https://youtube.com/@thehebs",  color: "#FF0000" },
-  { name: "Instagram", Icon: InstagramIcon, href: "https://instagram.com/thehebs", color: "#E1306C" },
-  { name: "TikTok",    Icon: TikTokIcon,    href: "https://tiktok.com/@thehebs",   color: "#ffffff" },
+  { name: "Facebook",  Icon: FacebookIcon,  href: "https://www.facebook.com/p/Hair-Education-Beauty-Summit-61571760180801/", color: "#1877F2" },
+  { name: "YouTube",   Icon: YoutubeIcon,   href: "https://www.youtube.com/@haireducationbeautysummit",                      color: "#FF0000" },
+  { name: "Instagram", Icon: InstagramIcon, href: "https://www.instagram.com/haireducationbeautysummit/",                    color: "#E1306C" },
 ];
 
 export default function Footer() {
@@ -62,10 +54,10 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative py-20 px-4"
+      className="relative py-20"
       style={{ background: "#0a0a0a", borderTop: "1px solid rgba(155,89,182,0.2)" }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <motion.div
           initial={mounted ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
@@ -74,17 +66,11 @@ export default function Footer() {
           className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16"
         >
           {/* Brand */}
-          <div className="flex flex-col gap-4">
-            <div>
-              <h3 className="font-playfair font-bold text-2xl text-white mb-1">HEBS 2026</h3>
-              <p className="text-sm font-inter" style={{ color: "#9b59b6" }}>
-                Hair Education Beauty Summit
-              </p>
-            </div>
-            <p className="text-sm font-inter leading-relaxed" style={{ color: "#aaaaaa" }}>
+          <div className="flex flex-col items-start justify-start text-left w-full gap-4">
+            <p className="text-zinc-400 text-sm md:text-base font-medium leading-relaxed max-w-sm text-left tracking-wide mr-auto">
               The premier international platform for beauty, hair, and fashion professionals.
             </p>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center justify-start gap-3 mt-2 mr-auto">
               {socials.map(({ name, Icon, href, color }) => (
                 <a
                   key={name}
@@ -115,18 +101,21 @@ export default function Footer() {
           </div>
 
           {/* Venue */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-playfair font-bold text-white text-lg">Venue</h4>
-            <div className="flex items-start gap-3">
+          <div className="flex flex-col gap-4 px-4 md:px-0">
+            <h4 className="text-zinc-50 font-semibold text-lg tracking-tight mb-2">Venue</h4>
+            <div className="flex items-start gap-3 text-left justify-start">
               <MapPin size={18} className="mt-0.5 shrink-0" style={{ color: "#e91e8c" }} />
               <div>
-                <p className="font-semibold text-sm text-white font-inter">
-                  NJS Royale Convention &amp; Suites
+                <p className="text-zinc-200 text-sm font-semibold leading-snug">
+                  NJS Event and Conference Center
                 </p>
-                <p className="text-sm font-inter mt-1" style={{ color: "#aaaaaa" }}>
+                <p className="text-sm font-inter mt-1 leading-relaxed" style={{ color: "#aaaaaa" }}>
+                  Inside Richland Garden Estate,<br />
+                  Along Lekki-Epe Expressway,<br />
+                  Shapati, Ibeju-Lekki,<br />
                   Lagos, Nigeria
                 </p>
-                <p className="text-sm font-inter mt-1" style={{ color: "#9b59b6" }}>
+                <p className="text-sm font-inter mt-2" style={{ color: "#9b59b6" }}>
                   October 23–25, 2026
                 </p>
               </div>
@@ -135,7 +124,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <h4 className="font-playfair font-bold text-white text-lg">Contact (US)</h4>
+            <h4 className="font-playfair font-bold text-zinc-50 text-lg">Contact (US)</h4>
             <div className="flex flex-col gap-3">
               <a
                 href="mailto:info@thehebs.com"
@@ -167,13 +156,13 @@ export default function Footer() {
               </a>
             </div>
             <a
-              href="https://hebseventportal.com"
+              href="https://hebseventportal.com/register"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-pink text-sm mt-2 inline-block"
               style={{ width: "fit-content" }}
             >
-              Get Your Tickets
+              Register Now
             </a>
           </div>
         </motion.div>
