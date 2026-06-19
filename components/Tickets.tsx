@@ -86,11 +86,11 @@ export default function Tickets() {
             <div className="w-full lg:w-1/3 flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-6 lg:gap-10">
               <div className="flex gap-4 sm:gap-6">
                 <div>
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Early Pricing</span>
+                  <span className="block font-mono text-[10px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Early Pricing</span>
                   <span className="font-sans text-xl font-bold text-white">{tier.earlyPrice}</span>
                 </div>
                 <div className="border-l border-neutral-800 pl-4 sm:pl-6">
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Standard Rate</span>
+                  <span className="block font-mono text-[10px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Standard Rate</span>
                   <span className="font-sans text-sm font-light text-neutral-400 line-through">{tier.standardPrice}</span>
                 </div>
               </div>

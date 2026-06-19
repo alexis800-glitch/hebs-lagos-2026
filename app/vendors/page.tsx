@@ -180,7 +180,7 @@ export default function VendorsPage() {
                         </span>
                       </div>
                       <div className="border-l border-zinc-800 pl-6">
-                        <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 block mb-1">
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 block mb-1">
                           Standard
                         </span>
                         <span className="font-sans text-lg font-light text-zinc-500 line-through leading-none">
@@ -188,7 +188,7 @@ export default function VendorsPage() {
                         </span>
                       </div>
                     </div>
-                    <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 mt-2 block">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-2 block">
                       {currency === 'USD' ? 'USD' : 'NGN'} · one-time · per event
                     </span>
                   </div>

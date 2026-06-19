@@ -425,7 +425,7 @@ export default function Navbar() {
           <NeonButton href="https://hebseventportal.com" onClick={closeMenu} className="w-full text-sm py-4">
             Register Now ↗
           </NeonButton>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600 text-center">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 text-center">
             Lagos, Nigeria · October 23–25, 2026
           </p>
         </div>

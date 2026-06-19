@@ -265,7 +265,7 @@ export default function CompetitionCategories() {
           >
             Register for Your Category ↗
           </a>
-          <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-600">
+          <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400">
             Entry from $50 USD · All categories open
           </p>
         </motion.div>

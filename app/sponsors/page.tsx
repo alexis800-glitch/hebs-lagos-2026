@@ -129,7 +129,7 @@ export default function SponsorsPage() {
         {/* ── Audience profile + HEBS 2025 link ── */}
         <div className="max-w-5xl mx-auto mb-10 border border-white/10 bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-xl">
-            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-3">Who You&apos;ll Reach</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">Who You&apos;ll Reach</p>
             <p className="font-sans text-sm text-zinc-300 font-light leading-relaxed">
               Connect with salon owners, master stylists, barbers, makeup artists, nail technicians, beauty educators, brand founders, and consumers from Nigeria, West Africa, and the global HEBS community — all under one roof in Lagos for three days.
             </p>

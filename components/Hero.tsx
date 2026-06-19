@@ -319,7 +319,7 @@ export default function Hero() {
               initial={mounted ? { opacity: 0, scale: 0.82 } : false}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.45, ease: EXPO, delay: 0.28 + i * 0.055 }}
-              className="inline-flex items-center gap-[6px] font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.14em] rounded-full px-[10px] py-[5px] border border-white/[0.09] bg-white/[0.035] text-zinc-400 select-none"
+              className="inline-flex items-center gap-[6px] font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] rounded-full px-[10px] py-[5px] border border-white/[0.09] bg-white/[0.035] text-zinc-400 select-none"
             >
               <span
                 className="w-[5px] h-[5px] rounded-full shrink-0"
@@ -410,7 +410,7 @@ export default function Hero() {
           </div>
 
           {/* Urgency copy */}
-          <p className="font-mono text-[9px] sm:text-[10px] text-zinc-500 tracking-wide leading-loose">
+          <p className="font-mono text-[10px] sm:text-xs text-zinc-400 tracking-wide leading-loose">
             Limited competition slots available &nbsp;·&nbsp; Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
           </p>
         </motion.div>
@@ -435,7 +435,7 @@ export default function Hero() {
                 <p className="font-serif text-[16px] sm:text-[17px] font-light text-white leading-none mb-1">
                   {item.value}
                 </p>
-                <p className="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-zinc-500 text-center leading-snug">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 text-center leading-snug">
                   {item.label}
                 </p>
               </div>

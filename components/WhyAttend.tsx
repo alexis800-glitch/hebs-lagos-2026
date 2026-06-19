@@ -262,10 +262,10 @@ export default function WhyAttend() {
           >
             Register for HEBS 2026 ↗
           </a>
-          <p className="text-zinc-600 text-[12px] leading-relaxed text-center">
+          <p className="text-zinc-400 text-xs leading-relaxed text-center">
             Limited competition slots available across all categories.
           </p>
-          <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-700">
+          <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400">
             October 23–25, 2026 · Lagos, Nigeria
           </p>
         </motion.div>
