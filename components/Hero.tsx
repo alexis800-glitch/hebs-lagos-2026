@@ -82,7 +82,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
         {/* Fallback image — mobile always, desktop when reduced-motion */}
-        <div className="absolute inset-0 md:hidden hero-fallback">
+        <div className="absolute inset-0 md:hidden">
           <Image
             src="/images/hebs-2025/crowd/crowd-main-stage.png"
             alt=""
@@ -93,25 +93,17 @@ export default function Hero() {
           />
         </div>
 
-        {/* HEBS promo video — no JS gate; shown md+ via CSS only */}
+        {/* HEBS promo video — always rendered, shown md+ via CSS breakpoint */}
         <video
           autoPlay
           loop
           muted
           playsInline
           aria-hidden="true"
-          className="hero-video hidden md:block absolute inset-0 w-full h-full object-cover opacity-50"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-60"
         >
           <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
         </video>
-
-        {/* Reduced-motion: swap video for fallback image on desktop too */}
-        <style>{`
-          @media (prefers-reduced-motion: reduce) {
-            .hero-video { display: none !important; }
-            .hero-fallback { display: block !important; }
-          }
-        `}</style>
 
         {/* Magenta centre glow */}
         <motion.div
