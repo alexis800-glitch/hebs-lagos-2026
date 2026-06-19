@@ -43,19 +43,34 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) return;
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
     setSubmitting(true);
-    setTimeout(() => {
+    setFormError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) {
+        setFormError(data.error ?? "Something went wrong. Please try again.");
+      } else {
+        setSubmitted(true);
+      }
+    } catch {
+      setFormError("Network error. Please check your connection and try again.");
+    } finally {
       setSubmitting(false);
-      setSubmitted(true);
-    }, 900);
+    }
   };
 
   return (
@@ -144,6 +159,7 @@ export default function Contact() {
                 <button
                   onClick={() => {
                     setSubmitted(false);
+                    setFormError(null);
                     setForm({ name: "", email: "", message: "" });
                   }}
                   className="font-sans text-xs uppercase tracking-widest text-white border-b border-neutral-700 hover:border-white pb-1 w-fit transition-colors duration-200 mt-4"
@@ -201,6 +217,12 @@ export default function Contact() {
                 >
                   {submitting ? "Sending…" : "Send Message"}
                 </button>
+
+                {formError && (
+                  <p className="font-sans text-xs text-red-400 leading-relaxed pt-1">
+                    {formError}
+                  </p>
+                )}
               </form>
             )}
           </motion.div>

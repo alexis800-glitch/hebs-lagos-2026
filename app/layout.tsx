@@ -12,6 +12,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hebslagos.com"),
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
     "The Hair Education Beauty Summit returns for Year 3. October 23–25, 2026 at NJS Royale Convention & Suites, Lagos Nigeria. $35,000 in prizes.",
@@ -28,6 +29,22 @@ export const metadata: Metadata = {
     title: "HEBS 2026 — Hair Education Beauty Summit",
     description: "$35,000 Grand Prize. October 23–25, 2026. Lagos, Nigeria.",
     type: "website",
+    url: "https://hebslagos.com",
+    siteName: "HEBS Lagos 2026",
+    images: [
+      {
+        url: "/images/og/hebs-lagos-2026-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "HEBS Lagos 2026 — Hair Education Beauty Summit, October 23–25 at NJS Royale Convention & Suites, Lagos Nigeria",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HEBS 2026 — Hair Education Beauty Summit",
+    description: "$35,000 Grand Prize. October 23–25, 2026. Lagos, Nigeria.",
+    images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };
 
