@@ -298,8 +298,8 @@ export default function Navbar() {
             link.label === "Competition" ? (
               <div
                 key={link.label}
-                style={{ transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms" }}
-                className={`border-b border-zinc-900 transition-all duration-500 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: menuOpen ? `${i * 35 + 40}ms` : "0ms" }}
+                className={`border-b border-zinc-900 transition-all duration-300 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
               >
                 <button
                   onClick={() => setIsMobileCompOpen((o) => !o)}
@@ -340,8 +340,8 @@ export default function Navbar() {
             ) : link.label === "Partnerships" ? (
               <div
                 key={link.label}
-                style={{ transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms" }}
-                className={`border-b border-zinc-900 transition-all duration-500 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: menuOpen ? `${i * 35 + 40}ms` : "0ms" }}
+                className={`border-b border-zinc-900 transition-all duration-300 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
               >
                 <div className="w-full flex flex-col">
                   <button
@@ -367,8 +367,8 @@ export default function Navbar() {
             ) : link.label === "HEBS Legacy" ? (
               <div
                 key={link.label}
-                style={{ transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms" }}
-                className={`border-b border-zinc-900 transition-all duration-500 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                style={{ transitionDelay: menuOpen ? `${i * 35 + 40}ms` : "0ms" }}
+                className={`border-b border-zinc-900 transition-all duration-300 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
               >
                 <button
                   onClick={() => setIsMobileLegacyOpen((o) => !o)}
@@ -407,8 +407,8 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={closeMenu}
-                style={{ transitionDelay: menuOpen ? `${i * 55 + 80}ms` : "0ms" }}
-                className={`block text-xl font-medium tracking-tight text-white py-1.5 hover:text-zinc-400 transition-all duration-500 border-b border-zinc-900 ${
+                style={{ transitionDelay: menuOpen ? `${i * 35 + 40}ms` : "0ms" }}
+                className={`block text-xl font-medium tracking-tight text-white py-1.5 hover:text-zinc-400 transition-all duration-300 border-b border-zinc-900 ${
                   menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
                 }`}
               >
@@ -419,8 +419,8 @@ export default function Navbar() {
         </nav>
 
         <div
-          style={{ transitionDelay: menuOpen ? "500ms" : "0ms" }}
-          className={`flex flex-col gap-4 transition-all duration-500 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          style={{ transitionDelay: menuOpen ? "320ms" : "0ms" }}
+          className={`flex flex-col gap-4 transition-all duration-300 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
         >
           <NeonButton href="https://hebseventportal.com/register" onClick={closeMenu} className="w-full text-sm py-4">
             Register Now ↗

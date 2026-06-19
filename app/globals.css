@@ -17,8 +17,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* offset anchor targets below the fixed 64px navbar */
   scroll-padding-top: 72px;
+  overflow-x: hidden;
 }
 
 body {
@@ -27,7 +27,9 @@ body {
   font-family: var(--font-inter), Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair), Georgia, serif;

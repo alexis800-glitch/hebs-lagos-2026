@@ -83,13 +83,13 @@ export default function Tickets() {
             </div>
 
             {/* Pricing Details */}
-            <div className="w-full lg:w-1/3 flex items-center justify-between lg:justify-end gap-12">
-              <div className="flex gap-8">
+            <div className="w-full lg:w-1/3 flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-6 lg:gap-10">
+              <div className="flex gap-4 sm:gap-6">
                 <div>
                   <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Early Pricing</span>
                   <span className="font-sans text-xl font-bold text-white">{tier.earlyPrice}</span>
                 </div>
-                <div className="border-l border-neutral-800 pl-8">
+                <div className="border-l border-neutral-800 pl-4 sm:pl-6">
                   <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Standard Rate</span>
                   <span className="font-sans text-sm font-light text-neutral-400 line-through">{tier.standardPrice}</span>
                 </div>
@@ -100,7 +100,7 @@ export default function Tickets() {
                 href={tier.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-xs shrink-0 block text-center min-w-[140px]"
+                className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-sm shrink-0 block text-center w-full sm:w-auto"
               >
                 SECURE PASS ↗
               </a>

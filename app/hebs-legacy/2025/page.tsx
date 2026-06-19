@@ -297,6 +297,7 @@ function VideoCard({ src, title, portrait = false }: { src: string; title: strin
           muted
           loop
           playsInline
+          preload="none"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-400" />
@@ -521,7 +522,7 @@ export default function Hebs2025Page() {
                   {w.hasPhoto && w.src ? (
                     /* Photo winner card */
                     <div className="relative h-72 cursor-pointer" onClick={() => openLb([{ src: w.src!, alt: w.name }], 0)}>
-                      <Image src={w.src} alt={w.name} fill className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" sizes="33vw" priority={false} />
+                      <Image src={w.src} alt={w.name} fill loading="lazy" className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500" sizes="33vw" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-5">
                         <p className="font-mono text-[8px] tracking-[0.22em] uppercase mb-1" style={{ color: `${w.color}` }}>{w.category}</p>
@@ -595,6 +596,7 @@ export default function Hebs2025Page() {
                   src="/images/hebs-2025/awards/award-01.png"
                   alt="HEBS 2025 award ceremony"
                   fill
+                  loading="lazy"
                   className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                   sizes="33vw"
                 />
@@ -625,6 +627,7 @@ export default function Hebs2025Page() {
                     src={img.src}
                     alt={img.alt}
                     fill
+                    loading="lazy"
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="33vw"
                   />
@@ -669,6 +672,7 @@ export default function Hebs2025Page() {
                     src={img.src}
                     alt={img.alt}
                     fill
+                    loading="lazy"
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="(max-width: 640px) 100vw, 33vw"
                   />
@@ -715,6 +719,7 @@ export default function Hebs2025Page() {
                     src={img.src}
                     alt={img.alt}
                     fill
+                    loading="lazy"
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="(max-width: 640px) 100vw, 50vw"
                   />
@@ -768,6 +773,7 @@ export default function Hebs2025Page() {
                 src="/images/hebs-2025/yacht-party/yacht-01.png"
                 alt="HEBS 2025 Yacht Party"
                 fill
+                loading="lazy"
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 80vw"
               />
@@ -811,6 +817,7 @@ export default function Hebs2025Page() {
                     src={img.src}
                     alt={img.alt}
                     fill
+                    loading="lazy"
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                     sizes="33vw"
                   />

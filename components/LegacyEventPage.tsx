@@ -266,7 +266,7 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
                     setLightboxIndex(idx >= 0 ? idx : 0);
                   }}
                 >
-                  <Image src={img.src} alt={img.caption} fill className="object-cover group-hover:scale-[1.04] transition-transform duration-500" sizes="33vw" />
+                  <Image src={img.src} alt={img.caption} fill loading="lazy" className="object-cover group-hover:scale-[1.04] transition-transform duration-500" sizes="33vw" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                   <span className="absolute bottom-3 left-3 font-mono text-[9px] tracking-widest text-white/60 uppercase">{img.caption}</span>
                 </motion.div>
@@ -298,7 +298,7 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
             >
               {/* Event recap */}
               <div className="relative aspect-video rounded-2xl overflow-hidden bg-[#0f0f0f] border border-white/[0.07] flex items-center justify-center group">
-                <Image src={data.heroImage} alt="" fill className="object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300" sizes="50vw" />
+                <Image src={data.heroImage} alt="" fill loading="lazy" className="object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300" sizes="50vw" />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="relative z-10 text-center px-6">
                   <div className="w-14 h-14 rounded-full border border-white/30 flex items-center justify-center mx-auto mb-4 bg-white/10 backdrop-blur-sm">
@@ -313,7 +313,7 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
 
               {/* Masterclass teaser */}
               <div className="relative aspect-video rounded-2xl overflow-hidden bg-[#0f0f0f] border border-white/[0.07] flex items-center justify-center group">
-                <Image src="/images/highlights/hands-on-hair-styling-01.png" alt="" fill className="object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300" sizes="50vw" />
+                <Image src="/images/highlights/hands-on-hair-styling-01.png" alt="" fill loading="lazy" className="object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300" sizes="50vw" />
                 <div className="absolute inset-0 bg-black/40" />
                 <div className="relative z-10 text-center px-6">
                   <div className="w-14 h-14 rounded-full border border-white/30 flex items-center justify-center mx-auto mb-4 bg-white/10 backdrop-blur-sm">
@@ -431,7 +431,7 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
                   onClick={() => setLightboxIndex(i)}
                   className="relative aspect-square rounded-xl overflow-hidden group cursor-pointer"
                 >
-                  <Image src={src} alt={`HEBS ${data.year} gallery ${i + 1}`} fill className="object-cover group-hover:scale-[1.04] transition-transform duration-500" sizes="33vw" />
+                  <Image src={src} alt={`HEBS ${data.year} gallery ${i + 1}`} fill loading="lazy" className="object-cover group-hover:scale-[1.04] transition-transform duration-500" sizes="33vw" />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-black/25 transition-colors duration-300" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
