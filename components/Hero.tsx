@@ -81,26 +81,26 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Static fallback: always on mobile, on desktop only when reduced motion */}
-        <div className={`absolute inset-0 ${shouldReduceMotion ? "" : "xl:hidden"}`}>
+        {/* Static fallback: mobile only, or all sizes when reduced motion */}
+        <div className={`absolute inset-0 ${shouldReduceMotion ? "" : "md:hidden"}`}>
           <Image
             src="/images/hebs-2025/crowd/crowd-main-stage.png"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-[0.22] brightness-[0.45] contrast-[1.15]"
+            className="object-cover opacity-40 brightness-75"
           />
         </div>
 
-        {/* HEBS promo video — desktop (xl+) only, skipped for reduced motion */}
+        {/* HEBS promo video — md+ desktop, skipped for reduced motion */}
         {mounted && !shouldReduceMotion && (
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="hidden xl:block absolute inset-0 w-full h-full object-cover opacity-[0.28] brightness-[0.45] contrast-[1.2] saturate-[0.85]"
+            className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-40 brightness-75"
           >
             <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
           </video>
@@ -147,9 +147,9 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Vignettes */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-transparent to-black/35" />
+        {/* Vignettes — top/bottom darkened, center left open so video reads through */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
       </div>
 
       {/* ── Particles ─────────────────────────────────────────────── */}
