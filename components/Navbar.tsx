@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Home",         href: "/" },
   { label: "About",        href: "/about" },
   { label: "Competition",  href: "/competitions" },
-  { label: "Partnerships", href: "#sponsors" },
+  { label: "Partnerships", href: "/sponsors" },
   { label: "Tickets",      href: "/tickets" },
   { label: "Gallery",      href: "/gallery" },
   { label: "HEBS Legacy",  href: "/hebs-legacy/2025" },

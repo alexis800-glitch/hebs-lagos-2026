@@ -1,8 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Check, ChevronRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import PartnershipContact from '@/components/PartnershipContact'
+import Footer from '@/components/Footer'
 
 export const metadata = {
   title: 'Sponsorship Opportunities — HEBS Lagos 2026',
@@ -71,7 +73,7 @@ const tiers = [
     tag: '05',
     name: 'Bronze Sponsor',
     price: '$1,500',
-    accent: 'text-orange-700',
+    accent: 'text-zinc-500',
     perks: [
       '8 × 8 ft booth space',
       'Logo listing on official HEBS website',
@@ -109,8 +111,65 @@ export default function SponsorsPage() {
           </p>
         </div>
 
+        {/* ── Audience credibility statement ── */}
+        <div className="max-w-5xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { stat: '3,000+', label: 'Expected Attendees', note: 'Beauty professionals, educators, creators, and consumers' },
+            { stat: 'Nigeria + Africa', label: 'Geographic Reach', note: 'International competitors from the US, UK, and West Africa' },
+            { stat: '$85,000+', label: 'Total Prize Pool', note: 'Largest prize purse in African beauty competition history' },
+          ].map((item) => (
+            <div key={item.stat} className="border border-white/10 bg-zinc-950/40 rounded-2xl p-6">
+              <span className="font-sans text-3xl font-light text-white block mb-1 tracking-tight">{item.stat}</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 block mb-2">{item.label}</span>
+              <span className="font-sans text-xs text-zinc-500 font-light leading-relaxed">{item.note}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Audience profile + HEBS 2025 link ── */}
+        <div className="max-w-5xl mx-auto mb-10 border border-white/10 bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="max-w-xl">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-3">Who You&apos;ll Reach</p>
+            <p className="font-sans text-sm text-zinc-300 font-light leading-relaxed">
+              Connect with salon owners, master stylists, barbers, makeup artists, nail technicians, beauty educators, brand founders, and consumers from Nigeria, West Africa, and the global HEBS community — all under one roof in Lagos for three days.
+            </p>
+          </div>
+          <Link
+            href="/hebs-legacy/2025"
+            className="shrink-0 inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 px-5 py-3 rounded-xl transition-all duration-200 whitespace-nowrap"
+          >
+            See HEBS 2025 →
+          </Link>
+        </div>
+
+        {/* ── Visual proof — event scale images ── */}
+        <div className="max-w-5xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="relative w-full h-56 md:h-72 rounded-2xl overflow-hidden">
+            <Image
+              src="/images/hebs-2025/crowd/crowd-main-stage.png"
+              alt="HEBS 2025 main stage — crowd and event scale"
+              fill
+              className="object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <span className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-widest text-zinc-400">HEBS 2025 · Main Stage</span>
+          </div>
+          <div className="relative w-full h-56 md:h-72 rounded-2xl overflow-hidden">
+            <Image
+              src="/images/sponsors/sponsor-ment-pro-tools-products-01.png"
+              alt="HEBS 2025 — sponsor brand presence on the exhibition floor"
+              fill
+              className="object-cover object-center"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <span className="absolute bottom-4 left-4 font-mono text-[9px] uppercase tracking-widest text-zinc-400">HEBS 2025 · Sponsor Floor</span>
+          </div>
+        </div>
+
         {/* ── Diamond Tier — full-width hero card ── */}
-        <div className="max-w-5xl mx-auto bg-gradient-to-br from-zinc-900 via-black to-zinc-900 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden shadow-2xl">
+        <div id="sponsorship-packages" className="max-w-5xl mx-auto bg-gradient-to-br from-zinc-900 via-black to-zinc-900 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-3xl p-8 md:p-12 mb-8 relative overflow-hidden shadow-2xl">
 
           {/* Ambient glow */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/4 blur-[120px] rounded-full pointer-events-none select-none" />
@@ -151,12 +210,12 @@ export default function SponsorsPage() {
                   >
                     Inquire About Diamond ↗
                   </a>
-                  <Link
-                    href="/"
+                  <a
+                    href="#sponsorship-packages"
                     className="inline-flex items-center justify-center gap-1 font-sans text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 px-6 py-3 rounded-xl font-medium transition-all duration-200"
                   >
                     View All Packages
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>
@@ -243,6 +302,7 @@ export default function SponsorsPage() {
         <PartnershipContact />
 
       </main>
+      <Footer />
     </>
   )
 }

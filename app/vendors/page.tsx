@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Check, ChevronRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import PartnershipContact from '@/components/PartnershipContact'
+import Footer from '@/components/Footer'
 
 type Currency = 'USD' | 'NGN'
 
@@ -174,7 +175,7 @@ export default function VendorsPage() {
                         <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 block mb-1">
                           Early Bird
                         </span>
-                        <span className="font-sans text-3xl font-light tracking-tight text-white leading-none">
+                        <span className="font-sans text-2xl md:text-3xl font-light tracking-tight text-white leading-none">
                           {earlyPrice}
                         </span>
                       </div>
@@ -258,6 +259,7 @@ export default function VendorsPage() {
         <PartnershipContact />
 
       </main>
+      <Footer />
     </>
   )
 }
