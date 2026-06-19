@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <>
+      <link rel="preload" as="image" href="/images/hero/hero-poster-gala-optimized.webp" type="image/webp" fetchPriority="high" />
       <Navbar />
       <main style={{ background: "#0d0d0d", overflowX: "hidden" }}>
         <Hero />

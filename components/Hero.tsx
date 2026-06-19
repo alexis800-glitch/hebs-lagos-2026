@@ -88,7 +88,7 @@ export default function Hero() {
           muted
           playsInline
           preload="metadata"
-          poster="/images/hero/hero-poster-gala.png"
+          poster="/images/hero/hero-poster-gala-optimized.webp"
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover opacity-65 brightness-[1.10] contrast-[1.05]"
         >
