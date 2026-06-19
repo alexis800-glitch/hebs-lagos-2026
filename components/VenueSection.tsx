@@ -78,7 +78,7 @@ export default function VenueSection() {
                   </div>
                 </div>
                 <a
-                  href="https://hebseventportal.com/register"
+                  href="https://hebseventportal.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center w-full bg-white text-black font-bold text-sm tracking-wide px-6 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 touch-manipulation min-h-[44px] mt-1"

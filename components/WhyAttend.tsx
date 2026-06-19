@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView, animate, AnimatePresence } from "framer-motion";
@@ -255,7 +255,7 @@ export default function WhyAttend() {
           className="mt-16 flex flex-col items-center gap-3"
         >
           <a
-            href="https://hebseventportal.com/register"
+            href="https://hebseventportal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-wide text-black bg-white px-8 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 min-h-[48px]"

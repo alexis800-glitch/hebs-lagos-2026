@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -27,7 +27,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD per division.",
+      "Visit hebseventportal.com to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD per division.",
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
@@ -47,7 +47,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD depending on category), and submit any required materials. Entry fees start at $50 per division.",
+      "To register as a competitor, visit hebseventportal.com and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD depending on category), and submit any required materials. Entry fees start at $50 per division.",
   },
   {
     triggers: ["global crown", "crowned icon", "beauty competition", "hairstylist competition", "makeup competition", "fashion competition", "nail competition", "editorial", "avant garde"],
@@ -57,7 +57,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
     answer:
-      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 entry · $5,000 prize pool\n• Battle of the Fades™ — 30 min · $50 entry · $5,000 prize pool\n• Freestyle Design Battle™ — 60 min · $75 entry · $7,500 prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100/team · $10,000 prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
+      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 entry · $5,000 prize pool\n• Battle of the Fades™ — 30 min · $50 entry · $5,000 prize pool\n• Freestyle Design Battle™ — 60 min · $75 entry · $7,500 prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100/team · $10,000 prize pool (Oct 25)\n\nRegister at hebseventportal.com.",
   },
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
@@ -133,9 +133,9 @@ type AnswerOption = { label: string; href?: never; external?: never; answer: str
 type QuickOption = LinkOption | AnswerOption;
 
 const QUICK_OPTIONS: QuickOption[] = [
-  { label: "How do I register?", href: "https://hebseventportal.com/register", external: true },
+  { label: "How do I register?", href: "https://hebseventportal.com", external: true },
   { label: "Buy attendee ticket", href: "https://hebseventportal.com", external: true },
-  { label: "Register as contestant", href: "https://hebseventportal.com/register", external: true },
+  { label: "Register as contestant", href: "https://hebseventportal.com", external: true },
   { label: "Competition categories", href: "/competitions", external: false },
   {
     label: "Event date and venue",

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
@@ -156,7 +156,7 @@ export default function Footer() {
               </a>
             </div>
             <a
-              href="https://hebseventportal.com/register"
+              href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-pink text-sm mt-2 inline-block"

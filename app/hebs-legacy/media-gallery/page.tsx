@@ -393,7 +393,7 @@ export default function MediaGalleryPage() {
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="https://hebseventportal.com/register"
+                href="https://hebseventportal.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-black bg-white px-7 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200"

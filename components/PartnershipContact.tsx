@@ -39,7 +39,7 @@ export default function PartnershipContact() {
           </a>
 
           <a
-            href="tel:4843571812"
+            href="tel:+14843571812"
             className="flex flex-col p-4 bg-zinc-950/50 border border-zinc-900 rounded-xl hover:border-zinc-800 transition-colors"
           >
             <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mb-1">

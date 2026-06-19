@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -125,7 +125,7 @@ export default function Navbar() {
                         <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-center gap-6">
                           <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">HEBS Lagos · Oct 23–25, 2026</span>
                           <a
-                            href="https://hebseventportal.com/register"
+                            href="https://hebseventportal.com"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-sans text-[10px] uppercase tracking-wider text-zinc-200 hover:text-white transition-colors"
@@ -256,7 +256,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <NeonButton
-            href="https://hebseventportal.com/register"
+            href="https://hebseventportal.com"
             className="hidden lg:inline-flex shrink-0 text-xs px-4 py-2"
           >
             Register Now
@@ -264,7 +264,7 @@ export default function Navbar() {
 
           {/* Mobile inline CTA */}
           <NeonButton
-            href="https://hebseventportal.com/register"
+            href="https://hebseventportal.com"
             className="lg:hidden shrink-0 text-xs px-3.5 py-2"
           >
             Register
@@ -422,7 +422,7 @@ export default function Navbar() {
           style={{ transitionDelay: menuOpen ? "320ms" : "0ms" }}
           className={`flex flex-col gap-4 transition-all duration-300 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
         >
-          <NeonButton href="https://hebseventportal.com/register" onClick={closeMenu} className="w-full text-sm py-4">
+          <NeonButton href="https://hebseventportal.com" onClick={closeMenu} className="w-full text-sm py-4">
             Register Now ↗
           </NeonButton>
           <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600 text-center">

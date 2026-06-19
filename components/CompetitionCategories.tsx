@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -167,7 +167,7 @@ export default function CompetitionCategories() {
             <motion.a
               key={cat.title}
               variants={itemAnim}
-              href="https://hebseventportal.com/register"
+              href="https://hebseventportal.com"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{
@@ -258,7 +258,7 @@ export default function CompetitionCategories() {
           className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center"
         >
           <a
-            href="https://hebseventportal.com/register"
+            href="https://hebseventportal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-wide text-black bg-white px-8 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 min-h-[48px]"
