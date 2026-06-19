@@ -46,12 +46,12 @@ const DESKTOP: Pos[] = [
   { x: 0,              y: CH - 48 - CARD_H, rotate: -2, scale: 0.88, opacity: 0,    zIndex: 0  },
 ];
 
-// Mobile — compact centred stack, 3 visible cards
+// Mobile — front card + one subtle depth card only; rest hidden
 const MOBILE: Pos[] = [
-  { x:  0, y:  0, rotate:  0, scale: 1,    opacity: 1,    zIndex: 40 },
-  { x:  7, y:  7, rotate:  3, scale: 0.97, opacity: 0.80, zIndex: 30 },
-  { x: -5, y: 11, rotate: -3, scale: 0.94, opacity: 0.55, zIndex: 20 },
-  { x:  0, y: 15, rotate:  0, scale: 0.91, opacity: 0,    zIndex: 0  },
+  { x: 0, y: 0, rotate:  0, scale: 1,    opacity: 1,    zIndex: 40 }, // front
+  { x: 4, y: 4, rotate:  2, scale: 0.98, opacity: 0.38, zIndex: 30 }, // single back peek
+  { x: 0, y: 6, rotate:  0, scale: 0.96, opacity: 0,    zIndex: 0  }, // hidden
+  { x: 0, y: 6, rotate:  0, scale: 0.94, opacity: 0,    zIndex: 0  }, // hidden
 ];
 
 export function TestimonialCards({
@@ -139,7 +139,7 @@ export function TestimonialCards({
       </div>
 
       {/* ── MOBILE centred stack ────────────────────────────────── */}
-      <div className="md:hidden relative w-[88vw] max-w-[320px] h-[290px]">
+      <div className="md:hidden relative w-full max-w-[310px] mx-auto h-[280px] overflow-hidden">
         {cards.map((card, i) => {
           const pos      = (i - active + n) % n;
           const t        = MOBILE[Math.min(pos, MOBILE.length - 1)];
