@@ -81,30 +81,37 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Static fallback: mobile only, or all sizes when reduced motion */}
-        <div className={`absolute inset-0 ${shouldReduceMotion ? "" : "md:hidden"}`}>
+        {/* Fallback image — mobile always, desktop when reduced-motion */}
+        <div className="absolute inset-0 md:hidden hero-fallback">
           <Image
             src="/images/hebs-2025/crowd/crowd-main-stage.png"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-40 brightness-75"
+            className="object-cover opacity-45"
           />
         </div>
 
-        {/* HEBS promo video — md+ desktop, skipped for reduced motion */}
-        {mounted && !shouldReduceMotion && (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-40 brightness-75"
-          >
-            <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
-          </video>
-        )}
+        {/* HEBS promo video — no JS gate; shown md+ via CSS only */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+          className="hero-video hidden md:block absolute inset-0 w-full h-full object-cover opacity-50"
+        >
+          <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
+        </video>
+
+        {/* Reduced-motion: swap video for fallback image on desktop too */}
+        <style>{`
+          @media (prefers-reduced-motion: reduce) {
+            .hero-video { display: none !important; }
+            .hero-fallback { display: block !important; }
+          }
+        `}</style>
 
         {/* Magenta centre glow */}
         <motion.div
@@ -147,9 +154,9 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Vignettes — top/bottom darkened, center left open so video reads through */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
+        {/* Overlay — top/bottom darkened, centre open so video is visible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
       </div>
 
       {/* ── Particles ─────────────────────────────────────────────── */}
