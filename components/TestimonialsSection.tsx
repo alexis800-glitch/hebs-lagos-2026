@@ -319,7 +319,7 @@ export default function TestimonialsSection() {
             <p className="font-serif text-xl font-light text-white">
               500<span className="text-amber-400">+</span>
             </p>
-            <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 mt-1">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
               Attendees
             </p>
           </div>
@@ -328,7 +328,7 @@ export default function TestimonialsSection() {
             <p className="font-serif text-xl font-light text-white">
               4.9<span className="text-amber-400">★</span>
             </p>
-            <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 mt-1">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
               Rating
             </p>
           </div>
@@ -337,7 +337,7 @@ export default function TestimonialsSection() {
             <p className="font-serif text-xl font-light text-white">
               100<span className="text-amber-400">%</span>
             </p>
-            <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 mt-1">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
               Return
             </p>
           </div>
