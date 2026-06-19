@@ -88,7 +88,7 @@ export default function Hero() {
           muted
           playsInline
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          className="absolute inset-0 w-full h-full object-cover opacity-65 brightness-[1.10] contrast-[1.05]"
         >
           <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
         </video>
@@ -149,8 +149,8 @@ export default function Hero() {
         />
 
         {/* Overlay — top/bottom darkened, centre open so video is visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10" />
       </div>
 
       {/* ── Particles ─────────────────────────────────────────────── */}

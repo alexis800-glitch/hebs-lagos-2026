@@ -78,6 +78,7 @@ export default function GallerySection() {
                 src={src}
                 alt={`HEBS event gallery ${i + 1}`}
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 50vw, 33vw"
                 className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
               />
@@ -114,6 +115,7 @@ export default function GallerySection() {
                 src={src}
                 alt={`HEBS event gallery ${i + 1}`}
                 fill
+                loading="lazy"
                 sizes="50vw"
                 className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
               />

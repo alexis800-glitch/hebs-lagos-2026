@@ -127,7 +127,7 @@ export default function CompetitionCategories() {
   return (
     <section
       id="categories"
-      className="py-24 md:py-32 px-5 sm:px-8 lg:px-12 bg-zinc-950"
+      className="py-16 md:py-24 px-5 sm:px-8 lg:px-12 bg-zinc-950"
     >
       <div className="max-w-6xl mx-auto">
 
@@ -137,7 +137,7 @@ export default function CompetitionCategories() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: EXPO }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-10 md:mb-14"
         >
           <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-500 mb-5">
             HEBS Lagos 2026 · Six Disciplines
@@ -174,7 +174,7 @@ export default function CompetitionCategories() {
                 boxShadow: `0 0 0 1px ${cat.color}55, 0 20px 50px -15px ${cat.color}30`,
                 transition: { duration: 0.18 },
               }}
-              className="group relative flex flex-col rounded-2xl overflow-hidden border border-white/[0.08] min-h-[300px] sm:min-h-[320px] cursor-pointer"
+              className="group relative flex flex-col rounded-2xl overflow-hidden border border-white/[0.08] min-h-[260px] sm:min-h-[300px] cursor-pointer"
             >
               {/* Background image */}
               <div className="absolute inset-0 z-0">
@@ -255,7 +255,7 @@ export default function CompetitionCategories() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: EXPO, delay: 0.25 }}
-          className="mt-14 flex flex-col sm:flex-row gap-4 items-center justify-center"
+          className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center"
         >
           <a
             href="https://hebseventportal.com/register"

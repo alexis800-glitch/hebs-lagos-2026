@@ -107,7 +107,7 @@ export default function WhyAttend() {
   return (
     <section
       id="why-attend"
-      className="py-24 md:py-32 px-5 sm:px-8 lg:px-12 bg-[#080808]"
+      className="py-16 md:py-24 px-5 sm:px-8 lg:px-12 bg-[#080808]"
     >
       <div className="max-w-5xl mx-auto">
 
@@ -117,7 +117,7 @@ export default function WhyAttend() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: EXPO }}
-          className="text-center mb-20 md:mb-28"
+          className="text-center mb-10 md:mb-14"
         >
           <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-500 mb-5">
             HEBS Lagos 2026 · Your Opportunity
@@ -153,8 +153,8 @@ export default function WhyAttend() {
               onClick={() => setLightboxIndex(i)}
               className={`group relative flex flex-col rounded-2xl border border-white/[0.10] overflow-hidden cursor-pointer ${
                 f.featured
-                  ? "min-h-[380px] sm:min-h-[420px] p-9 md:p-10"
-                  : "min-h-[300px] sm:min-h-[340px] p-7"
+                  ? "min-h-[320px] sm:min-h-[380px] p-7 md:p-9"
+                  : "min-h-[260px] sm:min-h-[300px] p-6"
               }`}
             >
               {/* Background photo */}
@@ -162,6 +162,7 @@ export default function WhyAttend() {
                 src={f.bgImage}
                 alt=""
                 fill
+                loading="lazy"
                 className={`object-cover ${f.bgPosition ?? "object-center"} transition-transform duration-700 group-hover:scale-[1.06]`}
                 sizes="(max-width: 640px) 100vw, 50vw"
                 aria-hidden="true"

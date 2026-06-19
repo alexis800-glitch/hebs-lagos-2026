@@ -46,10 +46,10 @@ export default function EventHighlights() {
   const mounted = useMounted();
 
   return (
-    <section id="highlights" className="py-24 px-4 bg-[#080808]">
+    <section id="highlights" className="py-16 md:py-20 px-4 bg-[#080808]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="pb-8 mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative">
+        <div className="pb-8 mb-10 md:mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative">
           <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div>
             <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">What to Expect</p>

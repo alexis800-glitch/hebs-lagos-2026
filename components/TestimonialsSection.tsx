@@ -267,7 +267,7 @@ export default function TestimonialsSection() {
         MOBILE  —  below md (768 px)
         ════════════════════════════════════════════════
       */}
-      <div className="md:hidden relative z-10 px-5 pt-24 pb-16 overflow-x-hidden">
+      <div className="md:hidden relative z-10 px-5 pt-20 pb-12 overflow-x-hidden">
 
         <motion.p
           initial={mounted ? { opacity: 0 } : false}
@@ -352,7 +352,7 @@ export default function TestimonialsSection() {
         DESKTOP  —  md+ (768 px)
         ════════════════════════════════════════════════
       */}
-      <div className="hidden md:block relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
+      <div className="hidden md:block relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_560px] gap-12 xl:gap-16 items-center">
 
           {/* Left — section header */}
