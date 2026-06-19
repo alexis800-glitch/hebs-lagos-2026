@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 
 const ticketTiers = [
   {
@@ -7,7 +7,7 @@ const ticketTiers = [
     standardPrice: "$65",
     perks: ["Access to one event day", "General sessions", "Floor networking"],
     tag: "",
-    link: "https://hebseventportal.com"
+    link: "https://hebseventportal.com/register"
   },
   {
     name: "2-Day Pass",
@@ -15,7 +15,7 @@ const ticketTiers = [
     standardPrice: "$110",
     perks: ["Access to two continuous days", "All general stage sessions", "Networking events inclusion"],
     tag: "",
-    link: "https://hebseventportal.com"
+    link: "https://hebseventportal.com/register"
   },
   {
     name: "3-Day All-Inclusive",
@@ -23,7 +23,7 @@ const ticketTiers = [
     standardPrice: "$250",
     perks: ["Full 3-day complete access", "All Masterclasses & Workshops", "Competitions viewing", "Networking & Gala Entry"],
     tag: "Best Value",
-    link: "https://hebseventportal.com"
+    link: "https://hebseventportal.com/register"
   },
   {
     name: "VIP Experience",
@@ -31,7 +31,7 @@ const ticketTiers = [
     standardPrice: "$600",
     perks: ["Full 3-day VIP clearance", "Front-row priority seating", "Exclusive VIP lounge access", "Celebrity Meet & Greet", "Official Merchandise Package"],
     tag: "Premium Clearance",
-    link: "https://hebseventportal.com"
+    link: "https://hebseventportal.com/register"
   }
 ]
 

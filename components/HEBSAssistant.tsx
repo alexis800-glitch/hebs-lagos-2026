@@ -27,27 +27,27 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      "Visit hebseventportal.com to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD per division.",
+      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD per division.",
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
     answer:
-      "Attendee ticket options (early bird pricing):\n\n• 1-Day Pass — $45 / ₦63,000\n• 2-Day Pass — $80 / ₦112,000\n• 3-Day All-Inclusive — $175 / ₦245,000 (Best Value)\n• VIP Experience — $400 / ₦560,000\n\nAll passes are issued via hebseventportal.com. Early bird rates are available for a limited time.",
+      "Attendee ticket options (early bird pricing):\n\n• 1-Day Pass — $45 / ₦63,000\n• 2-Day Pass — $80 / ₦112,000\n• 3-Day All-Inclusive — $175 / ₦245,000 (Best Value)\n• VIP Experience — $400 / ₦560,000\n\nAll passes are issued via hebseventportal.com/register. Early bird rates are available for a limited time.",
   },
   {
     triggers: ["vip", "vip ticket", "vip pass", "vip experience", "premium", "front row", "lounge", "meet greet", "celebrity", "merchandise"],
     answer:
-      "The VIP Experience pass is $400 early bird / $600 standard (₦560,000). It includes: full 3-day VIP clearance, front-row priority seating, exclusive VIP lounge access, Celebrity Meet & Greet, and an Official Merchandise Package. Purchase at hebseventportal.com.",
+      "The VIP Experience pass is $400 early bird / $600 standard (₦560,000). It includes: full 3-day VIP clearance, front-row priority seating, exclusive VIP lounge access, Celebrity Meet & Greet, and an Official Merchandise Package. Purchase at hebseventportal.com/register.",
   },
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "Ticket prices (early bird):\n• 1-Day Pass: $45 / ₦63,000\n• 2-Day Pass: $80 / ₦112,000\n• 3-Day All-Inclusive: $175 / ₦245,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD per division (up to $100 for team categories). All payments via hebseventportal.com.",
+      "Ticket prices (early bird):\n• 1-Day Pass: $45 / ₦63,000\n• 2-Day Pass: $80 / ₦112,000\n• 3-Day All-Inclusive: $175 / ₦245,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD per division (up to $100 for team categories). All payments via hebseventportal.com/register.",
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD depending on category), and submit any required materials. Entry fees start at $50 per division.",
+      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD depending on category), and submit any required materials. Entry fees start at $50 per division.",
   },
   {
     triggers: ["global crown", "crowned icon", "beauty competition", "hairstylist competition", "makeup competition", "fashion competition", "nail competition", "editorial", "avant garde"],
@@ -57,7 +57,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
     answer:
-      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 entry · $5,000 prize pool\n• Battle of the Fades™ — 30 min · $50 entry · $5,000 prize pool\n• Freestyle Design Battle™ — 60 min · $75 entry · $7,500 prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100/team · $10,000 prize pool (Oct 25)\n\nRegister at hebseventportal.com.",
+      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 entry · $5,000 prize pool\n• Battle of the Fades™ — 30 min · $50 entry · $5,000 prize pool\n• Freestyle Design Battle™ — 60 min · $75 entry · $7,500 prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100/team · $10,000 prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
   },
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
@@ -77,7 +77,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],
     answer:
-      "All payments are processed through the official portal at hebseventportal.com. After completing payment, you will receive a confirmation email with your digital ticket or QR code. If you do not receive confirmation within 24 hours, contact info@thehebs.com or call +1 (484) 357-1812.",
+      "All payments are processed through the official portal at hebseventportal.com/register. After completing payment, you will receive a confirmation email with your digital ticket or QR code. If you do not receive confirmation within 24 hours, contact info@thehebs.com or call +1 (484) 357-1812.",
   },
   {
     triggers: ["contact", "support", "help", "email", "phone", "reach", "whatsapp", "info", "question", "inquiry", "get in touch"],
@@ -133,9 +133,9 @@ type AnswerOption = { label: string; href?: never; external?: never; answer: str
 type QuickOption = LinkOption | AnswerOption;
 
 const QUICK_OPTIONS: QuickOption[] = [
-  { label: "How do I register?", href: "https://hebseventportal.com", external: true },
-  { label: "Buy attendee ticket", href: "https://hebseventportal.com", external: true },
-  { label: "Register as contestant", href: "https://hebseventportal.com", external: true },
+  { label: "How do I register?", href: "https://hebseventportal.com/register", external: true },
+  { label: "Buy attendee ticket", href: "https://hebseventportal.com/register", external: true },
+  { label: "Register as contestant", href: "https://hebseventportal.com/register", external: true },
   { label: "Competition categories", href: "/competitions", external: false },
   {
     label: "Event date and venue",

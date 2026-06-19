@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 // Rate-limit state — persists across hot reloads in dev
@@ -173,7 +173,7 @@ export async function POST(req: NextRequest) {
               <p style="margin:0 0 4px;font-size:13px;color:#a1a1aa;">Hair Education Beauty Summit 2026</p>
               <p style="margin:0 0 4px;font-size:13px;color:#a1a1aa;">October 23–25, 2026 · Lagos, Nigeria</p>
               <p style="margin:8px 0 0;font-size:13px;">
-                <a href="https://hebseventportal.com" style="color:#f59e0b;text-decoration:none;">Visit HEBS Portal ↗</a>
+                <a href="https://hebseventportal.com/register" style="color:#f59e0b;text-decoration:none;">Visit HEBS Portal ↗</a>
               </p>
             </div>
           </div>`,

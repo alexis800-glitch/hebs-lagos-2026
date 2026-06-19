@@ -502,7 +502,7 @@ function CompetitionsContent() {
               {/* CTA */}
               <div className="w-full px-5 flex flex-col items-center justify-center gap-3 pt-2 text-center">
                 <PrimaryCTA
-                  href="https://hebseventportal.com"
+                  href="https://hebseventportal.com/register"
                   className="w-full sm:w-auto max-w-xs mx-auto px-8 py-3.5 sm:py-2.5"
                 >
                   <span className="sm:hidden">Register Now</span>
@@ -608,7 +608,7 @@ function CompetitionsContent() {
               {/* CTA */}
               <div className="flex flex-col items-center gap-3 pt-2">
                 <PrimaryCTA
-                  href="https://hebseventportal.com"
+                  href="https://hebseventportal.com/register"
                   className="max-w-xs mx-auto px-5 py-4 leading-snug"
                 >
                   <span className="sm:hidden text-sm font-semibold text-center">Register Now</span>
@@ -725,7 +725,7 @@ function CompetitionsContent() {
                   OFFICIAL REGISTRATION IS NOW OPEN
                 </p>
                 <PrimaryCTA
-                  href="https://hebseventportal.com"
+                  href="https://hebseventportal.com/register"
                   className="w-[85%] max-w-xs mx-auto py-4"
                 >
                   Register Now

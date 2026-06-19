@@ -947,7 +947,7 @@ export default function Hebs2025Page() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
               <a
-                href="https://hebseventportal.com"
+                href="https://hebseventportal.com/register"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-wide text-black bg-white px-8 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 min-h-[48px]"

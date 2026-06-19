@@ -373,7 +373,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto items-center justify-center">
             {/* Primary */}
             <motion.a
-              href="https://hebseventportal.com"
+              href="https://hebseventportal.com/register"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={!shouldReduceMotion ? { scale: 1.03, transition: { type: "spring", stiffness: 380, damping: 22 } } : undefined}

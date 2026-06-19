@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { BookOpen, Globe, Sparkles } from 'lucide-react'
 
 const GradientDivider = () => (
@@ -108,7 +108,7 @@ export default function About() {
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.
         </p>
         <a
-          href="https://hebseventportal.com"
+          href="https://hebseventportal.com/register"
           target="_blank"
           rel="noopener noreferrer"
           className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-5 py-3 font-medium transition-colors rounded-lg shrink-0 whitespace-nowrap"

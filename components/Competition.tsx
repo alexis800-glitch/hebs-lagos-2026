@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Trophy, Calendar, Users } from "lucide-react";
@@ -143,7 +143,7 @@ export default function Competition() {
             </p>
           </div>
           <a
-            href="https://hebseventportal.com"
+            href="https://hebseventportal.com/register"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-pink text-base md:text-lg"
