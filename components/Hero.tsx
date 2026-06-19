@@ -81,29 +81,31 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Fallback image — mobile always, desktop when reduced-motion */}
-        <div className="absolute inset-0 md:hidden">
-          <Image
-            src="/images/hebs-2025/crowd/crowd-main-stage.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-45"
-          />
-        </div>
-
-        {/* HEBS promo video — always rendered, shown md+ via CSS breakpoint */}
+        {/* HEBS promo video — all screen sizes, muted+playsInline for mobile autoplay */}
         <video
           autoPlay
           loop
           muted
           playsInline
           aria-hidden="true"
-          className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-60"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
         >
           <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
         </video>
+
+        {/* Static fallback: only visible when video cannot play (reduced-motion) */}
+        {shouldReduceMotion && (
+          <div className="absolute inset-0">
+            <Image
+              src="/images/hebs-2025/crowd/crowd-main-stage.png"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-45"
+            />
+          </div>
+        )}
 
         {/* Magenta centre glow */}
         <motion.div
@@ -147,8 +149,8 @@ export default function Hero() {
         />
 
         {/* Overlay — top/bottom darkened, centre open so video is visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/15 via-transparent to-black/15" />
       </div>
 
       {/* ── Particles ─────────────────────────────────────────────── */}
