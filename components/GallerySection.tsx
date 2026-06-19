@@ -19,6 +19,7 @@ const ALL_IMAGES = [
   { src: "/images/hebs-2025/categories-winners/winner-hair-styling.png", span: "col-span-1 row-span-1" },
   { src: "/images/hebs-2025/competition/competition-avant-garde.png",     span: "col-span-1 row-span-1" },
   { src: "/images/hebs-2025/backstage/backstage-02.png",                  span: "col-span-1 row-span-1" },
+  { src: "/images/gallery/gallery-event-13.png",                           span: "col-span-1 row-span-2" },
 ];
 
 const LIGHTBOX_IMAGES = ALL_IMAGES.map((img, i) => ({

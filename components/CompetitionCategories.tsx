@@ -81,14 +81,14 @@ const CATEGORIES = [
     title: "Hair Styling",
     desc: "Showcase creativity, precision, and trend-setting hair artistry.",
     color: "#f59e0b",
-    image: "/images/categories/hairstylist-competition-01.png",
+    image: "/images/categories/hairstylist-competition-04.png",
     Icon: IconScissors,
   },
   {
     title: "Barbering",
     desc: "Compete with clean fades, sharp cuts, grooming skills, and barber artistry.",
     color: "#e91e8c",
-    image: "/images/categories/barber-competition-01.png",
+    image: "/images/categories/barber-competition-02.png",
     Icon: IconRazor,
   },
   {
@@ -102,7 +102,7 @@ const CATEGORIES = [
     title: "Makeup Artistry",
     desc: "Bring beauty, colour, and transformation to life through professional makeup.",
     color: "#f59e0b",
-    image: "/images/categories/makeup-artist-competition-01.png",
+    image: "/images/categories/makeup-artist-competition-02.png",
     Icon: IconBrush,
   },
   {
@@ -116,7 +116,7 @@ const CATEGORIES = [
     title: "Education & Masterclasses",
     desc: "Learn from industry leaders through hands-on sessions and expert training.",
     color: "#9b59b6",
-    image: "/images/hebs-2025/competition/competition-education.png",
+    image: "/images/highlights/industry-experts-panel.png",
     Icon: IconBook,
   },
 ];
