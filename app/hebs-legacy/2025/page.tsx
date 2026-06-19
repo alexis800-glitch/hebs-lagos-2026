@@ -118,7 +118,7 @@ const WINNERS: WinnerData[] = [
     hasPhoto: true,
   },
   {
-    src: "/images/hebs-2025/winners/winner-education.jpg",
+    src: "/images/hebs-2025/winners/winner-education-optimized.webp",
     name: "Emma Richardson",
     origin: "United Kingdom",
     flag: "🇬🇧",

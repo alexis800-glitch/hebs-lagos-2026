@@ -32,7 +32,7 @@ const PHOTOS = [
   { src: "/images/hebs-2025/categories-winners/winner-nail-art.png",     year: 2025, caption: "Nail Art Champion",        portrait: true },
   { src: "/images/hebs-2025/categories-winners/winner-makeup.png",       year: 2025, caption: "Makeup Artistry Champion", portrait: true },
   { src: "/images/hebs-2025/categories-winners/winner-avant-garde.png",  year: 2025, caption: "Avant-Garde Champion",    portrait: true },
-  { src: "/images/hebs-2025/winners/winner-education.jpg",               year: 2025, caption: "Education Award" },
+  { src: "/images/hebs-2025/winners/winner-education-optimized.webp",    year: 2025, caption: "Education Award" },
   // Backstage
   { src: "/images/hebs-2025/backstage/backstage-01.png", year: 2025, caption: "Backstage Preparation", portrait: true },
   { src: "/images/hebs-2025/backstage/backstage-02.png", year: 2025, caption: "Backstage Team",        portrait: true },
