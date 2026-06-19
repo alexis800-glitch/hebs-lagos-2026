@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { TestimonialCards, type CardData } from "@/components/ui/testimonial-cards";
+import { TestimonialCards, type CardData, type CardTheme } from "@/components/ui/testimonial-cards";
 import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -176,10 +176,10 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 export default function TestimonialsSection() {
   const mounted = useMounted();
 
-  /* Build cards once — shared by both mobile and desktop stacks */
   const cards: CardData[] = TESTIMONIALS.map((t) => ({
     id: t.id,
-    content: <TestimonialCard t={t} />,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    render: (_theme: CardTheme) => <TestimonialCard t={t} />,
   }));
 
   const Glows = (

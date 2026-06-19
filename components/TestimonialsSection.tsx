@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
-import { TestimonialCards, type CardData } from "@/components/ui/testimonial-cards";
+import { TestimonialCards, type CardData, type CardTheme } from "@/components/ui/testimonial-cards";
 import { useMounted } from "@/hooks/useMounted";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
@@ -78,58 +78,126 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-/*
-  Dribbble-inspired card layout:
-    ★★★★★
-    "Quote text…"
-    ──────────────
-    [avatar]  Name
-              Title
-*/
-function TestimonialCard({ t }: { t: Testimonial }) {
+// ── 4 card themes — keyed by cluster position ─────────────────
+const THEME_STYLES: Record<
+  CardTheme,
+  {
+    bg: string;
+    border: string;
+    shadow: string;
+    starColor: string;
+    quoteColor: string;
+    nameColor: string;
+    titleColor: string;
+    divider: string;
+    ring: string;
+  }
+> = {
+  // pos 0 — FRONT: deep black glass with subtle magenta glow
+  front: {
+    bg: "linear-gradient(150deg, rgba(10,4,22,0.97) 0%, rgba(4,2,9,0.99) 100%)",
+    border: "1px solid rgba(255,255,255,0.09)",
+    shadow:
+      "0 28px 72px rgba(0,0,0,0.94), 0 0 0 1px rgba(200,50,240,0.07), inset 0 1px 0 rgba(255,255,255,0.05)",
+    starColor: "#f59e0b",
+    quoteColor: "#e4e4e7",
+    nameColor: "#ffffff",
+    titleColor: "#c084fc",
+    divider: "rgba(255,255,255,0.07)",
+    ring: "rgba(245,158,11,0.38)",
+  },
+  // pos 1 — ACCENT: magenta-to-purple gradient — distinctly brighter
+  accent: {
+    bg: "linear-gradient(145deg, rgba(120,20,115,0.84) 0%, rgba(80,28,160,0.88) 55%, rgba(6,2,16,0.94) 100%)",
+    border: "1px solid rgba(232,40,140,0.30)",
+    shadow:
+      "0 24px 68px rgba(210,0,140,0.42), 0 0 0 1px rgba(232,40,140,0.14), inset 0 1px 0 rgba(255,120,220,0.10)",
+    starColor: "#fbbf24",
+    quoteColor: "#f3f4f6",
+    nameColor: "#ffffff",
+    titleColor: "#f9a8d4",
+    divider: "rgba(232,40,140,0.20)",
+    ring: "rgba(245,158,11,0.44)",
+  },
+  // pos 2 — GOLD: dark bronze/gold luxury
+  gold: {
+    bg: "linear-gradient(145deg, rgba(62,38,3,0.90) 0%, rgba(30,18,2,0.94) 55%, rgba(4,3,1,0.98) 100%)",
+    border: "1px solid rgba(245,158,11,0.24)",
+    shadow:
+      "0 24px 62px rgba(160,98,0,0.34), 0 0 0 1px rgba(245,158,11,0.11), inset 0 1px 0 rgba(255,200,50,0.07)",
+    starColor: "#f59e0b",
+    quoteColor: "#fef3c7",
+    nameColor: "#fefce8",
+    titleColor: "#fbbf24",
+    divider: "rgba(245,158,11,0.16)",
+    ring: "rgba(245,158,11,0.50)",
+  },
+  // pos 3 — CHARCOAL: dark charcoal with subtle purple edge
+  charcoal: {
+    bg: "linear-gradient(145deg, rgba(26,26,33,0.95) 0%, rgba(12,12,17,0.98) 60%, rgba(38,16,56,0.40) 100%)",
+    border: "1px solid rgba(147,51,234,0.16)",
+    shadow:
+      "0 24px 58px rgba(0,0,0,0.90), 0 0 0 1px rgba(147,51,234,0.08), inset 0 1px 0 rgba(255,255,255,0.03)",
+    starColor: "#f59e0b",
+    quoteColor: "#d4d4d8",
+    nameColor: "#f4f4f5",
+    titleColor: "#a78bfa",
+    divider: "rgba(147,51,234,0.13)",
+    ring: "rgba(245,158,11,0.30)",
+  },
+};
+
+// ── Card component — theme-aware ───────────────────────────────
+function TestimonialCard({ t, theme }: { t: Testimonial; theme: CardTheme }) {
   const [imgFailed, setImgFailed] = useState(false);
+  const s = THEME_STYLES[theme];
 
   return (
     <div
-      className="w-full h-full rounded-2xl flex flex-col select-none border border-white/[0.07] p-5 md:p-7"
+      className="w-full h-full rounded-2xl flex flex-col select-none p-5"
       style={{
-        background:
-          "linear-gradient(150deg, rgba(14,8,26,0.97) 0%, rgba(6,4,14,0.99) 100%)",
-        boxShadow:
-          "0 20px 64px rgba(0,0,0,0.88), inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(180,60,240,0.05)",
+        background: s.bg,
+        border: s.border,
+        boxShadow: s.shadow,
       }}
     >
       {/* Stars */}
-      <div className="flex gap-[3px] mb-4" aria-label="5 out of 5 stars">
+      <div className="flex gap-[3px] mb-3" aria-label="5 out of 5 stars">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
             size={13}
-            className="fill-amber-400 text-amber-400"
+            style={{ fill: s.starColor, color: s.starColor }}
             aria-hidden="true"
           />
         ))}
       </div>
 
       {/* Quote */}
-      <blockquote className="flex-1 mb-1">
-        <p className="font-sans text-zinc-200 leading-relaxed text-sm md:text-[15px]">
+      <blockquote className="flex-1">
+        <p
+          className="font-sans leading-relaxed text-[13px]"
+          style={{ color: s.quoteColor }}
+        >
           &ldquo;{t.quote}&rdquo;
         </p>
       </blockquote>
 
       {/* Divider */}
-      <div className="h-px bg-white/[0.07] my-4 md:my-5" />
+      <div className="my-4" style={{ height: 1, background: s.divider }} />
 
       {/* Author row */}
       <div className="flex items-center gap-3">
-        <div className="relative rounded-full overflow-hidden flex-shrink-0 ring-[1.5px] ring-amber-400/35 w-10 h-10 md:w-11 md:h-11">
+        <div
+          className="relative rounded-full overflow-hidden flex-shrink-0 w-10 h-10"
+          style={{ boxShadow: `0 0 0 1.5px ${s.ring}` }}
+        >
           {!imgFailed ? (
             <Image
               src={t.image}
               alt={t.name}
               fill
-              sizes="44px"
+              sizes="40px"
               className="object-cover"
               style={{ objectPosition: t.objectPosition }}
               onError={() => setImgFailed(true)}
@@ -147,12 +215,15 @@ function TestimonialCard({ t }: { t: Testimonial }) {
         </div>
 
         <div className="min-w-0">
-          <p className="font-sans font-semibold text-white leading-tight text-[13px] md:text-sm truncate">
+          <p
+            className="font-sans font-semibold leading-tight text-[13px] truncate"
+            style={{ color: s.nameColor }}
+          >
             {t.name}
           </p>
           <p
-            className="font-mono uppercase tracking-wider mt-[3px] text-[9px] md:text-[10px] truncate"
-            style={{ color: "#c084fc" }}
+            className="font-mono uppercase tracking-wider mt-[3px] text-[9px] truncate"
+            style={{ color: s.titleColor }}
           >
             {t.title}
           </p>
@@ -162,23 +233,23 @@ function TestimonialCard({ t }: { t: Testimonial }) {
   );
 }
 
+// ── Section ────────────────────────────────────────────────────
 export default function TestimonialsSection() {
   const mounted = useMounted();
 
-  // Build card data once — shared between mobile and desktop stacks
   const cards: CardData[] = TESTIMONIALS.map((t) => ({
     id: t.id,
-    content: <TestimonialCard t={t} />,
+    render: (theme: CardTheme) => <TestimonialCard t={t} theme={theme} />,
   }));
 
   const Glows = (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
-        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.04]"
+        className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.05]"
         style={{ background: "radial-gradient(circle, #e040fb 0%, transparent 70%)" }}
       />
       <div
-        className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.03]"
+        className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.04]"
         style={{ background: "radial-gradient(circle, #f59e0b 0%, transparent 70%)" }}
       />
     </div>
@@ -192,13 +263,11 @@ export default function TestimonialsSection() {
       {Glows}
 
       {/*
-        ══════════════════════════════════════════════════════
-        MOBILE  —  below md (768px)
-        eyebrow → title → paragraph → stats → card stack → dots
-        TestimonialCards handles its own auto-rotate + drag + dots.
-        ══════════════════════════════════════════════════════
+        ════════════════════════════════════════════════
+        MOBILE  —  below md (768 px)
+        ════════════════════════════════════════════════
       */}
-      <div className="md:hidden relative z-10 px-5 pt-28 pb-16 overflow-x-hidden">
+      <div className="md:hidden relative z-10 px-5 pt-24 pb-16 overflow-x-hidden">
 
         <motion.p
           initial={mounted ? { opacity: 0 } : false}
@@ -215,7 +284,7 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="font-serif text-[1.85rem] font-light text-white leading-[1.2] tracking-tight mb-4"
+          className="font-serif text-[1.75rem] font-light text-white leading-[1.2] tracking-tight mb-4"
         >
           What Beauty{" "}
           <em
@@ -224,7 +293,7 @@ export default function TestimonialsSection() {
           >
             Professionals
           </em>{" "}
-          Are Saying About HEBS
+          Are Saying
         </motion.h2>
 
         <motion.p
@@ -232,56 +301,56 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
-          className="font-sans text-sm text-zinc-400 leading-relaxed mb-8"
+          className="font-sans text-sm text-zinc-400 leading-relaxed mb-7"
         >
-          Hear directly from hairstylists, salon owners, beauty entrepreneurs,
-          educators, and industry professionals who have experienced HEBS firsthand.
+          Hairstylists, salon owners, and beauty professionals who experienced
+          HEBS firsthand.
         </motion.p>
 
-        {/* Stats */}
+        {/* Stats row */}
         <motion.div
           initial={mounted ? { opacity: 0, y: 10 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.15 }}
-          className="grid grid-cols-3 gap-4 text-center border-t border-b border-white/10 py-5 mb-10"
+          className="flex items-center justify-between border-t border-b border-white/10 py-4 mb-8"
         >
-          <div>
-            <p className="font-serif text-2xl font-light text-white">
+          <div className="text-center flex-1">
+            <p className="font-serif text-xl font-light text-white">
               500<span className="text-amber-400">+</span>
             </p>
-            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mt-1">
+            <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 mt-1">
               Attendees
             </p>
           </div>
-          <div>
-            <p className="font-serif text-2xl font-light text-white">
+          <div className="w-px h-8 bg-white/10" />
+          <div className="text-center flex-1">
+            <p className="font-serif text-xl font-light text-white">
               4.9<span className="text-amber-400">★</span>
             </p>
-            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mt-1">
-              Avg Rating
+            <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 mt-1">
+              Rating
             </p>
           </div>
-          <div>
-            <p className="font-serif text-2xl font-light text-white">
+          <div className="w-px h-8 bg-white/10" />
+          <div className="text-center flex-1">
+            <p className="font-serif text-xl font-light text-white">
               100<span className="text-amber-400">%</span>
             </p>
-            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mt-1">
-              Would Return
+            <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-500 mt-1">
+              Return
             </p>
           </div>
         </motion.div>
 
-        {/* Stacked card cluster — subtle on mobile, auto-rotates, swipeable, dots included */}
+        {/* Card stack */}
         <TestimonialCards cards={cards} autoRotateInterval={5000} />
       </div>
 
       {/*
-        ══════════════════════════════════════════════════════
-        DESKTOP  —  md+ (768px)
-        Left: section header + stats
-        Right: Dribbble-inspired stacked card cluster with hover spread
-        ══════════════════════════════════════════════════════
+        ════════════════════════════════════════════════
+        DESKTOP  —  md+ (768 px)
+        ════════════════════════════════════════════════
       */}
       <div className="hidden md:block relative z-10 max-w-screen-xl mx-auto px-6 lg:px-10 py-28 lg:py-36">
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_560px] gap-12 xl:gap-16 items-center">
@@ -344,7 +413,7 @@ export default function TestimonialsSection() {
             </div>
           </motion.div>
 
-          {/* Right — stacked card cluster */}
+          {/* Right — card cluster */}
           <motion.div
             initial={mounted ? { opacity: 0, x: 40 } : false}
             whileInView={{ opacity: 1, x: 0 }}
