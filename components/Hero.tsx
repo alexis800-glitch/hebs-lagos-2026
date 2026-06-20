@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -72,6 +73,15 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   return (
     <section
       id="home"
@@ -81,42 +91,46 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Mobile static background — poster shown below 768px instead of video */}
-        <div className="block md:hidden absolute inset-0">
-          <Image
-            src="/images/hebs-hero-poster.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
-
-        {/* Desktop video — hidden below 768px for performance */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster="/images/hebs-hero-poster.jpg"
-          aria-hidden="true"
-          className="hidden md:block absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/hebs-hero-web.mp4" type="video/mp4" />
-        </video>
-
-        {/* Reduced-motion fallback — desktop only, replaces video */}
-        {shouldReduceMotion && (
-          <div className="hidden md:block absolute inset-0">
+        {/* Hero background — JS-conditional: only ONE video ever in DOM, preventing cross-loading */}
+        {mounted && !shouldReduceMotion ? (
+          isMobile ? (
+            <video
+              key="mobile"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster="/images/hebs-hero-poster.jpg"
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/videos/hebs-hero-mobile.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            <video
+              key="desktop"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              poster="/images/hebs-hero-poster.jpg"
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/videos/hebs-hero-web.mp4" type="video/mp4" />
+            </video>
+          )
+        ) : (
+          <div className="absolute inset-0">
             <Image
-              src="/images/hebs-2025/crowd/crowd-main-stage.png"
+              src="/images/hebs-hero-poster.jpg"
               alt=""
               fill
               priority
               sizes="100vw"
-              className="object-cover opacity-45"
+              className="object-cover"
             />
           </div>
         )}
