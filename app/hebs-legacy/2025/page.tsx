@@ -761,16 +761,17 @@ export default function Hebs2025Page() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: EXPO }}
               onClick={() => openLb([
-                { src: "/images/hebs-2025/yacht-party/yacht-01.png", alt: "Yacht party group photo" },
-                { src: "/images/hebs-2025/yacht-party/yacht-02.png", alt: "Yacht party guests" },
-                { src: "/images/hebs-2025/yacht-party/yacht-03.jpg", alt: "Yacht party networking" },
-                { src: "/images/hebs-2025/yacht-party/yacht-04.png", alt: "Yacht party sunset" },
+                { src: "/images/yacht-party/yacht%20party%202.jpeg",   alt: "Yacht party" },
+                { src: "/images/yacht-party/yacht%20party.png",        alt: "Yacht party group" },
+                { src: "/images/yacht-party/yacht%20party%201.png",    alt: "Yacht party guests" },
+                { src: "/images/yacht-party/yacht%20party%203%20.jpeg",alt: "Yacht party networking" },
+                { src: "/images/yacht-party/yacht%20party%205.jpeg",   alt: "Yacht party evening" },
               ], 0)}
               className="relative rounded-2xl overflow-hidden group cursor-pointer mb-3"
               style={{ aspectRatio: "16/7" }}
             >
               <Image
-                src="/images/hebs-2025/yacht-party/yacht-01.png"
+                src="/images/yacht-party/yacht%20party%202.jpeg"
                 alt="HEBS 2025 Yacht Party"
                 fill
                 loading="lazy"
@@ -788,27 +789,29 @@ export default function Hebs2025Page() {
               </div>
             </motion.div>
 
-            {/* 4-image row */}
+            {/* 4-image grid — 2×2 on mobile, 4-column row on desktop */}
             <motion.div
               variants={stagger}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
-              className="grid grid-cols-2 sm:grid-cols-3 gap-3"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3"
             >
               {[
-                { src: "/images/hebs-2025/yacht-party/yacht-02.png", alt: "Yacht party guests",     idx: 1 },
-                { src: "/images/hebs-2025/yacht-party/yacht-03.jpg", alt: "Yacht party networking", idx: 2 },
-                { src: "/images/hebs-2025/yacht-party/yacht-04.png", alt: "Yacht party sunset",     idx: 3 },
+                { src: "/images/yacht-party/yacht%20party.png",         alt: "Yacht party group",      idx: 1 },
+                { src: "/images/yacht-party/yacht%20party%201.png",     alt: "Yacht party guests",     idx: 2 },
+                { src: "/images/yacht-party/yacht%20party%203%20.jpeg", alt: "Yacht party networking", idx: 3 },
+                { src: "/images/yacht-party/yacht%20party%205.jpeg",    alt: "Yacht party evening",    idx: 4 },
               ].map(img => (
                 <motion.div
                   key={img.src}
                   variants={fadeUp}
                   onClick={() => openLb([
-                    { src: "/images/hebs-2025/yacht-party/yacht-01.png", alt: "Yacht party group photo" },
-                    { src: "/images/hebs-2025/yacht-party/yacht-02.png", alt: "Yacht party guests" },
-                    { src: "/images/hebs-2025/yacht-party/yacht-03.jpg", alt: "Yacht party networking" },
-                    { src: "/images/hebs-2025/yacht-party/yacht-04.png", alt: "Yacht party sunset" },
+                    { src: "/images/yacht-party/yacht%20party%202.jpeg",   alt: "Yacht party" },
+                    { src: "/images/yacht-party/yacht%20party.png",        alt: "Yacht party group" },
+                    { src: "/images/yacht-party/yacht%20party%201.png",    alt: "Yacht party guests" },
+                    { src: "/images/yacht-party/yacht%20party%203%20.jpeg",alt: "Yacht party networking" },
+                    { src: "/images/yacht-party/yacht%20party%205.jpeg",   alt: "Yacht party evening" },
                   ], img.idx)}
                   className="relative rounded-xl overflow-hidden group cursor-pointer"
                   style={{ aspectRatio: "4/3" }}
@@ -819,7 +822,7 @@ export default function Hebs2025Page() {
                     fill
                     loading="lazy"
                     className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
-                    sizes="33vw"
+                    sizes="(max-width: 640px) 50vw, 25vw"
                   />
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-300" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
