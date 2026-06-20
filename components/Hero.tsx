@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -82,6 +82,12 @@ export default function Hero() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (!mounted || isMobile || shouldReduceMotion) return;
+    desktopVideoRef.current?.play().catch(() => {});
+  }, [mounted, isMobile, shouldReduceMotion]);
+
   return (
     <section
       id="home"
@@ -110,11 +116,12 @@ export default function Hero() {
           ) : (
             <video
               key="desktop"
+              ref={desktopVideoRef}
               autoPlay
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
               poster="/images/hebs-hero-poster.jpg"
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover"
