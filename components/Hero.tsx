@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -73,20 +73,11 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
-  const [isMobile, setIsMobile] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)');
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
-
-  const desktopVideoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    if (!mounted || isMobile || shouldReduceMotion) return;
-    desktopVideoRef.current?.play().catch(() => {});
-  }, [mounted, isMobile, shouldReduceMotion]);
+    if (!mounted || shouldReduceMotion) return;
+    videoRef.current?.play().catch(() => {});
+  }, [mounted, shouldReduceMotion]);
 
   return (
     <section
@@ -97,38 +88,21 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Hero background — JS-conditional: only ONE video ever in DOM, preventing cross-loading */}
+        {/* Hero background — single video source (confirmed working); poster shown pre-hydration */}
         {mounted && !shouldReduceMotion ? (
-          isMobile ? (
-            <video
-              key="mobile"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-              poster="/images/hebs-hero-poster.jpg"
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src="/videos/hebs-hero-mobile.mp4" type="video/mp4" />
-            </video>
-          ) : (
-            <video
-              key="desktop"
-              ref={desktopVideoRef}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              poster="/images/hebs-hero-poster.jpg"
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src="/videos/hebs-hero-web.mp4" type="video/mp4" />
-            </video>
-          )
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/images/hebs-hero-poster.jpg"
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/hebs-hero-mobile.mp4" type="video/mp4" />
+          </video>
         ) : (
           <div className="absolute inset-0">
             <Image
