@@ -33,18 +33,18 @@ export default function About() {
       <GradientDivider />
 
       {/* Part 1: Core Mission Statement */}
-      <div className="max-w-5xl mx-auto mt-12 mb-16 p-5 sm:p-8 md:p-12 bg-zinc-950/50 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl flex flex-col items-center justify-center text-center backdrop-blur-md shadow-2xl">
-        <p className="text-amber-500 font-mono text-[10px] tracking-widest uppercase text-center mb-5">
+      <div className="max-w-5xl mx-auto mt-12 mb-16 p-5 sm:p-8 md:p-12 bg-zinc-950/50 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl flex flex-col text-left backdrop-blur-md shadow-2xl">
+        <p className="text-amber-500 font-mono text-[10px] tracking-widest uppercase mb-5">
           A Premier International Beauty Event
         </p>
-        <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-light tracking-tight text-center leading-snug sm:leading-tight max-w-3xl mx-auto font-serif px-2 sm:px-0">
+        <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-light tracking-tight leading-snug sm:leading-tight max-w-4xl font-serif">
           Where Hair, Beauty, Fashion &amp; Innovation{' '}
           <span className="italic font-normal">Converge.</span>
         </h2>
-        <p className="text-zinc-400 text-sm md:text-base text-center leading-relaxed max-w-xl mx-auto mt-4 font-sans font-light px-5 sm:px-0">
+        <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-3xl mt-4 font-sans font-light">
           The global hub for education, high-stakes competition, and industry networking.
         </p>
-        <p className="text-zinc-300 text-sm md:text-base text-center leading-relaxed max-w-2xl mx-auto mt-5 font-sans font-light px-5 sm:px-2 md:px-0">
+        <p className="text-zinc-300 text-sm md:text-base leading-relaxed max-w-3xl mt-5 font-sans font-light">
           The Hair Education Beauty Summit (HEBS) is not just another beauty event — it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
         </p>
       </div>
