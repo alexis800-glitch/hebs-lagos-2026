@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -73,11 +73,12 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Fallback play attempt after hydration — catches cases where autoPlay was ignored
   useEffect(() => {
-    if (!mounted || shouldReduceMotion) return;
     videoRef.current?.play().catch(() => {});
-  }, [mounted, shouldReduceMotion]);
+  }, []);
 
   return (
     <section
@@ -88,33 +89,39 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Hero background — single video source (confirmed working); poster shown pre-hydration */}
-        {mounted && !shouldReduceMotion ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            poster="/images/hebs-hero-poster.jpg"
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/videos/hebs-hero-mobile.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <div className="absolute inset-0">
-            <Image
-              src="/images/hebs-hero-poster.jpg"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-        )}
+        {/* Poster — lowest layer, fades out once video is playing */}
+        <div
+          className="absolute inset-0 transition-opacity duration-700"
+          style={{ opacity: isVideoPlaying ? 0 : 1 }}
+        >
+          <Image
+            src="/images/hebs-hero-poster.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+
+        {/* Hero video — rendered unconditionally so browser autoPlay fires on first paint */}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/images/hebs-hero-poster.jpg"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          onCanPlay={() => { videoRef.current?.play().catch(() => {}); }}
+          onPlaying={() => setIsVideoPlaying(true)}
+          onPause={() => setIsVideoPlaying(false)}
+          onError={(e) => console.warn('[Hero] video error:', e)}
+        >
+          <source src="/videos/hebs-hero-mobile.mp4" type="video/mp4" />
+        </video>
 
         {/* Magenta centre glow */}
         <motion.div
