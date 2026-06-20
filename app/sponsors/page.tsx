@@ -98,14 +98,14 @@ export default function SponsorsPage() {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-16 max-w-2xl mx-auto px-5 sm:px-0">
           <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center">
             Partnerships
           </span>
-          <h1 className="text-3xl md:text-5xl font-light tracking-tight text-center mb-6 font-serif">
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-light tracking-tight text-center mb-4 sm:mb-6 font-serif leading-snug sm:leading-tight">
             Sponsorship <span className="italic font-normal">Opportunities</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-center px-2 sm:px-0">
+          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-center">
             Align your brand with the premier beauty summit in Africa. Five exclusive packages designed
             to deliver measurable visibility, qualified audience access, and lasting industry impact.
           </p>
