@@ -81,23 +81,35 @@ export default function Hero() {
       {/* ── Background layer ───────────────────────────────────────── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* HEBS promo video — all screen sizes, muted+playsInline for mobile autoplay */}
+        {/* Mobile static background — poster shown below 768px instead of video */}
+        <div className="block md:hidden absolute inset-0">
+          <Image
+            src="/images/hebs-hero-poster.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+
+        {/* Desktop video — hidden below 768px for performance */}
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="metadata"
-          poster="/images/hero/hero-poster-gala-optimized.webp"
+          poster="/images/hebs-hero-poster.jpg"
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-65 brightness-[1.10] contrast-[1.05]"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/hebs-promo-compressed.mp4" type="video/mp4" />
+          <source src="/videos/hebs-hero-web.mp4" type="video/mp4" />
         </video>
 
-        {/* Static fallback: only visible when video cannot play (reduced-motion) */}
+        {/* Reduced-motion fallback — desktop only, replaces video */}
         {shouldReduceMotion && (
-          <div className="absolute inset-0">
+          <div className="hidden md:block absolute inset-0">
             <Image
               src="/images/hebs-2025/crowd/crowd-main-stage.png"
               alt=""
@@ -150,8 +162,11 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Overlay — top/bottom darkened, centre open so video is visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/60" />
+        {/* Overlay — gradient for text readability over video and mobile poster */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10" />
       </div>
 
