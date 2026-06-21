@@ -289,7 +289,10 @@ export default function TestimonialsSection() {
           What Beauty{" "}
           <em
             className="font-normal italic text-transparent bg-clip-text"
-            style={{ backgroundImage: "linear-gradient(90deg, #f59e0b, #e040fb)" }}
+            style={{
+              backgroundImage: "linear-gradient(90deg, #fcd34d 0%, #f472b6 50%, #c084fc 100%)",
+              filter: "drop-shadow(0 0 8px rgba(252,211,77,0.45)) drop-shadow(0 0 18px rgba(240,171,252,0.30))",
+            }}
           >
             Professionals
           </em>{" "}
@@ -370,7 +373,10 @@ export default function TestimonialsSection() {
               What Beauty{" "}
               <em
                 className="font-normal italic text-transparent bg-clip-text"
-                style={{ backgroundImage: "linear-gradient(90deg, #f59e0b, #e040fb)" }}
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #fcd34d 0%, #f472b6 50%, #c084fc 100%)",
+                  filter: "drop-shadow(0 0 8px rgba(252,211,77,0.45)) drop-shadow(0 0 18px rgba(240,171,252,0.30))",
+                }}
               >
                 Professionals
               </em>{" "}
