@@ -269,7 +269,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-          className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-500 mb-6"
+          className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-6"
         >
           The Hair Education Beauty Summit · Lagos 2026
         </motion.p>
@@ -317,7 +317,7 @@ export default function Hero() {
             initial={mounted ? { opacity: 0, y: 28 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EXPO, delay: 0.18 }}
-            className="font-serif font-medium text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-7xl tracking-tight leading-[1.07] text-white"
+            className="font-serif font-semibold text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-7xl tracking-tight leading-[1.07] text-white"
           >
             The Stage Where{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
@@ -355,7 +355,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.44 }}
-          className="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-zinc-500 mb-7 inline-flex items-center justify-center gap-2"
+          className="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-zinc-400 mb-7 inline-flex items-center justify-center gap-2"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#e91e8c] shrink-0 opacity-80" />
           Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
@@ -449,7 +449,7 @@ export default function Hero() {
                 className="flex flex-col items-center justify-center px-3 py-[14px]"
                 style={{ background: "rgba(13,10,20,0.90)" }}
               >
-                <p className="font-serif text-[16px] sm:text-[17px] font-light text-white leading-none mb-1">
+                <p className="font-serif text-[16px] sm:text-[17px] font-medium text-white leading-none mb-1">
                   {item.value}
                 </p>
                 <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 text-center leading-snug">

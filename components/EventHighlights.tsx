@@ -52,12 +52,12 @@ export default function EventHighlights() {
         <div className="pb-8 mb-10 md:mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6 relative">
           <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div>
-            <p className="font-sans text-xs uppercase tracking-widest text-neutral-500 mb-3">What to Expect</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-light text-white tracking-tight">
-              Event <span className="italic font-normal">Highlights</span>
+            <p className="font-sans text-xs uppercase tracking-widest text-neutral-400 mb-3">What to Expect</p>
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-white tracking-tight">
+              Event <span className="italic font-medium">Highlights</span>
             </h2>
           </div>
-          <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed md:text-left">
+          <p className="font-sans text-sm text-neutral-300 max-w-xs leading-relaxed md:text-left">
             Three days of immersive education, fierce competition, and global connection.
           </p>
         </div>
@@ -76,16 +76,16 @@ export default function EventHighlights() {
               className="group flex flex-col md:flex-row md:items-start gap-4 md:gap-12 border-b border-white/10 py-8"
             >
               {/* Serial index */}
-              <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-700 md:w-20 shrink-0 pt-1">
+              <span className="font-sans text-[10px] uppercase tracking-widest text-neutral-500 md:w-20 shrink-0 pt-1">
                 {String(index + 1).padStart(2, "0")}
               </span>
 
               {/* Content */}
               <div className="flex-1">
-                <h3 className="font-serif text-xl font-light text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
+                <h3 className="font-serif text-xl font-medium text-white group-hover:text-neutral-300 transition-colors duration-200 mb-2 uppercase tracking-wide">
                   {h.title}
                 </h3>
-                <p className="font-sans text-sm md:text-base font-light text-neutral-400 leading-relaxed">
+                <p className="font-sans text-sm md:text-base text-neutral-300 leading-relaxed">
                   {h.desc}
                 </p>
               </div>

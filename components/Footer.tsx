@@ -89,7 +89,7 @@ export default function Footer() {
                     (e.currentTarget as HTMLAnchorElement).style.borderColor = color;
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.color = "#aaaaaa";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#cccccc";
                     (e.currentTarget as HTMLAnchorElement).style.borderColor =
                       "rgba(255,255,255,0.08)";
                   }}
@@ -129,7 +129,7 @@ export default function Footer() {
               <a
                 href="mailto:info@thehebs.com"
                 className="flex items-center gap-3 text-sm font-inter transition-colors"
-                style={{ color: "#aaaaaa" }}
+                style={{ color: "#cccccc" }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLAnchorElement).style.color = "#fff")
                 }
@@ -143,7 +143,7 @@ export default function Footer() {
               <a
                 href="tel:+14843571812"
                 className="flex items-center gap-3 text-sm font-inter transition-colors"
-                style={{ color: "#aaaaaa" }}
+                style={{ color: "#cccccc" }}
                 onMouseEnter={(e) =>
                   ((e.currentTarget as HTMLAnchorElement).style.color = "#fff")
                 }
@@ -176,10 +176,10 @@ export default function Footer() {
           className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
-          <p className="text-xs font-inter" style={{ color: "#555" }}>
+          <p className="text-xs font-inter" style={{ color: "#888" }}>
             © {new Date().getFullYear()} Hair Education Beauty Summit. All rights reserved.
           </p>
-          <p className="text-xs font-inter" style={{ color: "#555" }}>
+          <p className="text-xs font-inter" style={{ color: "#888" }}>
             Lagos, Nigeria · October 23–25, 2026
           </p>
         </motion.div>

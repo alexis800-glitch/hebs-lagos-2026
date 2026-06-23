@@ -119,16 +119,16 @@ export default function WhyAttend() {
           transition={{ duration: 0.7, ease: EXPO }}
           className="text-center mb-10 md:mb-14"
         >
-          <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-500 mb-5">
+          <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-5">
             HEBS Lagos 2026 · Your Opportunity
           </p>
-          <h2 className="font-serif font-medium text-4xl sm:text-5xl md:text-[3.25rem] tracking-tight leading-tight text-white mb-6">
+          <h2 className="font-serif font-semibold text-4xl sm:text-5xl md:text-[3.25rem] tracking-tight leading-tight text-white mb-6">
             Why Attend{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
               HEBS 2026?
             </span>
           </h2>
-          <p className="text-zinc-400 text-[15px] leading-relaxed max-w-xl mx-auto">
+          <p className="text-zinc-300 text-[15px] leading-relaxed max-w-xl mx-auto">
             More than a competition. A platform for recognition, education,
             networking, and global opportunities.
           </p>

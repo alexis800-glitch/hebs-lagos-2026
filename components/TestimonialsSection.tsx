@@ -284,7 +284,7 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="font-serif text-[1.75rem] font-light text-white leading-[1.2] tracking-tight mb-4"
+          className="font-serif text-[1.75rem] font-medium text-white leading-[1.2] tracking-tight mb-4"
         >
           What Beauty{" "}
           <em
@@ -304,7 +304,7 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
-          className="font-sans text-sm text-zinc-400 leading-relaxed mb-7"
+          className="font-sans text-sm text-zinc-300 leading-relaxed mb-7"
         >
           Hairstylists, salon owners, and beauty professionals who experienced
           HEBS firsthand.
@@ -319,7 +319,7 @@ export default function TestimonialsSection() {
           className="flex items-center justify-between border-t border-b border-white/10 py-4 mb-8"
         >
           <div className="text-center flex-1">
-            <p className="font-serif text-xl font-light text-white">
+            <p className="font-serif text-xl font-medium text-white">
               500<span className="text-amber-400">+</span>
             </p>
             <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
@@ -328,7 +328,7 @@ export default function TestimonialsSection() {
           </div>
           <div className="w-px h-8 bg-white/10" />
           <div className="text-center flex-1">
-            <p className="font-serif text-xl font-light text-white">
+            <p className="font-serif text-xl font-medium text-white">
               4.9<span className="text-amber-400">★</span>
             </p>
             <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
@@ -337,7 +337,7 @@ export default function TestimonialsSection() {
           </div>
           <div className="w-px h-8 bg-white/10" />
           <div className="text-center flex-1">
-            <p className="font-serif text-xl font-light text-white">
+            <p className="font-serif text-xl font-medium text-white">
               100<span className="text-amber-400">%</span>
             </p>
             <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
@@ -369,7 +369,7 @@ export default function TestimonialsSection() {
               Community Voices
             </p>
 
-            <h2 className="font-serif text-4xl sm:text-5xl font-light text-white leading-[1.15] tracking-tight mb-6">
+            <h2 className="font-serif text-4xl sm:text-5xl font-medium text-white leading-[1.15] tracking-tight mb-6">
               What Beauty{" "}
               <em
                 className="font-normal italic text-transparent bg-clip-text"
@@ -383,7 +383,7 @@ export default function TestimonialsSection() {
               Are Saying About HEBS
             </h2>
 
-            <p className="font-sans text-sm text-zinc-400 leading-relaxed max-w-sm">
+            <p className="font-sans text-sm text-zinc-300 leading-relaxed max-w-sm">
               Hear directly from hairstylists, salon owners, beauty entrepreneurs,
               educators, and industry professionals who have experienced HEBS firsthand.
             </p>
@@ -391,28 +391,28 @@ export default function TestimonialsSection() {
             {/* Stat strip */}
             <div className="mt-10 flex gap-8">
               <div>
-                <p className="font-serif text-3xl font-light text-white">
+                <p className="font-serif text-3xl font-medium text-white">
                   500<span className="text-amber-400">+</span>
                 </p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
                   Attendees
                 </p>
               </div>
               <div className="w-px bg-white/10" />
               <div>
-                <p className="font-serif text-3xl font-light text-white">
+                <p className="font-serif text-3xl font-medium text-white">
                   4.9<span className="text-amber-400">★</span>
                 </p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
                   Avg Rating
                 </p>
               </div>
               <div className="w-px bg-white/10" />
               <div>
-                <p className="font-serif text-3xl font-light text-white">
+                <p className="font-serif text-3xl font-medium text-white">
                   100<span className="text-amber-400">%</span>
                 </p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
                   Would Return
                 </p>
               </div>
