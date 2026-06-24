@@ -46,7 +46,7 @@ export default function Tickets() {
             Choose Your <span className="italic font-normal">Experience</span>
           </h2>
         </div>
-        <p className="font-sans text-sm text-neutral-400 max-w-xs font-light leading-relaxed">
+        <p className="font-sans text-sm text-neutral-300 max-w-xs font-light leading-relaxed">
           Early bird rates are available for a limited window. Secure placement before tier limits expire.
         </p>
       </div>
@@ -61,9 +61,9 @@ export default function Tickets() {
             {/* Title */}
             <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
               <div className="flex items-center gap-3">
-                <h3 className="font-serif text-2xl text-white font-light group-hover:text-amber-400 transition-colors">{tier.name}</h3>
+                <h3 className="font-serif text-2xl text-white font-normal group-hover:text-amber-400 transition-colors">{tier.name}</h3>
                 {tier.tag && (
-                  <span className="font-sans text-[10px] tracking-wider uppercase bg-neutral-900 border border-neutral-800 px-2 py-0.5 text-neutral-400 font-medium rounded-sm">
+                  <span className="font-sans text-xs tracking-wider uppercase bg-neutral-900 border border-neutral-700 px-2 py-0.5 text-neutral-200 font-medium rounded-sm">
                     {tier.tag}
                   </span>
                 )}
@@ -74,7 +74,7 @@ export default function Tickets() {
             <div className="w-full lg:w-2/5 mb-6 lg:mb-0 flex flex-col justify-center min-h-[64px]">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full">
                 {tier.perks.map((perk, pIdx) => (
-                  <li key={pIdx} className="font-sans text-sm text-neutral-300 flex items-start font-light leading-normal">
+                  <li key={pIdx} className="font-sans text-sm text-neutral-200 flex items-start font-normal leading-normal">
                     <span className="w-1.5 h-1.5 bg-amber-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                     <span>{perk}</span>
                   </li>
@@ -86,12 +86,12 @@ export default function Tickets() {
             <div className="w-full lg:w-1/3 flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-6 lg:gap-10">
               <div className="flex gap-4 sm:gap-6">
                 <div>
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Early Pricing</span>
+                  <span className="block font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium mb-1">Early Pricing</span>
                   <span className="font-sans text-xl font-bold text-white">{tier.earlyPrice}</span>
                 </div>
                 <div className="border-l border-neutral-800 pl-4 sm:pl-6">
-                  <span className="block font-mono text-[10px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Standard Rate</span>
-                  <span className="font-sans text-sm font-light text-neutral-400 line-through">{tier.standardPrice}</span>
+                  <span className="block font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium mb-1">Standard Rate</span>
+                  <span className="font-sans text-sm font-light text-neutral-300 line-through">{tier.standardPrice}</span>
                 </div>
               </div>
 

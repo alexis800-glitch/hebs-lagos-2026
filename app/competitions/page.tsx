@@ -208,11 +208,11 @@ function PartnerBanner({ logo, name, role, note }: { logo: string; name: string;
           <span className="text-sm font-bold text-white">{logo}</span>
         </div>
         <div className="min-w-0">
-          <p className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-0.5">{role}</p>
+          <p className="text-xs font-mono tracking-widest text-zinc-400 uppercase mb-0.5">{role}</p>
           <p className="text-white font-semibold text-sm leading-snug">{name}</p>
         </div>
       </div>
-      <p className="text-zinc-500 text-xs leading-relaxed max-w-sm text-left">
+      <p className="text-zinc-300 text-xs leading-relaxed max-w-sm text-left">
         {note}
       </p>
     </div>
@@ -222,8 +222,8 @@ function PartnerBanner({ logo, name, role, note }: { logo: string; name: string;
 function StatCell({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="text-center">
-      <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-0.5">{label}</p>
-      <p className={`text-xs font-semibold leading-snug whitespace-pre-line ${accent ? 'text-amber-500/90' : 'text-white'}`}>{value}</p>
+      <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-0.5">{label}</p>
+      <p className={`text-xs font-semibold leading-snug whitespace-pre-line ${accent ? 'text-amber-400' : 'text-white'}`}>{value}</p>
     </div>
   )
 }
@@ -268,7 +268,7 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
       {/* Title */}
       <div>
         <h4 className="text-white font-semibold text-base tracking-tight leading-snug">{div.title}</h4>
-        <p className="text-zinc-400 text-xs mt-0.5">{div.subtitle}</p>
+        <p className="text-zinc-300 text-xs mt-0.5">{div.subtitle}</p>
       </div>
 
       {/* Stats row */}
@@ -300,7 +300,7 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
       </div>
 
       {/* Note */}
-      <p className="text-zinc-400 text-xs leading-relaxed mt-auto">{div.note}</p>
+      <p className="text-zinc-300 text-xs leading-relaxed mt-auto">{div.note}</p>
     </div>
   )
 }
@@ -360,7 +360,7 @@ function CompetitionsContent() {
                 className={`whitespace-nowrap flex-shrink-0 px-4 sm:px-6 py-4 text-xs sm:text-sm font-medium tracking-wide border-b-2 transition-all duration-200 touch-manipulation select-none ${
                   activeTab === tab.id
                     ? 'border-white text-white'
-                    : 'border-transparent text-zinc-500 hover:text-zinc-300'
+                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
                 }`}
               >
                 {tab.label}
@@ -384,23 +384,23 @@ function CompetitionsContent() {
 
                   {/* Left: identity */}
                   <div className="flex flex-col gap-3 flex-1">
-                    <span className="text-[10px] font-mono tracking-widest text-amber-500/80 uppercase">
+                    <span className="text-xs font-mono tracking-widest text-amber-400 uppercase">
                       Global Crown Championship™
                     </span>
                     <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-semibold tracking-tight leading-tight">
                       Roots to Royalty™
                     </h2>
-                    <p className="text-zinc-400 text-sm leading-relaxed max-w-md">
+                    <p className="text-zinc-300 text-sm leading-relaxed max-w-md">
                       The ultimate global stage where artistry, culture, fashion, music, beauty, and performance collide into one iconic night.
                     </p>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
+                      <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
                         Oct 25, 2026
                       </span>
-                      <span className="text-[10px] font-mono tracking-widest uppercase text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-3 py-1">
+                      <span className="text-xs font-mono tracking-widest uppercase text-amber-400 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-3 py-1">
                         Lagos, Nigeria
                       </span>
-                      <span className="text-[10px] font-mono tracking-widest text-zinc-500 border border-white/[0.08] rounded-lg px-3 py-1 leading-snug">
+                      <span className="text-xs font-mono tracking-widest text-zinc-300 border border-white/[0.12] rounded-lg px-3 py-1 leading-snug">
                         NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos
                       </span>
                     </div>
@@ -408,11 +408,11 @@ function CompetitionsContent() {
 
                   {/* Right: prize pool */}
                   <div className="flex-shrink-0 md:text-right">
-                    <p className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2">Total Prize Pool</p>
+                    <p className="text-xs font-mono tracking-widest text-zinc-300 uppercase mb-2">Total Prize Pool</p>
                     <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
                       $85,000
                     </p>
-                    <p className="text-zinc-600 text-xs font-mono mt-1 mb-4">USD</p>
+                    <p className="text-zinc-400 text-xs font-mono mt-1 mb-4">USD</p>
                     <div className="flex flex-col gap-2.5">
                       {[
                         { place: '1st', usd: '$20,000 USD', ngn: '₦28,000,000', color: 'text-amber-400' },
@@ -422,7 +422,7 @@ function CompetitionsContent() {
                         <div key={place} className="grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-3">
                           <span className={`font-mono text-xs ${color} tabular-nums`}>{place}</span>
                           <span className="text-white font-semibold text-sm tabular-nums">{usd}</span>
-                          <span className={`font-mono text-[10px] ${color} opacity-75 tabular-nums`}>{ngn}</span>
+                          <span className={`font-mono text-xs ${color} tabular-nums`}>{ngn}</span>
                         </div>
                       ))}
                     </div>
@@ -440,7 +440,7 @@ function CompetitionsContent() {
                       {/* Connector */}
                       <div className="flex flex-col items-center">
                         <div className="w-9 h-9 rounded-full bg-zinc-900 border border-white/[0.10] flex items-center justify-center flex-shrink-0 z-10">
-                          <span className="font-mono text-[10px] text-zinc-400">{stage.n}</span>
+                          <span className="font-mono text-xs text-zinc-300">{stage.n}</span>
                         </div>
                         {i < GLOBAL_STAGES.length - 1 && (
                           <div className="w-px flex-1 bg-gradient-to-b from-white/10 to-transparent my-1 min-h-[2rem]" />
@@ -530,14 +530,14 @@ function CompetitionsContent() {
                 <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
                   Barber Championships™
                 </h2>
-                <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
+                <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
                   Africa&apos;s biggest barbering competition — bringing together professional and student barbers from Nigeria, Africa, and beyond for a high-energy battle of speed, precision, creativity, and technical excellence.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
+                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
                     October 24, 2026 | 1:00 PM – 7:00 PM
                   </span>
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
+                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
                     NJS Royale Beach Resort · Lagos
                   </span>
                 </div>
@@ -553,7 +553,7 @@ function CompetitionsContent() {
 
               {/* Equipment Regulation */}
               <div className="border border-zinc-600/50 bg-zinc-900 rounded-xl px-6 py-5">
-                <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mb-2.5">
+                <p className="font-mono text-xs uppercase tracking-widest text-zinc-300 mb-2.5">
                   Equipment Regulation
                 </p>
                 <p className="text-sm text-zinc-200 leading-relaxed">
@@ -566,7 +566,7 @@ function CompetitionsContent() {
 
               {/* General rules */}
               <div className="bg-zinc-900/30 border border-white/[0.06] rounded-xl px-6 py-4">
-                <p className="text-sm text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-300 leading-relaxed">
                   Must bring your own models.{' '}
                   <span className="text-white font-medium">Arrive 1 hour before start time — no exceptions.</span>{' '}
                   Open to professionals, students, apprentices, and educators.{' '}
@@ -587,7 +587,7 @@ function CompetitionsContent() {
 
               {/* Equipment callout */}
               <div className="border border-white/[0.06] bg-zinc-900/30 rounded-xl p-6">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mb-3">
+                <p className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-3">
                   Official Competition Equipment
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -599,7 +599,7 @@ function CompetitionsContent() {
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-2">
                       <span className="w-1 h-1 rounded-full bg-white/30 mt-1.5 flex-shrink-0" />
-                      <p className="text-zinc-400 text-xs leading-relaxed">{item}</p>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -614,7 +614,7 @@ function CompetitionsContent() {
                   <span className="sm:hidden text-sm font-semibold text-center">Register Now</span>
                   <span className="hidden sm:inline">Register for Barber Championships</span>
                 </PrimaryCTA>
-                <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1 text-center leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-300 font-mono mt-1 text-center leading-relaxed">
                   Entry fees from $50 USD per division
                 </p>
               </div>
@@ -641,7 +641,7 @@ function CompetitionsContent() {
                       The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Beach Resort, Lagos. Registration details are available now.
                     </p>
                   </div>
-                  <span className="hidden sm:inline-block flex-shrink-0 text-[10px] font-mono text-amber-500/70 border border-amber-500/20 rounded-full px-3 py-1.5 whitespace-nowrap">
+                  <span className="hidden sm:inline-block flex-shrink-0 text-xs font-mono text-amber-400 border border-amber-500/25 rounded-full px-3 py-1.5 whitespace-nowrap">
                     Oct 24, 2026
                   </span>
                 </div>
@@ -653,14 +653,14 @@ function CompetitionsContent() {
                 <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
                   Braiding Championships™
                 </h2>
-                <p className="text-zinc-400 text-sm leading-relaxed max-w-xl">
+                <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
                   Africa&apos;s premier braiding competition — celebrating the extraordinary skill, creativity, speed, and innovation of professional braiders from across Africa and the world while honouring one of the oldest beauty traditions.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
+                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
                     October 24, 2026 · 1:00 PM – 7:00 PM
                   </span>
-                  <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
+                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
                     NJS Royale Beach Resort · Lagos
                   </span>
                 </div>
@@ -676,7 +676,7 @@ function CompetitionsContent() {
 
               {/* Product Regulation */}
               <div className="border border-zinc-600/50 bg-zinc-900 rounded-xl px-6 py-5">
-                <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-400 mb-2.5">
+                <p className="font-mono text-xs uppercase tracking-widest text-zinc-300 mb-2.5">
                   Product Regulation
                 </p>
                 <p className="text-sm text-zinc-200 leading-relaxed">
@@ -730,7 +730,7 @@ function CompetitionsContent() {
                 >
                   Register Now
                 </PrimaryCTA>
-                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed tracking-normal max-w-sm mx-auto">
+                <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed tracking-normal max-w-sm mx-auto">
                   Secure your competitive track placement today. Limited stage entries available for international and local professionals.
                 </p>
               </div>
