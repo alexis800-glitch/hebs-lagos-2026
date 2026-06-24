@@ -34,7 +34,7 @@ const CATEGORIES = [
 ] as const;
 
 const VALUE_ITEMS = [
-  { value: "$85,000",    label: "Prize Pool"             },
+  { value: "$85,000",    label: "Prize Pool · ₦119M"      },
   { value: "5",          label: "Competition Categories" },
   { value: "Global",     label: "Beauty Professionals"   },
   { value: "Lagos 2026", label: "October 23–25"          },
@@ -259,7 +259,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
             </span>
-            <span className="sm:hidden">$85,000 USD Prize Pool</span>
+            <span className="sm:hidden">$85,000 USD (₦119M) Pool</span>
             <span className="hidden sm:inline">$85,000 USD (₦119,000,000) Grand Prize Pool</span>
           </span>
         </motion.div>
@@ -269,7 +269,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-          className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-6"
+          className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-300 font-medium mb-6"
         >
           The Hair Education Beauty Summit · Lagos 2026
         </motion.p>
@@ -336,7 +336,7 @@ export default function Hero() {
               initial={mounted ? { opacity: 0, scale: 0.82 } : false}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.45, ease: EXPO, delay: 0.28 + i * 0.055 }}
-              className="inline-flex items-center gap-[6px] font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] rounded-full px-[10px] py-[5px] border border-white/[0.09] bg-white/[0.035] text-zinc-400 select-none"
+              className="inline-flex items-center gap-[6px] font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] rounded-full px-[10px] py-[5px] border border-white/[0.12] bg-white/[0.05] text-zinc-300 font-medium select-none"
             >
               <span
                 className="w-[5px] h-[5px] rounded-full shrink-0"
@@ -449,7 +449,7 @@ export default function Hero() {
                 className="flex flex-col items-center justify-center px-3 py-[14px]"
                 style={{ background: "rgba(13,10,20,0.90)" }}
               >
-                <p className="font-serif text-[16px] sm:text-[17px] font-medium text-white leading-none mb-1">
+                <p className="font-serif text-[16px] sm:text-[17px] font-semibold text-white leading-none mb-1">
                   {item.value}
                 </p>
                 <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 text-center leading-snug">

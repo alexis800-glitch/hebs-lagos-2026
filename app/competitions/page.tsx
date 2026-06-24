@@ -346,7 +346,7 @@ function CompetitionsContent() {
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
-            Three championship tracks. $85,000+ in prizes. One stage. Lagos, Nigeria — October 2026.
+            Three championship tracks. $85,000+ USD (₦119,000,000+) in prizes. One stage. Lagos, Nigeria — October 2026.
           </p>
         </div>
 
@@ -412,7 +412,7 @@ function CompetitionsContent() {
                     <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
                       $85,000
                     </p>
-                    <p className="text-zinc-400 text-xs font-mono mt-1 mb-4">USD</p>
+                    <p className="text-zinc-400 text-xs font-mono mt-1 mb-4">USD · ₦119,000,000</p>
                     <div className="flex flex-col gap-2.5">
                       {[
                         { place: '1st', usd: '$20,000 USD', ngn: '₦28,000,000', color: 'text-amber-400' },

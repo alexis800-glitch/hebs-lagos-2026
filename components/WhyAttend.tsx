@@ -57,7 +57,7 @@ const FEATURES: Feature[] = [
     color: "#f59e0b",
     counter: { value: 85000, prefix: "$", suffix: "", duration: 2.4 },
     label: "Prize Pool",
-    desc: "Compete for one of the largest beauty and barbering prize pools in Africa.",
+    desc: "Compete for Africa's largest beauty prize pool — $85,000 USD (₦119,000,000) distributed across all competition tracks.",
     featured: true,
     bgImage: "/images/highlights/winner-cheque-presentation.png",
     bgPosition: "object-top",
@@ -193,7 +193,7 @@ export default function WhyAttend() {
                 {f.counter ? (
                   <div className="mb-4">
                     <p
-                      className={`font-serif font-medium leading-none tracking-tight tabular-nums [text-shadow:0_2px_16px_rgba(0,0,0,1)] ${
+                      className={`font-serif font-semibold leading-none tracking-tight tabular-nums [text-shadow:0_2px_16px_rgba(0,0,0,1)] ${
                         f.featured ? "text-[4.25rem]" : "text-[3.25rem]"
                       }`}
                       style={{ color: f.color }}

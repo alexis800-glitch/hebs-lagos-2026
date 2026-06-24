@@ -4,7 +4,9 @@ const ticketTiers = [
   {
     name: "1-Day Pass",
     earlyPrice: "$45",
+    earlyNaira: "₦63,000",
     standardPrice: "$65",
+    standardNaira: "₦91,000",
     perks: ["Access to one event day", "General sessions", "Floor networking"],
     tag: "",
     link: "https://hebseventportal.com/register"
@@ -12,7 +14,9 @@ const ticketTiers = [
   {
     name: "2-Day Pass",
     earlyPrice: "$80",
+    earlyNaira: "₦112,000",
     standardPrice: "$110",
+    standardNaira: "₦154,000",
     perks: ["Access to two continuous days", "All general stage sessions", "Networking events inclusion"],
     tag: "",
     link: "https://hebseventportal.com/register"
@@ -20,7 +24,9 @@ const ticketTiers = [
   {
     name: "3-Day All-Inclusive",
     earlyPrice: "$175",
+    earlyNaira: "₦245,000",
     standardPrice: "$250",
+    standardNaira: "₦350,000",
     perks: ["Full 3-day complete access", "All Masterclasses & Workshops", "Competitions viewing", "Networking & Gala Entry"],
     tag: "Best Value",
     link: "https://hebseventportal.com/register"
@@ -28,7 +34,9 @@ const ticketTiers = [
   {
     name: "VIP Experience",
     earlyPrice: "$400",
+    earlyNaira: "₦560,000",
     standardPrice: "$600",
+    standardNaira: "₦840,000",
     perks: ["Full 3-day VIP clearance", "Front-row priority seating", "Exclusive VIP lounge access", "Celebrity Meet & Greet", "Official Merchandise Package"],
     tag: "Premium Clearance",
     link: "https://hebseventportal.com/register"
@@ -88,10 +96,12 @@ export default function Tickets() {
                 <div>
                   <span className="block font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium mb-1">Early Pricing</span>
                   <span className="font-sans text-xl font-bold text-white">{tier.earlyPrice}</span>
+                  <span className="font-mono text-[10px] tracking-wide text-zinc-400 block mt-0.5">{tier.earlyNaira}</span>
                 </div>
                 <div className="border-l border-neutral-800 pl-4 sm:pl-6">
                   <span className="block font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium mb-1">Standard Rate</span>
                   <span className="font-sans text-sm font-light text-neutral-300 line-through">{tier.standardPrice}</span>
+                  <span className="font-mono text-[10px] tracking-wide text-zinc-500 line-through block">{tier.standardNaira}</span>
                 </div>
               </div>
 

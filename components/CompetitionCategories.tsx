@@ -266,7 +266,7 @@ export default function CompetitionCategories() {
             Register for Your Category ↗
           </a>
           <p className="font-mono text-xs tracking-widest uppercase text-zinc-300">
-            Entry from $50 USD · All categories open
+            Entry from $50 USD (₦70,000) · All categories open
           </p>
         </motion.div>
 

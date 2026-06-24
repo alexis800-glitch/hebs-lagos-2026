@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hebslagos.com"),
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    "The Hair Education Beauty Summit returns for Year 3. October 23–25, 2026 at NJS Royale Convention & Suites, Lagos Nigeria. $35,000 in prizes.",
+    "The Hair Education Beauty Summit returns for Year 3. October 23–25, 2026 at NJS Royale Convention & Suites, Lagos Nigeria. $85,000 USD (₦119,000,000) in prizes.",
   keywords: [
     "HEBS",
     "Hair Education Beauty Summit",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "HEBS 2026 — Hair Education Beauty Summit",
-    description: "$35,000 Grand Prize. October 23–25, 2026. Lagos, Nigeria.",
+    description: "$85,000 USD (₦119,000,000) Grand Prize Pool. October 23–25, 2026. Lagos, Nigeria.",
     type: "website",
     url: "https://hebslagos.com",
     siteName: "HEBS Lagos 2026",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HEBS 2026 — Hair Education Beauty Summit",
-    description: "$35,000 Grand Prize. October 23–25, 2026. Lagos, Nigeria.",
+    description: "$85,000 USD (₦119,000,000) Grand Prize Pool. October 23–25, 2026. Lagos, Nigeria.",
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };

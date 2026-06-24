@@ -140,8 +140,8 @@ export default function GallerySection() {
           >
             View Full Gallery ↗
           </Link>
-          <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-600">
-            HEBS 2025 archive
+          <p className="font-mono text-xs tracking-widest uppercase text-zinc-400 font-medium">
+            HEBS 2025 Archive
           </p>
         </div>
 
