@@ -152,19 +152,19 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
               {/* Payout Ledger */}
               <div className="border-t border-neutral-900 pt-8 mt-8 grid grid-cols-3 gap-4">
                 <div>
-                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-500 mb-1">1st Place Icon</span>
+                  <span className="block font-sans text-[10px] uppercase tracking-wider text-neutral-400 mb-1">1st Place Icon</span>
                   <span className="font-sans text-lg font-bold text-white block">$20,000</span>
-                  <span className="font-mono text-[9px] text-neutral-500">or ₦29.4M + Trophy</span>
+                  <span className="font-mono text-[10px] text-neutral-400">or ₦29.4M + Trophy</span>
                 </div>
                 <div className="border-l border-neutral-900 pl-4">
-                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-500 mb-1">2nd Place Vanguard</span>
+                  <span className="block font-sans text-[10px] uppercase tracking-wider text-neutral-400 mb-1">2nd Place Vanguard</span>
                   <span className="font-sans text-base font-medium text-neutral-200 block">$10,000</span>
-                  <span className="font-mono text-[9px] text-neutral-500">or ₦14.7M + Trophy</span>
+                  <span className="font-mono text-[10px] text-neutral-400">or ₦14.7M + Trophy</span>
                 </div>
                 <div className="border-l border-neutral-900 pl-4">
-                  <span className="block font-sans text-[9px] uppercase tracking-wider text-neutral-500 mb-1">3rd Place Revolutionist</span>
+                  <span className="block font-sans text-[10px] uppercase tracking-wider text-neutral-400 mb-1">3rd Place Revolutionist</span>
                   <span className="font-sans text-base font-medium text-neutral-300 block">$5,000</span>
-                  <span className="font-mono text-[9px] text-neutral-500">or ₦7.3M + Trophy</span>
+                  <span className="font-mono text-[10px] text-neutral-400">or ₦7.3M + Trophy</span>
                 </div>
               </div>
             </div>
@@ -182,7 +182,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   <li className="flex items-center gap-2"><span className="w-1 h-1 bg-neutral-700 rounded-full shrink-0"></span> Audience Engagement & Stage Presence</li>
                 </ul>
               </div>
-              <div className="border-t border-neutral-900 pt-4 mt-6 text-[10px] font-mono text-neutral-500 leading-normal">
+              <div className="border-t border-neutral-900 pt-4 mt-6 text-xs font-mono text-neutral-400 leading-normal">
                 Featuring Celebrity Judges, Live Instagram Voting, and Global Editorial Press Coverage.
               </div>
             </div>
@@ -328,7 +328,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                     alt={battle.title}
                     className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                   />
-                  <div className="absolute top-3 left-3 font-mono text-[9px] tracking-wider uppercase bg-black/80 border border-neutral-800 px-2 py-0.5 text-neutral-400 rounded-xs">
+                  <div className="absolute top-3 left-3 font-mono text-[10px] tracking-wider uppercase bg-black/80 border border-neutral-800 px-2 py-0.5 text-neutral-300 rounded-xs">
                     {battle.number}
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   </div>
                   <div className="border-t border-neutral-900/60 pt-4 mt-6 flex items-center justify-between">
                     <div>
-                      <span className="block font-mono text-[8px] uppercase tracking-wider text-neutral-600">Entry Stake</span>
+                      <span className="block font-mono text-[10px] uppercase tracking-wider text-neutral-400">Entry Stake</span>
                       <span className="font-sans text-sm font-medium text-white">{battle.price}</span>
                     </div>
                     <a

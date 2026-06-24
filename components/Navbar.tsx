@@ -96,18 +96,18 @@ export default function Navbar() {
                             onClick={() => setIsCompetitionOpen(false)}
                             className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
                           >
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 font-medium">Track 01 · Oct 25, 2026</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium">Track 01 · Oct 25, 2026</span>
                             <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Global Crown Championship 2026</span>
-                            <span className="font-sans text-xs text-zinc-400 font-light leading-relaxed">Flagship solo creative global event with a $85,000 prize pool.</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Flagship solo creative global event with a $85,000 prize pool.</span>
                           </Link>
                           <Link
                             href="/competitions?track=barber"
                             onClick={() => setIsCompetitionOpen(false)}
                             className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
                           >
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 font-medium">Track 02 · Oct 24, 2026</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-medium">Track 02 · Oct 24, 2026</span>
                             <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Barber Championships 2026</span>
-                            <span className="font-sans text-xs text-zinc-400 font-light leading-relaxed">4 high-stakes speed, fade, and design divisions powered by Men&apos;s Pro Tools™.</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">4 high-stakes speed, fade, and design divisions powered by Men&apos;s Pro Tools™.</span>
                           </Link>
                           <Link
                             href="/competitions?track=braiding"
@@ -115,15 +115,14 @@ export default function Navbar() {
                             className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
                           >
                             <div className="flex items-center gap-2">
-                              <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 font-medium">Track 03</span>
-                              <span className="text-[9px] font-mono text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 leading-none">May 2027</span>
+                              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-medium">Track 03 · Oct 24, 2026</span>
                             </div>
-                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Braiding Championships 2027</span>
-                            <span className="font-sans text-xs text-zinc-400 font-light leading-relaxed">Solo and collaborative braiding tracks powered by PureO Natural Products™.</span>
+                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Braiding Championships 2026</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Solo and collaborative braiding tracks powered by PureO Natural Products™.</span>
                           </Link>
                         </div>
                         <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-center gap-6">
-                          <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500">HEBS Lagos · Oct 23–25, 2026</span>
+                          <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">HEBS Lagos · Oct 23–25, 2026</span>
                           <a
                             href="https://hebseventportal.com/register"
                             target="_blank"
@@ -328,8 +327,8 @@ export default function Navbar() {
                           Barber Championships 2026
                         </Link>
                         <Link href="/competitions?track=braiding" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
-                          Braiding Championships
-                          <span className="text-[9px] font-mono text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 leading-none">May 2027</span>
+                          Braiding Championships 2026
+                          <span className="text-[10px] font-mono text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 leading-none">Oct 24</span>
                         </Link>
                       </div>
                     </motion.div>

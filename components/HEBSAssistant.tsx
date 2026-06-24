@@ -52,7 +52,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["global crown", "crowned icon", "beauty competition", "hairstylist competition", "makeup competition", "fashion competition", "nail competition", "editorial", "avant garde"],
     answer:
-      "The Global Crown Championship has 3 stages:\n1. Preselection Video Submission — Submit a 3-min video to casting@hebslagos.com by Aug 5, 2026. Pay $50 entry fee at hebslagos.com.\n2. Instagram Voting (Aug 10–18, 2026) — Top 12 by likes/comments on @haireducationbeautysummit advance.\n3. Live Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
+      "The Global Crown Championship has 3 stages:\n1. Pre-selection Video Submission — Submit a 3-min video to casting@hebslagos.com by August 20, 2026. Pay $50 entry fee at hebslagos.com.\n2. Public Instagram Voting (August 25–30, 2026) — Top 12 by likes/comments on @haireducationbeautysummit advance.\n3. Live Champion — October 25, 2026 on the main stage in Lagos, in person.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
   },
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
@@ -62,7 +62,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
     answer:
-      "The Braiding Championships are scheduled for May 24, 2027 as an Independent Spring Track — not part of the October 2026 event. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
+      "The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Beach Resort, Lagos. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
   },
   {
     triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "85000", "$85", "prize money"],
@@ -72,7 +72,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["categories", "competition category", "divisions", "what competitions", "which competitions", "tracks", "events", "what can i compete in", "competition types"],
     answer:
-      "HEBS Lagos 2026 competition tracks:\n\n🏆 Global Crown Championship — Beauty, hair, makeup, fashion, nail artistry\n✂️ Barber Championships — Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — Coming May 2027\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
+      "HEBS Lagos 2026 competition tracks:\n\n🏆 Global Crown Championship — Oct 25 · Beauty, hair, makeup, fashion, nail artistry\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — Oct 24 · Fast & Flawless Braiding, Braids & Fades Showdown, Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
   },
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],

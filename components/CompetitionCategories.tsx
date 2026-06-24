@@ -139,7 +139,7 @@ export default function CompetitionCategories() {
           transition={{ duration: 0.7, ease: EXPO }}
           className="text-center mb-10 md:mb-14"
         >
-          <p className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-400 mb-5">
+          <p className="font-mono text-xs tracking-[0.25em] uppercase text-zinc-300 mb-5">
             HEBS Lagos 2026 · Six Disciplines
           </p>
           <h2 className="font-serif font-semibold text-4xl sm:text-5xl md:text-[3.25rem] tracking-tight leading-tight text-white mb-6">
@@ -223,7 +223,7 @@ export default function CompetitionCategories() {
                   <h3 className="font-sans text-white font-bold text-base leading-snug mb-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {cat.title}
                   </h3>
-                  <p className="text-zinc-200 text-[13px] leading-relaxed mb-5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                  <p className="text-zinc-100 text-[13px] leading-relaxed mb-5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     {cat.desc}
                   </p>
 
@@ -235,7 +235,7 @@ export default function CompetitionCategories() {
 
                   {/* CTA */}
                   <div
-                    className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase"
+                    className="flex items-center gap-1.5 text-xs font-semibold tracking-[0.12em] uppercase"
                     style={{ color: cat.color }}
                   >
                     <span>Explore Category</span>
@@ -265,7 +265,7 @@ export default function CompetitionCategories() {
           >
             Register for Your Category ↗
           </a>
-          <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400">
+          <p className="font-mono text-xs tracking-widest uppercase text-zinc-300">
             Entry from $50 USD · All categories open
           </p>
         </motion.div>

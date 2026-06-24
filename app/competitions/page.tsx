@@ -18,14 +18,14 @@ const TABS: { id: Tab; label: string }[] = [
 const GLOBAL_STAGES = [
   {
     n: '01',
-    title: 'Preselection Video Submission',
-    deadline: 'Deadline: Aug 5, 2026',
+    title: 'Pre-selection Video Submission',
+    deadline: 'August 20, 2026',
     desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. Pay the $50 entry fee at hebslagos.com to complete registration.</>,
   },
   {
     n: '02',
     title: 'Public Instagram Voting',
-    deadline: 'Aug 10 – Aug 18, 2026',
+    deadline: 'August 25 – August 30, 2026',
     desc: 'All approved submissions are posted on @haireducationbeautysummit. Voting counts likes and comments only. The top 12 artists by total engagement advance to compete live in Lagos.',
   },
   {
@@ -186,7 +186,7 @@ function parsePrize(p: string) {
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mb-1">
+    <p className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-1">
       {children}
     </p>
   )
@@ -222,8 +222,8 @@ function PartnerBanner({ logo, name, role, note }: { logo: string; name: string;
 function StatCell({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="text-center">
-      <p className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider mb-0.5">{label}</p>
-      <p className={`text-[10px] font-semibold leading-snug whitespace-pre-line ${accent ? 'text-amber-500/90' : 'text-white'}`}>{value}</p>
+      <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-0.5">{label}</p>
+      <p className={`text-xs font-semibold leading-snug whitespace-pre-line ${accent ? 'text-amber-500/90' : 'text-white'}`}>{value}</p>
     </div>
   )
 }
@@ -242,7 +242,7 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
       {/* Featured badge */}
       {featured && (
         <div className="-mt-1 mb-0">
-          <span className="inline-block text-[9px] font-mono tracking-widest text-amber-500/90 bg-amber-500/[0.08] border border-amber-500/25 rounded-full px-3 py-1 uppercase">
+          <span className="inline-block text-[10px] font-mono tracking-widest text-amber-500/90 bg-amber-500/[0.08] border border-amber-500/25 rounded-full px-3 py-1 uppercase">
             Featured Collaborative Track
           </span>
         </div>
@@ -250,15 +250,15 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
 
       {/* Header row */}
       <div className="flex items-start justify-between gap-2">
-        <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">{div.n}</span>
+        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">{div.n}</span>
         <div className="flex gap-1.5 flex-wrap justify-end">
           {div.isTeam && (
-            <span className="text-[9px] font-mono tracking-widest text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 uppercase">
+            <span className="text-[10px] font-mono tracking-widest text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 uppercase">
               Team
             </span>
           )}
           {'format' in div && (
-            <span className="text-[9px] font-mono tracking-widest text-zinc-500 border border-white/[0.06] rounded-full px-2 py-0.5">
+            <span className="text-[10px] font-mono tracking-widest text-zinc-400 border border-white/[0.06] rounded-full px-2 py-0.5">
               {(div as BraidDivision).format}
             </span>
           )}
@@ -268,7 +268,7 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
       {/* Title */}
       <div>
         <h4 className="text-white font-semibold text-base tracking-tight leading-snug">{div.title}</h4>
-        <p className="text-zinc-500 text-xs mt-0.5">{div.subtitle}</p>
+        <p className="text-zinc-400 text-xs mt-0.5">{div.subtitle}</p>
       </div>
 
       {/* Stats row */}
@@ -288,11 +288,11 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
           return (
             <div key={p} className="flex flex-col gap-0.5">
               <div className="flex items-baseline gap-2">
-                <span className="font-mono text-[10px] text-zinc-500 w-7 shrink-0">{parsed.place}</span>
+                <span className="font-mono text-xs text-zinc-400 w-7 shrink-0">{parsed.place}</span>
                 <span className="text-xs font-semibold text-zinc-100 tabular-nums">{parsed.usd}</span>
               </div>
               {parsed.ngn && (
-                <span className="pl-9 font-mono text-[10px] text-zinc-500 tabular-nums">{parsed.ngn}</span>
+                <span className="pl-9 font-mono text-[10px] text-zinc-400 tabular-nums">{parsed.ngn}</span>
               )}
             </div>
           )
@@ -300,7 +300,7 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
       </div>
 
       {/* Note */}
-      <p className="text-zinc-500 text-xs leading-relaxed mt-auto">{div.note}</p>
+      <p className="text-zinc-400 text-xs leading-relaxed mt-auto">{div.note}</p>
     </div>
   )
 }
@@ -338,7 +338,7 @@ function CompetitionsContent() {
 
         {/* ── Page Header ──────────────────────────────────────────────────── */}
         <div className="pt-32 pb-10 px-5 sm:px-8 text-center">
-          <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-3 block">
+          <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase mb-3 block">
             HEBS Lagos 2026 — Competition Tracks
           </span>
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-semibold text-white tracking-tight leading-tight max-w-4xl mx-auto">
@@ -450,14 +450,14 @@ function CompetitionsContent() {
                       {/* Content */}
                       <div className="pb-10 flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2 mb-2">
-                          <h4 className="text-white font-medium text-sm sm:text-base leading-snug">
+                          <h4 className="text-white font-semibold text-sm sm:text-base leading-snug">
                             {stage.title}
                           </h4>
-                          <span className="text-[9px] font-mono text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2.5 py-0.5 whitespace-nowrap">
+                          <span className="text-[10px] font-mono text-amber-500/90 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2.5 py-0.5 whitespace-nowrap">
                             {stage.deadline}
                           </span>
                         </div>
-                        <p className="text-zinc-400 text-sm leading-relaxed">{stage.desc}</p>
+                        <p className="text-zinc-300 text-sm leading-relaxed">{stage.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -470,13 +470,13 @@ function CompetitionsContent() {
                   <SectionLabel>Who Can Enter</SectionLabel>
                   <ul className="flex flex-col gap-2.5 mt-3">
                     {ELIGIBLE_ARTISTS.map((cat) => (
-                      <li key={cat} className="flex items-center gap-2.5 text-sm text-zinc-300">
+                      <li key={cat} className="flex items-center gap-2.5 text-sm text-zinc-200">
                         <span className="w-1 h-1 rounded-full bg-amber-500 flex-shrink-0" />
                         {cat}
                       </li>
                     ))}
                   </ul>
-                  <p className="text-zinc-600 text-xs font-mono mt-5 leading-relaxed">
+                  <p className="text-zinc-400 text-xs font-mono mt-5 leading-relaxed">
                     Open worldwide — every country, every background.
                   </p>
                 </div>
@@ -486,14 +486,14 @@ function CompetitionsContent() {
                   <div className="flex flex-col gap-4 mt-3">
                     {JUDGING_CRITERIA.map((c) => (
                       <div key={c.label} className="flex items-center justify-between gap-4">
-                        <span className="text-zinc-300 text-sm leading-snug">{c.label}</span>
+                        <span className="text-zinc-200 text-sm leading-snug">{c.label}</span>
                         <span className="text-white font-mono text-sm font-semibold flex-shrink-0 tabular-nums">
                           {c.weight}
                         </span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-zinc-600 text-xs font-mono mt-5 leading-relaxed">
+                  <p className="text-zinc-400 text-xs font-mono mt-5 leading-relaxed">
                     Finalists arrange own travel and lodging. HEBS provides full stage production.
                   </p>
                 </div>
@@ -508,10 +508,10 @@ function CompetitionsContent() {
                   <span className="sm:hidden">Register Now</span>
                   <span className="hidden sm:inline">Register Now — $50 USD / ₦70,000</span>
                 </PrimaryCTA>
-                <p className="text-zinc-600 text-xs font-mono">
-                  Non-refundable · Deadline August 5, 2026 · questions: competitions@hebslagos.com
+                <p className="text-zinc-400 text-xs font-mono">
+                  Non-refundable · Deadline August 20, 2026 · questions: competitions@hebslagos.com
                 </p>
-                <p className="text-zinc-600 text-[11px] font-mono text-center max-w-md leading-relaxed mt-1">
+                <p className="text-zinc-400 text-[11px] font-mono text-center max-w-md leading-relaxed mt-1">
                   * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.
                 </p>
               </div>
@@ -627,7 +627,7 @@ function CompetitionsContent() {
           {activeTab === 'braiding' && (
             <div className="flex flex-col gap-12">
 
-              {/* Coming 2027 Banner */}
+              {/* Date Notice Banner */}
               <div className="w-full border border-amber-500/25 bg-gradient-to-r from-zinc-900/90 via-amber-500/[0.07] to-zinc-900/90 rounded-2xl px-6 py-5">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   <div className="w-9 h-9 rounded-full border border-amber-500/30 bg-amber-500/[0.08] flex items-center justify-center flex-shrink-0">
@@ -635,21 +635,21 @@ function CompetitionsContent() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-amber-400 font-semibold text-sm tracking-wide">
-                      Scheduled for May 24, 2027 — Independent Spring Track
+                      Scheduled for October 24, 2026 — Dedicated Track
                     </p>
                     <p className="text-zinc-400 text-xs mt-1 leading-relaxed">
-                      The Braiding Championships are a separate event scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos. Registration details will be announced closer to the date.
+                      The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Beach Resort, Lagos. Registration details are available now.
                     </p>
                   </div>
                   <span className="hidden sm:inline-block flex-shrink-0 text-[10px] font-mono text-amber-500/70 border border-amber-500/20 rounded-full px-3 py-1.5 whitespace-nowrap">
-                    May 24, 2027
+                    Oct 24, 2026
                   </span>
                 </div>
               </div>
 
               {/* Header */}
               <div>
-                <SectionLabel>Track 3 — May 24, 2027</SectionLabel>
+                <SectionLabel>Track 3 — October 24, 2026</SectionLabel>
                 <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
                   Braiding Championships™
                 </h2>
@@ -658,7 +658,7 @@ function CompetitionsContent() {
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
-                    May 24, 2027 · 1:00 PM – 7:00 PM
+                    October 24, 2026 · 1:00 PM – 7:00 PM
                   </span>
                   <span className="text-[10px] font-mono tracking-widest uppercase text-zinc-500 border border-white/[0.08] rounded-full px-3 py-1">
                     NJS Royale Beach Resort · Lagos
@@ -712,11 +712,11 @@ function CompetitionsContent() {
                   ].map((who) => (
                     <div key={who} className="flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-amber-500/70 flex-shrink-0" />
-                      <span className="text-zinc-300 text-xs leading-relaxed">{who}</span>
+                      <span className="text-zinc-200 text-xs leading-relaxed">{who}</span>
                     </div>
                   ))}
                 </div>
-                <p className="text-zinc-600 text-xs font-mono mt-4">Minimum age: 16 years old.</p>
+                <p className="text-zinc-400 text-xs font-mono mt-4">Minimum age: 16 years old.</p>
               </div>
 
               {/* CTA */}
