@@ -261,7 +261,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   </div>
                   <div className="pb-2">
                     <span className="font-sans text-xs uppercase tracking-wider text-white font-medium">Live Rehearsal Day</span>
-                    <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-1">Confirmed teams attend the NJS Royale venue for a timed stage walk-through, lighting cue checks, and audio synchronisation with production crew.</p>
+                    <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-1">Confirmed teams attend the NJS Royale Events Center for a timed stage walk-through, lighting cue checks, and audio synchronisation with production crew.</p>
                     <span className="font-mono text-[10px] text-neutral-500 mt-2 block">October 23, 2026</span>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
                   <div>
                     <span className="font-sans text-xs uppercase tracking-wider text-white font-medium">Grand Championship Night</span>
                     <p className="font-sans text-sm text-neutral-400 font-light leading-relaxed mt-1">All teams perform live before a panel of celebrity judges and a packed audience. Winners announced on stage at the closing ceremony.</p>
-                    <span className="font-mono text-[10px] text-amber-500 mt-2 block">October 24–25, 2026 · NJS Royale Convention & Suites</span>
+                    <span className="font-mono text-[10px] text-amber-500 mt-2 block">October 24–25, 2026 · NJS Royale Events Center</span>
                   </div>
                 </div>
               </div>

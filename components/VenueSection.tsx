@@ -63,7 +63,7 @@ export default function VenueSection() {
                 <div>
                   <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-500 mb-1">Location</p>
                   <p className="text-white font-semibold text-sm leading-snug">
-                    Richland Garden Estate, Lekki Epe Express, Lagos, Nigeria
+                    NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos
                   </p>
                 </div>
                 <div className="w-full h-[1px] bg-white/[0.06]" />
@@ -74,7 +74,7 @@ export default function VenueSection() {
                   </div>
                   <div>
                     <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-500 mb-1">Venue</p>
-                    <p className="text-white text-sm font-medium">NJS Royale</p>
+                    <p className="text-white text-sm font-medium">NJS Royale Events Center</p>
                   </div>
                 </div>
                 <a

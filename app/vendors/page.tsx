@@ -229,7 +229,7 @@ export default function VendorsPage() {
           {[
             { label: 'Early Bird Deadline', value: 'August 31, 2026', note: 'Lock in the lowest rate before cutoff' },
             { label: 'Setup Window', value: 'October 22, 2026', note: 'Full day pre-event booth setup access' },
-            { label: 'Event Dates', value: 'Oct 23–25, 2026', note: 'NJS Royale Convention & Suites, Lagos' },
+            { label: 'Event Dates', value: 'Oct 23–25, 2026', note: 'NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos' },
           ].map((item) => (
             <div key={item.label} className="border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-xl p-5 backdrop-blur-sm shadow-sm">
               <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-1">{item.label}</span>

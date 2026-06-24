@@ -11,7 +11,7 @@ const contactItems = [
   {
     icon: MapPin,
     label: "Venue",
-    value: "NJS Royale Convention & Suites, Lagos, Nigeria",
+    value: "NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos",
   },
   {
     icon: Mail,

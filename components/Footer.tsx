@@ -107,12 +107,11 @@ export default function Footer() {
               <MapPin size={18} className="mt-0.5 shrink-0" style={{ color: "#e91e8c" }} />
               <div>
                 <p className="text-zinc-200 text-sm font-semibold leading-snug">
-                  NJS Event and Conference Center
+                  NJS Royale Events Center
                 </p>
-                <p className="text-sm font-inter mt-1 leading-relaxed" style={{ color: "#aaaaaa" }}>
-                  Inside Richland Garden Estate,<br />
-                  Along Lekki-Epe Expressway,<br />
-                  Shapati, Ibeju-Lekki,<br />
+                <p className="text-sm font-inter mt-1 leading-relaxed" style={{ color: "#cccccc" }}>
+                  Richland Garden Estate,<br />
+                  Lekki-Epe Expressway,<br />
                   Lagos, Nigeria
                 </p>
                 <p className="text-sm font-inter mt-2" style={{ color: "#9b59b6" }}>
@@ -124,7 +123,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <h4 className="font-playfair font-bold text-zinc-50 text-lg">Contact (US)</h4>
+            <h4 className="font-playfair font-bold text-zinc-50 text-lg">Contact</h4>
             <div className="flex flex-col gap-3">
               <a
                 href="mailto:info@thehebs.com"
@@ -152,7 +151,21 @@ export default function Footer() {
                 }
               >
                 <Phone size={16} style={{ color: "#9b59b6" }} />
-                484-357-1812
+                +1 484-357-1812 (US)
+              </a>
+              <a
+                href="tel:+2348065881783"
+                className="flex items-center gap-3 text-sm font-inter transition-colors"
+                style={{ color: "#cccccc" }}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLAnchorElement).style.color = "#fff")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLAnchorElement).style.color = "#aaaaaa")
+                }
+              >
+                <Phone size={16} style={{ color: "#e91e8c" }} />
+                08065881783 (Lagos)
               </a>
             </div>
             <a
@@ -176,10 +189,10 @@ export default function Footer() {
           className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
           style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
         >
-          <p className="text-xs font-inter" style={{ color: "#888" }}>
+          <p className="text-xs font-inter" style={{ color: "#aaa" }}>
             © {new Date().getFullYear()} Hair Education Beauty Summit. All rights reserved.
           </p>
-          <p className="text-xs font-inter" style={{ color: "#888" }}>
+          <p className="text-xs font-inter" style={{ color: "#aaa" }}>
             Lagos, Nigeria · October 23–25, 2026
           </p>
         </motion.div>

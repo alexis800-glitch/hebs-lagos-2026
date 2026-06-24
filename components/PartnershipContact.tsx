@@ -5,7 +5,7 @@ const deadlines = [
   { date: 'May 30, 2026',        label: 'Local Vendor/Exhibitor Registration Deadline' },
   { date: 'June 15, 2026',       label: 'Final Exhibitor & Vendor Payment Deadline' },
   { date: 'October 23–25, 2026', label: 'Event Dates' },
-  { date: 'Venue',               label: 'NJS Royale Convention & Suites, Lagos, Nigeria' },
+  { date: 'Venue',               label: 'NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos' },
 ]
 
 export default function PartnershipContact() {

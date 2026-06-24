@@ -32,7 +32,7 @@ const GLOBAL_STAGES = [
     n: '03',
     title: 'Live Championship Finals',
     deadline: 'October 25, 2026',
-    desc: 'The 12 finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
+    desc: 'The 12 finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
   },
 ]
 
@@ -401,7 +401,7 @@ function CompetitionsContent() {
                         Lagos, Nigeria
                       </span>
                       <span className="text-xs font-mono tracking-widest text-zinc-300 border border-white/[0.12] rounded-lg px-3 py-1 leading-snug">
-                        NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos
+                        NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos
                       </span>
                     </div>
                   </div>
@@ -493,7 +493,7 @@ function CompetitionsContent() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-zinc-400 text-xs font-mono mt-5 leading-relaxed">
+                  <p className="text-zinc-300 text-xs font-mono mt-5 leading-relaxed">
                     Finalists arrange own travel and lodging. HEBS provides full stage production.
                   </p>
                 </div>
@@ -508,10 +508,10 @@ function CompetitionsContent() {
                   <span className="sm:hidden">Register Now</span>
                   <span className="hidden sm:inline">Register Now — $50 USD / ₦70,000</span>
                 </PrimaryCTA>
-                <p className="text-zinc-400 text-xs font-mono">
-                  Non-refundable · Deadline August 20, 2026 · questions: competitions@hebslagos.com
+                <p className="text-zinc-300 text-xs font-mono font-medium">
+                  Non-refundable · Deadline August 20, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
                 </p>
-                <p className="text-zinc-400 text-[11px] font-mono text-center max-w-md leading-relaxed mt-1">
+                <p className="text-zinc-300 text-xs font-mono text-center max-w-md leading-relaxed mt-1">
                   * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.
                 </p>
               </div>
@@ -538,7 +538,7 @@ function CompetitionsContent() {
                     October 24, 2026 | 1:00 PM – 7:00 PM
                   </span>
                   <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    NJS Royale Beach Resort · Lagos
+                    NJS Royale Events Center · Lagos
                   </span>
                 </div>
               </div>
@@ -638,7 +638,7 @@ function CompetitionsContent() {
                       Scheduled for October 24, 2026 — Dedicated Track
                     </p>
                     <p className="text-zinc-400 text-xs mt-1 leading-relaxed">
-                      The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Beach Resort, Lagos. Registration details are available now.
+                      The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Registration details are available now.
                     </p>
                   </div>
                   <span className="hidden sm:inline-block flex-shrink-0 text-xs font-mono text-amber-400 border border-amber-500/25 rounded-full px-3 py-1.5 whitespace-nowrap">
@@ -661,7 +661,7 @@ function CompetitionsContent() {
                     October 24, 2026 · 1:00 PM – 7:00 PM
                   </span>
                   <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    NJS Royale Beach Resort · Lagos
+                    NJS Royale Events Center · Lagos
                   </span>
                 </div>
               </div>

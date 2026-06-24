@@ -22,7 +22,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos island", "place", "held", "center", "centre", "convention"],
     answer:
-      "HEBS Lagos 2026 is held at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos, Nigeria.",
+      "HEBS Lagos 2026 is held at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria.",
   },
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
@@ -62,7 +62,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
     answer:
-      "The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Beach Resort, Lagos. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
+      "The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
   },
   {
     triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "85000", "$85", "prize money"],
@@ -139,7 +139,7 @@ const QUICK_OPTIONS: QuickOption[] = [
   { label: "Competition categories", href: "/competitions", external: false },
   {
     label: "Event date and venue",
-    answer: "HEBS Lagos 2026 runs October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos, Nigeria.",
+    answer: "HEBS Lagos 2026 runs October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria.",
   },
   { label: "Contact support", href: "/contact", external: false },
 ];
