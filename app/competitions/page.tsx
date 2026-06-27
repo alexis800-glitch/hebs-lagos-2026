@@ -19,17 +19,23 @@ const GLOBAL_STAGES = [
   {
     n: '01',
     title: 'Pre-selection Video Submission',
-    deadline: 'August 20, 2026',
+    deadline: 'August 5, 2026',
     desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. Pay the $50 entry fee at hebslagos.com to complete registration.</>,
   },
   {
     n: '02',
     title: 'Public Instagram Voting',
-    deadline: 'August 25 – August 30, 2026',
+    deadline: 'August 10 – August 18, 2026',
     desc: 'All approved submissions are posted on @haireducationbeautysummit. Voting counts likes and comments only. The top 12 artists by total engagement advance to compete live in Lagos.',
   },
   {
     n: '03',
+    title: 'Finalists Announced',
+    deadline: 'August 19, 2026',
+    desc: 'The top 12 finalists are announced publicly on @haireducationbeautysummit. All selected artists are notified directly and must confirm their participation within 48 hours.',
+  },
+  {
+    n: '04',
     title: 'Live Championship Finals',
     deadline: 'October 25, 2026',
     desc: 'The 12 finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
@@ -71,41 +77,41 @@ const BARBER_DIVISIONS: Division[] = [
     n: '01',
     title: 'Fast & Flawless Challenge™',
     subtitle: 'The Ultimate Speed Competition · 15 min',
-    entry: '$50 USD\n(₦70,000)',
+    entry: '$50 USD',
     time: '15 min',
-    prizePool: '$5,000 USD\n(₦7,000,000)',
-    prizes: ['1st — $3,000 USD (₦4,200,000)', '2nd — $1,500 USD (₦2,100,000)', '3rd — $500 USD (₦700,000)'],
+    prizePool: '$5,000',
+    prizes: ['1st — $3,000', '2nd — $1,500', '3rd — $500'],
     note: 'Complete a clean, polished haircut under intense time pressure. Permitted: tapers, fades, burst fades, mohawks, modern cuts.',
   },
   {
     n: '02',
     title: 'Battle of the Fades™',
     subtitle: 'The Ultimate Fade Championship · 30 min',
-    entry: '$50 USD\n(₦70,000)',
+    entry: '$50 USD',
     time: '30 min',
-    prizePool: '$5,000 USD\n(₦7,000,000)',
-    prizes: ['1st — $3,000 USD (₦4,200,000)', '2nd — $1,500 USD (₦2,100,000)', '3rd — $500 USD (₦700,000)'],
+    prizePool: '$5,000',
+    prizes: ['1st — $3,000', '2nd — $1,500', '3rd — $500'],
     note: 'Demonstrate smooth transitions, weight control, symmetry, clean detailing, and a flawless professional finish.',
   },
   {
     n: '03',
     title: 'Freestyle Design Battle™',
     subtitle: 'Art Meets Barbering · 60 min',
-    entry: '$75 USD\n(₦105,000)',
+    entry: '$75 USD',
     time: '60 min',
-    prizePool: '$7,500 USD\n(₦10,500,000)',
-    prizes: ['1st — $4,000 USD (₦5,600,000)', '2nd — $2,500 USD (₦3,500,000)', '3rd — $1,000 USD (₦1,400,000)'],
+    prizePool: '$7,500',
+    prizes: ['1st — $4,000', '2nd — $2,500', '3rd — $1,000'],
     note: 'Hair tattoos, portrait designs, artistic patterns, cultural concepts, abstract artwork. Creativity is the brief.',
   },
   {
     n: '04',
-    title: 'Barber Game™',
+    title: 'Barber Games™',
     subtitle: 'The Ultimate Team Battle · 2 Hours',
-    entry: '$100 USD\n(₦140,000) / team',
+    entry: '$100 USD / team',
     time: '2 hrs',
-    prizePool: '$10,000 USD\n(₦14,000,000)',
+    prizePool: '$10,000',
     prizes: ['Winning Team — $10,000', 'Championship Trophy', 'Team Recognition'],
-    note: 'Held Oct 25. Four barbers each own a designated section of one transformational look — teamwork, timing, and cohesion decide the winner.',
+    note: 'Four barbers each own a designated section of one transformational look — teamwork, timing, and cohesion decide the winner.',
     isTeam: true,
   },
 ]
@@ -123,10 +129,10 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Fast & Flawless Braiding Challenge™',
     subtitle: 'Speed Meets Precision',
     format: 'Solo',
-    entry: '$50 USD\n(₦70,000)',
+    entry: '$50 USD',
     time: '30 min',
-    prizePool: '$5,000 USD\n(₦7,000,000)',
-    prizes: ['1st — $3,000 USD (₦4,200,000)', '2nd — $1,500 USD (₦2,100,000)', '3rd — $500 USD (₦700,000)'],
+    prizePool: '$5,000',
+    prizes: ['1st — $3,000', '2nd — $1,500', '3rd — $500'],
     note: 'Judged on parting precision, neatness, consistency, product control, finish quality, and time management.',
     featured: false,
   },
@@ -135,10 +141,10 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Braids & Fades Showdown™',
     subtitle: 'Dual Discipline Team Track · $50 per Team of 1 Barber + 1 Braider',
     format: '1 Barber + 1 Braider',
-    entry: '$50 USD\n(₦70,000) / team',
+    entry: '$50 USD / team',
     time: '60 min',
-    prizePool: '$7,500 USD\n(₦10,500,000)',
-    prizes: ['1st — $4,000 USD (₦5,600,000)', '2nd — $2,500 USD (₦3,500,000)', '3rd — $1,000 USD (₦1,400,000)'],
+    prizePool: '$7,500',
+    prizes: ['1st — $4,000', '2nd — $2,500', '3rd — $1,000'],
     note: 'A barber and braider must create one complete transformation together — harmony between barbering and braiding artistry. Expected to be the event\'s standout audience favorite.',
     featured: true,
   },
@@ -147,10 +153,10 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Traditional Braiding Championship™',
     subtitle: 'Honoring Culture & Heritage',
     format: 'Solo',
-    entry: '$50 USD\n(₦70,000)',
+    entry: '$50 USD',
     time: '60 min',
-    prizePool: '$7,500 USD\n(₦10,500,000)',
-    prizes: ['1st — $4,000 USD (₦5,600,000)', '2nd — $2,500 USD (₦3,500,000)', '3rd — $1,000 USD (₦1,400,000)'],
+    prizePool: '$7,500',
+    prizes: ['1st — $4,000', '2nd — $2,500', '3rd — $1,000'],
     note: 'Eligible styles: Tribal, Fulani, Ghana braids, cornrows, feed-ins, and traditional African cultural styles. Judged on technical skill and cultural authenticity.',
     featured: false,
   },
@@ -159,10 +165,10 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Freestyle Braid Art Championship™',
     subtitle: 'Creativity Without Limits',
     format: 'Solo',
-    entry: '$75 USD\n(₦105,000)',
+    entry: '$75 USD',
     time: '75 min',
-    prizePool: '$10,000 USD\n(₦14,000,000)',
-    prizes: ['1st — $5,000 USD (₦7,000,000)', '2nd — $3,000 USD (₦4,200,000)', '3rd — $2,000 USD (₦2,800,000)'],
+    prizePool: '$10,000',
+    prizes: ['1st — $5,000', '2nd — $3,000', '3rd — $2,000'],
     note: 'Editorial braiding, avant-garde designs, fashion braiding, fantasy concepts, cultural fusion. Imagination is the only limit.',
     featured: false,
   },
@@ -346,7 +352,7 @@ function CompetitionsContent() {
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
-            Three championship tracks. $85,000+ USD (₦119,000,000+) in prizes. One stage. Lagos, Nigeria — October 2026.
+            Three championship tracks. $92,500 USD in prizes. Lagos, Nigeria.
           </p>
         </div>
 
@@ -410,19 +416,18 @@ function CompetitionsContent() {
                   <div className="flex-shrink-0 md:text-right">
                     <p className="text-xs font-mono tracking-widest text-zinc-300 uppercase mb-2">Total Prize Pool</p>
                     <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
-                      $85,000
+                      $35,000
                     </p>
-                    <p className="text-zinc-400 text-xs font-mono mt-1 mb-4">USD · ₦119,000,000</p>
+                    <p className="text-zinc-400 text-xs font-mono mt-1 mb-4">USD</p>
                     <div className="flex flex-col gap-2.5">
                       {[
-                        { place: '1st', usd: '$20,000 USD', ngn: '₦28,000,000', color: 'text-amber-400' },
-                        { place: '2nd', usd: '$10,000 USD', ngn: '₦14,000,000', color: 'text-zinc-300' },
-                        { place: '3rd', usd: '$5,000 USD',  ngn: '₦7,000,000',  color: 'text-zinc-500' },
-                      ].map(({ place, usd, ngn, color }) => (
-                        <div key={place} className="grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-3">
+                        { place: '1st', usd: '$20,000', color: 'text-amber-400' },
+                        { place: '2nd', usd: '$10,000', color: 'text-zinc-300' },
+                        { place: '3rd', usd: '$5,000',  color: 'text-zinc-500' },
+                      ].map(({ place, usd, color }) => (
+                        <div key={place} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-3">
                           <span className={`font-mono text-xs ${color} tabular-nums`}>{place}</span>
                           <span className="text-white font-semibold text-sm tabular-nums">{usd}</span>
-                          <span className={`font-mono text-xs ${color} tabular-nums`}>{ngn}</span>
                         </div>
                       ))}
                     </div>
@@ -433,7 +438,7 @@ function CompetitionsContent() {
               {/* 3-Stage Timeline */}
               <div>
                 <SectionLabel>Competition Process</SectionLabel>
-                <SectionHeading>3-Stage Selection Process</SectionHeading>
+                <SectionHeading>4-Stage Selection Process</SectionHeading>
                 <div className="flex flex-col">
                   {GLOBAL_STAGES.map((stage, i) => (
                     <div key={stage.n} className="flex gap-5">
@@ -509,11 +514,19 @@ function CompetitionsContent() {
                   <span className="hidden sm:inline">Register Now — $50 USD / ₦70,000</span>
                 </PrimaryCTA>
                 <p className="text-zinc-300 text-xs font-mono font-medium">
-                  Non-refundable · Deadline August 20, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
+                  Non-refundable · Deadline August 5, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
                 </p>
                 <p className="text-zinc-300 text-xs font-mono text-center max-w-md leading-relaxed mt-1">
                   * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.
                 </p>
+                <a
+                  href="/competition-pdfs/lagos-roots-to-royalty-2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 text-xs font-mono hover:text-zinc-300 transition-colors underline underline-offset-2"
+                >
+                  View Official Competition Brief ↗
+                </a>
               </div>
             </div>
           )}
@@ -617,6 +630,14 @@ function CompetitionsContent() {
                 <p className="text-xs sm:text-sm text-zinc-300 font-mono mt-1 text-center leading-relaxed">
                   Entry fees from $50 USD per division
                 </p>
+                <a
+                  href="/competition-pdfs/lagos-barber-championship-2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 text-xs font-mono hover:text-zinc-300 transition-colors underline underline-offset-2"
+                >
+                  View Official Competition Brief ↗
+                </a>
               </div>
             </div>
           )}
@@ -635,33 +656,33 @@ function CompetitionsContent() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-amber-400 font-semibold text-sm tracking-wide">
-                      Scheduled for October 24, 2026 — Dedicated Track
+                      Scheduled for May 24, 2027 — Dedicated Track
                     </p>
                     <p className="text-zinc-400 text-xs mt-1 leading-relaxed">
-                      The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Registration details are available now.
+                      The Braiding Championships are scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos, Nigeria. Registration details are available now.
                     </p>
                   </div>
                   <span className="hidden sm:inline-block flex-shrink-0 text-xs font-mono text-amber-400 border border-amber-500/25 rounded-full px-3 py-1.5 whitespace-nowrap">
-                    Oct 24, 2026
+                    May 24, 2027
                   </span>
                 </div>
               </div>
 
               {/* Header */}
               <div>
-                <SectionLabel>Track 3 — October 24, 2026</SectionLabel>
+                <SectionLabel>Track 3 — May 24, 2027</SectionLabel>
                 <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
-                  Braiding Championships™
+                  Braiding Championships™ 2027
                 </h2>
                 <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
                   Africa&apos;s premier braiding competition — celebrating the extraordinary skill, creativity, speed, and innovation of professional braiders from across Africa and the world while honouring one of the oldest beauty traditions.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    October 24, 2026 · 1:00 PM – 7:00 PM
+                    May 24, 2027 · 1:00 PM – 7:00 PM
                   </span>
                   <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    NJS Royale Events Center · Lagos
+                    NJS Royale Beach Resort · Lagos
                   </span>
                 </div>
               </div>
@@ -733,6 +754,14 @@ function CompetitionsContent() {
                 <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed tracking-normal max-w-sm mx-auto">
                   Secure your competitive track placement today. Limited stage entries available for international and local professionals.
                 </p>
+                <a
+                  href="/competition-pdfs/hebs-lagos-braiding-championship-2027.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 text-xs font-mono hover:text-zinc-300 transition-colors underline underline-offset-2"
+                >
+                  View Official Competition Brief ↗
+                </a>
               </div>
             </div>
           )}

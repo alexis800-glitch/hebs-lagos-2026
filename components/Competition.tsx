@@ -52,7 +52,7 @@ export default function Competition() {
             </p>
           </div>
           <h2 className="section-title text-white mb-4">
-            $85,000 USD (₦119,000,000) Grand Prize{" "}
+            $35,000 USD Grand Prize{" "}
             <span className="gradient-text italic">Showdown</span>
           </h2>
           <p className="section-subtitle max-w-xl mx-auto">
