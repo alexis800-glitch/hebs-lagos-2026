@@ -324,6 +324,24 @@ function PrimaryCTA({ href, children, className }: { href: string; children: Rea
   )
 }
 
+function BriefCTA({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-full sm:w-auto border border-amber-500/50 text-amber-400 hover:border-amber-400 hover:bg-amber-500/[0.07] font-semibold text-sm tracking-wide px-8 py-3 md:py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all duration-200 min-h-[48px] touch-manipulation select-none"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      {children}
+    </a>
+  )
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function CompetitionsContent() {
@@ -510,23 +528,17 @@ function CompetitionsContent() {
                   href="https://hebseventportal.com/register"
                   className="w-full sm:w-auto max-w-xs mx-auto px-8 py-3.5 sm:py-2.5"
                 >
-                  <span className="sm:hidden">Register Now</span>
-                  <span className="hidden sm:inline">Register Now — $50 USD / ₦70,000</span>
+                  Register Now — $50 USD
                 </PrimaryCTA>
+                <BriefCTA href="/competition-pdfs/lagos-roots-to-royalty-2026.pdf">
+                  Download Official Competition Brief
+                </BriefCTA>
                 <p className="text-zinc-300 text-xs font-mono font-medium">
                   Non-refundable · Deadline August 5, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
                 </p>
                 <p className="text-zinc-300 text-xs font-mono text-center max-w-md leading-relaxed mt-1">
                   * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.
                 </p>
-                <a
-                  href="/competition-pdfs/lagos-roots-to-royalty-2026.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-500 text-xs font-mono hover:text-zinc-300 transition-colors underline underline-offset-2"
-                >
-                  View Official Competition Brief ↗
-                </a>
               </div>
             </div>
           )}
@@ -559,9 +571,9 @@ function CompetitionsContent() {
               {/* Partner banner */}
               <PartnerBanner
                 logo="M"
-                name="Men's Pro Tools™"
+                name="Men’t Pro Tools™"
                 role="Official Equipment Partner"
-                note="All competitors use HEBS-supplied Men's Pro Tools. Personal clippers and trimmers are not permitted during competition rounds."
+                note="All competitors use HEBS-supplied Men’t Pro Tools™. Personal clippers and trimmers are not permitted during competition rounds."
               />
 
               {/* Equipment Regulation */}
@@ -571,7 +583,7 @@ function CompetitionsContent() {
                 </p>
                 <p className="text-sm text-zinc-200 leading-relaxed">
                   Powered by{' '}
-                  <span className="font-semibold text-zinc-100">Men&apos;s Pro Tools™</span>.
+                  <span className="font-semibold text-zinc-100">Men&rsquo;t Pro Tools™</span>.
                   All barbers will be supplied official clippers and trimmers on stage.{' '}
                   <span className="text-white font-semibold">Personal cutting machinery is strictly prohibited.</span>
                 </p>
@@ -605,10 +617,10 @@ function CompetitionsContent() {
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
-                    "Men's Apex Sovereign™ Clipper",
-                    "Men's Ghost™ Trimmer",
-                    "Men's Competition Guards",
-                    "Men's Charging Stations",
+                    "Men’t Apex Sovereign™ Clipper",
+                    "Men’t Ghost™ Trimmer",
+                    "Men’t Competition Guards",
+                    "Men’t Charging Stations",
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-2">
                       <span className="w-1 h-1 rounded-full bg-white/30 mt-1.5 flex-shrink-0" />
@@ -622,22 +634,16 @@ function CompetitionsContent() {
               <div className="flex flex-col items-center gap-3 pt-2">
                 <PrimaryCTA
                   href="https://hebseventportal.com/register"
-                  className="max-w-xs mx-auto px-5 py-4 leading-snug"
+                  className="max-w-xs mx-auto px-5 py-3 leading-snug"
                 >
-                  <span className="sm:hidden text-sm font-semibold text-center">Register Now</span>
-                  <span className="hidden sm:inline">Register for Barber Championships</span>
+                  Register for Barber Championships
                 </PrimaryCTA>
+                <BriefCTA href="/competition-pdfs/lagos-barber-championship-2026.pdf">
+                  Download Official Competition Brief
+                </BriefCTA>
                 <p className="text-xs sm:text-sm text-zinc-300 font-mono mt-1 text-center leading-relaxed">
                   Entry fees from $50 USD per division
                 </p>
-                <a
-                  href="/competition-pdfs/lagos-barber-championship-2026.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-500 text-xs font-mono hover:text-zinc-300 transition-colors underline underline-offset-2"
-                >
-                  View Official Competition Brief ↗
-                </a>
               </div>
             </div>
           )}
@@ -751,17 +757,12 @@ function CompetitionsContent() {
                 >
                   Register Now
                 </PrimaryCTA>
+                <BriefCTA href="/competition-pdfs/hebs-lagos-braiding-championship-2027.pdf">
+                  Download Official Competition Brief
+                </BriefCTA>
                 <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed tracking-normal max-w-sm mx-auto">
                   Secure your competitive track placement today. Limited stage entries available for international and local professionals.
                 </p>
-                <a
-                  href="/competition-pdfs/hebs-lagos-braiding-championship-2027.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-500 text-xs font-mono hover:text-zinc-300 transition-colors underline underline-offset-2"
-                >
-                  View Official Competition Brief ↗
-                </a>
               </div>
             </div>
           )}

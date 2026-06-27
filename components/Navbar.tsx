@@ -107,7 +107,7 @@ export default function Navbar() {
                           >
                             <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-medium">Track 02 · Oct 24, 2026</span>
                             <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Barber Championships 2026</span>
-                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">4 high-stakes speed, fade, and design divisions powered by Men&apos;s Pro Tools™.</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">4 high-stakes speed, fade, and design divisions powered by Men&rsquo;t Pro Tools™.</span>
                           </Link>
                           <Link
                             href="/competitions?track=braiding"
