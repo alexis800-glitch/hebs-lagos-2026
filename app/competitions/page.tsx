@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import TrailerSection from '@/components/TrailerSection'
 
 type Tab = 'global-crown' | 'barber' | 'braiding'
 
@@ -373,6 +374,9 @@ function CompetitionsContent() {
             Three championship tracks. $92,500 USD in prizes. Lagos, Nigeria.
           </p>
         </div>
+
+        {/* ── Official Trailer ─────────────────────────────────────────────── */}
+        <TrailerSection compact />
 
         {/* ── Tab Navigation ───────────────────────────────────────────────── */}
         <div className="sticky top-20 z-40 bg-zinc-950/90 backdrop-blur-md">
