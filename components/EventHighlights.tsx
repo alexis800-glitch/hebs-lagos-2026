@@ -7,8 +7,8 @@ const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const highlights = [
   {
-    title: "Luxury Pre-Gala Party",
-    desc: "Kick off the summit in style with an exclusive pre-gala celebration featuring live entertainment and networking.",
+    title: "Pre-Party",
+    desc: "Kick off the summit in style with an exclusive pre-party celebration featuring live entertainment and networking. October 23, 2026 · NJS Royale Beach Resort · 2:00 PM – 7:00 PM",
   },
   {
     title: "Immersive Masterclasses",

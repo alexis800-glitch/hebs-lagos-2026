@@ -17,12 +17,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
-      "HEBS Lagos 2026 runs for 3 days: October 23, 24, and 25, 2026. The Global Crown Championship Finals take place on October 25. The Barber Game™ team battle is also scheduled for October 25.",
+      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nThe Global Crown Championship Finals are on October 25. The Barber Championships take place on October 24.",
   },
   {
-    triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos island", "place", "held", "center", "centre", "convention"],
+    triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
     answer:
-      "HEBS Lagos 2026 is held at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria.",
+      "HEBS Lagos 2026 uses two venues:\n\n• Pre-Party (Oct 23): NJS Royale Beach Resort, Lagos, Nigeria · 2:00 PM – 7:00 PM\n• Main Event (Oct 24–25): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
   },
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
@@ -62,7 +62,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
     answer:
-      "The Braiding Championships are scheduled for October 24, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
+      "The Braiding Championships are scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos, Nigeria. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
   },
   {
     triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "85000", "$85", "prize money"],
@@ -72,7 +72,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["categories", "competition category", "divisions", "what competitions", "which competitions", "tracks", "events", "what can i compete in", "competition types"],
     answer:
-      "HEBS Lagos 2026 competition tracks:\n\n🏆 Global Crown Championship — Oct 25 · Beauty, hair, makeup, fashion, nail artistry\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — Oct 24 · Fast & Flawless Braiding, Braids & Fades Showdown, Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
+      "HEBS Lagos 2026 competition tracks:\n\n🏆 Global Crown Championship — Oct 25 · Beauty, hair, makeup, fashion, nail artistry\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — May 2027 · NJS Royale Beach Resort · Fast & Flawless Braiding, Braids & Fades Showdown, Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
   },
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],
@@ -139,7 +139,7 @@ const QUICK_OPTIONS: QuickOption[] = [
   { label: "Competition categories", href: "/competitions", external: false },
   {
     label: "Event date and venue",
-    answer: "HEBS Lagos 2026 runs October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria.",
+    answer: "HEBS Lagos 2026 runs October 23–25, 2026.\n\n• Oct 23 (Pre-Party): NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24–25 (Main Event): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
   },
   { label: "Contact support", href: "/contact", external: false },
 ];
