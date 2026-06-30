@@ -24,7 +24,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
     {
       id: 1,
       title: "Fast & Flawless",
-      price: "$50.00",
+      price: "$50 USD (₦70,000)",
       number: "Category 01",
       image: "https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg",
       desc: "An intense, high-speed showdown focusing on raw execution velocity, flawless blending transitions, and clean line work under an aggressive clock."
@@ -32,7 +32,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
     {
       id: 2,
       title: "Freestyle Fusion",
-      price: "$50.00",
+      price: "$50 USD (₦70,000)",
       number: "Category 02",
       image: "https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg",
       desc: "Unrestricted creative warfare. Competitors blend geometric hair portraits, abstract lines, and custom dye expressions live on stage."
@@ -40,7 +40,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
     {
       id: 3,
       title: "Vintage Vibe Tag Team",
-      price: "$50.00",
+      price: "$50 USD (₦70,000)",
       number: "Category 03",
       image: "https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg",
       desc: "A coordinated dual-stylist clash resurrecting classic, old-school silhouettes and timeless historical cuts updated with sharp modern flair."
@@ -48,7 +48,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
     {
       id: 4,
       title: "Braids & Fades",
-      price: "$50.00",
+      price: "$50 USD (₦70,000)",
       number: "Category 04",
       image: "https://images.pexels.com/photos/3738338/pexels-photo-3738338.jpeg",
       desc: "The ultimate technical crossover battle requiring flawless razor skin-fading paired with tight, symmetrical, and complex braid parting maps."
@@ -56,7 +56,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
     {
       id: 5,
       title: "Loc Retwist & Style Challenge",
-      price: "$50.00",
+      price: "$50 USD (₦70,000)",
       number: "Category 05",
       image: "https://images.pexels.com/photos/7697227/pexels-photo-7697227.jpeg",
       desc: "Celebrating structural locked texture. Stylists execute immaculate, crisp row maintenance alongside a visionary avant-garde locked formal shape style."
@@ -64,7 +64,7 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
     {
       id: 6,
       title: "Neatbraid Precision Maze Challenge",
-      price: "$50.00",
+      price: "$50 USD (₦70,000)",
       number: "Category 06",
       image: "https://images.pexels.com/photos/3065171/pexels-photo-3065171.jpeg",
       desc: "A meticulous test of absolute parting perfection. Contenders construct complex, multi-directional labyrinth braid patterns with immaculate tension."
@@ -153,18 +153,18 @@ export default function PrizeGrid({ initialTab = 'crowned', isSubPage = false }:
               <div className="border-t border-neutral-900 pt-8 mt-8 grid grid-cols-3 gap-4">
                 <div>
                   <span className="block font-sans text-[10px] uppercase tracking-wider text-neutral-400 mb-1">1st Place Icon</span>
-                  <span className="font-sans text-lg font-bold text-white block">$20,000</span>
-                  <span className="font-mono text-[10px] text-neutral-400">or ₦29.4M + Trophy</span>
+                  <span className="font-sans text-lg font-bold text-white block">$20,000 USD</span>
+                  <span className="font-mono text-[10px] text-neutral-400">₦28,000,000 + Trophy</span>
                 </div>
                 <div className="border-l border-neutral-900 pl-4">
                   <span className="block font-sans text-[10px] uppercase tracking-wider text-neutral-400 mb-1">2nd Place Vanguard</span>
-                  <span className="font-sans text-base font-medium text-neutral-200 block">$10,000</span>
-                  <span className="font-mono text-[10px] text-neutral-400">or ₦14.7M + Trophy</span>
+                  <span className="font-sans text-base font-medium text-neutral-200 block">$10,000 USD</span>
+                  <span className="font-mono text-[10px] text-neutral-400">₦14,000,000 + Trophy</span>
                 </div>
                 <div className="border-l border-neutral-900 pl-4">
                   <span className="block font-sans text-[10px] uppercase tracking-wider text-neutral-400 mb-1">3rd Place Revolutionist</span>
-                  <span className="font-sans text-base font-medium text-neutral-300 block">$5,000</span>
-                  <span className="font-mono text-[10px] text-neutral-400">or ₦7.3M + Trophy</span>
+                  <span className="font-sans text-base font-medium text-neutral-300 block">$5,000 USD</span>
+                  <span className="font-mono text-[10px] text-neutral-400">₦7,000,000 + Trophy</span>
                 </div>
               </div>
             </div>

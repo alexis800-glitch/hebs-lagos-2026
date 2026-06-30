@@ -12,7 +12,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["what is hebs", "about hebs", "what hebs", "tell me about", "hair education", "beauty summit", "what is the event", "summit"],
     answer:
-      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS Lagos 2026 is the third edition — previously hosted in New York/New Jersey — now expanding to Africa. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features a $85,000+ cumulative prize pool.",
+      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS Lagos 2026 is the third edition — previously hosted in New York/New Jersey — now expanding to Africa. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features a $92,500 USD (₦129,500,000) cumulative prize pool.",
   },
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
@@ -27,7 +27,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD per division.",
+      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD (₦70,000) per division.",
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
@@ -42,22 +42,22 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD per division (up to $100 for team categories). All payments via hebseventportal.com/register.",
+      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD (₦70,000) per division (up to $100 USD (₦140,000) for team categories). All payments via hebseventportal.com/register.",
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD depending on category), and submit any required materials. Entry fees start at $50 per division.",
+      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦70,000–₦140,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦70,000) per division.",
   },
   {
     triggers: ["global crown", "crowned icon", "beauty competition", "hairstylist competition", "makeup competition", "fashion competition", "nail competition", "editorial", "avant garde"],
     answer:
-      "The Global Crown Championship has 3 stages:\n1. Pre-selection Video Submission — Submit a 3-min video to casting@hebslagos.com by August 20, 2026. Pay $50 entry fee at hebslagos.com.\n2. Public Instagram Voting (August 25–30, 2026) — Top 12 by likes/comments on @haireducationbeautysummit advance.\n3. Live Champion — October 25, 2026 on the main stage in Lagos, in person.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
+      "The Global Crown Championship has 3 stages:\n1. Pre-selection Video Submission — Submit a 3-min video to casting@hebslagos.com by August 20, 2026. Pay the $50 USD (₦70,000) entry fee at hebslagos.com.\n2. Public Instagram Voting (August 25–30, 2026) — Top 12 by likes/comments on @haireducationbeautysummit advance.\n3. Live Champion — October 25, 2026 on the main stage in Lagos, in person.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
   },
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
     answer:
-      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 entry · $5,000 prize pool\n• Battle of the Fades™ — 30 min · $50 entry · $5,000 prize pool\n• Freestyle Design Battle™ — 60 min · $75 entry · $7,500 prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100/team · $10,000 prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
+      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Battle of the Fades™ — 30 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Freestyle Design Battle™ — 60 min · $75 USD (₦105,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100 USD (₦140,000)/team · $10,000 USD (₦14,000,000) prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
   },
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
@@ -65,9 +65,9 @@ const KNOWLEDGE_BASE: KBEntry[] = [
       "The Braiding Championships are scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos, Nigeria. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
   },
   {
-    triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "85000", "$85", "prize money"],
+    triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "85000", "$85", "prize money", "92500", "$92"],
     answer:
-      "HEBS Lagos 2026 features a $85,000+ cumulative prize pool across all competition tracks. Individual division prizes range from $5,000 to $10,000. In the Barber Championships, 1st place winners earn $3,000–$5,000 USD per division. The Barber Game™ team winner takes $10,000 USD.",
+      "HEBS Lagos 2026 features a $92,500 USD (₦129,500,000) cumulative prize pool across all competition tracks:\n\n• Global Crown Championship: $35,000 USD (₦49,000,000)\n• Barber Championships: $27,500 USD (₦38,500,000)\n• Braiding Championships: $30,000 USD (₦42,000,000)\n\nIndividual division prizes range from $5,000 USD (₦7,000,000) to $10,000 USD (₦14,000,000). In the Barber Championships, 1st place winners earn $3,000–$5,000 USD per division. The Barber Game™ team winner takes $10,000 USD (₦14,000,000).",
   },
   {
     triggers: ["categories", "competition category", "divisions", "what competitions", "which competitions", "tracks", "events", "what can i compete in", "competition types"],

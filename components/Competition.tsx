@@ -7,9 +7,9 @@ import { useMounted } from "@/hooks/useMounted";
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const prizes = [
-  { place: "1st Place", amount: "$20,000", gradient: "linear-gradient(135deg, #FFD700, #FFA500)" },
-  { place: "2nd Place", amount: "$10,000", gradient: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
-  { place: "3rd Place", amount: "$5,000",  gradient: "linear-gradient(135deg, #CD7F32, #A0522D)" },
+  { place: "1st Place", amount: "$20,000 USD", ngn: "₦28,000,000", gradient: "linear-gradient(135deg, #FFD700, #FFA500)" },
+  { place: "2nd Place", amount: "$10,000 USD", ngn: "₦14,000,000", gradient: "linear-gradient(135deg, #C0C0C0, #A0A0A0)" },
+  { place: "3rd Place", amount: "$5,000 USD",  ngn: "₦7,000,000",  gradient: "linear-gradient(135deg, #CD7F32, #A0522D)" },
 ];
 
 const team = [
@@ -51,10 +51,11 @@ export default function Competition() {
               Grand Prize Competition
             </p>
           </div>
-          <h2 className="section-title text-white mb-4">
+          <h2 className="section-title text-white mb-2">
             $35,000 USD Grand Prize{" "}
             <span className="gradient-text italic">Showdown</span>
           </h2>
+          <p className="text-zinc-500 text-sm font-mono tabular-nums mb-4">(₦49,000,000)</p>
           <p className="section-subtitle max-w-xl mx-auto">
             Assemble your dream team and compete for the biggest prize in beauty summit history.
           </p>
@@ -85,6 +86,7 @@ export default function Competition() {
               >
                 {prize.amount}
               </div>
+              <div className="text-zinc-400 text-xs font-mono mt-0.5 mb-1 tabular-nums">{prize.ngn}</div>
               <div className="text-white font-semibold font-inter">{prize.place}</div>
             </motion.div>
           ))}

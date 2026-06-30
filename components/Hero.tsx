@@ -34,7 +34,7 @@ const CATEGORIES = [
 ] as const;
 
 const VALUE_ITEMS = [
-  { value: "$85,000",    label: "Prize Pool · ₦119M"      },
+  { value: "$92,500",    label: "Prize Pool · ₦129.5M"    },
   { value: "5",          label: "Competition Categories" },
   { value: "Global",     label: "Beauty Professionals"   },
   { value: "Lagos 2026", label: "October 23–25"          },
@@ -259,8 +259,8 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
             </span>
-            <span className="sm:hidden">$85,000 USD (₦119M) Pool</span>
-            <span className="hidden sm:inline">$85,000 USD (₦119,000,000) Grand Prize Pool</span>
+            <span className="sm:hidden">$92,500 USD (₦129,500,000) Prize Pool</span>
+            <span className="hidden sm:inline">$92,500 USD (₦129,500,000) Grand Prize Pool</span>
           </span>
         </motion.div>
 

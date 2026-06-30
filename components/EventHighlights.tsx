@@ -20,7 +20,7 @@ const highlights = [
   },
   {
     title: "Creative Competitions",
-    desc: "Compete in high-stakes creative challenges with $85,000 USD (₦119,000,000) in prizes across all competition tracks.",
+    desc: "Compete in high-stakes creative challenges with $92,500 USD (₦129,500,000) in prizes across all competition tracks.",
   },
   {
     title: "Networking",

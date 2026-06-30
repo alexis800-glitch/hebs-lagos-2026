@@ -21,7 +21,7 @@ const GLOBAL_STAGES = [
     n: '01',
     title: 'Pre-selection Video Submission',
     deadline: 'August 5, 2026',
-    desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. Pay the $50 entry fee at hebslagos.com to complete registration.</>,
+    desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. Pay the $50 USD (₦70,000) entry fee at hebslagos.com to complete registration.</>,
   },
   {
     n: '02',
@@ -371,7 +371,7 @@ function CompetitionsContent() {
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
-            Three championship tracks. $92,500 USD in prizes. Lagos, Nigeria.
+            Three championship tracks. $92,500 USD (₦129,500,000) in prizes. Lagos, Nigeria.
           </p>
         </div>
 
@@ -438,18 +438,18 @@ function CompetitionsContent() {
                   <div className="flex-shrink-0 md:text-right">
                     <p className="text-xs font-mono tracking-widest text-zinc-300 uppercase mb-2">Total Prize Pool</p>
                     <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
-                      $35,000
+                      $35,000 USD
                     </p>
-                    <p className="text-zinc-400 text-xs font-mono mt-1 mb-4">USD</p>
+                    <p className="text-zinc-500 text-xs font-mono mt-0.5 mb-4 tabular-nums">₦49,000,000</p>
                     <div className="flex flex-col gap-2.5">
                       {[
-                        { place: '1st', usd: '$20,000', color: 'text-amber-400' },
-                        { place: '2nd', usd: '$10,000', color: 'text-zinc-300' },
-                        { place: '3rd', usd: '$5,000',  color: 'text-zinc-500' },
-                      ].map(({ place, usd, color }) => (
+                        { place: '1st', usd: '$20,000 USD', ngn: '₦28,000,000', color: 'text-amber-400' },
+                        { place: '2nd', usd: '$10,000 USD', ngn: '₦14,000,000', color: 'text-zinc-300' },
+                        { place: '3rd', usd: '$5,000 USD',  ngn: '₦7,000,000',  color: 'text-zinc-500' },
+                      ].map(({ place, usd, ngn, color }) => (
                         <div key={place} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-3">
                           <span className={`font-mono text-xs ${color} tabular-nums`}>{place}</span>
-                          <span className="text-white font-semibold text-sm tabular-nums">{usd}</span>
+                          <span className="text-white font-semibold text-sm tabular-nums">{usd} <span className="text-zinc-500 font-normal text-xs">({ngn})</span></span>
                         </div>
                       ))}
                     </div>
@@ -532,7 +532,7 @@ function CompetitionsContent() {
                   href="https://hebseventportal.com/register"
                   className="w-full sm:w-auto max-w-xs mx-auto px-8 py-3.5 sm:py-2.5"
                 >
-                  Register Now — $50 USD
+                  Register Now — $50 USD (₦70,000)
                 </PrimaryCTA>
                 <BriefCTA href="/competition-pdfs/lagos-roots-to-royalty-2026.pdf">
                   Download Official Competition Brief
@@ -646,7 +646,7 @@ function CompetitionsContent() {
                   Download Official Competition Brief
                 </BriefCTA>
                 <p className="text-xs sm:text-sm text-zinc-300 font-mono mt-1 text-center leading-relaxed">
-                  Entry fees from $50 USD per division
+                  Entry fees from $50 USD (₦70,000) per division
                 </p>
               </div>
             </div>

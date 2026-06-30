@@ -98,7 +98,7 @@ export default function Navbar() {
                           >
                             <span className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium">Track 01 · Oct 25, 2026</span>
                             <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Global Crown Championship 2026</span>
-                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Flagship solo creative global event with a $85,000 USD (₦119M) prize pool.</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Flagship solo creative global event with a $35,000 USD (₦49,000,000) prize pool.</span>
                           </Link>
                           <Link
                             href="/competitions?track=barber"

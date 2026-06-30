@@ -946,7 +946,7 @@ export default function Hebs2025Page() {
               </span>
             </h2>
             <p className="text-zinc-400 text-[15px] mb-10 max-w-md mx-auto">
-              October 23–25, 2026 · Lagos, Nigeria · $85,000 Prize Pool
+              October 23–25, 2026 · Lagos, Nigeria · $92,500 USD (₦129,500,000) in prizes
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
               <a
