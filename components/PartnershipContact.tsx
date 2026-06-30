@@ -1,11 +1,11 @@
 import React from 'react'
 
-const deadlines = [
-  { date: 'April 25, 2026',      label: 'International Vendor/Exhibitor Registration Deadline' },
-  { date: 'May 30, 2026',        label: 'Local Vendor/Exhibitor Registration Deadline' },
-  { date: 'June 15, 2026',       label: 'Final Exhibitor & Vendor Payment Deadline' },
-  { date: 'October 23–25, 2026', label: 'Event Dates' },
-  { date: 'Venue',               label: 'NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos' },
+const vendorInfo = [
+  { title: 'Vendor & Exhibitor Registration', text: 'Limited booth spaces available. Early inquiry is recommended for best placement.' },
+  { title: 'Booth Deposit',                   text: '20% deposit required to lock in booth space.' },
+  { title: 'Final Payment',                   text: 'Final booth payment is due upon approval and invoice confirmation.' },
+  { title: 'Event Dates',                     text: 'October 23–25, 2026' },
+  { title: 'Venue',                           text: 'NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos' },
 ]
 
 export default function PartnershipContact() {
@@ -50,20 +50,20 @@ export default function PartnershipContact() {
         </div>
       </div>
 
-      {/* Right — Critical Deadlines Timeline */}
+      {/* Right — Vendor & Exhibitor Information */}
       <div>
         <h2 className="text-lg font-medium text-white mb-6 tracking-tight">
-          Important Dates &amp; Deadlines
+          Important Vendor &amp; Exhibitor Information
         </h2>
 
         <div className="relative border-l border-zinc-800 pl-6 space-y-8 ml-2">
-          {deadlines.map((item, i) => (
+          {vendorInfo.map((item, i) => (
             <div key={i} className="relative pl-2">
               <span className="absolute top-1.5 -left-[29px] w-2 h-2 rounded-full bg-zinc-500 border border-black z-10" />
               <span className="text-[11px] font-mono tracking-widest text-zinc-400 uppercase font-semibold block mb-0.5">
-                {item.date}
+                {item.title}
               </span>
-              <span className="font-sans text-sm text-zinc-300">{item.label}</span>
+              <span className="font-sans text-sm text-zinc-300">{item.text}</span>
             </div>
           ))}
         </div>

@@ -1,6 +1,5 @@
 ﻿"use client";
 
-import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -73,55 +72,32 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  // Fallback play attempt after hydration — catches cases where autoPlay was ignored
-  useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, []);
-
   return (
     <section
       id="home"
       className="relative w-full min-h-screen bg-zinc-950 overflow-hidden"
     >
 
-      {/* ── Background layer ───────────────────────────────────────── */}
+      {/* ── Background layer — static premium gradient (no video) ───── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Poster — lowest layer, fades out once video is playing */}
+        {/* Base dark gradient */}
         <div
-          className="absolute inset-0 transition-opacity duration-700"
-          style={{ opacity: isVideoPlaying ? 0 : 1 }}
-        >
-          <Image
-            src="/images/hebs-hero-poster.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 120% 70% at 50% 0%, #1a0f24 0%, #0d0d0d 55%, #050505 100%)",
+          }}
+        />
 
-        {/* Hero video — rendered unconditionally so browser autoPlay fires on first paint */}
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/images/hebs-hero-poster.jpg"
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-          onCanPlay={() => { videoRef.current?.play().catch(() => {}); }}
-          onPlaying={() => setIsVideoPlaying(true)}
-          onPause={() => setIsVideoPlaying(false)}
-          onError={(e) => console.warn('[Hero] video error:', e)}
-        >
-          <source src="/videos/hebs-hero-mobile.mp4" type="video/mp4" />
-        </video>
+        {/* Subtle gold/pink diagonal sheen */}
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(245,158,11,0.6) 0%, transparent 32%, transparent 68%, rgba(233,30,140,0.6) 100%)",
+          }}
+        />
 
         {/* Magenta centre glow */}
         <motion.div
@@ -164,7 +140,7 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Overlay — gradient for text readability over video and mobile poster */}
+        {/* Overlay — gradient for text readability over the static background */}
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)" }}
@@ -269,7 +245,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
-          className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-300 font-medium mb-6"
+          className="font-mono text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-zinc-200 font-medium mb-6"
         >
           The Hair Education Beauty Summit · Lagos 2026
         </motion.p>
@@ -317,7 +293,7 @@ export default function Hero() {
             initial={mounted ? { opacity: 0, y: 28 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EXPO, delay: 0.18 }}
-            className="font-serif font-semibold text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-7xl tracking-tight leading-[1.07] text-white"
+            className="font-serif font-semibold text-[2.65rem] sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-8xl tracking-tight leading-[1.05] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]"
           >
             The Stage Where{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
@@ -355,7 +331,7 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.44 }}
-          className="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-zinc-400 mb-7 inline-flex items-center justify-center gap-2"
+          className="font-mono text-[10px] sm:text-xs tracking-widest uppercase text-zinc-300 mb-7 inline-flex items-center justify-center gap-2"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#e91e8c] shrink-0 opacity-80" />
           Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
@@ -427,7 +403,7 @@ export default function Hero() {
           </div>
 
           {/* Urgency copy */}
-          <p className="font-mono text-[10px] sm:text-xs text-zinc-400 tracking-wide leading-loose">
+          <p className="font-mono text-[10px] sm:text-xs text-zinc-300 tracking-wide leading-loose">
             Limited competition slots available &nbsp;·&nbsp; Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
           </p>
         </motion.div>
@@ -452,7 +428,7 @@ export default function Hero() {
                 <p className="font-serif text-[16px] sm:text-[17px] font-semibold text-white leading-none mb-1">
                   {item.value}
                 </p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 text-center leading-snug">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-300 text-center leading-snug">
                   {item.label}
                 </p>
               </div>
