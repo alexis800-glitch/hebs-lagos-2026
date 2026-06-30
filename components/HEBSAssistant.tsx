@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,7 +32,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
     answer:
-      "Attendee ticket options (early bird pricing):\n\n• 1-Day Pass — $45 / ₦63,000\n• 2-Day Pass — $80 / ₦112,000\n• 3-Day All-Inclusive — $175 / ₦245,000 (Best Value)\n• VIP Experience — $400 / ₦560,000\n\nAll passes are issued via hebseventportal.com/register. Early bird rates are available for a limited time.",
+      "General admission ticket options:\n\n• One Day Pass — ₦15,000\n• Two Days Pass — ₦25,000\n• Three Days Pass — ₦75,000 (includes Pre-Party & networking with industry leaders)\n• VIP Experience — $400 / ₦560,000\n\nAll passes are issued via hebseventportal.com/register.",
   },
   {
     triggers: ["vip", "vip ticket", "vip pass", "vip experience", "premium", "front row", "lounge", "meet greet", "celebrity", "merchandise"],
@@ -42,7 +42,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "Ticket prices (early bird):\n• 1-Day Pass: $45 / ₦63,000\n• 2-Day Pass: $80 / ₦112,000\n• 3-Day All-Inclusive: $175 / ₦245,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD per division (up to $100 for team categories). All payments via hebseventportal.com/register.",
+      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD per division (up to $100 for team categories). All payments via hebseventportal.com/register.",
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
@@ -87,12 +87,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["masterclass", "workshop", "education", "learn", "class", "training", "session", "seminar"],
     answer:
-      "HEBS Lagos 2026 features masterclasses and workshops for beauty, hair, and fashion professionals across all 3 days. The 3-Day All-Inclusive pass ($175 early bird) includes access to all masterclasses, workshops, competitions viewing, and the networking gala. Full session details will be announced closer to the event.",
+      "HEBS Lagos 2026 features masterclasses and workshops for beauty, hair, and fashion professionals across all 3 days. The Three Days Pass (₦75,000) includes full 3-day access, Pre-Party, education sessions, and networking with industry leaders. Full session details will be announced closer to the event.",
   },
   {
     triggers: ["networking", "gala", "meet", "professionals", "industry", "connections", "exhibitor", "sponsor", "vendor"],
     answer:
-      "HEBS Lagos 2026 includes dedicated networking events and a gala accessible with the 3-Day All-Inclusive or VIP passes. It's a hub for beauty industry professionals, educators, brands, sponsors, and vendors from across the globe.",
+      "HEBS Lagos 2026 includes dedicated networking events and a gala accessible with the Three Days Pass or VIP Experience. It's a hub for beauty industry professionals, educators, brands, sponsors, and vendors from across the globe.",
   },
 ];
 
@@ -134,12 +134,12 @@ type QuickOption = LinkOption | AnswerOption;
 
 const QUICK_OPTIONS: QuickOption[] = [
   { label: "How do I register?", href: "https://hebseventportal.com/register", external: true },
-  { label: "Buy attendee ticket", href: "https://hebseventportal.com/register", external: true },
+  { label: "Buy attendee ticket", href: "https://hebseventportal.com", external: true },
   { label: "Register as contestant", href: "https://hebseventportal.com/register", external: true },
   { label: "Competition categories", href: "/competitions", external: false },
   {
     label: "Event date and venue",
-    answer: "HEBS Lagos 2026 runs October 23–25, 2026.\n\n• Oct 23 (Pre-Party): NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24–25 (Main Event): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
+    answer: "HEBS Lagos 2026 runs October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos, Nigeria.",
   },
   { label: "Contact support", href: "/contact", external: false },
 ];

@@ -1,42 +1,58 @@
-﻿import React from 'react'
+import React from 'react'
 
 const ticketTiers = [
   {
-    name: "1-Day Pass",
-    earlyPrice: "$45",
-    earlyNaira: "₦63,000",
-    standardPrice: "$65",
-    standardNaira: "₦91,000",
-    perks: ["Access to one event day", "General sessions", "Floor networking"],
+    name: "One Day Pass",
+    earlyPrice: "₦15,000",
+    ngnPrice: "",
+    standardPrice: "",
+    perks: [
+      "General admission",
+      "Access to all 3 floors",
+      "Main stage",
+      "Education sessions",
+      "Exhibitors",
+    ],
     tag: "",
     link: "https://hebseventportal.com/register"
   },
   {
-    name: "2-Day Pass",
-    earlyPrice: "$80",
-    earlyNaira: "₦112,000",
-    standardPrice: "$110",
-    standardNaira: "₦154,000",
-    perks: ["Access to two continuous days", "All general stage sessions", "Networking events inclusion"],
+    name: "Two Days Pass",
+    earlyPrice: "₦25,000",
+    ngnPrice: "",
+    standardPrice: "",
+    perks: [
+      "General admission for two event days",
+      "Access to all 3 floors",
+      "Main stage",
+      "Education sessions",
+      "Exhibitors",
+    ],
     tag: "",
     link: "https://hebseventportal.com/register"
   },
   {
-    name: "3-Day All-Inclusive",
-    earlyPrice: "$175",
-    earlyNaira: "₦245,000",
-    standardPrice: "$250",
-    standardNaira: "₦350,000",
-    perks: ["Full 3-day complete access", "All Masterclasses & Workshops", "Competitions viewing", "Networking & Gala Entry"],
-    tag: "Best Value",
+    name: "Three Days Pass",
+    earlyPrice: "₦75,000",
+    ngnPrice: "",
+    standardPrice: "",
+    perks: [
+      "Full 3-day access",
+      "Includes Pre-Party",
+      "Networking access with industry leaders from the USA and Nigeria",
+      "Access to all 3 floors",
+      "Main stage",
+      "Education sessions",
+      "Exhibitors",
+    ],
+    tag: "",
     link: "https://hebseventportal.com/register"
   },
   {
     name: "VIP Experience",
     earlyPrice: "$400",
-    earlyNaira: "₦560,000",
+    ngnPrice: "₦560,000",
     standardPrice: "$600",
-    standardNaira: "₦840,000",
     perks: ["Full 3-day VIP clearance", "Front-row priority seating", "Exclusive VIP lounge access", "Celebrity Meet & Greet", "Official Merchandise Package"],
     tag: "Premium Clearance",
     link: "https://hebseventportal.com/register"
@@ -54,7 +70,7 @@ export default function Tickets() {
             Choose Your <span className="italic font-normal">Experience</span>
           </h2>
         </div>
-        <p className="font-sans text-sm text-neutral-300 max-w-xs font-light leading-relaxed">
+        <p className="font-sans text-sm text-zinc-200 max-w-xs font-light leading-relaxed">
           Early bird rates are available for a limited window. Secure placement before tier limits expire.
         </p>
       </div>
@@ -69,9 +85,9 @@ export default function Tickets() {
             {/* Title */}
             <div className="w-full lg:w-1/4 mb-4 lg:mb-0">
               <div className="flex items-center gap-3">
-                <h3 className="font-serif text-2xl text-white font-normal group-hover:text-amber-400 transition-colors">{tier.name}</h3>
+                <h3 className="font-serif text-2xl text-white font-light group-hover:text-amber-400 transition-colors">{tier.name}</h3>
                 {tier.tag && (
-                  <span className="font-sans text-xs tracking-wider uppercase bg-neutral-900 border border-neutral-700 px-2 py-0.5 text-neutral-200 font-medium rounded-sm">
+                  <span className="font-sans text-[10px] tracking-wider uppercase bg-neutral-900 border border-neutral-800 px-2 py-0.5 text-neutral-400 font-medium rounded-sm">
                     {tier.tag}
                   </span>
                 )}
@@ -82,7 +98,7 @@ export default function Tickets() {
             <div className="w-full lg:w-2/5 mb-6 lg:mb-0 flex flex-col justify-center min-h-[64px]">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 w-full">
                 {tier.perks.map((perk, pIdx) => (
-                  <li key={pIdx} className="font-sans text-sm text-neutral-200 flex items-start font-normal leading-normal">
+                  <li key={pIdx} className="font-sans text-sm text-zinc-200 flex items-start font-light leading-normal">
                     <span className="w-1.5 h-1.5 bg-amber-400 rounded-full mt-1.5 mr-2 shrink-0"></span>
                     <span>{perk}</span>
                   </li>
@@ -91,18 +107,21 @@ export default function Tickets() {
             </div>
 
             {/* Pricing Details */}
-            <div className="w-full lg:w-1/3 flex flex-col sm:flex-row sm:items-center sm:justify-between lg:justify-end gap-4 sm:gap-6 lg:gap-10">
-              <div className="flex gap-4 sm:gap-6">
+            <div className="w-full lg:w-1/3 flex items-center justify-between lg:justify-end gap-12">
+              <div className="flex gap-8">
                 <div>
-                  <span className="block font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium mb-1">Early Pricing</span>
+                  <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Price</span>
                   <span className="font-sans text-xl font-bold text-white">{tier.earlyPrice}</span>
-                  <span className="font-mono text-[10px] tracking-wide text-zinc-400 block mt-0.5">{tier.earlyNaira}</span>
+                  {tier.ngnPrice && (
+                    <span className="font-mono text-[10px] text-zinc-500 mt-0.5 block tabular-nums">{tier.ngnPrice}</span>
+                  )}
                 </div>
-                <div className="border-l border-neutral-800 pl-4 sm:pl-6">
-                  <span className="block font-mono text-xs uppercase tracking-widest text-neutral-300 font-medium mb-1">Standard Rate</span>
-                  <span className="font-sans text-sm font-light text-neutral-300 line-through">{tier.standardPrice}</span>
-                  <span className="font-mono text-[10px] tracking-wide text-zinc-500 line-through block">{tier.standardNaira}</span>
-                </div>
+                {tier.standardPrice && (
+                  <div className="border-l border-neutral-800 pl-8">
+                    <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400 font-medium mb-1">Standard Rate</span>
+                    <span className="font-sans text-sm font-light text-neutral-400 line-through">{tier.standardPrice}</span>
+                  </div>
+                )}
               </div>
 
               {/* Secure Direct Link */}
@@ -110,7 +129,7 @@ export default function Tickets() {
                 href={tier.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-sm shrink-0 block text-center w-full sm:w-auto"
+                className="font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-neutral-200 px-6 py-4 font-semibold transition-all duration-150 rounded-xs shrink-0 block text-center min-w-[140px]"
               >
                 SECURE PASS ↗
               </a>
