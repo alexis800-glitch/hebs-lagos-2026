@@ -167,7 +167,7 @@ export async function POST(req: NextRequest) {
               For urgent inquiries, reach us directly at
               <a href="mailto:info@thehebs.com" style="color:#f59e0b;text-decoration:none;">info@thehebs.com</a>
               or via WhatsApp at
-              <a href="https://wa.me/14843571812" style="color:#f59e0b;text-decoration:none;">+1 (484) 357-1812</a>.
+              <a href="https://wa.me/16104779635" style="color:#f59e0b;text-decoration:none;">+1 (610) 477-9635</a>.
             </p>
             <div style="border-top:1px solid #27272a;padding-top:20px;">
               <p style="margin:0 0 4px;font-size:13px;color:#a1a1aa;">Hair Education Beauty Summit 2026</p>

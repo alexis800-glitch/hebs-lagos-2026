@@ -55,9 +55,9 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     color: "#f59e0b",
-    counter: { value: 85000, prefix: "$", suffix: "", duration: 2.4 },
+    counter: { value: 92500, prefix: "$", suffix: "", duration: 2.4 },
     label: "Prize Pool",
-    desc: "Compete for Africa's largest beauty prize pool — $85,000 USD (₦119,000,000) distributed across all competition tracks.",
+    desc: "Compete for Africa's largest beauty prize pool — $92,500 USD (₦129,500,000) distributed across all competition tracks.",
     featured: true,
     bgImage: "/images/highlights/winner-cheque-presentation.png",
     bgPosition: "object-top",

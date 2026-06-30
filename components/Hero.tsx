@@ -35,7 +35,7 @@ const CATEGORIES = [
 
 const VALUE_ITEMS = [
   { value: "$92,500",    label: "Prize Pool · ₦129.5M"    },
-  { value: "5",          label: "Competition Categories" },
+  { value: "6",          label: "Competition Categories" },
   { value: "Global",     label: "Beauty Professionals"   },
   { value: "Lagos 2026", label: "October 23–25"          },
 ] as const;
@@ -402,7 +402,7 @@ export default function Hero() {
 
             {/* Secondary */}
             <motion.a
-              href="#categories"
+              href="/competitions"
               whileHover={!shouldReduceMotion ? { scale: 1.03, transition: { type: "spring", stiffness: 380, damping: 22 } } : undefined}
               whileTap={!shouldReduceMotion ? { scale: 0.97, transition: { type: "spring", stiffness: 420, damping: 26 } } : undefined}
               className="inline-flex items-center justify-center gap-2 bg-transparent text-white font-semibold text-sm tracking-wide border border-white/20 px-8 py-4 rounded-xl hover:border-amber-400/50 hover:bg-amber-500/[0.06] transition-all duration-200 touch-manipulation min-h-[52px] w-full sm:w-auto"

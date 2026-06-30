@@ -21,15 +21,15 @@ const contactItems = [
   },
   {
     icon: Phone,
-    label: "Phone (US)",
-    value: "484-357-1812",
-    href: "tel:+14843571812",
+    label: "US / WhatsApp",
+    value: "+1 610 477 9635",
+    href: "tel:+16104779635",
   },
   {
     icon: MessageCircle,
-    label: "WhatsApp",
-    value: "Chat with us on WhatsApp",
-    href: "https://wa.me/14843571812",
+    label: "Nigeria / WhatsApp",
+    value: "+234 806 588 1783",
+    href: "https://wa.me/2348065881783",
   },
 ];
 
@@ -123,17 +123,20 @@ export default function Contact() {
                         href={href}
                         target={href.startsWith("http") ? "_blank" : undefined}
                         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="font-sans text-sm text-neutral-300 hover:text-white transition-colors duration-200"
+                        className="font-sans text-sm text-neutral-200 hover:text-white transition-colors duration-200"
                       >
                         {value}
                       </a>
                     ) : (
-                      <p className="font-sans text-sm text-neutral-300">{value}</p>
+                      <p className="font-sans text-sm text-neutral-200">{value}</p>
                     )}
                   </div>
                 </div>
               ))}
             </div>
+            <p className="font-sans text-xs text-neutral-500 mt-4 pt-4 border-t border-neutral-900">
+              Support available 2:00 PM – 11:00 PM WAT
+            </p>
           </motion.div>
 
           {/* Right — inquiry form */}

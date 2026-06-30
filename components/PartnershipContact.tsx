@@ -39,13 +39,13 @@ export default function PartnershipContact() {
           </a>
 
           <a
-            href="tel:+14843571812"
+            href="tel:+16104779635"
             className="flex flex-col p-4 bg-zinc-950/50 border border-zinc-900 rounded-xl hover:border-zinc-800 transition-colors"
           >
             <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mb-1">
-              Call Us
+              Call Us (US / WhatsApp)
             </span>
-            <span className="font-sans text-sm text-white">484-357-1812</span>
+            <span className="font-sans text-sm text-white">+1 610 477 9635</span>
           </a>
         </div>
       </div>

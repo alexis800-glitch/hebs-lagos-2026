@@ -223,26 +223,10 @@ export default function CompetitionCategories() {
                   <h3 className="font-sans text-white font-bold text-base leading-snug mb-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {cat.title}
                   </h3>
-                  <p className="text-zinc-100 text-[13px] leading-relaxed mb-5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                  <p className="text-zinc-100 text-sm leading-relaxed mb-5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     {cat.desc}
                   </p>
 
-                  {/* Divider */}
-                  <div
-                    className="h-px w-full mb-4 origin-left scale-x-100"
-                    style={{ background: `linear-gradient(to right, ${cat.color}35, transparent)` }}
-                  />
-
-                  {/* CTA */}
-                  <div
-                    className="flex items-center gap-1.5 text-xs font-semibold tracking-[0.12em] uppercase"
-                    style={{ color: cat.color }}
-                  >
-                    <span>Explore Category</span>
-                    <span className="transition-transform duration-200 ease-out group-hover:translate-x-1.5">
-                      →
-                    </span>
-                  </div>
                 </div>
               </div>
             </motion.a>

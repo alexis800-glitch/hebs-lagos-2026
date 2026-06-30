@@ -140,7 +140,7 @@ export default function Footer() {
                 info@thehebs.com
               </a>
               <a
-                href="tel:+14843571812"
+                href="tel:+16104779635"
                 className="flex items-center gap-3 text-sm font-inter transition-colors"
                 style={{ color: "#cccccc" }}
                 onMouseEnter={(e) =>
@@ -151,10 +151,12 @@ export default function Footer() {
                 }
               >
                 <Phone size={16} style={{ color: "#9b59b6" }} />
-                +1 484-357-1812 (US)
+                +1 610 477 9635 (US / WhatsApp)
               </a>
               <a
-                href="tel:+2348065881783"
+                href="https://wa.me/2348065881783"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm font-inter transition-colors"
                 style={{ color: "#cccccc" }}
                 onMouseEnter={(e) =>
@@ -165,8 +167,11 @@ export default function Footer() {
                 }
               >
                 <Phone size={16} style={{ color: "#e91e8c" }} />
-                08065881783 (Lagos)
+                08065881783 (Nigeria / WhatsApp)
               </a>
+              <p className="text-xs font-inter" style={{ color: "#666" }}>
+                Support: 2:00 PM – 11:00 PM WAT
+              </p>
             </div>
             <a
               href="https://hebseventportal.com/register"

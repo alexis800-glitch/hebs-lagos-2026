@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import TrailerSection from '@/components/TrailerSection'
 
 type Tab = 'global-crown' | 'barber' | 'braiding'
 
@@ -19,27 +18,27 @@ const TABS: { id: Tab; label: string }[] = [
 const GLOBAL_STAGES = [
   {
     n: '01',
-    title: 'Pre-selection Video Submission',
-    deadline: 'August 5, 2026',
-    desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. Pay the $50 USD (₦70,000) entry fee at hebslagos.com to complete registration.</>,
+    title: 'Registration Opens',
+    deadline: 'July 15, 2026',
+    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to hairstylists, makeup artists, nail artists, fashion designers, fashion stylists, and avant-garde editorial artists worldwide.</>,
   },
   {
     n: '02',
-    title: 'Public Instagram Voting',
-    deadline: 'August 10 – August 18, 2026',
-    desc: 'All approved submissions are posted on @haireducationbeautysummit. Voting counts likes and comments only. The top 12 artists by total engagement advance to compete live in Lagos.',
+    title: 'Video Submission & Registration Deadline',
+    deadline: 'October 10, 2026 · 11:59 PM WAT',
+    desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. All registrations and video submissions must be completed by 11:59 PM WAT.</>,
   },
   {
     n: '03',
-    title: 'Finalists Announced',
-    deadline: 'August 19, 2026',
-    desc: 'The top 12 finalists are announced publicly on @haireducationbeautysummit. All selected artists are notified directly and must confirm their participation within 48 hours.',
+    title: 'Contestant Notification',
+    deadline: '1–3 Business Days After Submission',
+    desc: 'All contestants will be notified 1–3 business days after submitting if they have been chosen to compete in the Live Final Championship.',
   },
   {
     n: '04',
     title: 'Live Championship Finals',
     deadline: 'October 25, 2026',
-    desc: 'The 12 finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
+    desc: 'Selected finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
   },
 ]
 
@@ -307,7 +306,7 @@ function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) 
       </div>
 
       {/* Note */}
-      <p className="text-zinc-300 text-xs leading-relaxed mt-auto">{div.note}</p>
+      <p className="text-zinc-200 text-sm leading-relaxed mt-auto">{div.note}</p>
     </div>
   )
 }
@@ -370,13 +369,10 @@ function CompetitionsContent() {
             Compete for{' '}
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
-          <p className="text-zinc-400 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
+          <p className="text-zinc-300 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
             Three championship tracks. $92,500 USD (₦129,500,000) in prizes. Lagos, Nigeria.
           </p>
         </div>
-
-        {/* ── Official Trailer ─────────────────────────────────────────────── */}
-        <TrailerSection compact />
 
         {/* ── Tab Navigation ───────────────────────────────────────────────── */}
         <div className="sticky top-20 z-40 bg-zinc-950/90 backdrop-blur-md">
@@ -459,8 +455,8 @@ function CompetitionsContent() {
 
               {/* 3-Stage Timeline */}
               <div>
-                <SectionLabel>Competition Process</SectionLabel>
-                <SectionHeading>4-Stage Selection Process</SectionHeading>
+                <SectionLabel>Application Timeline</SectionLabel>
+                <SectionHeading>4-Stage Application Process</SectionHeading>
                 <div className="flex flex-col">
                   {GLOBAL_STAGES.map((stage, i) => (
                     <div key={stage.n} className="flex gap-5">
@@ -484,7 +480,7 @@ function CompetitionsContent() {
                             {stage.deadline}
                           </span>
                         </div>
-                        <p className="text-zinc-300 text-sm leading-relaxed">{stage.desc}</p>
+                        <p className="text-zinc-200 text-sm leading-relaxed">{stage.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -538,7 +534,7 @@ function CompetitionsContent() {
                   Download Official Competition Brief
                 </BriefCTA>
                 <p className="text-zinc-300 text-xs font-mono font-medium">
-                  Non-refundable · Deadline August 5, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
+                  Non-refundable · Registration Deadline October 10, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
                 </p>
                 <p className="text-zinc-300 text-xs font-mono text-center max-w-md leading-relaxed mt-1">
                   * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.

@@ -52,7 +52,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["global crown", "crowned icon", "beauty competition", "hairstylist competition", "makeup competition", "fashion competition", "nail competition", "editorial", "avant garde"],
     answer:
-      "The Global Crown Championship has 3 stages:\n1. Pre-selection Video Submission — Submit a 3-min video to casting@hebslagos.com by August 20, 2026. Pay the $50 USD (₦70,000) entry fee at hebslagos.com.\n2. Public Instagram Voting (August 25–30, 2026) — Top 12 by likes/comments on @haireducationbeautysummit advance.\n3. Live Champion — October 25, 2026 on the main stage in Lagos, in person.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
+      "The Global Crown Championship (Roots to Royalty™) application timeline:\n\n1. Registration Opens — July 15, 2026. Register at hebseventportal.com/register and pay the $50 USD (₦70,000) entry fee.\n2. Video Submission & Registration Deadline — October 10, 2026, 11:59 PM WAT. Submit a 3-min MP4/MOV video to casting@hebslagos.com.\n3. Contestant Notification — All contestants will be notified 1–3 business days after submitting if chosen for the Live Final.\n4. Live Championship Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
   },
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
@@ -77,12 +77,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],
     answer:
-      "All payments are processed through the official portal at hebseventportal.com/register. After completing payment, you will receive a confirmation email with your digital ticket or QR code. If you do not receive confirmation within 24 hours, contact info@thehebs.com or call +1 (484) 357-1812.",
+      "All payments are processed through the official portal at hebseventportal.com/register. After completing payment, you will receive a confirmation email with your digital ticket or QR code. If you do not receive confirmation within 24 hours, contact info@thehebs.com or call +1 (610) 477-9635.",
   },
   {
     triggers: ["contact", "support", "help", "email", "phone", "reach", "whatsapp", "info", "question", "inquiry", "get in touch"],
     answer:
-      "You can reach the HEBS team through:\n\n📧 Email: info@thehebs.com\n📞 Phone (US): +1 (484) 357-1812\n💬 WhatsApp: wa.me/14843571812\n\nOr use the contact form at /contact on this website.",
+      "You can reach the HEBS team through:\n\n📧 Email: info@thehebs.com\n📞 US / WhatsApp: +1 (610) 477-9635\n📱 Nigeria / WhatsApp: +234 806 588 1783\n⏰ Support: 2:00 PM – 11:00 PM WAT\n\nOr use the contact form at /contact on this website.",
   },
   {
     triggers: ["masterclass", "workshop", "education", "learn", "class", "training", "session", "seminar"],
@@ -96,7 +96,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   },
 ];
 
-const FALLBACK = "I don't have that specific information on hand. Please contact the HEBS team for confirmation — email info@thehebs.com or call +1 (484) 357-1812.";
+const FALLBACK = "I don't have that specific information on hand. Please contact the HEBS team for confirmation — email info@thehebs.com or call +1 (610) 477-9635.";
 
 function findBestAnswer(query: string): string {
   const q = query.toLowerCase().trim();

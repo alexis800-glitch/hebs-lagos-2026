@@ -11,6 +11,49 @@ export const metadata = {
   description: 'Partner with the premier beauty summit in Africa. Five exclusive sponsorship tiers from $1,500 to $25,000. HEBS Lagos 2026, October 23–25.',
 }
 
+const boothPackages = [
+  {
+    tag: '01',
+    name: 'Standard Booth',
+    price: '$1,500 USD',
+    priceNgn: '₦2,100,000',
+    inclusions: [
+      '1 Table, 2 Chairs',
+      '5 General Admission Passes',
+    ],
+  },
+  {
+    tag: '02',
+    name: 'Premium Booth',
+    price: '$3,000 USD',
+    priceNgn: '₦4,200,000',
+    inclusions: [
+      'High-Traffic Area Placement',
+      '2 Tables, 4 Chairs',
+      'Social Media Feature',
+      '10 General Admission Passes',
+    ],
+  },
+  {
+    tag: '03',
+    name: 'Deluxe Booth',
+    price: '$4,500 USD',
+    priceNgn: '₦6,300,000',
+    inclusions: [
+      'Prime Location',
+      '4 Tables, 6 Chairs',
+      'Featured Listing on Event Website',
+      'VIP Networking Access',
+      '15 General Admission Passes',
+    ],
+  },
+]
+
+const boothAddOns = [
+  { label: 'Electricity & Wi-Fi Access', price: '+$150 USD', ngn: '₦210,000' },
+  { label: 'On-Site Branding & Banner Placement', price: 'From $550 USD', ngn: '₦770,000' },
+]
+
 const diamondPerks = [
   'Prime "Presented By" branding on the HEBS main stage backdrop',
   'Opening ceremony & closing gala speaking slots',
@@ -116,7 +159,7 @@ export default function SponsorsPage() {
           {[
             { stat: '3,000+', label: 'Expected Attendees', note: 'Beauty professionals, educators, creators, and consumers' },
             { stat: 'Nigeria + Africa', label: 'Geographic Reach', note: 'International competitors from the US, UK, and West Africa' },
-            { stat: '$85,000+', label: 'Total Prize Pool', note: 'Largest prize purse in African beauty competition history' },
+            { stat: '$92,500', label: 'Total Prize Pool', note: 'Largest prize purse in African beauty competition history' },
           ].map((item) => (
             <div key={item.stat} className="border border-white/10 bg-zinc-950/40 rounded-2xl p-6">
               <span className="font-sans text-3xl font-light text-white block mb-1 tracking-tight">{item.stat}</span>
@@ -297,6 +340,89 @@ export default function SponsorsPage() {
             <span>CONTACT US</span>
             <span className="text-sm font-light">↗</span>
           </a>
+        </div>
+
+        {/* ── Exhibitor & Vendor Booth Packages ── */}
+        <div className="max-w-5xl mx-auto mt-20 border-t border-white/[0.08] pt-16">
+
+          {/* Section header */}
+          <div className="mb-10">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-3">
+              Exhibitor &amp; Vendor
+            </span>
+            <h2 className="font-serif text-2xl md:text-3xl font-light text-white tracking-tight mb-3">
+              Booth <span className="italic font-normal">Packages</span>
+            </h2>
+            <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed max-w-xl">
+              Showcase your products and services to thousands of beauty industry professionals.
+              Exhibit Days: October 24–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.
+            </p>
+          </div>
+
+          {/* 3-column booth cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+            {boothPackages.map((pkg) => (
+              <div
+                key={pkg.name}
+                className="bg-zinc-950/40 border border-white/10 hover:border-white/25 transition-all duration-300 rounded-2xl p-7 flex flex-col"
+              >
+                <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 block mb-4">
+                  {pkg.tag}
+                </span>
+                <h3 className="font-serif text-xl font-light text-white tracking-tight mb-1">
+                  {pkg.name}
+                </h3>
+                <div className="border-t border-zinc-900 pt-5 mt-4 mb-6">
+                  <span className="text-3xl font-light tracking-tight text-white block font-sans leading-none">
+                    {pkg.price}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1.5 block">
+                    {pkg.priceNgn}
+                  </span>
+                </div>
+                <ul className="text-sm text-zinc-400 space-y-3 flex-1 mb-6">
+                  {pkg.inclusions.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5 stroke-[2]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={`mailto:exhibitors@thehebs.com?subject=${encodeURIComponent(pkg.name + ' Inquiry — HEBS 2026')}`}
+                  className="w-full text-center py-3 rounded-xl font-medium transition-all border border-zinc-800 hover:border-zinc-600 text-white bg-zinc-900/30 font-sans text-xs uppercase tracking-widest block"
+                >
+                  Inquire ↗
+                </a>
+              </div>
+            ))}
+          </div>
+
+          {/* Add-ons row */}
+          <div className="border border-white/[0.08] bg-zinc-950/40 rounded-2xl p-6 mb-5">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-5">
+              Optional Add-Ons
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {boothAddOns.map((addon) => (
+                <div key={addon.label} className="flex items-start gap-3">
+                  <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5 stroke-[2]" />
+                  <div>
+                    <p className="text-sm text-white font-medium leading-snug">{addon.label}</p>
+                    <p className="font-mono text-xs text-zinc-400 mt-1">
+                      {addon.price} <span className="text-zinc-600">/ {addon.ngn}</span>
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Source note */}
+          <p className="font-sans text-xs text-zinc-600 text-center leading-relaxed">
+            Booth package pricing is based on the official HEBS Lagos travel guide.
+          </p>
+
         </div>
 
         <PartnershipContact />
