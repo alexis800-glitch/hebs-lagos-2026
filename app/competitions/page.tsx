@@ -77,40 +77,40 @@ const BARBER_DIVISIONS: Division[] = [
     n: '01',
     title: 'Fast & Flawless Challenge™',
     subtitle: 'The Ultimate Speed Competition · 15 min',
-    entry: '$50 USD',
+    entry: '$50 USD\n₦70,000',
     time: '15 min',
-    prizePool: '$5,000',
-    prizes: ['1st — $3,000', '2nd — $1,500', '3rd — $500'],
+    prizePool: '$5,000\n₦7,000,000',
+    prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
     note: 'Complete a clean, polished haircut under intense time pressure. Permitted: tapers, fades, burst fades, mohawks, modern cuts.',
   },
   {
     n: '02',
     title: 'Battle of the Fades™',
     subtitle: 'The Ultimate Fade Championship · 30 min',
-    entry: '$50 USD',
+    entry: '$50 USD\n₦70,000',
     time: '30 min',
-    prizePool: '$5,000',
-    prizes: ['1st — $3,000', '2nd — $1,500', '3rd — $500'],
+    prizePool: '$5,000\n₦7,000,000',
+    prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
     note: 'Demonstrate smooth transitions, weight control, symmetry, clean detailing, and a flawless professional finish.',
   },
   {
     n: '03',
     title: 'Freestyle Design Battle™',
     subtitle: 'Art Meets Barbering · 60 min',
-    entry: '$75 USD',
+    entry: '$75 USD\n₦105,000',
     time: '60 min',
-    prizePool: '$7,500',
-    prizes: ['1st — $4,000', '2nd — $2,500', '3rd — $1,000'],
+    prizePool: '$7,500\n₦10,500,000',
+    prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
     note: 'Hair tattoos, portrait designs, artistic patterns, cultural concepts, abstract artwork. Creativity is the brief.',
   },
   {
     n: '04',
     title: 'Barber Games™',
     subtitle: 'The Ultimate Team Battle · 2 Hours',
-    entry: '$100 USD / team',
+    entry: '$100 USD\n₦140,000 per team',
     time: '2 hrs',
-    prizePool: '$10,000',
-    prizes: ['Winning Team — $10,000', 'Championship Trophy', 'Team Recognition'],
+    prizePool: '$10,000\n₦14,000,000',
+    prizes: ['Winning Team — $10,000 / ₦14,000,000', 'Championship Trophy', 'Team Recognition'],
     note: 'Four barbers each own a designated section of one transformational look — teamwork, timing, and cohesion decide the winner.',
     isTeam: true,
   },
@@ -129,22 +129,22 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Fast & Flawless Braiding Challenge™',
     subtitle: 'Speed Meets Precision',
     format: 'Solo',
-    entry: '$50 USD',
+    entry: '$50 USD\n₦70,000',
     time: '30 min',
-    prizePool: '$5,000',
-    prizes: ['1st — $3,000', '2nd — $1,500', '3rd — $500'],
+    prizePool: '$5,000\n₦7,000,000',
+    prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
     note: 'Judged on parting precision, neatness, consistency, product control, finish quality, and time management.',
     featured: false,
   },
   {
     n: '02',
     title: 'Braids & Fades Showdown™',
-    subtitle: 'Dual Discipline Team Track · $50 per Team of 1 Barber + 1 Braider',
+    subtitle: 'Dual Discipline Team Track · $50 USD / ₦70,000 per Team of 1 Barber + 1 Braider',
     format: '1 Barber + 1 Braider',
-    entry: '$50 USD / team',
+    entry: '$50 USD\n₦70,000 / team',
     time: '60 min',
-    prizePool: '$7,500',
-    prizes: ['1st — $4,000', '2nd — $2,500', '3rd — $1,000'],
+    prizePool: '$7,500\n₦10,500,000',
+    prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
     note: 'A barber and braider must create one complete transformation together — harmony between barbering and braiding artistry. Expected to be the event\'s standout audience favorite.',
     featured: true,
   },
@@ -153,10 +153,10 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Traditional Braiding Championship™',
     subtitle: 'Honoring Culture & Heritage',
     format: 'Solo',
-    entry: '$50 USD',
+    entry: '$50 USD\n₦70,000',
     time: '60 min',
-    prizePool: '$7,500',
-    prizes: ['1st — $4,000', '2nd — $2,500', '3rd — $1,000'],
+    prizePool: '$7,500\n₦10,500,000',
+    prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
     note: 'Eligible styles: Tribal, Fulani, Ghana braids, cornrows, feed-ins, and traditional African cultural styles. Judged on technical skill and cultural authenticity.',
     featured: false,
   },
@@ -165,10 +165,10 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Freestyle Braid Art Championship™',
     subtitle: 'Creativity Without Limits',
     format: 'Solo',
-    entry: '$75 USD',
+    entry: '$75 USD\n₦105,000',
     time: '75 min',
-    prizePool: '$10,000',
-    prizes: ['1st — $5,000', '2nd — $3,000', '3rd — $2,000'],
+    prizePool: '$10,000\n₦14,000,000',
+    prizes: ['1st — $5,000 (₦7,000,000)', '2nd — $3,000 (₦4,200,000)', '3rd — $2,000 (₦2,800,000)'],
     note: 'Editorial braiding, avant-garde designs, fashion braiding, fantasy concepts, cultural fusion. Imagination is the only limit.',
     featured: false,
   },
@@ -602,7 +602,7 @@ function CompetitionsContent() {
               {/* Divisions grid */}
               <div>
                 <SectionLabel>Competition Divisions</SectionLabel>
-                <SectionHeading>4 Divisions · $27,500 in Prizes</SectionHeading>
+                <SectionHeading>4 Divisions · $27,500 (₦38,500,000) in Prizes</SectionHeading>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                   {BARBER_DIVISIONS.map((div) => (
                     <DivisionCard key={div.n} div={div} />
@@ -717,7 +717,7 @@ function CompetitionsContent() {
               {/* Divisions grid */}
               <div>
                 <SectionLabel>Competition Divisions</SectionLabel>
-                <SectionHeading>4 Divisions · $30,000 in Prizes</SectionHeading>
+                <SectionHeading>4 Divisions · $30,000 (₦42,000,000) in Prizes</SectionHeading>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                   {BRAIDING_DIVISIONS.map((div) => (
                     <DivisionCard key={div.n} div={div} featured={div.featured} />
