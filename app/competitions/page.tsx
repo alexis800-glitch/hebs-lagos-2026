@@ -20,7 +20,7 @@ const GLOBAL_STAGES = [
     n: '01',
     title: 'Registration Opens',
     deadline: 'July 15, 2026',
-    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to hairstylists, makeup artists, nail artists, fashion designers, fashion stylists, and avant-garde editorial artists worldwide.</>,
+    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to hairstylists, barbers, makeup artists, nail artists, fashion designers, fashion stylists, creative directors, and beauty &amp; fashion visionaries worldwide.</>,
   },
   {
     n: '02',
@@ -38,7 +38,7 @@ const GLOBAL_STAGES = [
     n: '04',
     title: 'Live Championship Finals',
     deadline: 'October 25, 2026',
-    desc: 'Selected finalists each get 10 minutes on the main stage at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos — presenting a full transformation combining hair, makeup, fashion, music, and storytelling before global judges, media, and a live audience.',
+    desc: 'Each finalist will receive 5 minutes to present their live interpretation of the 2026 Roots to Royalty™ theme.',
   },
 ]
 
@@ -51,11 +51,13 @@ const JUDGING_CRITERIA = [
 
 const ELIGIBLE_ARTISTS = [
   'Hairstylists',
+  'Barbers',
   'Makeup Artists',
   'Nail Artists',
   'Fashion Designers',
   'Fashion Stylists',
-  'Avant-Garde & Editorial Artists',
+  'Creative Directors',
+  'Beauty & Fashion Visionaries',
 ]
 
 // ─── Barber Championships Data ────────────────────────────────────────────────
@@ -453,6 +455,43 @@ function CompetitionsContent() {
                 </div>
               </div>
 
+              {/* Theme Introduction */}
+              <div className="flex flex-col gap-5">
+                <div>
+                  <SectionLabel>2026 Championship Theme</SectionLabel>
+                  <h3 className="font-serif text-2xl sm:text-3xl text-white font-semibold tracking-tight leading-tight mt-1 mb-4">
+                    What is Roots to Royalty™?
+                  </h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-zinc-400 text-xs font-mono uppercase tracking-widest leading-relaxed">
+                      This is not a beauty competition.<br />
+                      This is not a fashion show.<br />
+                      This is not a talent contest.
+                    </p>
+                    <p className="text-zinc-200 text-sm leading-relaxed">
+                      This is the ultimate global stage where artistry, culture, fashion, music, beauty, and performance collide — on October 25th, 2026, in Lagos, Nigeria.
+                    </p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">
+                      Every great story begins somewhere. Every culture carries a legacy. Every artist has a journey.
+                    </p>
+                  </div>
+                  <div className="border border-amber-500/20 bg-amber-500/[0.04] rounded-2xl p-6 flex flex-col gap-3">
+                    <p className="text-xs font-mono tracking-widest text-amber-400 uppercase">The Creative Challenge</p>
+                    <p className="text-zinc-200 text-sm leading-relaxed">
+                      <span className="font-semibold text-white">ROOTS TO ROYALTY™</span> challenges competitors to create a breathtaking artistic presentation celebrating heritage, culture, identity, music, fashion, beauty, and transformation.
+                    </p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">
+                      Your interpretation can be inspired by your ancestry, nation, personal journey, dreams, or your vision of beauty itself — traditional, futuristic, editorial, avant-garde, couture, or culturally inspired. The brief is this:
+                    </p>
+                    <p className="text-white font-serif text-base italic leading-relaxed border-l-2 border-amber-500/50 pl-4 mt-1">
+                      &ldquo;How do we transform from where we come from into who we are destined to become?&rdquo;
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* 3-Stage Timeline */}
               <div>
                 <SectionLabel>Application Timeline</SectionLabel>
@@ -482,6 +521,32 @@ function CompetitionsContent() {
                         </div>
                         <p className="text-zinc-200 text-sm leading-relaxed">{stage.desc}</p>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Live Championship Experience */}
+              <div className="border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6 md:p-8">
+                <SectionLabel>The Live Championship Experience</SectionLabel>
+                <p className="text-zinc-300 text-sm leading-relaxed mt-1 mb-5 max-w-2xl">
+                  Selected finalists take center stage in a fully immersive live production at the NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Each finalist will receive <span className="font-semibold text-white">5 minutes</span> to present their live interpretation of the 2026 Roots to Royalty™ theme — before global judges, media, sponsors, and a live audience.
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {[
+                    'Massive LED screens',
+                    'Professional lighting & visual effects',
+                    'Live audience',
+                    'Global media coverage',
+                    'International judges',
+                    'Music-driven stage presentations',
+                    'Fashion & cultural performances',
+                    'Red carpet experience',
+                    'Professional photography & videography',
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full bg-amber-500/70 mt-1.5 flex-shrink-0" />
+                      <span className="text-zinc-200 text-xs leading-relaxed">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -519,6 +584,27 @@ function CompetitionsContent() {
                   <p className="text-zinc-300 text-xs font-mono mt-5 leading-relaxed">
                     Finalists arrange own travel and lodging. HEBS provides full stage production.
                   </p>
+                </div>
+              </div>
+
+              {/* Why Compete */}
+              <div>
+                <SectionLabel>Why Compete</SectionLabel>
+                <SectionHeading>Beyond the Prize Money</SectionHeading>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
+                  {[
+                    'HEBS Global Crown Championship Trophy',
+                    'International recognition across global platforms',
+                    'Professional media coverage & editorial features',
+                    'Brand collaborations & sponsorship opportunities',
+                    'Live audience, global judges & industry leaders',
+                    'Career-defining exposure for artists worldwide',
+                  ].map((benefit) => (
+                    <div key={benefit} className="flex items-center gap-3 border border-white/[0.06] bg-zinc-900/30 rounded-xl px-4 py-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
+                      <span className="text-zinc-200 text-sm leading-snug">{benefit}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
