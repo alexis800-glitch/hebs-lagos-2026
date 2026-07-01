@@ -417,7 +417,7 @@ function CompetitionsContent() {
                       Roots to Royalty™
                     </h2>
                     <p className="text-zinc-300 text-sm leading-relaxed max-w-md">
-                      The ultimate global stage where artistry, culture, fashion, music, beauty, and performance collide into one iconic night.
+                      The global stage where artistry, culture, fashion, music, beauty, and performance converge in Lagos.
                     </p>
                     <div className="flex flex-wrap gap-2 mt-1">
                       <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
@@ -465,16 +465,14 @@ function CompetitionsContent() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-4">
-                    <p className="text-zinc-400 text-xs font-mono uppercase tracking-widest leading-relaxed">
-                      This is not a beauty competition.<br />
-                      This is not a fashion show.<br />
-                      This is not a talent contest.
-                    </p>
                     <p className="text-zinc-200 text-sm leading-relaxed">
-                      This is the ultimate global stage where artistry, culture, fashion, music, beauty, and performance collide — on October 25th, 2026, in Lagos, Nigeria.
+                      Every culture tells a story. Every tradition reflects beauty. Every artist carries a legacy.
                     </p>
                     <p className="text-zinc-300 text-sm leading-relaxed">
-                      Every great story begins somewhere. Every culture carries a legacy. Every artist has a journey.
+                      For the 2026 HEBS Lagos Global Crown Championship, contestants are invited to create a breathtaking artistic presentation that celebrates the beauty, history, and identity of their culture through the lens of modern royalty.
+                    </p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">
+                      Roots to Royalty™ challenges artists to honor where they come from while transforming their heritage into a bold, contemporary masterpiece worthy of the global stage.
                     </p>
                   </div>
                   <div className="border border-amber-500/20 bg-amber-500/[0.04] rounded-2xl p-6 flex flex-col gap-3">
