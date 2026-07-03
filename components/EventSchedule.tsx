@@ -7,27 +7,24 @@ const EASE = [0.25, 0.4, 0.25, 1] as const;
 
 const DAYS = [
   {
-    tag: "Oct 23 · Pre-Party",
-    date: "Friday, October 23, 2026",
-    time: "2:00 PM – 7:00 PM",
+    date: "October 23, 2026",
+    title: "Pre Party",
     venue: "NJS Royale Beach Resort",
-    detail: "Exclusive pre-party celebration, live entertainment & networking.",
+    time: "2:00 PM – 7:00 PM",
     accent: "#e91e8c",
   },
   {
-    tag: "Oct 24 · Main Event — Day 1",
-    date: "Saturday, October 24, 2026",
+    date: "October 24, 2026",
+    title: "Main Event — Exhibition, Education, Panel Discussion & Competition",
+    venue: "NJS Royale Event Center",
     time: "12:00 Noon – 6:00 PM",
-    venue: "NJS Royale Events Center",
-    detail: "Exhibition · Education · Panel Discussion · Competition",
     accent: "#f59e0b",
   },
   {
-    tag: "Oct 25 · Main Event — Day 2",
-    date: "Sunday, October 25, 2026",
+    date: "October 25, 2026",
+    title: "Main Event — Exhibition, Education, Panel Discussion & Competition",
+    venue: "NJS Royale Event Center",
     time: "11:00 AM – 5:00 PM",
-    venue: "NJS Royale Events Center",
-    detail: "Exhibition · Education · Panel Discussion · Competition",
     accent: "#9b59b6",
   },
 ] as const;
@@ -68,9 +65,9 @@ export default function EventSchedule() {
         >
           {DAYS.map((d) => (
             <motion.div
-              key={d.tag}
+              key={d.date}
               variants={card}
-              className="relative rounded-2xl p-6 sm:p-7 bg-zinc-950/80 border border-white/10 overflow-hidden"
+              className="relative rounded-2xl p-6 sm:p-7 bg-zinc-950/80 border border-white/10 overflow-hidden flex flex-col"
               style={{ boxShadow: `0 0 0 1px ${d.accent}22, 0 20px 48px -20px ${d.accent}30` }}
             >
               {/* Accent top bar */}
@@ -80,23 +77,22 @@ export default function EventSchedule() {
               />
 
               <p
-                className="font-mono text-[10px] uppercase tracking-[0.2em] font-semibold mb-3"
+                className="font-mono text-[11px] uppercase tracking-[0.2em] font-bold mb-3"
                 style={{ color: d.accent }}
               >
-                {d.tag}
-              </p>
-
-              <p className="font-serif text-lg sm:text-xl font-semibold text-white tracking-tight mb-1.5">
                 {d.date}
               </p>
 
-              {/* Bold, high-visibility time */}
-              <p className="text-2xl sm:text-[1.7rem] font-bold text-white tracking-tight leading-tight mb-4 tabular-nums">
-                {d.time}
+              <p className="font-serif text-lg sm:text-xl font-semibold text-white tracking-tight leading-snug mb-2">
+                {d.title}
               </p>
 
-              <p className="font-sans text-sm font-semibold text-zinc-100 mb-1.5">{d.venue}</p>
-              <p className="font-sans text-xs sm:text-[13px] text-zinc-400 leading-relaxed">{d.detail}</p>
+              <p className="font-sans text-sm font-semibold text-zinc-100 mb-4">{d.venue}</p>
+
+              {/* Bold, high-visibility time */}
+              <p className="text-2xl sm:text-[1.7rem] font-bold text-white tracking-tight leading-tight tabular-nums mt-auto">
+                {d.time}
+              </p>
             </motion.div>
           ))}
         </motion.div>
