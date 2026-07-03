@@ -94,6 +94,45 @@ export default function TicketsPage() {
               </p>
             </div>
 
+            {/* Event schedule — dates & times at a glance */}
+            <div className="mb-16">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium mb-4">
+                Event Schedule
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {[
+                  {
+                    day: "Oct 23 — Pre-Party",
+                    time: "2:00 PM – 7:00 PM",
+                    venue: "NJS Royale Beach Resort",
+                  },
+                  {
+                    day: "Oct 24 — Main Event · Day 1",
+                    time: "12:00 Noon – 6:00 PM",
+                    venue: "NJS Royale Events Center",
+                  },
+                  {
+                    day: "Oct 25 — Main Event · Day 2",
+                    time: "11:00 AM – 5:00 PM",
+                    venue: "NJS Royale Events Center",
+                  },
+                ].map((d) => (
+                  <div
+                    key={d.day}
+                    className="bg-zinc-950 border border-amber-500/20 rounded-2xl px-5 py-4"
+                  >
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-300 mb-1.5">
+                      {d.day}
+                    </p>
+                    <p className="text-lg sm:text-xl font-bold text-white tracking-tight tabular-nums mb-1">
+                      {d.time}
+                    </p>
+                    <p className="font-sans text-xs text-zinc-400">{d.venue}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Pass grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 w-full overflow-hidden">
               {passes.map((pass) => (

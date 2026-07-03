@@ -117,6 +117,20 @@ export default function Footer() {
                 <p className="text-sm font-inter mt-2" style={{ color: "#9b59b6" }}>
                   October 23–25, 2026
                 </p>
+                <div className="mt-2 flex flex-col gap-1">
+                  <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
+                    Oct 23 · Pre-Party (Beach Resort) ·{" "}
+                    <span className="font-bold text-white">2:00 PM – 7:00 PM</span>
+                  </p>
+                  <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
+                    Oct 24 · Main Event Day 1 ·{" "}
+                    <span className="font-bold text-white">12:00 Noon – 6:00 PM</span>
+                  </p>
+                  <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
+                    Oct 25 · Main Event Day 2 ·{" "}
+                    <span className="font-bold text-white">11:00 AM – 5:00 PM</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
