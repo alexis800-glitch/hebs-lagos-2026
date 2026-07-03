@@ -16,14 +16,14 @@ const DAYS = [
   {
     date: "October 24, 2026",
     title: "Main Event — Exhibition, Education, Panel Discussion & Competition",
-    venue: "NJS Royale Event Center",
+    venue: "NJS Royale Events Center",
     time: "12:00 Noon – 6:00 PM",
     accent: "#f59e0b",
   },
   {
     date: "October 25, 2026",
     title: "Main Event — Exhibition, Education, Panel Discussion & Competition",
-    venue: "NJS Royale Event Center",
+    venue: "NJS Royale Events Center",
     time: "11:00 AM – 5:00 PM",
     accent: "#9b59b6",
   },
