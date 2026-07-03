@@ -32,12 +32,6 @@ const CATEGORIES = [
   { label: "Culture",     dot: "#e91e8c" },
 ] as const;
 
-const SCHEDULE_PILLS = [
-  { day: "Oct 23 · Pre-Party", time: "2 – 7 PM" },
-  { day: "Oct 24 · Day 1",     time: "12 Noon – 6 PM" },
-  { day: "Oct 25 · Day 2",     time: "11 AM – 5 PM" },
-] as const;
-
 const VALUE_ITEMS = [
   { value: "$92,500",    label: "Prize Pool · ₦129.5M"    },
   { value: "6",          label: "Competition Categories" },
@@ -337,34 +331,12 @@ export default function Hero() {
           initial={mounted ? { opacity: 0 } : false}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.44 }}
-          className="font-mono text-[11px] sm:text-sm tracking-widest uppercase text-white font-bold mb-4 inline-flex items-center justify-center gap-2"
+          className="font-mono text-[11px] sm:text-sm tracking-widest uppercase text-white font-bold mb-7 inline-flex items-center justify-center gap-2"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#e91e8c] shrink-0 opacity-80" />
           Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
           <span className="w-1.5 h-1.5 rounded-full bg-[#e91e8c] shrink-0 opacity-80" />
         </motion.p>
-
-        {/* Schedule pills — dates & times at a glance */}
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 8 } : false}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.48 }}
-          className="flex flex-wrap items-center justify-center gap-2 mb-7 max-w-[560px]"
-        >
-          {SCHEDULE_PILLS.map((s) => (
-            <span
-              key={s.day}
-              className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-amber-500/[0.07] px-3.5 py-1.5"
-            >
-              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.12em] text-zinc-200 font-medium">
-                {s.day}
-              </span>
-              <span className="font-sans text-[11px] sm:text-xs font-bold text-amber-300 tabular-nums whitespace-nowrap">
-                {s.time}
-              </span>
-            </span>
-          ))}
-        </motion.div>
 
         {/* Thin decorative rule */}
         <motion.div
