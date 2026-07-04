@@ -126,7 +126,7 @@ export default function TicketsPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                   {
-                    day: "Oct 23 — Pre-Party",
+                    day: "Oct 23 — Pre Party",
                     time: "2:00 PM – 7:00 PM",
                     venue: "NJS Royale Beach Resort",
                   },
