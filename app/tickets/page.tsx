@@ -1,10 +1,34 @@
-import Navbar from "@/components/Navbar";
+﻿import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Tickets — HEBS Lagos 2026",
   description:
-    "Secure your pass to the Hair Education Beauty Summit. Early bird, standard, and VIP tiers available. Lagos, Nigeria · October 23–25, 2026.",
+    "Secure your pass to the Hair Education Beauty Summit Lagos 2026. One-day, two-day, and three-day passes plus VIP Experience. October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.",
+  alternates: { canonical: "/tickets" },
+  openGraph: {
+    title: "Tickets — HEBS Lagos 2026",
+    description:
+      "One-day, two-day, and three-day passes plus VIP Experience for HEBS Lagos 2026. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
+    url: "/tickets",
+    images: [
+      {
+        url: "/images/og/hebs-lagos-2026-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Tickets — HEBS Lagos 2026, October 23–25, 2026",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tickets — HEBS Lagos 2026",
+    description:
+      "One-day, two-day, and three-day passes plus VIP Experience for HEBS Lagos 2026. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
+    images: ["/images/og/hebs-lagos-2026-og.jpg"],
+  },
 };
 
 const passes = [
