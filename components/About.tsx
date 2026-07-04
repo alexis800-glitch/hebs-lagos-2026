@@ -22,9 +22,9 @@ export default function About() {
           </div>
           <div className="md:col-span-2">
             <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
-              HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. After hosting two exceptionally successful events in{' '}
-              <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">NY/NJ, USA</span>,
-              we are now expanding dynamically to Africa—offering an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+              HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. Born in the diaspora, HEBS launched in{' '}
+              <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">New Jersey, USA</span>{' '}
+              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. Now, we are bringing the summit home to Lagos — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
             </p>
           </div>
         </div>

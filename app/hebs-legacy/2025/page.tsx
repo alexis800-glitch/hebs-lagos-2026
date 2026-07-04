@@ -400,17 +400,17 @@ export default function Hebs2025Page() {
               transition={{ duration: 0.9, ease: EXPO }}
             >
               <p className="font-mono text-[10px] tracking-[0.28em] uppercase text-amber-400/80 mb-5">
-                HEBS Legacy · October 2025 · Lagos, Nigeria
+                HEBS Legacy · October 2025 · New Jersey, USA
               </p>
               <h1 className="font-serif font-medium text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[0.92] text-white mb-6">
-                HEBS Lagos
+                HEBS
                 <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
                   2025
                 </span>
               </h1>
               <p className="font-serif text-xl sm:text-2xl text-zinc-300 font-light italic mb-8 max-w-lg leading-relaxed">
-                &ldquo;Where Africa&rsquo;s Finest Created History&rdquo;
+                &ldquo;The Sold-Out Edition That Took HEBS Global&rdquo;
               </p>
 
               {/* Quick stats strip */}
@@ -848,7 +848,7 @@ export default function Hebs2025Page() {
             >
               <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 mb-3">Video Archive</p>
               <h2 className="font-serif font-medium text-3xl sm:text-4xl text-white tracking-tight">Video Highlights</h2>
-              <p className="text-zinc-500 text-sm mt-3 max-w-md">Relive the moments that defined HEBS Lagos 2025.</p>
+              <p className="text-zinc-500 text-sm mt-3 max-w-md">Relive the moments that defined HEBS 2025.</p>
             </motion.div>
 
             {/* Landscape stage — full width */}
@@ -902,7 +902,7 @@ export default function Hebs2025Page() {
             >
               {[
                 {
-                  quote: "HEBS 2025 completely transformed my career. The international exposure was unlike anything I had experienced on the African continent.",
+                  quote: "HEBS 2025 completely transformed my career. The international exposure was unlike anything I had experienced anywhere in my career.",
                   name: "HEBS 2025 Champion",
                   role: "Barbering Category, HEBS 2025",
                 },
@@ -938,7 +938,7 @@ export default function Hebs2025Page() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EXPO }}
           >
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 mb-5">The Journey Continues</p>
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 mb-5">The Summit Comes Home</p>
             <h2 className="font-serif font-medium text-4xl sm:text-5xl text-white tracking-tight mb-4">
               Be Part of{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">

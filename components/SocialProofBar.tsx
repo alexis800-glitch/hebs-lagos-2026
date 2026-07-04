@@ -32,9 +32,9 @@ export default function SocialProofBar() {
             Year 3
           </span>
           <p className="text-base md:text-xl font-medium font-inter" style={{ color: "#ffffff" }}>
-            Returning for Year 3 —&nbsp;
+            Coming Home for Year 3 —&nbsp;
             <span style={{ color: "#aaaaaa" }}>
-              After Two Sold-Out Events in New York &amp; New Jersey
+              After Two Sold-Out Editions in New Jersey, USA
             </span>
           </p>
         </div>

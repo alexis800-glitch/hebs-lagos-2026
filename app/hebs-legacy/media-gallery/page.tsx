@@ -198,7 +198,7 @@ function HeroSlider() {
       <div className="absolute bottom-16 left-0 right-0 text-center px-5 z-10">
         <p className="font-mono text-[9px] tracking-[0.28em] uppercase text-amber-400/80 mb-2">HEBS Media Archive</p>
         <h1 className="font-serif font-medium text-4xl sm:text-5xl text-white tracking-tight">Media Gallery</h1>
-        <p className="text-zinc-400 text-sm mt-2">The complete visual archive of HEBS Lagos 2025</p>
+        <p className="text-zinc-400 text-sm mt-2">The complete visual archive of HEBS 2025 · New Jersey, USA</p>
       </div>
     </section>
   );

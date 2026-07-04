@@ -3,12 +3,12 @@
 const data: LegacyEventData = {
   year: 2024,
   heroTagline: "The Beginning of Something Historic",
-  heroSubtitle: "The inaugural HEBS set the standard for African beauty excellence.",
+  heroSubtitle: "The inaugural HEBS launched in New Jersey, USA — and set a new standard for beauty excellence.",
   dates: "October 2024",
-  venue: "Lagos, Nigeria",
+  venue: "New Jersey, USA",
   heroImage: "/images/gallery/gallery-event-07.png",
   overviewText:
-    "HEBS Lagos 2024 was the debut of Africa's most ambitious beauty summit — a bold vision brought to life. Over 350 attendees from 14 countries gathered in Lagos to witness the birth of a new institution. Five competition categories, live masterclasses, and $50,000 in prizes made it a landmark moment for the African beauty industry.",
+    "HEBS 2024 was the debut of the Hair Education Beauty Summit — a bold, diaspora-born vision brought to life in New Jersey, USA. Over 350 attendees from 14 countries gathered to witness the birth of a new institution. Five competition categories, live masterclasses, and $50,000 in prizes made it a landmark moment for the global beauty community — and the first chapter of a journey now leading home to Lagos.",
   stats: [
     { value: 350, suffix: "+", label: "Attendees", color: "#f59e0b" },
     { value: 60, suffix: "+", label: "Competitors", color: "#9b59b6" },
@@ -16,10 +16,10 @@ const data: LegacyEventData = {
     { value: 5, label: "Categories", color: "#f59e0b" },
   ],
   winners: [
-    { category: "Hair Styling", name: "Hair Styling Champion", origin: "Lagos, Nigeria", color: "#f59e0b" },
-    { category: "Barbering", name: "Barbering Champion", origin: "Lagos, Nigeria", color: "#9b59b6" },
-    { category: "Nail Art", name: "Nail Art Champion", origin: "Nigeria", color: "#e91e8c" },
-    { category: "Makeup Artistry", name: "Makeup Artistry Champion", origin: "Nigeria", color: "#f59e0b" },
+    { category: "Hair Styling", name: "Hair Styling Champion", origin: "", color: "#f59e0b" },
+    { category: "Barbering", name: "Barbering Champion", origin: "", color: "#9b59b6" },
+    { category: "Nail Art", name: "Nail Art Champion", origin: "", color: "#e91e8c" },
+    { category: "Makeup Artistry", name: "Makeup Artistry Champion", origin: "", color: "#f59e0b" },
     { category: "Education Award", name: "Education Award", origin: "", color: "#9b59b6" },
   ],
   competitionHighlights: [
@@ -32,7 +32,7 @@ const data: LegacyEventData = {
   ],
   testimonials: [
     {
-      quote: "HEBS 2024 was a game-changer for Nigerian beauty. The fact that it happened at all was historic. The execution was flawless.",
+      quote: "HEBS 2024 was a game-changer for our industry. Launching a summit of this calibre from the diaspora was historic. The execution was flawless.",
       name: "HEBS 2024 Champion",
       role: "Hair Styling Category, HEBS 2024",
     },
@@ -59,8 +59,8 @@ const data: LegacyEventData = {
 };
 
 export const metadata = {
-  title: "HEBS Lagos 2024 | Hair & Beauty Excellence Summit",
-  description: "Relive the inaugural HEBS Lagos 2024 — winners, gallery, and highlights from the first edition.",
+  title: "HEBS 2024 — New Jersey, USA | Hair Education Beauty Summit",
+  description: "Relive the inaugural HEBS 2024 in New Jersey, USA — winners, gallery, and highlights from the first edition of the summit now coming home to Lagos.",
 };
 
 export default function Hebs2024Page() {

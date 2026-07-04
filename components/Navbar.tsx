@@ -226,7 +226,7 @@ export default function Navbar() {
                             onClick={() => setIsLegacyOpen(false)}
                             className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-3.5 flex flex-col gap-1 transition-colors group/item"
                           >
-                            <span className="font-serif text-[14px] font-light text-white group-hover/item:text-amber-400 transition-colors">HEBS Lagos 2025</span>
+                            <span className="font-serif text-[14px] font-light text-white group-hover/item:text-amber-400 transition-colors">HEBS 2025 · New Jersey</span>
                             <span className="font-sans text-xs text-zinc-500">Champions, highlights &amp; gallery</span>
                           </Link>
                           <Link
@@ -390,7 +390,7 @@ export default function Navbar() {
                     >
                       <div className="pb-4 flex flex-col gap-0.5">
                         <Link href="/hebs-legacy/2025" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
-                          HEBS Lagos 2025
+                          HEBS 2025 · New Jersey
                         </Link>
                         <Link href="/hebs-legacy/media-gallery" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
                           Media Gallery

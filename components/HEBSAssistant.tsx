@@ -12,7 +12,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["what is hebs", "about hebs", "what hebs", "tell me about", "hair education", "beauty summit", "what is the event", "summit"],
     answer:
-      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS Lagos 2026 is the third edition — previously hosted in New York/New Jersey — now expanding to Africa. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features a $92,500 USD (₦129,500,000) cumulative prize pool.",
+      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and is now bringing the summit home to Lagos for 2026 — the third and biggest edition yet. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features a $92,500 USD (₦129,500,000) cumulative prize pool.",
   },
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],

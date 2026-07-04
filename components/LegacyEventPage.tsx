@@ -102,7 +102,7 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
                 HEBS Legacy Archive · {data.year}
               </p>
               <h1 className="font-serif font-medium text-5xl sm:text-6xl md:text-7xl tracking-tight leading-tight text-white mb-4">
-                HEBS Lagos{" "}
+                HEBS{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
                   {data.year}
                 </span>
@@ -473,7 +473,7 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
               </span>
             </h2>
             <p className="text-zinc-400 text-[15px] mb-10 max-w-md mx-auto">
-              The stage is set for the biggest HEBS yet. October 23–25, 2026 · Lagos, Nigeria.
+              The summit comes home. The biggest HEBS yet — October 23–25, 2026 · Lagos, Nigeria.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
               <a
