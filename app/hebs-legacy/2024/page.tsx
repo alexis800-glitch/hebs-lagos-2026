@@ -61,6 +61,26 @@ const data: LegacyEventData = {
 export const metadata = {
   title: "HEBS 2024 — New Jersey, USA | Hair Education Beauty Summit",
   description: "Relive the inaugural HEBS 2024 in New Jersey, USA — winners, gallery, and highlights from the first edition of the summit now coming home to Lagos.",
+  alternates: { canonical: "/hebs-legacy/2024" },
+  openGraph: {
+    title: "HEBS 2024 — New Jersey, USA | Hair Education Beauty Summit",
+    description: "Winners, gallery, and highlights from the inaugural HEBS 2024 in New Jersey, USA — where the summit began before coming home to Lagos for 2026.",
+    url: "/hebs-legacy/2024",
+    images: [
+      {
+        url: "/images/og/hebs-lagos-2026-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "HEBS 2024 Legacy — New Jersey, USA",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HEBS 2024 — New Jersey, USA | Hair Education Beauty Summit",
+    description: "Winners, gallery, and highlights from the inaugural HEBS 2024 in New Jersey, USA — where the summit began before coming home to Lagos for 2026.",
+    images: ["/images/og/hebs-lagos-2026-og.jpg"],
+  },
 };
 
 export default function Hebs2024Page() {

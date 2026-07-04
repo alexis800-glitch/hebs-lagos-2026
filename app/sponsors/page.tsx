@@ -6,9 +6,31 @@ import Navbar from '@/components/Navbar'
 import PartnershipContact from '@/components/PartnershipContact'
 import Footer from '@/components/Footer'
 
-export const metadata = {
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
   title: 'Sponsorship Opportunities — HEBS Lagos 2026',
   description: 'Partner with the premier beauty summit in Africa. Five exclusive sponsorship tiers from $1,500 to $25,000. HEBS Lagos 2026, October 23–25.',
+  alternates: { canonical: '/sponsors' },
+  openGraph: {
+    title: 'Sponsorship Opportunities — HEBS Lagos 2026',
+    description: 'Partner with HEBS Lagos 2026. Sponsorship tiers from $1,500 to $25,000. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.',
+    url: '/sponsors',
+    images: [
+      {
+        url: '/images/og/hebs-lagos-2026-og.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Sponsorship Opportunities — HEBS Lagos 2026',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sponsorship Opportunities — HEBS Lagos 2026',
+    description: 'Partner with HEBS Lagos 2026. Sponsorship tiers from $1,500 to $25,000. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.',
+    images: ['/images/og/hebs-lagos-2026-og.jpg'],
+  },
 }
 
 const boothPackages = [
