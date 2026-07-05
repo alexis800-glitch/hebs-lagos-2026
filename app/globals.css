@@ -19,6 +19,16 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
   overflow-x: hidden;
+  /* Stop in-app browsers (Instagram/WhatsApp WebViews) from inflating text,
+     which pushes nowrap buttons and labels out of their cards */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Safety net: CTAs may never exceed their container/screen width */
+a,
+button {
+  max-width: 100%;
 }
 
 body {

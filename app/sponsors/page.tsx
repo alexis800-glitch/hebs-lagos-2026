@@ -201,7 +201,7 @@ export default function SponsorsPage() {
           </div>
           <Link
             href="/hebs-legacy/2025"
-            className="shrink-0 inline-flex items-center gap-2 font-sans text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 px-5 py-3 rounded-xl transition-all duration-200 whitespace-nowrap"
+            className="shrink-0 inline-flex items-center justify-center gap-2 font-sans text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 px-5 py-3 rounded-xl transition-all duration-200 w-full md:w-auto max-w-full md:whitespace-nowrap"
           >
             See HEBS 2025 →
           </Link>
