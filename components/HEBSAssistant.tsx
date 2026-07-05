@@ -82,7 +82,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["contact", "support", "help", "email", "phone", "reach", "whatsapp", "info", "question", "inquiry", "get in touch"],
     answer:
-      "You can reach the HEBS team through:\n\n📧 Email: info@thehebs.com\n📞 US / WhatsApp: +1 (610) 477-9635\n📱 Nigeria / WhatsApp: +234 806 588 1783\n⏰ Support: 2:00 PM – 11:00 PM WAT\n\nOr use the contact form at /contact on this website.",
+      "You can reach the HEBS team through:\n\n📧 Email: info@thehebs.com\n📞 US / WhatsApp: +1 (610) 477-9635\n📱 Nigeria / WhatsApp: 08148414917 / 08023051810\n⏰ Support: 2:00 PM – 11:00 PM WAT\n\nOr use the contact form at /contact on this website.",
   },
   {
     triggers: ["masterclass", "workshop", "education", "learn", "class", "training", "session", "seminar"],

@@ -28,8 +28,8 @@ const contactItems = [
   {
     icon: MessageCircle,
     label: "Nigeria / WhatsApp",
-    value: "+234 806 588 1783",
-    href: "https://wa.me/2348065881783",
+    value: "08148414917 / 08023051810",
+    href: "https://wa.me/2348148414917",
   },
 ];
 

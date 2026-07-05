@@ -618,7 +618,7 @@ function CompetitionsContent() {
                   Download Official Competition Brief
                 </BriefCTA>
                 <p className="text-zinc-300 text-xs font-mono font-medium">
-                  Non-refundable · Registration Deadline October 10, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08065881783
+                  Non-refundable · Registration Deadline October 10, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08148414917 / 08023051810
                 </p>
                 <p className="text-zinc-300 text-xs font-mono text-center max-w-md leading-relaxed mt-1">
                   * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.

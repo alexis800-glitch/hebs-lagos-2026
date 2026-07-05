@@ -168,7 +168,7 @@ export default function Footer() {
                 +1 610 477 9635 (US / WhatsApp)
               </a>
               <a
-                href="https://wa.me/2348065881783"
+                href="https://wa.me/2348148414917"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm font-inter transition-colors"
@@ -181,7 +181,7 @@ export default function Footer() {
                 }
               >
                 <Phone size={16} style={{ color: "#e91e8c" }} />
-                08065881783 (Nigeria / WhatsApp)
+                08148414917 / 08023051810 (Nigeria / WhatsApp)
               </a>
               <p className="text-xs font-inter" style={{ color: "#666" }}>
                 Support: 2:00 PM – 11:00 PM WAT
