@@ -49,7 +49,7 @@ const PHOTOS = [
 ];
 
 type VideoItem =
-  | { status: "ready"; title: string; year: number; src: string; portrait?: boolean; archiveNote?: string }
+  | { status: "ready"; title: string; year: number; src: string; portrait?: boolean; archiveNote?: string; poster?: string; caption?: string }
   | { status: "soon"; title: string; year: number; thumb: string };
 
 const VIDEOS: VideoItem[] = [
@@ -58,10 +58,11 @@ const VIDEOS: VideoItem[] = [
   { status: "ready", title: "Awards Night — HEBS 2025", year: 2025, src: "/videos/hebs-2025/hebs-2025-awards-night-web.mp4", portrait: true },
   { status: "ready", title: "Barber Competition Highlights", year: 2025, src: "/videos/hebs-2025/hebs-2025-barber-web.mp4", portrait: true },
   { status: "ready", title: "Stage Experience — Highlight", year: 2025, src: "/videos/hebs-2025/hebs-2025-stage-short-web.mp4", portrait: false, archiveNote: "Full 72-min stage archive available on request" },
+  { status: "ready", title: "HEBS 2025 Event Atmosphere", year: 2025, src: "/videos/hebs-2025/hebs-2025-atmosphere-web.mp4", portrait: true, poster: "/videos/hebs-2025/hebs-2025-atmosphere-poster.jpg", caption: "A glimpse of the energy, creativity, and competition from a previous HEBS edition." },
 ];
 
 // ── Video card with ambient autoplay + fullscreen modal ───────────────────────
-function VideoCard({ src, title, portrait = false, year, archiveNote }: { src: string; title: string; portrait?: boolean; year: number; archiveNote?: string }) {
+function VideoCard({ src, title, portrait = false, year, archiveNote, poster, caption }: { src: string; title: string; portrait?: boolean; year: number; archiveNote?: string; poster?: string; caption?: string }) {
   const [open, setOpen] = useState(false);
   const ambientRef = useRef<HTMLVideoElement>(null);
   const modalRef = useRef<HTMLVideoElement>(null);
@@ -91,6 +92,7 @@ function VideoCard({ src, title, portrait = false, year, archiveNote }: { src: s
         <video
           ref={ambientRef}
           src={src}
+          poster={poster}
           muted
           loop
           playsInline
@@ -108,6 +110,9 @@ function VideoCard({ src, title, portrait = false, year, archiveNote }: { src: s
         <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/80 to-transparent">
           <p className="text-white font-semibold text-sm leading-tight">{title}</p>
           <p className="font-mono text-[9px] tracking-widest text-white/40 uppercase mt-0.5">HEBS {year}</p>
+          {caption && (
+            <p className="text-white/55 text-[11px] leading-snug mt-1">{caption}</p>
+          )}
           {archiveNote && (
             <p className="font-mono text-[8px] tracking-wide text-amber-400/60 mt-1 leading-tight">{archiveNote}</p>
           )}
@@ -129,6 +134,7 @@ function VideoCard({ src, title, portrait = false, year, archiveNote }: { src: s
               <video
                 ref={modalRef}
                 src={src}
+                poster={poster}
                 controls
                 playsInline
                 className={`rounded-xl bg-black ${portrait ? "h-full w-auto" : "w-full"}`}
@@ -345,7 +351,7 @@ export default function MediaGalleryPage() {
                     {filteredVideos.map((video, i) => (
                       <motion.div key={i} variants={photoItem}>
                         {video.status === "ready" ? (
-                          <VideoCard src={video.src} title={video.title} portrait={video.portrait} year={video.year} archiveNote={video.archiveNote} />
+                          <VideoCard src={video.src} title={video.title} portrait={video.portrait} year={video.year} archiveNote={video.archiveNote} poster={video.poster} caption={video.caption} />
                         ) : (
                           <div className="relative aspect-video rounded-2xl overflow-hidden bg-[#0f0f0f] border border-white/[0.07] group cursor-pointer">
                             <Image
