@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -72,16 +73,44 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  // Landscape viewports get the 16:9 hero video, portrait viewports the 9:16 —
+  // picked client-side so only one video is ever downloaded
+  const [heroMedia, setHeroMedia] = useState<{ video: string; poster: string } | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const mq = window.matchMedia("(orientation: landscape)");
+    const pick = () =>
+      setHeroMedia(
+        mq.matches
+          ? {
+              video: "/videos/higgsfield/hebs-hero-higgsfield-desktop.mp4",
+              poster: "/images/hero/hebs-hero-higgsfield-desktop-poster.jpg",
+            }
+          : {
+              video: "/videos/higgsfield/hebs-hero-higgsfield-mobile.mp4",
+              poster: "/images/hero/hebs-hero-higgsfield-mobile-poster.jpg",
+            }
+      );
+    pick();
+    mq.addEventListener("change", pick);
+    return () => mq.removeEventListener("change", pick);
+  }, []);
+  // Fallback play attempt — catches cases where autoPlay was ignored
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {});
+  }, [heroMedia]);
+
   return (
     <section
       id="home"
       className="relative w-full min-h-screen bg-zinc-950 overflow-hidden"
     >
 
-      {/* ── Background layer — static premium gradient (no video) ───── */}
+      {/* ── Background layer — ambient video over static gradient fallback ── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Base dark gradient */}
+        {/* Base dark gradient — instant backdrop before poster/video, and fallback if video fails */}
         <div
           className="absolute inset-0"
           style={{
@@ -98,6 +127,47 @@ export default function Hero() {
               "linear-gradient(135deg, rgba(245,158,11,0.6) 0%, transparent 32%, transparent 68%, rgba(233,30,140,0.6) 100%)",
           }}
         />
+
+        {/* Poster — fades out once the video is playing */}
+        <div
+          className="absolute inset-0 transition-opacity duration-700"
+          style={{ opacity: isVideoPlaying ? 0 : 1 }}
+        >
+          {/* <picture> art direction so only the matching orientation's poster downloads */}
+          <picture>
+            <source
+              media="(orientation: landscape)"
+              srcSet="/images/hero/hebs-hero-higgsfield-desktop-poster.jpg"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/hero/hebs-hero-higgsfield-mobile-poster.jpg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </picture>
+        </div>
+
+        {/* Hero video — src set once orientation is known; key remounts it on orientation change */}
+        {heroMedia && (
+          <video
+            key={heroMedia.video}
+            ref={videoRef}
+            src={heroMedia.video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster={heroMedia.poster}
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            onCanPlay={() => { videoRef.current?.play().catch(() => {}); }}
+            onPlaying={() => setIsVideoPlaying(true)}
+            onPause={() => setIsVideoPlaying(false)}
+            onError={(e) => console.warn("[Hero] video error:", e)}
+          />
+        )}
 
         {/* Magenta centre glow */}
         <motion.div
@@ -140,10 +210,10 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Overlay — gradient for text readability over the static background */}
+        {/* Overlay — scrim for text readability over the video (center is its brightest zone) */}
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.75) 100%)" }}
+          style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.8) 100%)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10" />
       </div>
