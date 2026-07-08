@@ -129,8 +129,8 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }}
       />
-      <link rel="preload" as="image" href="/images/hero/hebs-hero-higgsfield-desktop-poster.jpg" type="image/jpeg" media="(orientation: landscape)" fetchPriority="high" />
-      <link rel="preload" as="image" href="/images/hero/hebs-hero-higgsfield-mobile-poster.jpg" type="image/jpeg" media="(orientation: portrait)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/images/hero/hebs-hero-competition-desktop-v1-poster.jpg" type="image/jpeg" media="(orientation: landscape)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/images/hero/hebs-hero-competition-mobile-v2-poster.jpg" type="image/jpeg" media="(orientation: portrait)" fetchPriority="high" />
       <Navbar />
       <main style={{ background: "#0d0d0d", overflowX: "hidden" }}>
         <Hero />

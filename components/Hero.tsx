@@ -84,12 +84,12 @@ export default function Hero() {
       setHeroMedia(
         mq.matches
           ? {
-              video: "/videos/higgsfield/hebs-hero-higgsfield-desktop.mp4",
-              poster: "/images/hero/hebs-hero-higgsfield-desktop-poster.jpg",
+              video: "/videos/higgsfield/hebs-hero-competition-desktop-v1-optimized.mp4",
+              poster: "/images/hero/hebs-hero-competition-desktop-v1-poster.jpg",
             }
           : {
-              video: "/videos/higgsfield/hebs-hero-higgsfield-mobile.mp4",
-              poster: "/images/hero/hebs-hero-higgsfield-mobile-poster.jpg",
+              video: "/videos/higgsfield/hebs-hero-competition-mobile-v2-optimized.mp4",
+              poster: "/images/hero/hebs-hero-competition-mobile-v2-poster.jpg",
             }
       );
     pick();
@@ -137,11 +137,11 @@ export default function Hero() {
           <picture>
             <source
               media="(orientation: landscape)"
-              srcSet="/images/hero/hebs-hero-higgsfield-desktop-poster.jpg"
+              srcSet="/images/hero/hebs-hero-competition-desktop-v1-poster.jpg"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/hero/hebs-hero-higgsfield-mobile-poster.jpg"
+              src="/images/hero/hebs-hero-competition-mobile-v2-poster.jpg"
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
