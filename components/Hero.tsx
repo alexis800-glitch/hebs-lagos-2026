@@ -88,8 +88,8 @@ export default function Hero() {
               poster: "/images/hero/hebs-hero-competition-desktop-v1-poster.jpg",
             }
           : {
-              video: "/videos/higgsfield/hebs-hero-competition-mobile-v2-optimized.mp4",
-              poster: "/images/hero/hebs-hero-competition-mobile-v2-poster.jpg",
+              video: "/videos/higgsfield/hebs-hero-competition-mobile-v3-optimized.mp4",
+              poster: "/images/hero/hebs-hero-competition-mobile-v3-poster.jpg",
             }
       );
     pick();
@@ -141,7 +141,7 @@ export default function Hero() {
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/hero/hebs-hero-competition-mobile-v2-poster.jpg"
+              src="/images/hero/hebs-hero-competition-mobile-v3-poster.jpg"
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
