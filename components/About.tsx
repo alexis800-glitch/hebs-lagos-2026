@@ -22,9 +22,9 @@ export default function About() {
           </div>
           <div className="md:col-span-2">
             <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
-              HEBS 2026 in Lagos, Nigeria marks our third year as a world-class beauty and fashion summit. Born in the diaspora, HEBS launched in{' '}
+              After successful editions delivering an international standard of excellence in the United States, HEBS proudly brings its inaugural Lagos edition home to Nigeria. Born in the diaspora, HEBS launched in{' '}
               <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">New Jersey, USA</span>{' '}
-              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. Now, we are bringing the summit home to Lagos — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. Now, the summit comes home to Lagos — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
             </p>
           </div>
         </div>
@@ -35,17 +35,23 @@ export default function About() {
       {/* Part 1: Core Mission Statement */}
       <div className="max-w-5xl mx-auto mt-12 mb-16 p-5 sm:p-8 md:p-12 bg-zinc-950/50 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] rounded-2xl flex flex-col text-left backdrop-blur-md shadow-2xl">
         <p className="text-amber-500 font-mono text-[10px] tracking-widest uppercase mb-5">
-          A Premier International Beauty Event
+          Our Vision · A Premier International Beauty Summit
         </p>
         <h2 className="text-white text-2xl sm:text-3xl md:text-5xl font-light tracking-tight leading-snug sm:leading-tight max-w-4xl font-serif">
-          Where Hair, Beauty, Fashion &amp; Innovation{' '}
-          <span className="italic font-normal">Converge.</span>
+          Where Nigeria&apos;s Beauty Industry{' '}
+          <span className="italic font-normal">Meets the World.</span>
         </h2>
         <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-3xl mt-4 font-sans font-light">
-          The global hub for education, high-stakes competition, and industry networking.
+          Education, innovation, competition, business, and culture — under one roof.
         </p>
         <p className="text-zinc-300 text-sm md:text-base leading-relaxed max-w-3xl mt-5 font-sans font-light">
-          The Hair Education Beauty Summit (HEBS) is not just another beauty event — it&apos;s an international movement dedicated to empowering, educating, and connecting professionals across the hair, beauty, and fashion industries. With cutting-edge education, high-stakes competitions, hands-on workshops, and unparalleled networking, HEBS stands as the premier summit for beauty professionals seeking to elevate their craft, build industry connections, and gain global recognition.
+          More than an event, HEBS Lagos is a global platform designed to elevate Nigeria&apos;s beauty industry. Our vision is to position Nigeria as a leading destination for beauty, creativity, entrepreneurship, and international collaboration.
+        </p>
+        <p className="text-zinc-300 text-sm md:text-base leading-relaxed max-w-3xl mt-5 font-sans font-light">
+          It is where education meets opportunity, creativity meets commerce, and Nigerian talent connects with the global marketplace. Hosted at the world-class NJS Royale Beach Resort and NJS Royale Events Center in Lagos, HEBS is designed to become Nigeria&apos;s premier annual beauty, fashion, and creative industries summit.
+        </p>
+        <p className="text-zinc-300 text-sm md:text-base leading-relaxed max-w-3xl mt-5 font-sans font-light">
+          Through world-class education, international exhibitions, business networking, panel discussions, championships, and cultural experiences, HEBS showcases the enormous economic potential and creative excellence of Nigeria&apos;s beauty industry.
         </p>
       </div>
 

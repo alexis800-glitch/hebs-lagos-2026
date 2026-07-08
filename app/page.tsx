@@ -5,6 +5,8 @@ import EventSchedule from "@/components/EventSchedule";
 import EventHighlights from "@/components/EventHighlights";
 import CompetitionCategories from "@/components/CompetitionCategories";
 import WhyAttend from "@/components/WhyAttend";
+import WhyHebsMatters from "@/components/WhyHebsMatters";
+import JoinTheMovement from "@/components/JoinTheMovement";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import GallerySection from "@/components/GallerySection";
 import HEBSAssistant from "@/components/HEBSAssistant";
@@ -72,7 +74,7 @@ const eventJsonLd = {
   subEvent: [
     {
       "@type": "Event",
-      name: "HEBS 2026 Pre Party",
+      name: "HEBS Welcome Beach Pre-Party",
       startDate: "2026-10-23T14:00:00+01:00",
       endDate: "2026-10-23T19:00:00+01:00",
       location: {
@@ -87,7 +89,7 @@ const eventJsonLd = {
     },
     {
       "@type": "Event",
-      name: "HEBS 2026 Main Event — Day 1",
+      name: "HEBS Main Summit — Day One",
       startDate: "2026-10-24T12:00:00+01:00",
       endDate: "2026-10-24T18:00:00+01:00",
       location: {
@@ -103,7 +105,7 @@ const eventJsonLd = {
     },
     {
       "@type": "Event",
-      name: "HEBS 2026 Main Event — Day 2",
+      name: "HEBS Main Summit — Day Two",
       startDate: "2026-10-25T11:00:00+01:00",
       endDate: "2026-10-25T17:00:00+01:00",
       location: {
@@ -136,6 +138,8 @@ export default function Home() {
         <EventHighlights />
         <CompetitionCategories />
         <WhyAttend />
+        <WhyHebsMatters />
+        <JoinTheMovement />
         <TestimonialsSection />
         <GallerySection />
         <HEBSAssistant />

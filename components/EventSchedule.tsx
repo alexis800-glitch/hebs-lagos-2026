@@ -8,24 +8,44 @@ const EASE = [0.25, 0.4, 0.25, 1] as const;
 const DAYS = [
   {
     date: "October 23, 2026",
-    title: "Pre Party",
+    title: "HEBS Welcome Beach Pre-Party",
     venue: "NJS Royale Beach Resort",
     time: "2:00 PM – 7:00 PM",
     accent: "#e91e8c",
+    desc: "An exclusive networking experience bringing together international delegates, sponsors, exhibitors, educators, media, influencers, and industry leaders in a luxury beachfront setting.",
+    highlights: null,
   },
   {
     date: "October 24, 2026",
-    title: "Main Event — Exhibition, Education, Panel Discussion & Competition",
+    title: "HEBS Main Summit — Day One",
     venue: "NJS Royale Events Center",
     time: "12:00 Noon – 6:00 PM",
     accent: "#f59e0b",
+    desc: null,
+    highlights: [
+      "International Exhibition",
+      "World-Class Education",
+      "Industry Panel Discussions",
+      "Live Competitions",
+      "Product Demonstrations",
+      "Business Networking",
+    ],
   },
   {
     date: "October 25, 2026",
-    title: "Main Event — Exhibition, Education, Panel Discussion & Competition",
+    title: "HEBS Main Summit — Day Two",
     venue: "NJS Royale Events Center",
     time: "11:00 AM – 5:00 PM",
     accent: "#9b59b6",
+    desc: null,
+    highlights: [
+      "Championship Finals",
+      "Global Crown Championship",
+      "Awards Ceremony",
+      "Closing Celebration",
+      "International Media Coverage",
+      "Partnership Announcements",
+    ],
   },
 ] as const;
 
@@ -88,6 +108,26 @@ export default function EventSchedule() {
               </p>
 
               <p className="font-sans text-sm font-semibold text-zinc-100 mb-4">{d.venue}</p>
+
+              {d.desc && (
+                <p className="font-sans text-[13px] text-zinc-400 font-light leading-relaxed mb-5">
+                  {d.desc}
+                </p>
+              )}
+
+              {d.highlights && (
+                <ul className="grid grid-cols-1 gap-1.5 mb-5">
+                  {d.highlights.map((h) => (
+                    <li key={h} className="flex items-center gap-2.5 font-sans text-[13px] text-zinc-300 font-light">
+                      <span
+                        className="w-1 h-1 rounded-full shrink-0"
+                        style={{ background: d.accent }}
+                      />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               {/* Bold, high-visibility time */}
               <p className="text-2xl sm:text-[1.7rem] font-bold text-white tracking-tight leading-tight tabular-nums mt-auto">

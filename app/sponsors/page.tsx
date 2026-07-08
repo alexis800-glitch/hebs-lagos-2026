@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Check, ChevronRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
+import JoinTheMovement from '@/components/JoinTheMovement'
 import PartnershipContact from '@/components/PartnershipContact'
 import Footer from '@/components/Footer'
 
@@ -446,6 +447,8 @@ export default function SponsorsPage() {
           </p>
 
         </div>
+
+        <JoinTheMovement packagesHref="#sponsorship-packages" />
 
         <PartnershipContact />
 
