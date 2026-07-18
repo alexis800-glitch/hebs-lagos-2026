@@ -5,22 +5,49 @@ import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-type Tab = 'global-crown' | 'barber' | 'braiding'
+type Tab = 'signature' | 'barber' | 'braiding'
 
 const TABS: { id: Tab; label: string }[] = [
-  { id: 'global-crown', label: 'Global Crown' },
+  { id: 'signature', label: 'Signature Competitions' },
   { id: 'barber', label: 'Barber Championships' },
   { id: 'braiding', label: 'Braiding Championships' },
 ]
 
-// ─── Global Crown Data ────────────────────────────────────────────────────────
+// ─── Signature Competitions Data ─────────────────────────────────────────────
+
+const SIGNATURE_PRIZES = [
+  { place: '1st', usd: '$4,000 USD', ngn: '₦5,600,000', color: 'text-amber-400' },
+  { place: '2nd', usd: '$2,500 USD', ngn: '₦3,500,000', color: 'text-zinc-300' },
+  { place: '3rd', usd: '$1,000 USD', ngn: '₦1,400,000', color: 'text-zinc-500' },
+]
+
+const SIGNATURE_CATEGORIES = [
+  {
+    n: '01',
+    title: 'Fashion Runway Competition',
+    theme: 'Roots to Royalty',
+    desc: 'Roots to Royalty celebrates the journey from cultural heritage to modern-day royalty. Designers are invited to create an original, runway-ready look inspired by ancestry, legacy, leadership, and the vibrant spirit of Lagos. Designs may feature regal silhouettes, bold colors, luxurious fabrics, cultural influences, symbolic details, and statement accessories. Each look should honor its roots while presenting a fresh, elevated, and powerful vision of royalty. Cultural inspiration should be represented thoughtfully and respectfully.',
+  },
+  {
+    n: '02',
+    title: 'Makeup Artistry Competition',
+    theme: 'Bridal Beauty',
+    desc: 'Bridal Beauty celebrates the artistry of creating a radiant, elegant, and wedding-ready makeup look. Artists are invited to showcase their interpretation of a modern bride while complementing the model’s features, skin tone, and personal beauty. The finished look may range from soft and timeless to bold and glamorous. Makeup should demonstrate flawless complexion work, balanced color, clean application, thoughtful detail, and long-lasting wear. Each look should feel cohesive, refined, camera-ready, and worthy of the bride’s special day.',
+  },
+  {
+    n: '03',
+    title: 'Nail Artistry Competition',
+    theme: 'Gilded Heritage',
+    desc: 'Gilded Heritage celebrates culture, craftsmanship, and luxury through the art of nail design. Artists are invited to create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewelry, and meaningful cultural details. Designs may incorporate rich colors, gold accents, sculpted elements, intricate patterns, embellishments, and creative textures. The finished set should be original, balanced, technically polished, and presented as a modern celebration of culture and elegance.',
+  },
+]
 
 const GLOBAL_STAGES = [
   {
     n: '01',
     title: 'Registration Opens',
     deadline: 'July 15, 2026',
-    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to hairstylists, barbers, makeup artists, nail artists, fashion designers, fashion stylists, creative directors, and beauty &amp; fashion visionaries worldwide.</>,
+    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to fashion designers, fashion stylists, makeup artists, nail artists, creative directors, and beauty &amp; fashion visionaries worldwide — across the Fashion Runway, Makeup Artistry, and Nail Artistry categories.</>,
   },
   {
     n: '02',
@@ -38,7 +65,7 @@ const GLOBAL_STAGES = [
     n: '04',
     title: 'Live Championship Finals',
     deadline: 'October 25, 2026',
-    desc: 'Each finalist will receive 5 minutes to present their live interpretation of the 2026 Roots to Royalty™ theme.',
+    desc: 'Each finalist will receive 5 minutes to present their live interpretation of their category’s 2026 theme.',
   },
 ]
 
@@ -50,12 +77,10 @@ const JUDGING_CRITERIA = [
 ]
 
 const ELIGIBLE_ARTISTS = [
-  'Hairstylists',
-  'Barbers',
-  'Makeup Artists',
-  'Nail Artists',
   'Fashion Designers',
   'Fashion Stylists',
+  'Makeup Artists',
+  'Nail Artists',
   'Creative Directors',
   'Beauty & Fashion Visionaries',
 ]
@@ -347,12 +372,12 @@ function BriefCTA({ href, children }: { href: string; children: React.ReactNode 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function CompetitionsContent() {
-  const [activeTab, setActiveTab] = useState<Tab>('global-crown')
+  const [activeTab, setActiveTab] = useState<Tab>('signature')
   const searchParams = useSearchParams()
 
   useEffect(() => {
     const track = searchParams.get('track')
-    if (track === 'global-crown' || track === 'barber' || track === 'braiding') {
+    if (track === 'signature' || track === 'barber' || track === 'braiding') {
       setActiveTab(track)
     }
   }, [searchParams])
@@ -372,7 +397,7 @@ function CompetitionsContent() {
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
           <p className="text-zinc-300 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
-            Three championship tracks. $92,500 USD (₦129,500,000) in prizes. Lagos, Nigeria.
+            Three championship tracks. $80,000 USD (₦112,000,000) in prizes. Lagos, Nigeria.
           </p>
         </div>
 
@@ -399,25 +424,25 @@ function CompetitionsContent() {
         <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 py-14">
 
           {/* ════════════════════════════════════════════════════════════════ */}
-          {/* TRACK 1: GLOBAL CROWN CHAMPIONSHIP                              */}
+          {/* TRACK 1: SIGNATURE COMPETITIONS                                 */}
           {/* ════════════════════════════════════════════════════════════════ */}
-          {activeTab === 'global-crown' && (
+          {activeTab === 'signature' && (
             <div className="flex flex-col gap-14">
 
-              {/* Hero card */}
+              {/* Intro card */}
               <div className="border border-white/[0.06] bg-zinc-900/50 backdrop-blur-md rounded-2xl p-8 md:p-12">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
 
                   {/* Left: identity */}
                   <div className="flex flex-col gap-3 flex-1">
                     <span className="text-xs font-mono tracking-widest text-amber-400 uppercase">
-                      Global Crown Championship™
+                      Signature Competitions
                     </span>
                     <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-semibold tracking-tight leading-tight">
-                      Roots to Royalty™
+                      Three Categories,<br />One Global Stage
                     </h2>
                     <p className="text-zinc-300 text-sm leading-relaxed max-w-md">
-                      The global stage where artistry, culture, fashion, music, beauty, and performance converge in Lagos.
+                      Three flagship competitions where artistry, culture, and beauty converge in Lagos — each with its own theme and a $7,500 USD (₦10,500,000) prize pool.
                     </p>
                     <div className="flex flex-wrap gap-2 mt-1">
                       <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
@@ -432,61 +457,66 @@ function CompetitionsContent() {
                     </div>
                   </div>
 
-                  {/* Right: prize pool */}
+                  {/* Right: combined prize pool */}
                   <div className="flex-shrink-0 md:text-right">
-                    <p className="text-xs font-mono tracking-widest text-zinc-300 uppercase mb-2">Total Prize Pool</p>
+                    <p className="text-xs font-mono tracking-widest text-zinc-300 uppercase mb-2">Combined Prize Pool</p>
                     <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
-                      $35,000 USD
+                      $22,500 USD
                     </p>
-                    <p className="text-zinc-500 text-xs font-mono mt-0.5 mb-4 tabular-nums">₦49,000,000</p>
-                    <div className="flex flex-col gap-2.5">
-                      {[
-                        { place: '1st', usd: '$20,000 USD', ngn: '₦28,000,000', color: 'text-amber-400' },
-                        { place: '2nd', usd: '$10,000 USD', ngn: '₦14,000,000', color: 'text-zinc-300' },
-                        { place: '3rd', usd: '$5,000 USD',  ngn: '₦7,000,000',  color: 'text-zinc-500' },
-                      ].map(({ place, usd, ngn, color }) => (
-                        <div key={place} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-3">
-                          <span className={`font-mono text-xs ${color} tabular-nums`}>{place}</span>
-                          <span className="text-white font-semibold text-sm tabular-nums">{usd} <span className="text-zinc-500 font-normal text-xs">({ngn})</span></span>
-                        </div>
-                      ))}
-                    </div>
+                    <p className="text-zinc-500 text-xs font-mono mt-0.5 mb-4 tabular-nums">₦31,500,000</p>
+                    <p className="text-zinc-400 text-xs font-mono leading-relaxed md:max-w-[12rem] md:ml-auto">
+                      $7,500 USD (₦10,500,000) per category · three categories.
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Theme Introduction */}
-              <div className="flex flex-col gap-5">
-                <div>
-                  <SectionLabel>2026 Championship Theme</SectionLabel>
-                  <h3 className="font-serif text-2xl sm:text-3xl text-white font-semibold tracking-tight leading-tight mt-1 mb-4">
-                    What is Roots to Royalty™?
-                  </h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="flex flex-col gap-4">
-                    <p className="text-zinc-200 text-sm leading-relaxed">
-                      Every culture tells a story. Every tradition reflects beauty. Every artist carries a legacy.
-                    </p>
-                    <p className="text-zinc-300 text-sm leading-relaxed">
-                      For the 2026 HEBS Lagos Global Crown Championship, contestants are invited to create a breathtaking artistic presentation that celebrates the beauty, history, and identity of their culture through the lens of modern royalty.
-                    </p>
-                    <p className="text-zinc-300 text-sm leading-relaxed">
-                      Roots to Royalty™ challenges artists to honor where they come from while transforming their heritage into a bold, contemporary masterpiece worthy of the global stage.
-                    </p>
-                  </div>
-                  <div className="border border-amber-500/20 bg-amber-500/[0.04] rounded-2xl p-6 flex flex-col gap-3">
-                    <p className="text-xs font-mono tracking-widest text-amber-400 uppercase">The Creative Challenge</p>
-                    <p className="text-zinc-200 text-sm leading-relaxed">
-                      <span className="font-semibold text-white">ROOTS TO ROYALTY™</span> challenges competitors to create a breathtaking artistic presentation celebrating heritage, culture, identity, music, fashion, beauty, and transformation.
-                    </p>
-                    <p className="text-zinc-300 text-sm leading-relaxed">
-                      Your interpretation can be inspired by your ancestry, nation, personal journey, dreams, or your vision of beauty itself — traditional, futuristic, editorial, avant-garde, couture, or culturally inspired. The brief is this:
-                    </p>
-                    <p className="text-white font-serif text-base italic leading-relaxed border-l-2 border-amber-500/50 pl-4 mt-1">
-                      &ldquo;How do we transform from where we come from into who we are destined to become?&rdquo;
-                    </p>
-                  </div>
+              {/* Competition Categories */}
+              <div>
+                <SectionLabel>2026 Competition Categories</SectionLabel>
+                <SectionHeading>Choose Your Category</SectionHeading>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                  {SIGNATURE_CATEGORIES.map((cat) => (
+                    <div
+                      key={cat.n}
+                      className="flex flex-col gap-4 rounded-2xl p-6 border border-white/[0.06] bg-zinc-900/50 hover:border-white/[0.12] transition-all duration-300"
+                    >
+                      {/* Header */}
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">{cat.n}</span>
+                        <span className="text-[10px] font-mono tracking-widest text-amber-500/90 bg-amber-500/[0.08] border border-amber-500/25 rounded-full px-3 py-1 uppercase">
+                          Theme · {cat.theme}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h4 className="text-white font-semibold text-lg tracking-tight leading-snug">{cat.title}</h4>
+
+                      {/* Prizes */}
+                      <div className="grid grid-cols-3 gap-2 border-t border-b border-white/[0.05] py-3">
+                        {SIGNATURE_PRIZES.map((p) => (
+                          <div key={p.place} className="text-center">
+                            <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider mb-0.5">{p.place}</p>
+                            <p className={`text-sm font-semibold leading-snug tabular-nums ${p.color}`}>{p.usd}</p>
+                            <p className="text-[10px] font-mono text-zinc-500 tabular-nums mt-0.5">{p.ngn}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-zinc-200 text-sm leading-relaxed">{cat.desc}</p>
+
+                      {/* CTA */}
+                      <div className="mt-auto pt-2">
+                        <PrimaryCTA
+                          href="https://hebseventportal.com/register"
+                          className="w-full px-6 py-3"
+                        >
+                          Register — {cat.theme}
+                        </PrimaryCTA>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -528,7 +558,7 @@ function CompetitionsContent() {
               <div className="border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6 md:p-8">
                 <SectionLabel>The Live Championship Experience</SectionLabel>
                 <p className="text-zinc-300 text-sm leading-relaxed mt-1 mb-5 max-w-2xl">
-                  Selected finalists take center stage in a fully immersive live production at the NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Each finalist will receive <span className="font-semibold text-white">5 minutes</span> to present their live interpretation of the 2026 Roots to Royalty™ theme — before global judges, media, sponsors, and a live audience.
+                  Selected finalists take center stage in a fully immersive live production at the NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Each finalist will receive <span className="font-semibold text-white">5 minutes</span> to present their live interpretation of their category&rsquo;s 2026 theme — before global judges, media, sponsors, and a live audience.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
@@ -591,7 +621,7 @@ function CompetitionsContent() {
                 <SectionHeading>Beyond the Prize Money</SectionHeading>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
                   {[
-                    'HEBS Global Crown Championship Trophy',
+                    'HEBS Signature Competition Trophy',
                     'International recognition across global platforms',
                     'Professional media coverage & editorial features',
                     'Brand collaborations & sponsorship opportunities',
@@ -614,9 +644,6 @@ function CompetitionsContent() {
                 >
                   Register Now — $50 USD (₦70,000)
                 </PrimaryCTA>
-                <BriefCTA href="/competition-pdfs/lagos-roots-to-royalty-2026.pdf">
-                  Download Official Competition Brief
-                </BriefCTA>
                 <p className="text-zinc-300 text-xs font-mono font-medium">
                   Non-refundable · Registration Deadline October 10, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08148414917 / 08023051810
                 </p>

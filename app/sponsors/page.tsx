@@ -182,7 +182,7 @@ export default function SponsorsPage() {
           {[
             { stat: '3,000+', label: 'Expected Attendees', note: 'Beauty professionals, educators, creators, and consumers' },
             { stat: 'Nigeria + Africa', label: 'Geographic Reach', note: 'International competitors from the US, UK, and West Africa' },
-            { stat: '$92,500', label: 'Total Prize Pool', note: 'Largest prize purse in African beauty competition history' },
+            { stat: '$80,000', label: 'Total Prize Pool', note: 'Largest prize purse in African beauty competition history' },
           ].map((item) => (
             <div key={item.stat} className="border border-white/10 bg-zinc-950/40 rounded-2xl p-6">
               <span className="font-sans text-3xl font-light text-white block mb-1 tracking-tight">{item.stat}</span>

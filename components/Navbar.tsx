@@ -92,13 +92,13 @@ export default function Navbar() {
                       <div className="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden w-[480px]">
                         <div className="flex flex-col divide-y divide-zinc-800/60">
                           <Link
-                            href="/competitions?track=global-crown"
+                            href="/competitions?track=signature"
                             onClick={() => setIsCompetitionOpen(false)}
                             className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
                           >
                             <span className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium">Track 01 · Oct 25, 2026</span>
-                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Global Crown Championship 2026</span>
-                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Flagship solo creative global event with a $35,000 USD (₦49,000,000) prize pool.</span>
+                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Signature Competitions 2026</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Fashion Runway, Makeup Artistry &amp; Nail Artistry — three categories, $22,500 USD (₦31,500,000) in prizes.</span>
                           </Link>
                           <Link
                             href="/competitions?track=barber"
@@ -320,8 +320,8 @@ export default function Navbar() {
                       className="overflow-hidden"
                     >
                       <div className="pb-4 flex flex-col gap-0.5">
-                        <Link href="/competitions?track=global-crown" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
-                          Global Crown Championship 2026
+                        <Link href="/competitions?track=signature" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
+                          Signature Competitions 2026
                         </Link>
                         <Link href="/competitions?track=barber" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
                           Barber Championships 2026

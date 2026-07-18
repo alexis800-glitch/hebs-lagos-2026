@@ -40,7 +40,7 @@ const DAYS = [
     desc: null,
     highlights: [
       "Championship Finals",
-      "Global Crown Championship",
+      "Signature Competitions Finals",
       "Awards Ceremony",
       "Closing Celebration",
       "International Media Coverage",

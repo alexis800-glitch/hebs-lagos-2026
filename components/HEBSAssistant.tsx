@@ -12,12 +12,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["what is hebs", "about hebs", "what hebs", "tell me about", "hair education", "beauty summit", "what is the event", "summit"],
     answer:
-      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and is now bringing the summit home to Lagos for 2026 — the third and biggest edition yet. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features a $92,500 USD (₦129,500,000) cumulative prize pool.",
+      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and is now bringing the summit home to Lagos for 2026 — the third and biggest edition yet. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features an $80,000 USD (₦112,000,000) cumulative prize pool.",
   },
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
-      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nThe Global Crown Championship Finals are on October 25. The Barber Championships take place on October 24.",
+      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nThe Signature Competitions Finals (Fashion Runway, Makeup Artistry & Nail Artistry) are on October 25. The Barber Championships take place on October 24.",
   },
   {
     triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
@@ -50,9 +50,9 @@ const KNOWLEDGE_BASE: KBEntry[] = [
       "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦70,000–₦140,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦70,000) per division.",
   },
   {
-    triggers: ["global crown", "crowned icon", "beauty competition", "hairstylist competition", "makeup competition", "fashion competition", "nail competition", "editorial", "avant garde"],
+    triggers: ["signature competition", "fashion runway", "runway", "roots to royalty", "bridal beauty", "gilded heritage", "beauty competition", "makeup competition", "fashion competition", "nail competition", "nail artistry", "makeup artistry"],
     answer:
-      "The Global Crown Championship (Roots to Royalty™) application timeline:\n\n1. Registration Opens — July 15, 2026. Register at hebseventportal.com/register and pay the $50 USD (₦70,000) entry fee.\n2. Video Submission & Registration Deadline — October 10, 2026, 11:59 PM WAT. Submit a 3-min MP4/MOV video to casting@hebslagos.com.\n3. Contestant Notification — All contestants will be notified 1–3 business days after submitting if chosen for the Live Final.\n4. Live Championship Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Hairstylists, Makeup Artists, Nail Artists, Fashion Designers, Fashion Stylists, Avant-Garde & Editorial Artists.",
+      "The Signature Competitions are three category events, each with a $7,500 USD (₦10,500,000) prize pool (1st $4,000 · 2nd $2,500 · 3rd $1,000):\n\n• Fashion Runway Competition — Theme: Roots to Royalty\n• Makeup Artistry Competition — Theme: Bridal Beauty\n• Nail Artistry Competition — Theme: Gilded Heritage\n\nApplication timeline:\n1. Registration Opens — July 15, 2026. Register at hebseventportal.com/register and pay the $50 USD (₦70,000) entry fee.\n2. Video Submission & Registration Deadline — October 10, 2026, 11:59 PM WAT. Submit a 3-min MP4/MOV video to casting@hebslagos.com.\n3. Contestant Notification — All contestants will be notified 1–3 business days after submitting if chosen for the Live Final.\n4. Live Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Fashion Designers, Fashion Stylists, Makeup Artists, Nail Artists, Creative Directors, and Beauty & Fashion Visionaries.",
   },
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
@@ -65,14 +65,14 @@ const KNOWLEDGE_BASE: KBEntry[] = [
       "The Braiding Championships are scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos, Nigeria. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
   },
   {
-    triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "85000", "$85", "prize money", "92500", "$92"],
+    triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "80000", "$80", "prize money", "92500", "$92"],
     answer:
-      "HEBS Lagos 2026 features a $92,500 USD (₦129,500,000) cumulative prize pool across all competition tracks:\n\n• Global Crown Championship: $35,000 USD (₦49,000,000)\n• Barber Championships: $27,500 USD (₦38,500,000)\n• Braiding Championships: $30,000 USD (₦42,000,000)\n\nIndividual division prizes range from $5,000 USD (₦7,000,000) to $10,000 USD (₦14,000,000). In the Barber Championships, 1st place winners earn $3,000–$5,000 USD per division. The Barber Game™ team winner takes $10,000 USD (₦14,000,000).",
+      "HEBS Lagos 2026 features an $80,000 USD (₦112,000,000) cumulative prize pool across all competition tracks:\n\n• Signature Competitions (Fashion Runway, Makeup Artistry, Nail Artistry): $22,500 USD (₦31,500,000)\n• Barber Championships: $27,500 USD (₦38,500,000)\n• Braiding Championships: $30,000 USD (₦42,000,000)\n\nEach Signature Competition category awards $4,000 (1st), $2,500 (2nd), and $1,000 (3rd). In the Barber Championships, 1st place winners earn $3,000–$5,000 USD per division. The Barber Game™ team winner takes $10,000 USD (₦14,000,000).",
   },
   {
     triggers: ["categories", "competition category", "divisions", "what competitions", "which competitions", "tracks", "events", "what can i compete in", "competition types"],
     answer:
-      "HEBS Lagos 2026 competition tracks:\n\n🏆 Global Crown Championship — Oct 25 · Beauty, hair, makeup, fashion, nail artistry\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — May 2027 · NJS Royale Beach Resort · Fast & Flawless Braiding, Braids & Fades Showdown, Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
+      "HEBS Lagos 2026 competition tracks:\n\n🏆 Signature Competitions — Oct 25 · Fashion Runway (Roots to Royalty), Makeup Artistry (Bridal Beauty), Nail Artistry (Gilded Heritage)\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — May 2027 · NJS Royale Beach Resort · Fast & Flawless Braiding, Braids & Fades Showdown, Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
   },
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],
