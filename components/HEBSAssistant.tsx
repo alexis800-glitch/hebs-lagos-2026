@@ -62,7 +62,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
     answer:
-      "The Braiding Championships are scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos, Nigeria. Categories include Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding Championship, and Freestyle Braid Art Championship.",
+      "Braiding Championship divisions (October 24, 2026 · NJS Royale Events Center, Lagos):\n\n• Fast & Flawless Braiding Challenge™ — 30 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Braids & Fades Showdown™ (Team of 1 Barber + 1 Braider) — 60 min · $50 USD (₦70,000)/team · $7,500 USD (₦10,500,000) prize pool\n• Traditional Braiding Championship™ — 60 min · $50 USD (₦70,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Freestyle Braid Art Championship™ — 75 min · $75 USD (₦105,000) entry · $10,000 USD (₦14,000,000) prize pool\n\nPowered by PureO Natural Products™. Open to professional and student braiders, salon owners, natural hair stylists, locticians, and international competitors. Minimum age 16. Register at hebseventportal.com/register.",
   },
   {
     triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "80000", "$80", "prize money", "92500", "$92"],
@@ -72,7 +72,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["categories", "competition category", "divisions", "what competitions", "which competitions", "tracks", "events", "what can i compete in", "competition types"],
     answer:
-      "HEBS Lagos 2026 competition tracks:\n\n🏆 Signature Competitions — Oct 25 · Fashion Runway (Roots to Royalty), Makeup Artistry (Bridal Beauty), Nail Artistry (Gilded Heritage)\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — May 2027 · NJS Royale Beach Resort · Fast & Flawless Braiding, Braids & Fades Showdown, Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
+      "HEBS Lagos 2026 competition tracks:\n\n🏆 Signature Competitions — Oct 25 · Fashion Runway (Roots to Royalty), Makeup Artistry (Bridal Beauty), Nail Artistry (Gilded Heritage)\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — Oct 24 · Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
   },
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],

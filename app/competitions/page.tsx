@@ -769,37 +769,37 @@ function CompetitionsContent() {
               <div className="w-full border border-amber-500/25 bg-gradient-to-r from-zinc-900/90 via-amber-500/[0.07] to-zinc-900/90 rounded-2xl px-6 py-5">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   <div className="w-9 h-9 rounded-full border border-amber-500/30 bg-amber-500/[0.08] flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-500 text-sm font-bold">!</span>
+                    <span className="text-amber-500 text-sm font-bold">★</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-amber-400 font-semibold text-sm tracking-wide">
-                      Scheduled for May 24, 2027 — Dedicated Track
+                      Now Part of HEBS Lagos 2026
                     </p>
                     <p className="text-zinc-400 text-xs mt-1 leading-relaxed">
-                      The Braiding Championships are scheduled for May 24, 2027 at NJS Royale Beach Resort, Lagos, Nigeria. Registration details are available now.
+                      The Braiding Championships join the HEBS Lagos 2026 main summit at NJS Royale Events Center, Lagos, Nigeria. Registration is open now.
                     </p>
                   </div>
                   <span className="hidden sm:inline-block flex-shrink-0 text-xs font-mono text-amber-400 border border-amber-500/25 rounded-full px-3 py-1.5 whitespace-nowrap">
-                    May 24, 2027
+                    October 24, 2026
                   </span>
                 </div>
               </div>
 
               {/* Header */}
               <div>
-                <SectionLabel>Track 3 — May 24, 2027</SectionLabel>
+                <SectionLabel>Track 3 — October 24, 2026</SectionLabel>
                 <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
-                  Braiding Championships™ 2027
+                  Braiding Championships™ 2026
                 </h2>
                 <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
                   Africa&apos;s premier braiding competition — celebrating the extraordinary skill, creativity, speed, and innovation of professional braiders from across Africa and the world while honouring one of the oldest beauty traditions.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    May 24, 2027 · 1:00 PM – 7:00 PM
+                    October 24, 2026
                   </span>
                   <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    NJS Royale Beach Resort · Lagos
+                    NJS Royale Events Center · Lagos
                   </span>
                 </div>
               </div>
@@ -868,9 +868,16 @@ function CompetitionsContent() {
                 >
                   Register Now
                 </PrimaryCTA>
-                <BriefCTA href="/competition-pdfs/hebs-lagos-braiding-championship-2027.pdf">
+                {/* Brief button hidden pending a 2026 brief. The existing PDF
+                    (hebs-lagos-braiding-championship-2027.pdf) is 2027-branded in its
+                    cover artwork, headers, date (May 24, 2027) and venue (NJS Royale
+                    Beach Resort), so it cannot be renamed or reused for 2026. The file
+                    is left in public/competition-pdfs/ untouched. Restore this button
+                    once an official 2026 braiding brief is supplied.
+                <BriefCTA href="/competition-pdfs/hebs-lagos-braiding-championship-2026.pdf">
                   Download Official Competition Brief
                 </BriefCTA>
+                */}
                 <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed tracking-normal max-w-sm mx-auto">
                   Secure your competitive track placement today. Limited stage entries available for international and local professionals.
                 </p>
