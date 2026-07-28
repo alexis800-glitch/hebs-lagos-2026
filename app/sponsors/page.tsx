@@ -441,6 +441,38 @@ export default function SponsorsPage() {
             </div>
           </div>
 
+          {/* ── Exhibitor & sponsor resource download ── */}
+          <div className="border border-white/[0.08] bg-zinc-950/40 rounded-2xl p-6 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div className="max-w-xl">
+              <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-2">
+                Sponsor &amp; Exhibitor Resources
+              </p>
+              <p className="font-sans text-sm text-white font-medium mb-1">
+                Exhibitor &amp; Sponsor Deck
+              </p>
+              <p className="font-sans text-xs text-zinc-400 font-light leading-relaxed">
+                Booth inclusions, exhibitor schedule, audience profile, and marketing opportunities in one document.
+              </p>
+              <p className="font-sans text-xs text-zinc-600 font-light leading-relaxed mt-2">
+                The official floor plan will be shared separately once finalized.
+              </p>
+            </div>
+            <a
+              href="/downloads/hebs-lagos-2026-floor-plan-and-event-deck.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download the HEBS Lagos 2026 Exhibitor and Sponsor Deck (PDF, 2 MB, opens in a new tab)"
+              className="shrink-0 w-full md:w-auto text-center inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 rounded-xl font-sans text-xs uppercase tracking-widest font-medium border border-zinc-800 hover:border-zinc-600 text-white bg-zinc-900/30 transition-all duration-200 touch-manipulation"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Exhibitor &amp; Sponsor Deck (PDF, 2 MB)
+            </a>
+          </div>
+
           {/* Source note */}
           <p className="font-sans text-xs text-zinc-600 text-center leading-relaxed">
             Booth package pricing is based on the official HEBS Lagos travel guide.
