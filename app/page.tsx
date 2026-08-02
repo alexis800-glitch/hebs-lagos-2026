@@ -120,8 +120,9 @@ const eventJsonLd = {
         },
       },
     },
-    // Per-competition sub-events, derived from the shared source. No price is
-    // exposed: one entry fee is still unconfirmed, so none are published here.
+    // Per-competition sub-events, derived from the shared source. Entry fees are
+    // deliberately not published as schema.org offers: the portal is the single
+    // place a fee is quoted and paid, so it must not be mirrored in metadata.
     ...COMPETITIONS.flatMap((c) =>
       c.sessions.map((s) => ({
         "@type": "Event",
