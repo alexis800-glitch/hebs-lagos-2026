@@ -5,6 +5,13 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useMounted } from "@/hooks/useMounted";
+import {
+  COMPETITION_COUNT,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_DISPLAY,
+  TOTAL_PRIZE_USD_DISPLAY,
+  TOTAL_PRIZE_NGN_DISPLAY,
+} from "@/lib/competitions";
 
 const CountdownTimer = dynamic(() => import("./CountdownTimer"), { ssr: false });
 
@@ -34,10 +41,10 @@ const CATEGORIES = [
 ] as const;
 
 const VALUE_ITEMS = [
-  { value: "$80,000",    label: "Prize Pool · ₦112M"    },
-  { value: "6",          label: "Competition Categories" },
-  { value: "Global",     label: "Beauty Professionals"   },
-  { value: "Lagos 2026", label: "October 23–25"          },
+  { value: TOTAL_PRIZE_USD_DISPLAY, label: `Prize Pool · ${TOTAL_PRIZE_NGN_DISPLAY}` },
+  { value: String(COMPETITION_COUNT), label: "Competitions"           },
+  { value: String(CATEGORY_COUNT),    label: "Competition Categories" },
+  { value: "Lagos 2026",              label: "October 23–25"          },
 ] as const;
 
 const FLOAT_CARDS = [
@@ -305,8 +312,8 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
             </span>
-            <span className="sm:hidden">$80,000 USD (₦112,000,000) Prize Pool</span>
-            <span className="hidden sm:inline">$80,000 USD (₦112,000,000) Grand Prize Pool</span>
+            <span className="sm:hidden">{TOTAL_PRIZE_DISPLAY} Prize Pool</span>
+            <span className="hidden sm:inline">{TOTAL_PRIZE_DISPLAY} Grand Prize Pool</span>
           </span>
         </motion.div>
 

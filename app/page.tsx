@@ -11,16 +11,17 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GallerySection from "@/components/GallerySection";
 import HEBSAssistant from "@/components/HEBSAssistant";
 import Footer from "@/components/Footer";
+import { COMPETITIONS } from "@/lib/competitions";
 
 export const metadata: Metadata = {
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    "HEBS launched in New Jersey, USA in 2024, returned in 2025 with a sold-out edition, and comes home to Lagos for 2026. October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.",
+    "After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. 12 competitions, October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
     description:
-      "After a sold-out 2025 in New Jersey, USA, HEBS comes home to Lagos. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
+      "After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. 12 competitions · October 23–25, 2026 · Lagos, Nigeria.",
     url: "/",
     images: [
       {
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
     description:
-      "After a sold-out 2025 in New Jersey, USA, HEBS comes home to Lagos. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
+      "After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. 12 competitions · October 23–25, 2026 · Lagos, Nigeria.",
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };
@@ -45,7 +46,7 @@ const eventJsonLd = {
   "@type": "Event",
   name: "Hair Education Beauty Summit Lagos 2026",
   description:
-    "HEBS launched in New Jersey, USA in 2024, returned in 2025 with a sold-out edition, and comes home to Lagos for 2026. Three days of hair education, beauty competitions, and industry celebration.",
+    "After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. Three days of hair education, 12 competitions across 7 categories, and industry celebration.",
   startDate: "2026-10-23T14:00:00+01:00",
   endDate: "2026-10-25T17:00:00+01:00",
   eventStatus: "https://schema.org/EventScheduled",
@@ -119,6 +120,29 @@ const eventJsonLd = {
         },
       },
     },
+    // Per-competition sub-events, derived from the shared source. No price is
+    // exposed: one entry fee is still unconfirmed, so none are published here.
+    ...COMPETITIONS.flatMap((c) =>
+      c.sessions.map((s) => ({
+        "@type": "Event",
+        name: c.name,
+        description: c.description,
+        startDate: s.startIso,
+        endDate: s.endIso,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        location: {
+          "@type": "Place",
+          name: "NJS Royale Events Center",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Richland Garden Estate, Lekki-Epe Expressway",
+            addressLocality: "Lagos",
+            addressCountry: "NG",
+          },
+        },
+      })),
+    ),
   ],
 };
 

@@ -24,7 +24,7 @@ export default function About() {
             <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
               After successful editions delivering an international standard of excellence in the United States, HEBS proudly brings its inaugural Lagos edition home to Nigeria. Born in the diaspora, HEBS launched in{' '}
               <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">New Jersey, USA</span>{' '}
-              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. Now, the summit comes home to Lagos — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. HEBS also hosted a sold-out United States edition from 2&ndash;4 May 2026, reinforcing its established presence within the beauty, hair and creative industries. Now, the summit comes home to Lagos for its fourth edition — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function About() {
           {[
             { n: '01', title: 'First-of-Its-Kind Industry Fusion', body: 'A Unified Beauty, Fashion & Education Platform where hairstylists, barbers, makeup artists, nail techs, fashion designers, and educators collaborate under one roof alongside top-tier global influencers.' },
             { n: '02', title: 'High-Value, Hands-On Learning', body: 'Focused entirely on technical education and real-world skills, ensuring every session is interactive, impactful, and delivers practical knowledge attendees can immediately apply to scale their business.' },
-            { n: '03', title: 'Elite Competitive Championship', body: 'Featuring a $80,000 USD (₦112,000,000) cumulative prize pool—the highest-stakes beauty competition in Africa. The event transforms raw competition into a full-scale runway production with music, lights, and energy.' },
+            { n: '03', title: 'Elite Competitive Championship', body: 'Featuring a $82,500 USD (₦115,500,000) cumulative prize pool across 12 competitions—the highest-stakes beauty competition in Africa. The event transforms raw competition into a full-scale runway production with music, lights, and energy.' },
             { n: '04', title: 'A Truly Global Experience', body: 'Bringing diverse international beauty trends to Lagos, Nigeria to blend with local African influences, creating an unparalleled creative exchange and global networking opportunity.' },
           ].map((card) => (
             <div key={card.n} className="bg-zinc-950/60 p-6 flex flex-col justify-between min-h-[260px]">

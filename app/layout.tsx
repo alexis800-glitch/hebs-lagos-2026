@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hebslagos.com"),
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    "Launched in New Jersey, USA in 2024 and back with a sold-out 2025 edition, the Hair Education Beauty Summit comes home to Lagos for 2026. October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. $80,000 USD (₦112,000,000) in prizes.",
+    "After three United States editions, including a sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit comes home to Lagos for its fourth edition. 12 competitions across 7 categories, October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. $82,500 USD (₦115,500,000) in prizes.",
   keywords: [
     "HEBS",
     "Hair Education Beauty Summit",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "HEBS 2026 — Hair Education Beauty Summit",
-    description: "$80,000 USD (₦112,000,000) in prizes. October 23–25, 2026. Lagos, Nigeria.",
+    description: "12 competitions. $82,500 USD (₦115,500,000) in prizes. October 23–25, 2026. Lagos, Nigeria.",
     type: "website",
     url: "https://hebslagos.com",
     siteName: "HEBS Lagos 2026",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HEBS 2026 — Hair Education Beauty Summit",
-    description: "$80,000 USD (₦112,000,000) in prizes. October 23–25, 2026. Lagos, Nigeria.",
+    description: "12 competitions. $82,500 USD (₦115,500,000) in prizes. October 23–25, 2026. Lagos, Nigeria.",
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };
