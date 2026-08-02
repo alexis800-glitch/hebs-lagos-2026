@@ -27,7 +27,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD (₦70,000) per division.",
+      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD (₦50,000) per division.",
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
@@ -42,17 +42,17 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD (₦70,000) per division (up to $100 USD (₦140,000) for team categories). All payments via hebseventportal.com/register.",
+      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD (₦50,000) per division (up to $100 USD (₦140,000) for team categories). All payments via hebseventportal.com/register.",
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦70,000–₦140,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦70,000) per division.",
+      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦50,000–₦140,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦50,000) per division.",
   },
   {
     triggers: ["signature competition", "fashion runway", "runway", "roots to royalty", "bridal beauty", "gilded heritage", "beauty competition", "makeup competition", "fashion competition", "nail competition", "nail artistry", "makeup artistry"],
     answer:
-      "The Signature Competitions are three category events, each with a $7,500 USD (₦10,500,000) prize pool (1st $4,000 · 2nd $2,500 · 3rd $1,000):\n\n• Fashion Runway Competition — Theme: Roots to Royalty\n• Makeup Artistry Competition — Theme: Bridal Beauty\n• Nail Artistry Competition — Theme: Gilded Heritage\n\nApplication timeline:\n1. Registration Opens — July 15, 2026. Register at hebseventportal.com/register and pay the $50 USD (₦70,000) entry fee.\n2. Video Submission & Registration Deadline — October 15, 2026, 11:59 PM WAT. Submit a 3-min MP4/MOV video to casting@hebslagos.com.\n3. Contestant Notification — All contestants will be notified 1–3 business days after submitting if chosen for the Live Final.\n4. Live Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Fashion Designers, Fashion Stylists, Makeup Artists, Nail Artists, Creative Directors, and Beauty & Fashion Visionaries.",
+      "The Signature Competitions are three category events, each with a $7,500 USD (₦10,500,000) prize pool (1st $4,000 · 2nd $2,500 · 3rd $1,000):\n\n• Fashion Runway Competition — Theme: Roots to Royalty\n• Makeup Artistry Competition — Theme: Bridal Beauty\n• Nail Artistry Competition — Theme: Gilded Heritage\n\nApplication timeline:\n1. Registration Opens — July 15, 2026. Register at hebseventportal.com/register and pay the $50 USD (₦50,000) entry fee.\n2. Video Submission & Registration Deadline — October 15, 2026, 11:59 PM WAT. Submit a 3-min MP4/MOV video to casting@hebslagos.com.\n3. Contestant Notification — All contestants will be notified 1–3 business days after submitting if chosen for the Live Final.\n4. Live Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Fashion Designers, Fashion Stylists, Makeup Artists, Nail Artists, Creative Directors, and Beauty & Fashion Visionaries.",
   },
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],

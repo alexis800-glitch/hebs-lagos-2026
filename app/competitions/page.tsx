@@ -47,7 +47,7 @@ const GLOBAL_STAGES = [
     n: '01',
     title: 'Registration Opens',
     deadline: 'July 15, 2026',
-    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to fashion designers, fashion stylists, makeup artists, nail artists, creative directors, and beauty &amp; fashion visionaries worldwide — across the Fashion Runway, Makeup Artistry, and Nail Artistry categories.</>,
+    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦50,000) entry fee to complete registration. Open to fashion designers, fashion stylists, makeup artists, nail artists, creative directors, and beauty &amp; fashion visionaries worldwide — across the Fashion Runway, Makeup Artistry, and Nail Artistry categories.</>,
   },
   {
     n: '02',
@@ -642,7 +642,7 @@ function CompetitionsContent() {
                   href="https://hebseventportal.com/register"
                   className="w-full sm:w-auto max-w-xs mx-auto px-8 py-3.5 sm:py-2.5"
                 >
-                  Register Now — $50 USD (₦70,000)
+                  Register Now — $50 USD (₦50,000)
                 </PrimaryCTA>
                 <p className="text-zinc-300 text-xs font-mono font-medium">
                   Non-refundable · Registration Deadline October 15, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08148414917 / 08023051810
