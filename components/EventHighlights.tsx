@@ -65,9 +65,15 @@ export default function EventHighlights() {
               Event <span className="italic font-medium">Highlights</span>
             </h2>
           </div>
-          <p className="font-sans text-sm text-neutral-300 max-w-xs leading-relaxed md:text-left">
-            Three days of immersive education, fierce competition, and global connection.
-          </p>
+          <div className="max-w-xs md:text-left">
+            <p className="font-sans text-sm text-neutral-300 leading-relaxed">
+              Three days of immersive education, fierce competition, and global connection.
+            </p>
+            <p className="font-sans text-sm text-neutral-400 leading-relaxed mt-3">
+              Following three United States editions, including another sold-out edition from
+              2&ndash;4 May 2026, HEBS comes home to Lagos for its fourth edition and Lagos debut.
+            </p>
+          </div>
         </div>
 
         {/* Flat linear panel list */}

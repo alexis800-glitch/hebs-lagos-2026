@@ -62,12 +62,17 @@ const KNOWLEDGE_BASE: KBEntry[] = [
       `HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and also hosted a sold-out United States edition from 2–4 May 2026. The summit is now coming home to Lagos for October 2026 — the fourth and biggest edition yet. It brings together hairstylists, barbers, braiders, frontal and lash artists, makeup artists, nail technicians, fashion designers, chefs, and vocalists for world-class education, high-stakes competition, and global networking. The event features ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories and a ${TOTAL_PRIZE_DISPLAY} cumulative prize pool.`,
   },
   {
+    triggers: ["fourth edition", "fourth", "edition", "editions", "previous editions", "how many editions", "lagos debut", "debut", "event history", "history", "sold out", "sold-out", "may 2026", "2024", "2025"],
+    answer:
+      "HEBS Lagos 2026 is the fourth edition of the Hair Education Beauty Summit and its Lagos debut.\n\n• 2024 — United States edition\n• 2025 — United States edition, sold out\n• 2–4 May 2026 — a separate sold-out United States edition\n• 23–25 October 2026 — HEBS Lagos, the fourth edition and first held in Nigeria",
+  },
+  {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
       "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nAsk me for the competition schedule to see the times for each competition.",
   },
   {
-    triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
+    triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
     answer:
       "HEBS Lagos 2026 uses two venues:\n\n• Pre-Party (Oct 23): NJS Royale Beach Resort, Lagos, Nigeria · 2:00 PM – 7:00 PM\n• Main Event (Oct 24–25): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
   },
@@ -161,23 +166,53 @@ All entry fees are non-refundable and paid at hebseventportal.com/register.`,
 
 const FALLBACK = "I don't have that specific information on hand. Please contact the HEBS team for confirmation — email info@thehebs.com or call +1 (610) 477-9635.";
 
+/**
+ * Words that carry no topical signal on their own. They are excluded from
+ * partial-token scoring only: a trigger that *is* one of these (for example the
+ * standalone "when" date trigger) still matches as a full phrase.
+ *
+ * Without this, multi-word triggers such as "battle of the fades" earned a point
+ * for "the" against any question containing "the", which let unrelated
+ * competitions outrank genuine date, venue and history answers.
+ */
+const STOP_WORDS = new Set([
+  "the", "and", "for", "are", "you", "all", "can", "how", "what", "does",
+  "with", "from", "this", "that", "when", "where", "who", "why", "event",
+  "was", "its", "has", "our", "out", "any", "get", "got", "will", "have",
+]);
+
+function normalize(value: string): string {
+  // Punctuation is folded to spaces on both sides of the comparison, so "fades?"
+  // and "fades" match. Kept ASCII-only so no downlevel regex flags are needed.
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9&\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function findBestAnswer(query: string): string {
-  const q = query.toLowerCase().trim();
+  const q = normalize(query);
   if (!q) return FALLBACK;
 
   let best = { score: 0, answer: FALLBACK };
 
   for (const entry of KNOWLEDGE_BASE) {
     let score = 0;
-    for (const trigger of entry.triggers) {
-      if (q.includes(trigger)) {
-        // Full phrase match scores highest
+    for (const raw of entry.triggers) {
+      const trigger = normalize(raw);
+      if (!trigger) continue;
+
+      if (q === trigger) {
+        // 1. Exact normalized match - strongest possible signal
+        score += trigger.split(" ").length * 4 + 4;
+      } else if (q.includes(trigger)) {
+        // 2. Full trigger phrase contained in the query
         score += trigger.split(" ").length * 2;
       } else {
-        // Partial word match
-        const triggerWords = trigger.split(" ");
-        for (const word of triggerWords) {
-          if (word.length > 2 && q.includes(word)) score += 1;
+        // 3. Meaningful token overlap only - stop words never score
+        for (const word of trigger.split(" ")) {
+          if (word.length > 2 && !STOP_WORDS.has(word) && q.includes(word)) score += 1;
         }
       }
     }
@@ -186,6 +221,7 @@ function findBestAnswer(query: string): string {
     }
   }
 
+  // 4. Default response when nothing matched confidently
   return best.score >= 2 ? best.answer : FALLBACK;
 }
 
