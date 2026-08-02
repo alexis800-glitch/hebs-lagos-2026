@@ -42,6 +42,12 @@ const PRIZE_SUMMARY = COMPETITIONS.map(
   (c) => `• ${c.name.replace(" Competition", "")} — ${prizeDisplay(c)}`,
 ).join("\n");
 
+/** Competitions charging a given confirmed USD fee, e.g. "Freestyle Design and Freestyle Braid Art". */
+const namesAtFee = (usdAmount: number): string =>
+  COMPETITIONS.filter((c) => c.feeUsd === usdAmount)
+    .map((c) => c.name.replace(" Competition", ""))
+    .join(" and ");
+
 /** One entry per competition, so a question about any single one is answered directly. */
 const COMPETITION_ENTRIES: KBEntry[] = COMPETITIONS.map((c) => {
   const s = c.sessions.map((x) => `${x.shortDate}, ${x.time} (${x.duration})`).join(" and ");
@@ -94,7 +100,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees are $50 USD (₦70,000) for most competitions, $75 USD (₦105,000) for Freestyle Design, and $100 USD (₦140,000) for Taste of Culture. All payments via hebseventportal.com/register.",
+      `General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees are $50 USD (₦70,000) for most competitions, $75 USD (₦105,000) for ${namesAtFee(75)}, and $100 USD (₦140,000) for ${namesAtFee(100)}. All payments via hebseventportal.com/register.`,
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
