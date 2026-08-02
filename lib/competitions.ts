@@ -160,16 +160,14 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Freestyle Braid Art explores creativity, innovation, and technical mastery through braiding. Braiders transform natural hair into intricate works of braid art using original patterns, dimensional structure, creative direction, and artistic detail. The finished design should be cohesive, technically clean, visually impactful, and recognizable as a braid-driven work of art.',
     sessions: [session(SAT, '1:15 – 2:30 PM', '75 min', '2026-10-24T13:15:00+01:00', '2026-10-24T14:30:00+01:00')],
-    // Flyer link supplied by the organiser is unavailable, so the fee is unconfirmed.
-    feeDisplay: 'Confirm on the official registration portal',
-    feeUsd: null,
-    feeNgn: null,
-    feeConfirmed: false,
+    feeDisplay: '$75 USD / ₦105,000',
+    feeUsd: 75,
+    feeNgn: 105000,
+    feeConfirmed: true,
     prizeUsd: 10000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
     order: 4,
-    note: 'Entry fee is confirmed at the point of registration on the official portal.',
   },
   {
     slug: 'traditional-braiding',
