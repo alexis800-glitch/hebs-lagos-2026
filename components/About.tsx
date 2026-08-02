@@ -24,7 +24,7 @@ export default function About() {
             <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
               After successful editions delivering an international standard of excellence in the United States, HEBS proudly brings its inaugural Lagos edition home to Nigeria. Born in the diaspora, HEBS launched in{' '}
               <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">New Jersey, USA</span>{' '}
-              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. Now, the summit comes home to Lagos — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. HEBS also hosted a sold-out United States edition from 2&ndash;4 May 2026, reinforcing its established presence within the beauty, hair and creative industries. Now, the summit comes home to Lagos for its fourth edition — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
             </p>
           </div>
         </div>

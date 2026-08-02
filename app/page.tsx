@@ -15,12 +15,12 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    "HEBS launched in New Jersey, USA in 2024, returned in 2025 with a sold-out edition, and comes home to Lagos for 2026. October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.",
+    "After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
     description:
-      "After a sold-out 2025 in New Jersey, USA, HEBS comes home to Lagos. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
+      "After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
     url: "/",
     images: [
       {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
     description:
-      "After a sold-out 2025 in New Jersey, USA, HEBS comes home to Lagos. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
+      "After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.",
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };
@@ -45,7 +45,7 @@ const eventJsonLd = {
   "@type": "Event",
   name: "Hair Education Beauty Summit Lagos 2026",
   description:
-    "HEBS launched in New Jersey, USA in 2024, returned in 2025 with a sold-out edition, and comes home to Lagos for 2026. Three days of hair education, beauty competitions, and industry celebration.",
+    "After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. Three days of hair education, beauty competitions, and industry celebration.",
   startDate: "2026-10-23T14:00:00+01:00",
   endDate: "2026-10-25T17:00:00+01:00",
   eventStatus: "https://schema.org/EventScheduled",

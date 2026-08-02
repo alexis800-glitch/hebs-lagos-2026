@@ -8,9 +8,9 @@ Official concept note prepared for partners, exhibitors, sponsors, and media.
 
 Event Overview
 
-The Hair Education Beauty Summit (HEBS) is an international platform for beauty, culture, and creative enterprise. HEBS launched in New Jersey, USA in 2024 and returned in 2025 with a sold-out edition that established its reputation internationally.
+The Hair Education Beauty Summit (HEBS) is an international platform for beauty, culture, and creative enterprise. HEBS launched in New Jersey, USA in 2024 and returned in 2025 with a sold-out edition that established its reputation internationally. Following those earlier United States editions, HEBS staged another sold-out edition from 2–4 May 2026.
 
-In 2026 the summit comes home. HEBS Lagos 2026 is the inaugural Nigerian edition: three days of education, competition, exhibition, and cultural programming, hosted at two venues on the Lekki-Epe corridor of Lagos.
+In October 2026 the summit comes home. HEBS Lagos 2026 will mark the event’s fourth edition and its Lagos debut: three days of education, competition, exhibition, and cultural programming, hosted at two venues on the Lekki-Epe corridor of Lagos.
 
 The Lagos edition is broader than the editions before it. Alongside hair, barbering, braiding, makeup, nails, and fashion, the 2026 programme adds cultural food and live music competition, and is built in partnership with the tourism and hospitality identity of the Epe region that hosts it.
 

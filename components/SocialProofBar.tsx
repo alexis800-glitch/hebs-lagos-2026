@@ -29,12 +29,12 @@ export default function SocialProofBar() {
             className="text-sm font-semibold uppercase tracking-[0.2em] font-inter px-3 py-1 rounded-full"
             style={{ background: "linear-gradient(135deg, #9b59b6, #e91e8c)", color: "#fff" }}
           >
-            Year 3
+            Year 4
           </span>
           <p className="text-base md:text-xl font-medium font-inter" style={{ color: "#ffffff" }}>
-            Coming Home for Year 3 —&nbsp;
+            Coming Home for Year 4 —&nbsp;
             <span style={{ color: "#aaaaaa" }}>
-              After Two Sold-Out Editions in New Jersey, USA
+              After Three United States Editions
             </span>
           </p>
         </div>

@@ -100,12 +100,14 @@ segs(kids[6], [
     ("New Jersey, USA in 2024", 1),
     (" and returned in ", 0),
     ("2025 with a sold-out edition", 1),
-    (" that established its reputation internationally.", 0)])
+    (" that established its reputation internationally. Following those earlier United States editions, HEBS staged another sold-out edition from ", 0),
+    ("2–4 May 2026", 1),
+    (".", 0)])
 
 segs(kids[7], [
-    ("In 2026 the summit comes home. ", 0),
+    ("In October 2026 the summit comes home. ", 0),
     ("HEBS Lagos 2026", 1),
-    (" is the inaugural Nigerian edition: three days of education, competition, exhibition, and cultural programming, hosted at two venues on the Lekki-Epe corridor of Lagos.", 0)])
+    (" will mark the event’s fourth edition and its Lagos debut: three days of education, competition, exhibition, and cultural programming, hosted at two venues on the Lekki-Epe corridor of Lagos.", 0)])
 
 _p = clone_after(BODY_TPL, kids[7])
 segs(_p, [
