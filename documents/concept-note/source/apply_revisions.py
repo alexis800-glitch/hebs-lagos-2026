@@ -312,6 +312,36 @@ for r in range(1, 4):
     txt = ft.rows[r].cells[1].text.strip()
     assert txt == '$50 USD / ₦50,000', f'unexpected Signature fee: {txt!r}'
 
+
+def cell_sub(cell, old, new):
+    """Replace text inside a cell run, leaving every run property untouched."""
+    for p in cell.paragraphs:
+        for r in p.runs:
+            if old in r.text:
+                r.text = r.text.replace(old, new, 1)
+                return
+    raise AssertionError(f'{old!r} not found in cell {cell.text!r}')
+
+
+# Barber and Braiding naira fees corrected to the live portal values (confirmed from
+# portal screenshots 2026-08-02). USD amounts are unchanged. The trailing bold runs
+# ("for the whole team, not per barber" / "for the two-person team, not per person")
+# are left in place, so the team-fee meaning is preserved.
+barber_ft = T(163)
+for row, old, new in [(1, '₦70,000', '₦50,000'),
+                      (2, '₦70,000', '₦50,000'),
+                      (3, '₦105,000', '₦75,000'),
+                      (4, '₦140,000', '₦100,000')]:
+    cell_sub(barber_ft.rows[row].cells[1], old, new)
+
+braid_ft = T(166)
+for row, old, new in [(1, '₦70,000', '₦50,000'),
+                      (2, '₦70,000', '₦50,000'),
+                      (3, '₦70,000', '₦50,000')]:
+    cell_sub(braid_ft.rows[row].cells[1], old, new)
+# Freestyle Braid Art Championship stays at $75 USD / NGN 105,000
+assert '₦105,000' in braid_ft.rows[4].cells[1].text, braid_ft.rows[4].cells[1].text
+
 # cultural competitions fee block after the braiding fee table's spacer
 lab = clone_after(kids[165], kids[167]); single(lab, "Cultural Competitions")
 cft = clone_table_3row(kids[159], lab, [

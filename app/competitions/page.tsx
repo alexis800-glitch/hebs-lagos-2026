@@ -104,7 +104,7 @@ const BARBER_DIVISIONS: Division[] = [
     n: '01',
     title: 'Fast & Flawless Challenge™',
     subtitle: 'The Ultimate Speed Competition · 15 min',
-    entry: '$50 USD\n₦70,000',
+    entry: '$50 USD\n₦50,000',
     time: '15 min',
     prizePool: '$5,000\n₦7,000,000',
     prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
@@ -114,7 +114,7 @@ const BARBER_DIVISIONS: Division[] = [
     n: '02',
     title: 'Battle of the Fades™',
     subtitle: 'The Ultimate Fade Championship · 30 min',
-    entry: '$50 USD\n₦70,000',
+    entry: '$50 USD\n₦50,000',
     time: '30 min',
     prizePool: '$5,000\n₦7,000,000',
     prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
@@ -124,7 +124,7 @@ const BARBER_DIVISIONS: Division[] = [
     n: '03',
     title: 'Freestyle Design Battle™',
     subtitle: 'Art Meets Barbering · 60 min',
-    entry: '$75 USD\n₦105,000',
+    entry: '$75 USD\n₦75,000',
     time: '60 min',
     prizePool: '$7,500\n₦10,500,000',
     prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
@@ -134,7 +134,7 @@ const BARBER_DIVISIONS: Division[] = [
     n: '04',
     title: 'Barber Games™',
     subtitle: 'The Ultimate Team Battle · 2 Hours',
-    entry: '$100 USD\n₦140,000 per team',
+    entry: '$100 USD\n₦100,000 per team',
     time: '2 hrs',
     prizePool: '$10,000\n₦14,000,000',
     prizes: ['Winning Team — $10,000 / ₦14,000,000', 'Championship Trophy', 'Team Recognition'],
@@ -156,7 +156,7 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Fast & Flawless Braiding Challenge™',
     subtitle: 'Speed Meets Precision',
     format: 'Solo',
-    entry: '$50 USD\n₦70,000',
+    entry: '$50 USD\n₦50,000',
     time: '30 min',
     prizePool: '$5,000\n₦7,000,000',
     prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
@@ -166,9 +166,9 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
   {
     n: '02',
     title: 'Braids & Fades Showdown™',
-    subtitle: 'Dual Discipline Team Track · $50 USD / ₦70,000 per Team of 1 Barber + 1 Braider',
+    subtitle: 'Dual Discipline Team Track · $50 USD / ₦50,000 per Team of 1 Barber + 1 Braider',
     format: '1 Barber + 1 Braider',
-    entry: '$50 USD\n₦70,000 / team',
+    entry: '$50 USD\n₦50,000 / team',
     time: '60 min',
     prizePool: '$7,500\n₦10,500,000',
     prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
@@ -180,7 +180,7 @@ const BRAIDING_DIVISIONS: BraidDivision[] = [
     title: 'Traditional Braiding Championship™',
     subtitle: 'Honoring Culture & Heritage',
     format: 'Solo',
-    entry: '$50 USD\n₦70,000',
+    entry: '$50 USD\n₦50,000',
     time: '60 min',
     prizePool: '$7,500\n₦10,500,000',
     prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
@@ -753,7 +753,7 @@ function CompetitionsContent() {
                   Download Official Competition Brief
                 </BriefCTA>
                 <p className="text-xs sm:text-sm text-zinc-300 font-mono mt-1 text-center leading-relaxed">
-                  Entry fees from $50 USD (₦70,000) per division
+                  Entry fees from $50 USD (₦50,000) per division
                 </p>
               </div>
             </div>

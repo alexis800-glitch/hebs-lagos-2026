@@ -42,12 +42,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD (₦50,000) per division (up to $100 USD (₦140,000) for team categories). All payments via hebseventportal.com/register.",
+      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD (₦50,000) per division (up to $100 USD (₦100,000) for team categories). All payments via hebseventportal.com/register.",
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦50,000–₦140,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦50,000) per division.",
+      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦50,000–₦105,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦50,000) per division.",
   },
   {
     triggers: ["signature competition", "fashion runway", "runway", "roots to royalty", "bridal beauty", "gilded heritage", "beauty competition", "makeup competition", "fashion competition", "nail competition", "nail artistry", "makeup artistry"],
@@ -57,12 +57,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
     answer:
-      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Battle of the Fades™ — 30 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Freestyle Design Battle™ — 60 min · $75 USD (₦105,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100 USD (₦140,000)/team · $10,000 USD (₦14,000,000) prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
+      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 USD (₦50,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Battle of the Fades™ — 30 min · $50 USD (₦50,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Freestyle Design Battle™ — 60 min · $75 USD (₦75,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100 USD (₦100,000)/team · $10,000 USD (₦14,000,000) prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
   },
   {
     triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
     answer:
-      "Braiding Championship divisions (October 24, 2026 · NJS Royale Events Center, Lagos):\n\n• Fast & Flawless Braiding Challenge™ — 30 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Braids & Fades Showdown™ (Team of 1 Barber + 1 Braider) — 60 min · $50 USD (₦70,000)/team · $7,500 USD (₦10,500,000) prize pool\n• Traditional Braiding Championship™ — 60 min · $50 USD (₦70,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Freestyle Braid Art Championship™ — 75 min · $75 USD (₦105,000) entry · $10,000 USD (₦14,000,000) prize pool\n\nPowered by PureO Natural Products™. Open to professional and student braiders, salon owners, natural hair stylists, locticians, and international competitors. Minimum age 16. Register at hebseventportal.com/register.",
+      "Braiding Championship divisions (October 24, 2026 · NJS Royale Events Center, Lagos):\n\n• Fast & Flawless Braiding Challenge™ — 30 min · $50 USD (₦50,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Braids & Fades Showdown™ (Team of 1 Barber + 1 Braider) — 60 min · $50 USD (₦50,000)/team · $7,500 USD (₦10,500,000) prize pool\n• Traditional Braiding Championship™ — 60 min · $50 USD (₦50,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Freestyle Braid Art Championship™ — 75 min · $75 USD (₦105,000) entry · $10,000 USD (₦14,000,000) prize pool\n\nPowered by PureO Natural Products™. Open to professional and student braiders, salon owners, natural hair stylists, locticians, and international competitors. Minimum age 16. Register at hebseventportal.com/register.",
   },
   {
     triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "80000", "$80", "prize money", "92500", "$92"],

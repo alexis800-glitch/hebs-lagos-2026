@@ -278,17 +278,17 @@ Barber Championship
 Fees are set per division, as published on the official registration portal.
 
 Division | Entry Fee
-Fast & Flawless Challenge™ | $50 USD / ₦70,000 per competitor
-Battle of the Fades™ | $50 USD / ₦70,000 per competitor
-Freestyle Design Battle™ | $75 USD / ₦105,000 per competitor
-Barber Games™ (team of 4) | $100 USD / ₦140,000 for the whole team, not per barber
+Fast & Flawless Challenge™ | $50 USD / ₦50,000 per competitor
+Battle of the Fades™ | $50 USD / ₦50,000 per competitor
+Freestyle Design Battle™ | $75 USD / ₦75,000 per competitor
+Barber Games™ (team of 4) | $100 USD / ₦100,000 for the whole team, not per barber
 
 Braiding Championship
 
 Division | Entry Fee
-Fast & Flawless Braiding Challenge™ | $50 USD / ₦70,000 per competitor
-Braids & Fades Showdown™ (1 barber and 1 braider) | $50 USD / ₦70,000 for the two-person team, not per person
-Traditional Braiding Championship™ | $50 USD / ₦70,000 per competitor
+Fast & Flawless Braiding Challenge™ | $50 USD / ₦50,000 per competitor
+Braids & Fades Showdown™ (1 barber and 1 braider) | $50 USD / ₦50,000 for the two-person team, not per person
+Traditional Braiding Championship™ | $50 USD / ₦50,000 per competitor
 Freestyle Braid Art Championship™ | $75 USD / ₦105,000 per competitor
 
 Cultural Competitions
