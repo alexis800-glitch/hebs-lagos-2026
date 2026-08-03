@@ -7,6 +7,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 import NeonButton from "@/components/ui/neon-button";
+import {
+  CATEGORIES,
+  COMPETITION_COUNT,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_DISPLAY,
+  competitionsByCategory,
+} from "@/lib/competitions";
+
+const NAV_CATEGORIES = CATEGORIES;
 
 const navLinks = [
   { label: "Home",         href: "/" },
@@ -92,34 +101,30 @@ export default function Navbar() {
                       <div className="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden w-[480px]">
                         <div className="flex flex-col divide-y divide-zinc-800/60">
                           <Link
-                            href="/competitions?track=signature"
+                            href="/competitions"
                             onClick={() => setIsCompetitionOpen(false)}
                             className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
                           >
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium">Track 01 · Oct 25, 2026</span>
-                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Signature Competitions 2026</span>
-                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Fashion Runway, Makeup Artistry &amp; Nail Artistry — three categories, $22,500 USD (₦31,500,000) in prizes.</span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium">Oct 24–25, 2026</span>
+                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">All {COMPETITION_COUNT} Competitions</span>
+                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">{CATEGORY_COUNT} categories, {TOTAL_PRIZE_DISPLAY} in prizes.</span>
                           </Link>
-                          <Link
-                            href="/competitions?track=barber"
-                            onClick={() => setIsCompetitionOpen(false)}
-                            className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
-                          >
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-medium">Track 02 · Oct 24, 2026</span>
-                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Barber Championships 2026</span>
-                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">4 high-stakes speed, fade, and design divisions powered by Men&rsquo;t Pro Tools™.</span>
-                          </Link>
-                          <Link
-                            href="/competitions?track=braiding"
-                            onClick={() => setIsCompetitionOpen(false)}
-                            className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
-                          >
-                            <div className="flex items-center gap-2">
-                              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-medium">Track 03 · Oct 24, 2026</span>
-                            </div>
-                            <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">Braiding Championships 2026</span>
-                            <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">Solo and collaborative braiding tracks powered by PureO Natural Products™.</span>
-                          </Link>
+                          {NAV_CATEGORIES.map((cat) => (
+                            <Link
+                              key={cat.slug}
+                              href={`/competitions?track=${cat.slug}`}
+                              onClick={() => setIsCompetitionOpen(false)}
+                              className="bg-zinc-900 hover:bg-zinc-800/60 px-5 py-4 flex flex-col gap-1.5 transition-colors group/item"
+                            >
+                              <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 font-medium">
+                                {competitionsByCategory(cat.slug).length} competition{competitionsByCategory(cat.slug).length === 1 ? '' : 's'}
+                              </span>
+                              <span className="font-serif text-[15px] font-light text-white group-hover/item:text-amber-400 transition-colors leading-snug">{cat.name}</span>
+                              <span className="font-sans text-xs text-zinc-300 font-light leading-relaxed">
+                                {competitionsByCategory(cat.slug).map((c) => c.name.replace(' Competition', '')).join(', ')}.
+                              </span>
+                            </Link>
+                          ))}
                         </div>
                         <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-center gap-6">
                           <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">HEBS Lagos · Oct 23–25, 2026</span>
@@ -320,16 +325,20 @@ export default function Navbar() {
                       className="overflow-hidden"
                     >
                       <div className="pb-4 flex flex-col gap-0.5">
-                        <Link href="/competitions?track=signature" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
-                          Signature Competitions 2026
+                        <Link href="/competitions" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
+                          All {COMPETITION_COUNT} Competitions
+                          <span className="text-[10px] font-mono text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 leading-none">Oct 24–25</span>
                         </Link>
-                        <Link href="/competitions?track=barber" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
-                          Barber Championships 2026
-                        </Link>
-                        <Link href="/competitions?track=braiding" onClick={closeMenu} className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans">
-                          Braiding Championships 2026
-                          <span className="text-[10px] font-mono text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 leading-none">Oct 24</span>
-                        </Link>
+                        {NAV_CATEGORIES.map((cat) => (
+                          <Link
+                            key={cat.slug}
+                            href={`/competitions?track=${cat.slug}`}
+                            onClick={closeMenu}
+                            className="flex items-center gap-2 text-zinc-300 hover:text-white text-base pl-4 py-2 transition-colors font-sans"
+                          >
+                            {cat.name}
+                          </Link>
+                        ))}
                       </div>
                     </motion.div>
                   )}

@@ -1,340 +1,33 @@
-﻿'use client'
+'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useMemo, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import CompetitionSchedule from '@/components/CompetitionSchedule'
+import {
+  COMPETITION_COUNT,
+  CATEGORIES,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_DISPLAY,
+  REGISTRATION_URL,
+  groupedByCategory,
+  prizeDisplay,
+  resolveLegacyTrack,
+  isRetiredTrack,
+  type CategorySlug,
+  type Competition,
+} from '@/lib/competitions'
 
-type Tab = 'signature' | 'barber' | 'braiding'
+type Filter = CategorySlug | 'all'
 
-const TABS: { id: Tab; label: string }[] = [
-  { id: 'signature', label: 'Signature Competitions' },
-  { id: 'barber', label: 'Barber Championships' },
-  { id: 'braiding', label: 'Braiding Championships' },
-]
-
-// ─── Signature Competitions Data ─────────────────────────────────────────────
-
-const SIGNATURE_PRIZES = [
-  { place: '1st', usd: '$4,000 USD', ngn: '₦5,600,000', color: 'text-amber-400' },
-  { place: '2nd', usd: '$2,500 USD', ngn: '₦3,500,000', color: 'text-zinc-300' },
-  { place: '3rd', usd: '$1,000 USD', ngn: '₦1,400,000', color: 'text-zinc-500' },
-]
-
-const SIGNATURE_CATEGORIES = [
-  {
-    n: '01',
-    title: 'Fashion Runway Competition',
-    theme: 'Roots to Royalty',
-    desc: 'Roots to Royalty celebrates the journey from cultural heritage to modern-day royalty. Designers are invited to create an original, runway-ready look inspired by ancestry, legacy, leadership, and the vibrant spirit of Lagos. Designs may feature regal silhouettes, bold colors, luxurious fabrics, cultural influences, symbolic details, and statement accessories. Each look should honor its roots while presenting a fresh, elevated, and powerful vision of royalty. Cultural inspiration should be represented thoughtfully and respectfully.',
-  },
-  {
-    n: '02',
-    title: 'Makeup Artistry Competition',
-    theme: 'Bridal Beauty',
-    desc: 'Bridal Beauty celebrates the artistry of creating a radiant, elegant, and wedding-ready makeup look. Artists are invited to showcase their interpretation of a modern bride while complementing the model’s features, skin tone, and personal beauty. The finished look may range from soft and timeless to bold and glamorous. Makeup should demonstrate flawless complexion work, balanced color, clean application, thoughtful detail, and long-lasting wear. Each look should feel cohesive, refined, camera-ready, and worthy of the bride’s special day.',
-  },
-  {
-    n: '03',
-    title: 'Nail Artistry Competition',
-    theme: 'Gilded Heritage',
-    desc: 'Gilded Heritage celebrates culture, craftsmanship, and luxury through the art of nail design. Artists are invited to create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewelry, and meaningful cultural details. Designs may incorporate rich colors, gold accents, sculpted elements, intricate patterns, embellishments, and creative textures. The finished set should be original, balanced, technically polished, and presented as a modern celebration of culture and elegance.',
-  },
-]
-
-const GLOBAL_STAGES = [
-  {
-    n: '01',
-    title: 'Registration Opens',
-    deadline: 'July 15, 2026',
-    desc: <>Register at <span className="font-semibold text-zinc-100">hebseventportal.com/register</span> and pay the $50 USD (₦70,000) entry fee to complete registration. Open to fashion designers, fashion stylists, makeup artists, nail artists, creative directors, and beauty &amp; fashion visionaries worldwide — across the Fashion Runway, Makeup Artistry, and Nail Artistry categories.</>,
-  },
-  {
-    n: '02',
-    title: 'Video Submission & Registration Deadline',
-    deadline: 'October 15, 2026 · 11:59 PM WAT',
-    desc: <>Submit a 3-minute MP4/MOV video to <span className="font-semibold text-zinc-100">casting@hebslagos.com</span>. Show your name, category, work-in-progress clips, and a before/after transformation. All registrations and video submissions must be completed by 11:59 PM WAT.</>,
-  },
-  {
-    n: '03',
-    title: 'Contestant Notification',
-    deadline: '1–3 Business Days After Submission',
-    desc: 'All contestants will be notified 1–3 business days after submitting if they have been chosen to compete in the Live Final Championship.',
-  },
-  {
-    n: '04',
-    title: 'Live Championship Finals',
-    deadline: 'October 25, 2026',
-    desc: 'Each finalist will receive 5 minutes to present their live interpretation of their category’s 2026 theme.',
-  },
-]
-
-const JUDGING_CRITERIA = [
-  { label: 'Creative Concept & Storytelling', weight: '30%' },
-  { label: 'Technical Skill & Precision', weight: '25%' },
-  { label: 'Visual Impact & Innovation', weight: '25%' },
-  { label: 'Stage Presence & Performance', weight: '20%' },
-]
-
-const ELIGIBLE_ARTISTS = [
-  'Fashion Designers',
-  'Fashion Stylists',
-  'Makeup Artists',
-  'Nail Artists',
-  'Creative Directors',
-  'Beauty & Fashion Visionaries',
-]
-
-// ─── Barber Championships Data ────────────────────────────────────────────────
-
-interface Division {
-  n: string
-  title: string
-  subtitle: string
-  entry: string
-  time: string
-  prizePool: string
-  prizes: string[]
-  note: string
-  isTeam?: boolean
-}
-
-const BARBER_DIVISIONS: Division[] = [
-  {
-    n: '01',
-    title: 'Fast & Flawless Challenge™',
-    subtitle: 'The Ultimate Speed Competition · 15 min',
-    entry: '$50 USD\n₦70,000',
-    time: '15 min',
-    prizePool: '$5,000\n₦7,000,000',
-    prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
-    note: 'Complete a clean, polished haircut under intense time pressure. Permitted: tapers, fades, burst fades, mohawks, modern cuts.',
-  },
-  {
-    n: '02',
-    title: 'Battle of the Fades™',
-    subtitle: 'The Ultimate Fade Championship · 30 min',
-    entry: '$50 USD\n₦70,000',
-    time: '30 min',
-    prizePool: '$5,000\n₦7,000,000',
-    prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
-    note: 'Demonstrate smooth transitions, weight control, symmetry, clean detailing, and a flawless professional finish.',
-  },
-  {
-    n: '03',
-    title: 'Freestyle Design Battle™',
-    subtitle: 'Art Meets Barbering · 60 min',
-    entry: '$75 USD\n₦105,000',
-    time: '60 min',
-    prizePool: '$7,500\n₦10,500,000',
-    prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
-    note: 'Hair tattoos, portrait designs, artistic patterns, cultural concepts, abstract artwork. Creativity is the brief.',
-  },
-  {
-    n: '04',
-    title: 'Barber Games™',
-    subtitle: 'The Ultimate Team Battle · 2 Hours',
-    entry: '$100 USD\n₦140,000 per team',
-    time: '2 hrs',
-    prizePool: '$10,000\n₦14,000,000',
-    prizes: ['Winning Team — $10,000 / ₦14,000,000', 'Championship Trophy', 'Team Recognition'],
-    note: 'Four barbers each own a designated section of one transformational look — teamwork, timing, and cohesion decide the winner.',
-    isTeam: true,
-  },
-]
-
-// ─── Braiding Championships Data ─────────────────────────────────────────────
-
-interface BraidDivision extends Division {
-  format: string
-  featured: boolean
-}
-
-const BRAIDING_DIVISIONS: BraidDivision[] = [
-  {
-    n: '01',
-    title: 'Fast & Flawless Braiding Challenge™',
-    subtitle: 'Speed Meets Precision',
-    format: 'Solo',
-    entry: '$50 USD\n₦70,000',
-    time: '30 min',
-    prizePool: '$5,000\n₦7,000,000',
-    prizes: ['1st — $3,000 (₦4,200,000)', '2nd — $1,500 (₦2,100,000)', '3rd — $500 (₦700,000)'],
-    note: 'Judged on parting precision, neatness, consistency, product control, finish quality, and time management.',
-    featured: false,
-  },
-  {
-    n: '02',
-    title: 'Braids & Fades Showdown™',
-    subtitle: 'Dual Discipline Team Track · $50 USD / ₦70,000 per Team of 1 Barber + 1 Braider',
-    format: '1 Barber + 1 Braider',
-    entry: '$50 USD\n₦70,000 / team',
-    time: '60 min',
-    prizePool: '$7,500\n₦10,500,000',
-    prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
-    note: 'A barber and braider must create one complete transformation together — harmony between barbering and braiding artistry. Expected to be the event\'s standout audience favorite.',
-    featured: true,
-  },
-  {
-    n: '03',
-    title: 'Traditional Braiding Championship™',
-    subtitle: 'Honoring Culture & Heritage',
-    format: 'Solo',
-    entry: '$50 USD\n₦70,000',
-    time: '60 min',
-    prizePool: '$7,500\n₦10,500,000',
-    prizes: ['1st — $4,000 (₦5,600,000)', '2nd — $2,500 (₦3,500,000)', '3rd — $1,000 (₦1,400,000)'],
-    note: 'Eligible styles: Tribal, Fulani, Ghana braids, cornrows, feed-ins, and traditional African cultural styles. Judged on technical skill and cultural authenticity.',
-    featured: false,
-  },
-  {
-    n: '04',
-    title: 'Freestyle Braid Art Championship™',
-    subtitle: 'Creativity Without Limits',
-    format: 'Solo',
-    entry: '$75 USD\n₦105,000',
-    time: '75 min',
-    prizePool: '$10,000\n₦14,000,000',
-    prizes: ['1st — $5,000 (₦7,000,000)', '2nd — $3,000 (₦4,200,000)', '3rd — $2,000 (₦2,800,000)'],
-    note: 'Editorial braiding, avant-garde designs, fashion braiding, fantasy concepts, cultural fusion. Imagination is the only limit.',
-    featured: false,
-  },
-]
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
-function parsePrize(p: string) {
-  const sep = ' — '
-  const sepIdx = p.indexOf(sep)
-  if (sepIdx === -1) return null
-  const place = p.slice(0, sepIdx)
-  // Only structured parse for short ordinal labels (1st, 2nd, 3rd…)
-  if (!/^\d+(st|nd|rd|th)$/i.test(place)) return null
-  const rest = p.slice(sepIdx + sep.length)
-  const ngnMatch = rest.match(/\((₦[^)]+)\)/)
-  const ngn = ngnMatch ? ngnMatch[1] : null
-  const usd = ngnMatch ? rest.slice(0, ngnMatch.index).trim() : rest.trim()
-  return { place, usd, ngn }
-}
+// ─── Small building blocks ────────────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-1">
+    <span className="text-xs font-mono tracking-widest text-amber-400 uppercase block mb-2">
       {children}
-    </p>
-  )
-}
-
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="font-serif text-2xl sm:text-3xl text-white font-semibold tracking-tight mb-6">
-      {children}
-    </h3>
-  )
-}
-
-function PartnerBanner({ logo, name, role, note }: { logo: string; name: string; role: string; note: string }) {
-  return (
-    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 border border-white/[0.06] bg-zinc-900/30 rounded-xl px-5 py-4">
-      <div className="flex items-center gap-4 shrink-0">
-        <div className="w-9 h-9 rounded-lg bg-zinc-800 border border-white/[0.08] flex items-center justify-center flex-shrink-0">
-          <span className="text-sm font-bold text-white">{logo}</span>
-        </div>
-        <div className="min-w-0">
-          <p className="text-xs font-mono tracking-widest text-zinc-400 uppercase mb-0.5">{role}</p>
-          <p className="text-white font-semibold text-sm leading-snug">{name}</p>
-        </div>
-      </div>
-      <p className="text-zinc-300 text-xs leading-relaxed max-w-sm text-left">
-        {note}
-      </p>
-    </div>
-  )
-}
-
-function StatCell({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
-  return (
-    <div className="text-center">
-      <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-0.5">{label}</p>
-      <p className={`text-xs font-semibold leading-snug whitespace-pre-line ${accent ? 'text-amber-400' : 'text-white'}`}>{value}</p>
-    </div>
-  )
-}
-
-function DivisionCard({ div, featured }: { div: Division; featured?: boolean }) {
-  return (
-    <div
-      className={`flex flex-col gap-4 rounded-2xl p-6 border transition-all duration-300 ${
-        featured
-          ? 'border-amber-500/30 bg-gradient-to-b from-amber-500/[0.06] to-zinc-900/60'
-          : div.isTeam
-          ? 'border-amber-500/20 bg-zinc-900/50'
-          : 'border-white/[0.06] bg-zinc-900/50 hover:border-white/[0.12]'
-      }`}
-    >
-      {/* Featured badge */}
-      {featured && (
-        <div className="-mt-1 mb-0">
-          <span className="inline-block text-[10px] font-mono tracking-widest text-amber-500/90 bg-amber-500/[0.08] border border-amber-500/25 rounded-full px-3 py-1 uppercase">
-            Featured Collaborative Track
-          </span>
-        </div>
-      )}
-
-      {/* Header row */}
-      <div className="flex items-start justify-between gap-2">
-        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">{div.n}</span>
-        <div className="flex gap-1.5 flex-wrap justify-end">
-          {div.isTeam && (
-            <span className="text-[10px] font-mono tracking-widest text-amber-500/80 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2 py-0.5 uppercase">
-              Team
-            </span>
-          )}
-          {'format' in div && (
-            <span className="text-[10px] font-mono tracking-widest text-zinc-400 border border-white/[0.06] rounded-full px-2 py-0.5">
-              {(div as BraidDivision).format}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Title */}
-      <div>
-        <h4 className="text-white font-semibold text-base tracking-tight leading-snug">{div.title}</h4>
-        <p className="text-zinc-300 text-xs mt-0.5">{div.subtitle}</p>
-      </div>
-
-      {/* Stats row */}
-      <div className="grid grid-cols-3 gap-2 border-t border-b border-white/[0.05] py-3">
-        <StatCell label="Entry" value={div.entry} />
-        <StatCell label="Time" value={div.time} />
-        <StatCell label="Pool" value={div.prizePool} accent />
-      </div>
-
-      {/* Prizes */}
-      <div className="flex flex-col gap-2">
-        {div.prizes.map((p) => {
-          const parsed = parsePrize(p)
-          if (!parsed) return (
-            <p key={p} className="text-xs text-zinc-300 font-medium leading-snug">{p}</p>
-          )
-          return (
-            <div key={p} className="flex flex-col gap-0.5">
-              <div className="flex items-baseline gap-2">
-                <span className="font-mono text-xs text-zinc-400 w-7 shrink-0">{parsed.place}</span>
-                <span className="text-xs font-semibold text-zinc-100 tabular-nums">{parsed.usd}</span>
-              </div>
-              {parsed.ngn && (
-                <span className="pl-9 font-mono text-[10px] text-zinc-400 tabular-nums">{parsed.ngn}</span>
-              )}
-            </div>
-          )
-        })}
-      </div>
-
-      {/* Note */}
-      <p className="text-zinc-200 text-sm leading-relaxed mt-auto">{div.note}</p>
-    </div>
+    </span>
   )
 }
 
@@ -344,547 +37,236 @@ function PrimaryCTA({ href, children, className }: { href: string; children: Rea
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-full sm:w-auto bg-white text-black font-semibold text-sm tracking-wide px-10 py-3 md:py-2.5 rounded-lg inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.98] transition-transform cursor-pointer touch-manipulation select-none${className ? ` ${className}` : ''}`}
+      className={`w-full sm:w-auto bg-white text-black font-semibold text-sm tracking-wide px-10 py-3 md:py-2.5 rounded-lg inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.98] transition-transform cursor-pointer touch-manipulation select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950${className ? ` ${className}` : ''}`}
     >
       {children}
     </a>
   )
 }
 
-function BriefCTA({ href, children }: { href: string; children: React.ReactNode }) {
+function DetailRow({ label, value }: { label: string; value: string }) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="w-full sm:w-auto border border-amber-500/50 text-amber-400 hover:border-amber-400 hover:bg-amber-500/[0.07] font-semibold text-sm tracking-wide px-8 py-3 md:py-2.5 rounded-lg inline-flex items-center justify-center gap-2 transition-all duration-200 min-h-[48px] touch-manipulation select-none"
-    >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" y1="15" x2="12" y2="3" />
-      </svg>
-      {children}
-    </a>
+    <div className="flex items-baseline justify-between gap-4 py-2 border-b border-white/[0.06] last:border-b-0">
+      <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 flex-shrink-0">
+        {label}
+      </span>
+      <span className="text-zinc-100 text-sm text-right leading-snug">{value}</span>
+    </div>
+  )
+}
+
+function CompetitionCard({ competition }: { competition: Competition }) {
+  const { name, description, sessions, feeDisplay, feeConfirmed, note } = competition
+
+  return (
+    <article className="flex flex-col border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6 sm:p-7 h-full">
+      <h3 className="font-serif text-xl sm:text-2xl text-white font-semibold tracking-tight leading-snug">
+        {name}
+      </h3>
+
+      <div className="mt-4 flex flex-col">
+        {sessions.map((s) => (
+          <DetailRow
+            key={`${competition.slug}-${s.isoDate}`}
+            label={sessions.length > 1 ? s.shortDate : 'When'}
+            value={
+              sessions.length > 1
+                ? `${s.time} · ${s.duration}`
+                : `${s.shortDate} · ${s.time} · ${s.duration}`
+            }
+          />
+        ))}
+        <DetailRow label="Entry fee" value={feeDisplay} />
+        <DetailRow label="Prize" value={prizeDisplay(competition)} />
+      </div>
+
+      {!feeConfirmed && (
+        <p className="mt-3 text-[11px] leading-relaxed text-amber-300/90">
+          Entry fee is confirmed at the point of registration.
+        </p>
+      )}
+      {note && feeConfirmed && (
+        <p className="mt-3 text-[11px] leading-relaxed text-zinc-400">{note}</p>
+      )}
+
+      <p className="text-zinc-300 text-sm leading-relaxed mt-4">{description}</p>
+
+      <div className="mt-auto pt-6">
+        <a
+          href={competition.registrationUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+        >
+          Register for {name.replace(' Competition', '')} ↗
+        </a>
+      </div>
+    </article>
   )
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 function CompetitionsContent() {
-  const [activeTab, setActiveTab] = useState<Tab>('signature')
+  const [filter, setFilter] = useState<Filter>('all')
+  const [showLegacyNotice, setShowLegacyNotice] = useState(false)
   const searchParams = useSearchParams()
 
   useEffect(() => {
     const track = searchParams.get('track')
-    if (track === 'signature' || track === 'barber' || track === 'braiding') {
-      setActiveTab(track)
-    }
+    const resolved = resolveLegacyTrack(track)
+    if (resolved) setFilter(resolved)
+    if (isRetiredTrack(track)) setShowLegacyNotice(true)
   }, [searchParams])
+
+  const groups = useMemo(() => {
+    const all = groupedByCategory()
+    return filter === 'all' ? all : all.filter((g) => g.category.slug === filter)
+  }, [filter])
+
+  const shownCount = groups.reduce((n, g) => n + g.competitions.length, 0)
 
   return (
     <>
       <Navbar />
       <main className="w-full min-h-screen bg-zinc-950 text-white">
 
-        {/* ── Page Header ──────────────────────────────────────────────────── */}
+        {/* ── Page header ──────────────────────────────────────────────────── */}
         <div className="pt-32 pb-10 px-5 sm:px-8 text-center">
           <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase mb-3 block">
-            HEBS Lagos 2026 — Competition Tracks
+            HEBS Lagos 2026 — Competition Programme
           </span>
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-semibold text-white tracking-tight leading-tight max-w-4xl mx-auto">
             Compete for{' '}
             <span className="italic font-normal text-zinc-300">Glory</span>
           </h1>
-          <p className="text-zinc-300 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed text-center px-5 sm:px-0">
-            Three championship tracks. $80,000 USD (₦112,000,000) in prizes. Lagos, Nigeria.
+          <p className="text-zinc-300 text-sm sm:text-base mt-4 max-w-sm sm:max-w-2xl mx-auto leading-relaxed px-5 sm:px-0">
+            {COMPETITION_COUNT} competitions across {CATEGORY_COUNT} categories.{' '}
+            {TOTAL_PRIZE_DISPLAY} in prizes. October 23–25, 2026 · Lagos, Nigeria.
           </p>
         </div>
 
-        {/* ── Tab Navigation ───────────────────────────────────────────────── */}
-        <div className="sticky top-20 z-40 bg-zinc-950/90 backdrop-blur-md">
-          <div className="w-full flex items-center justify-start md:justify-center overflow-x-auto scrollbar-none whitespace-nowrap gap-2 md:gap-6 border-b border-white/[0.06] pb-px px-4 md:px-0">
-            {TABS.map((tab) => (
+        {/* ── Category filter ──────────────────────────────────────────────── */}
+        <div className="sticky top-20 z-40 bg-zinc-950/90 backdrop-blur-md border-b border-white/[0.06]">
+          <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 py-3">
+
+            {/* Mobile: native select keeps seven categories usable on a small screen */}
+            <div className="md:hidden">
+              <label htmlFor="category-filter" className="sr-only">
+                Filter competitions by category
+              </label>
+              <select
+                id="category-filter"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value as Filter)}
+                className="w-full bg-zinc-900 border border-white/10 text-white text-sm rounded-lg px-4 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              >
+                <option value="all">All categories ({COMPETITION_COUNT})</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c.slug} value={c.slug}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Desktop: filter buttons */}
+            <div
+              className="hidden md:flex flex-wrap items-center justify-center gap-2"
+              role="group"
+              aria-label="Filter competitions by category"
+            >
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`whitespace-nowrap flex-shrink-0 px-4 sm:px-6 py-4 text-xs sm:text-sm font-medium tracking-wide border-b-2 transition-all duration-200 touch-manipulation select-none ${
-                  activeTab === tab.id
-                    ? 'border-white text-white'
-                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
+                type="button"
+                onClick={() => setFilter('all')}
+                aria-pressed={filter === 'all'}
+                className={`px-4 py-2 text-sm font-medium tracking-wide rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 ${
+                  filter === 'all'
+                    ? 'border-white bg-white text-black'
+                    : 'border-white/15 text-zinc-300 hover:text-white hover:border-white/40'
                 }`}
               >
-                {tab.label}
+                All {COMPETITION_COUNT}
               </button>
-            ))}
+              {CATEGORIES.map((c) => (
+                <button
+                  key={c.slug}
+                  type="button"
+                  onClick={() => setFilter(c.slug)}
+                  aria-pressed={filter === c.slug}
+                  className={`px-4 py-2 text-sm font-medium tracking-wide rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 ${
+                    filter === c.slug
+                      ? 'border-white bg-white text-black'
+                      : 'border-white/15 text-zinc-300 hover:text-white hover:border-white/40'
+                  }`}
+                >
+                  {c.name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* ── Tab Content ──────────────────────────────────────────────────── */}
-        <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 py-14">
+        {/* ── Content ──────────────────────────────────────────────────────── */}
+        <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 py-12">
 
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* TRACK 1: SIGNATURE COMPETITIONS                                 */}
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {activeTab === 'signature' && (
-            <div className="flex flex-col gap-14">
-
-              {/* Intro card */}
-              <div className="border border-white/[0.06] bg-zinc-900/50 backdrop-blur-md rounded-2xl p-8 md:p-12">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
-
-                  {/* Left: identity */}
-                  <div className="flex flex-col gap-3 flex-1">
-                    <span className="text-xs font-mono tracking-widest text-amber-400 uppercase">
-                      Signature Competitions
-                    </span>
-                    <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-white font-semibold tracking-tight leading-tight">
-                      Three Categories,<br />One Global Stage
-                    </h2>
-                    <p className="text-zinc-300 text-sm leading-relaxed max-w-md">
-                      Three flagship competitions where artistry, culture, and beauty converge in Lagos — each with its own theme and a $7,500 USD (₦10,500,000) prize pool.
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-1">
-                      <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                        Oct 25, 2026
-                      </span>
-                      <span className="text-xs font-mono tracking-widest uppercase text-amber-400 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-3 py-1">
-                        Lagos, Nigeria
-                      </span>
-                      <span className="text-xs font-mono tracking-widest text-zinc-300 border border-white/[0.12] rounded-lg px-3 py-1 leading-snug">
-                        NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Right: combined prize pool */}
-                  <div className="flex-shrink-0 md:text-right">
-                    <p className="text-xs font-mono tracking-widest text-zinc-300 uppercase mb-2">Combined Prize Pool</p>
-                    <p className="text-4xl sm:text-5xl md:text-6xl font-light text-white tracking-tight font-mono tabular-nums">
-                      $22,500 USD
-                    </p>
-                    <p className="text-zinc-500 text-xs font-mono mt-0.5 mb-4 tabular-nums">₦31,500,000</p>
-                    <p className="text-zinc-400 text-xs font-mono leading-relaxed md:max-w-[12rem] md:ml-auto">
-                      $7,500 USD (₦10,500,000) per category · three categories.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Competition Categories */}
-              <div>
-                <SectionLabel>2026 Competition Categories</SectionLabel>
-                <SectionHeading>Choose Your Category</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  {SIGNATURE_CATEGORIES.map((cat) => (
-                    <div
-                      key={cat.n}
-                      className="flex flex-col gap-4 rounded-2xl p-6 border border-white/[0.06] bg-zinc-900/50 hover:border-white/[0.12] transition-all duration-300"
-                    >
-                      {/* Header */}
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest">{cat.n}</span>
-                        <span className="text-[10px] font-mono tracking-widest text-amber-500/90 bg-amber-500/[0.08] border border-amber-500/25 rounded-full px-3 py-1 uppercase">
-                          Theme · {cat.theme}
-                        </span>
-                      </div>
-
-                      {/* Title */}
-                      <h4 className="text-white font-semibold text-lg tracking-tight leading-snug">{cat.title}</h4>
-
-                      {/* Prizes */}
-                      <div className="grid grid-cols-3 gap-2 border-t border-b border-white/[0.05] py-3">
-                        {SIGNATURE_PRIZES.map((p) => (
-                          <div key={p.place} className="text-center">
-                            <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider mb-0.5">{p.place}</p>
-                            <p className={`text-sm font-semibold leading-snug tabular-nums ${p.color}`}>{p.usd}</p>
-                            <p className="text-[10px] font-mono text-zinc-500 tabular-nums mt-0.5">{p.ngn}</p>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-zinc-200 text-sm leading-relaxed">{cat.desc}</p>
-
-                      {/* CTA */}
-                      <div className="mt-auto pt-2">
-                        <PrimaryCTA
-                          href="https://hebseventportal.com/register"
-                          className="w-full px-6 py-3"
-                        >
-                          Register — {cat.theme}
-                        </PrimaryCTA>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 3-Stage Timeline */}
-              <div>
-                <SectionLabel>Application Timeline</SectionLabel>
-                <SectionHeading>4-Stage Application Process</SectionHeading>
-                <div className="flex flex-col">
-                  {GLOBAL_STAGES.map((stage, i) => (
-                    <div key={stage.n} className="flex gap-5">
-                      {/* Connector */}
-                      <div className="flex flex-col items-center">
-                        <div className="w-9 h-9 rounded-full bg-zinc-900 border border-white/[0.10] flex items-center justify-center flex-shrink-0 z-10">
-                          <span className="font-mono text-xs text-zinc-300">{stage.n}</span>
-                        </div>
-                        {i < GLOBAL_STAGES.length - 1 && (
-                          <div className="w-px flex-1 bg-gradient-to-b from-white/10 to-transparent my-1 min-h-[2rem]" />
-                        )}
-                      </div>
-
-                      {/* Content */}
-                      <div className="pb-10 flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                          <h4 className="text-white font-semibold text-sm sm:text-base leading-snug">
-                            {stage.title}
-                          </h4>
-                          <span className="text-[10px] font-mono text-amber-500/90 bg-amber-500/[0.06] border border-amber-500/20 rounded-full px-2.5 py-0.5 whitespace-nowrap">
-                            {stage.deadline}
-                          </span>
-                        </div>
-                        <p className="text-zinc-200 text-sm leading-relaxed">{stage.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Live Championship Experience */}
-              <div className="border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6 md:p-8">
-                <SectionLabel>The Live Championship Experience</SectionLabel>
-                <p className="text-zinc-300 text-sm leading-relaxed mt-1 mb-5 max-w-2xl">
-                  Selected finalists take center stage in a fully immersive live production at the NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. Each finalist will receive <span className="font-semibold text-white">5 minutes</span> to present their live interpretation of their category&rsquo;s 2026 theme — before global judges, media, sponsors, and a live audience.
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[
-                    'Massive LED screens',
-                    'Professional lighting & visual effects',
-                    'Live audience',
-                    'Global media coverage',
-                    'International judges',
-                    'Music-driven stage presentations',
-                    'Fashion & cultural performances',
-                    'Red carpet experience',
-                    'Professional photography & videography',
-                  ].map((item) => (
-                    <div key={item} className="flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-amber-500/70 mt-1.5 flex-shrink-0" />
-                      <span className="text-zinc-200 text-xs leading-relaxed">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Who Can Enter + Judging */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6">
-                  <SectionLabel>Who Can Enter</SectionLabel>
-                  <ul className="flex flex-col gap-2.5 mt-3">
-                    {ELIGIBLE_ARTISTS.map((cat) => (
-                      <li key={cat} className="flex items-center gap-2.5 text-sm text-zinc-200">
-                        <span className="w-1 h-1 rounded-full bg-amber-500 flex-shrink-0" />
-                        {cat}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-zinc-400 text-xs font-mono mt-5 leading-relaxed">
-                    Open worldwide — every country, every background.
-                  </p>
-                </div>
-
-                <div className="border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6">
-                  <SectionLabel>Live Round Judging Criteria</SectionLabel>
-                  <div className="flex flex-col gap-4 mt-3">
-                    {JUDGING_CRITERIA.map((c) => (
-                      <div key={c.label} className="flex items-center justify-between gap-4">
-                        <span className="text-zinc-200 text-sm leading-snug">{c.label}</span>
-                        <span className="text-white font-mono text-sm font-semibold flex-shrink-0 tabular-nums">
-                          {c.weight}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-zinc-300 text-xs font-mono mt-5 leading-relaxed">
-                    Finalists arrange own travel and lodging. HEBS provides full stage production.
-                  </p>
-                </div>
-              </div>
-
-              {/* Why Compete */}
-              <div>
-                <SectionLabel>Why Compete</SectionLabel>
-                <SectionHeading>Beyond the Prize Money</SectionHeading>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl">
-                  {[
-                    'HEBS Signature Competition Trophy',
-                    'International recognition across global platforms',
-                    'Professional media coverage & editorial features',
-                    'Brand collaborations & sponsorship opportunities',
-                    'Live audience, global judges & industry leaders',
-                    'Career-defining exposure for artists worldwide',
-                  ].map((benefit) => (
-                    <div key={benefit} className="flex items-center gap-3 border border-white/[0.06] bg-zinc-900/30 rounded-xl px-4 py-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0" />
-                      <span className="text-zinc-200 text-sm leading-snug">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA */}
-              <div className="w-full px-5 flex flex-col items-center justify-center gap-3 pt-2 text-center">
-                <PrimaryCTA
-                  href="https://hebseventportal.com/register"
-                  className="w-full sm:w-auto max-w-xs mx-auto px-8 py-3.5 sm:py-2.5"
-                >
-                  Register Now — $50 USD (₦70,000)
-                </PrimaryCTA>
-                <p className="text-zinc-300 text-xs font-mono font-medium">
-                  Non-refundable · Registration Deadline October 15, 2026 · <a href="mailto:competitions@hebslagos.com" className="hover:text-white transition-colors underline underline-offset-2">competitions@hebslagos.com</a> | 08148414917 / 08023051810
-                </p>
-                <p className="text-zinc-300 text-xs font-mono text-center max-w-md leading-relaxed mt-1">
-                  * Finalists are responsible for their own travel and lodging to Lagos. HEBS provides premium stage production.
-                </p>
-              </div>
-            </div>
+          {showLegacyNotice && (
+            <p className="mb-8 text-sm text-zinc-300 border border-white/10 bg-zinc-900/40 rounded-xl px-5 py-4">
+              The competition structure has been updated for 2026. All {COMPETITION_COUNT} competitions
+              are listed below.
+            </p>
           )}
 
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* TRACK 2: BARBER CHAMPIONSHIPS                                   */}
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {activeTab === 'barber' && (
-            <div className="flex flex-col gap-12">
+          <p className="sr-only" aria-live="polite">
+            Showing {shownCount} of {COMPETITION_COUNT} competitions.
+          </p>
 
-              {/* Header */}
-              <div>
-                <SectionLabel>Track 2 — October 24, 2026</SectionLabel>
-                <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
-                  Barber Championships™
+          <div className="flex flex-col gap-14">
+            {groups.map(({ category, competitions }) => (
+              <section key={category.slug} aria-labelledby={`cat-${category.slug}`}>
+                <SectionLabel>
+                  {competitions.length} competition{competitions.length === 1 ? '' : 's'}
+                </SectionLabel>
+                <h2
+                  id={`cat-${category.slug}`}
+                  className="font-serif text-2xl sm:text-4xl text-white font-semibold tracking-tight mb-6"
+                >
+                  {category.name}
                 </h2>
-                <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
-                  Africa&apos;s biggest barbering competition — bringing together professional and student barbers from Nigeria, Africa, and beyond for a high-energy battle of speed, precision, creativity, and technical excellence.
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    October 24, 2026 | 1:00 PM – 7:00 PM
-                  </span>
-                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    NJS Royale Events Center · Lagos
-                  </span>
-                </div>
-              </div>
-
-              {/* Partner banner */}
-              <PartnerBanner
-                logo="M"
-                name="Men’t Pro Tools™"
-                role="Official Equipment Partner"
-                note="All competitors use HEBS-supplied Men’t Pro Tools™. Personal clippers and trimmers are not permitted during competition rounds."
-              />
-
-              {/* Equipment Regulation */}
-              <div className="border border-zinc-600/50 bg-zinc-900 rounded-xl px-6 py-5">
-                <p className="font-mono text-xs uppercase tracking-widest text-zinc-300 mb-2.5">
-                  Equipment Regulation
-                </p>
-                <p className="text-sm text-zinc-200 leading-relaxed">
-                  Powered by{' '}
-                  <span className="font-semibold text-zinc-100">Men&rsquo;t Pro Tools™</span>.
-                  All barbers will be supplied official clippers and trimmers on stage.{' '}
-                  <span className="text-white font-semibold">Personal cutting machinery is strictly prohibited.</span>
-                </p>
-              </div>
-
-              {/* General rules */}
-              <div className="bg-zinc-900/30 border border-white/[0.06] rounded-xl px-6 py-4">
-                <p className="text-sm text-zinc-300 leading-relaxed">
-                  Must bring your own models.{' '}
-                  <span className="text-white font-medium">Arrive 1 hour before start time — no exceptions.</span>{' '}
-                  Open to professionals, students, apprentices, and educators.{' '}
-                  <span className="text-white font-medium">Minimum age: 16.</span>
-                </p>
-              </div>
-
-              {/* Divisions grid */}
-              <div>
-                <SectionLabel>Competition Divisions</SectionLabel>
-                <SectionHeading>4 Divisions · $27,500 (₦38,500,000) in Prizes</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                  {BARBER_DIVISIONS.map((div) => (
-                    <DivisionCard key={div.n} div={div} />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                  {competitions.map((c) => (
+                    <CompetitionCard key={c.slug} competition={c} />
                   ))}
                 </div>
-              </div>
+              </section>
+            ))}
+          </div>
 
-              {/* Equipment callout */}
-              <div className="border border-white/[0.06] bg-zinc-900/30 rounded-xl p-6">
-                <p className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-3">
-                  Official Competition Equipment
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {[
-                    "Men’t Apex Sovereign™ Clipper",
-                    "Men’t Ghost™ Trimmer",
-                    "Men’t Competition Guards",
-                    "Men’t Charging Stations",
-                  ].map((item) => (
-                    <div key={item} className="flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-white/30 mt-1.5 flex-shrink-0" />
-                      <p className="text-zinc-300 text-xs leading-relaxed">{item}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* ── Schedule ───────────────────────────────────────────────────── */}
+          <div className="mt-20">
+            <CompetitionSchedule />
+          </div>
 
-              {/* CTA */}
-              <div className="flex flex-col items-center gap-3 pt-2">
-                <PrimaryCTA
-                  href="https://hebseventportal.com/register"
-                  className="max-w-xs mx-auto px-5 py-3 leading-snug"
-                >
-                  Register for Barber Championships
-                </PrimaryCTA>
-                <BriefCTA href="/competition-pdfs/lagos-barber-championship-2026.pdf">
-                  Download Official Competition Brief
-                </BriefCTA>
-                <p className="text-xs sm:text-sm text-zinc-300 font-mono mt-1 text-center leading-relaxed">
-                  Entry fees from $50 USD (₦70,000) per division
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {/* TRACK 3: BRAIDING CHAMPIONSHIPS                                 */}
-          {/* ════════════════════════════════════════════════════════════════ */}
-          {activeTab === 'braiding' && (
-            <div className="flex flex-col gap-12">
-
-              {/* Date Notice Banner */}
-              <div className="w-full border border-amber-500/25 bg-gradient-to-r from-zinc-900/90 via-amber-500/[0.07] to-zinc-900/90 rounded-2xl px-6 py-5">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                  <div className="w-9 h-9 rounded-full border border-amber-500/30 bg-amber-500/[0.08] flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-500 text-sm font-bold">★</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-amber-400 font-semibold text-sm tracking-wide">
-                      Now Part of HEBS Lagos 2026
-                    </p>
-                    <p className="text-zinc-400 text-xs mt-1 leading-relaxed">
-                      The Braiding Championships join the HEBS Lagos 2026 main summit at NJS Royale Events Center, Lagos, Nigeria. Registration is open now.
-                    </p>
-                  </div>
-                  <span className="hidden sm:inline-block flex-shrink-0 text-xs font-mono text-amber-400 border border-amber-500/25 rounded-full px-3 py-1.5 whitespace-nowrap">
-                    October 24, 2026
-                  </span>
-                </div>
-              </div>
-
-              {/* Header */}
-              <div>
-                <SectionLabel>Track 3 — October 24, 2026</SectionLabel>
-                <h2 className="font-serif text-3xl sm:text-5xl md:text-7xl font-semibold text-white tracking-tight leading-tight mb-3 mt-1">
-                  Braiding Championships™ 2026
-                </h2>
-                <p className="text-zinc-300 text-sm leading-relaxed max-w-xl">
-                  Africa&apos;s premier braiding competition — celebrating the extraordinary skill, creativity, speed, and innovation of professional braiders from across Africa and the world while honouring one of the oldest beauty traditions.
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    October 24, 2026
-                  </span>
-                  <span className="text-xs font-mono tracking-widest uppercase text-zinc-400 border border-white/[0.12] rounded-full px-3 py-1">
-                    NJS Royale Events Center · Lagos
-                  </span>
-                </div>
-              </div>
-
-              {/* Partner banner */}
-              <PartnerBanner
-                logo="P"
-                name="PureO Natural Products™"
-                role="Official Styling Partner"
-                note="All styling and finishing products used during competition must be official PureO products. Own combs, brushes, tools, and extensions are permitted."
-              />
-
-              {/* Product Regulation */}
-              <div className="border border-zinc-600/50 bg-zinc-900 rounded-xl px-6 py-5">
-                <p className="font-mono text-xs uppercase tracking-widest text-zinc-300 mb-2.5">
-                  Product Regulation
-                </p>
-                <p className="text-sm text-zinc-200 leading-relaxed">
-                  Powered by{' '}
-                  <span className="font-semibold text-zinc-100">PureO Natural Products™</span>.
-                  Finishing and styling gels will be provided by HEBS.{' '}
-                  <span className="text-white font-medium">Competitors bring personal combs and extension hair pieces.</span>
-                </p>
-              </div>
-
-              {/* Divisions grid */}
-              <div>
-                <SectionLabel>Competition Divisions</SectionLabel>
-                <SectionHeading>4 Divisions · $30,000 (₦42,000,000) in Prizes</SectionHeading>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                  {BRAIDING_DIVISIONS.map((div) => (
-                    <DivisionCard key={div.n} div={div} featured={div.featured} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Who can enter */}
-              <div className="border border-white/[0.06] bg-zinc-900/50 rounded-2xl p-6">
-                <SectionLabel>Who Can Enter</SectionLabel>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3">
-                  {[
-                    'Professional Braiders',
-                    'Student Braiders',
-                    'Salon Owners',
-                    'Natural Hair Stylists',
-                    'Locticians',
-                    'International Competitors',
-                  ].map((who) => (
-                    <div key={who} className="flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-amber-500/70 flex-shrink-0" />
-                      <span className="text-zinc-200 text-xs leading-relaxed">{who}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-zinc-400 text-xs font-mono mt-4">Minimum age: 16 years old.</p>
-              </div>
-
-              {/* CTA */}
-              <div className="w-full px-5 flex flex-col items-center justify-center gap-3 pt-2 text-center">
-                <p className="text-amber-400 text-xs font-mono tracking-widest uppercase">
-                  OFFICIAL REGISTRATION IS NOW OPEN
-                </p>
-                <PrimaryCTA
-                  href="https://hebseventportal.com/register"
-                  className="w-[85%] max-w-xs mx-auto py-4"
-                >
-                  Register Now
-                </PrimaryCTA>
-                {/* Brief button hidden pending a 2026 brief. The existing PDF
-                    (hebs-lagos-braiding-championship-2027.pdf) is 2027-branded in its
-                    cover artwork, headers, date (May 24, 2027) and venue (NJS Royale
-                    Beach Resort), so it cannot be renamed or reused for 2026. The file
-                    is left in public/competition-pdfs/ untouched. Restore this button
-                    once an official 2026 braiding brief is supplied.
-                <BriefCTA href="/competition-pdfs/hebs-lagos-braiding-championship-2026.pdf">
-                  Download Official Competition Brief
-                </BriefCTA>
-                */}
-                <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed tracking-normal max-w-sm mx-auto">
-                  Secure your competitive track placement today. Limited stage entries available for international and local professionals.
-                </p>
-              </div>
-            </div>
-          )}
-
+          {/* ── Registration CTA ───────────────────────────────────────────── */}
+          <div className="mt-16 flex flex-col items-center gap-3 text-center">
+            <PrimaryCTA href={REGISTRATION_URL} className="max-w-xs mx-auto px-8 py-3.5 sm:py-2.5">
+              Register Now
+            </PrimaryCTA>
+            <p className="text-zinc-300 text-xs font-mono font-medium max-w-xl leading-relaxed">
+              Non-refundable · Registration Deadline October 15, 2026 ·{' '}
+              <a
+                href="mailto:competitions@hebslagos.com"
+                className="hover:text-white transition-colors underline underline-offset-2"
+              >
+                competitions@hebslagos.com
+              </a>{' '}
+              | 08148414917 / 08023051810
+            </p>
+            <p className="text-zinc-400 text-xs font-mono max-w-md leading-relaxed">
+              Competitors arrange and pay for their own travel and lodging to Lagos. HEBS provides the
+              stage production.
+            </p>
+          </div>
         </div>
       </main>
       <Footer />
@@ -894,7 +276,13 @@ function CompetitionsContent() {
 
 export default function CompetitionsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-zinc-950 flex items-center justify-center text-zinc-400">Loading tracks...</div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-zinc-400">
+          Loading competitions...
+        </div>
+      }
+    >
       <CompetitionsContent />
     </Suspense>
   )

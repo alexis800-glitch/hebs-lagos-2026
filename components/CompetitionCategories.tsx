@@ -3,6 +3,13 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMounted } from "@/hooks/useMounted";
+import {
+  groupedByCategory,
+  COMPETITION_COUNT,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_DISPLAY,
+  type CategorySlug,
+} from "@/lib/competitions";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -76,50 +83,28 @@ function IconBook() {
   );
 }
 
-const CATEGORIES = [
-  {
-    title: "Hair Styling",
-    desc: "Showcase creativity, precision, and trend-setting hair artistry.",
-    color: "#f59e0b",
-    image: "/images/categories/hairstylist-competition-04.png",
-    Icon: IconScissors,
-  },
-  {
-    title: "Barbering",
-    desc: "Compete with clean fades, sharp cuts, grooming skills, and barber artistry.",
-    color: "#e91e8c",
-    image: "/images/categories/barber-competition-02.png",
-    Icon: IconRazor,
-  },
-  {
-    title: "Nail Art",
-    desc: "Display detailed nail design, beauty creativity, and technical excellence.",
-    color: "#9b59b6",
-    image: "/images/categories/nail-artist-competition-01.png",
-    Icon: IconDiamond,
-  },
-  {
-    title: "Makeup Artistry",
-    desc: "Bring beauty, colour, and transformation to life through professional makeup.",
-    color: "#f59e0b",
-    image: "/images/categories/makeup-artist-competition-02.png",
-    Icon: IconBrush,
-  },
-  {
-    title: "Avant-Garde",
-    desc: "Push creative boundaries with bold, artistic, and stage-ready looks.",
-    color: "#e91e8c",
-    image: "/images/categories/fashion-stylist-competition-01.png",
-    Icon: IconLightning,
-  },
-  {
-    title: "Education & Masterclasses",
-    desc: "Learn from industry leaders through hands-on sessions and expert training.",
-    color: "#9b59b6",
-    image: "/images/highlights/industry-experts-panel.png",
-    Icon: IconBook,
-  },
-];
+// Presentation-only styling per category. Names, competition lists and counts all
+// come from lib/competitions.ts so these cards cannot drift from the real programme.
+const CATEGORY_STYLE: Record<
+  CategorySlug,
+  { color: string; image: string; Icon: () => React.JSX.Element }
+> = {
+  barbering: { color: "#e91e8c", image: "/images/categories/barber-competition-02.png", Icon: IconRazor },
+  braiding: { color: "#f59e0b", image: "/images/categories/hairstylist-competition-04.png", Icon: IconScissors },
+  "hair-installation-styling": { color: "#9b59b6", image: "/images/categories/hairstylist-competition-04.png", Icon: IconScissors },
+  beauty: { color: "#f59e0b", image: "/images/categories/makeup-artist-competition-02.png", Icon: IconBrush },
+  fashion: { color: "#e91e8c", image: "/images/categories/fashion-stylist-competition-01.png", Icon: IconLightning },
+  "culinary-culture": { color: "#9b59b6", image: "/images/highlights/industry-experts-panel.png", Icon: IconDiamond },
+  "music-live-entertainment": { color: "#e91e8c", image: "/images/highlights/industry-experts-panel.png", Icon: IconBook },
+};
+
+const CATEGORIES = groupedByCategory().map(({ category, competitions }) => ({
+  slug: category.slug,
+  title: category.name,
+  desc: competitions.map((c) => c.name.replace(" Competition", "")).join(" · "),
+  count: competitions.length,
+  ...CATEGORY_STYLE[category.slug],
+}));
 
 export default function CompetitionCategories() {
   const mounted = useMounted();
@@ -140,7 +125,7 @@ export default function CompetitionCategories() {
           className="text-center mb-10 md:mb-14"
         >
           <p className="font-mono text-xs tracking-[0.25em] uppercase text-zinc-300 mb-5">
-            HEBS Lagos 2026 · Six Disciplines
+            HEBS Lagos 2026 · {COMPETITION_COUNT} Competitions · {CATEGORY_COUNT} Categories
           </p>
           <h2 className="font-serif font-semibold text-4xl sm:text-5xl md:text-[3.25rem] tracking-tight leading-tight text-white mb-6">
             Choose Your{" "}
@@ -149,9 +134,9 @@ export default function CompetitionCategories() {
             </span>
           </h2>
           <p className="text-zinc-300 text-[15px] leading-relaxed max-w-2xl mx-auto">
-            From hair and barbering to nails, makeup, education, and avant-garde
-            artistry, HEBS brings Africa&apos;s finest talents together on one
-            global platform.
+            From barbering and braiding to frontals, lashes, nails, makeup, fashion,
+            cultural food, and live vocals, HEBS brings Africa&apos;s finest talents
+            together on one global platform for {TOTAL_PRIZE_DISPLAY} in prizes.
           </p>
         </motion.div>
 
@@ -165,11 +150,10 @@ export default function CompetitionCategories() {
         >
           {CATEGORIES.map((cat) => (
             <motion.a
-              key={cat.title}
+              key={cat.slug}
               variants={itemAnim}
-              href="https://hebseventportal.com/register"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/competitions?track=${cat.slug}`}
+              aria-label={`${cat.title} — ${cat.count} competition${cat.count === 1 ? "" : "s"}`}
               whileHover={{
                 boxShadow: `0 0 0 1px ${cat.color}55, 0 20px 50px -15px ${cat.color}30`,
                 transition: { duration: 0.18 },
@@ -220,9 +204,12 @@ export default function CompetitionCategories() {
 
                 {/* Push title + desc + CTA to bottom */}
                 <div className="mt-auto pt-8">
-                  <h3 className="font-sans text-white font-bold text-base leading-snug mb-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                  <h3 className="font-sans text-white font-bold text-base leading-snug mb-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {cat.title}
                   </h3>
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-amber-300 mb-2 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                    {cat.count} competition{cat.count === 1 ? "" : "s"}
+                  </p>
                   <p className="text-zinc-100 text-sm leading-relaxed mb-5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     {cat.desc}
                   </p>
@@ -250,7 +237,7 @@ export default function CompetitionCategories() {
             Register for Your Category ↗
           </a>
           <p className="font-mono text-xs tracking-widest uppercase text-zinc-300">
-            Entry from $50 USD (₦70,000) · All categories open
+            Entry from $50 USD (₦70,000) · All {COMPETITION_COUNT} competitions open
           </p>
         </motion.div>
 

@@ -3,31 +3,89 @@
 import { useState, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMounted } from "@/hooks/useMounted";
+import {
+  COMPETITIONS,
+  COMPETITION_COUNT,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_DISPLAY,
+  groupedByCategory,
+  scheduleByDay,
+  prizeDisplay,
+  categoryName,
+} from "@/lib/competitions";
 
 // ─── Knowledge base ────────────────────────────────────────────────────────────
 
 type KBEntry = { triggers: string[]; answer: string };
 
+// Summaries are derived from lib/competitions.ts so the assistant can never quote a
+// competition, fee, prize or time that disagrees with the rest of the site.
+const CATEGORY_SUMMARY = groupedByCategory()
+  .map((g) => `• ${g.category.name}: ${g.competitions.map((c) => c.name.replace(" Competition", "")).join(", ")}`)
+  .join("\n");
+
+const SCHEDULE_SUMMARY = scheduleByDay()
+  .map(
+    (d) =>
+      `${d.date}\n` +
+      d.rows
+        .map((r) => `  • ${r.competition.name.replace(" Competition", "")} — ${r.session.time} (${r.session.duration})`)
+        .join("\n"),
+  )
+  .join("\n\n");
+
+const FEE_SUMMARY = COMPETITIONS.map(
+  (c) => `• ${c.name.replace(" Competition", "")} — ${c.feeDisplay}`,
+).join("\n");
+
+const PRIZE_SUMMARY = COMPETITIONS.map(
+  (c) => `• ${c.name.replace(" Competition", "")} — ${prizeDisplay(c)}`,
+).join("\n");
+
+/** Competitions charging a given confirmed USD fee, e.g. "Freestyle Design and Freestyle Braid Art". */
+const namesAtFee = (usdAmount: number): string =>
+  COMPETITIONS.filter((c) => c.feeUsd === usdAmount)
+    .map((c) => c.name.replace(" Competition", ""))
+    .join(" and ");
+
+/** One entry per competition, so a question about any single one is answered directly. */
+const COMPETITION_ENTRIES: KBEntry[] = COMPETITIONS.map((c) => {
+  const s = c.sessions.map((x) => `${x.shortDate}, ${x.time} (${x.duration})`).join(" and ");
+  const base = c.name.toLowerCase().replace(" competition", "");
+  return {
+    triggers: [c.slug.replace(/-/g, " "), base, c.name.toLowerCase()],
+    answer:
+      `${c.name} — ${categoryName(c.category)}\n\n` +
+      `When: ${s}\nEntry fee: ${c.feeDisplay}\nPrize: ${prizeDisplay(c)}\n\n` +
+      `${c.description}\n\nRegister at hebseventportal.com/register.`,
+  };
+});
+
 const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["what is hebs", "about hebs", "what hebs", "tell me about", "hair education", "beauty summit", "what is the event", "summit"],
     answer:
-      "HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and is now bringing the summit home to Lagos for 2026 — the third and biggest edition yet. It brings together hairstylists, barbers, makeup artists, nail technicians, fashion designers, and educators for world-class education, high-stakes competition, and global networking. The event features an $80,000 USD (₦112,000,000) cumulative prize pool.",
+      `HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and also hosted a sold-out United States edition from 2–4 May 2026. The summit is now coming home to Lagos for October 2026 — the fourth and biggest edition yet. It brings together hairstylists, barbers, braiders, frontal and lash artists, makeup artists, nail technicians, fashion designers, chefs, and vocalists for world-class education, high-stakes competition, and global networking. The event features ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories and a ${TOTAL_PRIZE_DISPLAY} cumulative prize pool.`,
+  },
+  {
+    triggers: ["fourth edition", "fourth", "edition", "editions", "previous editions", "how many editions", "lagos debut", "debut", "event history", "history", "sold out", "sold-out", "may 2026", "2024", "2025"],
+    answer:
+      "HEBS Lagos 2026 is the fourth edition of the Hair Education Beauty Summit and its Lagos debut.\n\n• 2024 — United States edition\n• 2025 — United States edition, sold out\n• 2–4 May 2026 — a separate sold-out United States edition\n• 23–25 October 2026 — HEBS Lagos, the fourth edition and first held in Nigeria",
   },
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
-      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nThe Signature Competitions Finals (Fashion Runway, Makeup Artistry & Nail Artistry) are on October 25. The Barber Championships take place on October 24.",
+      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nAsk me for the competition schedule to see the times for each competition.",
   },
   {
-    triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
+    triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
     answer:
       "HEBS Lagos 2026 uses two venues:\n\n• Pre-Party (Oct 23): NJS Royale Beach Resort, Lagos, Nigeria · 2:00 PM – 7:00 PM\n• Main Event (Oct 24–25): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
   },
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD (₦70,000) per division.",
+      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD (₦70,000) per competition.",
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
@@ -42,37 +100,52 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      "General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees start at $50 USD (₦70,000) per division (up to $100 USD (₦140,000) for team categories). All payments via hebseventportal.com/register.",
+      `General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees are $50 USD (₦70,000) for most competitions, $75 USD (₦105,000) for ${namesAtFee(75)}, and $100 USD (₦140,000) for ${namesAtFee(100)}. All payments via hebseventportal.com/register.`,
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your division, pay the entry fee ($50–$100 USD / ₦70,000–₦140,000 depending on category), and submit any required materials. Entry fees start at $50 USD (₦70,000) per division.",
+      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your competition, pay the entry fee ($50–$100 USD / ₦70,000–₦140,000 depending on the competition), and submit any required materials. Ask me for entry fees to see every competition.",
   },
   {
-    triggers: ["signature competition", "fashion runway", "runway", "roots to royalty", "bridal beauty", "gilded heritage", "beauty competition", "makeup competition", "fashion competition", "nail competition", "nail artistry", "makeup artistry"],
+    triggers: ["categories", "competition category", "what competitions", "which competitions", "events", "what can i compete in", "competition types", "all competitions", "list competitions", "programme", "program"],
     answer:
-      "The Signature Competitions are three category events, each with a $7,500 USD (₦10,500,000) prize pool (1st $4,000 · 2nd $2,500 · 3rd $1,000):\n\n• Fashion Runway Competition — Theme: Roots to Royalty\n• Makeup Artistry Competition — Theme: Bridal Beauty\n• Nail Artistry Competition — Theme: Gilded Heritage\n\nApplication timeline:\n1. Registration Opens — July 15, 2026. Register at hebseventportal.com/register and pay the $50 USD (₦70,000) entry fee.\n2. Video Submission & Registration Deadline — October 15, 2026, 11:59 PM WAT. Submit a 3-min MP4/MOV video to casting@hebslagos.com.\n3. Contestant Notification — All contestants will be notified 1–3 business days after submitting if chosen for the Live Final.\n4. Live Finals — October 25, 2026 on the main stage in Lagos.\n\nOpen to: Fashion Designers, Fashion Stylists, Makeup Artists, Nail Artists, Creative Directors, and Beauty & Fashion Visionaries.",
+      `HEBS Lagos 2026 has ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories:
+
+${CATEGORY_SUMMARY}
+
+Ask me about any single competition for its date, entry fee and prize, or visit /competitions.`,
   },
   {
-    triggers: ["barber", "barbering", "barber championship", "barber competition", "fade", "clipper", "haircut competition", "fast flawless", "freestyle design", "barber game"],
-    answer:
-      "Barber Championship divisions:\n\n• Fast & Flawless Challenge™ — 15 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Battle of the Fades™ — 30 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Freestyle Design Battle™ — 60 min · $75 USD (₦105,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Barber Game™ (Team of 4) — 2 hrs · $100 USD (₦140,000)/team · $10,000 USD (₦14,000,000) prize pool (Oct 25)\n\nRegister at hebseventportal.com/register.",
+    triggers: ["competition schedule", "competition times", "what time", "times", "running order", "line up", "lineup", "day one", "day two", "saturday", "sunday"],
+    answer: `Competition schedule:
+
+${SCHEDULE_SUMMARY}
+
+Taste of Culture runs on both days.`,
   },
   {
-    triggers: ["braiding", "braid", "braid championship", "traditional braiding", "cornrow", "fulani", "ghana braid", "loc", "retwist", "braid competition"],
+    triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "prize money", "prize breakdown"],
     answer:
-      "Braiding Championship divisions (October 24, 2026 · NJS Royale Events Center, Lagos):\n\n• Fast & Flawless Braiding Challenge™ — 30 min · $50 USD (₦70,000) entry · $5,000 USD (₦7,000,000) prize pool\n• Braids & Fades Showdown™ (Team of 1 Barber + 1 Braider) — 60 min · $50 USD (₦70,000)/team · $7,500 USD (₦10,500,000) prize pool\n• Traditional Braiding Championship™ — 60 min · $50 USD (₦70,000) entry · $7,500 USD (₦10,500,000) prize pool\n• Freestyle Braid Art Championship™ — 75 min · $75 USD (₦105,000) entry · $10,000 USD (₦14,000,000) prize pool\n\nPowered by PureO Natural Products™. Open to professional and student braiders, salon owners, natural hair stylists, locticians, and international competitors. Minimum age 16. Register at hebseventportal.com/register.",
+      `HEBS Lagos 2026 features a ${TOTAL_PRIZE_DISPLAY} cumulative prize pool across ${COMPETITION_COUNT} competitions:
+
+${PRIZE_SUMMARY}
+
+Prize amounts are the maximum available in each competition.`,
   },
   {
-    triggers: ["prize", "prize pool", "winnings", "cash prize", "how much can i win", "reward", "total prize", "money prize", "80000", "$80", "prize money", "92500", "$92"],
+    triggers: ["entry fee", "entry fees", "competition fee", "how much to enter", "cost to compete", "fee per competition"],
     answer:
-      "HEBS Lagos 2026 features an $80,000 USD (₦112,000,000) cumulative prize pool across all competition tracks:\n\n• Signature Competitions (Fashion Runway, Makeup Artistry, Nail Artistry): $22,500 USD (₦31,500,000)\n• Barber Championships: $27,500 USD (₦38,500,000)\n• Braiding Championships: $30,000 USD (₦42,000,000)\n\nEach Signature Competition category awards $4,000 (1st), $2,500 (2nd), and $1,000 (3rd). In the Barber Championships, 1st place winners earn $3,000–$5,000 USD per division. The Barber Game™ team winner takes $10,000 USD (₦14,000,000).",
+      `Entry fees by competition:
+
+${FEE_SUMMARY}
+
+All entry fees are non-refundable and paid at hebseventportal.com/register.`,
   },
   {
-    triggers: ["categories", "competition category", "divisions", "what competitions", "which competitions", "tracks", "events", "what can i compete in", "competition types"],
+    triggers: ["barber championship", "braiding championship", "signature competitions", "signature track", "barber games", "braids and fades", "braids & fades", "fast and flawless challenge", "old competitions", "what happened to"],
     answer:
-      "HEBS Lagos 2026 competition tracks:\n\n🏆 Signature Competitions — Oct 25 · Fashion Runway (Roots to Royalty), Makeup Artistry (Bridal Beauty), Nail Artistry (Gilded Heritage)\n✂️ Barber Championships — Oct 24 · Fast & Flawless, Battle of the Fades, Freestyle Design, Barber Game (team)\n💇 Braiding Championships — Oct 24 · Fast & Flawless Braiding, Braids & Fades Showdown (team), Traditional Braiding, Freestyle Braid Art\n\nVisit /competitions for full details on each division, entry fees, and prize breakdowns.",
+      `The competition programme was reorganized for HEBS Lagos 2026. It now has ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories rather than the previous Signature, Barber and Braiding tracks. See the current line-up at /competitions.`,
   },
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],
@@ -94,27 +167,58 @@ const KNOWLEDGE_BASE: KBEntry[] = [
     answer:
       "HEBS Lagos 2026 includes dedicated networking events and a gala accessible with the Three Days Pass or VIP Experience. It's a hub for beauty industry professionals, educators, brands, sponsors, and vendors from across the globe.",
   },
+  ...COMPETITION_ENTRIES,
 ];
 
 const FALLBACK = "I don't have that specific information on hand. Please contact the HEBS team for confirmation — email info@thehebs.com or call +1 (610) 477-9635.";
 
+/**
+ * Words that carry no topical signal on their own. They are excluded from
+ * partial-token scoring only: a trigger that *is* one of these (for example the
+ * standalone "when" date trigger) still matches as a full phrase.
+ *
+ * Without this, multi-word triggers such as "battle of the fades" earned a point
+ * for "the" against any question containing "the", which let unrelated
+ * competitions outrank genuine date, venue and history answers.
+ */
+const STOP_WORDS = new Set([
+  "the", "and", "for", "are", "you", "all", "can", "how", "what", "does",
+  "with", "from", "this", "that", "when", "where", "who", "why", "event",
+  "was", "its", "has", "our", "out", "any", "get", "got", "will", "have",
+]);
+
+function normalize(value: string): string {
+  // Punctuation is folded to spaces on both sides of the comparison, so "fades?"
+  // and "fades" match. Kept ASCII-only so no downlevel regex flags are needed.
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9&\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function findBestAnswer(query: string): string {
-  const q = query.toLowerCase().trim();
+  const q = normalize(query);
   if (!q) return FALLBACK;
 
   let best = { score: 0, answer: FALLBACK };
 
   for (const entry of KNOWLEDGE_BASE) {
     let score = 0;
-    for (const trigger of entry.triggers) {
-      if (q.includes(trigger)) {
-        // Full phrase match scores highest
+    for (const raw of entry.triggers) {
+      const trigger = normalize(raw);
+      if (!trigger) continue;
+
+      if (q === trigger) {
+        // 1. Exact normalized match - strongest possible signal
+        score += trigger.split(" ").length * 4 + 4;
+      } else if (q.includes(trigger)) {
+        // 2. Full trigger phrase contained in the query
         score += trigger.split(" ").length * 2;
       } else {
-        // Partial word match
-        const triggerWords = trigger.split(" ");
-        for (const word of triggerWords) {
-          if (word.length > 2 && q.includes(word)) score += 1;
+        // 3. Meaningful token overlap only - stop words never score
+        for (const word of trigger.split(" ")) {
+          if (word.length > 2 && !STOP_WORDS.has(word) && q.includes(word)) score += 1;
         }
       }
     }
@@ -123,6 +227,7 @@ function findBestAnswer(query: string): string {
     }
   }
 
+  // 4. Default response when nothing matched confidently
   return best.score >= 2 ? best.answer : FALLBACK;
 }
 

@@ -7,12 +7,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About the Summit — HEBS Lagos 2026",
   description:
-    "The Hair Education Beauty Summit launched in New Jersey, USA in 2024, returned in 2025 with a sold-out edition, and comes home to Lagos for 2026. Learn about our mission, legacy, and vision.",
+    "After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit comes home to Lagos for its fourth edition. Learn about our mission, legacy, and vision.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About the Summit — HEBS Lagos 2026",
     description:
-      "From New Jersey, USA in 2024 to a sold-out 2025 — HEBS comes home to Lagos, October 23–25, 2026.",
+      "After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. October 23–25, 2026.",
     url: "/about",
     images: [
       {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About the Summit — HEBS Lagos 2026",
     description:
-      "From New Jersey, USA in 2024 to a sold-out 2025 — HEBS comes home to Lagos, October 23–25, 2026.",
+      "After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. October 23–25, 2026.",
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };

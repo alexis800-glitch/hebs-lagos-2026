@@ -5,6 +5,7 @@ import { motion, useInView, animate, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 import ImageLightbox from "./ImageLightbox";
+import { COMPETITION_COUNT, CATEGORY_COUNT } from "@/lib/competitions";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -55,9 +56,9 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     color: "#f59e0b",
-    counter: { value: 80000, prefix: "$", suffix: "", duration: 2.4 },
+    counter: { value: 82500, prefix: "$", suffix: "", duration: 2.4 },
     label: "Prize Pool",
-    desc: "Compete for Africa's largest beauty prize pool — $80,000 USD (₦112,000,000) distributed across all competition tracks.",
+    desc: "Compete for Africa's largest beauty prize pool — $82,500 USD (₦115,500,000) distributed across 12 competitions.",
     featured: true,
     bgImage: "/images/highlights/winner-cheque-presentation.png",
     bgPosition: "object-top",
@@ -72,9 +73,9 @@ const FEATURES: Feature[] = [
   },
   {
     color: "#e91e8c",
-    counter: { value: 6, prefix: "", suffix: "", duration: 1.2 },
-    label: "Competition Categories",
-    desc: "Hair, Barbering, Nail Art, Makeup, Avant-Garde, and Education — six disciplines on one global stage.",
+    counter: { value: COMPETITION_COUNT, prefix: "", suffix: "", duration: 1.2 },
+    label: "Competitions",
+    desc: `Barbering, braiding, frontals, beauty, fashion, cultural food, and live vocals — ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories on one global stage.`,
     bgImage: "/images/hebs-2025/competition/competition-winners-01.png",
     bgPosition: "object-top",
   },

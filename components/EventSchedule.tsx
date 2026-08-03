@@ -2,8 +2,17 @@
 
 import { motion } from "framer-motion";
 import { useMounted } from "@/hooks/useMounted";
+import { scheduleByDay } from "@/lib/competitions";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
+
+// Competition line-ups are derived from the shared source so the homepage can never
+// disagree with the competitions page. Times and durations come with them.
+const SCHEDULE = scheduleByDay();
+const dayEntries = (isoDate: string) =>
+  SCHEDULE.find((d) => d.isoDate === isoDate)?.rows.map(
+    (r) => `${r.competition.name.replace(" Competition", "")} · ${r.session.time}`,
+  ) ?? [];
 
 const DAYS = [
   {
@@ -13,7 +22,7 @@ const DAYS = [
     time: "2:00 PM – 7:00 PM",
     accent: "#e91e8c",
     desc: "An exclusive networking experience bringing together international delegates, sponsors, exhibitors, educators, media, influencers, and industry leaders in a luxury beachfront setting.",
-    highlights: null,
+    highlights: null as readonly string[] | null,
   },
   {
     date: "October 24, 2026",
@@ -22,14 +31,7 @@ const DAYS = [
     time: "12:00 Noon – 6:00 PM",
     accent: "#f59e0b",
     desc: null,
-    highlights: [
-      "International Exhibition",
-      "World-Class Education",
-      "Industry Panel Discussions",
-      "Live Competitions",
-      "Product Demonstrations",
-      "Business Networking",
-    ],
+    highlights: dayEntries("2026-10-24"),
   },
   {
     date: "October 25, 2026",
@@ -38,14 +40,7 @@ const DAYS = [
     time: "11:00 AM – 5:00 PM",
     accent: "#9b59b6",
     desc: null,
-    highlights: [
-      "Championship Finals",
-      "Signature Competitions Finals",
-      "Awards Ceremony",
-      "Closing Celebration",
-      "International Media Coverage",
-      "Partnership Announcements",
-    ],
+    highlights: dayEntries("2026-10-25"),
   },
 ] as const;
 
