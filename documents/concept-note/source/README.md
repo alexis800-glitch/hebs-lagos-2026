@@ -30,7 +30,7 @@ directory. Run them in the order above; the export reads what the first script w
 Expected output, both written to the repository root:
 
 - `HEBS_Lagos_2026_Concept_Note.docx`
-- `HEBS_Lagos_2026_Concept_Note.pdf` (13 pages)
+- `HEBS_Lagos_2026_Concept_Note.pdf` (15 pages)
 
 ## Requirements
 
@@ -54,36 +54,49 @@ reworking. The asserts throughout exist to fail loudly if that ever happens.
 ## Approved figures — do not change without explicit sign-off
 
 The competition programme was restructured on 2026-08-02 from the organiser-supplied
-`Hebs Lagos Competitions.docx`: **twelve competitions across seven categories**, replacing
-the former Signature / Barber / Braiding track model. The obsolete Fast & Flawless Barber
-Challenge, Barber Games and Braids & Fades Showdown no longer appear.
+`Hebs Lagos Competitions.docx`, replacing the former Signature / Barber / Braiding track
+model. The **price revision of 2026-08-03**, taken from `Hebs Lagos Competitions.
+reviewed.docx` and the accompanying management decisions, supersedes it:
 
-The approved total prize pool is **$82,500 USD / ₦115,500,000** at the approved rate of
-**₦1,400 per USD**. This supersedes $80,000 / ₦112,000,000, $87,000 and $92,500.
+- **thirteen competitions across seven categories** — the Fast & Flawless Barber
+  Competition is reinstated as the third Barbering event (Sunday 25 October, 4:00 to
+  4:15 PM, 15 minutes, $5,000 prize)
+- **one flat contestant entry fee of ₦50,000** for every competition, published in naira
+  only. The earlier flyer-derived USD tiers ($50 / $75 / $100 and their ₦70,000 /
+  ₦105,000 / ₦140,000 equivalents) are withdrawn and must not reappear
+- approved total prize pool **$87,500 USD / ₦122,500,000** at **₦1,400 per USD**. This
+  supersedes $82,500 / ₦115,500,000, $80,000 / ₦112,000,000, $87,000 and $92,500
 
-Per-competition prizes and entry fees come from the competition flyers linked inside the
-supplied document. The script asserts that the twelve prize rows total exactly $82,500 and
-₦115,500,000, so an edit that breaks the total fails the build rather than shipping.
+₦1,400 per USD now applies to **prizes only**. Contestant entry fees are no longer
+converted from USD at any rate.
+
+Per-competition prizes come from the competition flyers linked inside the supplied
+document. The script asserts that the thirteen prize rows total exactly $87,500 and
+₦122,500,000, and that every entry fee equals ₦50,000, so an edit that breaks either
+fails the build rather than shipping.
 
 Sanity checks for a correct build:
 
-- exactly **12** competitions, and 12 rows plus a total row in the prize table
-- headline **$82,500 USD / ₦115,500,000**, and **zero** occurrences of $80,000, $87,000,
-  $92,500, ₦112,000,000 or ₦121,800,000
-- entry fees at 1,400 per USD: **₦70,000** for $50, **₦105,000** for $75, **₦140,000** for $100
+- exactly **13** competitions, and 13 rows plus a total row in the prize table
+- exactly **3** Barbering competitions
+- headline **$87,500 USD / ₦122,500,000**, and **zero** occurrences of $82,500, $80,000,
+  $87,000, $92,500, ₦115,500,000, ₦112,000,000 or ₦121,800,000
+- every entry fee reads **₦50,000**, with zero occurrences of ₦70,000, ₦105,000, ₦140,000,
+  or any USD entry-fee figure
 
 Also approved as published and **not** to be changed without sign-off: sponsorship tiers,
-exhibitor and vendor booth packages, and attendee ticket prices.
+exhibitor and vendor booth packages, and attendee ticket prices. Those remain quoted in
+USD — the naira-only rule applies to contestant entry fees, not to booths or tickets.
 
-### Open items
+### Resolved
 
-- **Freestyle Braid Art entry fee** is unverified — its flyer link in the supplied document
-  is dead, so the fee is shown as confirmed on the registration portal. Its $10,000 prize is
-  derived: the eleven verified flyers total $72,500 against the approved $82,500.
-- **Entry-fee rate conflict.** Every flyer quotes 1,400 per USD, while the portal
-  screenshots used for the website in PR #1 quoted 1,000 per USD ($50 = ₦50,000). The
-  concept note follows the flyers; the website has not been changed to match.
-- `concept_note_working_draft.md` still reflects the pre-restructure programme.
+- **Entry-fee rate conflict resolved.** The flyers quoted ₦1,400 per USD while the portal
+  screenshots quoted ₦1,000 per USD ($50 = ₦50,000). The 2026-08-03 management decision
+  settles it: a flat ₦50,000 with no USD equivalent, matching the portal. The website and
+  the concept note now agree.
+- **Freestyle Braid Art entry fee** is no longer unverified — it takes the same flat
+  ₦50,000 as every other competition. Its $10,000 prize is unchanged.
+- `concept_note_working_draft.md` is regenerated from the built DOCX and matches it.
 
 ## Still open
 

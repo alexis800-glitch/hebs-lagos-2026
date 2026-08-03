@@ -160,14 +160,14 @@ g = T(11)
 assert g.rows[3].cells[0].text.strip() == 'Total prize pool', g.rows[3].cells[0].text
 assert g.rows[4].cells[0].text.strip() == 'Competition tracks', g.rows[4].cells[0].text
 cell_set(g.rows[3].cells[0], [("Total prize pool", 0)])
-cell_set(g.rows[3].cells[1], [("$82,500 USD / ₦115,500,000", 1)])
+cell_set(g.rows[3].cells[1], [("$87,500 USD / ₦122,500,000", 1)])
 cell_set(g.rows[4].cells[0], [("Competition programme", 0)])
-cell_set(g.rows[4].cells[1], [("Twelve competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment", 0)])
+cell_set(g.rows[4].cells[1], [("Thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment", 0)])
 cell_set(g.rows[5].cells[1], [("Education, exhibition, competition, panels, networking, cultural food, live music, and hospitality experiences", 0)])
 
 # ============================ DATE AND VENUE ============================
 segs(kids[22], [("Exhibition floor, education sessions, panel discussions, and seven competitions: Battle of the Fades, Fast & Flawless Braiding, Taste of Culture, Freestyle Braid Art, Gilded Heritage Nail Art, Freestyle Design, and Mic Drop Live Vocalist.", 0)])
-segs(kids[26], [("Exhibition continues, alongside masterclasses and panels, with six competitions: Taste of Culture, Traditional Braiding, Roots to Royalty Fashion Runway, Bridal Beauty Makeup, Lash Couture, and Flawless Frontals.", 0)])
+segs(kids[26], [("Exhibition continues, alongside masterclasses and panels, with seven competitions: Taste of Culture, Traditional Braiding, Roots to Royalty Fashion Runway, Bridal Beauty Makeup, Lash Couture, Flawless Frontals, and Fast & Flawless Barber.", 0)])
 segs(kids[27], [
     ("Exhibition days are ", 0),
     ("October 24 and 25, 2026", 1),
@@ -191,6 +191,7 @@ SCHEDULE = [
         ('Bridal Beauty Makeup Competition', '1:30 to 3:00 PM', '90 min'),
         ('Lash Couture Competition', '1:45 to 2:30 PM', '45 min'),
         ('Flawless Frontals Competition', '2:45 to 3:45 PM', '60 min'),
+        ('Fast & Flawless Barber Competition', '4:00 to 4:15 PM', '15 min'),
     ]),
 ]
 _sched_anchor = clone_after(SUB_TPL, kids[27]); single(_sched_anchor, 'Competition Schedule')
@@ -212,8 +213,8 @@ segs(kids[35], [
 segs(kids[37], [
     ("A serious competition purse.", 1),
     (" An ", 0),
-    ("$82,500 USD (₦115,500,000)", 1),
-    (" cumulative prize pool across twelve competitions, the largest in African beauty competition, staged as a full production with music, lighting, and a live audience.", 0)])
+    ("$87,500 USD (₦122,500,000)", 1),
+    (" cumulative prize pool across thirteen competitions, the largest in African beauty competition, staged as a full production with music, lighting, and a live audience.", 0)])
 _p = clone_after(LIST_TPL, kids[37])
 segs(_p, [
     ("Culture on the programme, not on the poster.", 1),
@@ -278,85 +279,97 @@ for s in epe:
     anchor = clone_after(BODY_TPL, anchor); segs(anchor, s)
 
 # ============================ COMPETITION CATEGORIES ============================
-# Rebuilt from "Hebs Lagos Competitions.docx" (organiser-supplied, 2026-08-02):
-# twelve competitions across seven categories. Descriptions are the supplied
-# document's own wording. Times/durations come from its schedule tables. Entry fees
-# and prize ceilings come from the linked competition flyers on Google Drive.
-PORTAL = 'Confirmed on the official registration portal'
+# Rebuilt from "Hebs Lagos Competitions. reviewed.docx" (organiser-supplied, 2026-08-03):
+# thirteen competitions across seven categories. Descriptions are the supplied
+# document's own wording. Times/durations come from its schedule tables. Prize
+# ceilings come from the linked competition flyers on Google Drive.
+#
+# Entry fees no longer come from the flyers. The management price revision of
+# 2026-08-03 sets one flat contestant fee of ₦50,000 for every competition, published
+# in naira only, with no USD equivalent. This mirrors ENTRY_FEE_NGN in lib/competitions.ts.
+ENTRY_FEE = '₦50,000'
 
 CATEGORIES = [
     ('Barbering', [
         ('Battle of the Fades Competition',
          'Saturday, October 24, 2026, 12:30 to 1:00 PM, 30 minutes.',
-         '$50 USD / ₦70,000', 'up to $5,000 USD (₦7,000,000)',
+         ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
          'Battle of the Fades focuses on precision, control, and clean barbering execution. Barbers complete a full fade with a properly cut and styled top, demonstrating seamless blending, sharp detailing, balanced structure, and a polished finish. Each haircut should complement the model’s head shape while showcasing strong technical skill and professional presentation.'),
         ('Freestyle Design Competition',
          'Saturday, October 24, 2026, 2:45 to 3:45 PM, 60 minutes.',
-         '$75 USD / ₦105,000', 'up to $7,500 USD (₦10,500,000)',
+         ENTRY_FEE, 'up to $7,500 USD (₦10,500,000)',
          'Freestyle Design explores the intersection of barbering, creativity, and visual art. Barbers create an original haircut design using clean lines, patterns, shapes, and precision detailing. The finished look should be imaginative, balanced, technically clean, and visually impactful from every angle.'),
+        ('Fast & Flawless Barber Competition',
+         'Sunday, October 25, 2026, 4:00 to 4:15 PM, 15 minutes.',
+         ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
+         'The Fast & Flawless Barber Competition is a timed barbering challenge designed to showcase speed, precision, technical control, and professional execution under intense time pressure. Competitors must complete a professional-quality full haircut on one live model within 15 minutes. The finished look must include a clean, consistent full fade extending around the head and over the occipital bone, a sharp and balanced lineup, a properly cut and styled top, and a polished, competition-ready finish.'),
     ]),
     ('Braiding', [
         ('Fast & Flawless Braiding Competition',
          'Saturday, October 24, 2026, 12:30 to 1:00 PM, 30 minutes.',
-         '$50 USD / ₦70,000', 'up to $5,000 USD (₦7,000,000)',
+         ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
          'Fast & Flawless Braiding focuses on speed, precision, and natural-hair technique. Braiders complete eight full-head cornrows within 30 minutes using only the model’s natural hair. The finished design should demonstrate clean parting, consistent braid size, even spacing, controlled tension, and polished execution.'),
         ('Freestyle Braid Art Competition',
          'Saturday, October 24, 2026, 1:15 to 2:30 PM, 75 minutes.',
-         PORTAL, 'up to $10,000 USD (₦14,000,000)',
+         ENTRY_FEE, 'up to $10,000 USD (₦14,000,000)',
          'Freestyle Braid Art explores creativity, innovation, and technical mastery through braiding. Braiders transform natural hair into intricate works of braid art using original patterns, dimensional structure, creative direction, and artistic detail. The finished design should be cohesive, technically clean, visually impactful, and recognizable as a braid-driven work of art.'),
         ('Traditional Braiding Competition',
          'Sunday, October 25, 2026, 11:30 AM to 12:30 PM, 60 minutes.',
-         '$50 USD / ₦70,000', 'up to $7,500 USD (₦10,500,000)',
+         ENTRY_FEE, 'up to $7,500 USD (₦10,500,000)',
          'Traditional Braiding celebrates the artistry, cultural significance, and technical mastery of African braiding traditions. Braiders create a polished natural-hair design inspired by traditional African patterns, techniques, and cultural influence. The finished style should demonstrate precise sectioning, consistent technique, thoughtful design, and respect for traditional braiding artistry.'),
     ]),
     ('Hair Installation & Styling', [
         ('Flawless Frontals Competition',
          'Sunday, October 25, 2026, 2:45 to 3:45 PM, 60 minutes.',
-         '$50 USD / ₦70,000', 'up to $5,000 USD (₦7,000,000)',
+         ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
          'Flawless Frontals focuses on creating a seamless, natural-looking frontal installation. Stylists customize, place, secure, blend, and style the frontal while complementing the model’s features and desired look. The finished installation should demonstrate a refined hairline, clean application, balanced styling, and a polished finish from every angle.'),
     ]),
     ('Beauty', [
         ('Bridal Beauty Makeup Competition',
          'Sunday, October 25, 2026, 1:30 to 3:00 PM, 90 minutes.',
-         '$50 USD / ₦70,000', 'up to $7,500 USD (₦10,500,000)',
+         ENTRY_FEE, 'up to $7,500 USD (₦10,500,000)',
          'Bridal Beauty focuses on creating a radiant, elegant, wedding-ready look. Artists present their interpretation of the modern bride while complementing the model’s features, skin tone, and personal beauty, anywhere from soft and timeless to bold and glamorous. Judged on complexion work, balanced colour, clean application, attention to detail, and long-lasting wear.'),
         ('Lash Couture Competition',
          'Sunday, October 25, 2026, 1:45 to 2:30 PM, 45 minutes.',
-         '$50 USD / ₦70,000', 'up to $5,000 USD (₦7,000,000)',
+         ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
          'Lash Couture focuses on creating a customized, polished lash look that enhances the model’s natural eye shape. Artists demonstrate precise isolation, controlled placement, symmetry, balance, and thoughtful lash mapping. The finished set should be clean, comfortable, technically sound, and professionally finished.'),
         ('Gilded Heritage Nail Art Competition',
          'Saturday, October 24, 2026, 2:00 to 3:15 PM, 75 minutes.',
-         '$50 USD / ₦70,000', 'up to $7,500 USD (₦10,500,000)',
+         ENTRY_FEE, 'up to $7,500 USD (₦10,500,000)',
          'Gilded Heritage explores culture, craftsmanship, and luxury through nail design. Artists create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewellery, and cultural detail, using rich colour, gold accents, sculpted elements, intricate pattern, embellishment, and creative texture. The finished set should be original, balanced, technically clean, and a modern take on culture and elegance.'),
     ]),
     ('Fashion', [
         ('Roots to Royalty Fashion Runway Competition',
          'Sunday, October 25, 2026, 12:45 to 1:30 PM, 45 minutes.',
-         '$50 USD / ₦70,000', '$7,500 USD (₦10,500,000)',
+         ENTRY_FEE, '$7,500 USD (₦10,500,000)',
          'Roots to Royalty celebrates the journey from cultural heritage to modern-day royalty. Designers create an original, runway-ready look inspired by ancestry, legacy, leadership, and the spirit of Lagos, using regal silhouettes, bold colour, rich fabric, cultural influence, symbolic detail, and statement accessories. Each look should honour its roots while presenting a fresh, elevated take on royalty, with cultural inspiration represented thoughtfully and respectfully.'),
     ]),
     ('Culinary & Culture', [
         ('Taste of Culture Food Tasting Competition',
          'Saturday, October 24, 2026, 12:00 Noon to 5:00 PM and Sunday, October 25, 2026, 11:00 AM to 4:00 PM, five hours each day.',
-         '$100 USD / ₦140,000', 'up to $10,000 USD (₦14,000,000)',
+         ENTRY_FEE, 'up to $10,000 USD (₦14,000,000)',
          'Taste of Culture celebrates heritage, community, and creativity through food. Competitors present a dish inspired by their culture, family traditions, regional influence, or personal story. Each entry should demonstrate balanced flavour, thoughtful presentation, quality preparation, and a meaningful connection to the culture it represents.'),
     ]),
     ('Music & Live Entertainment', [
         ('Mic Drop Live Vocalist Competition',
          'Saturday, October 24, 2026, 4:00 to 5:15 PM, 75 minutes.',
-         '$50 USD / ₦70,000', 'up to $5,000 USD (₦7,000,000)',
+         ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
          'Mic Drop celebrates live vocal talent, individuality, and powerful stage performance. Vocalists present a song that showcases their voice, musical interpretation, emotional connection, and personal artistry. Each performance should demonstrate vocal control, confidence, originality, stage presence, and the ability to connect with a live audience.'),
     ]),
 ]
 ALL_COMPS = [c for _, comps in CATEGORIES for c in comps]
-assert len(ALL_COMPS) == 12, f'expected 12 competitions, got {len(ALL_COMPS)}'
+assert len(ALL_COMPS) == 13, f'expected 13 competitions, got {len(ALL_COMPS)}'
+assert len(CATEGORIES[0][1]) == 3, 'expected 3 Barbering competitions'
+assert all(fee == ENTRY_FEE for _n, _w, fee, _p, _d in ALL_COMPS), 'every entry fee must be the flat naira fee'
 
 segs(kids[56], [
     ("HEBS Lagos 2026 stages ", 0),
-    ("twelve competitions across seven categories", 1),
+    ("thirteen competitions across seven categories", 1),
     (": barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment. The combined prize pool is ", 0),
-    ("$82,500 USD (₦115,500,000)", 1),
-    (".", 0)])
+    ("$87,500 USD (₦122,500,000)", 1),
+    (". The contestant entry fee is ", 0),
+    ("₦50,000 per competition", 1),
+    (", the same for every competition.", 0)])
 
 # replace the entire former Signature / Barber / Braiding block
 drop(57, 81)
@@ -368,16 +381,14 @@ for cat_name, comps in CATEGORIES:
         anchor = clone_after(NAME_TPL, anchor); single(anchor, name)
         anchor = clone_after(META_TPL, anchor); single(anchor, when)
         anchor = clone_after(BODY_TPL, anchor)
-        if fee == PORTAL:
-            segs(anchor, [("Entry fee: ", 0), (PORTAL, 1), (". Prize: ", 0), (prize, 1), (" in cash prizes.", 0)])
-        else:
-            segs(anchor, [("Entry fee: ", 0), (fee, 1), (". Prize: ", 0), (prize, 1), (" in cash prizes.", 0)])
+        segs(anchor, [("Entry fee: ", 0), (fee, 1), (". Prize: ", 0), (prize, 1), (" in cash prizes.", 0)])
         anchor = clone_after(BODY_TPL, anchor); segs(anchor, [(desc, 0)])
 
 # ============================ PRIZE POOL ============================
 PRIZE_ROWS = [
     ('Battle of the Fades Competition', '$5,000', '₦7,000,000'),
     ('Freestyle Design Competition', '$7,500', '₦10,500,000'),
+    ('Fast & Flawless Barber Competition', '$5,000', '₦7,000,000'),
     ('Fast & Flawless Braiding Competition', '$5,000', '₦7,000,000'),
     ('Freestyle Braid Art Competition', '$10,000', '₦14,000,000'),
     ('Traditional Braiding Competition', '$7,500', '₦10,500,000'),
@@ -391,20 +402,20 @@ PRIZE_ROWS = [
 ]
 _usd = sum(int(r[1].replace('$', '').replace(',', '')) for r in PRIZE_ROWS)
 _ngn = sum(int(r[2].replace('₦', '').replace(',', '')) for r in PRIZE_ROWS)
-assert _usd == 82500, f'prize rows total ${_usd:,}, expected $82,500'
-assert _ngn == 115500000, f'prize rows total ₦{_ngn:,}, expected ₦115,500,000'
-assert len(PRIZE_ROWS) == 12
+assert _usd == 87500, f'prize rows total ${_usd:,}, expected $87,500'
+assert _ngn == 122500000, f'prize rows total ₦{_ngn:,}, expected ₦122,500,000'
+assert len(PRIZE_ROWS) == 13
 
 # headline banner
 banner = T(84)
-cell_sub(banner.rows[0].cells[0], '$80,000 USD / ₦112,000,000', '$82,500 USD / ₦115,500,000')
+cell_sub(banner.rows[0].cells[0], '$80,000 USD / ₦112,000,000', '$87,500 USD / ₦122,500,000')
 
-# replace the three-track table with the twelve-competition table
+# replace the three-track table with the thirteen-competition table
 old_pt = kids[86]
 new_pt = build_table(TBL3_TPL, old_pt,
                      [('Competition', 'USD', 'NGN')] + PRIZE_ROWS +
-                     [('Total prize pool', '$82,500', '₦115,500,000')],
-                     bold_rows={13})
+                     [('Total prize pool', '$87,500', '₦122,500,000')],
+                     bold_rows={14})
 old_pt.getparent().remove(old_pt)
 
 # ============================ EXPECTED IMPACT ============================
@@ -438,24 +449,27 @@ cell_set(rt.rows[4].cells[1], [("October 24 and 25, 2026", 0)], header=True)
 cell_set(rt.rows[4].cells[2], [
     ("Competitors present at their scheduled time, as published in the competition schedule.", 0)])
 
-# Entry fees for the revised twelve competitions, taken from the organiser-supplied
-# competition flyers (Google Drive links inside "Hebs Lagos Competitions.docx").
-# Every flyer quotes naira at 1,400 per USD, the same rate as the approved prize total.
-# The Freestyle Braid Art flyer link is dead, so that fee is left to the portal.
+# One flat contestant entry fee across the revised thirteen competitions, set by the
+# management price revision of 2026-08-03 and published in naira only. The earlier
+# flyer-derived USD tiers ($50 / $75 / $100) are withdrawn and must not reappear.
 FEE_ROWS = [(name, fee) for _, comps in CATEGORIES for name, _w, fee, _p, _d in comps]
-assert len(FEE_ROWS) == 12
+assert len(FEE_ROWS) == 13
+assert all(fee == ENTRY_FEE for _n, fee in FEE_ROWS)
 
 # Replace the three per-track fee tables, and the now-obsolete team-entry note, with
-# one table covering all twelve competitions. No competition in the revised programme
+# one table covering all thirteen competitions. No competition in the revised programme
 # is contested by a team, so the team-entry paragraph no longer applies.
-segs(kids[156], [("Entry fees are set per competition. Competitors pay only for the competitions they enter, and may enter more than one.", 0)])
+segs(kids[156], [
+    ("Every competition carries the same contestant entry fee of ", 0),
+    ("₦50,000", 1),
+    (". Competitors pay only for the competitions they enter, and may enter more than one.", 0)])
 drop(157, 168)
 _ft = build_table(TBL2_TPL, kids[156], [('Competition', 'Entry Fee')] + FEE_ROWS)
 clone_after(BLANK_TPL, _ft)
 cell_sub_p = kids[169]
 segs(cell_sub_p, [
     ("All entry fees are ", 0), ("non-refundable", 1),
-    (". Current fees for every competition are confirmed at the point of registration on the official portal. Competitors arrange and pay for their own travel and lodging to Lagos. HEBS provides the stage production and, where applicable, the official competition equipment and styling products supplied by our partner brands.", 0)])
+    (" and are quoted and paid in naira on the official portal. Competitors arrange and pay for their own travel and lodging to Lagos. HEBS provides the stage production and, where applicable, the official competition equipment and styling products supplied by our partner brands.", 0)])
 
 # ============================ OBJECTIVES LIST RESTART ============================
 # The List Number style shares one numId, so Objectives continued the previous list
