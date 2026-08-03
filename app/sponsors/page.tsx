@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import JoinTheMovement from '@/components/JoinTheMovement'
 import PartnershipContact from '@/components/PartnershipContact'
 import Footer from '@/components/Footer'
+import { COMPETITION_COUNT, TOTAL_PRIZE_USD_DISPLAY } from '@/lib/competitions'
 
 import type { Metadata } from 'next'
 
@@ -182,7 +183,7 @@ export default function SponsorsPage() {
           {[
             { stat: '3,000+', label: 'Expected Attendees', note: 'Beauty professionals, educators, creators, and consumers' },
             { stat: 'Nigeria + Africa', label: 'Geographic Reach', note: 'International competitors from the US, UK, and West Africa' },
-            { stat: '$82,500', label: 'Total Prize Pool', note: 'Across 12 competitions — the largest prize purse in African beauty competition history' },
+            { stat: TOTAL_PRIZE_USD_DISPLAY, label: 'Total Prize Pool', note: `Across ${COMPETITION_COUNT} competitions — the largest prize purse in African beauty competition history` },
           ].map((item) => (
             <div key={item.stat} className="border border-white/10 bg-zinc-950/40 rounded-2xl p-6">
               <span className="font-sans text-3xl font-light text-white block mb-1 tracking-tight">{item.stat}</span>

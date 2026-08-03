@@ -7,6 +7,7 @@ import { motion, AnimatePresence, animate, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ImageLightbox from "@/components/ImageLightbox";
+import { TOTAL_PRIZE_USD_DISPLAY, TOTAL_PRIZE_NGN_DISPLAY } from "@/lib/competitions";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
@@ -946,7 +947,7 @@ export default function Hebs2025Page() {
               </span>
             </h2>
             <p className="text-zinc-400 text-[15px] mb-10 max-w-md mx-auto">
-              October 23–25, 2026 · Lagos, Nigeria · $82,500 USD (₦115,500,000) in prizes
+              October 23–25, 2026 · Lagos, Nigeria · {TOTAL_PRIZE_USD_DISPLAY} USD ({TOTAL_PRIZE_NGN_DISPLAY}) in prizes
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
               <a

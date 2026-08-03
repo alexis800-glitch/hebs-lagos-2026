@@ -8,6 +8,7 @@ import {
   COMPETITION_COUNT,
   CATEGORY_COUNT,
   TOTAL_PRIZE_DISPLAY,
+  ENTRY_FEE_DISPLAY,
   groupedByCategory,
   scheduleByDay,
   prizeDisplay,
@@ -34,19 +35,9 @@ const SCHEDULE_SUMMARY = scheduleByDay()
   )
   .join("\n\n");
 
-const FEE_SUMMARY = COMPETITIONS.map(
-  (c) => `• ${c.name.replace(" Competition", "")} — ${c.feeDisplay}`,
-).join("\n");
-
 const PRIZE_SUMMARY = COMPETITIONS.map(
   (c) => `• ${c.name.replace(" Competition", "")} — ${prizeDisplay(c)}`,
 ).join("\n");
-
-/** Competitions charging a given confirmed USD fee, e.g. "Freestyle Design and Freestyle Braid Art". */
-const namesAtFee = (usdAmount: number): string =>
-  COMPETITIONS.filter((c) => c.feeUsd === usdAmount)
-    .map((c) => c.name.replace(" Competition", ""))
-    .join(" and ");
 
 /** One entry per competition, so a question about any single one is answered directly. */
 const COMPETITION_ENTRIES: KBEntry[] = COMPETITIONS.map((c) => {
@@ -85,7 +76,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      "Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. Entry fees for competitors start at $50 USD (₦70,000) per competition.",
+      `Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. The competitor entry fee is ${ENTRY_FEE_DISPLAY} per competition.`,
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
@@ -100,12 +91,12 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      `General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nCompetitor entry fees are $50 USD (₦70,000) for most competitions, $75 USD (₦105,000) for ${namesAtFee(75)}, and $100 USD (₦140,000) for ${namesAtFee(100)}. All payments via hebseventportal.com/register.`,
+      `General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nThe competitor entry fee is ${ENTRY_FEE_DISPLAY} per competition — the same for all ${COMPETITION_COUNT} competitions. All payments via hebseventportal.com/register.`,
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      "To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your competition, pay the entry fee ($50–$100 USD / ₦70,000–₦140,000 depending on the competition), and submit any required materials. Ask me for entry fees to see every competition.",
+      `To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your competition, pay the ${ENTRY_FEE_DISPLAY} entry fee, and submit any required materials. The fee is the same for every competition.`,
   },
   {
     triggers: ["categories", "competition category", "what competitions", "which competitions", "events", "what can i compete in", "competition types", "all competitions", "list competitions", "programme", "program"],
@@ -136,11 +127,9 @@ Prize amounts are the maximum available in each competition.`,
   {
     triggers: ["entry fee", "entry fees", "competition fee", "how much to enter", "cost to compete", "fee per competition"],
     answer:
-      `Entry fees by competition:
+      `Every HEBS Lagos 2026 competition has the same contestant entry fee: ${ENTRY_FEE_DISPLAY} per competition, across all ${COMPETITION_COUNT} competitions.
 
-${FEE_SUMMARY}
-
-All entry fees are non-refundable and paid at hebseventportal.com/register.`,
+Entry fees are non-refundable and paid at hebseventportal.com/register.`,
   },
   {
     triggers: ["barber championship", "braiding championship", "signature competitions", "signature track", "barber games", "braids and fades", "braids & fades", "fast and flawless challenge", "old competitions", "what happened to"],

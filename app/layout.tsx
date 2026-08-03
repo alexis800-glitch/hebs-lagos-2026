@@ -4,6 +4,15 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import {
+  COMPETITION_COUNT,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_USD_DISPLAY,
+  TOTAL_PRIZE_NGN_DISPLAY,
+} from "@/lib/competitions";
+
+/** "$87,500 USD (₦122,500,000) in prizes" — derived so metadata can never drift. */
+const PRIZE_PHRASE = `${TOTAL_PRIZE_USD_DISPLAY} USD (${TOTAL_PRIZE_NGN_DISPLAY}) in prizes`;
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -16,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hebslagos.com"),
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    "After three United States editions, including a sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit comes home to Lagos for its fourth edition. 12 competitions across 7 categories, October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. $82,500 USD (₦115,500,000) in prizes.",
+    `After three United States editions, including a sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit comes home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories, October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. ${PRIZE_PHRASE}.`,
   keywords: [
     "HEBS",
     "Hair Education Beauty Summit",
@@ -28,7 +37,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "HEBS 2026 — Hair Education Beauty Summit",
-    description: "12 competitions. $82,500 USD (₦115,500,000) in prizes. October 23–25, 2026. Lagos, Nigeria.",
+    description: `${COMPETITION_COUNT} competitions. ${PRIZE_PHRASE}. October 23–25, 2026. Lagos, Nigeria.`,
     type: "website",
     url: "https://hebslagos.com",
     siteName: "HEBS Lagos 2026",
@@ -44,7 +53,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HEBS 2026 — Hair Education Beauty Summit",
-    description: "12 competitions. $82,500 USD (₦115,500,000) in prizes. October 23–25, 2026. Lagos, Nigeria.",
+    description: `${COMPETITION_COUNT} competitions. ${PRIZE_PHRASE}. October 23–25, 2026. Lagos, Nigeria.`,
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useMounted } from "@/hooks/useMounted";
+import { COMPETITION_COUNT, TOTAL_PRIZE_USD_DISPLAY, TOTAL_PRIZE_NGN_DISPLAY } from "@/lib/competitions";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -28,7 +29,7 @@ const highlights = [
   },
   {
     title: "Creative Competitions",
-    desc: "Compete in high-stakes creative challenges with $82,500 USD (₦115,500,000) in prizes across 12 competitions.",
+    desc: `Compete in high-stakes creative challenges with ${TOTAL_PRIZE_USD_DISPLAY} USD (${TOTAL_PRIZE_NGN_DISPLAY}) in prizes across ${COMPETITION_COUNT} competitions.`,
   },
   {
     title: "Networking",

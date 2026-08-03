@@ -1,5 +1,10 @@
 ﻿import React from 'react'
 import { BookOpen, Globe, Sparkles } from 'lucide-react'
+import {
+  COMPETITION_COUNT,
+  TOTAL_PRIZE_USD_DISPLAY,
+  TOTAL_PRIZE_NGN_DISPLAY,
+} from '@/lib/competitions'
 
 const GradientDivider = () => (
   <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent my-16" />
@@ -68,7 +73,7 @@ export default function About() {
           {[
             { n: '01', title: 'First-of-Its-Kind Industry Fusion', body: 'A Unified Beauty, Fashion & Education Platform where hairstylists, barbers, makeup artists, nail techs, fashion designers, and educators collaborate under one roof alongside top-tier global influencers.' },
             { n: '02', title: 'High-Value, Hands-On Learning', body: 'Focused entirely on technical education and real-world skills, ensuring every session is interactive, impactful, and delivers practical knowledge attendees can immediately apply to scale their business.' },
-            { n: '03', title: 'Elite Competitive Championship', body: 'Featuring a $82,500 USD (₦115,500,000) cumulative prize pool across 12 competitions—the highest-stakes beauty competition in Africa. The event transforms raw competition into a full-scale runway production with music, lights, and energy.' },
+            { n: '03', title: 'Elite Competitive Championship', body: `Featuring a ${TOTAL_PRIZE_USD_DISPLAY} USD (${TOTAL_PRIZE_NGN_DISPLAY}) cumulative prize pool across ${COMPETITION_COUNT} competitions—the highest-stakes beauty competition in Africa. The event transforms raw competition into a full-scale runway production with music, lights, and energy.` },
             { n: '04', title: 'A Truly Global Experience', body: 'Bringing diverse international beauty trends to Lagos, Nigeria to blend with local African influences, creating an unparalleled creative exchange and global networking opportunity.' },
           ].map((card) => (
             <div key={card.n} className="bg-zinc-950/60 p-6 flex flex-col justify-between min-h-[260px]">
