@@ -5,7 +5,13 @@ import { motion, useInView, animate, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 import ImageLightbox from "./ImageLightbox";
-import { COMPETITION_COUNT, CATEGORY_COUNT } from "@/lib/competitions";
+import {
+  COMPETITION_COUNT,
+  CATEGORY_COUNT,
+  TOTAL_PRIZE_USD,
+  TOTAL_PRIZE_USD_DISPLAY,
+  TOTAL_PRIZE_NGN_DISPLAY,
+} from "@/lib/competitions";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -56,9 +62,9 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     color: "#f59e0b",
-    counter: { value: 82500, prefix: "$", suffix: "", duration: 2.4 },
+    counter: { value: TOTAL_PRIZE_USD, prefix: "$", suffix: "", duration: 2.4 },
     label: "Prize Pool",
-    desc: "Compete for Africa's largest beauty prize pool — $82,500 USD (₦115,500,000) distributed across 12 competitions.",
+    desc: `Compete for Africa's largest beauty prize pool — ${TOTAL_PRIZE_USD_DISPLAY} USD (${TOTAL_PRIZE_NGN_DISPLAY}) distributed across ${COMPETITION_COUNT} competitions.`,
     featured: true,
     bgImage: "/images/highlights/winner-cheque-presentation.png",
     bgPosition: "object-top",

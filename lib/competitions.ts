@@ -1,10 +1,15 @@
 /**
  * Single authoritative source for the HEBS Lagos 2026 competition programme.
  *
- * Sources of truth (organiser-supplied, 2026-08-02):
- *   - "Hebs Lagos Competitions.docx"        - names, categories, descriptions, schedule
- *   - Competition flyers linked from it     - entry fees and prize ceilings
- *   - Approved concept note review draft    - $82,500 USD / N115,500,000 total
+ * Sources of truth (organiser-supplied, 2026-08-03):
+ *   - "Hebs Lagos Competitions. reviewed.docx" - names, categories, descriptions, schedule
+ *   - Management price revision, 2026-08-03    - flat N50,000 entry fee, 13th competition
+ *   - Competition flyers linked from the doc   - prize ceilings
+ *   - Approved concept note review draft       - $87,500 USD / N122,500,000 total
+ *
+ * Contestant entry fees are quoted in naira only. The approved 2026 price revision
+ * sets one flat fee for every competition and withdraws USD entry-fee pricing from
+ * the public site, so there is deliberately no `feeUsd` field. Prizes stay in USD.
  *
  * Every competition count, category list, fee, prize, schedule row and total shown
  * anywhere on the site is derived from this file. Do not hard-code those values in
@@ -16,8 +21,17 @@
 
 export const REGISTRATION_URL = 'https://hebseventportal.com/register'
 
-/** Approved conversion rate for the 2026 programme: N1,400 per USD. */
+/** Approved conversion rate for the 2026 programme: N1,400 per USD. Prizes only. */
 export const NGN_PER_USD = 1400
+
+/**
+ * Flat contestant entry fee for every competition, in naira.
+ * Management decision of 2026-08-03. Never convert this to USD for display.
+ */
+export const ENTRY_FEE_NGN = 50000
+
+/** "N50,000" - the only entry-fee wording the public site may show. */
+export const ENTRY_FEE_DISPLAY = `₦${ENTRY_FEE_NGN.toLocaleString('en-US')}`
 
 export type CategorySlug =
   | 'barbering'
@@ -59,16 +73,18 @@ export interface Competition {
   /** Organiser-supplied description, used verbatim. */
   description: string
   sessions: Session[]
-  /** Ready-to-render fee string, or the portal-confirmation wording. */
+  /** Ready-to-render fee string, or the portal-confirmation wording. Naira only. */
   feeDisplay: string
-  /** Numeric fee, only where a flyer confirmed it. Null means unconfirmed. */
-  feeUsd: number | null
+  /** Numeric entry fee in naira. Null means unconfirmed. */
   feeNgn: number | null
-  /** True only when a flyer confirmed the fee. */
+  /** True once the fee is approved for publication. */
   feeConfirmed: boolean
   /** Approved prize ceiling in USD. */
   prizeUsd: number
-  /** Flyers word most prizes as "up to"; Roots to Royalty states a flat figure. */
+  /**
+   * Flyers word most prizes as "up to". Roots to Royalty and Fast & Flawless Barber
+   * state flat figures and must never render with an "Up to" prefix.
+   */
   prizeIsUpTo: boolean
   registrationUrl: string
   order: number
@@ -112,9 +128,8 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Battle of the Fades focuses on precision, control, and clean barbering execution. Barbers complete a full fade with a properly cut and styled top, demonstrating seamless blending, sharp detailing, balanced structure, and a polished finish. Each haircut should complement the model’s head shape while showcasing strong technical skill and professional presentation.',
     sessions: [session(SAT, '12:30 – 1:00 PM', '30 min', '2026-10-24T12:30:00+01:00', '2026-10-24T13:00:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 5000,
     prizeIsUpTo: true,
@@ -128,14 +143,29 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Freestyle Design explores the intersection of barbering, creativity, and visual art. Barbers create an original haircut design using clean lines, patterns, shapes, and precision detailing. The finished look should be imaginative, balanced, technically clean, and visually impactful from every angle.',
     sessions: [session(SAT, '2:45 – 3:45 PM', '60 min', '2026-10-24T14:45:00+01:00', '2026-10-24T15:45:00+01:00')],
-    feeDisplay: '$75 USD / ₦105,000',
-    feeUsd: 75,
-    feeNgn: 105000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 7500,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
     order: 2,
+  },
+  {
+    slug: 'fast-and-flawless-barber',
+    name: 'Fast & Flawless Barber Competition',
+    category: 'barbering',
+    description:
+      'The Fast & Flawless Barber Competition is a timed barbering challenge designed to showcase speed, precision, technical control, and professional execution under intense time pressure. Competitors must complete a professional-quality full haircut on one live model within 15 minutes. The finished look must include a clean, consistent full fade extending around the head and over the occipital bone, a sharp and balanced lineup, a properly cut and styled top, and a polished, competition-ready finish.',
+    sessions: [session(SUN, '4:00 – 4:15 PM', '15 min', '2026-10-25T16:00:00+01:00', '2026-10-25T16:15:00+01:00')],
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
+    feeConfirmed: true,
+    prizeUsd: 5000,
+    // Management states a flat figure for this competition, not a ceiling.
+    prizeIsUpTo: false,
+    registrationUrl: REGISTRATION_URL,
+    order: 3,
   },
   {
     slug: 'fast-and-flawless-braiding',
@@ -144,14 +174,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Fast & Flawless Braiding focuses on speed, precision, and natural-hair technique. Braiders complete eight full-head cornrows within 30 minutes using only the model’s natural hair. The finished design should demonstrate clean parting, consistent braid size, even spacing, controlled tension, and polished execution.',
     sessions: [session(SAT, '12:30 – 1:00 PM', '30 min', '2026-10-24T12:30:00+01:00', '2026-10-24T13:00:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 5000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 3,
+    order: 4,
   },
   {
     slug: 'freestyle-braid-art',
@@ -160,14 +189,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Freestyle Braid Art explores creativity, innovation, and technical mastery through braiding. Braiders transform natural hair into intricate works of braid art using original patterns, dimensional structure, creative direction, and artistic detail. The finished design should be cohesive, technically clean, visually impactful, and recognizable as a braid-driven work of art.',
     sessions: [session(SAT, '1:15 – 2:30 PM', '75 min', '2026-10-24T13:15:00+01:00', '2026-10-24T14:30:00+01:00')],
-    feeDisplay: '$75 USD / ₦105,000',
-    feeUsd: 75,
-    feeNgn: 105000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 10000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 4,
+    order: 5,
   },
   {
     slug: 'traditional-braiding',
@@ -176,14 +204,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Traditional Braiding celebrates the artistry, cultural significance, and technical mastery of African braiding traditions. Braiders create a polished natural-hair design inspired by traditional African patterns, techniques, and cultural influence. The finished style should demonstrate precise sectioning, consistent technique, thoughtful design, and respect for traditional braiding artistry.',
     sessions: [session(SUN, '11:30 AM – 12:30 PM', '60 min', '2026-10-25T11:30:00+01:00', '2026-10-25T12:30:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 7500,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 5,
+    order: 6,
   },
   {
     slug: 'flawless-frontals',
@@ -192,14 +219,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Flawless Frontals focuses on creating a seamless, natural-looking frontal installation. Stylists customize, place, secure, blend, and style the frontal while complementing the model’s features and desired look. The finished installation should demonstrate a refined hairline, clean application, balanced styling, and a polished finish from every angle.',
     sessions: [session(SUN, '2:45 – 3:45 PM', '60 min', '2026-10-25T14:45:00+01:00', '2026-10-25T15:45:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 5000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 6,
+    order: 7,
   },
   {
     slug: 'bridal-beauty-makeup',
@@ -208,14 +234,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Bridal Beauty focuses on creating a radiant, elegant, wedding-ready look. Artists present their interpretation of the modern bride while complementing the model’s features, skin tone, and personal beauty, anywhere from soft and timeless to bold and glamorous. Judged on complexion work, balanced colour, clean application, attention to detail, and long-lasting wear.',
     sessions: [session(SUN, '1:30 – 3:00 PM', '90 min', '2026-10-25T13:30:00+01:00', '2026-10-25T15:00:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 7500,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 7,
+    order: 8,
   },
   {
     slug: 'lash-couture',
@@ -224,14 +249,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Lash Couture focuses on creating a customized, polished lash look that enhances the model’s natural eye shape. Artists demonstrate precise isolation, controlled placement, symmetry, balance, and thoughtful lash mapping. The finished set should be clean, comfortable, technically sound, and professionally finished.',
     sessions: [session(SUN, '1:45 – 2:30 PM', '45 min', '2026-10-25T13:45:00+01:00', '2026-10-25T14:30:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 5000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 8,
+    order: 9,
   },
   {
     slug: 'gilded-heritage-nail-art',
@@ -240,14 +264,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Gilded Heritage explores culture, craftsmanship, and luxury through nail design. Artists create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewellery, and cultural detail, using rich colour, gold accents, sculpted elements, intricate pattern, embellishment, and creative texture. The finished set should be original, balanced, technically clean, and a modern take on culture and elegance.',
     sessions: [session(SAT, '2:00 – 3:15 PM', '75 min', '2026-10-24T14:00:00+01:00', '2026-10-24T15:15:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 7500,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 9,
+    order: 10,
   },
   {
     slug: 'roots-to-royalty-fashion-runway',
@@ -256,15 +279,14 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Roots to Royalty celebrates the journey from cultural heritage to modern-day royalty. Designers create an original, runway-ready look inspired by ancestry, legacy, leadership, and the spirit of Lagos, using regal silhouettes, bold colour, rich fabric, cultural influence, symbolic detail, and statement accessories. Each look should honour its roots while presenting a fresh, elevated take on royalty, with cultural inspiration represented thoughtfully and respectfully.',
     sessions: [session(SUN, '12:45 – 1:30 PM', '45 min', '2026-10-25T12:45:00+01:00', '2026-10-25T13:30:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 7500,
     // Its flyer states a flat figure rather than a ceiling.
     prizeIsUpTo: false,
     registrationUrl: REGISTRATION_URL,
-    order: 10,
+    order: 11,
   },
   {
     slug: 'taste-of-culture',
@@ -276,14 +298,13 @@ export const COMPETITIONS: Competition[] = [
       session(SAT, '12:00 Noon – 5:00 PM', '5 hours', '2026-10-24T12:00:00+01:00', '2026-10-24T17:00:00+01:00'),
       session(SUN, '11:00 AM – 4:00 PM', '5 hours', '2026-10-25T11:00:00+01:00', '2026-10-25T16:00:00+01:00'),
     ],
-    feeDisplay: '$100 USD / ₦140,000',
-    feeUsd: 100,
-    feeNgn: 140000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 10000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 11,
+    order: 12,
     note: 'Runs across both event days.',
   },
   {
@@ -293,14 +314,13 @@ export const COMPETITIONS: Competition[] = [
     description:
       'Mic Drop celebrates live vocal talent, individuality, and powerful stage performance. Vocalists present a song that showcases their voice, musical interpretation, emotional connection, and personal artistry. Each performance should demonstrate vocal control, confidence, originality, stage presence, and the ability to connect with a live audience.',
     sessions: [session(SAT, '4:00 – 5:15 PM', '75 min', '2026-10-24T16:00:00+01:00', '2026-10-24T17:15:00+01:00')],
-    feeDisplay: '$50 USD / ₦70,000',
-    feeUsd: 50,
-    feeNgn: 70000,
+    feeDisplay: ENTRY_FEE_DISPLAY,
+    feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 5000,
     prizeIsUpTo: true,
     registrationUrl: REGISTRATION_URL,
-    order: 12,
+    order: 13,
   },
 ]
 
@@ -317,11 +337,11 @@ export const TOTAL_PRIZE_NGN = TOTAL_PRIZE_USD * NGN_PER_USD
 const usd = (n: number) => `$${n.toLocaleString('en-US')}`
 const ngn = (n: number) => `₦${n.toLocaleString('en-US')}`
 
-/** "$82,500" */
+/** "$87,500" */
 export const TOTAL_PRIZE_USD_DISPLAY = usd(TOTAL_PRIZE_USD)
-/** "N115,500,000" */
+/** "N122,500,000" */
 export const TOTAL_PRIZE_NGN_DISPLAY = ngn(TOTAL_PRIZE_NGN)
-/** "$82,500 USD / N115,500,000" */
+/** "$87,500 USD / N122,500,000" */
 export const TOTAL_PRIZE_DISPLAY = `${TOTAL_PRIZE_USD_DISPLAY} USD / ${TOTAL_PRIZE_NGN_DISPLAY}`
 
 export function prizeDisplay(c: Competition): string {
@@ -416,15 +436,19 @@ function invariant(condition: boolean, message: string): void {
   if (!condition) throw new Error(`[lib/competitions] ${message}`)
 }
 
-invariant(COMPETITION_COUNT === 12, `expected 12 competitions, found ${COMPETITION_COUNT}`)
+invariant(COMPETITION_COUNT === 13, `expected 13 competitions, found ${COMPETITION_COUNT}`)
 invariant(CATEGORY_COUNT === 7, `expected 7 categories, found ${CATEGORY_COUNT}`)
 invariant(
-  TOTAL_PRIZE_USD === 82500,
-  `prize total must be $82,500, computed ${TOTAL_PRIZE_USD}`,
+  competitionsByCategory('barbering').length === 3,
+  `expected 3 barbering competitions, found ${competitionsByCategory('barbering').length}`,
 )
 invariant(
-  TOTAL_PRIZE_NGN === 115500000,
-  `naira prize total must be 115,500,000, computed ${TOTAL_PRIZE_NGN}`,
+  TOTAL_PRIZE_USD === 87500,
+  `prize total must be $87,500, computed ${TOTAL_PRIZE_USD}`,
+)
+invariant(
+  TOTAL_PRIZE_NGN === 122500000,
+  `naira prize total must be 122,500,000, computed ${TOTAL_PRIZE_NGN}`,
 )
 invariant(
   new Set(COMPETITIONS.map((c) => c.slug)).size === COMPETITION_COUNT,
@@ -452,17 +476,24 @@ for (const c of COMPETITIONS) {
     invariant(s.duration.trim().length > 0, `competition ${c.slug} session needs a duration`)
     invariant(s.time.trim().length > 0, `competition ${c.slug} session needs a time`)
   }
-  // A confirmed fee must carry both numeric values; an unconfirmed one must carry neither.
+  // A confirmed fee must carry a naira value; an unconfirmed one must not.
   invariant(
-    c.feeConfirmed ? c.feeUsd !== null && c.feeNgn !== null : c.feeUsd === null && c.feeNgn === null,
+    c.feeConfirmed ? c.feeNgn !== null : c.feeNgn === null,
     `competition ${c.slug} has inconsistent fee data`,
   )
-  if (c.feeConfirmed && c.feeUsd !== null && c.feeNgn !== null) {
-    invariant(
-      c.feeNgn === c.feeUsd * NGN_PER_USD,
-      `competition ${c.slug} fee must use ${NGN_PER_USD} per USD`,
-    )
-  }
+  // The 2026 revision sets one flat naira fee, published without any USD equivalent.
+  invariant(
+    c.feeNgn === ENTRY_FEE_NGN,
+    `competition ${c.slug} entry fee must be ${ENTRY_FEE_NGN}, found ${c.feeNgn}`,
+  )
+  invariant(
+    c.feeDisplay === ENTRY_FEE_DISPLAY,
+    `competition ${c.slug} must display the entry fee as ${ENTRY_FEE_DISPLAY}`,
+  )
+  invariant(
+    !/\$|USD/i.test(c.feeDisplay),
+    `competition ${c.slug} must not publish a USD entry fee`,
+  )
 }
 invariant(
   CATEGORIES.every((cat) => competitionsByCategory(cat.slug).length > 0),
