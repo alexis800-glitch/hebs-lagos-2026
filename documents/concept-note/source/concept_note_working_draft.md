@@ -121,7 +121,7 @@ Entry fee: ₦50,000. Prize: up to $7,500 USD (₦10,500,000) in cash prizes.
 Freestyle Design explores the intersection of barbering, creativity, and visual art. Barbers create an original haircut design using clean lines, patterns, shapes, and precision detailing. The finished look should be imaginative, balanced, technically clean, and visually impactful from every angle.
 Fast & Flawless Barber Competition
 Sunday, October 25, 2026, 4:00 to 4:15 PM, 15 minutes.
-Entry fee: ₦50,000. Prize: up to $5,000 USD (₦7,000,000) in cash prizes.
+Entry fee: ₦50,000. Prize: $5,000 USD (₦7,000,000) in cash prizes.
 The Fast & Flawless Barber Competition is a timed barbering challenge designed to showcase speed, precision, technical control, and professional execution under intense time pressure. Competitors must complete a professional-quality full haircut on one live model within 15 minutes. The finished look must include a clean, consistent full fade extending around the head and over the occipital bone, a sharp and balanced lineup, a properly cut and styled top, and a polished, competition-ready finish.
 Braiding
 Fast & Flawless Braiding Competition

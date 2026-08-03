@@ -81,7 +81,10 @@ export interface Competition {
   feeConfirmed: boolean
   /** Approved prize ceiling in USD. */
   prizeUsd: number
-  /** Flyers word most prizes as "up to"; Roots to Royalty states a flat figure. */
+  /**
+   * Flyers word most prizes as "up to". Roots to Royalty and Fast & Flawless Barber
+   * state flat figures and must never render with an "Up to" prefix.
+   */
   prizeIsUpTo: boolean
   registrationUrl: string
   order: number
@@ -159,7 +162,8 @@ export const COMPETITIONS: Competition[] = [
     feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,
     prizeUsd: 5000,
-    prizeIsUpTo: true,
+    // Management states a flat figure for this competition, not a ceiling.
+    prizeIsUpTo: false,
     registrationUrl: REGISTRATION_URL,
     order: 3,
   },
