@@ -262,8 +262,9 @@ export const COMPETITIONS: Competition[] = [
     name: 'Gilded Heritage Nail Art Competition',
     category: 'beauty',
     description:
-      'Gilded Heritage explores culture, craftsmanship, and luxury through nail design. Artists create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewellery, and cultural detail, using rich colour, gold accents, sculpted elements, intricate pattern, embellishment, and creative texture. The finished set should be original, balanced, technically clean, and a modern take on culture and elegance.',
-    sessions: [session(SAT, '2:00 – 3:15 PM', '75 min', '2026-10-24T14:00:00+01:00', '2026-10-24T15:15:00+01:00')],
+      'Gilded Heritage explores culture, craftsmanship, and luxury through nail design. Artists create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewellery, and cultural detail, using rich colour, gold accents, sculpted elements, intricate pattern, embellishment, and creative texture. The finished set should be original, balanced, technically clean, and a modern take on culture and elegance. The nail length must be a minimum of one inch.',
+    // Organiser correction, 2026-08-08: extended from 75 to 90 minutes.
+    sessions: [session(SAT, '2:00 – 3:30 PM', '90 min', '2026-10-24T14:00:00+01:00', '2026-10-24T15:30:00+01:00')],
     feeDisplay: ENTRY_FEE_DISPLAY,
     feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,

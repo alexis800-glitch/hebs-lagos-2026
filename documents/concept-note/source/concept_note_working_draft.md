@@ -53,7 +53,7 @@ Saturday, October 24, 2026
     Fast & Flawless Braiding Competition  |  12:30 to 1:00 PM  |  30 min
     Taste of Culture Food Tasting Competition  |  12:00 Noon to 5:00 PM  |  5 hours
     Freestyle Braid Art Competition  |  1:15 to 2:30 PM  |  75 min
-    Gilded Heritage Nail Art Competition  |  2:00 to 3:15 PM  |  75 min
+    Gilded Heritage Nail Art Competition  |  2:00 to 3:30 PM  |  90 min
     Freestyle Design Competition  |  2:45 to 3:45 PM  |  60 min
     Mic Drop Live Vocalist Competition  |  4:00 to 5:15 PM  |  75 min
 
@@ -151,9 +151,9 @@ Sunday, October 25, 2026, 1:45 to 2:30 PM, 45 minutes.
 Entry fee: ₦50,000. Prize: up to $5,000 USD (₦7,000,000) in cash prizes.
 Lash Couture focuses on creating a customized, polished lash look that enhances the model’s natural eye shape. Artists demonstrate precise isolation, controlled placement, symmetry, balance, and thoughtful lash mapping. The finished set should be clean, comfortable, technically sound, and professionally finished.
 Gilded Heritage Nail Art Competition
-Saturday, October 24, 2026, 2:00 to 3:15 PM, 75 minutes.
+Saturday, October 24, 2026, 2:00 to 3:30 PM, 90 minutes.
 Entry fee: ₦50,000. Prize: up to $7,500 USD (₦10,500,000) in cash prizes.
-Gilded Heritage explores culture, craftsmanship, and luxury through nail design. Artists create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewellery, and cultural detail, using rich colour, gold accents, sculpted elements, intricate pattern, embellishment, and creative texture. The finished set should be original, balanced, technically clean, and a modern take on culture and elegance.
+Gilded Heritage explores culture, craftsmanship, and luxury through nail design. Artists create a complete set inspired by heritage, traditional patterns, precious metals, textiles, jewellery, and cultural detail, using rich colour, gold accents, sculpted elements, intricate pattern, embellishment, and creative texture. The finished set should be original, balanced, technically clean, and a modern take on culture and elegance. The nail length must be a minimum of one inch.
 Fashion
 Roots to Royalty Fashion Runway Competition
 Sunday, October 25, 2026, 12:45 to 1:30 PM, 45 minutes.
