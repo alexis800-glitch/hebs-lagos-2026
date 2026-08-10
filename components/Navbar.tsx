@@ -63,11 +63,11 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" onClick={closeMenu} className="relative z-10 flex items-center">
             <Image
-              src="/assets/logos/hebs_logo_nav.png"
+              src="/assets/logos/hebs-lagos-2026-logo-nav.png"
               alt="HEBS Lagos 2026 Logo"
-              width={634}
-              height={529}
-              className="h-10 md:h-12 w-auto object-contain flex-shrink-0 block"
+              width={641}
+              height={600}
+              className="h-11 md:h-14 w-auto object-contain flex-shrink-0 block"
               priority
             />
           </Link>
