@@ -29,9 +29,16 @@ never cropped — only the fully transparent outer margin is removed.
 | Asset | Size | Purpose |
 |---|---|---|
 | `public/assets/logos/hebs-lagos-2026-logo-nav.png` | 641 × 600 | Header / navigation logo |
-| `app/icon.png` | 512 × 512 | Favicon (PNG) |
-| `app/apple-icon.png` | 180 × 180 | iOS home-screen icon |
-| `app/favicon.ico` | 16/32/48/256 | Legacy favicon |
 
-The square icons centre the trimmed artwork at 92% of the canvas. Aspect ratio
-of the trimmed artwork is 1.0683 (w/h) and is preserved in every derivative.
+Aspect ratio of the trimmed artwork is 1.0683 (w/h) and is preserved in every
+derivative.
+
+## Browser and app icons are deliberately NOT derived from this artwork
+
+`app/icon.png`, `app/apple-icon.png` and `app/favicon.ico` intentionally keep
+the earlier HEBS branding. The supplied Lagos artwork is a detailed composition
+— Africa map, LAGOS wordmark, 2026, and a HEBS roundel carrying "HAIR EDUCATION
+BEAUTY SUMMIT" — which reads well as the visible website identity but does not
+resolve at 16–32px. Making it work at icon sizes would require a simplified
+variant, and that is a separate brand-artwork decision that has not been
+approved. Do not "finish the job" by regenerating these icons from the source.
