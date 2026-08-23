@@ -1,5 +1,6 @@
 ﻿import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { eventDay } from "@/lib/competitions";
 
 import type { Metadata } from "next";
 
@@ -132,12 +133,12 @@ export default function TicketsPage() {
                   },
                   {
                     day: "Oct 24 — Main Event · Day 1",
-                    time: "11:00 AM – 6:00 PM",
+                    time: eventDay("2026-10-24").hours,
                     venue: "NJS Royale Events Center",
                   },
                   {
                     day: "Oct 25 — Main Event · Day 2",
-                    time: "10:00 AM – 5:00 PM",
+                    time: eventDay("2026-10-25").hours,
                     venue: "NJS Royale Events Center",
                   },
                 ].map((d) => (
