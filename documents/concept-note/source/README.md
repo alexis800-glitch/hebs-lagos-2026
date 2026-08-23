@@ -70,6 +70,28 @@ reviewed.docx` and the accompanying management decisions, supersedes it:
 ₦1,400 per USD now applies to **prizes only**. Contestant entry fees are no longer
 converted from USD at any rate.
 
+The **competition and schedule revision of 2026-08-23** (newly supplied Lagos flyer plus
+the accompanying management decisions) then amends that programme:
+
+- **Mic Drop Live Vocalist Competition is withdrawn**, and the **Music & Live
+  Entertainment** category with it
+- **Loc Retwist & Style Competition** takes its place under a new **Loc/Styling**
+  category: Saturday 24 October, 4:00 to 5:00 PM, 60 minutes, ₦50,000 entry fee, up to
+  $5,000 prize. The approved flyer summary is exactly four points — 60-minute retwist and
+  style challenge, natural locs, full-head retwist, no added hair — and nothing beyond
+  those may be published
+- the programme therefore stays at **thirteen competitions across seven categories**, and
+  the prize pool is **unchanged at $87,500 USD / ₦122,500,000** ($5,000 replaces $5,000)
+- **overall event hours** become **Saturday 24 October, 11:00 AM to 6:00 PM** and
+  **Sunday 25 October, 10:00 AM to 5:00 PM**, superseding the baseline's 12:00 Noon to
+  6:00 PM and 11:00 AM to 5:00 PM. Individual competition slots are **not** shifted with
+  them; every other competition keeps the time already approved for it
+
+> **Wrong source — do not use.** `Loc_Retwist_and_Style_Competition_Updated (1).pdf` was
+> confirmed on 2026-08-23 to be the wrong document for Nigeria. None of its DOMINION
+> wording, its $10,000 Winner-Take-All prize, or its final-battle details apply to the
+> Lagos competition, and none of it may enter this pipeline.
+
 Per-competition prizes come from the competition flyers linked inside the supplied
 document. The script asserts that the thirteen prize rows total exactly $87,500 and
 ₦122,500,000, and that every entry fee equals ₦50,000, so an edit that breaks either
@@ -83,6 +105,12 @@ Sanity checks for a correct build:
   $87,000, $92,500, ₦115,500,000, ₦112,000,000 or ₦121,800,000
 - every entry fee reads **₦50,000**, with zero occurrences of ₦70,000, ₦105,000, ₦140,000,
   or any USD entry-fee figure
+- **zero** occurrences of Mic Drop, vocalist, Music & Live Entertainment, DOMINION,
+  Winner-Take-All, or a $10,000 Loc prize
+- **Loc/Styling** and **Loc Retwist & Style Competition** each appear, timed 4:00 to
+  5:00 PM on 24 October at 60 minutes
+- overall event hours read **11:00 AM to 6:00 PM** (24 Oct) and **10:00 AM to 5:00 PM**
+  (25 Oct)
 
 Also approved as published and **not** to be changed without sign-off: sponsorship tiers,
 exhibitor and vendor booth packages, and attendee ticket prices. Those remain quoted in

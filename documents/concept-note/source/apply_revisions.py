@@ -146,10 +146,10 @@ segs(kids[7], [
 _p = clone_after(BODY_TPL, kids[7])
 segs(_p, [
     ("The Lagos edition is broader than the editions before it. Alongside hair, barbering, braiding, makeup, nails, and fashion, the 2026 programme adds ", 0),
-    ("cultural food and live music competition", 1),
+    ("cultural food and loc styling competitions", 1),
     (", and is built in partnership with the tourism and hospitality identity of the Epe region that hosts it.", 0)])
 
-segs(kids[8], [("The summit brings together the full value chain of the beauty and creative economy under one roof, including hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, caterers, seafood and cultural food vendors, vocalists and music creatives, educators, salon owners, manufacturers, distributors, investors, tourism and hospitality stakeholders, and brand leaders from Nigeria, across Africa, and the diaspora.", 0)])
+segs(kids[8], [("The summit brings together the full value chain of the beauty and creative economy under one roof, including hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, caterers, seafood and cultural food vendors, loc stylists, educators, salon owners, manufacturers, distributors, investors, tourism and hospitality stakeholders, and brand leaders from Nigeria, across Africa, and the diaspora.", 0)])
 
 segs(kids[9], [
     ("It is where ", 0),
@@ -162,11 +162,17 @@ assert g.rows[4].cells[0].text.strip() == 'Competition tracks', g.rows[4].cells[
 cell_set(g.rows[3].cells[0], [("Total prize pool", 0)])
 cell_set(g.rows[3].cells[1], [("$87,500 USD / ₦122,500,000", 1)])
 cell_set(g.rows[4].cells[0], [("Competition programme", 0)])
-cell_set(g.rows[4].cells[1], [("Thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment", 0)])
-cell_set(g.rows[5].cells[1], [("Education, exhibition, competition, panels, networking, cultural food, live music, and hospitality experiences", 0)])
+cell_set(g.rows[4].cells[1], [("Thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and loc styling", 0)])
+cell_set(g.rows[5].cells[1], [("Education, exhibition, competition, panels, networking, cultural food, and hospitality experiences", 0)])
 
 # ============================ DATE AND VENUE ============================
-segs(kids[22], [("Exhibition floor, education sessions, panel discussions, and seven competitions: Battle of the Fades, Fast & Flawless Braiding, Taste of Culture, Freestyle Braid Art, Gilded Heritage Nail Art, Freestyle Design, and Mic Drop Live Vocalist.", 0)])
+# Overall event hours, approved 2026-08-23. These supersede the baseline's
+# 12:00 Noon to 6:00 PM and 11:00 AM to 5:00 PM. Individual competition slots are
+# unaffected and keep the times previously approved for them.
+segs(kids[20], [("Saturday, October 24, 2026, 11:00 AM to 6:00 PM", 0)])
+segs(kids[24], [("Sunday, October 25, 2026, 10:00 AM to 5:00 PM", 0)])
+
+segs(kids[22], [("Exhibition floor, education sessions, panel discussions, and seven competitions: Battle of the Fades, Fast & Flawless Braiding, Taste of Culture, Freestyle Braid Art, Gilded Heritage Nail Art, Freestyle Design, and Loc Retwist & Style.", 0)])
 segs(kids[26], [("Exhibition continues, alongside masterclasses and panels, with seven competitions: Taste of Culture, Traditional Braiding, Roots to Royalty Fashion Runway, Bridal Beauty Makeup, Lash Couture, Flawless Frontals, and Fast & Flawless Barber.", 0)])
 segs(kids[27], [
     ("Exhibition days are ", 0),
@@ -182,7 +188,7 @@ SCHEDULE = [
         ('Freestyle Braid Art Competition', '1:15 to 2:30 PM', '75 min'),
         ('Gilded Heritage Nail Art Competition', '2:00 to 3:30 PM', '90 min'),
         ('Freestyle Design Competition', '2:45 to 3:45 PM', '60 min'),
-        ('Mic Drop Live Vocalist Competition', '4:00 to 5:15 PM', '75 min'),
+        ('Loc Retwist & Style Competition', '4:00 to 5:00 PM', '60 min'),
     ]),
     ('Sunday, October 25, 2026', [
         ('Taste of Culture Food Tasting Competition', '11:00 AM to 4:00 PM', '5 hours'),
@@ -202,14 +208,14 @@ for day, rows in SCHEDULE:
 
 # ============================ THEME AND POSITIONING ============================
 segs(kids[32], [("HEBS Lagos is built as a platform for Nigeria’s beauty and creative industries, positioning the country as a serious destination for beauty, culture, entrepreneurship, and international collaboration.", 0)])
-segs(kids[33], [("The 2026 edition widens that platform. Beauty, fashion, hair, food, music, tourism, and hospitality are not separate economies in Nigeria. They are the same creative economy, powered by the same entrepreneurs, serving the same audience, and carrying the same cultural story. HEBS Lagos 2026 programmes them together: the salon floor, the kitchen, the runway, and the stage in one venue, across one weekend.", 0)])
+segs(kids[33], [("The 2026 edition widens that platform. Beauty, fashion, hair, food, tourism, and hospitality are not separate economies in Nigeria. They are the same creative economy, powered by the same entrepreneurs, serving the same audience, and carrying the same cultural story. HEBS Lagos 2026 programmes them together: the salon floor, the kitchen, the runway, and the stage in one venue, across one weekend.", 0)])
 _p = clone_after(BODY_TPL, kids[33])
 segs(_p, [("The 2026 edition is also a homecoming. An industry built and proven in the diaspora returns to the culture that shaped it, bringing international standards, international buyers, and international attention with it, and doing so in a region of Lagos whose own identity is built on tourism, hospitality, fishing, and food.", 0)])
 
 # ============================ WHAT SETS HEBS APART ============================
 segs(kids[35], [
     ("Industry fusion.", 1),
-    (" A single platform where hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, cultural food vendors, vocalists, and educators work alongside each other and alongside global influencers, rather than in separate events.", 0)])
+    (" A single platform where hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, cultural food vendors, loc stylists, and educators work alongside each other and alongside global influencers, rather than in separate events.", 0)])
 segs(kids[37], [
     ("A serious competition purse.", 1),
     (" An ", 0),
@@ -218,20 +224,20 @@ segs(kids[37], [
 _p = clone_after(LIST_TPL, kids[37])
 segs(_p, [
     ("Culture on the programme, not on the poster.", 1),
-    (" Local food, seafood heritage, and live music are competition categories in their own right, with their own judges, their own stage time, and their own prizes.", 0)])
+    (" Local food, seafood heritage, and loc styling are competition categories in their own right, with their own judges, their own stage time, and their own prizes.", 0)])
 
 # ============================ OBJECTIVES ============================
 segs(kids[40], [("HEBS Lagos 2026 is built to deliver against seven objectives.", 0)])
 segs(kids[42], [
     ("Connect professionals worldwide.", 1),
-    (" Create a hub where stylists, barbers, braiders, makeup artists, nail technicians, chefs, music creatives, educators, and brand leaders can meet and build lasting commercial relationships.", 0)])
+    (" Create a hub where stylists, barbers, braiders, makeup artists, nail technicians, chefs, loc stylists, educators, and brand leaders can meet and build lasting commercial relationships.", 0)])
 segs(kids[44], [
     ("Drive commercial growth.", 1),
     (" Connect exhibitors, manufacturers, distributors, and food and hospitality vendors directly to a concentrated, qualified audience and to new distribution channels.", 0)])
 obj_new = _p = clone_after(LIST_TPL, kids[44])
 segs(_p, [
     ("Celebrate and commercialise local culture.", 1),
-    (" Give the food, seafood, music, and hospitality traditions of the host region a professional competitive platform, and turn cultural pride into visibility, bookings, and business for local vendors and creatives.", 0)])
+    (" Give the food, seafood, and hospitality traditions of the host region a professional competitive platform, and turn cultural pride into visibility, bookings, and business for local vendors and creatives.", 0)])
 segs(kids[45], [
     ("Position Lagos internationally.", 1),
     (" Establish the city, and the Lekki-Epe tourism corridor within it, as an emerging beauty, culture, and destination-event location that attracts delegates, media, and investment.", 0)])
@@ -248,8 +254,8 @@ anchor = kids[50]
 for label, body in [
     ("Food and Hospitality Attendees",
      "Food vendors, chefs, caterers, seafood vendors, cultural food entrepreneurs, restaurateurs, catering businesses, and hospitality operators."),
-    ("Music and Performance Attendees",
-     "Vocalists, music creatives, performers, producers, artist managers, and entertainment professionals."),
+    ("Loc and Natural Hair Attendees",
+     "Loctitians, natural hair specialists, salon owners, and stylists working with locs and natural texture."),
 ]:
     lab = clone_after(GOLD_TPL, anchor); single(lab, label)
     bod = clone_after(BODY_TPL, lab);    segs(bod, [(body, 0)])
@@ -263,12 +269,10 @@ segs(kids[54], [("The Epe community and its cultural representatives, beauty and
 head = clone_before(SEC_TPL, kids[55]); single(head, "Epe Cultural and Tourism Activation")
 epe = [
     [("HEBS Lagos 2026 is hosted on the Lekki-Epe corridor, in a part of Lagos State known for its tourism and hospitality economy, its fishing communities, and one of the strongest seafood and cultural food traditions in the country. The 2026 edition is built to reflect that identity rather than sit apart from it.", 0)],
-    [("Two new competition categories carry the activation. The ", 0),
+    [("A new competition category carries the activation. The ", 0),
      ("Taste of Culture Food Tasting Competition", 1),
-     (" puts Epe’s seafood and cultural cooking on a judged stage in front of thousands of attendees, and the ", 0),
-     ("Mic Drop Vocalist Competition", 1),
-     (" gives local and visiting vocal talent a professional main-stage platform. Both categories are held on the exhibition days, in the same venue, in front of the same audience, judges, sponsors, and media as the beauty championships.", 0)],
-    [("The intent is straightforward. Cooks, caterers, seafood vendors, cultural food entrepreneurs, vocalists, and music creatives receive the same standard of platform, judging, production, and commercial exposure that HEBS already gives to stylists, barbers, and braiders.", 0)],
+     (" puts Epe’s seafood and cultural cooking on a judged stage in front of thousands of attendees. It is held on the exhibition days, in the same venue, in front of the same audience, judges, sponsors, and media as the beauty championships.", 0)],
+    [("The intent is straightforward. Cooks, caterers, seafood vendors, and cultural food entrepreneurs receive the same standard of platform, judging, production, and commercial exposure that HEBS already gives to stylists, barbers, and braiders.", 0)],
     [("A proposed Epe community sponsorship will support ", 0),
      ("up to 200 contestants", 1),
      (" by covering their entry participation, creating access for local talent and strengthening community participation. Contestant allocation across categories will be confirmed with the sponsor ahead of registration.", 0)],
@@ -352,11 +356,12 @@ CATEGORIES = [
          ENTRY_FEE, 'up to $10,000 USD (₦14,000,000)',
          'Taste of Culture celebrates heritage, community, and creativity through food. Competitors present a dish inspired by their culture, family traditions, regional influence, or personal story. Each entry should demonstrate balanced flavour, thoughtful presentation, quality preparation, and a meaningful connection to the culture it represents.'),
     ]),
-    ('Music & Live Entertainment', [
-        ('Mic Drop Live Vocalist Competition',
-         'Saturday, October 24, 2026, 4:00 to 5:15 PM, 75 minutes.',
+    ('Loc/Styling', [
+        ('Loc Retwist & Style Competition',
+         # Replaces the withdrawn Mic Drop slot on 24 October, at 60 minutes rather than 75.
+         'Saturday, October 24, 2026, 4:00 to 5:00 PM, 60 minutes.',
          ENTRY_FEE, 'up to $5,000 USD (₦7,000,000)',
-         'Mic Drop celebrates live vocal talent, individuality, and powerful stage performance. Vocalists present a song that showcases their voice, musical interpretation, emotional connection, and personal artistry. Each performance should demonstrate vocal control, confidence, originality, stage presence, and the ability to connect with a live audience.'),
+         'Loc Retwist & Style is a 60-minute retwist and style challenge worked on natural locs. Competitors complete a full-head retwist and finish it as a styled look. No added hair is permitted.'),
     ]),
 ]
 ALL_COMPS = [c for _, comps in CATEGORIES for c in comps]
@@ -367,7 +372,7 @@ assert all(fee == ENTRY_FEE for _n, _w, fee, _p, _d in ALL_COMPS), 'every entry 
 segs(kids[56], [
     ("HEBS Lagos 2026 stages ", 0),
     ("thirteen competitions across seven categories", 1),
-    (": barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment. The combined prize pool is ", 0),
+    (": barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and loc styling. The combined prize pool is ", 0),
     ("$87,500 USD (₦122,500,000)", 1),
     (". The contestant entry fee is ", 0),
     ("₦50,000 per competition", 1),
@@ -400,7 +405,7 @@ PRIZE_ROWS = [
     ('Gilded Heritage Nail Art Competition', '$7,500', '₦10,500,000'),
     ('Roots to Royalty Fashion Runway Competition', '$7,500', '₦10,500,000'),
     ('Taste of Culture Food Tasting Competition', '$10,000', '₦14,000,000'),
-    ('Mic Drop Live Vocalist Competition', '$5,000', '₦7,000,000'),
+    ('Loc Retwist & Style Competition', '$5,000', '₦7,000,000'),
 ]
 _usd = sum(int(r[1].replace('$', '').replace(',', '')) for r in PRIZE_ROWS)
 _ngn = sum(int(r[2].replace('₦', '').replace(',', '')) for r in PRIZE_ROWS)
@@ -438,7 +443,7 @@ segs(kids[149], [
 rt = T(153)
 assert 'Registration Opens' in rt.rows[1].cells[0].text, rt.rows[1].cells[0].text
 cell_set(rt.rows[1].cells[2], [
-    ("Register at hebseventportal.com/register and pay the entry fee for your chosen competition. Open worldwide to barbers, braiders, frontal and installation stylists, makeup artists, lash artists, nail artists, fashion designers, chefs and cultural food entrepreneurs, vocalists, and beauty, culture, and fashion visionaries.", 0)])
+    ("Register at hebseventportal.com/register and pay the entry fee for your chosen competition. Open worldwide to barbers, braiders, frontal and installation stylists, makeup artists, lash artists, nail artists, fashion designers, chefs and cultural food entrepreneurs, loc stylists, and beauty, culture, and fashion visionaries.", 0)])
 
 # The former Signature grouping no longer exists, so the stages that referenced it are
 # generalised. Wording kept minimal: no new requirement is introduced.

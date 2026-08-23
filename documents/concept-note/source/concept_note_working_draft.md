@@ -20,16 +20,16 @@ Official concept note prepared for partners, exhibitors, sponsors, and media.
 Event Overview
 The Hair Education Beauty Summit (HEBS) is an international platform for beauty, culture, and creative enterprise. HEBS launched in New Jersey, USA in 2024 and returned in 2025 with a sold-out edition that established its reputation internationally. Following those earlier United States editions, HEBS staged another sold-out edition from 2–4 May 2026.
 In October 2026 the summit comes home. HEBS Lagos 2026 will mark the event’s fourth edition and its Lagos debut: three days of education, competition, exhibition, and cultural programming, hosted at two venues on the Lekki-Epe corridor of Lagos.
-The Lagos edition is broader than the editions before it. Alongside hair, barbering, braiding, makeup, nails, and fashion, the 2026 programme adds cultural food and live music competition, and is built in partnership with the tourism and hospitality identity of the Epe region that hosts it.
-The summit brings together the full value chain of the beauty and creative economy under one roof, including hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, caterers, seafood and cultural food vendors, vocalists and music creatives, educators, salon owners, manufacturers, distributors, investors, tourism and hospitality stakeholders, and brand leaders from Nigeria, across Africa, and the diaspora.
+The Lagos edition is broader than the editions before it. Alongside hair, barbering, braiding, makeup, nails, and fashion, the 2026 programme adds cultural food and loc styling competitions, and is built in partnership with the tourism and hospitality identity of the Epe region that hosts it.
+The summit brings together the full value chain of the beauty and creative economy under one roof, including hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, caterers, seafood and cultural food vendors, loc stylists, educators, salon owners, manufacturers, distributors, investors, tourism and hospitality stakeholders, and brand leaders from Nigeria, across Africa, and the diaspora.
 It is where education meets opportunity, creativity meets commerce, culture meets industry, and Nigerian talent connects with the global marketplace.
 At a Glance
     Dates  |  October 23 to 25, 2026 (three days)
     City  |  Lagos, Nigeria
     Expected attendance  |  3,000+
     Total prize pool  |  $87,500 USD / ₦122,500,000
-    Competition programme  |  Thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment
-    Format  |  Education, exhibition, competition, panels, networking, cultural food, live music, and hospitality experiences
+    Competition programme  |  Thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and loc styling
+    Format  |  Education, exhibition, competition, panels, networking, cultural food, and hospitality experiences
 
 Date and Venue
 HEBS Lagos 2026 runs across two official venues.
@@ -38,11 +38,11 @@ Friday, October 23, 2026, 2:00 PM to 7:00 PM
 NJS Royale Beach Resort, Lagos, Nigeria
 An opening celebration with live entertainment, hospitality, and first-night networking for delegates, sponsors, competitors, and invited guests.
 HEBS Main Summit, Day One
-Saturday, October 24, 2026, 12:00 Noon to 6:00 PM
+Saturday, October 24, 2026, 11:00 AM to 6:00 PM
 NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria
-Exhibition floor, education sessions, panel discussions, and seven competitions: Battle of the Fades, Fast & Flawless Braiding, Taste of Culture, Freestyle Braid Art, Gilded Heritage Nail Art, Freestyle Design, and Mic Drop Live Vocalist.
+Exhibition floor, education sessions, panel discussions, and seven competitions: Battle of the Fades, Fast & Flawless Braiding, Taste of Culture, Freestyle Braid Art, Gilded Heritage Nail Art, Freestyle Design, and Loc Retwist & Style.
 HEBS Main Summit, Day Two
-Sunday, October 25, 2026, 11:00 AM to 5:00 PM
+Sunday, October 25, 2026, 10:00 AM to 5:00 PM
 NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria
 Exhibition continues, alongside masterclasses and panels, with seven competitions: Taste of Culture, Traditional Braiding, Roots to Royalty Fashion Runway, Bridal Beauty Makeup, Lash Couture, Flawless Frontals, and Fast & Flawless Barber.
 Exhibition days are October 24 and 25, 2026. The Main Summit venue offers three activated floors, a main stage, masterclass spaces, a cultural food and tasting area, and a dedicated exhibition and vendor floor.
@@ -55,7 +55,7 @@ Saturday, October 24, 2026
     Freestyle Braid Art Competition  |  1:15 to 2:30 PM  |  75 min
     Gilded Heritage Nail Art Competition  |  2:00 to 3:30 PM  |  90 min
     Freestyle Design Competition  |  2:45 to 3:45 PM  |  60 min
-    Mic Drop Live Vocalist Competition  |  4:00 to 5:15 PM  |  75 min
+    Loc Retwist & Style Competition  |  4:00 to 5:00 PM  |  60 min
 
 Sunday, October 25, 2026
     Competition  |  Time  |  Duration
@@ -73,21 +73,21 @@ Theme and Positioning
 Education, innovation, competition, business, and culture, all under one roof.
 
 HEBS Lagos is built as a platform for Nigeria’s beauty and creative industries, positioning the country as a serious destination for beauty, culture, entrepreneurship, and international collaboration.
-The 2026 edition widens that platform. Beauty, fashion, hair, food, music, tourism, and hospitality are not separate economies in Nigeria. They are the same creative economy, powered by the same entrepreneurs, serving the same audience, and carrying the same cultural story. HEBS Lagos 2026 programmes them together: the salon floor, the kitchen, the runway, and the stage in one venue, across one weekend.
+The 2026 edition widens that platform. Beauty, fashion, hair, food, tourism, and hospitality are not separate economies in Nigeria. They are the same creative economy, powered by the same entrepreneurs, serving the same audience, and carrying the same cultural story. HEBS Lagos 2026 programmes them together: the salon floor, the kitchen, the runway, and the stage in one venue, across one weekend.
 The 2026 edition is also a homecoming. An industry built and proven in the diaspora returns to the culture that shaped it, bringing international standards, international buyers, and international attention with it, and doing so in a region of Lagos whose own identity is built on tourism, hospitality, fishing, and food.
 What Sets HEBS Apart
-Industry fusion. A single platform where hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, cultural food vendors, vocalists, and educators work alongside each other and alongside global influencers, rather than in separate events.
+Industry fusion. A single platform where hairstylists, barbers, braiders, makeup artists, nail technicians, fashion designers, chefs, cultural food vendors, loc stylists, and educators work alongside each other and alongside global influencers, rather than in separate events.
 Practical education. Sessions are built around technical skills and real business application, so what attendees learn can be used immediately.
 A serious competition purse. An $87,500 USD (₦122,500,000) cumulative prize pool across thirteen competitions, the largest in African beauty competition, staged as a full production with music, lighting, and a live audience.
-Culture on the programme, not on the poster. Local food, seafood heritage, and live music are competition categories in their own right, with their own judges, their own stage time, and their own prizes.
+Culture on the programme, not on the poster. Local food, seafood heritage, and loc styling are competition categories in their own right, with their own judges, their own stage time, and their own prizes.
 International exchange. Global beauty trends brought to Lagos and blended with African influence, creating genuine creative exchange and new commercial contacts.
 Objectives
 HEBS Lagos 2026 is built to deliver against seven objectives.
 Bridge education with opportunity. Deliver technical training, mentorship, and access to current global trends and product innovation for Nigerian and African professionals.
-Connect professionals worldwide. Create a hub where stylists, barbers, braiders, makeup artists, nail technicians, chefs, music creatives, educators, and brand leaders can meet and build lasting commercial relationships.
+Connect professionals worldwide. Create a hub where stylists, barbers, braiders, makeup artists, nail technicians, chefs, loc stylists, educators, and brand leaders can meet and build lasting commercial relationships.
 Showcase and reward excellence. Stage Africa's highest-value beauty championship, giving strong talent a professional platform, credible judging, and real exposure.
 Drive commercial growth. Connect exhibitors, manufacturers, distributors, and food and hospitality vendors directly to a concentrated, qualified audience and to new distribution channels.
-Celebrate and commercialise local culture. Give the food, seafood, music, and hospitality traditions of the host region a professional competitive platform, and turn cultural pride into visibility, bookings, and business for local vendors and creatives.
+Celebrate and commercialise local culture. Give the food, seafood, and hospitality traditions of the host region a professional competitive platform, and turn cultural pride into visibility, bookings, and business for local vendors and creatives.
 Position Lagos internationally. Establish the city, and the Lekki-Epe tourism corridor within it, as an emerging beauty, culture, and destination-event location that attracts delegates, media, and investment.
 Support the next generation. Help keep the future of beauty, grooming, fashion, food, and creative enterprise in Nigeria inclusive, innovative, and grounded in technical skill.
 Target Audience
@@ -96,20 +96,20 @@ Professional Attendees
 Salon owners, master stylists, barbers, braiders, makeup artists, nail technicians, natural hair stylists, locticians, fashion designers, fashion stylists, creative directors, beauty educators, students, and apprentices.
 Food and Hospitality Attendees
 Food vendors, chefs, caterers, seafood vendors, cultural food entrepreneurs, restaurateurs, catering businesses, and hospitality operators.
-Music and Performance Attendees
-Vocalists, music creatives, performers, producers, artist managers, and entertainment professionals.
+Loc and Natural Hair Attendees
+Loctitians, natural hair specialists, salon owners, and stylists working with locs and natural texture.
 Commercial and Institutional Attendees
 Global beauty brands, investors, manufacturers, distributors, brand founders, creative entrepreneurs, tourism and hospitality stakeholders, and industry media.
 Community and Cultural Audience
 The Epe community and its cultural representatives, beauty and food consumers, cultural attendees, and the wider Lagos creative community, drawn by the competition production, runway presentations, cultural food programming, and pre-party programming.
 Epe Cultural and Tourism Activation
 HEBS Lagos 2026 is hosted on the Lekki-Epe corridor, in a part of Lagos State known for its tourism and hospitality economy, its fishing communities, and one of the strongest seafood and cultural food traditions in the country. The 2026 edition is built to reflect that identity rather than sit apart from it.
-Two new competition categories carry the activation. The Taste of Culture Food Tasting Competition puts Epe’s seafood and cultural cooking on a judged stage in front of thousands of attendees, and the Mic Drop Vocalist Competition gives local and visiting vocal talent a professional main-stage platform. Both categories are held on the exhibition days, in the same venue, in front of the same audience, judges, sponsors, and media as the beauty championships.
-The intent is straightforward. Cooks, caterers, seafood vendors, cultural food entrepreneurs, vocalists, and music creatives receive the same standard of platform, judging, production, and commercial exposure that HEBS already gives to stylists, barbers, and braiders.
+A new competition category carries the activation. The Taste of Culture Food Tasting Competition puts Epe’s seafood and cultural cooking on a judged stage in front of thousands of attendees. It is held on the exhibition days, in the same venue, in front of the same audience, judges, sponsors, and media as the beauty championships.
+The intent is straightforward. Cooks, caterers, seafood vendors, and cultural food entrepreneurs receive the same standard of platform, judging, production, and commercial exposure that HEBS already gives to stylists, barbers, and braiders.
 A proposed Epe community sponsorship will support up to 200 contestants by covering their entry participation, creating access for local talent and strengthening community participation. Contestant allocation across categories will be confirmed with the sponsor ahead of registration.
 Beyond competition, the activation is designed to deliver measurable local value: visibility for Epe as a destination for food, hospitality, and cultural tourism; trade for local food vendors, caterers, transport operators, and hospitality businesses across the event weekend; a route to market for cultural food entrepreneurs seeking catering contracts, retail listings, and media coverage; and a recurring annual platform that returns to the region each year rather than a single visit.
 Competition Categories
-HEBS Lagos 2026 stages thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and music and live entertainment. The combined prize pool is $87,500 USD (₦122,500,000). The contestant entry fee is ₦50,000 per competition, the same for every competition.
+HEBS Lagos 2026 stages thirteen competitions across seven categories: barbering, braiding, hair installation and styling, beauty, fashion, culinary and culture, and loc styling. The combined prize pool is $87,500 USD (₦122,500,000). The contestant entry fee is ₦50,000 per competition, the same for every competition.
 Barbering
 Battle of the Fades Competition
 Saturday, October 24, 2026, 12:30 to 1:00 PM, 30 minutes.
@@ -164,11 +164,11 @@ Taste of Culture Food Tasting Competition
 Saturday, October 24, 2026, 12:00 Noon to 5:00 PM and Sunday, October 25, 2026, 11:00 AM to 4:00 PM, five hours each day.
 Entry fee: ₦50,000. Prize: up to $10,000 USD (₦14,000,000) in cash prizes.
 Taste of Culture celebrates heritage, community, and creativity through food. Competitors present a dish inspired by their culture, family traditions, regional influence, or personal story. Each entry should demonstrate balanced flavour, thoughtful presentation, quality preparation, and a meaningful connection to the culture it represents.
-Music & Live Entertainment
-Mic Drop Live Vocalist Competition
-Saturday, October 24, 2026, 4:00 to 5:15 PM, 75 minutes.
+Loc/Styling
+Loc Retwist & Style Competition
+Saturday, October 24, 2026, 4:00 to 5:00 PM, 60 minutes.
 Entry fee: ₦50,000. Prize: up to $5,000 USD (₦7,000,000) in cash prizes.
-Mic Drop celebrates live vocal talent, individuality, and powerful stage performance. Vocalists present a song that showcases their voice, musical interpretation, emotional connection, and personal artistry. Each performance should demonstrate vocal control, confidence, originality, stage presence, and the ability to connect with a live audience.
+Loc Retwist & Style is a 60-minute retwist and style challenge worked on natural locs. Competitors complete a full-head retwist and finish it as a styled look. No added hair is permitted.
 Prize Pool
 
     $87,500 USD / ₦122,500,000
@@ -187,7 +187,7 @@ The largest prize purse in African beauty competition history.
     Gilded Heritage Nail Art Competition  |  $7,500  |  ₦10,500,000
     Roots to Royalty Fashion Runway Competition  |  $7,500  |  ₦10,500,000
     Taste of Culture Food Tasting Competition  |  $10,000  |  ₦14,000,000
-    Mic Drop Live Vocalist Competition  |  $5,000  |  ₦7,000,000
+    Loc Retwist & Style Competition  |  $5,000  |  ₦7,000,000
     Total prize pool  |  $87,500  |  ₦122,500,000
 
 Alongside the prize money, winners receive the HEBS Championship Trophy, recognition across HEBS platforms, media coverage and editorial features, brand collaboration and sponsorship opportunities, and exposure to judges and industry leaders.
@@ -262,7 +262,7 @@ Registration and Participation
 For Competitors
 The application process runs in four stages.
     Stage  |  Timing  |  Detail
-    Registration Opens  |  Open now  |  Register at hebseventportal.com/register and pay the entry fee for your chosen competition. Open worldwide to barbers, braiders, frontal and installation stylists, makeup artists, lash artists, nail artists, fashion designers, chefs and cultural food entrepreneurs, vocalists, and beauty, culture, and fashion visionaries.
+    Registration Opens  |  Open now  |  Register at hebseventportal.com/register and pay the entry fee for your chosen competition. Open worldwide to barbers, braiders, frontal and installation stylists, makeup artists, lash artists, nail artists, fashion designers, chefs and cultural food entrepreneurs, loc stylists, and beauty, culture, and fashion visionaries.
     Video Submission and Registration Deadline  |  October 15, 2026
 11:59 PM WAT  |  Where a video submission is required for a competition, competitors submit a 3-minute MP4 or MOV video to casting@hebslagos.com showing their name, competition, work-in-progress clips, and a before and after transformation. All registrations and submissions must be complete by the deadline.
     Contestant Notification  |  1 to 3 business days after submission  |  All entrants are told whether they have been selected to compete.
@@ -283,7 +283,7 @@ Every competition carries the same contestant entry fee of ₦50,000. Competitor
     Gilded Heritage Nail Art Competition  |  ₦50,000
     Roots to Royalty Fashion Runway Competition  |  ₦50,000
     Taste of Culture Food Tasting Competition  |  ₦50,000
-    Mic Drop Live Vocalist Competition  |  ₦50,000
+    Loc Retwist & Style Competition  |  ₦50,000
 
 All entry fees are non-refundable and are quoted and paid in naira on the official portal. Competitors arrange and pay for their own travel and lodging to Lagos. HEBS provides the stage production and, where applicable, the official competition equipment and styling products supplied by our partner brands.
 For Attendees and Delegates
