@@ -124,11 +124,11 @@ export default function Footer() {
                   </p>
                   <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
                     Oct 24 · Main Event Day 1 ·{" "}
-                    <span className="font-bold text-white">12:00 Noon – 6:00 PM</span>
+                    <span className="font-bold text-white">11:00 AM – 6:00 PM</span>
                   </p>
                   <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
                     Oct 25 · Main Event Day 2 ·{" "}
-                    <span className="font-bold text-white">11:00 AM – 5:00 PM</span>
+                    <span className="font-bold text-white">10:00 AM – 5:00 PM</span>
                   </p>
                 </div>
               </div>

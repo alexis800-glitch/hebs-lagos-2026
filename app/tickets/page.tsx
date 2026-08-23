@@ -132,12 +132,12 @@ export default function TicketsPage() {
                   },
                   {
                     day: "Oct 24 — Main Event · Day 1",
-                    time: "12:00 Noon – 6:00 PM",
+                    time: "11:00 AM – 6:00 PM",
                     venue: "NJS Royale Events Center",
                   },
                   {
                     day: "Oct 25 — Main Event · Day 2",
-                    time: "11:00 AM – 5:00 PM",
+                    time: "10:00 AM – 5:00 PM",
                     venue: "NJS Royale Events Center",
                   },
                 ].map((d) => (

@@ -81,7 +81,7 @@ const FEATURES: Feature[] = [
     color: "#e91e8c",
     counter: { value: COMPETITION_COUNT, prefix: "", suffix: "", duration: 1.2 },
     label: "Competitions",
-    desc: `Barbering, braiding, frontals, beauty, fashion, cultural food, and live vocals — ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories on one global stage.`,
+    desc: `Barbering, braiding, frontals, beauty, fashion, cultural food, and locs — ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories on one global stage.`,
     bgImage: "/images/hebs-2025/competition/competition-winners-01.png",
     bgPosition: "object-top",
   },

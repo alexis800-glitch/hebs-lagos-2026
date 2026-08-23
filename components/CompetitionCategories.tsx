@@ -96,7 +96,7 @@ const CATEGORY_STYLE: Record<
   beauty: { color: "#f59e0b", image: "/images/categories/makeup-artist-competition-02.png", Icon: IconBrush },
   fashion: { color: "#e91e8c", image: "/images/categories/fashion-stylist-competition-01.png", Icon: IconLightning },
   "culinary-culture": { color: "#9b59b6", image: "/images/highlights/industry-experts-panel.png", Icon: IconDiamond },
-  "music-live-entertainment": { color: "#e91e8c", image: "/images/highlights/industry-experts-panel.png", Icon: IconBook },
+  "loc-styling": { color: "#e91e8c", image: "/images/categories/hairstylist-competition-01.png", Icon: IconBook },
 };
 
 const CATEGORIES = groupedByCategory().map(({ category, competitions }) => ({
@@ -136,7 +136,7 @@ export default function CompetitionCategories() {
           </h2>
           <p className="text-zinc-300 text-[15px] leading-relaxed max-w-2xl mx-auto">
             From barbering and braiding to frontals, lashes, nails, makeup, fashion,
-            cultural food, and live vocals, HEBS brings Africa&apos;s finest talents
+            cultural food, and locs, HEBS brings Africa&apos;s finest talents
             together on one global platform for {TOTAL_PRIZE_DISPLAY} in prizes.
           </p>
         </motion.div>

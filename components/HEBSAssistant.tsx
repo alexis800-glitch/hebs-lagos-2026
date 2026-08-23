@@ -56,7 +56,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["what is hebs", "about hebs", "what hebs", "tell me about", "hair education", "beauty summit", "what is the event", "summit"],
     answer:
-      `HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and also hosted a sold-out United States edition from 2–4 May 2026. The summit is now coming home to Lagos for October 2026 — the fourth and biggest edition yet. It brings together hairstylists, barbers, braiders, frontal and lash artists, makeup artists, nail technicians, fashion designers, chefs, and vocalists for world-class education, high-stakes competition, and global networking. The event features ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories and a ${TOTAL_PRIZE_DISPLAY} cumulative prize pool.`,
+      `HEBS (Hair Education Beauty Summit) is a premier international beauty and fashion summit. HEBS launched in New Jersey, USA in 2024, returned with a sold-out 2025 edition that built its international reputation, and also hosted a sold-out United States edition from 2–4 May 2026. The summit is now coming home to Lagos for October 2026 — the fourth and biggest edition yet. It brings together hairstylists, barbers, braiders, frontal and lash artists, makeup artists, nail technicians, fashion designers, chefs, and loc stylists for world-class education, high-stakes competition, and global networking. The event features ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories and a ${TOTAL_PRIZE_DISPLAY} cumulative prize pool.`,
   },
   {
     triggers: ["fourth edition", "fourth", "edition", "editions", "previous editions", "how many editions", "lagos debut", "debut", "event history", "history", "sold out", "sold-out", "may 2026", "2024", "2025"],
@@ -66,7 +66,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
-      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 12:00 PM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 5:00 PM\n\nAsk me for the competition schedule to see the times for each competition.",
+      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 10:00 AM – 5:00 PM\n\nAsk me for the competition schedule to see the times for each competition.",
   },
   {
     triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],

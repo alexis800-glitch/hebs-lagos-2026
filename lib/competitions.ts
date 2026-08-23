@@ -7,6 +7,15 @@
  *   - Competition flyers linked from the doc   - prize ceilings
  *   - Approved concept note review draft       - $87,500 USD / N122,500,000 total
  *
+ * Revision of 2026-08-23 (Lagos flyer plus management decision):
+ *   - Mic Drop Live Vocalist is withdrawn, and the Music & Live Entertainment category
+ *     with it. Loc Retwist & Style takes its place under a new Loc/Styling category, so
+ *     the programme stays at 13 competitions across 7 categories and the prize total is
+ *     unchanged ($5,000 for $5,000).
+ *   - The earlier "Loc_Retwist_and_Style_Competition_Updated (1).pdf" was confirmed to be
+ *     the wrong document for Nigeria. None of its DOMINION, Winner-Take-All or $10,000
+ *     wording applies to this competition and it must not reappear.
+ *
  * Contestant entry fees are quoted in naira only. The approved 2026 price revision
  * sets one flat fee for every competition and withdraws USD entry-fee pricing from
  * the public site, so there is deliberately no `feeUsd` field. Prizes stay in USD.
@@ -40,7 +49,7 @@ export type CategorySlug =
   | 'beauty'
   | 'fashion'
   | 'culinary-culture'
-  | 'music-live-entertainment'
+  | 'loc-styling'
 
 export interface Category {
   slug: CategorySlug
@@ -98,7 +107,7 @@ export const CATEGORIES: Category[] = [
   { slug: 'beauty', name: 'Beauty', order: 4 },
   { slug: 'fashion', name: 'Fashion', order: 5 },
   { slug: 'culinary-culture', name: 'Culinary & Culture', order: 6 },
-  { slug: 'music-live-entertainment', name: 'Music & Live Entertainment', order: 7 },
+  { slug: 'loc-styling', name: 'Loc/Styling', order: 7 },
 ]
 
 const SAT = {
@@ -309,12 +318,16 @@ export const COMPETITIONS: Competition[] = [
     note: 'Runs across both event days.',
   },
   {
-    slug: 'mic-drop-live-vocalist',
-    name: 'Mic Drop Live Vocalist Competition',
-    category: 'music-live-entertainment',
+    slug: 'loc-retwist-and-style',
+    name: 'Loc Retwist & Style Competition',
+    category: 'loc-styling',
+    // Flyer summary approved 2026-08-23. Only the four confirmed points are published:
+    // 60 minutes, natural locs, full-head retwist, no added hair.
     description:
-      'Mic Drop celebrates live vocal talent, individuality, and powerful stage performance. Vocalists present a song that showcases their voice, musical interpretation, emotional connection, and personal artistry. Each performance should demonstrate vocal control, confidence, originality, stage presence, and the ability to connect with a live audience.',
-    sessions: [session(SAT, '4:00 – 5:15 PM', '75 min', '2026-10-24T16:00:00+01:00', '2026-10-24T17:15:00+01:00')],
+      'Loc Retwist & Style is a 60-minute retwist and style challenge worked on natural locs. Competitors complete a full-head retwist and finish it as a styled look. No added hair is permitted.',
+    // Takes over the 4:00 PM slot on 24 October (see the header note), but runs 60
+    // minutes rather than the withdrawn competition's 75, so it ends at 5:00 PM.
+    sessions: [session(SAT, '4:00 – 5:00 PM', '60 min', '2026-10-24T16:00:00+01:00', '2026-10-24T17:00:00+01:00')],
     feeDisplay: ENTRY_FEE_DISPLAY,
     feeNgn: ENTRY_FEE_NGN,
     feeConfirmed: true,

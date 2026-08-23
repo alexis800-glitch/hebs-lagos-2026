@@ -91,7 +91,7 @@ const eventJsonLd = {
     {
       "@type": "Event",
       name: "HEBS Main Summit — Day One",
-      startDate: "2026-10-24T12:00:00+01:00",
+      startDate: "2026-10-24T11:00:00+01:00",
       endDate: "2026-10-24T18:00:00+01:00",
       location: {
         "@type": "Place",
@@ -107,7 +107,7 @@ const eventJsonLd = {
     {
       "@type": "Event",
       name: "HEBS Main Summit — Day Two",
-      startDate: "2026-10-25T11:00:00+01:00",
+      startDate: "2026-10-25T10:00:00+01:00",
       endDate: "2026-10-25T17:00:00+01:00",
       location: {
         "@type": "Place",
