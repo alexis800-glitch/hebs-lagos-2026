@@ -13,6 +13,7 @@ import {
   scheduleByDay,
   prizeDisplay,
   categoryName,
+  eventDay,
 } from "@/lib/competitions";
 
 // ─── Knowledge base ────────────────────────────────────────────────────────────
@@ -66,7 +67,7 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
-      "HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 11:00 AM – 6:00 PM\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · 10:00 AM – 5:00 PM\n\nAsk me for the competition schedule to see the times for each competition.",
+      `HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · ${eventDay("2026-10-24").hours}\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · ${eventDay("2026-10-25").hours}\n\nAsk me for the competition schedule to see the times for each competition.`,
   },
   {
     triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],

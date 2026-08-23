@@ -129,6 +129,67 @@ const session = (
   endIso: string,
 ): Session => ({ ...day, time, duration, startIso, endIso })
 
+/**
+ * One main-summit day, with the hours the venue is open to attendees.
+ *
+ * These are NOT competition times. A competition runs its own slot somewhere
+ * inside its day's hours - see `Session` and `COMPETITIONS` for those. The two
+ * are unrelated and must never be presented as if one implies the other.
+ */
+export interface EventDay {
+  isoDate: '2026-10-24' | '2026-10-25'
+  /** "Saturday, October 24, 2026" */
+  date: string
+  /** "Sat 24 Oct" */
+  shortDate: string
+  /** "HEBS Main Summit - Day One" */
+  title: string
+  /** Ready-to-render opening hours, e.g. "11:00 AM - 6:00 PM". */
+  hours: string
+  venue: string
+  /** ISO 8601 open/close, used for the day-level JSON-LD subEvents. */
+  opensIso: string
+  closesIso: string
+}
+
+const MAIN_VENUE = 'NJS Royale Events Center'
+
+/**
+ * Full operating hours for the two main-summit days, approved 2026-08-23.
+ *
+ * Every event-hours string on the site renders from this list, so the schedule
+ * cards, footer, tickets page, assistant, structured data and the competitions
+ * page cannot drift apart or disagree with each other.
+ *
+ * The 23 October Welcome Beach Pre-Party is deliberately absent: it is a
+ * separate evening at a different venue, not a summit operating day.
+ */
+export const EVENT_DAYS: EventDay[] = [
+  {
+    ...SAT,
+    title: 'HEBS Main Summit — Day One',
+    hours: '11:00 AM – 6:00 PM',
+    venue: MAIN_VENUE,
+    opensIso: '2026-10-24T11:00:00+01:00',
+    closesIso: '2026-10-24T18:00:00+01:00',
+  },
+  {
+    ...SUN,
+    title: 'HEBS Main Summit — Day Two',
+    hours: '10:00 AM – 5:00 PM',
+    venue: MAIN_VENUE,
+    opensIso: '2026-10-25T10:00:00+01:00',
+    closesIso: '2026-10-25T17:00:00+01:00',
+  },
+]
+
+/** The opening hours for one summit day. Throws rather than rendering a blank. */
+export function eventDay(isoDate: EventDay['isoDate']): EventDay {
+  const found = EVENT_DAYS.find((d) => d.isoDate === isoDate)
+  if (!found) throw new Error(`Unknown event day: ${isoDate}`)
+  return found
+}
+
 export const COMPETITIONS: Competition[] = [
   {
     slug: 'battle-of-the-fades',
@@ -513,3 +574,26 @@ invariant(
   CATEGORIES.every((cat) => competitionsByCategory(cat.slug).length > 0),
   'every category must contain at least one competition',
 )
+
+// Event hours are the venue's opening hours, not competition times. Every
+// competition slot must therefore sit inside its day's hours: if one ever falls
+// outside them, either the slot or the hours is wrong and the build says so.
+invariant(EVENT_DAYS.length === 2, `expected 2 summit days, found ${EVENT_DAYS.length}`)
+invariant(
+  new Set(EVENT_DAYS.map((d) => d.isoDate)).size === EVENT_DAYS.length,
+  'summit day dates must be unique',
+)
+for (const d of EVENT_DAYS) {
+  invariant(d.opensIso < d.closesIso, `${d.isoDate} must open before it closes`)
+  invariant(d.hours.trim().length > 0, `${d.isoDate} needs rendered opening hours`)
+}
+for (const c of COMPETITIONS) {
+  for (const s of c.sessions) {
+    const day = eventDay(s.isoDate)
+    invariant(
+      s.startIso >= day.opensIso && s.endIso <= day.closesIso,
+      `${c.slug} runs ${s.startIso}-${s.endIso}, outside ${day.isoDate} hours ` +
+        `${day.opensIso}-${day.closesIso}`,
+    )
+  }
+}

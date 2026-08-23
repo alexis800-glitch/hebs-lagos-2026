@@ -11,7 +11,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GallerySection from "@/components/GallerySection";
 import HEBSAssistant from "@/components/HEBSAssistant";
 import Footer from "@/components/Footer";
-import { COMPETITIONS, COMPETITION_COUNT, CATEGORY_COUNT } from "@/lib/competitions";
+import { COMPETITIONS, COMPETITION_COUNT, CATEGORY_COUNT, eventDay } from "@/lib/competitions";
 
 export const metadata: Metadata = {
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
@@ -90,9 +90,9 @@ const eventJsonLd = {
     },
     {
       "@type": "Event",
-      name: "HEBS Main Summit — Day One",
-      startDate: "2026-10-24T11:00:00+01:00",
-      endDate: "2026-10-24T18:00:00+01:00",
+      name: eventDay("2026-10-24").title,
+      startDate: eventDay("2026-10-24").opensIso,
+      endDate: eventDay("2026-10-24").closesIso,
       location: {
         "@type": "Place",
         name: "NJS Royale Events Center",
@@ -106,9 +106,9 @@ const eventJsonLd = {
     },
     {
       "@type": "Event",
-      name: "HEBS Main Summit — Day Two",
-      startDate: "2026-10-25T10:00:00+01:00",
-      endDate: "2026-10-25T17:00:00+01:00",
+      name: eventDay("2026-10-25").title,
+      startDate: eventDay("2026-10-25").opensIso,
+      endDate: eventDay("2026-10-25").closesIso,
       location: {
         "@type": "Place",
         name: "NJS Royale Events Center",

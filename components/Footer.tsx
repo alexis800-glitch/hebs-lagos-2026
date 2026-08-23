@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
+import { eventDay } from "@/lib/competitions";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -124,11 +125,11 @@ export default function Footer() {
                   </p>
                   <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
                     Oct 24 · Main Event Day 1 ·{" "}
-                    <span className="font-bold text-white">11:00 AM – 6:00 PM</span>
+                    <span className="font-bold text-white">{eventDay("2026-10-24").hours}</span>
                   </p>
                   <p className="text-xs font-inter" style={{ color: "#cccccc" }}>
                     Oct 25 · Main Event Day 2 ·{" "}
-                    <span className="font-bold text-white">10:00 AM – 5:00 PM</span>
+                    <span className="font-bold text-white">{eventDay("2026-10-25").hours}</span>
                   </p>
                 </div>
               </div>

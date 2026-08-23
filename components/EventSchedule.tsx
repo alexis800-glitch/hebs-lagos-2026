@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useMounted } from "@/hooks/useMounted";
-import { scheduleByDay } from "@/lib/competitions";
+import { scheduleByDay, eventDay } from "@/lib/competitions";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -26,18 +26,18 @@ const DAYS = [
   },
   {
     date: "October 24, 2026",
-    title: "HEBS Main Summit — Day One",
-    venue: "NJS Royale Events Center",
-    time: "11:00 AM – 6:00 PM",
+    title: eventDay("2026-10-24").title,
+    venue: eventDay("2026-10-24").venue,
+    time: eventDay("2026-10-24").hours,
     accent: "#f59e0b",
     desc: null,
     highlights: dayEntries("2026-10-24"),
   },
   {
     date: "October 25, 2026",
-    title: "HEBS Main Summit — Day Two",
-    venue: "NJS Royale Events Center",
-    time: "10:00 AM – 5:00 PM",
+    title: eventDay("2026-10-25").title,
+    venue: eventDay("2026-10-25").venue,
+    time: eventDay("2026-10-25").hours,
     accent: "#9b59b6",
     desc: null,
     highlights: dayEntries("2026-10-25"),

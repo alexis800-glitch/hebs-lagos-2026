@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CompetitionSchedule from '@/components/CompetitionSchedule'
+import EventHours from '@/components/EventHours'
 import {
   COMPETITION_COUNT,
   CATEGORIES,
@@ -144,6 +145,13 @@ function CompetitionsContent() {
             {COMPETITION_COUNT} competitions across {CATEGORY_COUNT} categories.{' '}
             {TOTAL_PRIZE_DISPLAY} in prizes. October 23–25, 2026 · Lagos, Nigeria.
           </p>
+        </div>
+
+        {/* ── Event hours ──────────────────────────────────────────────────── */}
+        {/* Above the filter and the cards, so the full-day hours are read before
+            any individual competition slot is. */}
+        <div className="w-full max-w-7xl mx-auto px-5 sm:px-8 pb-10">
+          <EventHours />
         </div>
 
         {/* ── Category filter ──────────────────────────────────────────────── */}
