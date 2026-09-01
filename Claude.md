@@ -1,236 +1,171 @@
-# NJS Royal Beach Resort Project Rules
+# HEBS Lagos 2026 — Project Rules
 
-## Active Project
+## Project Identity
 
-This is the NJS Royal Beach Resort concept website workspace.
+This repository is **HEBS Lagos 2026**.
 
-Work only inside this workspace:
+* Repository: `alexis800-glitch/hebs-lagos-2026`
+* Production domain: `www.hebslagos.com`
 
-`NJS_ROYALE_WEBSITE_ASSETS`
+This is a **live production event website**, not a concept site.
 
-The actual website code must stay inside:
+This repo is **not** the NJS Royal Beach Resort project. Do not apply NJS rules here:
 
-`website-build`
+* no NJS workspace paths (`NJS_ROYALE_WEBSITE_ASSETS`, `website-build`)
+* no rooftop-pool rules
+* no rooms/suites or "Signature Spaces" naming rules
+* no resort reference folders (`floor-plans`, `mep-drawings`, `pool-and-sections`)
+* no concept-stage reservation wording ("Enquire Now", "Reservations opening soon")
 
-Do not create another website project folder unless explicitly instructed.
+Because this site is live and sells real competition entries, it uses direct
+registration language pointing at the live portal. Concept-stage hedging is wrong here.
 
-## Reference Folders
+## Source of Truth
 
-Do not delete, rename, move, or modify these reference folders:
+`lib/competitions.ts` is the canonical source for competition programme data.
 
-* `floor-plans`
-* `images`
-* `mep-drawings`
-* `pool-and-sections`
-* `reference-pdf`
-* `prompt`
+Do **not** hard-code competition counts, categories, entry fees, prize totals,
+schedules or main event hours anywhere else when a derived value exists. Import
+from `lib/competitions.ts` so values cannot drift apart.
 
-Use these folders only as reference material.
+Invariants at the bottom of that file run at module load, so `npm run build`
+fails loudly if the data stops matching the approved programme. Treat a failing
+invariant as a real conflict to raise, never as an obstacle to edit around.
 
-If an image from a PDF is needed for the website, ask the user to extract it into the `images` folder first. Do not make the website depend directly on PDF files.
+### Current approved programme
 
-## Reference PDF Rule
+* **13 competitions**
+* **7 categories** — Barbering, Braiding, Hair Installation & Styling, Beauty,
+  Fashion, Culinary & Culture, Loc/Styling
+* **All contestant entry fees ₦50,000** — one flat naira fee, published in naira
+  only. There is deliberately no `feeUsd` field; never render a USD entry fee.
+* **Total prize pool $87,500 USD / ₦122,500,000** (at the approved ₦1,400/USD
+  rate, prizes only)
+* **Registration deadline: October 15, 2026**
 
-Always review the `reference-pdf` folder when working on visual direction, image selection, resort positioning, rooms/spaces, dining, event spaces, lobby, bar, spa, or rooftop pool sections.
+## Event Hours
 
-The PDF may include important interior design references, but the website must use actual image files from `website-build/public/images/` or copied/optimized images from the `images` folder.
+`EVENT_DAYS` in `lib/competitions.ts` is the one place summit opening hours are
+written down. The schedule cards, footer, tickets page, assistant answer, JSON-LD
+and the competitions page all render from it.
 
-Do not directly link to large PDFs from the website.
+* **Saturday, October 24, 2026 — 11:00 AM–6:00 PM**
+* **Sunday, October 25, 2026 — 10:00 AM–5:00 PM**
 
-## Project Stage
+These are **full summit operating hours, not individual competition times**.
+Individual competitions run at their own times inside them, and the site copy
+must keep that distinction clear.
 
-This is currently a concept preview landing page, not the final production website.
+The **October 23 Welcome Beach Pre-Party** is a separate evening at a different
+venue. It is deliberately absent from `EVENT_DAYS` and must not be folded in.
+It keeps its own wording on its own card.
 
-Do not add:
+An invariant asserts every competition slot falls inside its day's hours. If a
+slot and the hours ever disagree, one of them is wrong — stop and raise it.
 
-* booking engine
-* payment system
-* PMS integration
-* live contact form
-* custom domain
-* final reservation flow
+## Loc/Styling
 
-unless explicitly requested.
+**Loc Retwist & Style Competition** is the approved Lagos competition.
 
-Use concept-stage wording such as:
+* Saturday, October 24, 2026, 4:00–5:00 PM, 60 minutes
+* Natural locs, full-head retwist, no added hair
+* Up to $5,000 in cash prizes
 
-* “Enquire Now”
-* “Register Interest”
-* “Plan Your Stay”
-* “Plan an Event”
-* “Reservations opening soon”
-* “Contact details to be confirmed”
+Never reintroduce **Mic Drop** as an active competition — it was withdrawn and
+Loc Retwist & Style took its slot and category place.
 
-Avoid final booking language like:
+Never use **DOMINION**, **Winner-Take-All** or **$10,000** language. That wording
+comes from `Loc_Retwist_and_Style_Competition_Updated (1).pdf`, confirmed to be
+the wrong document for Nigeria. None of it applies and it must not reappear.
 
-* “Book Now”
-* “Reserve a Room”
-* “Check Availability”
-* “Pay Now”
+## Known Special Competition Rules
 
-unless official booking flow details are provided.
+**Gilded Heritage Nail Art Competition**
 
-## Think Before Editing
+* October 24, 2:00–3:30 PM, 90 minutes
+* The nail length must be a minimum of **one inch**
+* The overlap with Freestyle Design is intentional — do not "fix" it
 
-Before making changes:
+**Fast & Flawless Barber Competition**
 
-1. Inspect the relevant files.
-2. State the intended plan briefly.
-3. Identify the exact files likely to change.
-4. If there is ambiguity, ask before editing.
+* October 25, 4:00–4:15 PM, 15 minutes
+* Prize is a **flat $5,000**, not "up to" (`prizeIsUpTo: false`)
+* Roots to Royalty also states a flat figure and must never render an "Up to" prefix
 
-## Surgical Changes Only
+**Taste of Culture Food Tasting Competition**
 
-Only edit files directly related to the requested task.
+* Runs on **both** summit days (Oct 24 and Oct 25) — it is the one competition
+  with two sessions, so anything that assumes one session per competition is wrong
 
-Do not touch unrelated:
+## Base44 Boundary
 
-* layout
-* hero section
-* image paths
-* CTA wording
-* gallery
-* footer
-* deployment settings
-* package files
-* project configuration
+The **Base44 HEBS Event Portal** is a separate system.
 
-unless the task specifically requires it.
+* Do not modify Base44 from this website repo
+* Website registration links may point at the live portal
+  (`https://hebseventportal.com/register`, exported as `REGISTRATION_URL`)
+* Portal logic, schemas and data are **not** maintained here
 
-## Do Not Invent Content
+## Concept Note
 
-Do not add:
+* `HEBS_Lagos_2026_Concept_Note.docx` and `.pdf` (tracked) are the current
+  generated concept note artifacts
+* The generation pipeline lives in `documents/concept-note/source/`
+* `HEBS_Lagos_2026_Concept_Note_UPDATED_REVIEW.docx` / `.pdf` (untracked, dated
+  August 2, 2026) are **stale leftovers**
 
-* fake guest names
-* fake testimonials
-* fake countries
-* fake awards
-* fake ratings or certifications
-* fake phone numbers
-* fake emails
-* fake partners
-* Lorem Ipsum
-* placeholder content that appears final
+Never stage, commit or overwrite those stale review files unless explicitly
+instructed.
 
-Use neutral premium wording when details are not confirmed.
+## Git Safety
 
-## Image Rules
-
-Use clean image naming where possible:
-
-* lowercase
-* hyphen-separated
-* no spaces
-* no long WhatsApp filenames
-
-Good examples:
-
-* `exterior-entrance-facade-01.jpg`
-* `grand-entrance-hall-01.jpg`
-* `double-height-grand-lounge-01.jpg`
-* `ground-floor-bar-01.jpg`
-* `rooftop-pool-01.jpg`
-* `fine-dining-restaurant-01.jpg`
-
-Do not use images that confuse the resort brand, including:
-
-* technical/server room images
-* luggage room images
-* back-of-house operational images
-* hair salon images with unrelated branding
-* nail salon images with “NAIL” signage
-* children’s playground images unless specifically requested
-
-## Rooftop Pool Rule
-
-The rooftop pool is an important selling point.
-
-When working on the rooftop pool section, reference:
-
-* `pool-and-sections/POOL SECTION.pdf`
-* `floor-plans/fifth floor.pdf`
-
-If no pool render exists, keep the pool section text-led and concept-stage. Do not pretend a final pool photo exists.
-
-## Rooms and Suites Rule
-
-Do not misrepresent spa, salon, lounge, or corridor images as confirmed guest rooms.
-
-If actual guest room renders are not available, use softer section naming such as:
-
-* “Signature Spaces”
-* “Luxury Spaces Preview”
-* “Interior Concept Preview”
-
-instead of final “Rooms & Suites” claims.
-
-## Design Direction
-
-Maintain a premium luxury resort feel:
-
-* navy
-* gold
-* sand
-* ivory
-* marble
-* glass
-* tropical elegance
-* calm spacing
-* elegant typography
-* mobile-first layout
-
-The visual style should feel like a premium oceanfront resort, not a generic hotel template.
+* `origin/master` is authoritative
+* Local `master` is known **stale and diverged** — do not merge through it, and
+  do not branch from it
+* New work must branch cleanly from the latest `origin/master`
+* Surgical changes only — touch only files the task requires
+* Do not include unrelated files in a commit
+* Do not commit, push, merge or deploy to production without explicit approval
+* Use a preview deployment / PR for review first unless expressly told otherwise
 
 ## Context7
 
 Use Context7 when working with:
 
 * Next.js
+* React
 * Tailwind CSS
-* Framer Motion
 * TypeScript
-* next/font/google
 * Next.js Image
-* Lucide React
 * Vercel
 
-## Verify Before Reporting Done
+## Verification
 
-After changes, run:
+For website code changes, run:
 
-`npm run build`
-
-from inside:
-
-`website-build`
+```
+npm run build
+npm run lint
+npx tsc --noEmit
+```
 
 Then report:
 
-1. files changed
-2. exact changes made
-3. images used or changed
-4. fake/placeholder content removed if applicable
-5. mobile checks if UI was changed
-6. build result
-7. anything that needs review
+1. exact files changed
+2. scope of the change
+3. build / lint / typecheck results
+4. preview URL
+5. PR URL
+6. confirmation that no unrelated programme data changed
 
-## Git Safety
+## Content Integrity
 
-Do not commit or push automatically.
+Do not invent organiser information — no fabricated names, titles, contacts,
+sponsors, judges, testimonials, awards or figures.
 
-After changes, report the result first and wait for approval before running:
-
-* `git add`
-* `git commit`
-* `git push`
-
-## Deployment Safety
-
-Do not deploy unless explicitly approved.
-
-If deployed, it must be a preview/staging deployment unless the user clearly says it is production.
-
-Do not connect a custom domain unless explicitly requested.
+When source documents conflict, **stop and identify the conflict** rather than
+silently choosing one. Known live conflicts should be surfaced, not resolved by
+guesswork.
 
 ## If Unsure
 
