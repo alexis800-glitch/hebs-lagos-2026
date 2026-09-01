@@ -1,9 +1,11 @@
 ﻿"use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useMounted } from "@/hooks/useMounted";
 import { eventDay } from "@/lib/competitions";
+import { OPEN_PREFERENCES_EVENT } from "@/lib/consent";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 
@@ -212,9 +214,29 @@ export default function Footer() {
           <p className="text-xs font-inter" style={{ color: "#aaa" }}>
             © {new Date().getFullYear()} Hair Education Beauty Summit. All rights reserved.
           </p>
-          <p className="text-xs font-inter" style={{ color: "#aaa" }}>
-            Lagos, Nigeria · October 23–25, 2026
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <Link
+              href="/privacy"
+              className="text-xs font-inter underline underline-offset-4 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+              style={{ color: "#aaa" }}
+            >
+              Privacy &amp; Cookies
+            </Link>
+            {/* Reopens the consent controls so a choice can be changed either way. */}
+            <button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(new Event(OPEN_PREFERENCES_EVENT))
+              }
+              className="text-xs font-inter underline underline-offset-4 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+              style={{ color: "#aaa" }}
+            >
+              Cookie preferences
+            </button>
+            <p className="text-xs font-inter" style={{ color: "#aaa" }}>
+              Lagos, Nigeria · October 23–25, 2026
+            </p>
+          </div>
         </motion.div>
       </div>
     </footer>
