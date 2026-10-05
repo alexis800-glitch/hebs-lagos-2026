@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import EventSchedule from "@/components/EventSchedule";
+import EducationSchedule from "@/components/EducationSchedule";
 import EventHighlights from "@/components/EventHighlights";
 import CompetitionCategories from "@/components/CompetitionCategories";
 import WhyAttend from "@/components/WhyAttend";
@@ -160,6 +161,7 @@ export default function Home() {
       <main style={{ background: "#0d0d0d", overflowX: "hidden" }}>
         <Hero />
         <EventSchedule />
+        <EducationSchedule />
         <EventHighlights />
         <CompetitionCategories />
         <WhyAttend />
