@@ -102,8 +102,14 @@ export async function POST(req: NextRequest) {
   }
 
   // ── Build email content ───────────────────────────────────────────────────
-  const FROM =
-    process.env.RESEND_FROM ?? "HEBS <noreply@hebslagos.com>";
+  // The sender's display name is fixed here rather than taken from RESEND_FROM,
+  // so it can never name a past (or unannounced) event. RESEND_FROM supplies
+  // only the address, in either "Name <address>" or bare "address" form.
+  const fromEnv = process.env.RESEND_FROM?.trim();
+  const senderAddress =
+    fromEnv?.match(/<([^<>\s]+@[^<>\s]+)>/)?.[1] ??
+    (fromEnv && /^[^<>\s]+@[^<>\s]+$/.test(fromEnv) ? fromEnv : "noreply@hebslagos.com");
+  const FROM = `HEBS <${senderAddress}>`;
   const TO_TEAM = "info@thehebs.com";
 
   const safeName    = escHtml(name.trim());

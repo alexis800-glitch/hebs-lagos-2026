@@ -50,3 +50,20 @@ describe("contact confirmation email", () => {
     expect(confirmation.html).toContain("https://www.hebslagos.com");
   });
 });
+
+describe("sender display name", () => {
+  const cases: [string | undefined, string][] = [
+    ["HEBS Lagos 2026 <noreply@hebslagos.com>", "HEBS <noreply@hebslagos.com>"],
+    ["HEBS Lagos 2026 <hello@thehebs.com>", "HEBS <hello@thehebs.com>"],
+    ["noreply@thehebs.com", "HEBS <noreply@thehebs.com>"],
+    [undefined, "HEBS <noreply@hebslagos.com>"],
+    ["not an address", "HEBS <noreply@hebslagos.com>"],
+  ];
+  it.each(cases)("RESEND_FROM=%j sends as %j on both emails", async (env, expected) => {
+    if (env === undefined) delete process.env.RESEND_FROM;
+    else process.env.RESEND_FROM = env;
+    await POST(request({ name: "Test Visitor", email: "visitor3@example.com", message: "A question about HEBS." }));
+    expect(send.mock.calls.map((c) => c[0].from)).toEqual([expected, expected]);
+    delete process.env.RESEND_FROM;
+  });
+});
