@@ -47,7 +47,6 @@ const passes = [
       "Education sessions",
       "Exhibitors",
     ],
-    link: "https://hebseventportal.com/register",
   },
   {
     name: "Two Days Pass",
@@ -62,7 +61,6 @@ const passes = [
       "Education sessions",
       "Exhibitors",
     ],
-    link: "https://hebseventportal.com/register",
   },
   {
     name: "Three Days Pass",
@@ -79,7 +77,6 @@ const passes = [
       "Education sessions",
       "Exhibitors",
     ],
-    link: "https://hebseventportal.com/register",
   },
   {
     name: "VIP Experience",
@@ -94,7 +91,6 @@ const passes = [
       "Celebrity Meet & Greet",
       "Official Merchandise Package",
     ],
-    link: "https://hebseventportal.com/register",
   },
 ];
 
@@ -187,10 +183,7 @@ export default function TicketsPage() {
                       )}
                       {pass.standardPrice && (
                         <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-600 mt-1.5 block">
-                          Early bird ·{" "}
-                          <span className="line-through">
-                            {pass.standardPrice} standard
-                          </span>
+                          2026 early-bird price · standard was {pass.standardPrice}
                         </span>
                       )}
                     </div>

@@ -27,3 +27,11 @@ export const TICKETS_CLOSED =
   "HEBS Lagos 2026 has ended and tickets are no longer available. The passes below are kept as a record of the 2026 event.";
 
 export const HELD_LINE = "Held October 23–25, 2026 · Lagos, Nigeria";
+
+/** Sponsorship page: the 2026 tiers are kept as a record, not as an offer. */
+export const SPONSORSHIP_ARCHIVE_NOTE =
+  "HEBS Lagos 2026 took place October 23–25, 2026. This page records the partnership tiers offered for that edition. They are no longer available.";
+
+/** Vendor page: the 2026 booths are kept as a record, not as an offer. */
+export const VENDOR_ARCHIVE_NOTE =
+  "HEBS Lagos 2026 took place October 23–25, 2026. This page records the exhibition booths offered for that edition. They are no longer available.";

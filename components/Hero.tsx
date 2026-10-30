@@ -1,7 +1,5 @@
 ﻿"use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useMounted } from "@/hooks/useMounted";
 import {
@@ -45,32 +43,6 @@ const VALUE_ITEMS = [
   { value: "Lagos 2026",              label: "October 23–25"          },
 ] as const;
 
-const FLOAT_CARDS = [
-  {
-    id: "competition",
-    src: "/images/hebs-2025/competition/competition-barbering.png",
-    alt: "Live Competition",
-    label: "Competition",
-    pos: { top: "12%", right: "2.5%" } as React.CSSProperties,
-    floatDelay: 0,
-  },
-  {
-    id: "education",
-    src: "/images/hebs-2025/competition/competition-education.png",
-    alt: "Education Panel",
-    label: "Education",
-    pos: { top: "56%", left: "2%" } as React.CSSProperties,
-    floatDelay: 1.8,
-  },
-  {
-    id: "crowd",
-    src: "/images/hebs-2025/crowd/crowd-audience.png",
-    alt: "HEBS Live Audience",
-    label: "Live Event",
-    pos: { bottom: "16%", right: "2.5%" } as React.CSSProperties,
-    floatDelay: 3.2,
-  },
-] as const;
 
 import type React from "react";
 
@@ -78,44 +50,16 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  // Landscape viewports get the 16:9 hero video, portrait viewports the 9:16 —
-  // picked client-side so only one video is ever downloaded
-  const [heroMedia, setHeroMedia] = useState<{ video: string; poster: string } | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const mq = window.matchMedia("(orientation: landscape)");
-    const pick = () =>
-      setHeroMedia(
-        mq.matches
-          ? {
-              video: "/videos/higgsfield/hebs-hero-competition-desktop-v1-optimized.mp4",
-              poster: "/images/hero/hebs-hero-competition-desktop-v1-poster.jpg",
-            }
-          : {
-              video: "/videos/higgsfield/hebs-hero-competition-mobile-v3-optimized.mp4",
-              poster: "/images/hero/hebs-hero-competition-mobile-v3-poster.jpg",
-            }
-      );
-    pick();
-    mq.addEventListener("change", pick);
-    return () => mq.removeEventListener("change", pick);
-  }, []);
-  // Fallback play attempt — catches cases where autoPlay was ignored
-  useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, [heroMedia]);
-
   return (
     <section
       id="home"
       className="relative w-full min-h-screen bg-zinc-950 overflow-hidden"
     >
 
-      {/* ── Background layer — ambient video over static gradient fallback ── */}
+      {/* ── Background layer — static gradient (no photographic media) ── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Base dark gradient — instant backdrop before poster/video, and fallback if video fails */}
+        {/* Base dark gradient */}
         <div
           className="absolute inset-0"
           style={{
@@ -133,46 +77,9 @@ export default function Hero() {
           }}
         />
 
-        {/* Poster — fades out once the video is playing */}
-        <div
-          className="absolute inset-0 transition-opacity duration-700"
-          style={{ opacity: isVideoPlaying ? 0 : 1 }}
-        >
-          {/* <picture> art direction so only the matching orientation's poster downloads */}
-          <picture>
-            <source
-              media="(orientation: landscape)"
-              srcSet="/images/hero/hebs-hero-competition-desktop-v1-poster.jpg"
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/hero/hebs-hero-competition-mobile-v3-poster.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </picture>
-        </div>
-
-        {/* Hero video — src set once orientation is known; key remounts it on orientation change */}
-        {heroMedia && (
-          <video
-            key={heroMedia.video}
-            ref={videoRef}
-            src={heroMedia.video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            poster={heroMedia.poster}
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
-            onCanPlay={() => { videoRef.current?.play().catch(() => {}); }}
-            onPlaying={() => setIsVideoPlaying(true)}
-            onPause={() => setIsVideoPlaying(false)}
-            onError={(e) => console.warn("[Hero] video error:", e)}
-          />
-        )}
+        {/* No photographic background: the previous hero video and its posters were
+            AI-generated, so they are not shown as event footage. A static
+            gradient stands in until authentic HEBS Lagos 2026 media is approved. */}
 
         {/* Magenta centre glow */}
         <motion.div
@@ -215,7 +122,7 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Overlay — scrim for text readability over the video (center is its brightest zone) */}
+        {/* Overlay — scrim for text readability */}
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.8) 100%)" }}
@@ -251,49 +158,6 @@ export default function Hero() {
 
       {/* ── Top accent border ──────────────────────────────────────── */}
       <div className="absolute top-[80px] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-700/70 to-transparent z-[2]" />
-
-      {/* ── Floating image cards — xl desktop only, no reduced motion ─ */}
-      {mounted && !shouldReduceMotion && (
-        <div className="hidden xl:block absolute inset-0 z-[3] pointer-events-none">
-          {FLOAT_CARDS.map((card) => (
-            <motion.div
-              key={card.id}
-              className="absolute w-[152px] h-[108px] rounded-2xl overflow-hidden"
-              style={{
-                ...card.pos,
-                border: "1px solid rgba(255,255,255,0.09)",
-                boxShadow:
-                  "0 24px 64px rgba(0,0,0,0.80), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.06)",
-              }}
-              initial={{ opacity: 0, y: 0 }}
-              animate={{
-                opacity: [0, 0, 0.82, 0.78, 0.82],
-                y: [0, 0, -5, 0, -5],
-              }}
-              transition={{
-                duration: 10 + card.floatDelay * 1.5,
-                times: [0, 0.12, 0.25, 0.625, 1],
-                repeat: Infinity,
-                delay: card.floatDelay,
-                ease: "easeInOut",
-              }}
-            >
-              <Image
-                src={card.src}
-                alt={card.alt}
-                fill
-                sizes="152px"
-                className="object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-              <span className="absolute bottom-[7px] left-[9px] font-mono text-[8px] uppercase tracking-widest text-white/60">
-                {card.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      )}
 
       {/* ── Main content ───────────────────────────────────────────── */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 flex flex-col items-center text-center min-h-screen justify-center pt-28 pb-16 sm:pt-32 sm:pb-20">

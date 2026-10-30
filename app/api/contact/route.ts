@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
 
   // ── Build email content ───────────────────────────────────────────────────
   const FROM =
-    process.env.RESEND_FROM ?? "HEBS Lagos 2026 <noreply@hebslagos.com>";
+    process.env.RESEND_FROM ?? "HEBS <noreply@hebslagos.com>";
   const TO_TEAM = "info@thehebs.com";
 
   const safeName    = escHtml(name.trim());
@@ -155,10 +155,12 @@ export async function POST(req: NextRequest) {
       resend.emails.send({
         from: FROM,
         to: email.trim(),
-        subject: "We received your message — HEBS Lagos 2026",
+        // Visitor-facing: no event dates or registration links, so the
+        // confirmation never advertises a past (or unannounced) event.
+        subject: "We received your message — HEBS",
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px 24px;background:#0d0d0d;color:#e4e4e7;border-radius:12px;">
-            <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#a1a1aa;">HEBS Lagos 2026</p>
+            <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#a1a1aa;">Hair Education Beauty Summit</p>
             <h2 style="margin:0 0 20px;font-size:22px;font-weight:600;color:#f59e0b;">Thank you, ${safeName}!</h2>
             <p style="margin:0 0 16px;line-height:1.7;color:#d4d4d8;">
               We've received your message and will get back to you within <strong style="color:#fff;">1–2 business days</strong>.
@@ -170,10 +172,9 @@ export async function POST(req: NextRequest) {
               <a href="https://wa.me/16104779635" style="color:#f59e0b;text-decoration:none;">+1 (610) 477-9635</a>.
             </p>
             <div style="border-top:1px solid #27272a;padding-top:20px;">
-              <p style="margin:0 0 4px;font-size:13px;color:#a1a1aa;">Hair Education Beauty Summit 2026</p>
-              <p style="margin:0 0 4px;font-size:13px;color:#a1a1aa;">October 23–25, 2026 · Lagos, Nigeria</p>
+              <p style="margin:0 0 4px;font-size:13px;color:#a1a1aa;">Hair Education Beauty Summit</p>
               <p style="margin:8px 0 0;font-size:13px;">
-                <a href="https://hebseventportal.com/register" style="color:#f59e0b;text-decoration:none;">Visit HEBS Portal ↗</a>
+                <a href="https://www.hebslagos.com" style="color:#f59e0b;text-decoration:none;">hebslagos.com</a>
               </p>
             </div>
           </div>`,

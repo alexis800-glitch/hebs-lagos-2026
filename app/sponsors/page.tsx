@@ -7,30 +7,31 @@ import JoinTheMovement from '@/components/JoinTheMovement'
 import PartnershipContact from '@/components/PartnershipContact'
 import Footer from '@/components/Footer'
 import { COMPETITION_COUNT, TOTAL_PRIZE_USD_DISPLAY } from '@/lib/competitions'
+import { SPONSORSHIP_ARCHIVE_NOTE } from '@/lib/post-event'
 
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sponsorship Opportunities — HEBS Lagos 2026',
-  description: 'Partner with the premier beauty summit in Africa. Five exclusive sponsorship tiers from $1,500 to $25,000. HEBS Lagos 2026, October 23–25.',
+  title: 'Sponsorship — HEBS Lagos 2026',
+  description: 'The partnership tiers offered for the Hair Education Beauty Summit Lagos 2026, held October 23–25, 2026. These tiers are no longer available.',
   alternates: { canonical: '/sponsors' },
   openGraph: {
-    title: 'Sponsorship Opportunities — HEBS Lagos 2026',
-    description: 'Partner with HEBS Lagos 2026. Sponsorship tiers from $1,500 to $25,000. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.',
+    title: 'Sponsorship — HEBS Lagos 2026',
+    description: 'The partnership tiers offered for HEBS Lagos 2026. Held October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.',
     url: '/sponsors',
     images: [
       {
         url: '/images/og/hebs-lagos-2026-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Sponsorship Opportunities — HEBS Lagos 2026',
+        alt: 'Sponsorship — HEBS Lagos 2026',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Sponsorship Opportunities — HEBS Lagos 2026',
-    description: 'Partner with HEBS Lagos 2026. Sponsorship tiers from $1,500 to $25,000. October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.',
+    title: 'Sponsorship — HEBS Lagos 2026',
+    description: 'The partnership tiers offered for HEBS Lagos 2026. Held October 23–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.',
     images: ['/images/og/hebs-lagos-2026-og.jpg'],
   },
 }
@@ -39,8 +40,6 @@ const boothPackages = [
   {
     tag: '01',
     name: 'Standard Booth',
-    price: '$1,500 USD',
-    priceNgn: '₦2,100,000',
     inclusions: [
       '1 Table, 2 Chairs',
       '5 General Admission Passes',
@@ -49,8 +48,6 @@ const boothPackages = [
   {
     tag: '02',
     name: 'Premium Booth',
-    price: '$3,000 USD',
-    priceNgn: '₦4,200,000',
     inclusions: [
       'High-Traffic Area Placement',
       '2 Tables, 4 Chairs',
@@ -61,8 +58,6 @@ const boothPackages = [
   {
     tag: '03',
     name: 'Deluxe Booth',
-    price: '$4,500 USD',
-    priceNgn: '₦6,300,000',
     inclusions: [
       'Prime Location',
       '4 Tables, 6 Chairs',
@@ -74,8 +69,8 @@ const boothPackages = [
 ]
 
 const boothAddOns = [
-  { label: 'Electricity & Wi-Fi Access', price: '+$150 USD', ngn: '₦210,000' },
-  { label: 'On-Site Branding & Banner Placement', price: 'From $550 USD', ngn: '₦770,000' },
+  { label: 'Electricity & Wi-Fi Access' },
+  { label: 'On-Site Branding & Banner Placement' },
 ]
 
 const diamondPerks = [
@@ -95,7 +90,6 @@ const tiers = [
   {
     tag: '02',
     name: 'Platinum Sponsor',
-    price: '$15,000',
     accent: 'text-zinc-300',
     perks: [
       'VIP Lounge presenting sponsor — full naming rights',
@@ -110,7 +104,6 @@ const tiers = [
   {
     tag: '03',
     name: 'Gold Sponsor',
-    price: '$5,500',
     accent: 'text-amber-400',
     perks: [
       'Masterclass stage sponsorship — naming rights',
@@ -125,7 +118,6 @@ const tiers = [
   {
     tag: '04',
     name: 'Silver Sponsor',
-    price: '$2,500',
     accent: 'text-zinc-400',
     perks: [
       '10 × 10 ft booth space',
@@ -139,7 +131,6 @@ const tiers = [
   {
     tag: '05',
     name: 'Bronze Sponsor',
-    price: '$1,500',
     accent: 'text-zinc-500',
     perks: [
       '8 × 8 ft booth space',
@@ -167,22 +158,20 @@ export default function SponsorsPage() {
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto px-5 sm:px-0">
           <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center">
-            Partnerships
+            HEBS Lagos 2026 · Partnerships
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-light tracking-tight text-center mb-4 sm:mb-6 font-serif leading-snug sm:leading-tight">
-            Sponsorship <span className="italic font-normal">Opportunities</span>
+            2026 Sponsorship <span className="italic font-normal">Tiers</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-center">
-            Align your brand with the premier beauty summit in Africa. Five exclusive packages designed
-            to deliver measurable visibility, qualified audience access, and lasting industry impact.
+          <p role="note" className="font-sans text-sm text-zinc-300 font-light leading-relaxed text-center">
+            {SPONSORSHIP_ARCHIVE_NOTE}
           </p>
         </div>
 
         {/* ── Audience credibility statement ── */}
-        <div className="max-w-5xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-5xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           {[
-            { stat: '3,000+', label: 'Expected Attendees', note: 'Beauty professionals, educators, creators, and consumers' },
-            { stat: 'Nigeria + Africa', label: 'Geographic Reach', note: 'International competitors from the US, UK, and West Africa' },
+            { stat: 'Nigeria + Africa', label: 'Geographic Reach', note: 'Built for competitors from Nigeria, West Africa, the US and the UK' },
             { stat: TOTAL_PRIZE_USD_DISPLAY, label: 'Total Prize Pool', note: `Across ${COMPETITION_COUNT} competitions — the largest prize purse in African beauty competition history` },
           ].map((item) => (
             <div key={item.stat} className="border border-white/10 bg-zinc-950/40 rounded-2xl p-6">
@@ -196,9 +185,9 @@ export default function SponsorsPage() {
         {/* ── Audience profile + HEBS 2025 link ── */}
         <div className="max-w-5xl mx-auto mb-10 border border-white/10 bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-xl">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">Who You&apos;ll Reach</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">The 2026 Audience</p>
             <p className="font-sans text-sm text-zinc-300 font-light leading-relaxed">
-              Connect with salon owners, master stylists, barbers, makeup artists, nail technicians, beauty educators, brand founders, and consumers from Nigeria, West Africa, and the global HEBS community — all under one roof in Lagos for three days.
+              HEBS Lagos 2026 was built for salon owners, master stylists, barbers, makeup artists, nail technicians, beauty educators, brand founders, and consumers from Nigeria, West Africa, and the global HEBS community, over three days in Lagos.
             </p>
           </div>
           <Link
@@ -244,11 +233,11 @@ export default function SponsorsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
 
-            {/* Left — identity + price + CTA */}
+            {/* Left — identity (2026 record; no price or call to action) */}
             <div className="flex flex-col justify-between gap-8">
               <div>
                 <span className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 block mb-4">
-                  01 · Exclusive Tier
+                  01 · Presenting Tier
                 </span>
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   <h2 className="font-serif text-3xl md:text-4xl font-light text-white tracking-tight">
@@ -259,38 +248,19 @@ export default function SponsorsPage() {
                   </span>
                 </div>
                 <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed">
-                  The ultimate presenting partnership at HEBS Lagos 2026. One slot available. Total event integration across every channel, stage, and media asset.
+                  The presenting partnership offered for HEBS Lagos 2026, with event integration across every channel, stage, and media asset.
                 </p>
               </div>
 
-              <div className="border-t border-zinc-800 pt-6">
-                <span className="font-sans text-5xl font-light tracking-tight text-white leading-none block">
-                  $25,000
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-2 block">
-                  USD · one exclusive slot · HEBS Lagos 2026
-                </span>
-                <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                  <a
-                    href="mailto:info@thehebs.com?subject=Diamond Sponsorship Inquiry — HEBS 2026"
-                    className="inline-flex items-center justify-center gap-2 font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-zinc-200 px-6 py-3 rounded-xl font-medium transition-all duration-200"
-                  >
-                    Inquire About Diamond ↗
-                  </a>
-                  <a
-                    href="#sponsorship-packages"
-                    className="inline-flex items-center justify-center gap-1 font-sans text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 px-6 py-3 rounded-xl font-medium transition-all duration-200"
-                  >
-                    View All Packages
-                  </a>
-                </div>
-              </div>
+              <p className="border-t border-zinc-800 pt-6 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
+                HEBS Lagos 2026 · no longer available
+              </p>
             </div>
 
             {/* Right — perks */}
             <div className="border-t md:border-t-0 md:border-l border-zinc-800 pt-8 md:pt-0 md:pl-10">
               <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-6">
-                Exclusive inclusions
+                Included in 2026
               </p>
               <ul className="text-sm text-zinc-400 space-y-3">
                 {diamondPerks.map((perk, i) => (
@@ -319,14 +289,6 @@ export default function SponsorsPage() {
                   <h3 className="font-serif text-xl font-light text-white tracking-tight mb-2">
                     {tier.name}
                   </h3>
-                  <div className="border-t border-zinc-900 pt-5 mt-5">
-                    <span className="text-4xl font-light tracking-tight text-white block font-sans">
-                      {tier.price}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1 block">
-                      USD · one-time · per event
-                    </span>
-                  </div>
                 </div>
 
                 <ul className="text-sm text-zinc-400 space-y-3">
@@ -339,31 +301,11 @@ export default function SponsorsPage() {
                 </ul>
               </div>
 
-              <a
-                href={`mailto:info@thehebs.com?subject=${tier.name} Inquiry — HEBS 2026`}
-                className="w-full text-center py-3 rounded-xl font-medium transition-all mt-6 border border-zinc-800 hover:border-zinc-600 text-white bg-zinc-900/30 font-sans text-xs uppercase tracking-widest block"
-              >
-                Inquire About {tier.name} ↗
-              </a>
+              <p className="mt-6 border-t border-zinc-900 pt-4 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
+                HEBS Lagos 2026 · no longer available
+              </p>
             </div>
           ))}
-        </div>
-
-        {/* Footer CTA strip */}
-        <div className="max-w-5xl mx-auto mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
-          <div>
-            <p className="font-sans text-sm text-white font-medium mb-1">Ready to Partner with HEBS 2026?</p>
-            <p className="font-sans text-xs text-zinc-400 font-light">
-              All packages are confirmed via email. A proposal and invoice will be sent within 48 hours.
-            </p>
-          </div>
-          <a
-            href="mailto:info@thehebs.com"
-            className="bg-white text-black font-medium px-6 py-3 rounded-xl hover:bg-zinc-200 transition-all text-xs tracking-wider inline-flex items-center gap-1 shrink-0"
-          >
-            <span>CONTACT US</span>
-            <span className="text-sm font-light">↗</span>
-          </a>
         </div>
 
         {/* ── Exhibitor & Vendor Booth Packages ── */}
@@ -375,11 +317,11 @@ export default function SponsorsPage() {
               Exhibitor &amp; Vendor
             </span>
             <h2 className="font-serif text-2xl md:text-3xl font-light text-white tracking-tight mb-3">
-              Booth <span className="italic font-normal">Packages</span>
+              2026 Booth <span className="italic font-normal">Packages</span>
             </h2>
             <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed max-w-xl">
-              Showcase your products and services to thousands of beauty industry professionals.
-              Exhibit Days: October 24–25, 2026 · NJS Royale Events Center, Lagos, Nigeria.
+              The exhibition booths offered for HEBS Lagos 2026. Exhibit days were October 24–25, 2026
+              at NJS Royale Events Center, Lagos, Nigeria. These packages are no longer available.
             </p>
           </div>
 
@@ -396,15 +338,7 @@ export default function SponsorsPage() {
                 <h3 className="font-serif text-xl font-light text-white tracking-tight mb-1">
                   {pkg.name}
                 </h3>
-                <div className="border-t border-zinc-900 pt-5 mt-4 mb-6">
-                  <span className="text-3xl font-light tracking-tight text-white block font-sans leading-none">
-                    {pkg.price}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-1.5 block">
-                    {pkg.priceNgn}
-                  </span>
-                </div>
-                <ul className="text-sm text-zinc-400 space-y-3 flex-1 mb-6">
+                <ul className="text-sm text-zinc-400 space-y-3 flex-1 mt-4 border-t border-zinc-900 pt-5">
                   {pkg.inclusions.map((item, i) => (
                     <li key={i} className="flex items-start gap-2.5">
                       <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5 stroke-[2]" />
@@ -412,12 +346,6 @@ export default function SponsorsPage() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={`mailto:exhibitors@thehebs.com?subject=${encodeURIComponent(pkg.name + ' Inquiry — HEBS 2026')}`}
-                  className="w-full text-center py-3 rounded-xl font-medium transition-all border border-zinc-800 hover:border-zinc-600 text-white bg-zinc-900/30 font-sans text-xs uppercase tracking-widest block"
-                >
-                  Inquire ↗
-                </a>
               </div>
             ))}
           </div>
@@ -425,7 +353,7 @@ export default function SponsorsPage() {
           {/* Add-ons row */}
           <div className="border border-white/[0.08] bg-zinc-950/40 rounded-2xl p-6 mb-5">
             <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-500 mb-5">
-              Optional Add-Ons
+              Optional add-ons offered in 2026
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {boothAddOns.map((addon) => (
@@ -433,9 +361,6 @@ export default function SponsorsPage() {
                   <Check className="h-3.5 w-3.5 text-amber-500 shrink-0 mt-0.5 stroke-[2]" />
                   <div>
                     <p className="text-sm text-white font-medium leading-snug">{addon.label}</p>
-                    <p className="font-mono text-xs text-zinc-400 mt-1">
-                      {addon.price} <span className="text-zinc-600">/ {addon.ngn}</span>
-                    </p>
                   </div>
                 </div>
               ))}
@@ -449,20 +374,17 @@ export default function SponsorsPage() {
                 Sponsor &amp; Exhibitor Resources
               </p>
               <p className="font-sans text-sm text-white font-medium mb-1">
-                Exhibitor &amp; Sponsor Deck
+                HEBS Lagos 2026 Exhibitor &amp; Sponsor Deck (archive)
               </p>
               <p className="font-sans text-xs text-zinc-400 font-light leading-relaxed">
-                Booth inclusions, exhibitor schedule, audience profile, and marketing opportunities in one document.
-              </p>
-              <p className="font-sans text-xs text-zinc-600 font-light leading-relaxed mt-2">
-                The official floor plan will be shared separately once finalized.
+                The 2026 deck, kept for reference. The packages and prices in it have expired.
               </p>
             </div>
             <a
               href="/downloads/hebs-lagos-2026-floor-plan-and-event-deck.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Download the HEBS Lagos 2026 Exhibitor and Sponsor Deck (PDF, 2 MB, opens in a new tab)"
+              aria-label="Download the archived HEBS Lagos 2026 Exhibitor and Sponsor Deck (PDF, 2 MB, opens in a new tab)"
               className="shrink-0 w-full md:w-auto text-center inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 rounded-xl font-sans text-xs uppercase tracking-widest font-medium border border-zinc-800 hover:border-zinc-600 text-white bg-zinc-900/30 transition-all duration-200 touch-manipulation"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -470,14 +392,9 @@ export default function SponsorsPage() {
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Download Exhibitor &amp; Sponsor Deck (PDF, 2 MB)
+              Download 2026 Deck (PDF, 2 MB)
             </a>
           </div>
-
-          {/* Source note */}
-          <p className="font-sans text-xs text-zinc-600 text-center leading-relaxed">
-            Booth package pricing is based on the official HEBS Lagos travel guide.
-          </p>
 
         </div>
 
