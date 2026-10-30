@@ -23,6 +23,28 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
+// Matches anything shaped like an email address, so provider error messages
+// that echo a recipient back cannot carry it into the logs.
+const EMAIL_PATTERN = /[^\s@<>"'(),;:]+@[^\s@<>"'(),;:]+/g;
+
+/**
+ * Log-safe summary of an error: its name, status code and message, with any
+ * email address redacted. Request data (visitor name, email, message) is never
+ * logged - Vercel keeps runtime logs outside the privacy notice's scope.
+ */
+function logSafe(err: unknown): Record<string, unknown> {
+  if (!err || typeof err !== "object") {
+    return { error: String(err).replace(EMAIL_PATTERN, "[redacted-email]") };
+  }
+  const e = err as { name?: unknown; statusCode?: unknown; message?: unknown };
+  return {
+    name: typeof e.name === "string" ? e.name : undefined,
+    statusCode: typeof e.statusCode === "number" ? e.statusCode : undefined,
+    message:
+      typeof e.message === "string" ? e.message.replace(EMAIL_PATTERN, "[redacted-email]") : undefined,
+  };
+}
+
 function escHtml(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -33,11 +55,7 @@ function escHtml(str: string): string {
 }
 
 export async function POST(req: NextRequest) {
-  // ── Diagnostic: env check (safe — never logs the key value) ──────────────
   const apiKeyExists = !!process.env.RESEND_API_KEY;
-  const fromAddress = process.env.RESEND_FROM ?? "(not set — using hardcoded fallback)";
-  console.log("[contact] RESEND_API_KEY present:", apiKeyExists);
-  console.log("[contact] RESEND_FROM:", fromAddress);
 
   // ── Guard: fail fast if API key is missing ────────────────────────────────
   if (!apiKeyExists) {
@@ -72,8 +90,6 @@ export async function POST(req: NextRequest) {
   }
 
   const { name, email, message, bot_field } = body;
-
-  console.log("CONTACT FORM RECEIVED", { name, email, messageLength: message?.length, bot_field: !!bot_field });
 
   // ── Honeypot ──────────────────────────────────────────────────────────────
   if (bot_field) {
@@ -180,13 +196,12 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
-    console.log("ADMIN EMAIL RESULT", { data: notif.data, error: notif.error });
-    console.log("CONFIRM EMAIL RESULT", { data: confirm.data, error: confirm.error });
-
     // ── Surface any Resend-level errors to the client ───────────────────────
     if (notif.error || confirm.error) {
-      const sdkErr = notif.error ?? confirm.error;
-      console.error("[contact] Resend rejected at least one send:", sdkErr);
+      console.error("[contact] Resend rejected at least one send:", {
+        notification: notif.error ? logSafe(notif.error) : "sent",
+        confirmation: confirm.error ? logSafe(confirm.error) : "sent",
+      });
       return NextResponse.json(
         {
           error:
@@ -201,7 +216,7 @@ export async function POST(req: NextRequest) {
 
   } catch (err) {
     // Catches network-level failures or unexpected SDK throws
-    console.error("[contact] Unexpected error during Resend call:", err);
+    console.error("[contact] Unexpected error during Resend call:", logSafe(err));
     return NextResponse.json(
       {
         error:
