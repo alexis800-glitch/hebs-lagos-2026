@@ -15,6 +15,7 @@ import {
   categoryName,
   eventDay,
 } from "@/lib/competitions";
+import { REGISTRATION_CLOSED } from "@/lib/post-event";
 
 // ─── Knowledge base ────────────────────────────────────────────────────────────
 
@@ -49,7 +50,7 @@ const COMPETITION_ENTRIES: KBEntry[] = COMPETITIONS.map((c) => {
     answer:
       `${c.name} — ${categoryName(c.category)}\n\n` +
       `When: ${s}\nEntry fee: ${c.feeDisplay}\nPrize: ${prizeDisplay(c)}\n\n` +
-      `${c.description}\n\nRegister at hebseventportal.com/register.`,
+      `${c.description}\n\n${REGISTRATION_CLOSED}`,
   };
 });
 
@@ -67,37 +68,37 @@ const KNOWLEDGE_BASE: KBEntry[] = [
   {
     triggers: ["date", "when", "october", "schedule", "how long", "days", "weekend", "timeline"],
     answer:
-      `HEBS Lagos 2026 is a 3-day event:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · ${eventDay("2026-10-24").hours}\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · ${eventDay("2026-10-25").hours}\n\nAsk me for the competition schedule to see the times for each competition.`,
+      `HEBS Lagos 2026 was a 3-day event, held October 23–25, 2026:\n\n• Oct 23 — Pre-Party · NJS Royale Beach Resort · 2:00 PM – 7:00 PM\n• Oct 24 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · ${eventDay("2026-10-24").hours}\n• Oct 25 — Exhibition, Education, Panel Discussions & Competitions · NJS Royale Events Center · ${eventDay("2026-10-25").hours}\n\nAsk me for the competition schedule to see the times for each competition.`,
   },
   {
     triggers: ["venue", "where", "location", "address", "njs", "royale", "lekki", "richland", "lagos", "lagos island", "place", "held", "center", "centre", "convention", "beach resort"],
     answer:
-      "HEBS Lagos 2026 uses two venues:\n\n• Pre-Party (Oct 23): NJS Royale Beach Resort, Lagos, Nigeria · 2:00 PM – 7:00 PM\n• Main Event (Oct 24–25): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
+      "HEBS Lagos 2026 used two venues:\n\n• Pre-Party (Oct 23): NJS Royale Beach Resort, Lagos, Nigeria · 2:00 PM – 7:00 PM\n• Main Event (Oct 24–25): NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos, Nigeria",
   },
   {
     triggers: ["how to register", "how do i register", "sign up", "registration", "register", "how register", "joining", "participate", "sign me up"],
     answer:
-      `Visit hebseventportal.com/register to get started. You will be able to choose between buying an attendee ticket or registering as a competitor. The competitor entry fee is ${ENTRY_FEE_DISPLAY} per competition.`,
+      `${REGISTRATION_CLOSED} For a question about a 2026 registration, contact info@thehebs.com.`,
   },
   {
     triggers: ["ticket", "attendee", "pass", "buy ticket", "purchase ticket", "attend", "coming as audience", "watch", "spectate", "general admission"],
     answer:
-      "General admission ticket options:\n\n• One Day Pass — ₦15,000\n• Two Days Pass — ₦25,000\n• Three Days Pass — ₦75,000 (includes Pre-Party & networking with industry leaders)\n• VIP Experience — $400 / ₦560,000\n\nAll passes are issued via hebseventportal.com/register.",
+      "HEBS Lagos 2026 general admission passes were:\n\n• One Day Pass — ₦15,000\n• Two Days Pass — ₦25,000\n• Three Days Pass — ₦75,000 (included Pre-Party & networking with industry leaders)\n• VIP Experience — $400 / ₦560,000\n\nThe event has taken place and ticket sales have closed.",
   },
   {
     triggers: ["vip", "vip ticket", "vip pass", "vip experience", "premium", "front row", "lounge", "meet greet", "celebrity", "merchandise"],
     answer:
-      "The VIP Experience pass is $400 early bird / $600 standard (₦560,000). It includes: full 3-day VIP clearance, front-row priority seating, exclusive VIP lounge access, Celebrity Meet & Greet, and an Official Merchandise Package. Purchase at hebseventportal.com/register.",
+      "The HEBS Lagos 2026 VIP Experience pass was $400 early bird / $600 standard (₦560,000). It included full 3-day VIP clearance, front-row priority seating, exclusive VIP lounge access, Celebrity Meet & Greet, and an Official Merchandise Package. The event has taken place and ticket sales have closed.",
   },
   {
     triggers: ["price", "cost", "fee", "how much", "pricing", "rates", "entry fee", "ticket price", "money", "dollar", "naira", "usd", "ngn"],
     answer:
-      `General admission ticket prices:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nThe competitor entry fee is ${ENTRY_FEE_DISPLAY} per competition — the same for all ${COMPETITION_COUNT} competitions. All payments via hebseventportal.com/register.`,
+      `HEBS Lagos 2026 general admission prices were:\n• One Day Pass: ₦15,000\n• Two Days Pass: ₦25,000\n• Three Days Pass: ₦75,000\n• VIP Experience: $400 / ₦560,000\n\nThe competitor entry fee was ${ENTRY_FEE_DISPLAY} per competition — the same for all ${COMPETITION_COUNT} competitions. Ticket sales and registration have closed.`,
   },
   {
     triggers: ["contestant", "compete", "competitor", "competition registration", "register as contestant", "enter competition", "enter contest", "compete in"],
     answer:
-      `To register as a competitor, visit hebseventportal.com/register and select the contestant option. Choose your competition, pay the ${ENTRY_FEE_DISPLAY} entry fee, and submit any required materials. The fee is the same for every competition.`,
+      `${REGISTRATION_CLOSED} The competitor entry fee was ${ENTRY_FEE_DISPLAY}, the same for every competition.`,
   },
   {
     triggers: ["categories", "competition category", "what competitions", "which competitions", "events", "what can i compete in", "competition types", "all competitions", "list competitions", "programme", "program"],
@@ -128,9 +129,9 @@ Prize amounts are the maximum available in each competition.`,
   {
     triggers: ["entry fee", "entry fees", "competition fee", "how much to enter", "cost to compete", "fee per competition"],
     answer:
-      `Every HEBS Lagos 2026 competition has the same contestant entry fee: ${ENTRY_FEE_DISPLAY} per competition, across all ${COMPETITION_COUNT} competitions.
+      `Every HEBS Lagos 2026 competition had the same contestant entry fee: ${ENTRY_FEE_DISPLAY} per competition, across all ${COMPETITION_COUNT} competitions.
 
-Entry fees are non-refundable and paid at hebseventportal.com/register.`,
+${REGISTRATION_CLOSED}`,
   },
   {
     triggers: ["barber championship", "braiding championship", "signature competitions", "signature track", "barber games", "braids and fades", "braids & fades", "fast and flawless challenge", "old competitions", "what happened to"],
@@ -140,7 +141,7 @@ Entry fees are non-refundable and paid at hebseventportal.com/register.`,
   {
     triggers: ["payment", "pay", "how to pay", "payment method", "bank transfer", "card", "confirmation", "receipt", "qr code", "qr", "digital ticket", "email confirmation", "after payment"],
     answer:
-      "All payments are processed through the official portal at hebseventportal.com/register. After completing payment, you will receive a confirmation email with your digital ticket or QR code. If you do not receive confirmation within 24 hours, contact info@thehebs.com or call +1 (610) 477-9635.",
+      "Payments for HEBS Lagos 2026 were processed through the official portal at hebseventportal.com. For a question about a 2026 payment, ticket or QR code, contact info@thehebs.com or call +1 (610) 477-9635.",
   },
   {
     triggers: ["contact", "support", "help", "email", "phone", "reach", "whatsapp", "info", "question", "inquiry", "get in touch"],
@@ -150,12 +151,12 @@ Entry fees are non-refundable and paid at hebseventportal.com/register.`,
   {
     triggers: ["masterclass", "workshop", "education", "learn", "class", "training", "session", "seminar"],
     answer:
-      "HEBS Lagos 2026 features masterclasses and workshops for beauty, hair, and fashion professionals across all 3 days. The Three Days Pass (₦75,000) includes full 3-day access, Pre-Party, education sessions, and networking with industry leaders. Full session details will be announced closer to the event.",
+      "HEBS Lagos 2026 featured masterclasses and workshops for beauty, hair, and fashion professionals across all 3 days, held October 23–25, 2026.",
   },
   {
     triggers: ["networking", "gala", "meet", "professionals", "industry", "connections", "exhibitor", "sponsor", "vendor"],
     answer:
-      "HEBS Lagos 2026 includes dedicated networking events and a gala accessible with the Three Days Pass or VIP Experience. It's a hub for beauty industry professionals, educators, brands, sponsors, and vendors from across the globe.",
+      "HEBS Lagos 2026 included dedicated networking events and a gala for Three Days Pass and VIP Experience holders, bringing together beauty industry professionals, educators, brands, sponsors, and vendors.",
   },
   ...COMPETITION_ENTRIES,
 ];
@@ -228,13 +229,12 @@ type AnswerOption = { label: string; href?: never; external?: never; answer: str
 type QuickOption = LinkOption | AnswerOption;
 
 const QUICK_OPTIONS: QuickOption[] = [
-  { label: "How do I register?", href: "https://hebseventportal.com/register", external: true },
-  { label: "Buy attendee ticket", href: "https://hebseventportal.com", external: true },
-  { label: "Register as contestant", href: "https://hebseventportal.com/register", external: true },
+  { label: "Registration status", answer: REGISTRATION_CLOSED },
+  { label: "Gallery", href: "/gallery", external: false },
   { label: "Competition categories", href: "/competitions", external: false },
   {
     label: "Event date and venue",
-    answer: "HEBS Lagos 2026 runs October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos, Nigeria.",
+    answer: "HEBS Lagos 2026 took place October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki Epe Express, Lagos, Nigeria.",
   },
   { label: "Contact support", href: "/contact", external: false },
 ];

@@ -29,7 +29,7 @@ export default function About() {
             <p className="font-sans text-sm md:text-base text-neutral-300 font-light leading-relaxed tracking-wide">
               After successful editions delivering an international standard of excellence in the United States, HEBS proudly brings its inaugural Lagos edition home to Nigeria. Born in the diaspora, HEBS launched in{' '}
               <span className="text-white font-medium underline decoration-neutral-800 underline-offset-4">New Jersey, USA</span>{' '}
-              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. HEBS also hosted a sold-out United States edition from 2&ndash;4 May 2026, reinforcing its established presence within the beauty, hair and creative industries. Now, the summit comes home to Lagos for its fourth edition — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
+              in 2024 and returned in 2025 with a sold-out edition that built our international reputation. HEBS also hosted a sold-out United States edition from 2&ndash;4 May 2026, reinforcing its established presence within the beauty, hair and creative industries. In October 2026, the summit came home to Lagos for its fourth edition — an even bigger, high-production platform for global education, high-stakes competition, and sustainable industry growth.
             </p>
           </div>
         </div>
@@ -118,16 +118,14 @@ export default function About() {
       {/* Why Attend Footer Banner */}
       <div className="mt-16 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 backdrop-blur-sm shadow-sm rounded-xl p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
         <p className="font-sans text-sm text-neutral-300 max-w-2xl font-light leading-relaxed">
-          <span className="text-white font-medium block mb-1">Why HEBS is a Must-Attend Event</span>
+          <span className="text-white font-medium block mb-1">Why HEBS Matters</span>
           Whether you are a hairstylist, barber, makeup artist, salon owner, brand executive, or fashion designer, HEBS provides the exact technical knowledge, core connections, and premium global platform you need to thrive in the modern industry.
         </p>
         <a
-          href="https://hebseventportal.com/register"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/competitions"
           className="font-sans text-xs uppercase tracking-wider bg-white text-black hover:bg-neutral-200 px-4 md:px-5 py-3 font-medium transition-colors rounded-lg shrink-0 w-full md:w-auto max-w-full text-center md:whitespace-nowrap"
         >
-          Secure Your Placement ↗
+          View the 2026 Programme
         </a>
       </div>
 

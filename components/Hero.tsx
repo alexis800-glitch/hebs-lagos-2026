@@ -1,9 +1,6 @@
 ﻿"use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { useMounted } from "@/hooks/useMounted";
 import {
   COMPETITION_COUNT,
@@ -12,8 +9,7 @@ import {
   TOTAL_PRIZE_USD_DISPLAY,
   TOTAL_PRIZE_NGN_DISPLAY,
 } from "@/lib/competitions";
-
-const CountdownTimer = dynamic(() => import("./CountdownTimer"), { ssr: false });
+import { HELD_LINE, POST_EVENT_THANKS } from "@/lib/post-event";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -47,32 +43,6 @@ const VALUE_ITEMS = [
   { value: "Lagos 2026",              label: "October 23–25"          },
 ] as const;
 
-const FLOAT_CARDS = [
-  {
-    id: "competition",
-    src: "/images/hebs-2025/competition/competition-barbering.png",
-    alt: "Live Competition",
-    label: "Competition",
-    pos: { top: "12%", right: "2.5%" } as React.CSSProperties,
-    floatDelay: 0,
-  },
-  {
-    id: "education",
-    src: "/images/hebs-2025/competition/competition-education.png",
-    alt: "Education Panel",
-    label: "Education",
-    pos: { top: "56%", left: "2%" } as React.CSSProperties,
-    floatDelay: 1.8,
-  },
-  {
-    id: "crowd",
-    src: "/images/hebs-2025/crowd/crowd-audience.png",
-    alt: "HEBS Live Audience",
-    label: "Live Event",
-    pos: { bottom: "16%", right: "2.5%" } as React.CSSProperties,
-    floatDelay: 3.2,
-  },
-] as const;
 
 import type React from "react";
 
@@ -80,44 +50,16 @@ export default function Hero() {
   const mounted = useMounted();
   const shouldReduceMotion = useReducedMotion();
 
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  // Landscape viewports get the 16:9 hero video, portrait viewports the 9:16 —
-  // picked client-side so only one video is ever downloaded
-  const [heroMedia, setHeroMedia] = useState<{ video: string; poster: string } | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const mq = window.matchMedia("(orientation: landscape)");
-    const pick = () =>
-      setHeroMedia(
-        mq.matches
-          ? {
-              video: "/videos/higgsfield/hebs-hero-competition-desktop-v1-optimized.mp4",
-              poster: "/images/hero/hebs-hero-competition-desktop-v1-poster.jpg",
-            }
-          : {
-              video: "/videos/higgsfield/hebs-hero-competition-mobile-v3-optimized.mp4",
-              poster: "/images/hero/hebs-hero-competition-mobile-v3-poster.jpg",
-            }
-      );
-    pick();
-    mq.addEventListener("change", pick);
-    return () => mq.removeEventListener("change", pick);
-  }, []);
-  // Fallback play attempt — catches cases where autoPlay was ignored
-  useEffect(() => {
-    videoRef.current?.play().catch(() => {});
-  }, [heroMedia]);
-
   return (
     <section
       id="home"
       className="relative w-full min-h-screen bg-zinc-950 overflow-hidden"
     >
 
-      {/* ── Background layer — ambient video over static gradient fallback ── */}
+      {/* ── Background layer — static gradient (no photographic media) ── */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
 
-        {/* Base dark gradient — instant backdrop before poster/video, and fallback if video fails */}
+        {/* Base dark gradient */}
         <div
           className="absolute inset-0"
           style={{
@@ -135,46 +77,9 @@ export default function Hero() {
           }}
         />
 
-        {/* Poster — fades out once the video is playing */}
-        <div
-          className="absolute inset-0 transition-opacity duration-700"
-          style={{ opacity: isVideoPlaying ? 0 : 1 }}
-        >
-          {/* <picture> art direction so only the matching orientation's poster downloads */}
-          <picture>
-            <source
-              media="(orientation: landscape)"
-              srcSet="/images/hero/hebs-hero-competition-desktop-v1-poster.jpg"
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/hero/hebs-hero-competition-mobile-v3-poster.jpg"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </picture>
-        </div>
-
-        {/* Hero video — src set once orientation is known; key remounts it on orientation change */}
-        {heroMedia && (
-          <video
-            key={heroMedia.video}
-            ref={videoRef}
-            src={heroMedia.video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            poster={heroMedia.poster}
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
-            onCanPlay={() => { videoRef.current?.play().catch(() => {}); }}
-            onPlaying={() => setIsVideoPlaying(true)}
-            onPause={() => setIsVideoPlaying(false)}
-            onError={(e) => console.warn("[Hero] video error:", e)}
-          />
-        )}
+        {/* No photographic background: the previous hero video and its posters were
+            AI-generated, so they are not shown as event footage. A static
+            gradient stands in until authentic HEBS Lagos 2026 media is approved. */}
 
         {/* Magenta centre glow */}
         <motion.div
@@ -217,7 +122,7 @@ export default function Hero() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        {/* Overlay — scrim for text readability over the video (center is its brightest zone) */}
+        {/* Overlay — scrim for text readability */}
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.8) 100%)" }}
@@ -253,49 +158,6 @@ export default function Hero() {
 
       {/* ── Top accent border ──────────────────────────────────────── */}
       <div className="absolute top-[80px] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-700/70 to-transparent z-[2]" />
-
-      {/* ── Floating image cards — xl desktop only, no reduced motion ─ */}
-      {mounted && !shouldReduceMotion && (
-        <div className="hidden xl:block absolute inset-0 z-[3] pointer-events-none">
-          {FLOAT_CARDS.map((card) => (
-            <motion.div
-              key={card.id}
-              className="absolute w-[152px] h-[108px] rounded-2xl overflow-hidden"
-              style={{
-                ...card.pos,
-                border: "1px solid rgba(255,255,255,0.09)",
-                boxShadow:
-                  "0 24px 64px rgba(0,0,0,0.80), 0 0 0 1px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.06)",
-              }}
-              initial={{ opacity: 0, y: 0 }}
-              animate={{
-                opacity: [0, 0, 0.82, 0.78, 0.82],
-                y: [0, 0, -5, 0, -5],
-              }}
-              transition={{
-                duration: 10 + card.floatDelay * 1.5,
-                times: [0, 0.12, 0.25, 0.625, 1],
-                repeat: Infinity,
-                delay: card.floatDelay,
-                ease: "easeInOut",
-              }}
-            >
-              <Image
-                src={card.src}
-                alt={card.alt}
-                fill
-                sizes="152px"
-                className="object-cover"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-              <span className="absolute bottom-[7px] left-[9px] font-mono text-[8px] uppercase tracking-widest text-white/60">
-                {card.label}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      )}
 
       {/* ── Main content ───────────────────────────────────────────── */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 lg:px-12 flex flex-col items-center text-center min-h-screen justify-center pt-28 pb-16 sm:pt-32 sm:pb-20">
@@ -372,12 +234,10 @@ export default function Hero() {
             transition={{ duration: 0.9, ease: EXPO, delay: 0.18 }}
             className="font-serif font-semibold text-[2.65rem] sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-8xl tracking-tight leading-[1.05] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]"
           >
-            The Stage Where{" "}
+            Thank You,{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
-              Africa&apos;s Finest
+              Lagos 2026.
             </span>
-            <br className="hidden sm:block" />{" "}
-            Create History
           </motion.h1>
         </div>
 
@@ -423,15 +283,15 @@ export default function Hero() {
           className="w-20 h-[1px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent mb-7 origin-center"
         />
 
-        {/* Countdown */}
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 14, scale: 0.97 } : false}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+        {/* Post-event acknowledgement. The countdown ended when the event began. */}
+        <motion.p
+          initial={mounted ? { opacity: 0, y: 14 } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EXPO, delay: 0.54 }}
-          className="mb-8 w-full max-w-sm sm:max-w-md mx-auto"
+          className="mb-8 w-full max-w-md mx-auto text-sm sm:text-base text-zinc-200 leading-relaxed"
         >
-          <CountdownTimer />
-        </motion.div>
+          {POST_EVENT_THANKS}
+        </motion.p>
 
         {/* ── CTAs + urgency ─────────────────────────────────────────── */}
         <motion.div
@@ -443,24 +303,22 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto items-center justify-center">
             {/* Primary */}
             <motion.a
-              href="https://hebseventportal.com/register"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/competitions"
               whileHover={!shouldReduceMotion ? { scale: 1.03, transition: { type: "spring", stiffness: 380, damping: 22 } } : undefined}
               whileTap={!shouldReduceMotion ? { scale: 0.97, transition: { type: "spring", stiffness: 420, damping: 26 } } : undefined}
               className="inline-flex items-center justify-center bg-white text-black font-bold text-sm tracking-widest uppercase px-10 py-4 rounded-xl hover:bg-amber-400 transition-colors duration-200 touch-manipulation select-none min-h-[52px] w-full sm:w-auto"
             >
-              Register Now ↗
+              View the 2026 Programme
             </motion.a>
 
             {/* Secondary */}
             <motion.a
-              href="/competitions"
+              href="/gallery"
               whileHover={!shouldReduceMotion ? { scale: 1.03, transition: { type: "spring", stiffness: 380, damping: 22 } } : undefined}
               whileTap={!shouldReduceMotion ? { scale: 0.97, transition: { type: "spring", stiffness: 420, damping: 26 } } : undefined}
               className="inline-flex items-center justify-center gap-2 bg-transparent text-white font-semibold text-sm tracking-wide border border-white/20 px-8 py-4 rounded-xl hover:border-amber-400/50 hover:bg-amber-500/[0.06] transition-all duration-200 touch-manipulation min-h-[52px] w-full sm:w-auto"
             >
-              Explore Competitions
+              Gallery
               <svg
                 width="14"
                 height="14"
@@ -481,7 +339,7 @@ export default function Hero() {
 
           {/* Urgency copy */}
           <p className="font-mono text-[10px] sm:text-xs text-zinc-300 tracking-wide leading-loose">
-            Limited competition slots available &nbsp;·&nbsp; Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
+            {HELD_LINE}
           </p>
         </motion.div>
 

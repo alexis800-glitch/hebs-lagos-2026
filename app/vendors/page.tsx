@@ -1,24 +1,19 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { Check, ChevronRight } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import PartnershipContact from '@/components/PartnershipContact'
 import Footer from '@/components/Footer'
-
-type Currency = 'USD' | 'NGN'
+import { VENDOR_ARCHIVE_NOTE } from '@/lib/post-event'
 
 const booths = [
   {
     tag: '01',
     name: 'Standard Booth',
     size: '10 ft × 10 ft',
-    earlyUSD: '$1,200',
-    earlyNGN: '₦1,767,600',
-    standardUSD: '$2,000',
-    standardNGN: '₦2,946,000',
-    description: 'Perfect for independent vendors and emerging beauty brands making their debut at HEBS Lagos 2026.',
+    description: 'For independent vendors and emerging beauty brands at HEBS Lagos 2026.',
     perks: [
       '1 display table + 2 chairs',
       'Logo listing on official HEBS website',
@@ -32,10 +27,6 @@ const booths = [
     tag: '02',
     name: 'Premium Booth',
     size: '10 ft × 20 ft',
-    earlyUSD: '$2,000',
-    earlyNGN: '₦2,946,000',
-    standardUSD: '$3,000',
-    standardNGN: '₦4,419,000',
     description: 'For established brands seeking high-traffic placement, expanded footprint, and broader audience reach.',
     perks: [
       'High-traffic premium floor placement',
@@ -51,10 +42,6 @@ const booths = [
     tag: '03',
     name: 'Deluxe Booth',
     size: '20 ft × 20 ft',
-    earlyUSD: '$2,400',
-    earlyNGN: '₦3,535,200',
-    standardUSD: '$4,500',
-    standardNGN: '₦6,628,500',
     description: 'Maximum-impact flagship presence at prime exhibition location. Full brand integration across event media.',
     perks: [
       'Prime entrance-level location',
@@ -70,8 +57,6 @@ const booths = [
 ]
 
 export default function VendorsPage() {
-  const [currency, setCurrency] = useState<Currency>('USD')
-
   return (
     <>
       <Navbar />
@@ -87,52 +72,19 @@ export default function VendorsPage() {
         {/* Header */}
         <div className="text-center mb-6 max-w-2xl mx-auto px-5 sm:px-0">
           <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mb-2 block text-center">
-            Exhibition Booths
+            HEBS Lagos 2026 · Exhibition Booths
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-light tracking-tight text-center mb-4 sm:mb-6 font-serif leading-snug sm:leading-tight">
-            Vendor <span className="italic font-normal">Opportunities</span>
+            2026 Vendor <span className="italic font-normal">Booths</span>
           </h1>
-          <p className="font-sans text-sm text-zinc-400 font-light leading-relaxed text-center">
-            Secure your booth at Africa&apos;s premier beauty summit. Three exhibition sizes with
-            early-bird and standard pricing. All booths include full event-day floor access.
+          <p role="note" className="font-sans text-sm text-zinc-300 font-light leading-relaxed text-center">
+            {VENDOR_ARCHIVE_NOTE}
           </p>
         </div>
 
-        {/* Currency toggle */}
-        <div className="flex justify-center mt-10">
-          <div className="inline-flex bg-zinc-900 border border-zinc-800 p-1 rounded-full relative mx-auto mb-12">
-            <div
-              className={`absolute top-1 bottom-1 bg-white rounded-full transition-all duration-300 ease-out ${
-                currency === 'USD'
-                  ? 'left-1 right-[calc(50%+1px)]'
-                  : 'left-[calc(50%+1px)] right-1'
-              }`}
-            />
-            <button
-              onClick={() => setCurrency('USD')}
-              className={`relative z-10 w-24 py-1.5 text-xs font-medium rounded-full transition-colors duration-300 ${
-                currency === 'USD' ? 'text-black' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              USD ($)
-            </button>
-            <button
-              onClick={() => setCurrency('NGN')}
-              className={`relative z-10 w-24 py-1.5 text-xs font-medium rounded-full transition-colors duration-300 ${
-                currency === 'NGN' ? 'text-black' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              NGN (₦)
-            </button>
-          </div>
-        </div>
-
         {/* Booth grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-10">
           {booths.map((booth) => {
-            const earlyPrice    = currency === 'USD' ? booth.earlyUSD    : booth.earlyNGN
-            const standardPrice = currency === 'USD' ? booth.standardUSD : booth.standardNGN
-
             return (
               <div
                 key={booth.name}
@@ -168,31 +120,6 @@ export default function VendorsPage() {
                     </p>
                   </div>
 
-                  {/* Pricing */}
-                  <div className="border-t border-zinc-900 pt-6 mb-6">
-                    <div className="flex items-end gap-6">
-                      <div>
-                        <span className="font-mono text-[9px] uppercase tracking-widest text-amber-500 block mb-1">
-                          Early Bird
-                        </span>
-                        <span className="font-sans text-2xl md:text-3xl font-light tracking-tight text-white leading-none">
-                          {earlyPrice}
-                        </span>
-                      </div>
-                      <div className="border-l border-zinc-800 pl-6">
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 block mb-1">
-                          Standard
-                        </span>
-                        <span className="font-sans text-lg font-light text-zinc-500 line-through leading-none">
-                          {standardPrice}
-                        </span>
-                      </div>
-                    </div>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 mt-2 block">
-                      {currency === 'USD' ? 'USD' : 'NGN'} · one-time · per event
-                    </span>
-                  </div>
-
                   {/* Perks */}
                   <ul className="text-sm text-zinc-400 space-y-3">
                     {booth.perks.map((perk, i) => (
@@ -208,27 +135,18 @@ export default function VendorsPage() {
                   </ul>
                 </div>
 
-                {/* CTA */}
-                <a
-                  href={`mailto:info@thehebs.com?subject=${booth.name} Inquiry — HEBS 2026`}
-                  className={`w-full text-center py-3 rounded-xl font-medium transition-all mt-8 font-sans text-xs uppercase tracking-widest block ${
-                    booth.featured
-                      ? 'bg-white text-black hover:bg-zinc-200'
-                      : 'border border-zinc-800 hover:border-zinc-600 text-white bg-zinc-900/30'
-                  }`}
-                >
-                  Reserve {booth.name} ↗
-                </a>
+                <p className="mt-8 border-t border-zinc-900 pt-4 font-mono text-[10px] uppercase tracking-widest text-zinc-500">
+                  HEBS Lagos 2026 · no longer available
+                </p>
               </div>
             )
           })}
         </div>
 
         {/* Info strip */}
-        <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
-            { label: 'Early Bird Deadline', value: 'August 31, 2026', note: 'Lock in the lowest rate before cutoff' },
-            { label: 'Setup Window', value: 'October 22, 2026', note: 'Full day pre-event booth setup access' },
+            { label: 'Setup Day', value: 'October 22, 2026', note: 'Pre-event booth setup' },
             { label: 'Event Dates', value: 'Oct 23–25, 2026', note: 'NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos' },
           ].map((item) => (
             <div key={item.label} className="border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-xl p-5 backdrop-blur-sm shadow-sm">
@@ -237,23 +155,6 @@ export default function VendorsPage() {
               <span className="font-sans text-xs text-zinc-500 font-light">{item.note}</span>
             </div>
           ))}
-        </div>
-
-        {/* Footer CTA */}
-        <div className="max-w-6xl mx-auto mt-10 border border-white/10 hover:border-white/30 transition-all duration-500 ease-out shadow-lg hover:shadow-white/[0.02] bg-zinc-950/40 rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 backdrop-blur-sm shadow-sm">
-          <div>
-            <p className="font-sans text-sm text-white font-medium mb-1">Ready to Exhibit at HEBS 2026?</p>
-            <p className="font-sans text-xs text-zinc-400 font-light">
-              Booth confirmations are sent within 48 hours. All rates are per-event and non-transferable.
-            </p>
-          </div>
-          <a
-            href="mailto:info@thehebs.com"
-            className="bg-white text-black font-medium px-6 py-3 rounded-xl hover:bg-zinc-200 transition-all text-xs tracking-wider inline-flex items-center gap-1 shrink-0 cursor-pointer relative z-50 pointer-events-auto"
-          >
-            <span>CONTACT US</span>
-            <span className="text-sm font-light">↗</span>
-          </a>
         </div>
 
         <PartnershipContact />

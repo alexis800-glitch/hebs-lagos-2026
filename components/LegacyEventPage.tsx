@@ -464,25 +464,23 @@ export default function LegacyEventPage({ data }: { data: LegacyEventData }) {
             transition={{ duration: 0.7, ease: EXPO }}
           >
             <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 mb-5">
-              The Journey Continues
+              The Journey Continued
             </p>
             <h2 className="font-serif font-medium text-4xl sm:text-5xl text-white tracking-tight mb-4">
-              Be Part of{" "}
+              Then Came{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
                 HEBS 2026
               </span>
             </h2>
             <p className="text-zinc-400 text-[15px] mb-10 max-w-md mx-auto">
-              The summit comes home. The biggest HEBS yet — October 23–25, 2026 · Lagos, Nigeria.
+              The summit came home to Lagos, October 23–25, 2026.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
               <a
-                href="https://hebseventportal.com/register"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/competitions"
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-wide text-black bg-white px-8 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 min-h-[48px]"
               >
-                Register for HEBS 2026 ↗
+                The 2026 Programme
               </a>
               <Link
                 href="/"

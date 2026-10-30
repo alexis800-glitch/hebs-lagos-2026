@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Gallery — HEBS Lagos 2026',
   description:
-    'Moments from the Hair Education Beauty Summit — competition stages, winners, and highlights from past editions as HEBS comes home to Lagos for 2026.',
+    'Moments from the Hair Education Beauty Summit — competition stages, winners, and highlights from past editions as HEBS came home to Lagos for 2026.',
   alternates: { canonical: '/gallery' },
   openGraph: {
     title: 'Gallery — HEBS Lagos 2026',

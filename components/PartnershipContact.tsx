@@ -1,9 +1,9 @@
 import React from 'react'
 
+// HEBS Lagos 2026 facts, kept as a record. The booking terms that applied
+// before the event (deposits, payment deadlines, availability) were removed
+// once it had taken place.
 const vendorInfo = [
-  { title: 'Vendor & Exhibitor Registration', text: 'Limited booth spaces available. Early inquiry is recommended for best placement.' },
-  { title: 'Booth Deposit',                   text: '20% deposit required to lock in booth space.' },
-  { title: 'Final Payment',                   text: 'Final booth payment is due upon approval and invoice confirmation.' },
   { title: 'Event Dates',                     text: 'October 23–25, 2026' },
   { title: 'Venue',                           text: 'NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos' },
 ]
@@ -15,13 +15,8 @@ export default function PartnershipContact() {
       {/* Left — Direct Inquiry & Desk Info */}
       <div>
         <h2 className="text-2xl md:text-3xl font-light text-white tracking-tight mb-4">
-          Secure Your Opportunity
+          Partnership Contact
         </h2>
-
-        <span className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 font-medium text-xs font-mono px-3 py-1.5 rounded-full mb-6 tracking-wide">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-          <span>20% deposit required to lock in booth space</span>
-        </span>
 
         <p className="text-zinc-300 font-medium text-sm mb-4">
           HEBS Sponsorship &amp; Vendor Relations Desk
@@ -53,7 +48,7 @@ export default function PartnershipContact() {
       {/* Right — Vendor & Exhibitor Information */}
       <div>
         <h2 className="text-lg font-medium text-white mb-6 tracking-tight">
-          Important Vendor &amp; Exhibitor Information
+          HEBS Lagos 2026 Vendor &amp; Exhibitor Information
         </h2>
 
         <div className="relative border-l border-zinc-800 pl-6 space-y-8 ml-2">

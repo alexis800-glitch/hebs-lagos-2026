@@ -392,19 +392,17 @@ export default function MediaGalleryPage() {
         <section className="py-16 px-5 sm:px-8 border-t border-white/[0.05] bg-black">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-zinc-500 mb-2">Next Edition</p>
+              <p className="font-mono text-[9px] tracking-[0.25em] uppercase text-zinc-500 mb-2">Latest Edition</p>
               <h2 className="font-serif font-medium text-2xl sm:text-3xl text-white tracking-tight">
                 HEBS Lagos 2026 · <span className="text-amber-400">Oct 23–25</span>
               </h2>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="https://hebseventportal.com/register"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/competitions"
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-black bg-white px-7 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200"
               >
-                Register for HEBS 2026 ↗
+                The 2026 Programme
               </a>
               <Link
                 href="/"

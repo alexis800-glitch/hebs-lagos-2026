@@ -48,10 +48,10 @@ export default function JoinTheMovement({
                   href={packagesHref}
                   className="inline-flex items-center justify-center gap-2 font-sans text-xs uppercase tracking-widest bg-white text-black hover:bg-zinc-200 px-6 py-3 rounded-xl font-medium transition-all duration-200"
                 >
-                  Explore Sponsorship Packages
+                  HEBS Lagos 2026 Partnerships
                 </Link>
                 <a
-                  href="mailto:info@thehebs.com?subject=Partnership Inquiry — HEBS Lagos 2026"
+                  href="mailto:info@thehebs.com?subject=Partnership Inquiry — HEBS"
                   className="inline-flex items-center justify-center gap-1 font-sans text-xs uppercase tracking-widest text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-600 px-6 py-3 rounded-xl font-medium transition-all duration-200"
                 >
                   Partner With Us ↗

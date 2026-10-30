@@ -190,15 +190,13 @@ export default function Footer() {
                 Support: 2:00 PM – 11:00 PM WAT
               </p>
             </div>
-            <a
-              href="https://hebseventportal.com/register"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="btn-pink text-sm mt-2 inline-block"
               style={{ width: "fit-content" }}
             >
-              Register Now
-            </a>
+              Contact Us
+            </Link>
           </div>
         </motion.div>
 
