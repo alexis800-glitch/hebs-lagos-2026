@@ -23,25 +23,22 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
-// Matches anything shaped like an email address, so provider error messages
-// that echo a recipient back cannot carry it into the logs.
-const EMAIL_PATTERN = /[^\s@<>"'(),;:]+@[^\s@<>"'(),;:]+/g;
+// An error code is logged only if it looks like an identifier
+// ("validation_error", "TypeError"). Anything else becomes "unknown_error".
+const SAFE_CODE = /^[A-Za-z][A-Za-z0-9_.-]{0,63}$/;
 
 /**
- * Log-safe summary of an error: its name, status code and message, with any
- * email address redacted. Request data (visitor name, email, message) is never
- * logged - Vercel keeps runtime logs outside the privacy notice's scope.
+ * Log-safe summary of a provider or runtime error: a short operational code and
+ * the HTTP status, nothing else. Third-party error text is never logged, because
+ * providers can echo request data (such as the recipient address) back in it.
+ * Request data itself (visitor name, email, message) is never logged either.
  */
-function logSafe(err: unknown): Record<string, unknown> {
-  if (!err || typeof err !== "object") {
-    return { error: String(err).replace(EMAIL_PATTERN, "[redacted-email]") };
-  }
-  const e = err as { name?: unknown; statusCode?: unknown; message?: unknown };
+function logSafe(err: unknown): { code: string; statusCode?: number } {
+  if (!err || typeof err !== "object") return { code: "unknown_error" };
+  const e = err as { name?: unknown; statusCode?: unknown };
   return {
-    name: typeof e.name === "string" ? e.name : undefined,
+    code: typeof e.name === "string" && SAFE_CODE.test(e.name) ? e.name : "unknown_error",
     statusCode: typeof e.statusCode === "number" ? e.statusCode : undefined,
-    message:
-      typeof e.message === "string" ? e.message.replace(EMAIL_PATTERN, "[redacted-email]") : undefined,
   };
 }
 

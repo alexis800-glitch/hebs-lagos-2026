@@ -74,15 +74,37 @@ describe("POST /api/contact", () => {
     const line = logged.find((l) => l.includes("Resend rejected"));
     expect(line).toContain("validation_error");
     expect(line).toContain("422");
-    expect(line).toContain("[redacted-email]");
+    // Only the code and status: none of the provider's own text is logged.
+    expect(line).not.toContain("Invalid");
     expectNoPersonalData();
   });
 
-  it("redacts addresses from unexpected thrown errors", async () => {
+  it("logs only an error code for unexpected thrown errors, never their text", async () => {
     send.mockRejectedValue(new Error(`socket closed while sending to ${VISITOR.email}`));
     const res = await POST(request(VISITOR));
     expect(res.status).toBe(500);
-    expect(logged.some((l) => l.includes("Unexpected error") && l.includes("[redacted-email]"))).toBe(true);
+    const line = logged.find((l) => l.includes("Unexpected error"));
+    expect(line).toContain('"code":"Error"');
+    expect(line).not.toContain("socket closed");
+    expectNoPersonalData();
+  });
+
+  it("replaces a non-identifier error name with a generic code", async () => {
+    send.mockResolvedValue({
+      data: null,
+      error: { name: `bounce for ${VISITOR.email}`, statusCode: 400, message: VISITOR.message },
+    });
+    const res = await POST(request(VISITOR));
+    expect(res.status).toBe(500);
+    expect(logged.find((l) => l.includes("Resend rejected"))).toContain("unknown_error");
+    expectNoPersonalData();
+  });
+
+  it("handles a non-object rejection without logging it", async () => {
+    send.mockRejectedValue(`string failure mentioning ${VISITOR.email}`);
+    const res = await POST(request(VISITOR));
+    expect(res.status).toBe(500);
+    expect(logged.find((l) => l.includes("Unexpected error"))).toContain("unknown_error");
     expectNoPersonalData();
   });
 
