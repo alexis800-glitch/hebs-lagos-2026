@@ -1,13 +1,14 @@
 ﻿import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { eventDay } from "@/lib/competitions";
+import { TICKETS_CLOSED } from "@/lib/post-event";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Tickets — HEBS Lagos 2026",
   description:
-    "Secure your pass to the Hair Education Beauty Summit Lagos 2026. One-day, two-day, and three-day passes plus VIP Experience. October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.",
+    "Passes offered for the Hair Education Beauty Summit Lagos 2026: one-day, two-day and three-day passes plus VIP Experience. Held October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria. Ticket sales have closed.",
   alternates: { canonical: "/tickets" },
   openGraph: {
     title: "Tickets — HEBS Lagos 2026",
@@ -107,15 +108,14 @@ export default function TicketsPage() {
             {/* Header */}
             <div className="mb-16 border-b border-zinc-900 pb-10">
               <p className="font-mono text-[10px] uppercase tracking-widest text-amber-500 font-medium mb-4">
-                Registration Portals
+                HEBS Lagos 2026 · Passes
               </p>
               <h1 className="font-serif text-4xl md:text-5xl font-semibold text-white tracking-tight mb-4">
-                Choose Your{" "}
-                <span className="italic font-normal">Experience</span>
+                The 2026{" "}
+                <span className="italic font-normal">Passes</span>
               </h1>
-              <p className="font-sans text-sm text-zinc-200 leading-relaxed max-w-md">
-                Early bird rates are available for a limited window. Secure
-                placement before tier limits expire.
+              <p role="note" className="font-sans text-sm text-zinc-200 leading-relaxed max-w-md">
+                {TICKETS_CLOSED}
               </p>
             </div>
 
@@ -210,21 +210,16 @@ export default function TicketsPage() {
                   </div>
 
                   {/* CTA */}
-                  <a
-                    href={pass.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center font-sans text-xs uppercase tracking-widest py-4 rounded-xl font-medium border border-zinc-800 hover:border-zinc-600 text-white hover:bg-zinc-900/60 transition-all duration-200"
-                  >
-                    Secure Pass ↗
-                  </a>
+                  <p className="block w-full text-center font-sans text-xs uppercase tracking-widest py-4 rounded-xl font-medium border border-zinc-900 text-zinc-400">
+                    Sales closed
+                  </p>
                 </div>
               ))}
             </div>
 
             {/* Footer note */}
             <p className="text-center font-sans text-xs text-zinc-400 mt-12">
-              All passes are issued via{" "}
+              2026 passes were issued via{" "}
               <a
                 href="https://hebseventportal.com"
                 target="_blank"

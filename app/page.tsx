@@ -17,12 +17,12 @@ import { COMPETITIONS, COMPETITION_COUNT, CATEGORY_COUNT, eventDay } from "@/lib
 export const metadata: Metadata = {
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    `After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions, October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.`,
+    `After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS came home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions, October 23–25, 2026 at NJS Royale Events Center, Lagos, Nigeria.`,
   alternates: { canonical: "/" },
   openGraph: {
     title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
     description:
-      `After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions · October 23–25, 2026 · Lagos, Nigeria.`,
+      `After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS came home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions · October 23–25, 2026 · Lagos, Nigeria.`,
     url: "/",
     images: [
       {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
     description:
-      `After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions · October 23–25, 2026 · Lagos, Nigeria.`,
+      `After three United States editions, including a sold-out edition from 2–4 May 2026, HEBS came home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions · October 23–25, 2026 · Lagos, Nigeria.`,
     images: ["/images/og/hebs-lagos-2026-og.jpg"],
   },
 };
@@ -47,7 +47,7 @@ const eventJsonLd = {
   "@type": "Event",
   name: "Hair Education Beauty Summit Lagos 2026",
   description:
-    `After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS comes home to Lagos for its fourth edition. Three days of hair education, ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories, and industry celebration.`,
+    `After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, HEBS came home to Lagos for its fourth edition. Three days of hair education, ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories, and industry celebration.`,
   startDate: "2026-10-23T14:00:00+01:00",
   endDate: "2026-10-25T17:00:00+01:00",
   eventStatus: "https://schema.org/EventScheduled",
@@ -68,11 +68,9 @@ const eventJsonLd = {
     name: "Hair Education Beauty Summit",
     url: "https://hebslagos.com",
   },
-  offers: {
-    "@type": "Offer",
-    url: "https://hebseventportal.com/register",
-    availability: "https://schema.org/InStock",
-  },
+  // No `offers`: the event has taken place and nothing is on sale. eventStatus
+  // stays EventScheduled - schema.org has no "completed" status; the past
+  // startDate/endDate are what mark the event as over.
   subEvent: [
     {
       "@type": "Event",

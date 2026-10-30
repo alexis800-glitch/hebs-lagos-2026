@@ -72,7 +72,7 @@ export default function EventHighlights() {
             </p>
             <p className="font-sans text-sm text-neutral-400 leading-relaxed mt-3">
               Following three United States editions, including another sold-out edition from
-              2&ndash;4 May 2026, HEBS comes home to Lagos for its fourth edition and Lagos debut.
+              2&ndash;4 May 2026, HEBS came home to Lagos for its fourth edition and Lagos debut.
             </p>
           </div>
         </div>

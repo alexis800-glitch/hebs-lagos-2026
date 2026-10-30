@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 import NeonButton from "@/components/ui/neon-button";
+import { POST_EVENT_NOTICE, POST_EVENT_NOTICE_SHORT } from "@/lib/post-event";
 import {
   CATEGORIES,
   COMPETITION_COUNT,
@@ -54,6 +55,11 @@ export default function Navbar() {
     <>
       {/* Fixed nav bar */}
       <div className="fixed top-0 left-0 right-0 z-50 w-full bg-black/60 backdrop-blur-md border-b border-white/[0.06]">
+        {/* Post-event notice: the 2026 summit has taken place. */}
+        <p className="w-full border-b border-amber-500/20 bg-amber-500/[0.08] px-4 py-1 text-center font-mono text-[10px] sm:text-[11px] tracking-wide text-amber-100">
+          <span className="sm:hidden">{POST_EVENT_NOTICE_SHORT}</span>
+          <span className="hidden sm:inline">{POST_EVENT_NOTICE}</span>
+        </p>
         <motion.nav
           initial={mounted ? { y: -80, opacity: 0 } : false}
           animate={{ y: 0, opacity: 1 }}
@@ -128,14 +134,12 @@ export default function Navbar() {
                         </div>
                         <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-center gap-6">
                           <span className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">HEBS Lagos · Oct 23–25, 2026</span>
-                          <a
-                            href="https://hebseventportal.com/register"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <Link
+                            href="/competitions"
                             className="font-sans text-[10px] uppercase tracking-wider text-zinc-200 hover:text-white transition-colors"
                           >
-                            Register to Compete ↗
-                          </a>
+                            Full 2026 Programme
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -260,18 +264,20 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <NeonButton
-            href="https://hebseventportal.com/register"
+            href="/contact"
+            target="_self"
             className="hidden lg:inline-flex shrink-0 text-xs px-4 py-2"
           >
-            Register Now
+            Contact Us
           </NeonButton>
 
           {/* Mobile inline CTA */}
           <NeonButton
-            href="https://hebseventportal.com/register"
+            href="/contact"
+            target="_self"
             className="lg:hidden shrink-0 text-xs px-3.5 py-2"
           >
-            Register
+            Contact
           </NeonButton>
 
           {/* Hamburger */}
@@ -430,8 +436,8 @@ export default function Navbar() {
           style={{ transitionDelay: menuOpen ? "320ms" : "0ms" }}
           className={`flex flex-col gap-4 transition-all duration-300 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
         >
-          <NeonButton href="https://hebseventportal.com/register" onClick={closeMenu} className="w-full text-sm py-4">
-            Register Now ↗
+          <NeonButton href="/contact" target="_self" onClick={closeMenu} className="w-full text-sm py-4">
+            Contact Us
           </NeonButton>
           <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 text-center">
             Lagos, Nigeria · October 23–25, 2026

@@ -8,7 +8,6 @@ import {
   COMPETITION_COUNT,
   CATEGORY_COUNT,
   TOTAL_PRIZE_DISPLAY,
-  ENTRY_FEE_DISPLAY,
   type CategorySlug,
 } from "@/lib/competitions";
 
@@ -230,15 +229,13 @@ export default function CompetitionCategories() {
           className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center"
         >
           <a
-            href="https://hebseventportal.com/register"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/competitions"
             className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-wide text-black bg-white px-8 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 min-h-[48px]"
           >
-            Register for Your Category ↗
+            View the 2026 Competitions
           </a>
           <p className="font-mono text-xs tracking-widest uppercase text-zinc-300">
-            Entry {ENTRY_FEE_DISPLAY} per competition · All {COMPETITION_COUNT} competitions open
+            {COMPETITION_COUNT} competitions · Held October 23–25, 2026
           </p>
         </motion.div>
 

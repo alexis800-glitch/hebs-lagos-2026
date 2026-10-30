@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { useMounted } from "@/hooks/useMounted";
 import {
   COMPETITION_COUNT,
@@ -12,8 +11,7 @@ import {
   TOTAL_PRIZE_USD_DISPLAY,
   TOTAL_PRIZE_NGN_DISPLAY,
 } from "@/lib/competitions";
-
-const CountdownTimer = dynamic(() => import("./CountdownTimer"), { ssr: false });
+import { HELD_LINE, POST_EVENT_THANKS } from "@/lib/post-event";
 
 const EASE = [0.25, 0.4, 0.25, 1] as const;
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -372,12 +370,10 @@ export default function Hero() {
             transition={{ duration: 0.9, ease: EXPO, delay: 0.18 }}
             className="font-serif font-semibold text-[2.65rem] sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-8xl tracking-tight leading-[1.05] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]"
           >
-            The Stage Where{" "}
+            Thank You,{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-[#e91e8c] to-[#9b59b6]">
-              Africa&apos;s Finest
+              Lagos 2026.
             </span>
-            <br className="hidden sm:block" />{" "}
-            Create History
           </motion.h1>
         </div>
 
@@ -423,15 +419,15 @@ export default function Hero() {
           className="w-20 h-[1px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent mb-7 origin-center"
         />
 
-        {/* Countdown */}
-        <motion.div
-          initial={mounted ? { opacity: 0, y: 14, scale: 0.97 } : false}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+        {/* Post-event acknowledgement. The countdown ended when the event began. */}
+        <motion.p
+          initial={mounted ? { opacity: 0, y: 14 } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EXPO, delay: 0.54 }}
-          className="mb-8 w-full max-w-sm sm:max-w-md mx-auto"
+          className="mb-8 w-full max-w-md mx-auto text-sm sm:text-base text-zinc-200 leading-relaxed"
         >
-          <CountdownTimer />
-        </motion.div>
+          {POST_EVENT_THANKS}
+        </motion.p>
 
         {/* ── CTAs + urgency ─────────────────────────────────────────── */}
         <motion.div
@@ -443,24 +439,22 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto items-center justify-center">
             {/* Primary */}
             <motion.a
-              href="https://hebseventportal.com/register"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/competitions"
               whileHover={!shouldReduceMotion ? { scale: 1.03, transition: { type: "spring", stiffness: 380, damping: 22 } } : undefined}
               whileTap={!shouldReduceMotion ? { scale: 0.97, transition: { type: "spring", stiffness: 420, damping: 26 } } : undefined}
               className="inline-flex items-center justify-center bg-white text-black font-bold text-sm tracking-widest uppercase px-10 py-4 rounded-xl hover:bg-amber-400 transition-colors duration-200 touch-manipulation select-none min-h-[52px] w-full sm:w-auto"
             >
-              Register Now ↗
+              View the 2026 Programme
             </motion.a>
 
             {/* Secondary */}
             <motion.a
-              href="/competitions"
+              href="/gallery"
               whileHover={!shouldReduceMotion ? { scale: 1.03, transition: { type: "spring", stiffness: 380, damping: 22 } } : undefined}
               whileTap={!shouldReduceMotion ? { scale: 0.97, transition: { type: "spring", stiffness: 420, damping: 26 } } : undefined}
               className="inline-flex items-center justify-center gap-2 bg-transparent text-white font-semibold text-sm tracking-wide border border-white/20 px-8 py-4 rounded-xl hover:border-amber-400/50 hover:bg-amber-500/[0.06] transition-all duration-200 touch-manipulation min-h-[52px] w-full sm:w-auto"
             >
-              Explore Competitions
+              Gallery
               <svg
                 width="14"
                 height="14"
@@ -481,7 +475,7 @@ export default function Hero() {
 
           {/* Urgency copy */}
           <p className="font-mono text-[10px] sm:text-xs text-zinc-300 tracking-wide leading-loose">
-            Limited competition slots available &nbsp;·&nbsp; Lagos, Nigeria &nbsp;·&nbsp; October 23–25, 2026
+            {HELD_LINE}
           </p>
         </motion.div>
 

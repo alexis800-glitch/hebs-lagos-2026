@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hebslagos.com"),
   title: "HEBS 2026 — Hair Education Beauty Summit | Lagos, Nigeria",
   description:
-    `After three United States editions, including a sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit comes home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories, October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. ${PRIZE_PHRASE}.`,
+    `After three United States editions, including a sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit came home to Lagos for its fourth edition. ${COMPETITION_COUNT} competitions across ${CATEGORY_COUNT} categories, October 23–25, 2026 at NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos. ${PRIZE_PHRASE}.`,
   keywords: [
     "HEBS",
     "Hair Education Beauty Summit",

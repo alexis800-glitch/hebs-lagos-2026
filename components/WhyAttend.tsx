@@ -5,6 +5,7 @@ import { motion, useInView, animate, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useMounted } from "@/hooks/useMounted";
 import ImageLightbox from "./ImageLightbox";
+import { HELD_LINE } from "@/lib/post-event";
 import {
   COMPETITION_COUNT,
   CATEGORY_COUNT,
@@ -262,18 +263,13 @@ export default function WhyAttend() {
           className="mt-16 flex flex-col items-center gap-3"
         >
           <a
-            href="https://hebseventportal.com/register"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/competitions"
             className="inline-flex items-center justify-center gap-2 text-sm font-semibold tracking-wide text-black bg-white px-8 py-3.5 rounded-xl hover:bg-amber-400 transition-colors duration-200 min-h-[48px]"
           >
-            Register for HEBS 2026 ↗
+            View the 2026 Programme
           </a>
-          <p className="text-zinc-400 text-xs leading-relaxed text-center">
-            Limited competition slots available across all categories.
-          </p>
           <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400">
-            October 23–25, 2026 · Lagos, Nigeria
+            {HELD_LINE}
           </p>
         </motion.div>
 

@@ -6,12 +6,12 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CompetitionSchedule from '@/components/CompetitionSchedule'
 import EventHours from '@/components/EventHours'
+import { REGISTRATION_CLOSED } from '@/lib/post-event'
 import {
   COMPETITION_COUNT,
   CATEGORIES,
   CATEGORY_COUNT,
   TOTAL_PRIZE_DISPLAY,
-  REGISTRATION_URL,
   groupedByCategory,
   prizeDisplay,
   resolveLegacyTrack,
@@ -29,19 +29,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
     <span className="text-xs font-mono tracking-widest text-amber-400 uppercase block mb-2">
       {children}
     </span>
-  )
-}
-
-function PrimaryCTA({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`w-full sm:w-auto bg-white text-black font-semibold text-sm tracking-wide px-10 py-3 md:py-2.5 rounded-lg inline-flex items-center justify-center shadow-md hover:scale-[1.01] active:scale-[0.98] transition-transform cursor-pointer touch-manipulation select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950${className ? ` ${className}` : ''}`}
-    >
-      {children}
-    </a>
   )
 }
 
@@ -93,14 +80,7 @@ function CompetitionCard({ competition }: { competition: Competition }) {
       <p className="text-zinc-300 text-sm leading-relaxed mt-4">{description}</p>
 
       <div className="mt-auto pt-6">
-        <a
-          href={competition.registrationUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-        >
-          Register for {name.replace(' Competition', '')} ↗
-        </a>
+        <p className="text-xs font-mono uppercase tracking-wider text-zinc-400">Registration closed</p>
       </div>
     </article>
   )
@@ -255,13 +235,11 @@ function CompetitionsContent() {
             <CompetitionSchedule />
           </div>
 
-          {/* ── Registration CTA ───────────────────────────────────────────── */}
+          {/* ── Registration (closed: the 2026 event has taken place) ─────────── */}
           <div className="mt-16 flex flex-col items-center gap-3 text-center">
-            <PrimaryCTA href={REGISTRATION_URL} className="max-w-xs mx-auto px-8 py-3.5 sm:py-2.5">
-              Register Now
-            </PrimaryCTA>
+            <p className="text-white text-sm font-semibold max-w-xl leading-relaxed">{REGISTRATION_CLOSED}</p>
             <p className="text-zinc-300 text-xs font-mono font-medium max-w-xl leading-relaxed">
-              Non-refundable · Registration Deadline October 15, 2026 ·{' '}
+              Registration closed October 15, 2026 ·{' '}
               <a
                 href="mailto:competitions@hebslagos.com"
                 className="hover:text-white transition-colors underline underline-offset-2"
