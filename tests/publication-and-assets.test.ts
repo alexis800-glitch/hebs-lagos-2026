@@ -48,6 +48,18 @@ describe("asset register", () => {
     }
   });
 
+  it("keeps concept reference photographs out of every 2027 media slot", () => {
+    for (const id of ["ref-hebs-portrait", "ref-hebs-avant-garde"]) {
+      const ref = findAsset(id);
+      expect(ref.status).not.toBe("approved");
+      expect(ref.permittedDepictions).toEqual([]);
+      for (const env of ["production", "preview", "development"] as const) {
+        expect(mayDepict(ref, "real-event", env)).toBe(false);
+      }
+    }
+    expect(MEDIA_SLOTS.every((s) => s.assetId === null || !s.assetId.startsWith("ref-"))).toBe(true);
+  });
+
   it("records an approval for every approved asset", () => {
     for (const a of ASSETS.filter((x) => x.status === "approved")) expect(a.approval).toBeDefined();
   });

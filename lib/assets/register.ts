@@ -65,6 +65,27 @@ export const ASSETS: AssetRecord[] = [
     restriction:
       "AI-generated (Higgsfield). Must never represent a real event, venue or resort facility.",
   },
+  // Concept references: HEBS archive photographs from the US editions, used only
+  // in the /2027/concepts design exploration with a visible reference label.
+  // No permitted depictions, so they can never fill a 2027 media slot.
+  {
+    id: "ref-hebs-portrait",
+    src: "/images/hebs-2025/winners/winner-05.png",
+    alt: "HEBS competitor with sculpted natural hair in a black gown at a HEBS awards evening (archive reference)",
+    provenance: "hebs-event-photo",
+    status: "provisional",
+    permittedDepictions: [],
+    restriction: "Concept reference only. US edition, not 2027. Consent and approval needed before any publication.",
+  },
+  {
+    id: "ref-hebs-avant-garde",
+    src: "/images/hebs-2025/crowd/crowd-01.jpg",
+    alt: "Avant-garde competition look on the HEBS stage (archive reference)",
+    provenance: "hebs-event-photo",
+    status: "provisional",
+    permittedDepictions: [],
+    restriction: "Concept reference only. US edition, not 2027. Consent and approval needed before any publication.",
+  },
   {
     id: "hebs-2026-trailer",
     src: "/videos/hebs-2026-official-event-trailer.mp4",
