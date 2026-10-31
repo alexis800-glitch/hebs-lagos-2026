@@ -77,7 +77,9 @@ export function Hero({ environment, exploreHref }: Env & { exploreHref: string }
     <section id="hero" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-h27-ink text-h27-ivory">
       <MediaFrame slotId="hero" environment={environment} fill className="-z-10 opacity-70" sizes="100vw" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-h27-ink/30 via-h27-ink/60 to-transparent" />
-      <div className="mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 sm:px-8 py-24 text-center">
+      {/* Bottom padding keeps the hero content clear of the media panel's caption,
+          which sits at the bottom of the section (it overlapped the last CTA on phones). */}
+      <div className="mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 sm:px-8 pt-24 pb-44 sm:pb-36 text-center">
         <Eyebrow>Hair Education Beauty Summit</Eyebrow>
         <DisplayHeading id="hero-title" level={1} className="mt-6">
           <span className="block">HEBS LAGOS 2027</span>
