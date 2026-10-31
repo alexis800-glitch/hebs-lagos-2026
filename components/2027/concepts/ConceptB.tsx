@@ -306,7 +306,7 @@ function ThreeDays() {
                       <path key={k} d={`M0 ${270 + k * 30} Q 75 ${262 + k * 30} 150 ${270 + k * 30} T 300 ${270 + k * 30}`} fill="none" stroke="#F7F2E9" strokeOpacity="0.18" />
                     ))}
                   </svg>
-                  <span className="absolute inset-x-0 top-[34%] text-center" style={{ ...display, fontSize: "72px", color: i === 2 ? C.ivory : C.ink, lineHeight: 1 }}>
+                  <span className="absolute inset-x-0 top-[34%] text-center" style={{ ...display, fontSize: "72px", color: C.ink, lineHeight: 1 }}>
                     {d.shortDate.split(" ")[1]}
                   </span>
                   <ReferenceLabel kind="illustration" className="absolute bottom-2 left-2 text-left" />
