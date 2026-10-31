@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Cormorant_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import TrackingConsent from "@/components/TrackingConsent";
 import {
@@ -14,11 +14,36 @@ import {
 /** "$87,500 USD (₦122,500,000) in prizes" — derived so metadata can never drift. */
 const PRIZE_PHRASE = `${TOTAL_PRIZE_USD_DISPLAY} USD (${TOTAL_PRIZE_NGN_DISPLAY}) in prizes`;
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
+// Cormorant Garamond is served from files in the repo (app/fonts/cormorant,
+// SIL Open Font License, latin subset from @fontsource/cormorant-garamond 5.1.0)
+// rather than fetched from Google Fonts at build time. The build-time fetch made
+// builds fail when Google was unreachable, and on one Vercel preview a cached and
+// a fresh response gave the HTML and CSS different font hashes, so every serif
+// heading fell back to sans-serif. Local files make the build deterministic.
+// Same weights, styles and latin character range as the previous Google setup
+// (font loader options must be literals, so the range is written inline).
+
+const cormorant = localFont({
+  src: [
+    { path: "./fonts/cormorant/cormorant-garamond-latin-300-normal.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-300-italic.woff2", weight: "300", style: "italic" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-500-italic.woff2", weight: "500", style: "italic" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/cormorant/cormorant-garamond-latin-600-italic.woff2", weight: "600", style: "italic" },
+  ],
   variable: "--font-serif",
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
+  display: "swap",
+  declarations: [
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
+    },
+  ],
+  adjustFontFallback: "Times New Roman",
 });
 
 export const metadata: Metadata = {
