@@ -137,6 +137,16 @@ describe("asset register", () => {
     expect(walk(join(ROOT, "public")).filter((f) => /comparison|study/i.test(f))).toEqual([]);
   });
 
+  it("never carries the 2026 venue address into the 2027 site (D9)", () => {
+    // 2026 records keep their venue as recorded; 2027 waits for written confirmation.
+    const files = [...walk(join(ROOT, "app/2027")), ...walk(join(ROOT, "components/2027")),
+      join(ROOT, "lib/editions/2027.ts"), join(ROOT, "lib/content/2027.ts"), join(ROOT, "lib/assets/register.ts")]
+      .filter((f) => /\.tsx?$/.test(f));
+    for (const f of files) {
+      expect(readFileSync(f, "utf8"), f).not.toMatch(/richland|lekki|events? cent(er|re)|conference cent(er|re)|shapati|ibeju/i);
+    }
+  });
+
   it("records an approval for every approved asset", () => {
     for (const a of ASSETS.filter((x) => x.status === "approved")) expect(a.approval).toBeDefined();
   });
