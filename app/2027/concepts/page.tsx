@@ -2,24 +2,27 @@
  * Side-by-side overview of the two creative concepts for owner review:
  * direction, palette, type pairing and links to each full concept.
  */
+import { EDITORIAL_FONTS } from "./fonts-editorial";
+import { DESTINATION_FONTS } from "./fonts-destination";
+
 const CONCEPTS = [
   {
-    key: "a",
-    name: "Concept A — The Beauty Editorial",
-    line: "International fashion and beauty editorial: dramatic Didone display type, black and champagne, a single striking portrait, magazine page furniture.",
-    bg: "#0B0A08",
-    fg: "#F4EEE3",
-    accent: "#C9A96E",
+    key: "direction",
+    name: "Direction A, refined — The Beauty Editorial on the Atlantic",
+    line: "The approved direction: Concept A's editorial black and champagne with Concept B's ocean horizon. Hero, Welcome and the three-day presentation, with every photograph position reserved for approved HEBS Lagos or NJS Royale Beach Resort media.",
+    bg: "#000000",
+    fg: "#F5EFE4",
+    accent: "#C8A96A",
     displayVar: "var(--c-bodoni)",
     textVar: "var(--c-manrope)",
     displayName: "Bodoni Moda",
     textName: "Manrope",
     sample: "Bigger. Bolder. Beyond Beauty.",
-    swatches: ["#0B0A08", "#141210", "#C9A96E", "#E6CF9F", "#F4EEE3"],
+    swatches: ["#000000", "#C8A96A", "#EAD7A8", "#F5EFE4", "#FFFFFF", "#0E3A3F"],
   },
   {
     key: "b",
-    name: "Concept B — The Luxury Destination",
+    name: "Concept B — The Luxury Destination (reference)",
     line: "Premium beachfront hospitality: ivory and champagne light, an ocean horizon, refined capitals, arched resort-architecture shapes and generous space.",
     bg: "#F7F2E9",
     fg: "#1C1A17",
@@ -35,16 +38,16 @@ const CONCEPTS = [
 
 export default function ConceptsOverview() {
   return (
-    <main className="min-h-screen bg-[#ECE7DE] px-4 py-14 text-[#1C1A17] sm:px-8" style={{ fontFamily: "var(--c-manrope), sans-serif" }}>
+    <main className={`${EDITORIAL_FONTS} ${DESTINATION_FONTS} min-h-screen bg-[#ECE7DE] px-4 py-14 text-[#1C1A17] sm:px-8`} style={{ fontFamily: "var(--c-manrope), sans-serif" }}>
       <div className="mx-auto max-w-6xl">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#5F5A52]">HEBS Lagos 2027 · Creative direction · For owner review</p>
         <h1 className="mt-4 text-4xl sm:text-6xl" style={{ fontFamily: "var(--c-bodoni), serif", fontWeight: 500 }}>
-          Two concepts
+          Creative direction
         </h1>
         <p className="mt-4 max-w-3xl text-[15px] leading-relaxed text-[#4A453E]">
-          Each concept shows the navigation, the hero (desktop and mobile) and the first two homepage sections below the hero.
-          Choose a direction; the full ten-section homepage is then rebuilt in it. Images are labelled concept references and
-          illustrations, not approved HEBS 2027 or NJS photography.
+          Concept A was chosen, with selected beachfront elements from Concept B. The refined direction shows the hero, the
+          Welcome section and the three-day presentation for review before the full ten-section homepage is built. Concept B
+          stays here for reference. No photograph is used until approved HEBS Lagos or NJS Royale Beach Resort media exists.
         </p>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
@@ -57,7 +60,7 @@ export default function ConceptsOverview() {
                 <p className="mt-6 uppercase" style={{ fontFamily: c.displayVar, fontSize: "44px", lineHeight: 1 }}>
                   HEBS Lagos 2027
                 </p>
-                <p className="mt-3" style={{ fontFamily: c.displayVar, fontSize: "26px", fontStyle: c.key === "a" ? "italic" : "normal", color: c.accent }}>
+                <p className="mt-3" style={{ fontFamily: c.displayVar, fontSize: "26px", fontStyle: c.key === "direction" ? "italic" : "normal", color: c.accent }}>
                   {c.sample}
                 </p>
                 <p className="mt-5 max-w-sm text-[14px] leading-relaxed" style={{ fontFamily: c.textVar, opacity: 0.8 }}>
@@ -76,7 +79,7 @@ export default function ConceptsOverview() {
                   ))}
                 </ul>
                 <a href={`/2027/concepts/${c.key}`} className="mt-8 inline-flex min-h-[48px] w-fit items-center bg-[#1C1A17] px-6 text-[11px] font-semibold uppercase tracking-[0.24em] text-white">
-                  View concept {c.key.toUpperCase()} <span aria-hidden="true" className="ml-2">→</span>
+                  {c.key === "direction" ? "View the refined direction" : "View Concept B"}
                 </a>
               </div>
             </article>

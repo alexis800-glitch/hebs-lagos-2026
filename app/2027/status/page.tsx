@@ -43,11 +43,19 @@ export default function Status2027() {
 
         <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Asset register</h2>
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse">
-            <thead><tr className="text-h27-champagne"><th className={cell}>Asset</th><th className={cell}>Provenance</th><th className={cell}>Status</th><th className={cell}>Restriction</th></tr></thead>
+          <table className="w-full min-w-[1080px] border-collapse">
+            <thead><tr className="text-h27-champagne"><th className={cell}>Asset</th><th className={cell}>Year, edition, location</th><th className={cell}>Origin and provenance</th><th className={cell}>Status and approval</th><th className={cell}>Rights and consent</th><th className={cell}>Permitted usage</th><th className={cell}>Restriction</th></tr></thead>
             <tbody>
               {ASSETS.map((a) => (
-                <tr key={a.id}><td className={cell}>{a.id}</td><td className={cell}>{a.provenance}</td><td className={cell}>{a.status}</td><td className={cell}>{a.restriction}</td></tr>
+                <tr key={a.id}>
+                  <td className={cell}>{a.id}</td>
+                  <td className={cell}>{[a.eventYear ?? "Year not recorded", a.edition, a.location ?? "Location not recorded"].filter(Boolean).join(", ")}</td>
+                  <td className={cell}>{a.origin}, {a.provenance}</td>
+                  <td className={cell}>{a.status}{a.approval ? `, approved by ${a.approval.by} on ${a.approval.date}` : ""}</td>
+                  <td className={cell}>Holder: {a.rights.holder ?? "not recorded"}. Permission: {a.rights.permission}. People: {a.rights.peopleConsent}.</td>
+                  <td className={cell}>{a.permittedUsage.length ? a.permittedUsage.join(", ") : "None"}</td>
+                  <td className={cell}>{a.restriction}</td>
+                </tr>
               ))}
             </tbody>
           </table>
@@ -55,7 +63,7 @@ export default function Status2027() {
         <h3 className="mt-8 font-serif text-xl text-h27-ivory">Media slots</h3>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {MEDIA_SLOTS.map((s) => (
-            <li key={s.id} className="border border-h27-line p-3"><span className="text-h27-ivory">{s.label}</span><span className="block text-xs text-h27-muted">{s.assetId ? `Assigned: ${s.assetId}` : `Empty. Needs: ${s.dependency}`}</span></li>
+            <li key={s.id} className="border border-h27-line p-3"><span className="text-h27-ivory">{s.label}</span><span className="block text-xs text-h27-muted">Takes {s.source} media only. {s.assetId ? `Assigned: ${s.assetId}` : `Empty. Needs: ${s.dependency}`}</span></li>
           ))}
         </ul>
       </main>
