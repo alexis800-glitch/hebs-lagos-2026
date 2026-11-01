@@ -181,6 +181,8 @@ export interface MediaSlot {
   depiction: Depiction;
   /** The only origin that may fill this slot. */
   source: SlotSource;
+  /** Event media only: the HEBS Lagos edition the photograph must come from. */
+  eventYear?: number;
   /** Asset assigned to this slot, once one is approved. */
   assetId: string | null;
   /** What has to happen before this slot can be filled. */
@@ -192,13 +194,13 @@ const HEBS_LAGOS_MEDIA = "Approved HEBS Lagos event photography or video, with r
 
 const venue = (id: string, label: string): MediaSlot =>
   ({ id, label, depiction: "real-venue", source: "njs-resort", assetId: null, dependency: NJS_MEDIA });
-const event = (id: string, label: string): MediaSlot =>
-  ({ id, label, depiction: "real-event", source: "hebs-lagos-event", assetId: null, dependency: HEBS_LAGOS_MEDIA });
+const event = (id: string, label: string, eventYear?: number): MediaSlot =>
+  ({ id, label, depiction: "real-event", source: "hebs-lagos-event", eventYear, assetId: null, dependency: HEBS_LAGOS_MEDIA });
 
 export const MEDIA_SLOTS: MediaSlot[] = [
   venue("hero", "Beachfront hero"),
   event("hero-beauty", "Hero beauty imagery"),
-  event("welcome", "Welcome to HEBS 2027"),
+  event("welcome", "Welcome to HEBS 2027", 2026),
   venue("day-1", "Welcome Pre-Party"),
   event("day-2", "Summit Day One"),
   event("day-3", "Summit Day Two"),
@@ -211,7 +213,7 @@ export const MEDIA_SLOTS: MediaSlot[] = [
   venue("destination-gallery", "Resort photo gallery"),
   venue("destination-video", "Resort promotional video"),
   event("education", "Education and masterclasses"),
-  event("highlights-2026", "HEBS Lagos 2026 highlights"),
+  event("highlights-2026", "HEBS Lagos 2026 highlights", 2026),
 ];
 
 export type ResolvedSlot =
@@ -245,6 +247,7 @@ export function mayDepict(asset: AssetRecord, depiction: Depiction, environment:
 export function slotRefusal(asset: AssetRecord, slot: MediaSlot, environment: DeployEnvironment): string | null {
   if (!asset.permittedUsage.includes("2027-site")) return "not permitted on the 2027 site";
   if (asset.origin !== slot.source) return `needs ${slot.source} media, this is ${asset.origin}`;
+  if (slot.eventYear && asset.eventYear !== slot.eventYear) return `needs HEBS Lagos ${slot.eventYear} media`;
   if (!mayDepict(asset, slot.depiction, environment)) return "not approved for this use";
   if (asset.rights.permission !== "recorded") return "publication permission not recorded";
   if (asset.rights.peopleConsent === "not-obtained") return "consent of the people shown not obtained";

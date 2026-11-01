@@ -90,6 +90,10 @@ describe("asset register", () => {
     expect(slotRefusal(lagos, findSlot("day-1"), "production")).toMatch(/njs-resort/);
     expect(slotRefusal(njs, findSlot("welcome"), "production")).toMatch(/hebs-lagos-event/);
     for (const s of MEDIA_SLOTS) expect(s.source).toBe(s.depiction === "real-venue" ? "njs-resort" : "hebs-lagos-event");
+    // The Welcome photograph must come from HEBS Lagos 2026 itself.
+    expect(findSlot("welcome").eventYear).toBe(2026);
+    expect(slotRefusal(lagos, findSlot("welcome"), "production")).toBeNull();
+    expect(slotRefusal({ ...lagos, eventYear: 2027 }, findSlot("welcome"), "production")).toMatch(/2026/);
   });
 
   it("requires recorded permission, and recorded consent before production", () => {

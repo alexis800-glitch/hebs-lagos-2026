@@ -30,8 +30,10 @@ export function PreviewBanner() {
     <div role="note" className="bg-h27-ocean text-h27-ivory">
       <p className="mx-auto max-w-6xl px-4 sm:px-8 py-2 text-center text-xs leading-relaxed">
         <strong className="font-semibold uppercase tracking-[0.14em]">Staging preview</strong> · Not published.
-        Provisional logo, venue details and copy are marked; dashed panels are pending approved media. No
-        registration or inquiry is collected.{" "}
+        <span className="hidden sm:inline">
+          {" "}Provisional logo, venue details and copy are marked; dashed panels are pending approved media.
+        </span>{" "}
+        No registration or inquiry is collected.{" "}
         <a href="/2027/status" className="underline underline-offset-2">
           Approval status
         </a>

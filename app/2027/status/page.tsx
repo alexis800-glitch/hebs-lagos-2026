@@ -63,7 +63,7 @@ export default function Status2027() {
         <h3 className="mt-8 font-serif text-xl text-h27-ivory">Media slots</h3>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {MEDIA_SLOTS.map((s) => (
-            <li key={s.id} className="border border-h27-line p-3"><span className="text-h27-ivory">{s.label}</span><span className="block text-xs text-h27-muted">Takes {s.source} media only. {s.assetId ? `Assigned: ${s.assetId}` : `Empty. Needs: ${s.dependency}`}</span></li>
+            <li key={s.id} className="border border-h27-line p-3"><span className="text-h27-ivory">{s.label}</span><span className="block text-xs text-h27-muted">Takes {s.source} media only{s.eventYear ? ` from ${s.eventYear}` : ""}. {s.assetId ? `Assigned: ${s.assetId}` : `Empty. Needs: ${s.dependency}`}</span></li>
           ))}
         </ul>
       </main>

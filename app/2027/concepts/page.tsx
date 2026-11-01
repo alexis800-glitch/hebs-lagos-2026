@@ -81,6 +81,12 @@ export default function ConceptsOverview() {
                 <a href={`/2027/concepts/${c.key}`} className="mt-8 inline-flex min-h-[48px] w-fit items-center bg-[#1C1A17] px-6 text-[11px] font-semibold uppercase tracking-[0.24em] text-white">
                   {c.key === "direction" ? "View the refined direction" : "View Concept B"}
                 </a>
+                {c.key === "direction" && (
+                  <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-[#3B362F]">
+                    <a className="underline underline-offset-4" href="/2027/concepts/direction?notes=panel">Clean review view</a>
+                    <a className="underline underline-offset-4" href="/2027/concepts/direction?brand=type&notes=panel">Typographic wordmark comparison</a>
+                  </p>
+                )}
               </div>
             </article>
           ))}
