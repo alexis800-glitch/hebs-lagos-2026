@@ -126,6 +126,17 @@ describe("asset register", () => {
     for (const f of files) expect(readFileSync(f, "utf8"), f).not.toMatch(/\/images\/hebs-20(24|25)\//);
   });
 
+  it("keeps the D3 logo colour studies internal and unapproved", () => {
+    for (const id of ["hebs-logo-champagne-ivory", "hebs-logo-champagne-black"]) {
+      const a = findAsset(id);
+      expect(a.permittedUsage).toEqual(["internal-review"]);
+      expect(a.status).not.toBe("approved");
+    }
+    expect(findAsset("hebs-logo-nav").src).toBe("/assets/logos/hebs_logo_nav.png");
+    // No static public URL may exist for an internal study.
+    expect(walk(join(ROOT, "public")).filter((f) => /comparison|study/i.test(f))).toEqual([]);
+  });
+
   it("records an approval for every approved asset", () => {
     for (const a of ASSETS.filter((x) => x.status === "approved")) expect(a.approval).toBeDefined();
   });
@@ -135,6 +146,23 @@ describe("traceability", () => {
   it("covers all ten homepage sections A-J with structure built", () => {
     expect(HOMEPAGE_SECTIONS.map((s) => s.id)).toEqual(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]);
     expect(HOMEPAGE_SECTIONS.every((s) => s.structureBuilt)).toBe(true);
+  });
+
+  it("renders an anchor for every homepage section A-J and the priority list", () => {
+    const src = readFileSync(join(ROOT, "components/2027/editorial/sections.tsx"), "utf8");
+    for (const s of HOMEPAGE_SECTIONS) expect(src, s.anchor).toContain(`id="${s.anchor}"`);
+    expect(src).toContain('id="priority-list"');
+  });
+
+  it("has no working form or submission path on the 2027 pages", () => {
+    const files = [...walk(join(ROOT, "app/2027")), ...walk(join(ROOT, "components/2027"))].filter((f) => /\.tsx?$/.test(f));
+    for (const f of files) {
+      const src = readFileSync(f, "utf8");
+      expect(src, f).not.toMatch(/<form\b|\baction=|onSubmit|type="submit"|fetch\(/);
+    }
+    // Every input of the priority-list preview sits inside a disabled fieldset.
+    const sections = readFileSync(join(ROOT, "components/2027/editorial/sections.tsx"), "utf8");
+    expect(sections).toMatch(/<fieldset disabled/);
   });
 
   it("lists the section 11 launch items", () => {

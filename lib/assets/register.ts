@@ -105,6 +105,42 @@ export const ASSETS: AssetRecord[] = [
     restriction:
       "Official 2027 mark not yet confirmed (D3); its pink/purple palette differs from the 2027 black and champagne direction. Preview only.",
   },
+  // Colour-only treatments of the official mark for the D3 comparison. Made from
+  // hebs_logo_nav.png by recolouring each pixel (shape untouched): violet-to-pink
+  // letterforms to ivory or black, gold strands and tagline to champagne. Kept in
+  // brand-studies/ (not public/) and served by a route that 404s in production.
+  {
+    id: "hebs-logo-champagne-ivory",
+    src: "/2027/brand-study/champagne-ivory",
+    alt: "HEBS, Hair Education Beauty Summit",
+    eventYear: null,
+    edition: "HEBS brand, colour study",
+    location: null,
+    origin: "hebs-brand",
+    provenance: "hebs-brand",
+    status: "provisional",
+    rights: { holder: "HEBS", permission: "not-recorded", peopleConsent: "not-applicable" },
+    permittedDepictions: ["brand"],
+    permittedUsage: ["internal-review"],
+    restriction:
+      "Internal D3 comparison only, for dark grounds. Not an approved logo; the official mark stays in use unless Mrs. Shuler approves a change.",
+  },
+  {
+    id: "hebs-logo-champagne-black",
+    src: "/2027/brand-study/champagne-black",
+    alt: "HEBS, Hair Education Beauty Summit",
+    eventYear: null,
+    edition: "HEBS brand, colour study",
+    location: null,
+    origin: "hebs-brand",
+    provenance: "hebs-brand",
+    status: "provisional",
+    rights: { holder: "HEBS", permission: "not-recorded", peopleConsent: "not-applicable" },
+    permittedDepictions: ["brand"],
+    permittedUsage: ["internal-review"],
+    restriction:
+      "Internal D3 comparison only, for light grounds. Not an approved logo; the official mark stays in use unless Mrs. Shuler approves a change.",
+  },
   {
     id: "hero-video-higgsfield",
     src: "/videos/higgsfield/hebs-hero-competition-desktop-v1-optimized.mp4",

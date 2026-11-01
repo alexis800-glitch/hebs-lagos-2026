@@ -1,42 +1,23 @@
+import type { Viewport } from "next";
+import { Homepage2027A } from "@/components/2027/editorial/pages";
+import type { BrandVariant, NotesMode } from "@/components/2027/editorial/tokens";
 import { deployEnvironment } from "@/lib/publication";
-import {
-  Competitions,
-  Destination,
-  Education,
-  Experience,
-  FinalCta,
-  Header2027,
-  Hero,
-  Highlights2026,
-  Partners,
-  PriorityListPreview,
-  ThreeDays,
-  Welcome,
-} from "@/components/2027/sections";
+import { EDITORIAL_FONTS } from "../concepts/fonts-editorial";
+
+export const viewport: Viewport = { themeColor: "#000000", colorScheme: "dark" };
 
 /**
- * Deliverable B: the complete redesigned homepage, all ten sections A-J of
- * directive section 4, in directive order. The priority list sits before the
- * final call to action so every "priority list" button has a target.
+ * Deliverable B: the complete homepage, sections A-J of directive section 4,
+ * in the approved Direction A. Review variants: ?notes=panel lists the staging
+ * notes after the page instead of beside each section; ?brand=champagne shows
+ * the champagne-and-ivory colour study of the official mark (D3 comparison).
  */
-export default function Homepage2027() {
-  const environment = deployEnvironment();
+export default function Homepage2027({ searchParams }: { searchParams: { brand?: string; notes?: string } }) {
+  const brand: BrandVariant = searchParams.brand === "champagne" ? "champagne" : "mark";
+  const notes: NotesMode = searchParams.notes === "panel" ? "panel" : "inline";
   return (
-    <>
-      <Header2027 home="/2027/homepage" />
-      <main>
-        <Hero environment={environment} exploreHref="#experience" />
-        <Welcome />
-        <ThreeDays environment={environment} programHref="/2027/status#program" />
-        <Experience environment={environment} />
-        <Destination environment={environment} />
-        <Competitions />
-        <Education environment={environment} />
-        <Partners />
-        <Highlights2026 environment={environment} />
-        <PriorityListPreview />
-        <FinalCta environment={environment} />
-      </main>
-    </>
+    <div className={EDITORIAL_FONTS}>
+      <Homepage2027A environment={deployEnvironment()} brand={brand} notes={notes} />
+    </div>
   );
 }

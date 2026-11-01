@@ -105,6 +105,9 @@ export const COPY = {
       "For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort on the Atlantic Ocean beachfront in Lagos: education, competitions, exhibitions, networking and celebrations in one destination.",
     ),
     restriction: "Rooms, packages, availability and amenities are published only once approved.",
+    /** The directive's own list of what the destination section introduces (4E). */
+    topics: ["The Atlantic Ocean beachfront", "Resort atmosphere", "Hospitality", "Dining", "Planned event experiences"],
+    topicsNote: draft("Details of each are published as NJS Royale Beach Resort confirms them."),
   },
   competitions: {
     headline: directive("THE NEXT GENERATION OF BEAUTY CHAMPIONS."),
@@ -112,6 +115,8 @@ export const COPY = {
       "HEBS competitions recognise talent, creativity and professional excellence. The 2027 competition categories and prize values remain the same as 2026.",
     ),
     pending: "2027 rules, eligibility, schedule, entry fees and application dates will be published once approved.",
+    /** The five links directive 4F asks for; each becomes a link when its page exists. */
+    pathways: ["Competition categories", "Eligibility and requirements", "Competition rules", "Application or registration", "Awards and prizes"],
   },
   education: {
     headline: draft("EDUCATION & MASTERCLASSES"),
@@ -125,13 +130,21 @@ export const COPY = {
     body: draft(
       "Sponsorship, exhibition, brand activation and strategic partnership opportunities for businesses that want to reach the beauty industry in Lagos and beyond.",
     ),
-    pathways: ["Sponsorship", "Exhibitions", "Brand activation", "Strategic partnerships"],
+    pathways: [
+      { title: "Sponsorship", body: draft("Put your brand beside the summit's education, competitions and celebrations.") },
+      { title: "Exhibitions", body: draft("Show products, tools and services to the professionals who choose them.") },
+      { title: "Brand activation", body: draft("Create moments guests take part in, on the beachfront and on stage.") },
+      { title: "Strategic partnerships", body: draft("Build a longer relationship with HEBS and its professional community.") },
+    ],
+    gate: draft("Partner inquiries and the 2027 sponsorship prospectus open once approved."),
   },
   highlights: {
     headline: draft("HEBS LAGOS 2026 HIGHLIGHTS"),
     body: draft(
       "Photographs, videos, testimonials, competition highlights and major moments from HEBS Lagos 2026 will be added here once approved. The 2026 programme remains available in the archive.",
     ),
+    /** Directive 4I, the kinds of material this section will hold. */
+    kinds: ["Photographs", "Videos", "Testimonials", "Competition highlights", "Major moments"],
   },
   finalCta: {
     headline: directive("YOUR NEXT BEAUTY EXPERIENCE STARTS HERE."),
@@ -141,12 +154,34 @@ export const COPY = {
     headline: directive("JOIN THE 2027 PRIORITY LIST"),
     gateNotice:
       "Preview only. The priority list is not collecting registrations yet. It opens once secure storage, administration and privacy terms are approved.",
+    intro: draft("Be first to hear when registration, tickets and the 2027 programme open."),
+  },
+  qr: {
+    headline: draft("Scan for instant access"),
+    body: draft("A QR code that opens this page is added once its permanent address is confirmed."),
   },
 } as const;
 
 /* ------------------------------------------------------------------ */
 /* Approval states the preview pages render                            */
 /* ------------------------------------------------------------------ */
+
+export interface ContentEntry {
+  /** Where the copy lives, e.g. "partners.pathways.0.body". */
+  key: string;
+  status: PublicationStatus;
+  text: string;
+}
+
+/** Every copy block the 2027 pages render, with its approval state (the content register). */
+export function contentRegister(node: unknown = COPY, path = ""): ContentEntry[] {
+  if (!node || typeof node !== "object") return [];
+  if ("status" in node && "text" in node) {
+    const b = node as CopyBlock;
+    return [{ key: path, status: b.status, text: b.text }];
+  }
+  return Object.entries(node).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k));
+}
 
 function copyStatuses(node: unknown): PublicationStatus[] {
   if (!node || typeof node !== "object") return [];

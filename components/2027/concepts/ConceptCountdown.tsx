@@ -6,7 +6,7 @@ import { timeLeft, type TimeLeft } from "@/lib/countdown";
 
 /**
  * Countdown to July 23, 2027, midnight in Lagos, styled per concept. Same
- * arithmetic and guarantees as Countdown2027: no start time, server renders
+ * arithmetic as lib/countdown: no start time, server renders
  * the date only so hydration never disagrees.
  */
 export default function ConceptCountdown({

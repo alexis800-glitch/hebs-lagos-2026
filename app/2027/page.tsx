@@ -1,33 +1,21 @@
+import type { Viewport } from "next";
+import { Announcement2027A } from "@/components/2027/editorial/pages";
+import type { BrandVariant, NotesMode } from "@/components/2027/editorial/tokens";
 import { deployEnvironment } from "@/lib/publication";
-import {
-  Destination,
-  FinalCta,
-  Header2027,
-  Hero,
-  Partners,
-  PriorityListPreview,
-  QrAccess,
-  ThreeDays,
-} from "@/components/2027/sections";
+import { EDITORIAL_FONTS } from "./concepts/fonts-editorial";
+
+export const viewport: Viewport = { themeColor: "#000000", colorScheme: "dark" };
 
 /**
- * Deliverable A: the HEBS 2027 announcement landing page (directive section 11).
- * The complete homepage (sections A-J) is previewed at /2027/homepage.
+ * Deliverable A: the HEBS 2027 announcement landing page (directive section
+ * 11), in the approved Direction A. Same review variants as the homepage.
  */
-export default function Announcement2027() {
-  const environment = deployEnvironment();
+export default function Announcement2027({ searchParams }: { searchParams: { brand?: string; notes?: string } }) {
+  const brand: BrandVariant = searchParams.brand === "champagne" ? "champagne" : "mark";
+  const notes: NotesMode = searchParams.notes === "panel" ? "panel" : "inline";
   return (
-    <>
-      <Header2027 home="/2027" />
-      <main>
-        <Hero environment={environment} exploreHref="#three-days" />
-        <ThreeDays environment={environment} programHref="/2027/status#program" />
-        <Destination environment={environment} />
-        <PriorityListPreview />
-        <Partners />
-        <QrAccess />
-        <FinalCta environment={environment} />
-      </main>
-    </>
+    <div className={EDITORIAL_FONTS}>
+      <Announcement2027A environment={deployEnvironment()} brand={brand} notes={notes} />
+    </div>
   );
 }

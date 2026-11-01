@@ -1,4 +1,4 @@
-import { ANNOUNCEMENT_ITEMS, HOMEPAGE_SECTIONS } from "@/lib/content/2027";
+import { ANNOUNCEMENT_ITEMS, HOMEPAGE_SECTIONS, contentRegister } from "@/lib/content/2027";
 import { ASSETS, MEDIA_SLOTS } from "@/lib/assets/register";
 import { Header2027 } from "@/components/2027/sections";
 
@@ -40,6 +40,19 @@ export default function Status2027() {
 
         <h2 id="program" className="mt-12 scroll-mt-24 font-serif text-2xl text-h27-ivory">Event program</h2>
         <p className="mt-2 text-h27-muted">No 2027 session times are approved. The Event Program page is built in Phase 4.</p>
+
+        <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Content register</h2>
+        <p className="mt-2 text-h27-muted">Headlines quoted in the directive are approved; copy written for the preview is provisional until signed off.</p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[720px] border-collapse">
+            <thead><tr className="text-h27-champagne"><th className={cell}>Copy</th><th className={cell}>Status</th><th className={cell}>Text</th></tr></thead>
+            <tbody>
+              {contentRegister().map((c) => (
+                <tr key={c.key}><td className={cell}>{c.key}</td><td className={cell}>{c.status}</td><td className={cell}>{c.text}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Asset register</h2>
         <div className="mt-4 overflow-x-auto">
