@@ -13,7 +13,8 @@ import { COPY } from "@/lib/content/2027";
 import { CAMPAIGN, CATEGORIES_2027, COMPETITIONS_2027, EDITION_DAYS, VENUE } from "@/lib/editions/2027";
 import { resolveSlot } from "@/lib/assets/register";
 import { PRIORITY_LIST_FIELDS, INTEREST_OPTIONS } from "@/lib/integrations/registration-2027";
-import type { PageId } from "@/lib/site/2027";
+import { PRIORITY_CTA, type PageId } from "@/lib/site/2027";
+import { FORMS_OPEN } from "@/lib/integrations/registration-2027";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { EXPERIENCE_SLOTS } from "./notes";
 import { PageLink } from "./site";
@@ -99,7 +100,7 @@ export function Hero({ opts, notes, to }: SectionProps & { to: Targets }) {
             className="inline-flex min-h-[56px] items-center justify-center px-9 text-[13px] font-bold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-[#EAD7A8]"
             style={{ background: C.champ, color: C.black }}
           >
-            Join the 2027 Priority List
+            {PRIORITY_CTA}
           </a>
           <a
             href={to.experience}
@@ -167,7 +168,8 @@ export function Welcome({ opts, notes }: SectionProps) {
 
 /* ── C. Three days ──────────────────────────────────────────────────── */
 
-export function ThreeDays({ opts, notes }: SectionProps) {
+/** `compact`: on phones, reserved day images become a short band (inner pages; the homepage keeps the approved proportions). */
+export function ThreeDays({ opts, notes, compact = false }: SectionProps & { compact?: boolean }) {
   return (
     <section id="three-days" aria-labelledby="three-days-title" style={{ background: C.black, color: C.ivory }}>
       <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-12 lg:py-28">
@@ -188,7 +190,7 @@ export function ThreeDays({ opts, notes }: SectionProps) {
                 slotId={`day-${i + 1}`}
                 opts={opts}
                 sizes="(min-width: 1024px) 33vw, 100vw"
-                className="aspect-[16/10] w-full lg:aspect-[5/6]"
+                className={`${compact && resolveSlot(`day-${i + 1}`, opts.environment).kind !== "asset" ? "aspect-[16/6] sm:aspect-[16/10]" : "aspect-[16/10]"} w-full lg:aspect-[5/6]`}
                 tone={PANORAMA}
                 style={{ backgroundSize: "300% 100%", backgroundPosition: `${i * 50}% 0` }}
               >
@@ -268,11 +270,13 @@ export function Experience({ opts, notes }: SectionProps) {
 
 /* ── E. The destination ─────────────────────────────────────────────── */
 
-export function Destination({ opts, notes }: SectionProps) {
+/** `compact`: on phones, the reserved gallery is shorter and the reserved video position is left out until a video exists. */
+export function Destination({ opts, notes, compact = false }: SectionProps & { compact?: boolean }) {
+  const videoReserved = resolveSlot("destination-video", opts.environment).kind !== "asset";
   return (
     <section id="destination" aria-labelledby="destination-title" style={{ background: C.atlantic, color: C.ivory }}>
       {/* Edge to edge: the resort's own photograph will take this panorama. */}
-      <Plate slotId="destination-gallery" opts={opts} sizes="100vw" className="aspect-[4/3] w-full sm:aspect-[21/9]" tone={PANORAMA}>
+      <Plate slotId="destination-gallery" opts={opts} sizes="100vw" className={`${compact ? "aspect-[16/9]" : "aspect-[4/3]"} w-full sm:aspect-[21/9]`} tone={PANORAMA}>
         <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />
         <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: `linear-gradient(180deg, transparent, ${C.atlantic})` }} />
       </Plate>
@@ -301,7 +305,7 @@ export function Destination({ opts, notes }: SectionProps) {
             slotId="destination-video"
             opts={opts}
             sizes="(min-width: 1024px) 55vw, 100vw"
-            className="aspect-video w-full lg:col-span-7"
+            className={`${compact && videoReserved ? "hidden lg:block" : ""} aspect-video w-full lg:col-span-7`}
             tone={TONE.dark}
           >
             <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.22)" }} />
@@ -475,7 +479,8 @@ export function PriorityList({ opts, notes }: SectionProps) {
     <Section id="priority-list" ground="ivory" labelledBy="priority-title">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
-          <h2 id="priority-title" style={h2Style}>{sentenceCase(COPY.priorityList.headline.text)}</h2>
+          {/* The directive's headline once the list can be joined; until then it names the list without inviting a sign-up. */}
+          <h2 id="priority-title" style={h2Style}>{FORMS_OPEN.priority ? sentenceCase(COPY.priorityList.headline.text) : "The 2027 priority list"}</h2>
           <p className="mt-6 max-w-[40ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>{COPY.priorityList.intro.text}</p>
           <p id="priority-gate" className="mt-8 border-l-2 pl-4 text-[16px] font-medium leading-relaxed" style={{ borderColor: C.atlantic, color: C.atlantic }}>
             The priority list is not open yet. It opens once secure storage and privacy terms are approved.
@@ -571,6 +576,9 @@ export function FinalCta({ to }: { to: Targets }) {
         >
           {COPY.finalCta.button.text}
         </a>
+        {!FORMS_OPEN.priority && (
+          <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>The priority list opens soon.</p>
+        )}
       </div>
       <span aria-hidden="true" className="relative block h-px" style={{ background: `linear-gradient(90deg, transparent, ${C.champL} 30%, #FFF6DE 50%, ${C.champL} 70%, transparent)` }} />
     </section>

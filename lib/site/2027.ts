@@ -9,6 +9,8 @@
  */
 
 /** Staging prefix. The 2026 site keeps the root until publication is approved. */
+import { FORMS_OPEN } from "../integrations/registration-2027";
+
 export const BASE = "/2027";
 
 export type PageId =
@@ -72,8 +74,15 @@ export function pageHref(id: PageId, hash = ""): string | null {
   return p.built ? `${p.path}${hash ? `#${hash}` : ""}` : null;
 }
 
-/** Where every "Join the 2027 Priority List" button leads. */
+/** Where every priority-list button leads. */
 export const PRIORITY_HREF = `${BASE}/homepage#priority-list`;
+
+/**
+ * The priority-list call to action. The directive's wording, "Join the 2027
+ * Priority List", is used only once the list can actually be joined; until
+ * then every button says it opens soon.
+ */
+export const PRIORITY_CTA = FORMS_OPEN.priority ? "Join the 2027 Priority List" : "Priority list opens soon";
 
 const PRIMARY: PageId[] = ["experience", "programme", "competitions", "education", "sponsorship", "tickets", "travel"];
 const link = (p: SitePage) => ({ label: p.nav, href: p.path });

@@ -13,7 +13,7 @@ import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
 import { CONTACT_FIELDS, EXHIBITOR_APPLICATION_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink } from "@/lib/integrations/registration-2027";
-import { PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
+import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
 import { resolveSlot } from "@/lib/assets/register";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
@@ -57,7 +57,7 @@ export function ExperiencePage(props: PageProps) {
       <PageHero title={PAGES.experience.title.text} intro={PAGES.experience.intro.text} opts={opts} notes={notes.hero}>
         <PageContents items={[{ href: "#three-days", label: "The three days" }, { href: "#six-experiences", label: "The six experiences" }, { href: "#destination", label: "The destination" }]} />
       </PageHero>
-      <ThreeDays opts={opts} notes={notes.days} />
+      <ThreeDays opts={opts} notes={notes.days} compact />
       <Section id="six-experiences" ground="white" labelledBy="six-title">
         <h2 id="six-title" className="max-w-[20ch]" style={h2Style}>Six experiences, one destination.</h2>
         <SectionNotes notes={notes.experiences} opts={opts} ground="white" className="mt-6" />
@@ -76,13 +76,13 @@ export function ExperiencePage(props: PageProps) {
                   opts={opts}
                   noteLight={i !== 5}
                   sizes="(min-width: 768px) 45vw, 100vw"
-                  className={filled ? "aspect-[4/3] w-full" : "aspect-[16/5] w-full"}
+                  className={filled ? "aspect-[4/3] w-full" : "hidden aspect-[16/5] w-full md:block"}
                   tone={i === 5 ? PANORAMA : TONE.light}
                   style={i === 5 ? { backgroundSize: "300% 100%", backgroundPosition: "50% 0" } : undefined}
                 >
                   {i === 5 && <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />}
                 </Plate>
-                <div className="mt-6 grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4">
+                <div className={`${filled ? "mt-6" : "md:mt-6"} grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4`}>
                   <span aria-hidden="true" className="leading-none" style={{ ...display, fontWeight: 500, fontSize: "44px", color: "#8A6D3B" }}>{i + 1}</span>
                   <div>
                     <h3 style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.4vw, 34px)", lineHeight: 1.12 }}>{item.title}</h3>
@@ -99,7 +99,7 @@ export function ExperiencePage(props: PageProps) {
           })}
         </ol>
       </Section>
-      <Destination opts={opts} notes={[COPY_DRAFT, "Venue name provisional until confirmed (D9)."]} />
+      <Destination opts={opts} notes={[COPY_DRAFT, "Venue name provisional until confirmed (D9)."]} compact />
       <FinalCta to={TARGETS} />
     </Shell>
   );
@@ -224,7 +224,7 @@ export function EducationPage(props: PageProps) {
               <Pending>{PAGES.education.registration.text}</Pending>
             )}
             <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              Want to hear first? <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>Join the 2027 priority list</a>
+              To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a>, which opens soon.
             </p>
           </div>
         </div>
@@ -292,7 +292,7 @@ export function CompetitionsPage(props: PageProps) {
               <Pending>{PAGES.competitions.apply.text}</Pending>
             )}
             <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              Want to hear when applications open? <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>Join the 2027 priority list</a>
+              To hear when applications open, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a>, which opens soon.
             </p>
           </div>
         </div>
@@ -321,13 +321,13 @@ export function SponsorshipPage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [
     COPY_DRAFT,
-    "No inquiry is collected until storage and administration (D1) and public contacts (D10) are approved. Once approved, the form becomes a link to the Base44 2027 portal.",
+    "No inquiry is collected. Submission follows INTEGRATION-CONTRACT-v1.0 (signed, server to Base44) once implemented and authorised; public contacts await D10.",
     "The prospectus download appears with an approved 2027 prospectus.",
   ];
   return (
     <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Sponsorship & partnerships", notes]]}>
       <PageHero title={sentenceCase(COPY.partners.headline.text)} intro={PAGES.sponsorship.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="champagne">
-        <PageContents light items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Send an inquiry" }]} />
+        <PageContents light items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Inquiries" }]} />
       </PageHero>
       <Section id="opportunities" ground="ivory" labelledBy="opportunities-title">
         <h2 id="opportunities-title" style={h2Style}>Four ways to take part.</h2>
@@ -361,7 +361,7 @@ export function SponsorshipPage(props: PageProps) {
       <Section id="inquiry" ground="ivory" labelledBy="inquiry-title">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
-            <h2 id="inquiry-title" style={h2Style}>Send a sponsorship inquiry.</h2>
+            <h2 id="inquiry-title" style={h2Style}>Sponsorship inquiries.</h2>
             <p className="mt-6 max-w-[40ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>Tell the HEBS team about your brand and how you want to take part.</p>
             <div className="mt-8"><Pending>{PAGES.sponsorship.contact.text}</Pending></div>
             <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="ivory" className="mt-6" />
@@ -383,12 +383,12 @@ export function ExhibitorsPage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [
     COPY_DRAFT,
-    "No application is collected until storage and administration (D1) are approved. Once approved, the form becomes a link to the Base44 2027 portal, where the company profile is uploaded.",
+    "No application is collected. Submission follows INTEGRATION-CONTRACT-v1.0 once implemented and authorised. Contract v1.0 has no file upload, so the company profile field is an open question.",
   ];
   return (
     <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>
       <PageHero title={PAGES.exhibitors.title.text} intro={PAGES.exhibitors.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="ivory">
-        <PageContents light items={[{ href: "#exhibit", label: "Ways to exhibit" }, { href: "#apply", label: "Apply" }, { href: "#brands", label: "Participating brands" }]} />
+        <PageContents light items={[{ href: "#exhibit", label: "Ways to exhibit" }, { href: "#apply", label: "Applications" }, { href: "#brands", label: "Participating brands" }]} />
       </PageHero>
       <Section id="exhibit" ground="white" labelledBy="exhibit-title">
         <h2 id="exhibit-title" style={h2Style}>Ways to exhibit.</h2>
@@ -407,7 +407,7 @@ export function ExhibitorsPage(props: PageProps) {
       <Section id="apply" ground="ivory" labelledBy="apply-title">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
-            <h2 id="apply-title" style={h2Style}>Apply to exhibit.</h2>
+            <h2 id="apply-title" style={h2Style}>Exhibitor applications.</h2>
             <p className="mt-6 max-w-[40ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>Tell us about your company and what you would show.</p>
             <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" className="mt-6" />
           </div>
@@ -522,7 +522,7 @@ export function TicketsPage(props: PageProps) {
       <PageHero title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href={PRIORITY_HREF} className="inline-flex min-h-[56px] items-center justify-center px-9 text-[13px] font-bold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-[#EAD7A8]" style={{ background: C.champ, color: C.black }}>
-            Join the 2027 Priority List
+            {PRIORITY_CTA}
           </a>
         </div>
       </PageHero>
@@ -616,7 +616,7 @@ export function ContactPage(props: PageProps) {
       <Section id="message" ground="ivory" labelledBy="message-title">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="space-y-8 lg:col-span-5">
-            <h2 id="message-title" style={h2Style}>Send a message.</h2>
+            <h2 id="message-title" style={h2Style}>Contact form.</h2>
             <div>
               <h3 className="text-[14px] font-semibold">Email</h3>
               <div className="mt-3"><Pending>{c.emails.text}</Pending></div>
@@ -651,7 +651,7 @@ export function AboutPage(props: PageProps) {
   const opts = optsOf(props);
   const a = PAGES.about;
   const notes = [
-    "History and the three statements below are carried from the live HEBS Lagos 2026 About page and need reconfirming for 2027.",
+    `History and the three statements are carried verbatim from the live ${a.pillarsSource} and stay provisional until Mrs. Shuler approves them for 2027.`,
     "Vision and impact copy awaiting owner approval.",
   ];
   return (
@@ -677,7 +677,6 @@ export function AboutPage(props: PageProps) {
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-[13px]" style={{ color: "rgba(245,239,228,.6)" }}>Source: {a.pillarsSource}.</p>
       </Section>
       <Section id="vision" ground="white" labelledBy="vision-title" innerClassName="lg:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
@@ -738,5 +737,5 @@ export const pageTitle = (id: PageId) => `${sitePage(id).title} — HEBS Lagos 2
 
 /** The review variants every 2027 page accepts: ?brand=champagne and ?notes=panel. */
 export function reviewProps(searchParams: { brand?: string; notes?: string }): Pick<PageProps, "brand" | "notes"> {
-  return { brand: searchParams.brand === "champagne" ? "champagne" : "mark", notes: searchParams.notes === "panel" ? "panel" : "inline" };
+  return { brand: searchParams.brand === "champagne" ? "champagne" : "mark", notes: searchParams.notes === "inline" ? "inline" : "panel" };
 }

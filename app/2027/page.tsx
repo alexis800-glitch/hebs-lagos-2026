@@ -12,7 +12,8 @@ export const viewport: Viewport = { themeColor: "#000000", colorScheme: "dark" }
  */
 export default function Announcement2027({ searchParams }: { searchParams: { brand?: string; notes?: string } }) {
   const brand: BrandVariant = searchParams.brand === "champagne" ? "champagne" : "mark";
-  const notes: NotesMode = searchParams.notes === "panel" ? "panel" : "inline";
+  // Staging notes sit in the reviewer panel by default; ?notes=inline shows them beside each section.
+  const notes: NotesMode = searchParams.notes === "inline" ? "inline" : "panel";
   return (
     <div className={EDITORIAL_FONTS}>
       <Announcement2027A environment={deployEnvironment()} brand={brand} notes={notes} />

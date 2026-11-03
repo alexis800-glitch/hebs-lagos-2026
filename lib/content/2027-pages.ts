@@ -87,7 +87,7 @@ export const PAGES = {
       { q: "Do I need a visa to visit Nigeria?", a: draft("It depends on your nationality. The Nigeria Immigration Service sets the rules; check its website before you travel and apply only through its official e-Visa portal.") },
       { q: "Where should I stay?", a: draft("HEBS accommodation packages at the resort are introduced once approved. Until then, no room or package is offered through this website.") },
       { q: "How do I get from the airport to the resort?", a: draft("Transport guidance is published here once arrangements are confirmed.") },
-      { q: "Who can help me plan my visit?", a: draft("Support contacts for international visitors are published once approved. Join the priority list to hear first.") },
+      { q: "Who can help me plan my visit?", a: draft("Support contacts for international visitors are published once approved. The 2027 priority list, opening soon, is the way to hear first.") },
     ],
   },
   tickets: {
@@ -130,6 +130,6 @@ export const PAGES = {
     intro: draft("The professionals who teach, demonstrate and speak at HEBS Lagos 2027. Each is added here once officially confirmed."),
     pending: draft("No speaker or educator for 2027 is confirmed yet."),
     profile: ["Professional profile", "Biography", "Photograph", "Sessions at HEBS 2027"],
-    teach: draft("Interested in teaching at HEBS 2027? Join the priority list and choose Educator as your area of interest."),
+    teach: draft("Interested in teaching at HEBS 2027? Speakers and educators are confirmed by the HEBS team; the 2027 priority list, opening soon, is the way to hear first."),
   },
 } as const;

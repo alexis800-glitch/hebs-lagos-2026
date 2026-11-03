@@ -68,7 +68,7 @@ export function Footer2027() {
         </ul>
       </nav>
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-8 py-10 text-xs sm:flex-row sm:items-center sm:justify-between">
-        <p>HEBS Lagos 2027 · Staging preview. Contact details pending approval (D10).</p>
+        <p>HEBS Lagos 2027, staging preview.</p>
         <ul className="flex flex-wrap gap-5">
           <li><a className="hover:text-h27-ivory" href="/privacy">Privacy</a></li>
           <li><a className="hover:text-h27-ivory" href="/">HEBS Lagos 2026 site</a></li>

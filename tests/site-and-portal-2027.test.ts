@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { BASE, SITE_NAV, SITE_PAGES, pageHref } from "../lib/site/2027";
+import { BASE, PRIORITY_CTA, SITE_NAV, SITE_PAGES, pageHref } from "../lib/site/2027";
 import {
-  CONTACT_FIELDS, EXHIBITOR_APPLICATION_FIELDS, INTEREST_OPTIONS, PORTAL_2027, PORTAL_HOSTS, PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink,
+  CONTACT_FIELDS, EXHIBITOR_APPLICATION_FIELDS, FORMS_OPEN, INTEREST_OPTIONS, PORTAL_2027, PORTAL_HOSTS, PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink,
   type PortalDestination,
 } from "../lib/integrations/registration-2027";
 import { EDITION_DAYS, PROGRAMME_2027 } from "../lib/editions/2027";
@@ -112,6 +112,14 @@ describe("Base44 2027 portal hand-off", () => {
   it("never renders a prize amount while D8 is open", () => {
     const files = [...walk(join(ROOT, "components/2027")), ...walk(join(ROOT, "app/2027"))].filter((f) => /\.tsx?$/.test(f));
     for (const f of files) expect(readFileSync(f, "utf8"), f).not.toMatch(/prizeUsd|TOTAL_PRIZE|PRIZE_TOTAL|NGN_PER_USD/);
+  });
+
+  it("never invites a sign-up while the priority list is closed", () => {
+    expect(FORMS_OPEN.priority).toBe(false);
+    expect(PRIORITY_CTA).toBe("Priority list opens soon");
+    for (const f of walk(join(ROOT, "components/2027/editorial"))) {
+      expect(readFileSync(f, "utf8"), f).not.toMatch(/>\s*Join the 2027 Priority List\s*</i);
+    }
   });
 
   it("keeps every form preview disabled", () => {

@@ -73,6 +73,14 @@ export function portalLink(
   return u.toString();
 }
 
+/**
+ * Whether each website form accepts submissions. All false: submission is not
+ * implemented (INTEGRATION-CONTRACT-v1.0 reviewed, implementation not yet
+ * authorised) and no portal form is open. Calls to action read these, so no
+ * button promises a registration that cannot happen.
+ */
+export const FORMS_OPEN = { priority: false, sponsor: false, exhibitor: false, enquiry: false } as const;
+
 /* ------------------------------------------------------------------ */
 /* Field contracts                                                     */
 /* ------------------------------------------------------------------ */

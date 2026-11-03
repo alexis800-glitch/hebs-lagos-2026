@@ -6,6 +6,7 @@ import Image from "next/image";
 import { findAsset, resolveSlot, type MediaSlot } from "@/lib/assets/register";
 import type { DeployEnvironment } from "@/lib/publication";
 import { C, GROUND, type BrandVariant, type Ground } from "./tokens";
+import { PRIORITY_CTA } from "@/lib/site/2027";
 
 export interface Opts {
   environment: DeployEnvironment;
@@ -149,7 +150,7 @@ export function Nav({ brand, links, menuLinks = links, priorityHref, homeHref }:
             className="hidden min-h-[44px] items-center border px-5 text-[13px] font-semibold transition-colors duration-200 hover:bg-[#C8A96A] hover:text-black whitespace-nowrap xl:inline-flex"
             style={{ borderColor: C.champ, color: C.champL }}
           >
-            Join the 2027 Priority List
+            {PRIORITY_CTA}
           </a>
           <details className="relative xl:hidden">
             <summary
@@ -169,7 +170,7 @@ export function Nav({ brand, links, menuLinks = links, priorityHref, homeHref }:
               {menuLinks.map((l) => (
                 <li key={l.label}><a className="flex min-h-[44px] items-center px-3" href={l.href}>{l.label}</a></li>
               ))}
-              <li><a className="flex min-h-[44px] items-center px-3" href={priorityHref} style={{ color: C.champL }}>Join the 2027 Priority List</a></li>
+              <li><a className="flex min-h-[44px] items-center px-3" href={priorityHref} style={{ color: C.champL }}>{PRIORITY_CTA}</a></li>
             </ul>
           </details>
         </div>
