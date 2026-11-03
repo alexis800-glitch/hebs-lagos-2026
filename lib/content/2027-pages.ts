@@ -90,4 +90,46 @@ export const PAGES = {
       { q: "Who can help me plan my visit?", a: draft("Support contacts for international visitors are published once approved. Join the priority list to hear first.") },
     ],
   },
+  tickets: {
+    title: draft("Tickets & registration"),
+    intro: draft("Tickets for HEBS Lagos 2027 are not on sale yet. Ticket categories, prices and registration open once they are officially approved."),
+    status: draft("Ticket sales are not open. No payment is taken through this website until ticket sales are officially opened."),
+    categories: draft("Ticket categories and prices are published here once approved."),
+    /** Directive section 6, what ticketing will support once released. */
+    willSupport: ["Different ticket categories", "Secure online payment", "Automatic confirmation emails", "A unique ticket reference and QR code", "Secure handling of attendee details"],
+    willSupportNote: draft("When tickets are released, registration will include:"),
+  },
+  gallery: {
+    title: draft("Gallery & past events"),
+    intro: draft("Photographs, videos, testimonials and highlights from HEBS Lagos. Approved HEBS Lagos 2026 material is added here as it is cleared for use."),
+    pending: draft("HEBS Lagos 2026 photographs and videos appear here once approved, with rights and consent recorded for every image."),
+    archive: draft("The HEBS Lagos 2026 website stays online as the record of the 2026 edition."),
+    earlier: draft("HEBS held earlier editions in the United States. Their photographs belong to the HEBS archive and are not shown on the Lagos 2027 site."),
+  },
+  contact: {
+    title: draft("Contact us"),
+    intro: draft("Questions about HEBS Lagos 2027, partnerships or the press. Official contact details are published once approved."),
+    emails: draft("Official HEBS 2027 email addresses are published here once approved."),
+    social: draft("Official HEBS social media accounts are listed here once confirmed."),
+  },
+  about: {
+    title: draft("About HEBS"),
+    /** From the live HEBS Lagos 2026 About page; to be reconfirmed for 2027. */
+    history: draft("After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit came home to Lagos for its fourth edition in October 2026."),
+    next: draft("In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Royale Beach Resort, on the Atlantic beachfront in Lagos."),
+    pillarsSource: "HEBS Lagos 2026 About page, as published",
+    pillars: [
+      { title: "Bridging Education with Opportunity", body: draft("Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.") },
+      { title: "Connecting Professionals Worldwide", body: draft("Creating a dynamic global network and physical hub where hairstylists, masters barbers, creative makeup artists, fashion stylists, educators, and global brand leaders can seamlessly collaborate, share narratives, and grow collectively.") },
+      { title: "Empowering the Next Generation", body: draft("Ensuring that the collective future of beauty, grooming, and high-fashion remains completely inclusive, boundary-pushing, hyper-innovative, and continuously driven by technical excellence.") },
+    ],
+    vision: draft("The HEBS vision and its impact on the beauty industry are published here once approved."),
+  },
+  speakers: {
+    title: draft("Speakers & educators"),
+    intro: draft("The professionals who teach, demonstrate and speak at HEBS Lagos 2027. Each is added here once officially confirmed."),
+    pending: draft("No speaker or educator for 2027 is confirmed yet."),
+    profile: ["Professional profile", "Biography", "Photograph", "Sessions at HEBS 2027"],
+    teach: draft("Interested in teaching at HEBS 2027? Join the priority list and choose Educator as your area of interest."),
+  },
 } as const;

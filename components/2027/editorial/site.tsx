@@ -99,7 +99,7 @@ function Control({ f }: { f: FieldSpec }) {
     return (
       <label className="flex items-start gap-3 text-[14px]">
         <input type="checkbox" name={f.name} className="mt-1 h-4 w-4" />
-        <span>{f.label}</span>
+        <span>{f.label}{!f.required && f.consent === "marketing" && <span style={{ color: "#5E5546" }}> (optional)</span>}</span>
       </label>
     );
   }

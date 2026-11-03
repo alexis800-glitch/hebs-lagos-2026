@@ -34,7 +34,7 @@ const page = (id: PageId, title: string, nav: string, slug: string, purpose: str
 
 export const SITE_PAGES: SitePage[] = [
   page("home", "Home", "Home", "", "The complete premium landing page.", true),
-  page("about", "About HEBS", "About", "about", "History, mission, vision, purpose and impact on the beauty industry.", false,
+  page("about", "About HEBS", "About", "about", "History, mission, vision, purpose and impact on the beauty industry.", true,
     ["Owner-approved history, mission and vision copy"]),
   page("experience", "HEBS 2027 experience", "Experience", "experience", "Overview of the three-day event and planned activities.", true,
     ["Approved event and resort photography"]),
@@ -44,19 +44,19 @@ export const SITE_PAGES: SitePage[] = [
     ["Confirmed educators and sessions", "Education registration route (D1)"]),
   page("competitions", "Competitions", "Competitions", "competitions", "Categories, rules, eligibility, applications and awards.", true,
     ["2027 rules, eligibility, fees, schedule and deadline", "Prize currency presentation (D8)", "Application route (D1)"]),
-  page("speakers", "Speakers & educators", "Speakers", "speakers", "Professional profiles, biographies, photographs and sessions.", false,
+  page("speakers", "Speakers & educators", "Speakers", "speakers", "Professional profiles, biographies, photographs and sessions.", true,
     ["At least one officially confirmed speaker or educator"]),
   page("exhibitors", "Exhibitors", "Exhibitors", "exhibitors", "Exhibition opportunities, application forms and confirmed participating brands.", true,
     ["Exhibitor application route (D1)", "Confirmed participating brands"]),
   page("sponsorship", "Sponsorship & partnerships", "Sponsorship", "sponsorship", "Partnership opportunities, sponsorship packages, inquiry forms and contact details.", true,
     ["Sponsor inquiry route (D1)", "Approved 2027 prospectus and packages", "Public contacts (D10)"]),
-  page("tickets", "Tickets & registration", "Tickets", "tickets", "Ticket categories, registration forms and payment when ticket sales officially open.", false,
+  page("tickets", "Tickets & registration", "Tickets", "tickets", "Ticket categories, registration forms and payment when ticket sales officially open.", true,
     ["Ticket categories, prices and payment gateway approval", "Ticketing route (D1)"]),
   page("travel", "Travel & accommodation", "Travel", "travel", "Venue information, transport, accommodation, travel information and international visitor guidance.", true,
     ["Venue address and directions (D9)", "Approved accommodation packages", "Visitor support contacts (D10)"]),
-  page("gallery", "Gallery & past events", "Gallery", "gallery", "HEBS event history, photographs, videos, testimonials and highlights.", false,
+  page("gallery", "Gallery & past events", "Gallery", "gallery", "HEBS event history, photographs, videos, testimonials and highlights.", true,
     ["Approved HEBS Lagos 2026 photographs, video and testimonials"]),
-  page("contact", "Contact us", "Contact", "contact", "Contact form, official email addresses, social media links and business inquiries.", false,
+  page("contact", "Contact us", "Contact", "contact", "Contact form, official email addresses, social media links and business inquiries.", true,
     ["Public contacts and social accounts (D10)", "Contact route (D1)"]),
 ];
 
@@ -75,7 +75,13 @@ export function pageHref(id: PageId, hash = ""): string | null {
 /** Where every "Join the 2027 Priority List" button leads. */
 export const PRIORITY_HREF = `${BASE}/homepage#priority-list`;
 
-/** Main navigation: the built guest and partner pages, in directive order. */
-export const SITE_NAV = SITE_PAGES.filter((p) => p.built && p.id !== "home").map((p) => ({ label: p.nav, href: p.path }));
+const PRIMARY: PageId[] = ["experience", "programme", "competitions", "education", "sponsorship", "tickets", "travel"];
+const link = (p: SitePage) => ({ label: p.nav, href: p.path });
+
+/** Desktop navigation: the seven pages visitors look for first. */
+export const SITE_NAV = SITE_PAGES.filter((p) => p.built && PRIMARY.includes(p.id)).map(link);
+
+/** Mobile menu and footer: every built page, in directive order. */
+export const SITE_MENU = SITE_PAGES.filter((p) => p.built && p.id !== "home").map(link);
 
 if (SITE_PAGES.length !== 13) throw new Error("[lib/site/2027] directive section 5 lists thirteen pages");

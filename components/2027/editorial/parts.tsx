@@ -113,7 +113,14 @@ export interface NavLink {
   href: string;
 }
 
-export function Nav({ brand, links, priorityHref, homeHref }: { brand: BrandVariant; links: NavLink[]; priorityHref: string; homeHref: string }) {
+export function Nav({ brand, links, menuLinks = links, priorityHref, homeHref }: {
+  brand: BrandVariant;
+  links: NavLink[];
+  /** The mobile menu can list more pages than fit across the desktop bar. */
+  menuLinks?: NavLink[];
+  priorityHref: string;
+  homeHref: string;
+}) {
   return (
     <header className="sticky top-0 z-40 border-b" style={{ background: "rgba(0,0,0,.92)", borderColor: "rgba(200,169,106,.22)" }}>
       <a
@@ -156,10 +163,10 @@ export function Nav({ brand, links, priorityHref, homeHref }: { brand: BrandVari
               </span>
             </summary>
             <ul
-              className="absolute right-0 mt-3 w-64 space-y-1 border p-3 text-[15px]"
+              className="absolute right-0 mt-3 max-h-[calc(100svh-140px)] w-64 space-y-1 overflow-y-auto overscroll-contain border p-3 text-[15px]"
               style={{ background: C.black, borderColor: "rgba(200,169,106,.4)", color: C.ivory }}
             >
-              {links.map((l) => (
+              {menuLinks.map((l) => (
                 <li key={l.label}><a className="flex min-h-[44px] items-center px-3" href={l.href}>{l.label}</a></li>
               ))}
               <li><a className="flex min-h-[44px] items-center px-3" href={priorityHref} style={{ color: C.champL }}>Join the 2027 Priority List</a></li>

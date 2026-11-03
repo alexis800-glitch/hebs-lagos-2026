@@ -3,7 +3,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { BASE, SITE_NAV, SITE_PAGES, pageHref } from "../lib/site/2027";
 import {
-  EXHIBITOR_APPLICATION_FIELDS, INTEREST_OPTIONS, PORTAL_2027, PORTAL_HOSTS, PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink,
+  CONTACT_FIELDS, EXHIBITOR_APPLICATION_FIELDS, INTEREST_OPTIONS, PORTAL_2027, PORTAL_HOSTS, PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink,
   type PortalDestination,
 } from "../lib/integrations/registration-2027";
 import { EDITION_DAYS, PROGRAMME_2027 } from "../lib/editions/2027";
@@ -84,8 +84,8 @@ describe("Base44 2027 portal hand-off", () => {
   });
 
   it("asks the priority list for exactly the directive section 6 fields", () => {
-    expect(PRIORITY_LIST_FIELDS.map((f) => f.label)).toEqual([
-      "Full name", "Email address", "Country of residence", "Phone number", "Area of interest", "I agree to receive HEBS 2027 event updates.",
+    expect(PRIORITY_LIST_FIELDS.map((f) => f.name)).toEqual([
+      "full_name", "email", "country", "phone", "interest", "privacy_acknowledged", "marketing_opt_in",
     ]);
     expect(PRIORITY_LIST_FIELDS.find((f) => f.name === "phone")?.required).toBe(false);
     expect([...INTEREST_OPTIONS]).toEqual(["Attendee", "Competitor", "Educator", "Exhibitor", "Sponsor", "Other"]);
@@ -97,6 +97,21 @@ describe("Base44 2027 portal hand-off", () => {
     const names = (fs: readonly { name: string }[]) => new Set(fs.map((f) => f.name));
     expect(names(SPONSOR_INQUIRY_FIELDS).size).toBe(SPONSOR_INQUIRY_FIELDS.length);
     expect(names(EXHIBITOR_APPLICATION_FIELDS).size).toBe(EXHIBITOR_APPLICATION_FIELDS.length);
+  });
+
+  it("separates the required acknowledgement from optional marketing consent on every form", () => {
+    for (const list of [PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, EXHIBITOR_APPLICATION_FIELDS, CONTACT_FIELDS]) {
+      const ack = list.filter((f) => f.consent === "acknowledgement");
+      expect(ack).toHaveLength(1);
+      expect(ack[0].required).toBe(true);
+      for (const m of list.filter((f) => f.consent === "marketing")) expect(m.required).toBe(false);
+      expect(list.some((f) => f.consent === "acknowledgement" && /news|offers|unsubscribe/i.test(f.label))).toBe(false);
+    }
+  });
+
+  it("never renders a prize amount while D8 is open", () => {
+    const files = [...walk(join(ROOT, "components/2027")), ...walk(join(ROOT, "app/2027"))].filter((f) => /\.tsx?$/.test(f));
+    for (const f of files) expect(readFileSync(f, "utf8"), f).not.toMatch(/prizeUsd|TOTAL_PRIZE|PRIZE_TOTAL|NGN_PER_USD/);
   });
 
   it("keeps every form preview disabled", () => {

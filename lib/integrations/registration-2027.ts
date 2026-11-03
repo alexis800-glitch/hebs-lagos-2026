@@ -26,6 +26,7 @@ export type PortalDestination =
   | "exhibitor-application"
   | "competition-application"
   | "education-registration"
+  | "contact"
   | "tickets";
 
 const PENDING_ROUTE = (what: string): Gated<string> => ({
@@ -40,6 +41,7 @@ export const PORTAL_2027: Record<PortalDestination, Gated<string>> = {
   "exhibitor-application": PENDING_ROUTE("exhibitor application"),
   "competition-application": PENDING_ROUTE("competition application"),
   "education-registration": PENDING_ROUTE("education registration"),
+  contact: PENDING_ROUTE("contact message"),
   // Directive section 6: ticket categories, prices and payment gateways are approved separately.
   tickets: { status: "awaiting-confirmation", note: "Ticket sales not authorised; categories, prices and payment gateway awaiting approval." },
 };
@@ -87,7 +89,33 @@ export interface FieldSpec {
   options?: readonly string[];
   /** Short helper text under the control. */
   hint?: string;
+  /**
+   * Checkboxes only. "acknowledgement": required to submit, records that the
+   * person was told how their details are used for what they asked for.
+   * "marketing": optional, unticked by default, never a condition of submitting.
+   */
+  consent?: "acknowledgement" | "marketing";
 }
+
+/**
+ * Consent, split (owner review of 2026-11-03): the details needed to handle
+ * the request are acknowledged; marketing is a separate, optional opt-in. The
+ * privacy notice they refer to is decision D13 and must exist before any form opens.
+ */
+const ACKNOWLEDGE = (purpose: string): FieldSpec => ({
+  name: "privacy_acknowledged",
+  label: `I understand HEBS will use these details to ${purpose}, as described in the privacy notice.`,
+  kind: "checkbox",
+  required: true,
+  consent: "acknowledgement",
+});
+const MARKETING: FieldSpec = {
+  name: "marketing_opt_in",
+  label: "Send me HEBS news and event updates by email. I can unsubscribe at any time.",
+  kind: "checkbox",
+  required: false,
+  consent: "marketing",
+};
 
 /** Directive section 6, "Area of interest". */
 export const INTEREST_OPTIONS = ["Attendee", "Competitor", "Educator", "Exhibitor", "Sponsor", "Other"] as const;
@@ -99,7 +127,8 @@ export const PRIORITY_LIST_FIELDS: readonly FieldSpec[] = [
   { name: "country", label: "Country of residence", kind: "text", required: true, autoComplete: "country-name" },
   { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel" },
   { name: "interest", label: "Area of interest", kind: "select", required: true, options: INTEREST_OPTIONS },
-  { name: "consent_updates", label: "I agree to receive HEBS 2027 event updates.", kind: "checkbox", required: true },
+  ACKNOWLEDGE("tell me when HEBS 2027 registration, tickets and the programme open"),
+  MARKETING,
 ];
 
 /** Directive 4H and section 8: the four kinds of partnership. */
@@ -115,6 +144,8 @@ export const SPONSOR_INQUIRY_FIELDS: readonly FieldSpec[] = [
   { name: "partnership_interest", label: "Interested in", kind: "select", required: true, options: PARTNERSHIP_OPTIONS },
   { name: "message", label: "What would you like to achieve at HEBS 2027?", kind: "textarea", required: false },
   { name: "prospectus_requested", label: "Send me the 2027 sponsorship prospectus when it is available.", kind: "checkbox", required: false },
+  ACKNOWLEDGE("respond to my partnership inquiry"),
+  MARKETING,
 ];
 
 /** Directive section 8: apply for exhibition participation, upload basic company information. */
@@ -127,8 +158,24 @@ export const EXHIBITOR_APPLICATION_FIELDS: readonly FieldSpec[] = [
   { name: "website", label: "Website or social page", kind: "url", required: false, autoComplete: "url" },
   { name: "products", label: "What you would exhibit", kind: "textarea", required: true },
   { name: "company_profile", label: "Company profile", kind: "file", required: false, hint: "PDF, up to the size the portal allows." },
+  ACKNOWLEDGE("assess my exhibitor application and contact me about it"),
+  MARKETING,
 ];
 
-if (PRIORITY_LIST_FIELDS.filter((f) => f.required).length !== 5) {
-  throw new Error("[registration-2027] the priority list makes every field but the phone number required");
+/** Directive section 5, Contact us: a general message. */
+export const CONTACT_TOPICS = ["General question", "Attending", "Competing", "Education", "Press", "Other"] as const;
+export const CONTACT_FIELDS: readonly FieldSpec[] = [
+  { name: "full_name", label: "Your name", kind: "text", required: true, autoComplete: "name" },
+  { name: "email", label: "Email address", kind: "email", required: true, autoComplete: "email" },
+  { name: "topic", label: "Topic", kind: "select", required: true, options: CONTACT_TOPICS },
+  { name: "message", label: "Message", kind: "textarea", required: true },
+  ACKNOWLEDGE("reply to my message"),
+];
+
+for (const list of [PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, EXHIBITOR_APPLICATION_FIELDS, CONTACT_FIELDS]) {
+  for (const f of list) {
+    if (f.consent === "marketing" && f.required) throw new Error(`[registration-2027] marketing consent "${f.name}" must be optional`);
+    if (f.consent && f.kind !== "checkbox") throw new Error(`[registration-2027] consent field "${f.name}" must be a checkbox`);
+  }
+  if (list.filter((f) => f.consent === "acknowledgement").length !== 1) throw new Error("[registration-2027] every form carries one privacy acknowledgement");
 }

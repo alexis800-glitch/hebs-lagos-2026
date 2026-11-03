@@ -458,7 +458,10 @@ export const COMPETITION_ANCHORS = ["categories", "eligibility", "rules", "apply
 
 const INTERESTS = INTEREST_OPTIONS;
 const FIELDS = PRIORITY_LIST_FIELDS.map((f) =>
-  f.kind === "checkbox" ? "Consent to receive event updates" : f.required ? f.label : `${f.label} (optional)`);
+  f.consent === "acknowledgement" ? "Acknowledgement of how your details are used"
+    : f.consent === "marketing" ? "Consent to HEBS news and event updates (optional)"
+      : f.required ? f.label : `${f.label} (optional)`);
+const CONSENTS = PRIORITY_LIST_FIELDS.filter((f) => f.consent);
 
 /**
  * The priority list as it will look, with every control disabled and no
@@ -509,10 +512,12 @@ export function PriorityList({ opts, notes }: SectionProps) {
                   {INTERESTS.map((i) => <option key={i}>{i}</option>)}
                 </select>
               </label>
-              <label className="flex items-start gap-3 text-[14px]">
-                <input type="checkbox" name="consent" className="mt-1 h-4 w-4" />
-                <span>I agree to receive HEBS 2027 event updates.</span>
-              </label>
+              {CONSENTS.map((f) => (
+                <label key={f.name} className="flex items-start gap-3 text-[14px]">
+                  <input type="checkbox" name={f.name} className="mt-1 h-4 w-4" />
+                  <span>{f.label}{!f.required && <span style={{ color: "#5E5546" }}> (optional)</span>}</span>
+                </label>
+              ))}
               <button type="button" className="min-h-[52px] border px-6 text-[12px] font-bold uppercase tracking-[0.18em]" style={{ borderColor: "rgba(0,0,0,.25)", color: "#5E5546", background: "transparent" }}>
                 Opens soon
               </button>

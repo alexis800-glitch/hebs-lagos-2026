@@ -24,7 +24,7 @@ import {
 } from "./sections";
 import { C, EDITORIAL_CSS, type BrandVariant, type NotesMode } from "./tokens";
 import type { DeployEnvironment } from "@/lib/publication";
-import { PRIORITY_HREF, SITE_NAV, pageHref, sitePage } from "@/lib/site/2027";
+import { PRIORITY_HREF, SITE_MENU, SITE_NAV, pageHref, sitePage } from "@/lib/site/2027";
 
 export interface PageProps {
   environment: DeployEnvironment;
@@ -61,7 +61,7 @@ export function Shell({ opts, nav = SITE_NAV, home = sitePage("home").path, note
   return (
     <div className="da relative">
       <style>{EDITORIAL_CSS}</style>
-      <Nav brand={opts.brand} links={nav} priorityHref={home === "#hero" ? "#priority-list" : PRIORITY_HREF} homeHref={home} />
+      <Nav brand={opts.brand} links={nav} menuLinks={nav === SITE_NAV ? SITE_MENU : nav} priorityHref={home === "#hero" ? "#priority-list" : PRIORITY_HREF} homeHref={home} />
       <main>{children}</main>
       {notes === "panel" && <ReviewPanel groups={groups} brand={opts.brand} />}
     </div>

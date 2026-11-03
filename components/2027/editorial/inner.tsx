@@ -12,8 +12,9 @@ import { PAGES } from "@/lib/content/2027-pages";
 import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
-import { EXHIBITOR_APPLICATION_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink } from "@/lib/integrations/registration-2027";
+import { CONTACT_FIELDS, EXHIBITOR_APPLICATION_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink } from "@/lib/integrations/registration-2027";
 import { PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
+import { resolveSlot } from "@/lib/assets/register";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, ThreeDays, dayAnchor, type Targets } from "./sections";
@@ -65,6 +66,9 @@ export function ExperiencePage(props: PageProps) {
           {COPY.experience.items.map((item, i) => {
             const [to, hash] = EXPERIENCE_LINKS[item.slot];
             const self = to === "experience";
+            // An approved photograph takes the full 4:3 frame; until then the slot is a slim band,
+            // so reserved positions hold the layout without dominating it.
+            const filled = resolveSlot(item.slot, opts.environment).kind === "asset";
             return (
               <li key={item.slot} id={item.slot} className="flex flex-col">
                 <Plate
@@ -72,7 +76,7 @@ export function ExperiencePage(props: PageProps) {
                   opts={opts}
                   noteLight={i !== 5}
                   sizes="(min-width: 768px) 45vw, 100vw"
-                  className="aspect-[4/3] w-full"
+                  className={filled ? "aspect-[4/3] w-full" : "aspect-[16/5] w-full"}
                   tone={i === 5 ? PANORAMA : TONE.light}
                   style={i === 5 ? { backgroundSize: "300% 100%", backgroundPosition: "50% 0" } : undefined}
                 >
@@ -500,6 +504,229 @@ export function TravelPage(props: PageProps) {
         </div>
         <div className="mt-12 max-w-[60ch]"><Pending light={false}>{t.support.text}</Pending></div>
         <SectionNotes notes={notes.slice(3)} opts={opts} ground="black" className="mt-6" />
+      </Section>
+      <FinalCta to={TARGETS} />
+    </Shell>
+  );
+}
+
+/* ── Tickets & registration ─────────────────────────────────────────── */
+
+export function TicketsPage(props: PageProps) {
+  const opts = optsOf(props);
+  const t = PAGES.tickets;
+  const buy = portalLink("tickets", opts.environment);
+  const notes = [COPY_DRAFT, "Ticket categories, prices and payment gateway are approved separately (directive section 6). Payment collection is not authorised."];
+  return (
+    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
+      <PageHero title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href={PRIORITY_HREF} className="inline-flex min-h-[56px] items-center justify-center px-9 text-[13px] font-bold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-[#EAD7A8]" style={{ background: C.champ, color: C.black }}>
+            Join the 2027 Priority List
+          </a>
+        </div>
+      </PageHero>
+      <Section id="status" ground="ivory" labelledBy="status-title">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="status-title" className="lg:col-span-5" style={h2Style}>Ticket sales.</h2>
+          <div className="space-y-6 lg:col-span-6 lg:col-start-7">
+            {buy ? (
+              <a href={buy} className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Buy tickets</a>
+            ) : (
+              <Pending>{t.status.text}</Pending>
+            )}
+            <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" />
+          </div>
+        </div>
+      </Section>
+      <Section id="categories" ground="white" labelledBy="categories-title" innerClassName="lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="categories-title" className="lg:col-span-5" style={h2Style}>Ticket categories.</h2>
+          <div className="lg:col-span-6 lg:col-start-7"><Pending>{t.categories.text}</Pending></div>
+        </div>
+      </Section>
+      <Section id="how" ground="black" labelledBy="how-title">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="how-title" className="lg:col-span-5" style={h2Style}>How registration will work.</h2>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <p className="text-[17px] leading-[1.7]" style={{ color: "rgba(245,239,228,.85)" }}>{t.willSupportNote.text}</p>
+            <ul className="mt-6 border-t" style={{ borderColor: "rgba(200,169,106,.45)" }}>
+              {t.willSupport.map((x) => (
+                <li key={x} className="border-b py-4 text-[17px]" style={{ borderColor: "rgba(245,239,228,.14)" }}>{x}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+      <FinalCta to={TARGETS} />
+    </Shell>
+  );
+}
+
+/* ── Gallery & past events ──────────────────────────────────────────── */
+
+export function GalleryPage(props: PageProps) {
+  const opts = optsOf(props);
+  const g = PAGES.gallery;
+  const notes = [COPY_DRAFT, "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here."];
+  return (
+    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
+      <PageHero title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+      <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
+          <div className="lg:col-span-4">
+            <h2 id="lagos-2026-title" style={h2Style}>{sentenceCase(COPY.highlights.headline.text)}</h2>
+            <div className="mt-8"><Pending>{g.pending.text}</Pending></div>
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px]" style={{ color: C.body }}>
+              {COPY.highlights.kinds.map((k) => <li key={k}>{k}</li>)}
+            </ul>
+            <SectionNotes notes={notes.slice(1)} opts={opts} ground="white" className="mt-6" />
+          </div>
+          <div className="lg:col-span-8">
+            <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/7] w-full" tone={TONE.light}>
+              <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
+            </Plate>
+          </div>
+        </div>
+      </Section>
+      <Section id="archive" ground="ivory" labelledBy="archive-title" innerClassName="lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="archive-title" className="lg:col-span-5" style={h2Style}>Past events.</h2>
+          <div className="space-y-6 lg:col-span-6 lg:col-start-7">
+            <p className="text-[17px] leading-[1.7]" style={{ color: C.body }}>{g.archive.text}</p>
+            <a href="/" className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Visit the HEBS Lagos 2026 website</a>
+            <p className="text-[15px] leading-relaxed" style={{ color: C.body }}>{g.earlier.text}</p>
+          </div>
+        </div>
+      </Section>
+      <FinalCta to={TARGETS} />
+    </Shell>
+  );
+}
+
+/* ── Contact us ─────────────────────────────────────────────────────── */
+
+export function ContactPage(props: PageProps) {
+  const opts = optsOf(props);
+  const c = PAGES.contact;
+  const notes = [COPY_DRAFT, "Email addresses and social accounts withheld until public contacts are approved (D10). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
+  return (
+    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
+      <PageHero title={c.title.text} intro={c.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+      <Section id="message" ground="ivory" labelledBy="message-title">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
+          <div className="space-y-8 lg:col-span-5">
+            <h2 id="message-title" style={h2Style}>Send a message.</h2>
+            <div>
+              <h3 className="text-[14px] font-semibold">Email</h3>
+              <div className="mt-3"><Pending>{c.emails.text}</Pending></div>
+            </div>
+            <div>
+              <h3 className="text-[14px] font-semibold">Social media</h3>
+              <div className="mt-3"><Pending>{c.social.text}</Pending></div>
+            </div>
+            <div>
+              <h3 className="text-[14px] font-semibold">Business inquiries</h3>
+              <ul className="mt-2 text-[15px]">
+                <li><PageLink to="sponsorship" hash="inquiry" className={quietLink} style={{ color: C.black }}>Sponsorship and partnerships</PageLink></li>
+                <li><PageLink to="exhibitors" hash="apply" className={quietLink} style={{ color: C.black }}>Exhibiting at HEBS 2027</PageLink></li>
+              </ul>
+            </div>
+            <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" />
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <FormPreview id="contact" destination="contact" fields={CONTACT_FIELDS} opts={opts}
+              gate="Preview of the contact form. It is not open yet." linkLabel="Contact the HEBS team" />
+          </div>
+        </div>
+      </Section>
+      <FinalCta to={TARGETS} />
+    </Shell>
+  );
+}
+
+/* ── About HEBS ─────────────────────────────────────────────────────── */
+
+export function AboutPage(props: PageProps) {
+  const opts = optsOf(props);
+  const a = PAGES.about;
+  const notes = [
+    "History and the three statements below are carried from the live HEBS Lagos 2026 About page and need reconfirming for 2027.",
+    "Vision and impact copy awaiting owner approval.",
+  ];
+  return (
+    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["About HEBS", notes]]}>
+      <PageHero title={a.title.text} intro={COPY.welcome.body.text} opts={opts} />
+      <Section id="history" ground="ivory" labelledBy="history-title">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="history-title" className="max-w-[14ch] lg:col-span-5" style={h2Style}>{sentenceCase(COPY.welcome.headline.text)}</h2>
+          <div className="space-y-6 lg:col-span-6 lg:col-start-7">
+            <p className="text-[18px] leading-[1.7]" style={{ color: C.body }}>{a.history.text}</p>
+            <p className="text-[18px] leading-[1.7]" style={{ color: C.body }}>{a.next.text}</p>
+            <SectionNotes notes={notes.slice(0, 1)} opts={opts} ground="ivory" />
+          </div>
+        </div>
+      </Section>
+      <Section id="mission" ground="black" labelledBy="mission-title">
+        <h2 id="mission-title" style={h2Style}>What HEBS stands for.</h2>
+        <ul className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-3">
+          {a.pillars.map((p) => (
+            <li key={p.title} className="border-t pt-6" style={{ borderColor: "rgba(200,169,106,.55)" }}>
+              <h3 style={{ ...display, fontWeight: 500, fontSize: "26px", lineHeight: 1.15 }}>{p.title}</h3>
+              <p className="mt-4 text-[16px] leading-[1.7]" style={{ color: "rgba(245,239,228,.8)" }}>{p.body.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 text-[13px]" style={{ color: "rgba(245,239,228,.6)" }}>Source: {a.pillarsSource}.</p>
+      </Section>
+      <Section id="vision" ground="white" labelledBy="vision-title" innerClassName="lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="vision-title" className="lg:col-span-5" style={h2Style}>Vision and impact.</h2>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <Pending>{a.vision.text}</Pending>
+            <SectionNotes notes={notes.slice(1)} opts={opts} ground="white" className="mt-6" />
+          </div>
+        </div>
+      </Section>
+      <FinalCta to={TARGETS} />
+    </Shell>
+  );
+}
+
+/* ── Speakers & educators ───────────────────────────────────────────── */
+
+export function SpeakersPage(props: PageProps) {
+  const opts = optsOf(props);
+  const sp = PAGES.speakers;
+  const notes = [COPY_DRAFT, "No speaker or educator is confirmed, so none is named and no portrait is shown."];
+  return (
+    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Speakers & educators", notes]]}>
+      <PageHero title={sp.title.text} intro={sp.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+      <Section id="announced" ground="ivory" labelledBy="announced-title">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="announced-title" className="lg:col-span-5" style={h2Style}>Announced so far.</h2>
+          <div className="space-y-8 lg:col-span-6 lg:col-start-7">
+            <Pending>{sp.pending.text}</Pending>
+            <div>
+              <h3 className="text-[14px] font-semibold">Each profile will include</h3>
+              <ul className="mt-3 border-t" style={{ borderColor: "rgba(0,0,0,.18)" }}>
+                {sp.profile.map((x) => <li key={x} className="border-b py-3 text-[16px]" style={{ borderColor: "rgba(0,0,0,.18)" }}>{x}</li>)}
+              </ul>
+            </div>
+            <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" />
+          </div>
+        </div>
+      </Section>
+      <Section id="teach" ground="black" labelledBy="teach-title" innerClassName="lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <h2 id="teach-title" className="lg:col-span-5" style={h2Style}>Teach at HEBS 2027.</h2>
+          <div className="space-y-6 lg:col-span-6 lg:col-start-7">
+            <p className="text-[17px] leading-[1.7]" style={{ color: "rgba(245,239,228,.85)" }}>{sp.teach.text}</p>
+            <p className="text-[15px]">
+              <PageLink to="education" className={`${quietLink} hover:text-white`} style={{ color: C.champL }}>Education & masterclasses</PageLink>
+            </p>
+          </div>
+        </div>
       </Section>
       <FinalCta to={TARGETS} />
     </Shell>
