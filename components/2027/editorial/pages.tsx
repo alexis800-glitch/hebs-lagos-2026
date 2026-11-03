@@ -24,23 +24,20 @@ import {
 } from "./sections";
 import { C, EDITORIAL_CSS, type BrandVariant, type NotesMode } from "./tokens";
 import type { DeployEnvironment } from "@/lib/publication";
+import { PRIORITY_HREF, SITE_NAV, pageHref, sitePage } from "@/lib/site/2027";
 
-interface PageProps {
+export interface PageProps {
   environment: DeployEnvironment;
   brand?: BrandVariant;
   notes?: NotesMode;
 }
 
-const HOME_TARGETS: Targets = { priority: "#priority-list", experience: "#experience", sponsor: "#partners" };
-
-const HOME_NAV: NavLink[] = [
-  { label: "Experience", href: "#experience" },
-  { label: "Programme", href: "#three-days" },
-  { label: "Destination", href: "#destination" },
-  { label: "Competitions", href: "#competitions" },
-  { label: "Education", href: "#education" },
-  { label: "Partners", href: "#partners" },
-];
+/* The homepage hero leads to the pages it names once they exist. */
+const HOME_TARGETS: Targets = {
+  priority: "#priority-list",
+  experience: pageHref("experience") ?? "#experience",
+  sponsor: pageHref("sponsorship") ?? "#partners",
+};
 
 /* The announcement page has no Experience section, so "Explore the Experience"
    leads to the three-day overview, which is the experience it presents. */
@@ -52,10 +49,11 @@ const LAUNCH_NAV: NavLink[] = [
   { label: "Partners", href: "#partners" },
 ];
 
-function Shell({ opts, nav, home, notes, groups, children }: {
+/** Every 2027 page: the site navigation, the page, and (panel mode) its staging notes. */
+export function Shell({ opts, nav = SITE_NAV, home = sitePage("home").path, notes, groups, children }: {
   opts: Opts;
-  nav: NavLink[];
-  home: string;
+  nav?: NavLink[];
+  home?: string;
   notes: NotesMode;
   groups: [string, string[]][];
   children: React.ReactNode;
@@ -63,7 +61,7 @@ function Shell({ opts, nav, home, notes, groups, children }: {
   return (
     <div className="da relative">
       <style>{EDITORIAL_CSS}</style>
-      <Nav brand={opts.brand} links={nav} priorityHref="#priority-list" homeHref={home} />
+      <Nav brand={opts.brand} links={nav} priorityHref={home === "#hero" ? "#priority-list" : PRIORITY_HREF} homeHref={home} />
       <main>{children}</main>
       {notes === "panel" && <ReviewPanel groups={groups} brand={opts.brand} />}
     </div>
@@ -74,7 +72,7 @@ export function Homepage2027A({ environment, brand = "mark", notes = "inline" }:
   const opts: Opts = { environment, brand, inline: notes === "inline" };
   const n = reviewNotes(brand);
   return (
-    <Shell opts={opts} nav={HOME_NAV} home="#hero" notes={notes} groups={homeGroups(n)}>
+    <Shell opts={opts} home="#hero" notes={notes} groups={homeGroups(n)}>
       <Hero opts={opts} notes={n.hero} to={HOME_TARGETS} />
       <Welcome opts={opts} notes={n.welcome} />
       <ThreeDays opts={opts} notes={n.threeDays} />
@@ -129,7 +127,7 @@ const launchGroups = (n: ReviewNotes): [string, string[]][] => [
 ];
 
 /** Panel mode: the same staging notes, separated from the composition. */
-function ReviewPanel({ groups, brand }: { groups: [string, string[]][]; brand: BrandVariant }) {
+export function ReviewPanel({ groups, brand }: { groups: [string, string[]][]; brand: BrandVariant }) {
   const view = (b: BrandVariant, m: NotesMode) => `?brand=${b}&notes=${m}`;
   return (
     <aside aria-labelledby="review-notes-title" className="border-t-2 border-dashed" style={{ background: "#0B2226", borderColor: "rgba(200,169,106,.6)", color: C.ivory }}>

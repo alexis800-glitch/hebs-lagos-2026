@@ -111,6 +111,35 @@ export const EDITION_DAYS: EditionDay[] = [
 export const COUNTDOWN_TARGET_ISO = "2027-07-23T00:00:00+01:00";
 
 /* ------------------------------------------------------------------ */
+/* Event programme (directive section 5, "Event Program")              */
+/* ------------------------------------------------------------------ */
+
+export type SessionKind = "education" | "competition" | "demonstration" | "exhibition" | "networking" | "celebration" | "other";
+
+/**
+ * One confirmed programme session. A session is added only once the owner has
+ * confirmed it, so every field it carries is approved; until then a day's list
+ * stays empty and the page says so.
+ */
+export interface ProgrammeSession {
+  title: string;
+  kind: SessionKind;
+  /** Lagos time, "HH:MM". */
+  start: string;
+  end: string;
+  location: string;
+  status: "approved";
+  source: string;
+}
+
+/** The 2027 programme, day by day. Empty until sessions are confirmed. */
+export const PROGRAMME_2027: Record<EditionDay["isoDate"], ProgrammeSession[]> = {
+  "2027-07-23": [],
+  "2027-07-24": [],
+  "2027-07-25": [],
+};
+
+/* ------------------------------------------------------------------ */
 /* Competitions - carried forward from 2026 by explicit allowlist      */
 /* ------------------------------------------------------------------ */
 
@@ -209,3 +238,10 @@ invariant(
   EDITION_DAYS.every((d) => d.hours.status === "awaiting-confirmation"),
   "no 2027 day may carry hours until approved",
 );
+for (const [day, sessions] of Object.entries(PROGRAMME_2027)) {
+  invariant(EDITION_DAYS.some((d) => d.isoDate === day), `programme day ${day} is not a 2027 event day`);
+  for (const x of sessions) {
+    invariant(x.status === "approved" && !!x.source, `${day} "${x.title}" is in the programme without an approval source`);
+    invariant(/^\d{2}:\d{2}$/.test(x.start) && /^\d{2}:\d{2}$/.test(x.end) && x.start < x.end, `${day} "${x.title}" needs a start before its end`);
+  }
+}

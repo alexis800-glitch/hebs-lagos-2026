@@ -127,7 +127,7 @@ export function Nav({ brand, links, priorityHref, homeHref }: { brand: BrandVari
         <a href={homeHref} className="flex min-h-[44px] items-center" aria-label="HEBS Lagos 2027, home">
           <Brand brand={brand} className="h-10 w-auto lg:h-11" />
         </a>
-        <nav aria-label="Main" className="hidden lg:block">
+        <nav aria-label="Main" className="hidden xl:block">
           <ul className="flex gap-8 text-[14px]" style={{ color: "rgba(245,239,228,.8)" }}>
             {links.map((l) => (
               <li key={l.label}>
@@ -139,12 +139,12 @@ export function Nav({ brand, links, priorityHref, homeHref }: { brand: BrandVari
         <div className="flex items-center gap-4">
           <a
             href={priorityHref}
-            className="hidden min-h-[44px] items-center border px-5 text-[13px] font-semibold transition-colors duration-200 hover:bg-[#C8A96A] hover:text-black lg:inline-flex"
+            className="hidden min-h-[44px] items-center border px-5 text-[13px] font-semibold transition-colors duration-200 hover:bg-[#C8A96A] hover:text-black whitespace-nowrap xl:inline-flex"
             style={{ borderColor: C.champ, color: C.champL }}
           >
             Join the 2027 Priority List
           </a>
-          <details className="relative lg:hidden">
+          <details className="relative xl:hidden">
             <summary
               className="flex min-h-[44px] min-w-[44px] cursor-pointer list-none items-center justify-end gap-3 text-[14px] [&::-webkit-details-marker]:hidden"
               style={{ color: C.ivory }}

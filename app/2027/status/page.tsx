@@ -1,6 +1,8 @@
 import { ANNOUNCEMENT_ITEMS, HOMEPAGE_SECTIONS, contentRegister } from "@/lib/content/2027";
 import { ASSETS, MEDIA_SLOTS } from "@/lib/assets/register";
 import { Header2027 } from "@/components/2027/sections";
+import { SITE_PAGES } from "@/lib/site/2027";
+import { PORTAL_2027, PORTAL_HOSTS } from "@/lib/integrations/registration-2027";
 
 /** Reviewer view of what the preview contains and what each part is waiting for. */
 export default function Status2027() {
@@ -38,8 +40,41 @@ export default function Status2027() {
           </table>
         </div>
 
+        <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Site pages: directive section 5</h2>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse">
+            <thead><tr className="text-h27-champagne"><th className={cell}>Page</th><th className={cell}>Staging address</th><th className={cell}>State</th><th className={cell}>Waiting for</th></tr></thead>
+            <tbody>
+              {SITE_PAGES.map((p) => (
+                <tr key={p.id}>
+                  <td className={cell}>{p.title}</td>
+                  <td className={cell}>{p.built ? <a className="underline underline-offset-2" href={p.path}>{p.path}</a> : p.path}</td>
+                  <td className={cell}>{p.built ? "Built" : "Not started"}</td>
+                  <td className={cell}>{p.waitingOn.join("; ") || "Nothing"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <h2 id="program" className="mt-12 scroll-mt-24 font-serif text-2xl text-h27-ivory">Event program</h2>
-        <p className="mt-2 text-h27-muted">No 2027 session times are approved. The Event Program page is built in Phase 4.</p>
+        <p className="mt-2 text-h27-muted">No 2027 session times are approved. The programme page lists each day and fills as sessions are confirmed.</p>
+
+        <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Registration portal (Base44 2027)</h2>
+        <p className="mt-2 max-w-3xl text-h27-muted">
+          Every form on the site stays a disabled preview until its portal page is approved and the portal host is allowlisted
+          (allowlisted hosts: {PORTAL_HOSTS.length ? PORTAL_HOSTS.join(", ") : "none yet"}). Then it becomes a plain link to the portal.
+        </p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse">
+            <thead><tr className="text-h27-champagne"><th className={cell}>Destination</th><th className={cell}>State</th><th className={cell}>Note</th></tr></thead>
+            <tbody>
+              {Object.entries(PORTAL_2027).map(([k, v]) => (
+                <tr key={k}><td className={cell}>{k}</td><td className={cell}>{v.status}</td><td className={cell}>{"note" in v ? v.note : v.source}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Content register</h2>
         <p className="mt-2 text-h27-muted">Headlines quoted in the directive are approved; copy written for the preview is provisional until signed off.</p>

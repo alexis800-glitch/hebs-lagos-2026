@@ -25,12 +25,10 @@ export function reviewNotes(brand: BrandVariant) {
     welcome: [COPY_DRAFT, reserved("welcome")],
     threeDays: [
       "No 2027 session times are approved; the horizon is one abstract panorama and implies no time of day.",
-      "Each day links to the Event Programme page once it is built (Phase 4).",
       ...EDITION_DAYS.map((_, i) => reserved(`day-${i + 1}`)),
     ],
     experience: [
       COPY_DRAFT,
-      "Each experience links to its own page once those pages are built (Phase 4).",
       "Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Royale Beach Resort photograph.",
     ],
     destination: [
@@ -44,7 +42,6 @@ export function reviewNotes(brand: BrandVariant) {
       COPY_DRAFT,
       "Categories are carried from 2026 as the directive states. 2027 rules, eligibility, fees, schedule and deadlines await approval.",
       "Prize amounts are not shown until the 2027 currency presentation is decided (D8).",
-      "Each of the five items becomes a link when its Competitions page exists (Phase 4).",
     ],
     education: [COPY_DRAFT, "No speaker or educator is confirmed, so none is named.", reserved("education")],
     partners: [

@@ -14,6 +14,7 @@
 import type { PublicationStatus } from "../publication";
 import { EDITION_DAYS, VENUE } from "../editions/2027";
 import { MEDIA_SLOTS, findAsset } from "../assets/register";
+import { PAGES } from "./2027-pages";
 
 export interface CopyBlock {
   status: PublicationStatus;
@@ -174,7 +175,7 @@ export interface ContentEntry {
 }
 
 /** Every copy block the 2027 pages render, with its approval state (the content register). */
-export function contentRegister(node: unknown = COPY, path = ""): ContentEntry[] {
+export function contentRegister(node: unknown = { ...COPY, pages: PAGES }, path = ""): ContentEntry[] {
   if (!node || typeof node !== "object") return [];
   if ("status" in node && "text" in node) {
     const b = node as CopyBlock;
@@ -199,6 +200,7 @@ function copyStatuses(node: unknown): PublicationStatus[] {
 export function previewStatuses(): PublicationStatus[] {
   return [
     ...copyStatuses(COPY),
+    ...copyStatuses(PAGES),
     VENUE.name.status,
     ...EDITION_DAYS.map((d) => d.hours.status),
     findAsset("hebs-logo-nav").status,

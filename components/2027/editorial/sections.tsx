@@ -12,8 +12,11 @@ import ConceptCountdown from "@/components/2027/concepts/ConceptCountdown";
 import { COPY } from "@/lib/content/2027";
 import { CAMPAIGN, CATEGORIES_2027, COMPETITIONS_2027, EDITION_DAYS, VENUE } from "@/lib/editions/2027";
 import { resolveSlot } from "@/lib/assets/register";
+import { PRIORITY_LIST_FIELDS, INTEREST_OPTIONS } from "@/lib/integrations/registration-2027";
+import type { PageId } from "@/lib/site/2027";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { EXPERIENCE_SLOTS } from "./notes";
+import { PageLink } from "./site";
 import { C, HORIZON, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
 
 export interface Targets {
@@ -23,6 +26,21 @@ export interface Targets {
 }
 
 type SectionProps = { opts: Opts; notes: string[] };
+
+/** Where each of the six experiences (directive 4D) leads. */
+export const EXPERIENCE_LINKS: Record<string, [PageId, string?]> = {
+  "exp-education": ["education"],
+  "exp-competitions": ["competitions"],
+  "exp-exhibitions": ["exhibitors"],
+  "exp-networking": ["experience", "exp-networking"],
+  "exp-entertainment": ["programme", "july-23"],
+  "exp-destination": ["travel"],
+};
+
+/** The anchor of a day on the event programme page. */
+export const dayAnchor = (shortDate: string) => shortDate.toLowerCase().replace(" ", "-");
+
+const quietLink = "underline decoration-[#C8A96A] underline-offset-[6px] transition-colors duration-200";
 
 const venueLine = (
   <>
@@ -185,7 +203,11 @@ export function ThreeDays({ opts, notes }: SectionProps) {
                 </p>
                 <h3 className="mt-2" style={{ ...display, fontWeight: 500, fontSize: "28px", lineHeight: 1.15 }}>{d.title}</h3>
                 <p className="mt-3 max-w-[38ch] text-[15px] leading-relaxed" style={{ color: "rgba(245,239,228,.75)" }}>{d.description}</p>
-                <p className="mt-auto pt-5 text-[13px]" style={{ color: "rgba(245,239,228,.6)" }}>Programme published as sessions are confirmed.</p>
+                <p className="mt-auto pt-5 text-[14px]">
+                  <PageLink to="programme" hash={dayAnchor(d.shortDate)} className={`inline-flex min-h-[44px] items-center ${quietLink} hover:text-white`} style={{ color: C.champL }}>
+                    {d.shortDate} on the programme
+                  </PageLink>
+                </p>
               </div>
             </li>
           ))}
@@ -222,7 +244,11 @@ export function Experience({ opts, notes }: SectionProps) {
               <span aria-hidden="true" className="row-span-2 leading-none lg:row-span-1" style={{ ...display, fontWeight: 500, fontSize: "40px", color: "#8A6D3B" }}>
                 {i + 1}
               </span>
-              <h3 style={{ ...display, fontWeight: 500, fontSize: "clamp(22px, 2vw, 28px)", lineHeight: 1.15 }}>{item.title}</h3>
+              <h3 style={{ ...display, fontWeight: 500, fontSize: "clamp(22px, 2vw, 28px)", lineHeight: 1.15 }}>
+                <PageLink to={EXPERIENCE_LINKS[item.slot][0]} hash={EXPERIENCE_LINKS[item.slot][1]} className="underline decoration-[#C8A96A] decoration-1 underline-offset-[6px] hover:decoration-2">
+                  {item.title}
+                </PageLink>
+              </h3>
               <Plate
                 slotId={EXPERIENCE_SLOTS[i]}
                 opts={{ ...opts, inline: false }}
@@ -296,10 +322,12 @@ export function Competitions({ opts, notes }: SectionProps) {
         <div className="lg:col-span-5">
           <h2 id="competitions-title" className="max-w-[16ch]" style={h2Style}>{sentenceCase(COPY.competitions.headline.text)}</h2>
           <p className="mt-6 max-w-[44ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>{COPY.competitions.body.text}</p>
-          <h3 className="mt-12 text-[14px] font-semibold" style={{ color: C.black }}>Published with the 2027 rules</h3>
+          <h3 className="mt-12 text-[14px] font-semibold" style={{ color: C.black }}>On the competitions page</h3>
           <ul className="mt-4 border-t" style={{ borderColor: "rgba(0,0,0,.18)" }}>
-            {COPY.competitions.pathways.map((p) => (
-              <li key={p} className="border-b py-3.5 text-[16px]" style={{ borderColor: "rgba(0,0,0,.18)" }}>{p}</li>
+            {COPY.competitions.pathways.map((p, i) => (
+              <li key={p} className="border-b text-[16px]" style={{ borderColor: "rgba(0,0,0,.18)" }}>
+                <PageLink to="competitions" hash={COMPETITION_ANCHORS[i]} className="flex min-h-[48px] items-center py-2 hover:underline">{p}</PageLink>
+              </li>
             ))}
           </ul>
           <p className="mt-4 max-w-[48ch] text-[14px] leading-relaxed" style={{ color: "#5E5546" }}>{COPY.competitions.pending}</p>
@@ -345,6 +373,11 @@ export function Education({ opts, notes }: SectionProps) {
             ))}
           </ul>
           <p className="mt-6 text-[15px]" style={{ color: "rgba(245,239,228,.7)" }}>Speakers and educators are announced as they are officially confirmed.</p>
+          <p className="mt-6 text-[15px]">
+            <PageLink to="education" className={`inline-flex min-h-[44px] items-center ${quietLink} hover:text-white`} style={{ color: C.champL }}>
+              Education and masterclasses at HEBS 2027
+            </PageLink>
+          </p>
           <SectionNotes notes={notes.slice(0, 2)} opts={opts} ground="black" className="mt-6" />
         </div>
         <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 36vw, 100vw" className="aspect-[4/5] w-full lg:col-span-4 lg:col-start-9 lg:mt-20" tone={TONE.dark}>
@@ -371,7 +404,15 @@ export function Partners({ opts, notes }: SectionProps) {
           </li>
         ))}
       </ul>
-      <p className="mt-12 max-w-[60ch] border-l-2 pl-4 text-[16px] font-medium leading-relaxed" style={{ borderColor: C.onChamp }}>
+      <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <PageLink to="sponsorship" className="inline-flex min-h-[52px] items-center justify-center px-7 text-[12px] font-bold uppercase tracking-[0.16em] transition-colors duration-200 hover:bg-[#2B2416]" style={{ background: C.onChamp, color: C.champL }}>
+          Sponsorship and partnerships
+        </PageLink>
+        <PageLink to="exhibitors" className="inline-flex min-h-[52px] items-center justify-center border px-7 text-[12px] font-bold uppercase tracking-[0.16em] transition-colors duration-200 hover:bg-[#1C170E] hover:text-[#EAD7A8]" style={{ borderColor: C.onChamp, color: C.onChamp }}>
+          Exhibit at HEBS 2027
+        </PageLink>
+      </div>
+      <p className="mt-8 max-w-[60ch] border-l-2 pl-4 text-[16px] font-medium leading-relaxed" style={{ borderColor: C.onChamp }}>
         {COPY.partners.gate.text}
       </p>
       <SectionNotes notes={notes} opts={opts} ground="champagne" className="mt-6" />
@@ -412,8 +453,12 @@ export function Highlights({ opts, notes }: SectionProps) {
 
 /* ── Priority list (directive section 6; inactive) ──────────────────── */
 
-const INTERESTS = ["Attendee", "Competitor", "Educator", "Exhibitor", "Sponsor", "Other"];
-const FIELDS = ["Full name", "Email address", "Country of residence", "Phone number (optional)", "Area of interest", "Consent to receive event updates"];
+/** The anchors of the five pathways (directive 4F) on the competitions page, in COPY order. */
+export const COMPETITION_ANCHORS = ["categories", "eligibility", "rules", "apply", "awards"];
+
+const INTERESTS = INTEREST_OPTIONS;
+const FIELDS = PRIORITY_LIST_FIELDS.map((f) =>
+  f.kind === "checkbox" ? "Consent to receive event updates" : f.required ? f.label : `${f.label} (optional)`);
 
 /**
  * The priority list as it will look, with every control disabled and no
