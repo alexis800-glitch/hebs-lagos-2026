@@ -81,6 +81,8 @@ export function portalLink(
  */
 export const FORMS_OPEN = { priority: false, sponsor: false, exhibitor: false, enquiry: false } as const;
 
+export type FormId = keyof typeof FORMS_OPEN;
+
 /* ------------------------------------------------------------------ */
 /* Field contracts                                                     */
 /* ------------------------------------------------------------------ */
@@ -97,6 +99,10 @@ export interface FieldSpec {
   options?: readonly string[];
   /** Short helper text under the control. */
   hint?: string;
+  /** Longest accepted value, in characters (text kinds). */
+  maxLength?: number;
+  /** Rendered but not usable: the contract does not yet define secure handling for it. */
+  inactive?: string;
   /**
    * Checkboxes only. "acknowledgement": required to submit, records that the
    * person was told how their details are used for what they asked for.
@@ -130,10 +136,10 @@ export const INTEREST_OPTIONS = ["Attendee", "Competitor", "Educator", "Exhibito
 
 /** Directive section 6: the priority list collects exactly these. */
 export const PRIORITY_LIST_FIELDS: readonly FieldSpec[] = [
-  { name: "full_name", label: "Full name", kind: "text", required: true, autoComplete: "name" },
-  { name: "email", label: "Email address", kind: "email", required: true, autoComplete: "email" },
-  { name: "country", label: "Country of residence", kind: "text", required: true, autoComplete: "country-name" },
-  { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel" },
+  { name: "full_name", label: "Full name", kind: "text", required: true, autoComplete: "name", maxLength: 200 },
+  { name: "email", label: "Email address", kind: "email", required: true, autoComplete: "email", maxLength: 200 },
+  { name: "country", label: "Country of residence", kind: "text", required: true, autoComplete: "country-name", maxLength: 100 },
+  { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel", maxLength: 40 },
   { name: "interest", label: "Area of interest", kind: "select", required: true, options: INTEREST_OPTIONS },
   ACKNOWLEDGE("tell me when HEBS 2027 registration, tickets and the programme open"),
   MARKETING,
@@ -144,13 +150,13 @@ export const PARTNERSHIP_OPTIONS = ["Sponsorship", "Exhibition", "Brand activati
 
 /** Directive section 8: submit a sponsorship inquiry, request the prospectus. */
 export const SPONSOR_INQUIRY_FIELDS: readonly FieldSpec[] = [
-  { name: "company_name", label: "Company or brand", kind: "text", required: true, autoComplete: "organization" },
-  { name: "contact_name", label: "Your name", kind: "text", required: true, autoComplete: "name" },
-  { name: "email", label: "Work email", kind: "email", required: true, autoComplete: "email" },
-  { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel" },
-  { name: "country", label: "Country", kind: "text", required: true, autoComplete: "country-name" },
+  { name: "company_name", label: "Company or brand", kind: "text", required: true, autoComplete: "organization", maxLength: 200 },
+  { name: "contact_name", label: "Your name", kind: "text", required: true, autoComplete: "name", maxLength: 200 },
+  { name: "email", label: "Work email", kind: "email", required: true, autoComplete: "email", maxLength: 200 },
+  { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel", maxLength: 40 },
+  { name: "country", label: "Country", kind: "text", required: true, autoComplete: "country-name", maxLength: 100 },
   { name: "partnership_interest", label: "Interested in", kind: "select", required: true, options: PARTNERSHIP_OPTIONS },
-  { name: "message", label: "What would you like to achieve at HEBS 2027?", kind: "textarea", required: false },
+  { name: "message", label: "What would you like to achieve at HEBS 2027?", kind: "textarea", required: false, maxLength: 2000 },
   { name: "prospectus_requested", label: "Send me the 2027 sponsorship prospectus when it is available.", kind: "checkbox", required: false },
   ACKNOWLEDGE("respond to my partnership inquiry"),
   MARKETING,
@@ -158,14 +164,15 @@ export const SPONSOR_INQUIRY_FIELDS: readonly FieldSpec[] = [
 
 /** Directive section 8: apply for exhibition participation, upload basic company information. */
 export const EXHIBITOR_APPLICATION_FIELDS: readonly FieldSpec[] = [
-  { name: "company_name", label: "Company or brand", kind: "text", required: true, autoComplete: "organization" },
-  { name: "contact_name", label: "Your name", kind: "text", required: true, autoComplete: "name" },
-  { name: "email", label: "Work email", kind: "email", required: true, autoComplete: "email" },
-  { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel" },
-  { name: "country", label: "Country", kind: "text", required: true, autoComplete: "country-name" },
-  { name: "website", label: "Website or social page", kind: "url", required: false, autoComplete: "url" },
-  { name: "products", label: "What you would exhibit", kind: "textarea", required: true },
-  { name: "company_profile", label: "Company profile", kind: "file", required: false, hint: "PDF, up to the size the portal allows." },
+  { name: "company_name", label: "Company or brand", kind: "text", required: true, autoComplete: "organization", maxLength: 200 },
+  { name: "contact_name", label: "Your name", kind: "text", required: true, autoComplete: "name", maxLength: 200 },
+  { name: "email", label: "Work email", kind: "email", required: true, autoComplete: "email", maxLength: 200 },
+  { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel", maxLength: 40 },
+  { name: "country", label: "Country", kind: "text", required: true, autoComplete: "country-name", maxLength: 100 },
+  { name: "company_website", label: "Website or social page", kind: "url", required: false, autoComplete: "url", maxLength: 200 },
+  { name: "products", label: "What you would exhibit", kind: "textarea", required: true, maxLength: 1000 },
+  { name: "company_profile", label: "Company profile", kind: "file", required: false,
+    inactive: "Uploads open once the integration contract defines secure file handling. Nothing is uploaded until then." },
   ACKNOWLEDGE("assess my exhibitor application and contact me about it"),
   MARKETING,
 ];
@@ -173,10 +180,10 @@ export const EXHIBITOR_APPLICATION_FIELDS: readonly FieldSpec[] = [
 /** Directive section 5, Contact us: a general message. */
 export const CONTACT_TOPICS = ["General question", "Attending", "Competing", "Education", "Press", "Other"] as const;
 export const CONTACT_FIELDS: readonly FieldSpec[] = [
-  { name: "full_name", label: "Your name", kind: "text", required: true, autoComplete: "name" },
-  { name: "email", label: "Email address", kind: "email", required: true, autoComplete: "email" },
+  { name: "full_name", label: "Your name", kind: "text", required: true, autoComplete: "name", maxLength: 200 },
+  { name: "email", label: "Email address", kind: "email", required: true, autoComplete: "email", maxLength: 200 },
   { name: "topic", label: "Topic", kind: "select", required: true, options: CONTACT_TOPICS },
-  { name: "message", label: "Message", kind: "textarea", required: true },
+  { name: "message", label: "Message", kind: "textarea", required: true, maxLength: 2000 },
   ACKNOWLEDGE("reply to my message"),
 ];
 
@@ -187,3 +194,11 @@ for (const list of [PRIORITY_LIST_FIELDS, SPONSOR_INQUIRY_FIELDS, EXHIBITOR_APPL
   }
   if (list.filter((f) => f.consent === "acknowledgement").length !== 1) throw new Error("[registration-2027] every form carries one privacy acknowledgement");
 }
+
+/** The four website forms (owner instruction of 2026-11-04), by form id. */
+export const FORM_FIELDS: Record<FormId, readonly FieldSpec[]> = {
+  priority: PRIORITY_LIST_FIELDS,
+  sponsor: SPONSOR_INQUIRY_FIELDS,
+  exhibitor: EXHIBITOR_APPLICATION_FIELDS,
+  enquiry: CONTACT_FIELDS,
+};

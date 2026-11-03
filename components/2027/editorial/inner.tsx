@@ -12,13 +12,13 @@ import { PAGES } from "@/lib/content/2027-pages";
 import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
-import { CONTACT_FIELDS, EXHIBITOR_APPLICATION_FIELDS, SPONSOR_INQUIRY_FIELDS, portalLink } from "@/lib/integrations/registration-2027";
+import { portalLink } from "@/lib/integrations/registration-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
 import { resolveSlot } from "@/lib/assets/register";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, ThreeDays, dayAnchor, type Targets } from "./sections";
-import { FormPreview, PageContents, PageHero, PageLink, Pending } from "./site";
+import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
 import { C, HORIZON, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
 
 const COPY_DRAFT = "Body copy provisional, awaiting owner approval.";
@@ -367,8 +367,7 @@ export function SponsorshipPage(props: PageProps) {
             <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="ivory" className="mt-6" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <FormPreview id="sponsor-inquiry" destination="sponsor-inquiry" fields={SPONSOR_INQUIRY_FIELDS} opts={opts}
-              gate="Preview of the inquiry form. It is not open yet." linkLabel="Send a sponsorship inquiry" />
+            <FormBlock form="sponsor" title="Sponsorship inquiry" gate="The inquiry form is not open yet. Nothing can be sent." submitLabel="Send inquiry" />
           </div>
         </div>
       </Section>
@@ -412,8 +411,7 @@ export function ExhibitorsPage(props: PageProps) {
             <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" className="mt-6" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <FormPreview id="exhibitor-application" destination="exhibitor-application" fields={EXHIBITOR_APPLICATION_FIELDS} opts={opts}
-              gate="Preview of the exhibitor application. It is not open yet." linkLabel="Apply to exhibit" />
+            <FormBlock form="exhibitor" title="Exhibitor application" gate="Exhibitor applications are not open yet. Nothing can be sent." submitLabel="Send application" />
           </div>
         </div>
       </Section>
@@ -635,8 +633,7 @@ export function ContactPage(props: PageProps) {
             <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <FormPreview id="contact" destination="contact" fields={CONTACT_FIELDS} opts={opts}
-              gate="Preview of the contact form. It is not open yet." linkLabel="Contact the HEBS team" />
+            <FormBlock form="enquiry" title="Contact form" gate="The contact form is not open yet. Nothing can be sent." submitLabel="Send message" />
           </div>
         </div>
       </Section>

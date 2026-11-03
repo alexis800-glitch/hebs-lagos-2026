@@ -12,12 +12,11 @@ import ConceptCountdown from "@/components/2027/concepts/ConceptCountdown";
 import { COPY } from "@/lib/content/2027";
 import { CAMPAIGN, CATEGORIES_2027, COMPETITIONS_2027, EDITION_DAYS, VENUE } from "@/lib/editions/2027";
 import { resolveSlot } from "@/lib/assets/register";
-import { PRIORITY_LIST_FIELDS, INTEREST_OPTIONS } from "@/lib/integrations/registration-2027";
 import { PRIORITY_CTA, type PageId } from "@/lib/site/2027";
 import { FORMS_OPEN } from "@/lib/integrations/registration-2027";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { EXPERIENCE_SLOTS } from "./notes";
-import { PageLink } from "./site";
+import { FormBlock, PageLink } from "./site";
 import { C, HORIZON, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
 
 export interface Targets {
@@ -460,21 +459,13 @@ export function Highlights({ opts, notes }: SectionProps) {
 /** The anchors of the five pathways (directive 4F) on the competitions page, in COPY order. */
 export const COMPETITION_ANCHORS = ["categories", "eligibility", "rules", "apply", "awards"];
 
-const INTERESTS = INTEREST_OPTIONS;
-const FIELDS = PRIORITY_LIST_FIELDS.map((f) =>
-  f.consent === "acknowledgement" ? "Acknowledgement of how your details are used"
-    : f.consent === "marketing" ? "Consent to HEBS news and event updates (optional)"
-      : f.required ? f.label : `${f.label} (optional)`);
-const CONSENTS = PRIORITY_LIST_FIELDS.filter((f) => f.consent);
 
 /**
- * The priority list as it will look, with every control disabled and no
- * submission path: nothing can be entered or sent until storage (D1) and
- * privacy terms (D13) are approved.
+ * The priority list (directive section 6). The form is the working HebsForm;
+ * it stays disabled, sending nothing, until submission is configured for this
+ * deployment and the owner opens the list.
  */
 export function PriorityList({ opts, notes }: SectionProps) {
-  const field = "mt-2 block w-full border bg-white px-3 py-3 text-[15px]";
-  const fieldStyle = { borderColor: "rgba(0,0,0,.22)", color: "#6B6253" };
   return (
     <Section id="priority-list" ground="ivory" labelledBy="priority-title">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
@@ -482,52 +473,11 @@ export function PriorityList({ opts, notes }: SectionProps) {
           {/* The directive's headline once the list can be joined; until then it names the list without inviting a sign-up. */}
           <h2 id="priority-title" style={h2Style}>{FORMS_OPEN.priority ? sentenceCase(COPY.priorityList.headline.text) : "The 2027 priority list"}</h2>
           <p className="mt-6 max-w-[40ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>{COPY.priorityList.intro.text}</p>
-          <p id="priority-gate" className="mt-8 border-l-2 pl-4 text-[16px] font-medium leading-relaxed" style={{ borderColor: C.atlantic, color: C.atlantic }}>
-            The priority list is not open yet. It opens once secure storage and privacy terms are approved.
-          </p>
-          <h3 className="mt-10 text-[14px] font-semibold">What it will ask for</h3>
-          <ul className="mt-3 space-y-1.5 text-[15px]" style={{ color: C.body }}>
-            {FIELDS.map((f) => <li key={f}>{f}</li>)}
-          </ul>
-          <p className="mt-4 text-[14px]" style={{ color: "#5E5546" }}>No payment is requested through the priority list.</p>
+          <p className="mt-8 text-[14px]" style={{ color: "#5E5546" }}>No payment is requested through the priority list.</p>
           <SectionNotes notes={notes} opts={opts} ground="ivory" className="mt-6" />
         </div>
         <div className="lg:col-span-6 lg:col-start-7">
-          <div className="border bg-[#FBF8F2] p-6 sm:p-8" style={{ borderColor: "rgba(0,0,0,.14)", colorScheme: "light" }}>
-            <p className="text-[13px] font-semibold" style={{ color: C.atlantic }}>Preview of the form, not active</p>
-            <fieldset disabled aria-describedby="priority-gate" className="mt-5 grid gap-5">
-              <legend className="sr-only">Priority list fields (preview, disabled)</legend>
-              <label className="text-[14px] font-medium">Full name
-                <input className={field} style={fieldStyle} type="text" name="name" autoComplete="name" />
-              </label>
-              <label className="text-[14px] font-medium">Email address
-                <input className={field} style={fieldStyle} type="email" name="email" autoComplete="email" inputMode="email" spellCheck={false} />
-              </label>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <label className="text-[14px] font-medium">Country of residence
-                  <input className={field} style={fieldStyle} type="text" name="country" autoComplete="country-name" />
-                </label>
-                <label className="text-[14px] font-medium">Phone number <span className="font-normal" style={{ color: "#5E5546" }}>(optional)</span>
-                  <input className={field} style={fieldStyle} type="tel" name="phone" autoComplete="tel" inputMode="tel" />
-                </label>
-              </div>
-              <label className="text-[14px] font-medium">Area of interest
-                <select className={field} style={fieldStyle} name="interest" defaultValue="">
-                  <option value="" disabled>Choose one</option>
-                  {INTERESTS.map((i) => <option key={i}>{i}</option>)}
-                </select>
-              </label>
-              {CONSENTS.map((f) => (
-                <label key={f.name} className="flex items-start gap-3 text-[14px]">
-                  <input type="checkbox" name={f.name} className="mt-1 h-4 w-4" />
-                  <span>{f.label}{!f.required && <span style={{ color: "#5E5546" }}> (optional)</span>}</span>
-                </label>
-              ))}
-              <button type="button" className="min-h-[52px] border px-6 text-[12px] font-bold uppercase tracking-[0.18em]" style={{ borderColor: "rgba(0,0,0,.25)", color: "#5E5546", background: "transparent" }}>
-                Opens soon
-              </button>
-            </fieldset>
-          </div>
+          <FormBlock form="priority" title="2027 priority list" gate="The priority list is not open yet. Nothing can be sent." submitLabel="Join the priority list" />
         </div>
       </div>
     </Section>

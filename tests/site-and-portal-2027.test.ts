@@ -123,7 +123,8 @@ describe("Base44 2027 portal hand-off", () => {
   });
 
   it("keeps every form preview disabled", () => {
-    const site = readFileSync(join(ROOT, "components/2027/editorial/site.tsx"), "utf8");
-    expect(site).toMatch(/<fieldset disabled/);
+    // Closed forms render every control inside a disabled fieldset (components/2027/editorial/HebsForm.tsx).
+    const form = readFileSync(join(ROOT, "components/2027/editorial/HebsForm.tsx"), "utf8");
+    expect(form).toMatch(/<fieldset disabled=\{!enabled/);
   });
 });

@@ -165,15 +165,18 @@ describe("traceability", () => {
     expect(src).toContain('id="priority-list"');
   });
 
-  it("has no working form or submission path on the 2027 pages", () => {
+  it("submits forms from one component only, to the website's own route only", () => {
     const files = [...walk(join(ROOT, "app/2027")), ...walk(join(ROOT, "components/2027"))].filter((f) => /\.tsx?$/.test(f));
-    for (const f of files) {
-      const src = readFileSync(f, "utf8");
-      expect(src, f).not.toMatch(/<form\b|\baction=|onSubmit|type="submit"|fetch\(/);
+    const form = join(ROOT, "components/2027/editorial/HebsForm.tsx");
+    for (const f of files.filter((x) => x !== form)) {
+      expect(readFileSync(f, "utf8"), f).not.toMatch(/<form\b|\baction=|onSubmit|type="submit"|fetch\(/);
     }
-    // Every input of the priority-list preview sits inside a disabled fieldset.
-    const sections = readFileSync(join(ROOT, "components/2027/editorial/sections.tsx"), "utf8");
-    expect(sections).toMatch(/<fieldset disabled/);
+    const src = readFileSync(form, "utf8");
+    expect(src).toContain('const ENDPOINT = "/api/hebs2027/submit"');
+    expect(src.match(/fetch\(/g)).toHaveLength(1);
+    expect(src).toMatch(/fetch\(ENDPOINT,/);
+    expect(src).not.toMatch(/base44|hebseventportal|HEBS_PORTAL|process\.env/i);
+    expect(src).toMatch(/<fieldset disabled=\{!enabled/);
   });
 
   it("lists the section 11 launch items", () => {

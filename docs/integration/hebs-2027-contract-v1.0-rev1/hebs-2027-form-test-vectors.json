@@ -1,0 +1,111 @@
+{
+ "contract": "HEBS 2027 public forms v1.0",
+ "secret": "synthetic-secret-synthetic-secret-0123456789",
+ "secret_note": "Synthetic test secret. Never use in any real environment.",
+ "signature_algorithm": "hex(HMAC-SHA256(secret, \"<timestamp>.<raw_body>\"))",
+ "vectors": [
+  {
+   "name": "priority: valid, form open",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "bd3f37d33d4fa04120ae35e8cd4a7bf53e551371d96d7827fcd7a044c138a890",
+   "expected_status": 201,
+   "expected_body_shape": {
+    "reference": "H27-PRI-XXXXXX"
+   }
+  },
+  {
+   "name": "sponsor: valid, form open",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"sponsor\",\"edition\":\"2027\",\"client_request_id\":\"0b5e8d1c-7a3f-4e2b-8c6d-1f9a4b7e2c30\",\"website\":\"\",\"data\":{\"company_name\":\"Synthetic Sponsor Co\",\"contact_person\":\"Synthetic Contact\",\"email\":\"sponsor@synthetic.test\",\"tier_interest\":\"Gold\",\"budget_range\":\"$10,000 – $25,000\",\"message\":\"Interested in 2027 headline sponsorship.\"}}",
+   "signature": "887323cffb7b3623262eb0cf5e40b0e2555bbb9bb04e5c15d72f09d964b76a43",
+   "expected_status": 201,
+   "expected_body_shape": {
+    "reference": "H27-SPN-XXXXXX"
+   }
+  },
+  {
+   "name": "exhibitor: valid, form open",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"exhibitor\",\"edition\":\"2027\",\"client_request_id\":\"9d2a6f4e-1c8b-4a7d-b3e5-6f0c2d9a8b17\",\"website\":\"\",\"data\":{\"business_name\":\"Synthetic Stall Ltd\",\"email\":\"stall@synthetic.test\",\"booth_requirement\":\"Small (3×3m)\"}}",
+   "signature": "26a82f964174bc04d1b43494661b5e626892c9f8eecb83268e58523bb79e7278",
+   "expected_status": 201,
+   "expected_body_shape": {
+    "reference": "H27-EXH-XXXXXX"
+   }
+  },
+  {
+   "name": "enquiry: valid, form open",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"enquiry\",\"edition\":\"2027\",\"client_request_id\":\"3e7c1b9a-5d2f-4c8e-a6b4-0f1d7e3c9a25\",\"website\":\"\",\"data\":{\"name\":\"Synthetic Person\",\"email\":\"ask@synthetic.test\",\"subject\":\"Group tickets\",\"message\":\"Do you offer group rates?\"}}",
+   "signature": "13c53f72680770324367a8251df06b7671ad70482fa006b43f36942a51188de7",
+   "expected_status": 201,
+   "expected_body_shape": {
+    "reference": "H27-ENQ-XXXXXX"
+   }
+  },
+  {
+   "name": "priority: valid signature, form closed",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "bd3f37d33d4fa04120ae35e8cd4a7bf53e551371d96d7827fcd7a044c138a890",
+   "expected_status": 403,
+   "expected_body": {
+    "error": "not_open",
+    "form": "priority"
+   }
+  },
+  {
+   "name": "priority: signed with the wrong secret",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "0c20f025cda5bbf19f1b7e173a62e3895a03bdd89410551a97d36cb9e308b000",
+   "expected_status": 401,
+   "expected_body": {
+    "error": "unauthorized"
+   }
+  },
+  {
+   "name": "priority: timestamp 600 s old (replay window is 300 s)",
+   "timestamp": 1793749800,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "5e7998d39e27d7a8c1c42f5e07636a5f4b69346c595ac700c6a5734d2af6efc2",
+   "expected_status": 401,
+   "expected_body": {
+    "error": "unauthorized"
+   }
+  },
+  {
+   "name": "priority: body changed after signing",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Altered Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "bd3f37d33d4fa04120ae35e8cd4a7bf53e551371d96d7827fcd7a044c138a890",
+   "expected_status": 401,
+   "expected_body": {
+    "error": "unauthorized"
+   }
+  },
+  {
+   "name": "priority: identical request sent twice (retry or replay inside window)",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "bd3f37d33d4fa04120ae35e8cd4a7bf53e551371d96d7827fcd7a044c138a890",
+   "expected_status_first": 201,
+   "expected_status_second": 200,
+   "expected_second_body_shape": {
+    "reference": "same as first",
+    "duplicate": true
+   }
+  },
+  {
+   "name": "priority: honeypot filled",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"http://spam.example\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\"}}",
+   "signature": "49b285eb0c1ca91fc227c58437c8bd99d403884f23be9c333233e20d84249888",
+   "expected_status": 202,
+   "expected_body": {
+    "accepted": true
+   }
+  }
+ ]
+}

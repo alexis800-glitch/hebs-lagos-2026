@@ -5,7 +5,9 @@
  */
 import { CAMPAIGN, VENUE } from "@/lib/editions/2027";
 import { pageHref, type PageId } from "@/lib/site/2027";
-import { portalLink, type FieldSpec, type PortalDestination } from "@/lib/integrations/registration-2027";
+import { FORM_FIELDS, type FormId } from "@/lib/integrations/registration-2027";
+import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
+import HebsForm from "./HebsForm";
 import { SectionNotes, type Opts } from "./parts";
 import { C, GROUND, display, type Ground } from "./tokens";
 
@@ -88,104 +90,22 @@ export function PageLink({ to, hash, children, className = "", style }: {
   return <a href={href} className={className} style={style}>{children}</a>;
 }
 
-/* ── Form previews ──────────────────────────────────────────────────── */
-
-const fieldClass = "mt-2 block w-full border bg-white px-3 py-3 text-[15px]";
-const fieldStyle = { borderColor: "rgba(0,0,0,.22)", color: "#6B6253" };
-
-function Control({ f }: { f: FieldSpec }) {
-  const optional = !f.required && f.kind !== "checkbox" ? <span className="font-normal" style={{ color: "#5E5546" }}> (optional)</span> : null;
-  if (f.kind === "checkbox") {
-    return (
-      <label className="flex items-start gap-3 text-[14px]">
-        <input type="checkbox" name={f.name} className="mt-1 h-4 w-4" />
-        <span>{f.label}{!f.required && f.consent === "marketing" && <span style={{ color: "#5E5546" }}> (optional)</span>}</span>
-      </label>
-    );
-  }
-  const common = { name: f.name, autoComplete: f.autoComplete, className: fieldClass, style: fieldStyle };
-  return (
-    <label className="text-[14px] font-medium">
-      {f.label}{optional}
-      {f.kind === "select" ? (
-        <select {...common} defaultValue="">
-          <option value="" disabled>Choose one</option>
-          {f.options?.map((o) => <option key={o}>{o}</option>)}
-        </select>
-      ) : f.kind === "textarea" ? (
-        <textarea {...common} rows={4} />
-      ) : (
-        <input
-          {...common}
-          type={f.kind}
-          inputMode={f.kind === "email" ? "email" : f.kind === "tel" ? "tel" : f.kind === "url" ? "url" : undefined}
-          spellCheck={f.kind === "email" || f.kind === "url" ? false : undefined}
-          accept={f.kind === "file" ? "application/pdf" : undefined}
-        />
-      )}
-      {f.hint && <span className="mt-1.5 block text-[13px] font-normal" style={{ color: "#5E5546" }}>{f.hint}</span>}
-    </label>
-  );
-}
+/* ── Forms ──────────────────────────────────────────────────────────── */
 
 /**
- * A registration or inquiry form as it will look. Until the destination's
- * Base44 2027 page is approved, every control is disabled and nothing can be
- * sent; once it is, the panel becomes a plain link to the portal instead, so
- * the website itself never receives what visitors enter.
+ * A website form (HebsForm). Whether it accepts submissions is decided here, on
+ * the server, from lib/forms-2027/config.ts; the browser receives only that
+ * yes or no, never a setting or a secret.
  */
-export function FormPreview({
-  id,
-  destination,
-  fields,
-  opts,
-  gate,
-  linkLabel,
-}: {
-  id: string;
-  destination: PortalDestination;
-  fields: readonly FieldSpec[];
-  opts: Opts;
+export function FormBlock({ form, title, gate, submitLabel }: {
+  form: FormId;
+  title: string;
   /** Sentence shown while the form is closed. */
   gate: string;
-  linkLabel: string;
+  submitLabel: string;
 }) {
-  const href = portalLink(destination, opts.environment);
-  if (href) {
-    return (
-      <div className="border bg-[#FBF8F2] p-6 sm:p-8" style={{ borderColor: "rgba(0,0,0,.14)", color: C.black }}>
-        <a
-          href={href}
-          className="flex min-h-[56px] items-center justify-center px-8 text-[13px] font-bold uppercase tracking-[0.16em] transition-colors duration-200 hover:bg-[#EAD7A8]"
-          style={{ background: C.champ, color: C.black }}
-        >
-          {linkLabel}
-        </a>
-        <p className="mt-4 text-[14px]" style={{ color: C.body }}>Opens the official HEBS 2027 registration portal.</p>
-      </div>
-    );
-  }
-  const half = (f: FieldSpec) => f.kind === "tel" || f.name === "country";
-  return (
-    <div className="border bg-[#FBF8F2] p-6 sm:p-8" style={{ borderColor: "rgba(0,0,0,.14)", colorScheme: "light", color: C.black }}>
-      <p id={`${id}-gate`} className="text-[14px] font-semibold" style={{ color: C.atlantic }}>{gate}</p>
-      <fieldset disabled aria-describedby={`${id}-gate`} className="mt-5 grid gap-5 sm:grid-cols-2">
-        <legend className="sr-only">Form fields (preview, disabled)</legend>
-        {fields.map((f) => (
-          <div key={f.name} className={half(f) ? "" : "sm:col-span-2"}>
-            <Control f={f} />
-          </div>
-        ))}
-        <button
-          type="button"
-          className="min-h-[52px] border px-6 text-[12px] font-bold uppercase tracking-[0.18em] sm:col-span-2"
-          style={{ borderColor: "rgba(0,0,0,.25)", color: "#5E5546", background: "transparent" }}
-        >
-          Opens soon
-        </button>
-      </fieldset>
-    </div>
-  );
+  const enabled = formEnabled(form, submitConfig());
+  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} gate={gate} submitLabel={submitLabel} title={title} />;
 }
 
 /** "To be announced" for a fact that does not exist yet, set quietly in the page's own type. */
