@@ -15,7 +15,7 @@
  */
 import { deployEnvironment, type DeployEnvironment } from "../publication";
 import { FORMS_OPEN, type FormId } from "../integrations/registration-2027";
-import { CONTRACT, NOTICE_VERSIONS, type NoticeVersions } from "./contract";
+import { CONTRACT, NOTICE_VERSIONS, PROFILE_ACCEPTED, type NoticeVersions } from "./contract";
 
 /**
  * Real company-profile uploads. Off until malware scanning or secure quarantine
@@ -69,8 +69,8 @@ export function submitConfig(env: Env = process.env): SubmitConfig {
       environment, mode: "mock", store, ipSalt,
       portal: { url: "https://mock.portal.invalid/evSubmitPublicForm", appId: "mock-app", secret: MOCK_SECRET },
       notices: MOCK_NOTICES,
-      // Local testing of the upload path only; never real files on a deployment.
-      uploads: env.HEBS_FORMS_MOCK_UPLOADS === "yes",
+      // Local testing of the upload path only, and only once the contract accepts profiles again.
+      uploads: PROFILE_ACCEPTED && env.HEBS_FORMS_MOCK_UPLOADS === "yes",
     };
   }
   if (wanted !== "portal") return off("HEBS_FORMS_MODE is not set");
@@ -81,7 +81,7 @@ export function submitConfig(env: Env = process.env): SubmitConfig {
   if (!url || !url.startsWith("https://") || !appId || !secret || secret.length < 32) return off("portal settings incomplete");
   if (!store || !ipSalt) return off("no shared rate-limit store or salt");
   if (environment === "production" && env.HEBS_FORMS_PRODUCTION_APPROVED !== "yes") return off("production forms not approved");
-  return { environment, mode: "portal", store, ipSalt, portal: { url, appId, secret }, notices: NOTICE_VERSIONS, uploads: UPLOADS_ENABLED };
+  return { environment, mode: "portal", store, ipSalt, portal: { url, appId, secret }, notices: NOTICE_VERSIONS, uploads: UPLOADS_ENABLED && PROFILE_ACCEPTED };
 }
 
 /** Synthetic notice versions for the mock portal; real versions come with the approved privacy notice (D13). */

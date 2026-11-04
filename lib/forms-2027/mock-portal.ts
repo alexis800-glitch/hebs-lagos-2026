@@ -1,8 +1,8 @@
 /**
  * A stand-in for the portal's evSubmitPublicForm, following
- * INTEGRATION-CONTRACT-v1.1 and checked against its 15 official test vectors
- * and its request schema (tests/forms-2027.test.ts). Development and tests
- * only: synthetic records in memory, never Base44.
+ * INTEGRATION-CONTRACT-v1.1 (Gate A corrections revision) and checked against
+ * its 21 official test vectors and its request schema (tests/forms-2027.test.ts).
+ * Development and tests only: synthetic records in memory, never Base44.
  */
 import { createHash, timingSafeEqual } from "node:crypto";
 import { signBody } from "./sign";
@@ -15,6 +15,11 @@ export interface MockPortalOptions {
   downFor?: number;
   /** Never answer the next N calls (simulated timeout). */
   hangFor?: number;
+  /** Answer 503 busy (platform read limit) to the next N valid submissions, with this retry_after_s. */
+  busyFor?: number;
+  busyRetryAfter?: number | null;
+  /** Fail the audit row for the next N valid submissions: the record is removed, 503 audit_failed. */
+  auditFailFor?: number;
 }
 
 type FieldRule = { t: "string"; max: number; enum?: readonly string[]; url?: boolean; email?: boolean } | { t: "boolean" } | { t: "true" } | { t: "file" };
@@ -28,17 +33,18 @@ const WEB = { website_url: S(300, { url: true }), social_media: S(300) };
 /** v1.1 section 4, per form: allowed fields and the required ones. */
 export const MOCK_SCHEMA: Record<string, { required: string[]; fields: Record<string, FieldRule> }> = {
   priority: {
-    required: ["full_name", "email", "privacy_acknowledged", "privacy_notice_version"],
+    required: ["full_name", "email", "country", "interest", "privacy_acknowledged", "privacy_notice_version"],
     fields: {
       ...COMMON, ...WEB, full_name: S(200), email: S(200, { email: true }), phone: S(40), city: S(100), company: S(200),
-      interest: S(60, { enum: ["Attendee", "Competitor", "Educator", "Sponsor", "Exhibitor", "Media", "Other"] }),
+      interest: S(60, { enum: ["Attendee", "Competitor", "Educator", "Exhibitor", "Sponsor", "Other"] }),
       category_interest: S(200), utm_source: S(100), utm_medium: S(100), utm_campaign: S(100),
     },
   },
   sponsor: {
-    required: ["company_name", "email", "privacy_acknowledged", "privacy_notice_version"],
+    required: ["company_name", "email", "partnership_interest", "privacy_acknowledged", "privacy_notice_version"],
     fields: {
       ...COMMON, ...WEB, company_name: S(200), email: S(200, { email: true }), contact_person: S(200), phone: S(40),
+      partnership_interest: S(60, { enum: ["Sponsorship", "Exhibition", "Brand activation", "Strategic partnership"] }),
       tier_interest: S(60), budget_range: S(60), message: S(2000), prospectus_requested: { t: "boolean" },
     },
   },
@@ -46,7 +52,8 @@ export const MOCK_SCHEMA: Record<string, { required: string[]; fields: Record<st
     required: ["business_name", "email", "privacy_acknowledged", "privacy_notice_version"],
     fields: {
       ...COMMON, ...WEB, business_name: S(200), email: S(200, { email: true }), contact_person: S(200), phone: S(40),
-      business_category: S(100), product_service: S(1000), booth_requirement: S(60), company_profile: { t: "file" },
+      // company_profile is refused in this release (upload_disabled), so it is not an accepted field.
+      business_category: S(100), product_service: S(1000), booth_requirement: S(60),
     },
   },
   enquiry: {
@@ -66,12 +73,14 @@ export function createMockPortal(o: MockPortalOptions) {
   const priorityEmails = new Set<string>();
   let down = o.downFor ?? 0;
   let hang = o.hangFor ?? 0;
+  let busy = o.busyFor ?? 0;
+  let auditFail = o.auditFailFor ?? 0;
   let seq = 0;
   const calls: { status: number; body?: Record<string, unknown> }[] = [];
 
-  const reply = (status: number, body: Record<string, unknown>) => {
+  const reply = (status: number, body: Record<string, unknown>, extra: Record<string, string> = {}) => {
     calls.push({ status, body });
-    return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
+    return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", ...extra } });
   };
   const err = (status: number, error: string, field?: string) => reply(status, field ? { error, field } : { error });
   const reference = (form: string) => {
@@ -105,7 +114,8 @@ export function createMockPortal(o: MockPortalOptions) {
     const good = sig.length === expected.length && timingSafeEqual(Buffer.from(sig), Buffer.from(expected));
     if (!Number.isFinite(ts) || !good || Math.abs(now() - ts) > 300) return err(401, "unauthorized");
     const bytes = Buffer.byteLength(raw, "utf8");
-    if (bytes > 4_200_000) return err(413, "too_large");
+    // Corrected v1.1 section 2: 20,000 bytes for every request in this release.
+    if (bytes > 20_000) return err(413, "too_large");
     let body: Record<string, unknown>;
     try { body = JSON.parse(raw); } catch { return err(400, "invalid_json"); }
     if (!body || typeof body !== "object" || Array.isArray(body)) return err(400, "invalid_json");
@@ -118,11 +128,12 @@ export function createMockPortal(o: MockPortalOptions) {
     if (typeof body.website === "string" && body.website !== "") return reply(202, { accepted: true });
     if (!(o.open?.[form] ?? false)) return reply(403, { error: "not_open", form });
     const data = (body.data && typeof body.data === "object" && !Array.isArray(body.data) ? body.data : {}) as Record<string, unknown>;
-    if (bytes > 20_000 && !(form === "exhibitor" && data.company_profile)) return err(413, "too_large");
+    if ("company_profile" in data) return err(400, "upload_disabled", "company_profile");
     const schema = MOCK_SCHEMA[form];
     const unknown = Object.keys(data).find((k) => !(k in schema.fields));
     if (unknown) return err(400, "unknown_field", unknown);
-    const given = (k: string) => data[k] !== undefined && data[k] !== null && data[k] !== "";
+    // Empty, blank and null all count as "not given" (corrected v1.1 section 4, G1).
+    const given = (k: string) => data[k] !== undefined && data[k] !== null && !(typeof data[k] === "string" && (data[k] as string).trim() === "");
     for (const k of schema.required) {
       if (!given(k)) return err(400, k === "privacy_acknowledged" ? "privacy_ack_required" : "missing_field", k);
     }
@@ -139,12 +150,23 @@ export function createMockPortal(o: MockPortalOptions) {
       if (rule.url && !/^https?:\/\/\S+$/.test(v)) return err(400, "invalid_url", k);
     }
     if (data.consent_marketing === true && !given("consent_version")) return err(400, "missing_field", "consent_version");
+    if (busy > 0) {
+      busy -= 1;
+      const after = o.busyRetryAfter === undefined ? 2 : o.busyRetryAfter;
+      return after === null ? err(503, "busy") : reply(503, { error: "busy", retry_after_s: after }, { "Retry-After": String(after) });
+    }
     const prior = byRequest.get(body.client_request_id);
     if (prior) return reply(200, { reference: prior, duplicate: true });
     if (form === "priority") {
       const email = String(data.email).toLowerCase();
       if (priorityEmails.has(email)) return reply(200, { already_registered: true });
       priorityEmails.add(email);
+    }
+    if (auditFail > 0) {
+      // All or nothing: the record is removed when its audit row cannot be written.
+      auditFail -= 1;
+      if (form === "priority") priorityEmails.delete(String(data.email).toLowerCase());
+      return err(503, "audit_failed");
     }
     const ref = reference(form);
     byRequest.set(body.client_request_id, ref);

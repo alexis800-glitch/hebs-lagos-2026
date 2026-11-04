@@ -15,7 +15,10 @@ import { createMockPortal, MOCK_SCHEMA } from "../lib/forms-2027/mock-portal";
 import { handleSubmit, RATE_LIMIT, type SubmitDeps, type SubmitRequest } from "../lib/forms-2027/handler";
 import { MOCK_NOTICES, MOCK_SECRET, UPLOADS_ENABLED, formEnabled, submitConfig, type SubmitConfig } from "../lib/forms-2027/config";
 import { memoryStore, restStore, type SharedStore } from "../lib/forms-2027/store";
-import { BLOCKED_FIELDS, CONTRACT, FIELD_MAP, NOTICE_VERSIONS, OWNER_INTERESTS, RETRYABLE, classify, toPortalBody } from "../lib/forms-2027/contract";
+import {
+  BLOCKED_FIELDS, CONTRACT, FIELD_MAP, MAX_INLINE_BUSY_WAIT_S, NOTICE_VERSIONS, OWNER_INTERESTS, PROFILE_ACCEPTED, RETRYABLE, busyDelaySeconds, classify, toPortalBody,
+} from "../lib/forms-2027/contract";
+import { PARTNERSHIP_OPTIONS } from "../lib/integrations/registration-2027";
 import { preparePdf, PDF_MAX_BYTES } from "../lib/forms-2027/pdf";
 import { callPortal } from "../lib/forms-2027/portal-client";
 import * as route from "../app/api/hebs2027/submit/route";
@@ -145,21 +148,26 @@ describe("fields and mapping", () => {
     expect(() => toPortalBody("enquiry", v, uuid(), MOCK_NOTICES)).toThrow(/no v1.1 field/);
   });
 
-  it("keeps the sponsor partnership type on the form but blocks sending it: not dropped, not relabelled", async () => {
-    expect(Object.keys(BLOCKED_FIELDS.sponsor)).toEqual(["partnership_interest"]);
-    expect(FORM_FIELDS.sponsor.some((f) => f.name === "partnership_interest" && f.required)).toBe(true);
+  it("sends the partnership type as its own required field, with exactly the contract's four values, never as tier_interest", async () => {
+    const schemaEnum = SCHEMA.allOf.find((b: { if: { properties: { form: { const: string } } } }) => b.if.properties.form.const === "sponsor")
+      .then.properties.data.properties.partnership_interest.enum;
+    expect([...PARTNERSHIP_OPTIONS]).toEqual(schemaEnum);
+    expect(Object.keys(BLOCKED_FIELDS.sponsor)).toEqual([]);
+    expect(FIELD_MAP.sponsor.partnership_interest).toBe("partnership_interest");
     expect(Object.values(FIELD_MAP.sponsor)).not.toContain("tier_interest");
-    expect(() => toPortalBody("sponsor", validateForm("sponsor", sponsor).values, uuid(), MOCK_NOTICES)).toThrow(/partnership_interest.*blocked/);
+    expect(validateForm("sponsor", { ...sponsor, partnership_interest: "" }).errors.partnership_interest).toBeTruthy();
+    expect(validateForm("sponsor", { ...sponsor, partnership_interest: "Gold tier" }).errors.partnership_interest).toBeTruthy();
     const r = rig();
-    const res = await r.send({ form: "sponsor", values: sponsor });
-    expect(res.outcome).toEqual({ status: "invalid", errors: { _form: "This form cannot be sent yet. Nothing was saved." } });
-    expect(r.portal.calls).toHaveLength(0);
+    for (let i = 0; i < PARTNERSHIP_OPTIONS.length; i++) {
+      const res = await r.send({ form: "sponsor", values: { ...sponsor, partnership_interest: PARTNERSHIP_OPTIONS[i] } }, { ip: `192.0.2.${i + 50}` });
+      expect(res.outcome.status, PARTNERSHIP_OPTIONS[i]).toBe("confirmed");
+    }
+    expect(r.portal.calls.every((c) => c.status === 201)).toBe(true);
   });
 
-  it("carries the prospectus request, country, website and social fields", () => {
-    const { partnership_interest: _blocked, ...sendable } = validateForm("sponsor", sponsor).values;
-    const s = toPortalBody("sponsor", sendable, uuid(), MOCK_NOTICES).data;
-    expect(s).toMatchObject({ prospectus_requested: true, country: "Testland", website_url: "https://brand.synthetic.test", social_media: "@synthetic" });
+  it("carries the partnership type, prospectus request, country, website and social fields", () => {
+    const s = toPortalBody("sponsor", validateForm("sponsor", sponsor).values, uuid(), MOCK_NOTICES).data;
+    expect(s).toMatchObject({ partnership_interest: "Sponsorship", prospectus_requested: true, country: "Testland", website_url: "https://brand.synthetic.test", social_media: "@synthetic" });
     expect(s).not.toHaveProperty("tier_interest");
     const e = toPortalBody("exhibitor", validateForm("exhibitor", exhibitor).values, uuid(), MOCK_NOTICES).data;
     expect(e).toMatchObject({ country: "Testland", website_url: "https://tools.synthetic.test", social_media: "@tools", business_name: "Synthetic Tools", product_service: "Synthetic combs" });
@@ -205,10 +213,10 @@ describe("privacy acknowledgement and marketing consent (v1.1 section 5)", () =>
 
 /* ── Signing and the official vectors ───────────────────────────────── */
 
-describe("signing and the 15 official v1.1 test vectors", () => {
+describe("signing and the 21 official v1.1 test vectors (Gate A corrections revision)", () => {
   const secret = VECTORS.secret as string;
   it("reproduces every correctly signed vector", () => {
-    expect(VECTORS.vectors).toHaveLength(15);
+    expect(VECTORS.vectors).toHaveLength(21);
     for (const x of VECTORS.vectors) {
       const ours = signBody(secret, x.timestamp, x.raw_body);
       if (/wrong secret|altered after signing/.test(x.name)) expect(ours, x.name).not.toBe(x.signature);
@@ -217,8 +225,8 @@ describe("signing and the 15 official v1.1 test vectors", () => {
   });
 
   it("matches the contract's worked example", () => {
-    const raw = '{"form":"priority","edition":"2027","client_request_id":"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14","website":"","data":{"full_name":"Synthetic Person","email":"person@synthetic.test","privacy_acknowledged":true,"privacy_notice_version":"2027-01"}}';
-    expect(signBody("synthetic-secret-synthetic-secret-0123456789", 1793750400, raw)).toBe("5dff8a0ae6a805f979f3bc5b52deb8e6887c9e159a411ebb9a8c2d4e516f3e5e");
+    const raw = '{"form":"priority","edition":"2027","client_request_id":"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14","website":"","data":{"full_name":"Synthetic Person","email":"person@synthetic.test","country":"Nigeria","interest":"Attendee","privacy_acknowledged":true,"privacy_notice_version":"2027-01"}}';
+    expect(signBody("synthetic-secret-synthetic-secret-0123456789", 1793750400, raw)).toBe("efb7d843c436d6897806664e84119826a0c727a3d2b499e6935f25c5ef5eaeb8");
   });
 
   it("signs the exact string it sends and sends no Authorization header", () => {
@@ -249,9 +257,9 @@ describe("signing and the 15 official v1.1 test vectors", () => {
 /* ── Submission handler ─────────────────────────────────────────────── */
 
 describe("submission handler with the mock portal", () => {
-  it("submits the three sendable forms and confirms only with a portal reference (sponsor is blocked, above)", async () => {
+  it("submits all four forms and confirms only with a portal reference", async () => {
     const r = rig();
-    for (const [form, values] of [["priority", priority()], ["exhibitor", exhibitor], ["enquiry", enquiry]] as const) {
+    for (const [form, values] of [["priority", priority()], ["sponsor", sponsor], ["exhibitor", exhibitor], ["enquiry", enquiry]] as const) {
       const res = await r.send({ form, values });
       expect(res.outcome, form).toMatchObject({ status: "confirmed", reference: expect.stringMatching(/^H27-(PRI|SPN|EXH|ENQ)-[2-9A-HJKMNP-Z]{6}$/) });
     }
@@ -298,6 +306,87 @@ describe("submission handler with the mock portal", () => {
     const once = await callPortal({ url: "https://x.invalid", appId: "a", secret: MOCK_SECRET, body: {}, fetch: async () => { n++; return new Response('{"error":"too_large"}', { status: 413 }); }, sleep: async () => {} });
     expect(once).toMatchObject({ status: 413, attempts: 1 });
     expect(n).toBe(1);
+  });
+
+  it("on 503 busy waits retry_after_s and retries once with the same request id", async () => {
+    const r = rig({ portal: { secret: MOCK_SECRET, open: { priority: true }, nowSeconds: () => NOW, busyFor: 1, busyRetryAfter: 3 } });
+    const res = await r.send({ form: "priority", values: priority() });
+    expect(res.outcome.status).toBe("confirmed");
+    expect(r.portal.calls.map((c) => c.status)).toEqual([503, 201]);
+    expect(r.sleeps).toEqual([3000]);
+  });
+
+  it("does not wait out a long busy delay inside one request: no confirmation, the visitor is told when to resend", async () => {
+    const r = rig({ portal: { secret: MOCK_SECRET, open: { priority: true }, nowSeconds: () => NOW, busyFor: 1, busyRetryAfter: 30 } });
+    const attempt_id = uuid();
+    const first = await r.send({ form: "priority", values: priority(), attempt_id });
+    expect(first).toEqual({ httpStatus: 503, outcome: { status: "busy", retryAfterSeconds: 30 } });
+    expect(r.portal.calls).toHaveLength(1);
+    expect(r.sleeps).toEqual([]);
+    // The visitor's resend carries the same attempt, so the portal sees the same client_request_id.
+    const again = await r.send({ form: "priority", values: priority(), attempt_id });
+    expect(again.outcome.status).toBe("confirmed");
+    const ids = r.portal.calls.map((c, i) => i);
+    expect(ids).toHaveLength(2);
+  });
+
+  it("keeps the same client_request_id across every permitted retry and resend", async () => {
+    const seen: string[] = [];
+    const portal = createMockPortal({ secret: MOCK_SECRET, open: { priority: true }, nowSeconds: () => NOW, busyFor: 2, busyRetryAfter: 1 });
+    const r = rig();
+    r.deps.portalFetch = async (url, init) => { seen.push(JSON.parse(String(init.body)).client_request_id); return portal.fetch(url, init); };
+    const attempt_id = uuid();
+    expect((await r.send({ form: "priority", values: priority(), attempt_id })).outcome).toEqual({ status: "busy", retryAfterSeconds: 1 });
+    expect((await r.send({ form: "priority", values: priority(), attempt_id })).outcome.status).toBe("confirmed");
+    expect(seen).toHaveLength(3);
+    expect(new Set(seen).size).toBe(1);
+  });
+
+  it("bounds every busy delay to 1-60 s and never makes more than two calls", async () => {
+    expect(busyDelaySeconds({ retry_after_s: 0 }, null)).toBe(1);
+    expect(busyDelaySeconds({ retry_after_s: 999 }, null)).toBe(60);
+    expect(busyDelaySeconds({ retry_after_s: 2.2 }, null)).toBe(3);
+    expect(busyDelaySeconds({}, "7")).toBe(7);
+    expect(busyDelaySeconds({}, "soon")).toBe(2);
+    expect(busyDelaySeconds({ retry_after_s: "4" }, null)).toBe(2);
+    expect(busyDelaySeconds({}, null)).toBe(2);
+    expect(busyDelaySeconds({ retry_after_s: Number.NaN }, null)).toBe(2);
+    expect(MAX_INLINE_BUSY_WAIT_S).toBeLessThanOrEqual(5);
+    // Every combination of two bad answers ends after at most two calls and never confirms.
+    const answers: [number, unknown][] = [[503, { error: "busy", retry_after_s: 1 }], [503, { error: "audit_failed" }], [500, { error: "server_error" }], [0, null], [413, { error: "too_large" }]];
+    for (const a of answers) for (const b of answers) {
+      let n = 0;
+      const seq = [a, b, [201, { reference: "H27-PRI-ABCDEF" }]] as [number, unknown][];
+      const res = await callPortal({
+        url: "https://x.invalid", appId: "a", secret: MOCK_SECRET, body: {}, sleep: async () => {},
+        fetch: async () => { const [st, body] = seq[n++]; if (st === 0) throw new Error("down"); return new Response(JSON.stringify(body), { status: st }); },
+      });
+      expect(n, JSON.stringify([a, b])).toBeLessThanOrEqual(2);
+      expect(classify("priority", res.status, res.json, res.retryAfter).status).not.toBe("confirmed");
+    }
+  });
+
+  it("on 503 audit_failed retries once with the same id; a second failure confirms nothing and stores nothing", async () => {
+    const once = rig({ portal: { secret: MOCK_SECRET, open: { priority: true }, nowSeconds: () => NOW, auditFailFor: 1 } });
+    expect((await once.send({ form: "priority", values: priority() })).outcome.status).toBe("confirmed");
+    expect(once.portal.calls.map((c) => c.status)).toEqual([503, 201]);
+    expect(once.portal.stored()).toBe(1);
+    const twice = rig({ portal: { secret: MOCK_SECRET, open: { priority: true }, nowSeconds: () => NOW, auditFailFor: 2 } });
+    expect((await twice.send({ form: "priority", values: priority() })).outcome).toEqual({ status: "unavailable" });
+    expect(twice.portal.stored()).toBe(0);
+  });
+
+  it("stores one record for simultaneous identical requests: one 201, the rest duplicates of the same reference", async () => {
+    const portal = createMockPortal({ secret: MOCK_SECRET, open: { priority: true, sponsor: true, exhibitor: true, enquiry: true }, nowSeconds: () => NOW });
+    for (const [form, values] of [["priority", priority()], ["sponsor", sponsor], ["exhibitor", exhibitor], ["enquiry", enquiry]] as const) {
+      const body = toPortalBody(form, validateForm(form, values).values, uuid(), MOCK_NOTICES);
+      const { raw, headers } = signedRequest(MOCK_SECRET, "a", body, NOW);
+      const answers = await Promise.all(Array.from({ length: 8 }, () => portal.handle(raw, new Headers(headers)).then(async (r) => ({ status: r.status, body: await r.json() }))));
+      expect(answers.filter((a) => a.status === 201), form).toHaveLength(1);
+      expect(answers.filter((a) => a.status === 200 && a.body.duplicate === true), form).toHaveLength(7);
+      expect(new Set(answers.map((a) => a.body.reference)).size, form).toBe(1);
+    }
+    expect(portal.stored()).toBe(4);
   });
 
   it("never confirms when the portal is down, unreachable, hanging or refuses the signature", async () => {
@@ -361,8 +450,10 @@ describe("submission handler with the mock portal", () => {
 /* ── Exhibitor company profile (PDF) ────────────────────────────────── */
 
 describe("exhibitor company profile (v1.1 section 6)", () => {
-  it("is disabled for real uploads until malware checking is approved", () => {
+  it("is disabled for real uploads until malware checking is approved, and not accepted by this contract release", () => {
     expect(UPLOADS_ENABLED).toBe(false);
+    expect(PROFILE_ACCEPTED).toBe(false);
+    expect(submitConfig({ HEBS_FORMS_MODE: "mock", HEBS_FORMS_MOCK_UPLOADS: "yes" }).uploads).toBe(false);
     expect(submitConfig({ HEBS_FORMS_MODE: "mock", HEBS_FORMS_MOCK_UPLOADS: "yes", VERCEL_ENV: "preview" }).uploads).toBe(false);
     expect(FORM_FIELDS.exhibitor.find((f) => f.kind === "file")?.inactive).toBeTruthy();
   });
@@ -395,32 +486,40 @@ describe("exhibitor company profile (v1.1 section 6)", () => {
     expect(named.ok && named.profile.file_name).toBe("Profile.pdf");
   });
 
-  it("with uploads enabled in a test, sends a verifiable profile the mock portal accepts", async () => {
+  it("never sends a profile, even if the website's upload switch were forced on", async () => {
     const r = rig({ config: { uploads: true } });
     const res = await r.send({ form: "exhibitor", values: exhibitor }, { contentType: "multipart/form-data; boundary=x", file: pdfFile() });
-    expect(res.outcome).toMatchObject({ status: "confirmed", reference: expect.stringMatching(/^H27-EXH-/) });
-    const bad = await r.send({ form: "exhibitor", values: exhibitor }, { contentType: "multipart/form-data; boundary=x", file: pdfFile({ bytes: new Uint8Array(Buffer.from("not a pdf")) }) });
-    expect(bad.outcome).toMatchObject({ status: "invalid", errors: { company_profile: expect.any(String) } });
-    expect((await r.send({ form: "sponsor", values: sponsor }, { contentType: "multipart/form-data; boundary=x", file: pdfFile() })).httpStatus).toBe(415);
-    expect(r.portal.calls).toHaveLength(1);
-    expect(JSON.stringify(r.portal.calls)).not.toContain("tier_interest");
+    expect(res.outcome).toMatchObject({ status: "invalid" });
+    expect(() => toPortalBody("exhibitor", validateForm("exhibitor", exhibitor).values, uuid(), MOCK_NOTICES, (preparePdf(pdfFile()) as unknown as { profile: never }).profile)).toThrow(/not accepted/);
+    expect(r.portal.calls).toHaveLength(0);
   });
 
-  it("the mock portal rejects a profile whose hash or size does not match", async () => {
-    const portal = createMockPortal({ secret: MOCK_SECRET, nowSeconds: () => NOW, open: { exhibitor: true } });
-    const p = preparePdf(pdfFile());
-    if (!p.ok) throw new Error("setup");
-    const body = toPortalBody("exhibitor", validateForm("exhibitor", exhibitor).values, uuid(), MOCK_NOTICES, { ...p.profile, sha256: "0".repeat(64) });
-    const { raw, headers } = signedRequest(MOCK_SECRET, "a", body, NOW);
-    const res = await portal.handle(raw, new Headers(headers));
-    expect(res.status).toBe(400);
-    expect(await res.json()).toEqual({ error: "file_mismatch", field: "company_profile" });
+  it("the mock portal answers upload_disabled to any company_profile, and 413 above 20,000 bytes", async () => {
+    const portal = createMockPortal({ secret: MOCK_SECRET, nowSeconds: () => NOW, open: { exhibitor: true, enquiry: true } });
+    const base = toPortalBody("exhibitor", validateForm("exhibitor", exhibitor).values, uuid(), MOCK_NOTICES);
+    const withFile = { ...base, data: { ...base.data, company_profile: { file_name: "a.pdf", content_type: "application/pdf", size_bytes: 1, sha256: "0".repeat(64), data_base64: "JQ==" } } };
+    const a = signedRequest(MOCK_SECRET, "a", withFile, NOW);
+    const ra = await portal.handle(a.raw, new Headers(a.headers));
+    expect([ra.status, await ra.json()]).toEqual([400, { error: "upload_disabled", field: "company_profile" }]);
+    const big = toPortalBody("enquiry", validateForm("enquiry", enquiry).values, uuid(), MOCK_NOTICES);
+    const b = signedRequest(MOCK_SECRET, "a", { ...big, data: { ...big.data, subject: "s".repeat(20_001) } }, NOW);
+    const rb = await portal.handle(b.raw, new Headers(b.headers));
+    expect([rb.status, await rb.json()]).toEqual([413, { error: "too_large" }]);
+  });
+
+  it("renders no upload control while uploads are off (corrected v1.1 section 6)", () => {
+    const src = readFileSync(join(ROOT, "components/2027/editorial/HebsForm.tsx"), "utf8");
+    expect(src).toContain('fields.filter((f) => f.kind !== "file" || uploads)');
   });
 });
 
 /* ── Production isolation ───────────────────────────────────────────── */
 
 describe("production isolation and the unpublished route", () => {
+  it("gives the route enough time for two 10 s calls and the longest inline busy wait", () => {
+    expect(route.maxDuration).toBeGreaterThanOrEqual(2 * 10 + MAX_INLINE_BUSY_WAIT_S);
+  });
+
   it("answers 404 for GET and every unsupported method", async () => {
     for (const m of ["GET", "HEAD", "PUT", "PATCH", "DELETE", "OPTIONS"] as const) {
       const res = await (route[m] as () => Response)();

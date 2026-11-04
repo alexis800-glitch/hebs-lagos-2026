@@ -61,7 +61,7 @@ export interface SubmitResponse {
 }
 
 const HTTP: Record<Outcome["status"], number> = {
-  confirmed: 201, already_registered: 200, received: 200, closed: 403, invalid: 400, rate_limited: 429, unavailable: 503,
+  confirmed: 201, already_registered: 200, received: 200, closed: 403, invalid: 400, rate_limited: 429, busy: 503, unavailable: 503,
 };
 const done = (o: Outcome): SubmitResponse => ({ httpStatus: HTTP[o.status], outcome: o });
 const bad = (httpStatus: number): SubmitResponse => ({ httpStatus, outcome: { status: "bad_request" } });
@@ -177,7 +177,7 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
     fetch: deps.portalFetch, nowSeconds: deps.nowSeconds, sleep: deps.sleep,
     timeoutMs: profile ? LIMITS.timeoutWithFileMs : LIMITS.timeoutMs,
   });
-  const outcome = classify(form, res.status, res.json);
+  const outcome = classify(form, res.status, res.json, res.retryAfter);
   log(form, outcome.status, { portalStatus: res.status, clientRequestId });
   return done(outcome);
 }

@@ -19,6 +19,7 @@ type Status =
   | { kind: "received" }
   | { kind: "closed" }
   | { kind: "rate_limited" }
+  | { kind: "busy"; seconds: number }
   | { kind: "error" };
 
 const ENDPOINT = "/api/hebs2027/submit";
@@ -90,12 +91,14 @@ export default function HebsForm({
         init = { method: "POST", body: fd };
       }
       const res = await fetch(ENDPOINT, init);
-      const out = (await res.json().catch(() => ({}))) as { status?: string; reference?: string; errors?: Record<string, string> };
+      const out = (await res.json().catch(() => ({}))) as { status?: string; reference?: string; errors?: Record<string, string>; retryAfterSeconds?: number };
       if (out.status === "confirmed" && out.reference) next = { kind: "confirmed", reference: out.reference };
       else if (out.status === "already_registered") next = { kind: "already" };
       else if (out.status === "received") next = { kind: "received" };
       else if (out.status === "closed") next = { kind: "closed" };
       else if (out.status === "rate_limited") next = { kind: "rate_limited" };
+      // Busy: nothing is confirmed. The attempt id is kept, so a resend cannot create a second record.
+      else if (out.status === "busy") next = { kind: "busy", seconds: Math.min(60, Math.max(1, Number(out.retryAfterSeconds) || 30)) };
       else if (out.status === "invalid" && out.errors) {
         setErrors(out.errors);
         next = { kind: "idle" };
@@ -136,6 +139,7 @@ export default function HebsForm({
         {status.kind === "received" && <p className="border-l-2 pl-4 text-[16px]" style={{ borderColor: champ }}>Thank you.</p>}
         {status.kind === "closed" && <p className="border-l-2 pl-4 text-[16px]" style={{ borderColor: atlantic, color: atlantic }}>This form is not open yet. Nothing was saved.</p>}
         {status.kind === "rate_limited" && <p className="border-l-2 pl-4 text-[16px]" style={{ borderColor: error, color: error }}>Too many attempts from this connection. Please wait ten minutes and try again. Nothing was saved.</p>}
+        {status.kind === "busy" && <p className="border-l-2 pl-4 text-[16px]" style={{ borderColor: error, color: error }}>The registration system is busy, so nothing is confirmed yet. Please send the form again in about {status.seconds} seconds.</p>}
         {status.kind === "error" && <p className="border-l-2 pl-4 text-[16px]" style={{ borderColor: error, color: error }}>Your details could not be saved just now, so nothing is confirmed. Please try again later.</p>}
       </div>
 
@@ -151,7 +155,8 @@ export default function HebsForm({
           </div>
           <fieldset disabled={!enabled || status.kind === "sending"} aria-describedby={enabled ? undefined : id("gate")} className="grid gap-5 sm:grid-cols-2">
             <legend className="sr-only">{title}</legend>
-            {fields.map((f) => {
+            {/* Corrected v1.1 section 6: no upload control while uploads are off. */}
+            {fields.filter((f) => f.kind !== "file" || uploads).map((f) => {
               const err = errors[f.name];
               const describedBy = [f.hint || f.inactive ? id(`${f.name}-hint`) : "", err ? id(`${f.name}-error`) : ""].filter(Boolean).join(" ") || undefined;
               const half = f.kind === "tel" || f.name === "country";

@@ -52,6 +52,8 @@
       "required": [
        "full_name",
        "email",
+       "country",
+       "interest",
        "privacy_acknowledged",
        "privacy_notice_version"
       ],
@@ -82,11 +84,11 @@
          "Attendee",
          "Competitor",
          "Educator",
-         "Sponsor",
          "Exhibitor",
-         "Media",
+         "Sponsor",
          "Other"
-        ]
+        ],
+        "description": "Required. Mrs. Shuler's directive. Media enquiries use the enquiry form."
        },
        "category_interest": {
         "type": "string",
@@ -115,7 +117,10 @@
        },
        "country": {
         "type": "string",
-        "maxLength": 100
+        "minLength": 1,
+        "maxLength": 100,
+        "pattern": "\\S",
+        "description": "Required on priority (Mrs. Shuler's directive)."
        },
        "privacy_acknowledged": {
         "const": true,
@@ -170,6 +175,7 @@
       "required": [
        "company_name",
        "email",
+       "partnership_interest",
        "privacy_acknowledged",
        "privacy_notice_version"
       ],
@@ -191,9 +197,19 @@
         "type": "string",
         "maxLength": 40
        },
+       "partnership_interest": {
+        "enum": [
+         "Sponsorship",
+         "Exhibition",
+         "Brand activation",
+         "Strategic partnership"
+        ],
+        "description": "Required. Type of partnership: the HEBS 2027 website's four categories. Separate from tier_interest. No other values without Mrs. Shuler's approval."
+       },
        "tier_interest": {
         "type": "string",
-        "maxLength": 60
+        "maxLength": 60,
+        "description": "Optional sponsorship tier (free text, e.g. Gold). Separate from partnership_interest."
        },
        "budget_range": {
         "type": "string",
@@ -305,42 +321,6 @@
        "booth_requirement": {
         "type": "string",
         "maxLength": 60
-       },
-       "company_profile": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-         "file_name",
-         "content_type",
-         "size_bytes",
-         "sha256",
-         "data_base64"
-        ],
-        "description": "Optional company profile. PDF only, max 3,000,000 bytes. Stored in Base44 private storage; never public.",
-        "properties": {
-         "file_name": {
-          "type": "string",
-          "maxLength": 120,
-          "pattern": "(?i)\\.pdf$"
-         },
-         "content_type": {
-          "const": "application/pdf"
-         },
-         "size_bytes": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 3000000
-         },
-         "sha256": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-         },
-         "data_base64": {
-          "type": "string",
-          "contentEncoding": "base64",
-          "description": "The file bytes, standard base64 with padding. Must start with %PDF-."
-         }
-        }
        },
        "website_url": {
         "type": "string",
@@ -475,5 +455,43 @@
     }
    }
   }
- ]
+ ],
+ "$defs": {
+  "company_profile_when_enabled": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "file_name",
+    "content_type",
+    "size_bytes",
+    "sha256",
+    "data_base64"
+   ],
+   "description": "NOT accepted in this release (owner decision 7). Shape for a later, separately approved release with malware scanning or quarantine-and-review.",
+   "properties": {
+    "file_name": {
+     "type": "string",
+     "maxLength": 120,
+     "pattern": "(?i)\\.pdf$"
+    },
+    "content_type": {
+     "const": "application/pdf"
+    },
+    "size_bytes": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 3000000
+    },
+    "sha256": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    },
+    "data_base64": {
+     "type": "string",
+     "contentEncoding": "base64",
+     "description": "The file bytes, standard base64 with padding. Must start with %PDF-."
+    }
+   }
+  }
+ }
 }

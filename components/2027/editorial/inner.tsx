@@ -321,7 +321,7 @@ export function SponsorshipPage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [
     COPY_DRAFT,
-    "No inquiry is collected. Submission follows INTEGRATION-CONTRACT-v1.0 (signed, server to Base44) once implemented and authorised; public contacts await D10.",
+    "No inquiry is collected. Submission follows INTEGRATION-CONTRACT-v1.1 (signed, server to Base44); the form stays closed until the private integration test and owner approval. Public contacts await D10.",
     "The prospectus download appears with an approved 2027 prospectus.",
   ];
   return (
@@ -382,7 +382,7 @@ export function ExhibitorsPage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [
     COPY_DRAFT,
-    "No application is collected. Submission follows INTEGRATION-CONTRACT-v1.0 once implemented and authorised. Contract v1.0 has no file upload, so the company profile field is an open question.",
+    "No application is collected. Submission follows INTEGRATION-CONTRACT-v1.1; the form stays closed until the private integration test and owner approval. The company-profile upload is not shown in this release (owner decision 7) until malware scanning or quarantine is approved.",
   ];
   return (
     <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>

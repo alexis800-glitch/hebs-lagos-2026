@@ -9,8 +9,8 @@
   {
    "name": "priority: minimal valid, form open",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "5dff8a0ae6a805f979f3bc5b52deb8e6887c9e159a411ebb9a8c2d4e516f3e5e",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "efb7d843c436d6897806664e84119826a0c727a3d2b499e6935f25c5ef5eaeb8",
    "expected_status": 201,
    "expected_body_shape": {
     "reference": "H27-PRI-XXXXXX"
@@ -19,8 +19,8 @@
   {
    "name": "priority: exact replay of the same signed request",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "5dff8a0ae6a805f979f3bc5b52deb8e6887c9e159a411ebb9a8c2d4e516f3e5e",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6f1c2a9e-4b7d-4c3e-9a1f-2d8e5b7c0a14\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"person@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "efb7d843c436d6897806664e84119826a0c727a3d2b499e6935f25c5ef5eaeb8",
    "expected_status": 200,
    "expected_body_shape": {
     "reference": "H27-PRI-XXXXXX",
@@ -41,8 +41,8 @@
   {
    "name": "priority: Competitor interest",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"3d9a1c7e-2f58-4b06-8e3a-9c1d4f7b2a65\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Competitor\",\"email\":\"competitor@synthetic.test\",\"interest\":\"Competitor\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "ea9b3a4085267c72aa413f052a42c4f45a530060151e88613301a5e3e51c2a42",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"3d9a1c7e-2f58-4b06-8e3a-9c1d4f7b2a65\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Competitor\",\"email\":\"competitor@synthetic.test\",\"country\":\"Ghana\",\"interest\":\"Competitor\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "68a97c0b1eb7ea1df896734c2f9159b3858a93fc512fa40120ea2f273ce3492f",
    "expected_status": 201,
    "expected_body_shape": {
     "reference": "H27-PRI-XXXXXX"
@@ -51,22 +51,34 @@
   {
    "name": "sponsor: prospectus requested",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"sponsor\",\"edition\":\"2027\",\"client_request_id\":\"8e2b5f1c-9a37-4d60-b4c2-1f7e3a9d5c08\",\"website\":\"\",\"data\":{\"company_name\":\"Synthetic Sponsor Co\",\"contact_person\":\"Synthetic Contact\",\"email\":\"sponsor@synthetic.test\",\"country\":\"Ghana\",\"website_url\":\"https://sponsor.synthetic.example\",\"social_media\":\"linkedin.com/company/synthetic\",\"tier_interest\":\"Gold\",\"budget_range\":\"USD 5,000-10,000\",\"prospectus_requested\":true,\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "9e9fc45415c4427a367cd87bb64c7365a56e1ab5619e2414098e14ddcbc97c7a",
+   "raw_body": "{\"form\":\"sponsor\",\"edition\":\"2027\",\"client_request_id\":\"8e2b5f1c-9a37-4d60-b4c2-1f7e3a9d5c08\",\"website\":\"\",\"data\":{\"company_name\":\"Synthetic Sponsor Co\",\"contact_person\":\"Synthetic Contact\",\"email\":\"sponsor@synthetic.test\",\"country\":\"Ghana\",\"website_url\":\"https://sponsor.synthetic.example\",\"social_media\":\"linkedin.com/company/synthetic\",\"partnership_interest\":\"Sponsorship\",\"tier_interest\":\"Gold\",\"budget_range\":\"USD 5,000-10,000\",\"prospectus_requested\":true,\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "cc2482ee9b24498e5e8db7621a2c2773011f50cc09e873d66407fa9c9a777534",
    "expected_status": 201,
    "expected_body_shape": {
     "reference": "H27-SPN-XXXXXX"
    }
   },
   {
-   "name": "exhibitor: with company profile PDF",
+   "name": "exhibitor: valid, no file",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"exhibitor\",\"edition\":\"2027\",\"client_request_id\":\"c4a7e2d9-1b36-4f85-a0e7-6d2b9f4c1e53\",\"website\":\"\",\"data\":{\"business_name\":\"Synthetic Stall\",\"email\":\"stall@synthetic.test\",\"country\":\"Nigeria\",\"business_category\":\"Hair care\",\"booth_requirement\":\"Medium (6x3m)\",\"company_profile\":{\"file_name\":\"Synthetic Company Profile.pdf\",\"content_type\":\"application/pdf\",\"size_bytes\":64,\"sha256\":\"fe201a7c3d63b7776f182475de3bf8360f1877b24df5d427462bb24c09bbb478\",\"data_base64\":\"JVBERi0xLjQKJSBzeW50aGV0aWMgY29tcGFueSBwcm9maWxlIGZvciBjb250cmFjdCB2ZWN0b3JzCiUlRU9GCg==\"},\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "f344eb43348fdbc1ad750a5f6674cc683883b74e214ada18a4292517749f1cfd",
+   "raw_body": "{\"form\":\"exhibitor\",\"edition\":\"2027\",\"client_request_id\":\"c4a7e2d9-1b36-4f85-a0e7-6d2b9f4c1e53\",\"website\":\"\",\"data\":{\"business_name\":\"Synthetic Stall\",\"email\":\"stall@synthetic.test\",\"country\":\"Nigeria\",\"business_category\":\"Hair care\",\"booth_requirement\":\"Medium (6x3m)\",\"website_url\":\"https://stall.synthetic.example\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "ec8f4481d384728514bef678fa73ab1bb9724127488472f81d3576199e3c030b",
    "expected_status": 201,
    "expected_body_shape": {
     "reference": "H27-EXH-XXXXXX"
    }
+  },
+  {
+   "name": "exhibitor: company profile sent while uploads are disabled (this release)",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"exhibitor\",\"edition\":\"2027\",\"client_request_id\":\"b7e3a1c9-6d24-4f80-9a5e-3c8b2f1d7e46\",\"website\":\"\",\"data\":{\"business_name\":\"Synthetic Stall Two\",\"email\":\"stall3@synthetic.test\",\"company_profile\":{\"file_name\":\"Synthetic Company Profile.pdf\",\"content_type\":\"application/pdf\",\"size_bytes\":64,\"sha256\":\"fe201a7c3d63b7776f182475de3bf8360f1877b24df5d427462bb24c09bbb478\",\"data_base64\":\"JVBERi0xLjQKJSBzeW50aGV0aWMgY29tcGFueSBwcm9maWxlIGZvciBjb250cmFjdCB2ZWN0b3JzCiUlRU9GCg==\"},\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "b5c33f966a1fee945326388f9bfc2aef3469da9cce48ec25c9f6c4e0bce53590",
+   "expected_status": 400,
+   "expected_body_shape": {
+    "error": "upload_disabled",
+    "field": "company_profile"
+   },
+   "note": "Owner decision 7: uploads stay off until malware scanning or an approved quarantine-and-review procedure exists. The website must not show the upload control."
   },
   {
    "name": "enquiry: valid",
@@ -81,8 +93,8 @@
   {
    "name": "priority: privacy acknowledgement missing",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"9a3e6c1f-4b72-4d58-a6e1-7f2c5b9d3a84\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"noack@synthetic.test\",\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "4b0fca00ebb3851d18670aee983ec6978ed07bdbca46817b04d9f7f680664bbe",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"9a3e6c1f-4b72-4d58-a6e1-7f2c5b9d3a84\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"noack@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "fc30abbe3a96174f5d86cae954116dacb448ca80b49749ab6a082ebccfadcc38",
    "expected_status": 400,
    "expected_body_shape": {
     "error": "privacy_ack_required",
@@ -92,8 +104,8 @@
   {
    "name": "priority: unknown field is refused, not dropped",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"2c7f4a9e-8d13-4b65-9f2a-5e1c8b6d3f97\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"extra@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\",\"status\":\"Converted\"}}",
-   "signature": "c2df7e18e9cbaf9784b5751a5440b76d64bb9576ec31dc358fd43d55306920a9",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"2c7f4a9e-8d13-4b65-9f2a-5e1c8b6d3f97\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"extra@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\",\"status\":\"Converted\"}}",
+   "signature": "26f1b59224b77faf782ea17428f63d38148d6f8ff765c9f092a3a87e88674ec1",
    "expected_status": 400,
    "expected_body_shape": {
     "error": "unknown_field",
@@ -101,21 +113,77 @@
    }
   },
   {
-   "name": "exhibitor: company profile hash does not match",
+   "name": "priority: Media interest is not in the directive list",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"exhibitor\",\"edition\":\"2027\",\"client_request_id\":\"e1d5b8f3-2a69-4c47-b3d8-9a6f1c4e7b25\",\"website\":\"\",\"data\":{\"business_name\":\"Synthetic Stall\",\"email\":\"stall2@synthetic.test\",\"company_profile\":{\"file_name\":\"Synthetic Company Profile.pdf\",\"content_type\":\"application/pdf\",\"size_bytes\":64,\"sha256\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"data_base64\":\"JVBERi0xLjQKJSBzeW50aGV0aWMgY29tcGFueSBwcm9maWxlIGZvciBjb250cmFjdCB2ZWN0b3JzCiUlRU9GCg==\"},\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "79b580bef0103488615590a46b58256cd057994f52ce7e1d2f89ff3983e5c1c2",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"e1d5b8f3-2a69-4c47-b3d8-9a6f1c4e7b25\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Press\",\"email\":\"press@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Media\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "2c949b08a03711e711577b5c8f3e8ac174909b0ff03fa7e62616bd56931cc707",
    "expected_status": 400,
    "expected_body_shape": {
-    "error": "file_mismatch",
-    "field": "company_profile"
+    "error": "invalid_value",
+    "field": "interest"
+   },
+   "note": "Media enquiries use the enquiry form."
+  },
+  {
+   "name": "priority: country missing (required by the directive)",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"a2c4e6f8-1b3d-4f5a-8c7e-9d0b2a4c6e81\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"nocountry@synthetic.test\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "c01f23714a5b0d7633051f58fd6f3a1e10db08cd3e831210acbf6de6b7d690d8",
+   "expected_status": 400,
+   "expected_body_shape": {
+    "error": "missing_field",
+    "field": "country"
    }
+  },
+  {
+   "name": "priority: area of interest missing (required by the directive)",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"b3d5f7a9-2c4e-4a6b-9d8f-0e1c3b5d7f92\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"nointerest@synthetic.test\",\"country\":\"Nigeria\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "2af387873c2ddf53c9e56343fa096c24f16272dcb12bb75d26471bdb138aa5ff",
+   "expected_status": 400,
+   "expected_body_shape": {
+    "error": "missing_field",
+    "field": "interest"
+   }
+  },
+  {
+   "name": "sponsor: Brand activation, no tier (partnership_interest and tier_interest are separate)",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"sponsor\",\"edition\":\"2027\",\"client_request_id\":\"c4e6a8b0-3d5f-4b7c-8e9a-1f2d4c6e8a03\",\"website\":\"\",\"data\":{\"company_name\":\"Synthetic Brand Co\",\"email\":\"brand@synthetic.test\",\"partnership_interest\":\"Brand activation\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "094e4361de9ca5909d4ffb0e7c2f14a23d814af7b38195b8a8645ea96a041a4b",
+   "expected_status": 201,
+   "expected_body_shape": {
+    "reference": "H27-SPN-XXXXXX"
+   }
+  },
+  {
+   "name": "sponsor: partnership_interest missing",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"sponsor\",\"edition\":\"2027\",\"client_request_id\":\"d5f7b9c1-4e6a-4c8d-9f0b-2a3e5d7f9b14\",\"website\":\"\",\"data\":{\"company_name\":\"Synthetic Sponsor Co\",\"email\":\"nopartner@synthetic.test\",\"tier_interest\":\"Gold\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "d569a55be7f33a0106b73c1c78f87377524f44b88721afc4b87d82cb51801bd4",
+   "expected_status": 400,
+   "expected_body_shape": {
+    "error": "missing_field",
+    "field": "partnership_interest"
+   }
+  },
+  {
+   "name": "sponsor: partnership_interest outside the four categories",
+   "timestamp": 1793750400,
+   "raw_body": "{\"form\":\"sponsor\",\"edition\":\"2027\",\"client_request_id\":\"e6a8c0d2-5f7b-4d9e-8a1c-3b4f6e8a0c25\",\"website\":\"\",\"data\":{\"company_name\":\"Synthetic Sponsor Co\",\"email\":\"badpartner@synthetic.test\",\"partnership_interest\":\"Gold\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "dc4803a3c1b4a9851327128e7a19a35fca67f56f2f0651c10b9132e03cd7319f",
+   "expected_status": 400,
+   "expected_body_shape": {
+    "error": "invalid_value",
+    "field": "partnership_interest"
+   },
+   "note": "Allowed values: Sponsorship, Exhibition, Brand activation, Strategic partnership (exact spelling and case). Tier goes in tier_interest."
   },
   {
    "name": "priority: form closed",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"7b4d9e2a-5c18-4f63-8a9d-3e6b1f5c2d70\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"closed@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "9207f8069ee01edc2ce729495e4256e351021d9bf9b99723bc7d25bdca231059",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"7b4d9e2a-5c18-4f63-8a9d-3e6b1f5c2d70\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"closed@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "09cbf7ecfe578e40e4a73b7f608412d52b6f47587ced9243a6af5d8e631164b8",
    "expected_status": 403,
    "expected_body_shape": {
     "error": "not_open",
@@ -125,8 +193,8 @@
   {
    "name": "priority: wrong secret",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"4e1a8c6d-3f95-4b27-9c4e-8d2a5f7b1c39\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"wrong@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "99460d3aae6b5a77b91d1608e31ee2fb5f5b71d141e897895c61ebdf4e5a15e9",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"4e1a8c6d-3f95-4b27-9c4e-8d2a5f7b1c39\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"wrong@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "782eb53aff41494c596dfbe7cf350791248db5b5c51b3e3d2b77775b98e3245d",
    "expected_status": 401,
    "expected_body_shape": {
     "error": "unauthorized"
@@ -135,8 +203,8 @@
   {
    "name": "priority: timestamp 10 minutes old",
    "timestamp": 1793749800,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"4e1a8c6d-3f95-4b27-9c4e-8d2a5f7b1c39\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"wrong@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "9103067102c8977a6e36454b8b39e81f976a910723e3be5e139c1c438bdb564a",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"4e1a8c6d-3f95-4b27-9c4e-8d2a5f7b1c39\",\"website\":\"\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"wrong@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "cf038ffbec0c3d1f8b3d7814d52076f3ce47e955b7b64572d266d52e52c5bfbc",
    "expected_status": 401,
    "expected_body_shape": {
     "error": "unauthorized"
@@ -145,8 +213,8 @@
   {
    "name": "priority: body altered after signing",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"4e1a8c6d-3f95-4b27-9c4e-8d2a5f7b1c39\",\"website\":\"\",\"data\":{\"full_name\":\"Altered Person\",\"email\":\"wrong@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "85601292c816d777fd6514cc3ff231d3d43c0ddbfdcded00f03d5a35caba8bd5",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"4e1a8c6d-3f95-4b27-9c4e-8d2a5f7b1c39\",\"website\":\"\",\"data\":{\"full_name\":\"Altered Person\",\"email\":\"wrong@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "7a8a48aa19a4c1a835164b7c142e2b1945114d29ebd4bc844301eb2bff04d12e",
    "expected_status": 401,
    "expected_body_shape": {
     "error": "unauthorized"
@@ -155,8 +223,8 @@
   {
    "name": "priority: honeypot filled",
    "timestamp": 1793750400,
-   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6c2e9a4f-1d73-4b58-a2e6-9f4c7b1d3e85\",\"website\":\"http://spam.example\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"bot@synthetic.test\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
-   "signature": "37626139014bc0963b8b774d94eb69ee9428b0a1a8f6c9aed8a61fedff3abc5e",
+   "raw_body": "{\"form\":\"priority\",\"edition\":\"2027\",\"client_request_id\":\"6c2e9a4f-1d73-4b58-a2e6-9f4c7b1d3e85\",\"website\":\"http://spam.example\",\"data\":{\"full_name\":\"Synthetic Person\",\"email\":\"bot@synthetic.test\",\"country\":\"Nigeria\",\"interest\":\"Attendee\",\"privacy_acknowledged\":true,\"privacy_notice_version\":\"2027-01\"}}",
+   "signature": "f83a4ec629f650232fd7f6f960b1fdbc8ad7c51825e9a8af55236c184ab15a01",
    "expected_status": 202,
    "expected_body_shape": {
     "accepted": true

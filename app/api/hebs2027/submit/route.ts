@@ -11,6 +11,8 @@ import { storeFor } from "@/lib/forms-2027/store";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+/** Two 10 s portal calls plus at most a 5 s busy wait (lib/forms-2027/portal-client.ts). */
+export const maxDuration = 30;
 
 const notFound = () => new Response("Not found", { status: 404, headers: { "Cache-Control": "no-store" } });
 const tooLarge = "x".repeat(MAX_BODY_BYTES + 1);
@@ -53,7 +55,9 @@ export async function POST(req: Request) {
     { config, store: storeFor(config.store), portalFetch: config.mode === "mock" ? mockPortalFetch() : undefined },
   );
   if (result.outcome.status === "not_found") return notFound();
-  return Response.json(result.outcome, { status: result.httpStatus, headers: { "Cache-Control": "no-store" } });
+  const headers: Record<string, string> = { "Cache-Control": "no-store" };
+  if (result.outcome.status === "busy") headers["Retry-After"] = String(result.outcome.retryAfterSeconds);
+  return Response.json(result.outcome, { status: result.httpStatus, headers });
 }
 
 // Unsupported access: 404, as if the route did not exist.
