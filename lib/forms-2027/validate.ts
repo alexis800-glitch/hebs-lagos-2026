@@ -24,8 +24,9 @@ export function isFormId(x: unknown): x is FormId {
 }
 
 function checkOne(f: FieldSpec, raw: unknown): { value?: string | boolean; error?: string } {
-  if (f.inactive) {
-    return raw === undefined || raw === null || raw === "" ? {} : { error: "This field is not accepted yet." };
+  // Files never travel as form values: the company profile is a separate upload part (lib/forms-2027/pdf.ts).
+  if (f.kind === "file") {
+    return raw === undefined || raw === null || raw === "" ? {} : { error: f.inactive ? "This field is not accepted yet." : "Please attach the file as an upload." };
   }
   if (f.kind === "checkbox") {
     if (raw !== undefined && typeof raw !== "boolean") return { error: "Please tick or untick this box." };

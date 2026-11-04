@@ -28,12 +28,16 @@ function newAttempt() {
   return typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : `${Date.now()}`;
 }
 
+const PDF_MAX = 3_000_000;
+
 export default function HebsForm({
-  form, fields, enabled, gate, submitLabel, title,
+  form, fields, enabled, uploads = false, gate, submitLabel, title,
 }: {
   form: FormId;
   fields: readonly FieldSpec[];
   enabled: boolean;
+  /** Whether the company-profile upload is accepted (server decision; off until malware checking is approved). */
+  uploads?: boolean;
   /** Shown while the form is closed. */
   gate: string;
   submitLabel: string;
@@ -47,6 +51,8 @@ export default function HebsForm({
   const [honey, setHoney] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [file, setFile] = useState<File | null>(null);
+  const [prospectus, setProspectus] = useState(false);
   const summary = useRef<HTMLDivElement>(null);
   const result = useRef<HTMLDivElement>(null);
 
@@ -57,6 +63,12 @@ export default function HebsForm({
     e.preventDefault();
     if (status.kind === "sending") return;
     const local = validateForm(form, values);
+    if (file) {
+      if (!/\.pdf$/i.test(file.name) || file.name.length > 120 || file.type !== "application/pdf") local.errors.company_profile = "Please choose a PDF file.";
+      else if (file.size > PDF_MAX) local.errors.company_profile = "Please choose a PDF of 3 MB or less.";
+      else if (file.size < 1) local.errors.company_profile = "The file is empty.";
+      if (local.errors.company_profile) local.ok = false;
+    }
     setErrors(local.errors);
     if (!local.ok) {
       requestAnimationFrame(() => {
@@ -68,11 +80,16 @@ export default function HebsForm({
     setStatus({ kind: "sending" });
     let next: Status = { kind: "error" };
     try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ form, values: local.values, website: honey, attempt_id: attempt.current, elapsed_ms: Date.now() - started.current }),
-      });
+      const payload = JSON.stringify({ form, values: local.values, website: honey, attempt_id: attempt.current, elapsed_ms: Date.now() - started.current });
+      let init: RequestInit = { method: "POST", headers: { "Content-Type": "application/json" }, body: payload };
+      if (file && uploads) {
+        // The file travels to the website's own route; the server checks it and computes its hash.
+        const fd = new FormData();
+        fd.set("payload", payload);
+        fd.set("company_profile", file, file.name);
+        init = { method: "POST", body: fd };
+      }
+      const res = await fetch(ENDPOINT, init);
       const out = (await res.json().catch(() => ({}))) as { status?: string; reference?: string; errors?: Record<string, string> };
       if (out.status === "confirmed" && out.reference) next = { kind: "confirmed", reference: out.reference };
       else if (out.status === "already_registered") next = { kind: "already" };
@@ -87,8 +104,10 @@ export default function HebsForm({
       next = { kind: "error" };
     }
     if (next.kind === "confirmed" || next.kind === "already" || next.kind === "received") {
+      setProspectus(local.values.prospectus_requested === true);
       attempt.current = newAttempt();
       setValues({});
+      setFile(null);
     }
     setStatus(next);
     requestAnimationFrame(() => (next.kind === "idle" ? summary.current : result.current)?.focus());
@@ -108,6 +127,7 @@ export default function HebsForm({
           <div className="border-l-2 pl-4" style={{ borderColor: champ }}>
             <p className="text-[17px] font-semibold">Thank you. Your details are saved.</p>
             <p className="mt-2 text-[15px]" style={{ color: body }}>Your reference is <strong className="tabular-nums tracking-wide">{status.reference}</strong>. Keep it for your records.</p>
+            {prospectus && <p className="mt-2 text-[15px]" style={{ color: body }}>Our team will send the prospectus.</p>}
           </div>
         )}
         {status.kind === "already" && (
@@ -136,7 +156,7 @@ export default function HebsForm({
               const describedBy = [f.hint || f.inactive ? id(`${f.name}-hint`) : "", err ? id(`${f.name}-error`) : ""].filter(Boolean).join(" ") || undefined;
               const half = f.kind === "tel" || f.name === "country";
               const help = (f.hint || f.inactive) && (
-                <span id={id(`${f.name}-hint`)} className="mt-1.5 block text-[13px] font-normal" style={{ color: muted }}>{f.inactive ?? f.hint}</span>
+                <span id={id(`${f.name}-hint`)} className="mt-1.5 block text-[13px] font-normal" style={{ color: muted }}>{f.kind === "file" && uploads ? f.hint : f.inactive ?? f.hint}</span>
               );
               const errNode = err && <span id={id(`${f.name}-error`)} className="mt-1.5 block text-[13px] font-medium" style={{ color: error }}>{err}</span>;
               if (f.kind === "checkbox") {
@@ -172,8 +192,11 @@ export default function HebsForm({
                   ) : f.kind === "textarea" ? (
                     <textarea {...common} rows={4} maxLength={f.maxLength} value={value} onChange={(e) => set(f.name, e.target.value)} />
                   ) : f.kind === "file" ? (
-                    // Uploads are not processed until the integration contract defines secure handling.
-                    <input {...common} type="file" accept="application/pdf" disabled />
+                    // Off until malware checking is approved; then a PDF of up to 3 MB.
+                    <input
+                      {...common} type="file" accept="application/pdf,.pdf" disabled={!uploads}
+                      onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                    />
                   ) : (
                     <input
                       {...common} type={f.kind} maxLength={f.maxLength} value={value} onChange={(e) => set(f.name, e.target.value)}

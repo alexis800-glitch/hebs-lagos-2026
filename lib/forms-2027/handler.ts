@@ -4,25 +4,31 @@
  *
  * Order of checks, cheapest and safest first; any failure ends the request
  * and nothing is stored:
- *   1  POST, JSON only (no multipart, so no file can arrive), at most 20 KB
- *   2  same-origin request
- *   3  forms switched on for this deployment
- *   4  shared rate limit, by salted hash of the visitor's IP (5 per 10 minutes)
- *   5  honeypot and minimum fill time: bots get a plain thank-you, nothing is sent
- *   6  field validation (the same rules the browser ran)
- *   7  one client_request_id per form attempt, held in the shared store
- *   8  signed call to the portal; only a portal reference is a confirmation
+ *   1  unpublished feature: anything but a POST, or any request while forms are
+ *      off, is 404, as if the route did not exist
+ *   2  JSON only, at most 20,000 bytes; a multipart upload only for the
+ *      exhibitor form and only while uploads are enabled (off: contract O-3)
+ *   3  same-origin request
+ *   4  form switched on for this deployment
+ *   5  shared rate limit, by salted hash of the visitor's IP (5 per 10 minutes)
+ *   6  honeypot and minimum fill time: bots get a plain thank-you, nothing is sent
+ *   7  field validation (the same rules the browser ran), then the PDF checks
+ *   8  one client_request_id per form attempt, held in the shared store
+ *   9  v1.1 request body; any field without a contract field refuses the request
+ *  10  signed call to the portal; only a portal reference is a confirmation
  */
 import { createHash, randomUUID } from "node:crypto";
-import { FORM_FIELDS } from "../integrations/registration-2027";
-import { ContractGapError, classify, toPortalBody, type Outcome } from "./contract";
+import { ContractGapError, LIMITS, classify, toPortalBody, type Outcome } from "./contract";
 import { formEnabled, type SubmitConfig } from "./config";
 import { logSubmit } from "./log";
+import { preparePdf, type PreparedPdf, type UploadedFile } from "./pdf";
 import { callPortal, type FetchLike } from "./portal-client";
 import type { SharedStore } from "./store";
 import { isFormId, validateForm } from "./validate";
 
-export const MAX_BODY_BYTES = 20 * 1024;
+export const MAX_BODY_BYTES = LIMITS.bodyBytes;
+/** Browser-to-website request carrying a PDF: the 3 MB file plus the form fields. */
+export const MAX_UPLOAD_REQUEST_BYTES = 3_200_000;
 export const RATE_LIMIT = { max: 5, windowSeconds: 600 } as const;
 export const MIN_FILL_MS = 1500;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -33,7 +39,10 @@ export interface SubmitRequest {
   origin: string | null;
   host: string | null;
   ip: string | null;
+  /** The JSON form payload (for a multipart upload, its "payload" part). */
   body: string;
+  /** The company-profile part of a multipart upload, if any. */
+  file?: UploadedFile | null;
 }
 
 export interface SubmitDeps {
@@ -56,6 +65,7 @@ const HTTP: Record<Outcome["status"], number> = {
 };
 const done = (o: Outcome): SubmitResponse => ({ httpStatus: HTTP[o.status], outcome: o });
 const bad = (httpStatus: number): SubmitResponse => ({ httpStatus, outcome: { status: "bad_request" } });
+const NOT_FOUND: SubmitResponse = { httpStatus: 404, outcome: { status: "not_found" } };
 
 function sameOrigin(origin: string | null, host: string | null): boolean {
   if (!origin || !host) return false;
@@ -71,10 +81,12 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   const log = (form: string, outcome: string, extra: { portalStatus?: number; clientRequestId?: string } = {}) =>
     logSubmit({ form, outcome, ...extra }, deps.log);
 
-  // A production deployment with forms off does not reveal that the route exists.
-  if (config.mode === "off" && config.environment === "production") return { httpStatus: 404, outcome: { status: "not_found" } };
-  if (req.method !== "POST") return bad(405);
-  if (!req.contentType || !/^application\/json\b/i.test(req.contentType)) return bad(415);
+  // While the feature is unpublished the route answers like a missing page.
+  if (req.method !== "POST" || config.mode === "off") return NOT_FOUND;
+
+  const multipart = !!req.contentType && /^multipart\/form-data\b/i.test(req.contentType);
+  const json = !!req.contentType && /^application\/json\b/i.test(req.contentType);
+  if (!json && !(multipart && config.uploads)) return bad(415);
   if (Buffer.byteLength(req.body, "utf8") > MAX_BODY_BYTES) return bad(413);
   if (!sameOrigin(req.origin, req.host)) return bad(403);
 
@@ -86,6 +98,7 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   }
   if (!parsed || typeof parsed !== "object" || !isFormId(parsed.form)) return bad(400);
   const form = parsed.form;
+  if (multipart && form !== "exhibitor") return bad(415);
 
   if (!formEnabled(form, config)) {
     log(form, "closed");
@@ -120,6 +133,20 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
     return done({ status: "invalid", errors: v.errors });
   }
 
+  let profile: PreparedPdf | undefined;
+  if (req.file) {
+    if (!config.uploads || form !== "exhibitor") {
+      log(form, "upload_refused");
+      return done({ status: "invalid", errors: { company_profile: "Uploads are not accepted yet." } });
+    }
+    const pdf = preparePdf(req.file);
+    if (!pdf.ok) {
+      log(form, "upload_invalid");
+      return done({ status: "invalid", errors: { company_profile: pdf.error } });
+    }
+    profile = pdf.profile;
+  }
+
   // One portal request id per form attempt: a double click or a resend reuses it.
   const attempt = typeof parsed.attempt_id === "string" && UUID.test(parsed.attempt_id) ? parsed.attempt_id : null;
   if (!attempt) return bad(400);
@@ -134,12 +161,12 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
 
   let body: ReturnType<typeof toPortalBody>;
   try {
-    body = toPortalBody(form, v.values, clientRequestId);
+    body = toPortalBody(form, v.values, clientRequestId, config.notices, profile);
   } catch (e) {
     if (e instanceof ContractGapError) {
+      // Refused rather than sent incomplete: nothing the visitor entered is dropped.
       log(form, "contract_gap", { clientRequestId });
-      const field = FORM_FIELDS[form].find((f) => f.kind === "select")?.name ?? "_form";
-      return done({ status: "invalid", errors: { [field]: "This option cannot be accepted yet. Please choose another for now." } });
+      return done({ status: "invalid", errors: { _form: "This form cannot be sent yet. Nothing was saved." } });
     }
     throw e;
   }
@@ -148,8 +175,9 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   const res = await callPortal({
     url: portal.url, appId: portal.appId, secret: portal.secret, body,
     fetch: deps.portalFetch, nowSeconds: deps.nowSeconds, sleep: deps.sleep,
+    timeoutMs: profile ? LIMITS.timeoutWithFileMs : LIMITS.timeoutMs,
   });
-  const outcome = classify(res.status, res.json);
+  const outcome = classify(form, res.status, res.json);
   log(form, outcome.status, { portalStatus: res.status, clientRequestId });
   return done(outcome);
 }

@@ -104,8 +104,9 @@ export function FormBlock({ form, title, gate, submitLabel }: {
   gate: string;
   submitLabel: string;
 }) {
-  const enabled = formEnabled(form, submitConfig());
-  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} gate={gate} submitLabel={submitLabel} title={title} />;
+  const cfg = submitConfig();
+  const enabled = formEnabled(form, cfg);
+  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} uploads={enabled && cfg.uploads && form === "exhibitor"} gate={gate} submitLabel={submitLabel} title={title} />;
 }
 
 /** "To be announced" for a fact that does not exist yet, set quietly in the page's own type. */

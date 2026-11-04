@@ -15,7 +15,13 @@
  */
 import { deployEnvironment, type DeployEnvironment } from "../publication";
 import { FORMS_OPEN, type FormId } from "../integrations/registration-2027";
-import { CONTRACT } from "./contract";
+import { CONTRACT, NOTICE_VERSIONS, type NoticeVersions } from "./contract";
+
+/**
+ * Real company-profile uploads. Off until malware scanning or secure quarantine
+ * is approved (contract v1.1 open item O-3). The checks run in mock mode only.
+ */
+export const UPLOADS_ENABLED = false;
 
 export type SubmitMode = "off" | "mock" | "portal";
 
@@ -34,6 +40,10 @@ export interface SubmitConfig {
   store: StoreConfig | null;
   /** Salt for hashing visitor IP addresses before they are used as rate-limit keys. */
   ipSalt: string | null;
+  /** Privacy-notice and consent versions sent with each submission (D13). */
+  notices: NoticeVersions;
+  /** Whether a company-profile PDF may be uploaded. */
+  uploads: boolean;
 }
 
 type Env = Record<string, string | undefined>;
@@ -50,12 +60,18 @@ export function submitConfig(env: Env = process.env): SubmitConfig {
   const environment = deployEnvironment(env);
   const store = storeFrom(env, environment);
   const ipSalt = env.HEBS_RATE_LIMIT_SALT ?? (environment === "development" ? "development-only-salt" : null);
-  const off = (reason: string): SubmitConfig => ({ environment, mode: "off", reason, store, ipSalt });
+  const off = (reason: string): SubmitConfig => ({ environment, mode: "off", reason, store, ipSalt, notices: NOTICE_VERSIONS, uploads: false });
   const wanted = env.HEBS_FORMS_MODE ?? "off";
 
   if (wanted === "mock") {
     if (environment !== "development") return off("mock mode is refused on Vercel deployments");
-    return { environment, mode: "mock", store, ipSalt, portal: { url: "https://mock.portal.invalid/evSubmitPublicForm", appId: "mock-app", secret: MOCK_SECRET } };
+    return {
+      environment, mode: "mock", store, ipSalt,
+      portal: { url: "https://mock.portal.invalid/evSubmitPublicForm", appId: "mock-app", secret: MOCK_SECRET },
+      notices: MOCK_NOTICES,
+      // Local testing of the upload path only; never real files on a deployment.
+      uploads: env.HEBS_FORMS_MOCK_UPLOADS === "yes",
+    };
   }
   if (wanted !== "portal") return off("HEBS_FORMS_MODE is not set");
   if (!CONTRACT.final) return off(`integration contract ${CONTRACT.version} is not final`);
@@ -65,8 +81,11 @@ export function submitConfig(env: Env = process.env): SubmitConfig {
   if (!url || !url.startsWith("https://") || !appId || !secret || secret.length < 32) return off("portal settings incomplete");
   if (!store || !ipSalt) return off("no shared rate-limit store or salt");
   if (environment === "production" && env.HEBS_FORMS_PRODUCTION_APPROVED !== "yes") return off("production forms not approved");
-  return { environment, mode: "portal", store, ipSalt, portal: { url, appId, secret } };
+  return { environment, mode: "portal", store, ipSalt, portal: { url, appId, secret }, notices: NOTICE_VERSIONS, uploads: UPLOADS_ENABLED };
 }
+
+/** Synthetic notice versions for the mock portal; real versions come with the approved privacy notice (D13). */
+export const MOCK_NOTICES: NoticeVersions = { privacy: "mock-2027-00", consent: "mock-2027-00" };
 
 /** The mock portal's secret: synthetic, development and tests only. */
 export const MOCK_SECRET = "mock-secret-synthetic-not-for-use-0123456789abcdef";
@@ -77,5 +96,6 @@ export const MOCK_SECRET = "mock-secret-synthetic-not-for-use-0123456789abcdef";
  */
 export function formEnabled(form: FormId, cfg: SubmitConfig): boolean {
   if (cfg.mode === "mock") return true;
-  return cfg.mode === "portal" && FORMS_OPEN[form];
+  // A real form also needs the approved privacy notice it refers to.
+  return cfg.mode === "portal" && FORMS_OPEN[form] && !!cfg.notices.privacy;
 }

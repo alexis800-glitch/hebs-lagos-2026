@@ -1,0 +1,479 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://hebslagos.com/schemas/hebs-2027-form-request-v1.1.json",
+ "title": "HEBS 2027 public form request (website server -> portal evSubmitPublicForm), contract v1.1",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "form",
+  "edition",
+  "client_request_id",
+  "data"
+ ],
+ "properties": {
+  "form": {
+   "enum": [
+    "priority",
+    "sponsor",
+    "exhibitor",
+    "enquiry"
+   ]
+  },
+  "edition": {
+   "const": "2027"
+  },
+  "client_request_id": {
+   "type": "string",
+   "format": "uuid",
+   "description": "UUID v4, created once per submission on the website server and reused on retry"
+  },
+  "website": {
+   "type": "string",
+   "description": "Honeypot. Send \"\" for people; a non-empty value returns 202 and stores nothing."
+  },
+  "data": {
+   "type": "object"
+  }
+ },
+ "allOf": [
+  {
+   "if": {
+    "properties": {
+     "form": {
+      "const": "priority"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+       "full_name",
+       "email",
+       "privacy_acknowledged",
+       "privacy_notice_version"
+      ],
+      "properties": {
+       "full_name": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "email": {
+        "type": "string",
+        "maxLength": 200,
+        "format": "email"
+       },
+       "phone": {
+        "type": "string",
+        "maxLength": 40
+       },
+       "city": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "company": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "interest": {
+        "enum": [
+         "Attendee",
+         "Competitor",
+         "Educator",
+         "Sponsor",
+         "Exhibitor",
+         "Media",
+         "Other"
+        ]
+       },
+       "category_interest": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "utm_source": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "utm_medium": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "utm_campaign": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "website_url": {
+        "type": "string",
+        "maxLength": 300,
+        "pattern": "^https?://\\S+$"
+       },
+       "social_media": {
+        "type": "string",
+        "maxLength": 300
+       },
+       "country": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "privacy_acknowledged": {
+        "const": true,
+        "description": "Required. True only when the person ticked the privacy-notice acknowledgement."
+       },
+       "privacy_notice_version": {
+        "type": "string",
+        "maxLength": 40,
+        "minLength": 1
+       },
+       "consent_marketing": {
+        "type": "boolean",
+        "description": "Optional, separate from the privacy acknowledgement. true only if the marketing box was ticked."
+       },
+       "consent_version": {
+        "type": "string",
+        "maxLength": 40
+       }
+      },
+      "if": {
+       "properties": {
+        "consent_marketing": {
+         "const": true
+        }
+       },
+       "required": [
+        "consent_marketing"
+       ]
+      },
+      "then": {
+       "required": [
+        "consent_version"
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "form": {
+      "const": "sponsor"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+       "company_name",
+       "email",
+       "privacy_acknowledged",
+       "privacy_notice_version"
+      ],
+      "properties": {
+       "company_name": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "contact_person": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "email": {
+        "type": "string",
+        "maxLength": 200,
+        "format": "email"
+       },
+       "phone": {
+        "type": "string",
+        "maxLength": 40
+       },
+       "tier_interest": {
+        "type": "string",
+        "maxLength": 60
+       },
+       "budget_range": {
+        "type": "string",
+        "maxLength": 60
+       },
+       "message": {
+        "type": "string",
+        "maxLength": 2000
+       },
+       "prospectus_requested": {
+        "type": "boolean",
+        "description": "The sponsor asks for the prospectus. Recorded only in v1.1; nothing is emailed."
+       },
+       "website_url": {
+        "type": "string",
+        "maxLength": 300,
+        "pattern": "^https?://\\S+$"
+       },
+       "social_media": {
+        "type": "string",
+        "maxLength": 300
+       },
+       "country": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "privacy_acknowledged": {
+        "const": true,
+        "description": "Required. True only when the person ticked the privacy-notice acknowledgement."
+       },
+       "privacy_notice_version": {
+        "type": "string",
+        "maxLength": 40,
+        "minLength": 1
+       },
+       "consent_marketing": {
+        "type": "boolean",
+        "description": "Optional, separate from the privacy acknowledgement. true only if the marketing box was ticked."
+       },
+       "consent_version": {
+        "type": "string",
+        "maxLength": 40
+       }
+      },
+      "if": {
+       "properties": {
+        "consent_marketing": {
+         "const": true
+        }
+       },
+       "required": [
+        "consent_marketing"
+       ]
+      },
+      "then": {
+       "required": [
+        "consent_version"
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "form": {
+      "const": "exhibitor"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+       "business_name",
+       "email",
+       "privacy_acknowledged",
+       "privacy_notice_version"
+      ],
+      "properties": {
+       "business_name": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "contact_person": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "email": {
+        "type": "string",
+        "maxLength": 200,
+        "format": "email"
+       },
+       "phone": {
+        "type": "string",
+        "maxLength": 40
+       },
+       "business_category": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "product_service": {
+        "type": "string",
+        "maxLength": 1000
+       },
+       "booth_requirement": {
+        "type": "string",
+        "maxLength": 60
+       },
+       "company_profile": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+         "file_name",
+         "content_type",
+         "size_bytes",
+         "sha256",
+         "data_base64"
+        ],
+        "description": "Optional company profile. PDF only, max 3,000,000 bytes. Stored in Base44 private storage; never public.",
+        "properties": {
+         "file_name": {
+          "type": "string",
+          "maxLength": 120,
+          "pattern": "(?i)\\.pdf$"
+         },
+         "content_type": {
+          "const": "application/pdf"
+         },
+         "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3000000
+         },
+         "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+         },
+         "data_base64": {
+          "type": "string",
+          "contentEncoding": "base64",
+          "description": "The file bytes, standard base64 with padding. Must start with %PDF-."
+         }
+        }
+       },
+       "website_url": {
+        "type": "string",
+        "maxLength": 300,
+        "pattern": "^https?://\\S+$"
+       },
+       "social_media": {
+        "type": "string",
+        "maxLength": 300
+       },
+       "country": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "privacy_acknowledged": {
+        "const": true,
+        "description": "Required. True only when the person ticked the privacy-notice acknowledgement."
+       },
+       "privacy_notice_version": {
+        "type": "string",
+        "maxLength": 40,
+        "minLength": 1
+       },
+       "consent_marketing": {
+        "type": "boolean",
+        "description": "Optional, separate from the privacy acknowledgement. true only if the marketing box was ticked."
+       },
+       "consent_version": {
+        "type": "string",
+        "maxLength": 40
+       }
+      },
+      "if": {
+       "properties": {
+        "consent_marketing": {
+         "const": true
+        }
+       },
+       "required": [
+        "consent_marketing"
+       ]
+      },
+      "then": {
+       "required": [
+        "consent_version"
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "form": {
+      "const": "enquiry"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+       "name",
+       "email",
+       "message",
+       "privacy_acknowledged",
+       "privacy_notice_version"
+      ],
+      "properties": {
+       "name": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "email": {
+        "type": "string",
+        "maxLength": 200,
+        "format": "email"
+       },
+       "phone": {
+        "type": "string",
+        "maxLength": 40
+       },
+       "subject": {
+        "type": "string",
+        "maxLength": 200
+       },
+       "message": {
+        "type": "string",
+        "maxLength": 2000
+       },
+       "country": {
+        "type": "string",
+        "maxLength": 100
+       },
+       "privacy_acknowledged": {
+        "const": true,
+        "description": "Required. True only when the person ticked the privacy-notice acknowledgement."
+       },
+       "privacy_notice_version": {
+        "type": "string",
+        "maxLength": 40,
+        "minLength": 1
+       },
+       "consent_marketing": {
+        "type": "boolean",
+        "description": "Optional, separate from the privacy acknowledgement. true only if the marketing box was ticked."
+       },
+       "consent_version": {
+        "type": "string",
+        "maxLength": 40
+       }
+      },
+      "if": {
+       "properties": {
+        "consent_marketing": {
+         "const": true
+        }
+       },
+       "required": [
+        "consent_marketing"
+       ]
+      },
+      "then": {
+       "required": [
+        "consent_version"
+       ]
+      }
+     }
+    }
+   }
+  }
+ ]
+}

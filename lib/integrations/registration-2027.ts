@@ -145,6 +145,10 @@ export const PRIORITY_LIST_FIELDS: readonly FieldSpec[] = [
   MARKETING,
 ];
 
+/** Contract v1.1 section 4: optional website and social fields (sponsor and exhibitor). */
+const WEBSITE_URL: FieldSpec = { name: "website_url", label: "Website", kind: "url", required: false, autoComplete: "url", maxLength: 300 };
+const SOCIAL_MEDIA: FieldSpec = { name: "social_media", label: "Social media", kind: "text", required: false, maxLength: 300, hint: "Handles or links." };
+
 /** Directive 4H and section 8: the four kinds of partnership. */
 export const PARTNERSHIP_OPTIONS = ["Sponsorship", "Exhibition", "Brand activation", "Strategic partnership"] as const;
 
@@ -157,6 +161,8 @@ export const SPONSOR_INQUIRY_FIELDS: readonly FieldSpec[] = [
   { name: "country", label: "Country", kind: "text", required: true, autoComplete: "country-name", maxLength: 100 },
   { name: "partnership_interest", label: "Interested in", kind: "select", required: true, options: PARTNERSHIP_OPTIONS },
   { name: "message", label: "What would you like to achieve at HEBS 2027?", kind: "textarea", required: false, maxLength: 2000 },
+  WEBSITE_URL,
+  SOCIAL_MEDIA,
   { name: "prospectus_requested", label: "Send me the 2027 sponsorship prospectus when it is available.", kind: "checkbox", required: false },
   ACKNOWLEDGE("respond to my partnership inquiry"),
   MARKETING,
@@ -169,10 +175,11 @@ export const EXHIBITOR_APPLICATION_FIELDS: readonly FieldSpec[] = [
   { name: "email", label: "Work email", kind: "email", required: true, autoComplete: "email", maxLength: 200 },
   { name: "phone", label: "Phone number", kind: "tel", required: false, autoComplete: "tel", maxLength: 40 },
   { name: "country", label: "Country", kind: "text", required: true, autoComplete: "country-name", maxLength: 100 },
-  { name: "company_website", label: "Website or social page", kind: "url", required: false, autoComplete: "url", maxLength: 200 },
+  WEBSITE_URL,
+  SOCIAL_MEDIA,
   { name: "products", label: "What you would exhibit", kind: "textarea", required: true, maxLength: 1000 },
-  { name: "company_profile", label: "Company profile", kind: "file", required: false,
-    inactive: "Uploads open once the integration contract defines secure file handling. Nothing is uploaded until then." },
+  { name: "company_profile", label: "Company profile", kind: "file", required: false, hint: "PDF only, up to 3 MB.",
+    inactive: "Uploads open once secure file checking is approved. Nothing is uploaded until then." },
   ACKNOWLEDGE("assess my exhibitor application and contact me about it"),
   MARKETING,
 ];
