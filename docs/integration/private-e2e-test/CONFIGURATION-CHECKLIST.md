@@ -44,7 +44,7 @@ Vercel system variables: `VERCEL_ENV` and `VERCEL_GIT_COMMIT_REF` must reach the
 | URL or app id other than the copy's, or the live app id | — | off |
 | Secret missing, under 32 characters, or a published synthetic one | — | off |
 | No REST store, or salt under 16 characters | — | off |
-| Email outside `.test`, `.example`, `example.com/.net/.org` | — | refused, nothing sent |
+| Anything outside the synthetic identity convention: names and companies not starting `TEST `, email not `@hebs-e2e.test`, phone outside `+234 800 000 0000–0099`, website not on `hebs-e2e.test`, social handle not starting `TEST` | — | refused field by field, nothing sent |
 | `TEST-ONLY-NOT-D13` in any other mode | module-load check | refused, nothing sent |
 | Company profile upload | — | no control rendered, `uploads: false` |
 | `CONTRACT.final`, `FORMS_OPEN` | unchanged: `false`, all closed | — |

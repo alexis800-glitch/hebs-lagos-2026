@@ -7,11 +7,12 @@ Follows the Gate C run sheet, revision 2, section 9. The test runs between the w
 ## Rules for the whole test
 
 - **Synthetic identities only.**
-  - Names start with `TEST`.
-  - Emails use `@hebs-e2e.test`; the website refuses any other domain.
-  - Phone numbers are from `+234 800 000 0000` to `0099`.
-  - Companies start with `TEST`.
+  - Names and companies start with `TEST ` (capitals, then a space).
+  - Emails use `@hebs-e2e.test`.
+  - Phone numbers, if any, are from `+234 800 000 0000` to `0099`.
+  - Websites, if any, are on `hebs-e2e.test`; social handles, if any, start with `TEST`.
   - No real name, address, company or social handle.
+  - The website's server refuses anything outside this convention in test mode, field by field, before anything is sent.
 - **No uploads, payments or emails.** The website renders no upload control and has no payment or email code on this path.
 - **Every record carries the test notice.** The privacy notice version is `TEST-ONLY-NOT-D13`, and the banner "TEST ONLY – not the approved HEBS privacy notice" is visible on every form.
 - **Evidence.** Each case gets:

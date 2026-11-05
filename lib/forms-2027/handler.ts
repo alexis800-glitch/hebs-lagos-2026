@@ -17,15 +17,15 @@
  *   9  v1.1 request body; any field without a contract field refuses the request
  *  10  signed call to the portal; only a portal reference is a confirmation
  *
- * In private-test mode (config.ts) step 7 also refuses any address outside the
- * reserved test domains, and a same-origin {"probe":"reachability"} carrying
+ * In private-test mode (config.ts) step 7 also refuses anything outside the
+ * synthetic identity convention (TEST names and companies, @hebs-e2e.test), and a same-origin {"probe":"reachability"} carrying
  * the operator's X-HEBS-Probe-Token runs the run sheet's E0 check
  * (reachability.ts); without that token it answers 404.
  * The test-only notice version is refused in every other mode.
  */
 import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { ContractGapError, LIMITS, classify, toPortalBody, type Outcome } from "./contract";
-import { SYNTHETIC_EMAIL, formEnabled, type SubmitConfig } from "./config";
+import { formEnabled, syntheticIdentityErrors, type SubmitConfig } from "./config";
 import { logSubmit } from "./log";
 import { preparePdf, type PreparedPdf, type UploadedFile } from "./pdf";
 import { callPortal, type FetchLike } from "./portal-client";
@@ -145,10 +145,14 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
     log(form, "invalid");
     return done({ status: "invalid", errors: v.errors });
   }
-  // The private test takes synthetic identities only: an address that can never reach a real person.
-  if (config.mode === "private-test" && !(typeof v.values.email === "string" && SYNTHETIC_EMAIL.test(v.values.email))) {
-    log(form, "not_synthetic");
-    return done({ status: "invalid", errors: { email: "This test accepts only made-up addresses ending in .test or .example." } });
+  // The private test takes synthetic identities only (TEST-PLAN-E0-E12.md): TEST names and companies,
+  // @hebs-e2e.test addresses, the reserved phone range. Nothing else is sent.
+  if (config.mode === "private-test") {
+    const notSynthetic = syntheticIdentityErrors(v.values);
+    if (Object.keys(notSynthetic).length) {
+      log(form, "not_synthetic");
+      return done({ status: "invalid", errors: notSynthetic });
+    }
   }
 
   let profile: PreparedPdf | undefined;

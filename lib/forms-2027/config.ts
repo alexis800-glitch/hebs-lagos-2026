@@ -128,8 +128,49 @@ function probeTokenFrom(token: string | undefined, secret: string): string | und
 /** The private test's synthetic-only notice (run sheet P5), for privacy and the optional marketing box alike. */
 export const TEST_NOTICES: NoticeVersions = { privacy: PRIVATE_TEST.noticeVersion, consent: PRIVATE_TEST.noticeVersion };
 
-/** Private test only: addresses on reserved test domains (RFC 2606 / 6761), which can never reach a real person. */
-export const SYNTHETIC_EMAIL = /@([a-z0-9-]+\.)*([a-z0-9-]+\.(test|example)|example\.(com|net|org))$/i;
+/**
+ * Private test only: the synthetic identity convention of
+ * docs/integration/private-e2e-test/TEST-PLAN-E0-E12.md, checked on the
+ * server, so every test record is plainly synthetic and no real person,
+ * company or address can be entered. Other modes never apply it.
+ */
+export const SYNTHETIC = {
+  /** The reserved test domain (RFC 6761 .test): never delivers to anyone. */
+  email: /^[a-z0-9._+-]+@hebs-e2e\.test$/i,
+  /** Names and companies: "TEST" in capitals, then the rest of the name. */
+  name: /^TEST\s+\S/,
+  /** +234 800 000 0000 to 0099, spaces optional. */
+  phoneDigits: /^23480000000\d{2}$/,
+  /** Social handles: "TEST" or "@test", any case. */
+  social: /^@?test/i,
+} as const;
+
+const NAME_FIELDS = ["full_name", "contact_name", "company_name"] as const;
+
+/** Website-field errors for values that break the synthetic convention; empty when all are synthetic. */
+export function syntheticIdentityErrors(values: Record<string, unknown>): Record<string, string> {
+  const errors: Record<string, string> = {};
+  const given = (k: string) => (typeof values[k] === "string" && values[k] !== "" ? (values[k] as string) : null);
+  const email = given("email");
+  if (!email || !SYNTHETIC.email.test(email)) errors.email = "This test accepts only made-up addresses ending in @hebs-e2e.test.";
+  for (const k of NAME_FIELDS) {
+    const v = given(k);
+    if (v !== null && !SYNTHETIC.name.test(v)) errors[k] = 'This test accepts only made-up names starting with "TEST ".';
+  }
+  const phone = given("phone");
+  if (phone !== null && !SYNTHETIC.phoneDigits.test(phone.replace(/[\s()+-]/g, ""))) {
+    errors.phone = "This test accepts only +234 800 000 0000 to +234 800 000 0099.";
+  }
+  const site = given("website_url");
+  if (site !== null) {
+    let host = "";
+    try { host = new URL(site).hostname.toLowerCase(); } catch { host = ""; }
+    if (host !== "hebs-e2e.test" && !host.endsWith(".hebs-e2e.test")) errors.website_url = "This test accepts only addresses on hebs-e2e.test.";
+  }
+  const social = given("social_media");
+  if (social !== null && !SYNTHETIC.social.test(social)) errors.social_media = 'This test accepts only made-up handles starting with "TEST".';
+  return errors;
+}
 
 /** The mock portal's secret: synthetic, development and tests only. */
 export const MOCK_SECRET = "mock-secret-synthetic-not-for-use-0123456789abcdef";

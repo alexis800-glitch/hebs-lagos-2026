@@ -12,7 +12,7 @@ import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { PRIVATE_TEST, PUBLISHED_SECRETS, privateTestBuildErrors } from "../lib/forms-2027/private-test.mjs";
-import { SYNTHETIC_EMAIL, TEST_NOTICES, formEnabled, submitConfig, type SubmitConfig } from "../lib/forms-2027/config";
+import { MOCK_NOTICES, MOCK_SECRET, TEST_NOTICES, formEnabled, submitConfig, syntheticIdentityErrors, type SubmitConfig } from "../lib/forms-2027/config";
 import { CONTRACT, NOTICE_VERSIONS } from "../lib/forms-2027/contract";
 import { handleSubmit, type SubmitDeps, type SubmitRequest } from "../lib/forms-2027/handler";
 import { createMockPortal } from "../lib/forms-2027/mock-portal";
@@ -42,13 +42,16 @@ const PREVIEW_TEST_ENV = {
 const STAGING_ENV = { VERCEL_ENV: "preview", VERCEL_GIT_COMMIT_REF: "website/2027-pages-batch-1" } as const;
 
 const values: Record<FormId, Record<string, unknown>> = {
-  priority: { full_name: "TEST Synthetic Person", email: "person@synthetic.test", country: "Testland", interest: "Attendee", privacy_acknowledged: true },
+  priority: { full_name: "TEST Priority One", email: "p1@hebs-e2e.test", phone: "+234 800 000 0001", country: "Nigeria", interest: "Attendee", privacy_acknowledged: true },
   sponsor: {
-    company_name: "TEST Synthetic Brand", contact_name: "TEST Contact", email: "brand@synthetic.test", country: "Testland",
+    company_name: "TEST Sponsor A", contact_name: "TEST Contact A", email: "sa@hebs-e2e.test", country: "Nigeria",
     partnership_interest: "Sponsorship", privacy_acknowledged: true,
   },
-  exhibitor: { company_name: "TEST Synthetic Tools", contact_name: "TEST Contact", email: "tools@synthetic.example", country: "Testland", products: "Synthetic combs", privacy_acknowledged: true },
-  enquiry: { full_name: "TEST Synthetic Person", email: "ask@synthetic.test", topic: "General question", message: "A synthetic question.", privacy_acknowledged: true },
+  exhibitor: {
+    company_name: "TEST Exhibitor One", contact_name: "TEST Contact E", email: "e1@hebs-e2e.test", country: "Nigeria", products: "TEST combs",
+    website_url: "https://exhibitor.hebs-e2e.test", social_media: "@test_exhibitor", privacy_acknowledged: true,
+  },
+  enquiry: { full_name: "TEST Enquiry One", email: "q1@hebs-e2e.test", topic: "General question", message: "A synthetic question.", privacy_acknowledged: true },
 };
 
 let n = 0;
@@ -229,14 +232,49 @@ describe("forms in the private test", () => {
     }
   });
 
-  it("refuse an address that could reach a real person, before anything is sent", async () => {
+  it("refuse, field by field and before anything is sent, every value outside the synthetic identity convention", async () => {
     const r = testRig(testConfig());
-    for (const email of ["someone@gmail.com", "owner@hebslagos.com", "x@test.com", "x@example.co", "x@synthetic.testing"]) {
-      const res = await r.send({ form: "priority", values: { ...values.priority, email } });
-      expect(res.outcome, email).toEqual({ status: "invalid", errors: { email: expect.stringContaining(".test") } });
+    const refused: [FormId, string, string][] = [
+      ["priority", "email", "someone@gmail.com"], ["priority", "email", "owner@hebslagos.com"], ["priority", "email", "x@synthetic.test"],
+      ["priority", "email", "x@hebs-e2e.test.example.com"], ["priority", "email", "x@hebs-e2e.testing"],
+      ["priority", "full_name", "Ada Synthetic"], ["priority", "full_name", "Test Person"], ["priority", "full_name", "TESTER Person"], ["priority", "full_name", "TEST"],
+      ["priority", "phone", "+234 803 555 0101"], ["priority", "phone", "+234 800 000 0100"], ["priority", "phone", "+44 20 7946 0000"],
+      ["sponsor", "company_name", "Real Brand Ltd"], ["sponsor", "contact_name", "Jane Contact"],
+      ["exhibitor", "company_name", "Lagos Combs"], ["exhibitor", "contact_name", "Contact TEST"],
+      ["exhibitor", "website_url", "https://example.com"], ["exhibitor", "website_url", "https://hebs-e2e.test.evil.com"],
+      ["exhibitor", "social_media", "@realbrand"],
+      ["enquiry", "full_name", "Someone Real"], ["enquiry", "email", "q1@hebs-e2e.test.co"],
+    ];
+    for (const [form, field, value] of refused) {
+      const res = await r.send({ form, values: { ...values[form], [field]: value } });
+      expect(res.outcome, `${form}.${field}=${value}`).toEqual({ status: "invalid", errors: { [field]: expect.stringContaining("This test accepts only") } });
     }
     expect(r.seen).toHaveLength(0);
-    for (const ok of ["a@synthetic.test", "a@b.example", "a@example.com", "a@mail.example.org"]) expect(SYNTHETIC_EMAIL.test(ok), ok).toBe(true);
+    expect(r.lines.every((l) => l.includes("not_synthetic"))).toBe(true);
+  });
+
+  it("accept the convention as the test plan writes it", () => {
+    for (const form of FORMS) expect(syntheticIdentityErrors(values[form]), form).toEqual({});
+    const ok = {
+      full_name: "TEST Priority One", contact_name: "TEST Contact B", company_name: "TEST Sponsor D", email: "SD+1@HEBS-E2E.TEST",
+      phone: "+2348000000099", website_url: "https://hebs-e2e.test/brand", social_media: "TEST_brand",
+    };
+    expect(syntheticIdentityErrors(ok)).toEqual({});
+    expect(syntheticIdentityErrors({ ...ok, phone: "+234 (800) 000-0000" })).toEqual({});
+    // Optional fields left empty are not checked; email is always required.
+    expect(syntheticIdentityErrors({ full_name: "TEST Q", email: "q@hebs-e2e.test", phone: "", website_url: "", social_media: "" })).toEqual({});
+    expect(Object.keys(syntheticIdentityErrors({ full_name: "TEST Q" }))).toEqual(["email"]);
+  });
+
+  it("leave normal validation unchanged outside the private test", async () => {
+    // Details outside the convention are still accepted in every other mode, exactly as before (here the local mock portal).
+    const mock: SubmitConfig = { ...testConfig(), mode: "mock", notices: MOCK_NOTICES, portal: { url: "https://mock.portal.invalid/evSubmitPublicForm", appId: "mock-app", secret: MOCK_SECRET } };
+    const portal = createMockPortal({ secret: MOCK_SECRET, open: { priority: true }, nowSeconds: () => NOW });
+    const res = await handleSubmit({
+      method: "POST", contentType: "application/json", origin: "https://dev.synthetic.test", host: "dev.synthetic.test", ip: "203.0.113.200",
+      body: JSON.stringify({ form: "priority", values: { full_name: "Ada Person", email: "ada@synthetic.test", country: "Nigeria", interest: "Attendee", privacy_acknowledged: true }, website: "", attempt_id: uuid(), elapsed_ms: 5000 }),
+    }, { config: mock, store: memoryStore(), portalFetch: portal.fetch, nowSeconds: () => NOW, sleep: async () => {}, log: () => {} });
+    expect(res.outcome.status).toBe("confirmed");
   });
 
   it("shows a form closed by the copy's admin as closed, not saved (E9)", async () => {
@@ -265,7 +303,7 @@ describe("forms in the private test", () => {
     expect(await attemptFor("enquiry", { ...values.enquiry, message: "Another synthetic question." } as never, other, deps)).toBe(other);
     // The tab keeps a salted hash and the id only, never the details.
     const kept = Array.from(tab.values()).join(" ");
-    for (const v of ["ask@synthetic.test", "TEST Synthetic Person", "synthetic question"]) expect(kept).not.toContain(v);
+    for (const v of ["q1@hebs-e2e.test", "TEST Enquiry One", "synthetic question"]) expect(kept).not.toContain(v);
     // Without storage the in-page id is used, and nothing breaks.
     const broken: AttemptStore = { get: () => { throw new Error("blocked"); }, set: () => { throw new Error("blocked"); } };
     const own = uuid();
