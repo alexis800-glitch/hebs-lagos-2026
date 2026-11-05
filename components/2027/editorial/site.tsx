@@ -7,6 +7,7 @@ import { CAMPAIGN, VENUE } from "@/lib/editions/2027";
 import { pageHref, type PageId } from "@/lib/site/2027";
 import { FORM_FIELDS, type FormId } from "@/lib/integrations/registration-2027";
 import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
+import { PRIVATE_TEST } from "@/lib/forms-2027/private-test.mjs";
 import HebsForm from "./HebsForm";
 import { SectionNotes, type Opts } from "./parts";
 import { C, GROUND, display, type Ground } from "./tokens";
@@ -106,7 +107,9 @@ export function FormBlock({ form, title, gate, submitLabel }: {
 }) {
   const cfg = submitConfig();
   const enabled = formEnabled(form, cfg);
-  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} uploads={enabled && cfg.uploads && form === "exhibitor"} gate={gate} submitLabel={submitLabel} title={title} />;
+  // Private test only: the synthetic-only notice is labelled on every form (run sheet P5).
+  const testNotice = cfg.mode === "private-test" ? { title: PRIVATE_TEST.banner, detail: PRIVATE_TEST.bannerDetail, version: PRIVATE_TEST.noticeVersion } : undefined;
+  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} uploads={enabled && cfg.uploads && form === "exhibitor"} gate={gate} submitLabel={submitLabel} title={title} testNotice={testNotice} />;
 }
 
 /** "To be announced" for a fact that does not exist yet, set quietly in the page's own type. */

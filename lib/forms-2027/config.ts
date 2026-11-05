@@ -9,6 +9,11 @@
  *   portal - the real Base44 portal. Needs the final integration contract
  *            (CONTRACT.final), all three portal settings and a shared rate-limit
  *            store; on production it also needs HEBS_FORMS_PRODUCTION_APPROVED=yes.
+ *   private-test - the private end-to-end test with the Base44 test copy only
+ *            (lib/forms-2027/private-test.mjs): Vercel Preview of the test
+ *            branch only, the copy's exact URL and app id, a shared store, the
+ *            synthetic TEST-ONLY-NOT-D13 notice, synthetic addresses only, no
+ *            uploads. Does not need CONTRACT.final, which stays false.
  *
  * Test and production use different secrets and URLs, set per Vercel
  * environment. None is ever committed.
@@ -16,6 +21,12 @@
 import { deployEnvironment, type DeployEnvironment } from "../publication";
 import { FORMS_OPEN, type FormId } from "../integrations/registration-2027";
 import { CONTRACT, NOTICE_VERSIONS, PROFILE_ACCEPTED, type NoticeVersions } from "./contract";
+import { PRIVATE_TEST, PUBLISHED_SECRETS } from "./private-test.mjs";
+
+// The test-only notice is never the real one (run sheet P5); a failure here stops the build.
+if (NOTICE_VERSIONS.privacy === PRIVATE_TEST.noticeVersion || NOTICE_VERSIONS.consent === PRIVATE_TEST.noticeVersion) {
+  throw new Error("NOTICE_VERSIONS must never be the TEST-ONLY-NOT-D13 notice");
+}
 
 /**
  * Real company-profile uploads. Off until malware scanning or secure quarantine
@@ -23,7 +34,7 @@ import { CONTRACT, NOTICE_VERSIONS, PROFILE_ACCEPTED, type NoticeVersions } from
  */
 export const UPLOADS_ENABLED = false;
 
-export type SubmitMode = "off" | "mock" | "portal";
+export type SubmitMode = "off" | "mock" | "portal" | "private-test";
 
 export interface StoreConfig {
   kind: "rest" | "memory";
@@ -44,6 +55,11 @@ export interface SubmitConfig {
   notices: NoticeVersions;
   /** Whether a company-profile PDF may be uploaded. */
   uploads: boolean;
+  /**
+   * Private test only: the operator token that authorises the E0 reachability
+   * probe (HEBS_PRIVATE_TEST_PROBE_TOKEN). Server only; absent means no probe.
+   */
+  probeToken?: string;
 }
 
 type Env = Record<string, string | undefined>;
@@ -73,6 +89,22 @@ export function submitConfig(env: Env = process.env): SubmitConfig {
       uploads: PROFILE_ACCEPTED && env.HEBS_FORMS_MOCK_UPLOADS === "yes",
     };
   }
+  if (wanted === "private-test") {
+    // The same rules as the build guard, checked again at run time.
+    if (environment !== "preview") return off("private-test runs only on Vercel Preview");
+    if (env.VERCEL_GIT_COMMIT_REF !== PRIVATE_TEST.branch) return off("private-test runs only on the test branch");
+    const url = env.HEBS_PORTAL_FORM_URL;
+    const appId = env.HEBS_PORTAL_APP_ID;
+    const secret = env.HEBS_PORTAL_FORM_SECRET;
+    if (appId === PRIVATE_TEST.liveAppId || (url ?? "").includes(PRIVATE_TEST.liveAppId)) return off("private-test never targets the live portal");
+    if (url !== PRIVATE_TEST.url || appId !== PRIVATE_TEST.appId) return off("private-test targets the private test copy only");
+    if (!secret || secret.length < 32 || PUBLISHED_SECRETS.includes(secret)) return off("private-test secret missing, short or published");
+    if (store?.kind !== "rest" || !ipSalt || ipSalt.length < 16) return off("private-test needs the shared store and a salt of 16+ characters");
+    return {
+      environment, mode: "private-test", store, ipSalt, portal: { url, appId, secret },
+      notices: TEST_NOTICES, uploads: false, probeToken: probeTokenFrom(env.HEBS_PRIVATE_TEST_PROBE_TOKEN, secret),
+    };
+  }
   if (wanted !== "portal") return off("HEBS_FORMS_MODE is not set");
   if (!CONTRACT.final) return off(`integration contract ${CONTRACT.version} is not final`);
   const url = env.HEBS_PORTAL_FORM_URL;
@@ -87,15 +119,29 @@ export function submitConfig(env: Env = process.env): SubmitConfig {
 /** Synthetic notice versions for the mock portal; real versions come with the approved privacy notice (D13). */
 export const MOCK_NOTICES: NoticeVersions = { privacy: "mock-2027-00", consent: "mock-2027-00" };
 
+/** A usable E0 operator token: 32+ characters, not the signing secret and not a published value. */
+function probeTokenFrom(token: string | undefined, secret: string): string | undefined {
+  if (!token || token.length < 32 || token === secret || PUBLISHED_SECRETS.includes(token)) return undefined;
+  return token;
+}
+
+/** The private test's synthetic-only notice (run sheet P5), for privacy and the optional marketing box alike. */
+export const TEST_NOTICES: NoticeVersions = { privacy: PRIVATE_TEST.noticeVersion, consent: PRIVATE_TEST.noticeVersion };
+
+/** Private test only: addresses on reserved test domains (RFC 2606 / 6761), which can never reach a real person. */
+export const SYNTHETIC_EMAIL = /@([a-z0-9-]+\.)*([a-z0-9-]+\.(test|example)|example\.(com|net|org))$/i;
+
 /** The mock portal's secret: synthetic, development and tests only. */
 export const MOCK_SECRET = "mock-secret-synthetic-not-for-use-0123456789abcdef";
 
 /**
  * Whether a form accepts submissions. Mock mode opens every form locally for
- * testing; the real portal also needs the owner's FORMS_OPEN switch.
+ * testing; the private test sends every form to the test copy, which keeps
+ * each one closed (403 not_open, "Opens soon") until its admin opens it under
+ * run sheet P7; the real portal also needs the owner's FORMS_OPEN switch.
  */
 export function formEnabled(form: FormId, cfg: SubmitConfig): boolean {
-  if (cfg.mode === "mock") return true;
+  if (cfg.mode === "mock" || cfg.mode === "private-test") return true;
   // A real form also needs the approved privacy notice it refers to.
   return cfg.mode === "portal" && FORMS_OPEN[form] && !!cfg.notices.privacy;
 }

@@ -9,6 +9,7 @@ import { describe, expect, it } from "vitest";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { MOCK_SECRET } from "../lib/forms-2027/config";
+import { PRIVATE_TEST } from "../lib/forms-2027/private-test.mjs";
 
 const STATIC = join(__dirname, "..", ".next", "static");
 const walk = (d: string): string[] => readdirSync(d).flatMap((n) => (statSync(join(d, n)).isDirectory() ? walk(join(d, n)) : [join(d, n)]));
@@ -18,7 +19,11 @@ describe.skipIf(!canary || !existsSync(STATIC))("browser bundles", () => {
   it("contain no secret, no server setting name and no mock credential", () => {
     const files = walk(STATIC).filter((f) => /\.(js|css|json|html|txt|map)$/.test(f));
     expect(files.length).toBeGreaterThan(10);
-    const needles = [canary!, MOCK_SECRET, "HEBS_PORTAL_FORM_SECRET", "HEBS_PORTAL_FORM_URL", "HEBS_PORTAL_APP_ID", "HEBS_RATE_LIMIT", "X-HEBS-Signature", "createHmac", "evSubmitPublicForm"];
+    const needles = [
+      canary!, MOCK_SECRET, "HEBS_PORTAL_FORM_SECRET", "HEBS_PORTAL_FORM_URL", "HEBS_PORTAL_APP_ID", "HEBS_RATE_LIMIT", "X-HEBS-Signature", "createHmac", "evSubmitPublicForm",
+      // The private test's notice, banner, copy id and switch stay on the server.
+      PRIVATE_TEST.noticeVersion, PRIVATE_TEST.banner, PRIVATE_TEST.appId, "HEBS_PRIVATE_TEST_PROBE_TOKEN", "X-HEBS-Probe-Token", "private-test",
+    ];
     for (const f of files) {
       const src = readFileSync(f, "utf8");
       for (const n of needles) expect(src.includes(n), `${n} in ${f}`).toBe(false);

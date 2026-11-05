@@ -16,13 +16,21 @@
  *   8  one client_request_id per form attempt, held in the shared store
  *   9  v1.1 request body; any field without a contract field refuses the request
  *  10  signed call to the portal; only a portal reference is a confirmation
+ *
+ * In private-test mode (config.ts) step 7 also refuses any address outside the
+ * reserved test domains, and a same-origin {"probe":"reachability"} carrying
+ * the operator's X-HEBS-Probe-Token runs the run sheet's E0 check
+ * (reachability.ts); without that token it answers 404.
+ * The test-only notice version is refused in every other mode.
  */
-import { createHash, randomUUID } from "node:crypto";
+import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { ContractGapError, LIMITS, classify, toPortalBody, type Outcome } from "./contract";
-import { formEnabled, type SubmitConfig } from "./config";
+import { SYNTHETIC_EMAIL, formEnabled, type SubmitConfig } from "./config";
 import { logSubmit } from "./log";
 import { preparePdf, type PreparedPdf, type UploadedFile } from "./pdf";
 import { callPortal, type FetchLike } from "./portal-client";
+import { PRIVATE_TEST } from "./private-test.mjs";
+import { probePortal, type ProbeResult } from "./reachability";
 import type { SharedStore } from "./store";
 import { isFormId, validateForm } from "./validate";
 
@@ -43,6 +51,8 @@ export interface SubmitRequest {
   body: string;
   /** The company-profile part of a multipart upload, if any. */
   file?: UploadedFile | null;
+  /** The X-HEBS-Probe-Token header: the operator's authorisation for the E0 probe. */
+  probeToken?: string | null;
 }
 
 export interface SubmitDeps {
@@ -57,7 +67,7 @@ export interface SubmitDeps {
 
 export interface SubmitResponse {
   httpStatus: number;
-  outcome: Outcome | { status: "bad_request" } | { status: "not_found" };
+  outcome: Outcome | { status: "bad_request" } | { status: "not_found" } | { status: "probe"; results: ProbeResult[] };
 }
 
 const HTTP: Record<Outcome["status"], number> = {
@@ -66,6 +76,8 @@ const HTTP: Record<Outcome["status"], number> = {
 const done = (o: Outcome): SubmitResponse => ({ httpStatus: HTTP[o.status], outcome: o });
 const bad = (httpStatus: number): SubmitResponse => ({ httpStatus, outcome: { status: "bad_request" } });
 const NOT_FOUND: SubmitResponse = { httpStatus: 404, outcome: { status: "not_found" } };
+/** Shared-store key prefix: the private test's keys never share a namespace with any other mode's. */
+export const storePrefix = (config: SubmitConfig) => (config.mode === "private-test" ? "hebs27-e2e:" : "hebs27:");
 
 function sameOrigin(origin: string | null, host: string | null): boolean {
   if (!origin || !host) return false;
@@ -96,6 +108,7 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   } catch {
     return bad(400);
   }
+  if (parsed && typeof parsed === "object" && "probe" in parsed) return probe(parsed, req, deps);
   if (!parsed || typeof parsed !== "object" || !isFormId(parsed.form)) return bad(400);
   const form = parsed.form;
   if (multipart && form !== "exhibitor") return bad(415);
@@ -111,7 +124,7 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
 
   try {
     const who = createHash("sha256").update(`${config.ipSalt}:${req.ip ?? "unknown"}`).digest("hex");
-    const n = await deps.store.hit(`hebs27:rl:${who}`, RATE_LIMIT.windowSeconds);
+    const n = await deps.store.hit(`${storePrefix(config)}rl:${who}`, RATE_LIMIT.windowSeconds);
     if (n > RATE_LIMIT.max) {
       log(form, "rate_limited");
       return done({ status: "rate_limited" });
@@ -131,6 +144,11 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   if (!v.ok) {
     log(form, "invalid");
     return done({ status: "invalid", errors: v.errors });
+  }
+  // The private test takes synthetic identities only: an address that can never reach a real person.
+  if (config.mode === "private-test" && !(typeof v.values.email === "string" && SYNTHETIC_EMAIL.test(v.values.email))) {
+    log(form, "not_synthetic");
+    return done({ status: "invalid", errors: { email: "This test accepts only made-up addresses ending in .test or .example." } });
   }
 
   let profile: PreparedPdf | undefined;
@@ -153,7 +171,7 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   let clientRequestId: string;
   try {
     const attemptKey = createHash("sha256").update(`${config.ipSalt}:${attempt}`).digest("hex");
-    clientRequestId = await deps.store.claim(`hebs27:id:${attemptKey}`, (deps.newId ?? randomUUID)(), 3600);
+    clientRequestId = await deps.store.claim(`${storePrefix(config)}id:${attemptKey}`, (deps.newId ?? randomUUID)(), 3600);
   } catch {
     log(form, "store_error");
     return done({ status: "unavailable" });
@@ -162,6 +180,10 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   let body: ReturnType<typeof toPortalBody>;
   try {
     body = toPortalBody(form, v.values, clientRequestId, config.notices, profile);
+    const test = PRIVATE_TEST.noticeVersion;
+    if (config.mode !== "private-test" && (body.data.privacy_notice_version === test || body.data.consent_version === test)) {
+      throw new ContractGapError("the test-only notice is never sent outside the private test");
+    }
   } catch (e) {
     if (e instanceof ContractGapError) {
       // Refused rather than sent incomplete: nothing the visitor entered is dropped.
@@ -180,4 +202,29 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   const outcome = classify(form, res.status, res.json, res.retryAfter);
   log(form, outcome.status, { portalStatus: res.status, clientRequestId });
   return done(outcome);
+}
+
+const digest = (s: string) => createHash("sha256").update(s, "utf8").digest();
+
+/** Whether the request carries the operator token, compared in constant time. */
+function operatorAuthorised(expected: string | undefined, given: string | null | undefined): boolean {
+  if (!expected || !given) return false;
+  return timingSafeEqual(digest(expected), digest(given));
+}
+
+/**
+ * Run sheet E0: only in private-test mode, only with the operator's token, and
+ * otherwise as if it did not exist (404). It writes nothing anywhere: not even
+ * the rate-limit store; the token is what limits it.
+ */
+async function probe(parsed: Record<string, unknown>, req: SubmitRequest, deps: SubmitDeps): Promise<SubmitResponse> {
+  const { config } = deps;
+  if (config.mode !== "private-test" || parsed.probe !== "reachability" || !config.portal) return NOT_FOUND;
+  if (!operatorAuthorised(config.probeToken, req.probeToken)) return NOT_FOUND;
+  const results = await probePortal({
+    url: config.portal.url, appId: config.portal.appId, secret: config.portal.secret,
+    fetch: deps.portalFetch, nowSeconds: deps.nowSeconds, newId: deps.newId,
+  });
+  for (const r of results) logSubmit({ form: "probe", outcome: `${r.request}:${r.error ?? "none"}`, portalStatus: r.status }, deps.log);
+  return { httpStatus: 200, outcome: { status: "probe", results } };
 }

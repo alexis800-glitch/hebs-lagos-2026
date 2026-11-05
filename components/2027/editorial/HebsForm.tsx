@@ -10,6 +10,7 @@
 import { useId, useRef, useState } from "react";
 import type { FieldSpec, FormId } from "@/lib/integrations/registration-2027";
 import { validateForm, type FormValues } from "@/lib/forms-2027/validate";
+import { attemptFor, browserAttemptDeps } from "@/lib/forms-2027/attempt";
 
 type Status =
   | { kind: "idle" }
@@ -32,7 +33,7 @@ function newAttempt() {
 const PDF_MAX = 3_000_000;
 
 export default function HebsForm({
-  form, fields, enabled, uploads = false, gate, submitLabel, title,
+  form, fields, enabled, uploads = false, gate, submitLabel, title, testNotice,
 }: {
   form: FormId;
   fields: readonly FieldSpec[];
@@ -44,6 +45,8 @@ export default function HebsForm({
   submitLabel: string;
   /** Accessible name of the form. */
   title: string;
+  /** Private end-to-end test only (server decision): the synthetic-only notice banner. Its text arrives from the server. */
+  testNotice?: { title: string; detail: string; version: string };
 }) {
   const uid = useId();
   const started = useRef(Date.now());
@@ -81,6 +84,8 @@ export default function HebsForm({
     setStatus({ kind: "sending" });
     let next: Status = { kind: "error" };
     try {
+      // The same details resent from this tab, even after a refresh, keep their attempt id: one record (E7).
+      attempt.current = await attemptFor(form, local.values, attempt.current, browserAttemptDeps());
       const payload = JSON.stringify({ form, values: local.values, website: honey, attempt_id: attempt.current, elapsed_ms: Date.now() - started.current });
       let init: RequestInit = { method: "POST", headers: { "Content-Type": "application/json" }, body: payload };
       if (file && uploads) {
@@ -123,6 +128,13 @@ export default function HebsForm({
 
   return (
     <div className="border bg-[#FBF8F2] p-6 sm:p-8" style={{ borderColor: "rgba(0,0,0,.14)", colorScheme: "light", color: ink }}>
+      {testNotice && (
+        <div role="note" className="mb-5 border-2 border-dashed p-4" style={{ borderColor: error, color: error, background: "#FFF4F1" }}>
+          <p className="text-[15px] font-bold">{testNotice.title}</p>
+          <p className="mt-1.5 text-[14px]">{testNotice.detail}</p>
+          <p className="mt-1.5 text-[13px]">Notice version sent: <code>{testNotice.version}</code></p>
+        </div>
+      )}
       {!enabled && <p id={id("gate")} className="text-[14px] font-semibold" style={{ color: atlantic }}>{gate}</p>}
 
       <div ref={result} tabIndex={-1} aria-live="polite" className="outline-none">

@@ -51,6 +51,7 @@ export async function POST(req: Request) {
       ip: (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || req.headers.get("x-real-ip"),
       body,
       file,
+      probeToken: req.headers.get("x-hebs-probe-token"),
     },
     { config, store: storeFor(config.store), portalFetch: config.mode === "mock" ? mockPortalFetch() : undefined },
   );
