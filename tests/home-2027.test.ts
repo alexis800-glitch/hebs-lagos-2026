@@ -6,7 +6,7 @@ import { REVIEW_ASSETS, REVIEW_DIR, findReviewAsset } from "@/lib/assets/home-20
 import { HOME } from "@/lib/content/home-2027";
 import { winnersView, type Winner } from "@/lib/content/winners-2026";
 import { COMPETITIONS, COMPETITION_COUNT, CATEGORY_COUNT } from "@/lib/competitions";
-import { reviewMedia } from "@/components/2027/home/review-media";
+import { reviewMedia, reviewMediaAllowed } from "@/components/2027/home/review-media";
 
 const ROOT = join(__dirname, "..");
 
@@ -26,11 +26,16 @@ describe("preferred homepage: review media safeguards", () => {
     expect(tracked).toBe("");
   });
 
-  it("never serves review media outside local development", () => {
+  it("never serves review media on production, and on a preview only with the review switch", () => {
     for (const a of REVIEW_ASSETS) {
-      expect(reviewMedia(a.id, "production"), a.id).toBeNull();
-      expect(reviewMedia(a.id, "preview"), a.id).toBeNull();
+      expect(reviewMedia(a.id, "production", { HEBS_REVIEW_MEDIA: "on" }), a.id).toBeNull();
+      expect(reviewMedia(a.id, "preview", {}), a.id).toBeNull();
     }
+    expect(reviewMediaAllowed("production", { HEBS_REVIEW_MEDIA: "on" })).toBe(false);
+    expect(reviewMediaAllowed("preview", {})).toBe(false);
+    expect(reviewMediaAllowed("preview", { HEBS_REVIEW_MEDIA: "yes" })).toBe(false);
+    expect(reviewMediaAllowed("preview", { HEBS_REVIEW_MEDIA: "on" })).toBe(true);
+    expect(reviewMediaAllowed("development", {})).toBe(true);
   });
 
   it("labels generated and undocumented media as concepts", () => {

@@ -35,10 +35,16 @@ to NJS Royale Beach Resort and its Atlantic location are kept.
   internal-review material listed in `lib/assets/home-2027-review.ts`, with
   its source, rights holder and the clearances it still needs. The files live
   only in `public/_review/home-2027/`, which is gitignored.
-- A file is shown only in local development and only when it is present on
-  disk (`components/2027/home/review-media.ts`). A clean checkout, a preview
-  build and a production build render a labelled placeholder instead, and the
-  official HEBS mark replaces the provisional 2027 mark.
+- A file is shown only when it is present on disk, and only in local
+  development or in a preview built with `HEBS_REVIEW_MEDIA=on`
+  (`components/2027/home/review-media.ts`). Never on production. A clean
+  checkout or a Git-built preview renders a labelled placeholder instead, and
+  the official HEBS mark replaces the provisional 2027 mark.
+- The owner authorised the selected media for the private preview
+  (2026-11-07). That preview is deployed from a local checkout with the CLI
+  (`scripts/deploy-review-preview.sh`): the media travels only inside that one
+  deployment, behind Vercel Authentication, and never through GitHub. Public
+  use still needs the permissions and clearances in `MEDIA-REGISTER.md`.
 - Generated or undocumented media (the NJS pool and terrace clips) is always
   labelled as a concept and may never depict a real venue or event.
 - The winners block renders only approved winners with a recorded approval.
