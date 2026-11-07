@@ -1,0 +1,131 @@
+/**
+ * Copy for the preferred HEBS Lagos 2027 homepage design (owner approval of
+ * 2026-11-07). The structure and headlines follow Mrs. Shuler's directive.
+ * Counts come from lib/competitions.ts so they cannot drift.
+ *
+ * Wording rule (owner, 2026-11-07): the page shows no beach imagery, and the
+ * copy speaks of the resort, poolside and terrace. Accurate references to NJS
+ * Royale Beach Resort and its Atlantic location stay.
+ */
+
+import { CATEGORIES, CATEGORY_COUNT, COMPETITION_COUNT } from "../competitions";
+
+export const HOME = {
+  strip:
+    "Internal concept, not for publication. All footage and photographs are real HEBS Lagos 2026 material from VMM, not yet cleared. The destination's pool and guest scenes are NJS concept visuals. The 2027 mark is provisional.",
+  hero: {
+    kicker: "HEBS Lagos 2027",
+    lines: ["Bigger.", "Bolder."],
+    accent: "Beyond Beauty.",
+    sub: "Three extraordinary days of beauty, education, innovation, competition, networking, and unforgettable luxury resort experiences.",
+    when: "July 23–25, 2027",
+    where: "NJS Royale Beach Resort, Lagos, Nigeria",
+    live: "HEBS Lagos 2026, the styling floor",
+    ctaPrimary: "Join the 2027 priority list",
+    ctaSecondary: "Explore the experience",
+    cards: [
+      { media: "hero-card-guest", label: "The pre-party, 2026" },
+      { media: "hero-card-terrace", label: "The NJS terrace, 2026" },
+    ],
+  },
+  nav: ["Experience", "Programme", "Competitions", "Education", "Travel"],
+  welcome: {
+    label: "Welcome to HEBS 2027",
+    title: "Where beauty, education",
+    accent: "& opportunity meet.",
+    body: "HEBS brings together the beauty industry's professionals, educators, innovators, entrepreneurs and emerging talent. For the first time, the whole experience takes place at one destination on the Atlantic: three days of learning, competition, business and celebration.",
+  },
+  numbers: {
+    label: "HEBS Lagos 2027",
+    title: "The summit,",
+    accent: "in three numbers.",
+    items: [
+      { value: "3", label: "Days", media: "num-days", text: "July 23–25, 2027. An opening celebration, then two full summit days." },
+      { value: String(COMPETITION_COUNT), label: "Competitions", media: "num-competitions", text: "Thirteen competitions, with categories and prizes the same as 2026." },
+      { value: String(CATEGORY_COUNT), label: "Categories", media: "num-categories", text: `${CATEGORIES.map((c) => c.name).join(", ")}.` },
+    ],
+  },
+  days: {
+    title: "Three days, one",
+    accent: "extraordinary destination.",
+    body: "From an opening celebration at the resort to two full summit days of education, competitions and exhibitions.",
+    items: [
+      { date: "July 23", title: "The Welcome Pre-Party", text: "An exclusive opening celebration introducing guests to the HEBS 2027 experience.", media: "day-1" },
+      { date: "July 24", title: "The Summit Begins", text: "Professional education, live demonstrations, beauty competitions, exhibitions and networking.", media: "day-2" },
+      { date: "July 25", title: "The Experience Continues", text: "Industry engagement, competitions, learning opportunities and closing celebrations.", media: "day-3" },
+    ],
+    cta: "The programme",
+  },
+  experiences: {
+    label: "The HEBS experience",
+    title: "Six ways",
+    accent: "to be part of it.",
+    items: [
+      { title: "Professional Beauty Education", text: "Masterclasses, demonstrations and technical training.", media: "exp-education" },
+      { title: "Hair and Beauty Competitions", text: "Thirteen competitions across seven categories.", media: "exp-competitions" },
+      { title: "Exhibitions and Brand Showcases", text: "The brands shaping the industry.", media: "exp-exhibitions" },
+      { title: "International Networking", text: "Nigeria, Africa, the US, Europe and beyond.", media: "exp-networking-desktop", phoneMedia: "exp-networking-phone" },
+      { title: "Entertainment and Celebrations", text: "Glamorous evenings at the resort.", media: "exp-entertainment" },
+      { title: "Luxury Destination Experiences", text: "A resort setting for the whole summit.", media: "exp-destination" },
+    ],
+  },
+  destination: {
+    label: "The destination",
+    title: "Beauty meets",
+    accent: "paradise.",
+    body: "NJS Royale Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.",
+    cta: "Explore the destination",
+    scenes: [
+      { title: "Sunset by the pool", kind: "concept", seconds: 4.0, wide: "dest-guests-wide", tall: "dest-guests-tall",
+        note: "Concept from NJS: illustrative guests at the second-floor pool. Not real attendees or the completed property." },
+      { title: "The pool terrace", kind: "concept", seconds: 5.6, wide: "dest-pool-wide", tall: "dest-pool-tall",
+        note: "Concept from the NJS website: the second-floor pool terrace. Not the completed property." },
+      { title: "Evenings on the terrace", kind: "concept", seconds: 6.2, wide: "dest-cinema-wide", tall: "dest-cinema-tall",
+        note: "Concept from NJS: an illustrative terrace evening. Not a confirmed event or facility." },
+      { title: "HEBS at NJS, 2026", kind: "photographed", seconds: 6.0, pair: ["dest-terrace", "dest-guest"],
+        note: "HEBS Lagos 2026 pre-party guests on the NJS terrace, 23 Oct 2026. VMM." },
+    ],
+  },
+  competitions: {
+    label: "Competitions",
+    title: "The next generation of",
+    accent: "beauty champions.",
+    body: "Thirteen competitions across seven categories. Categories and prizes remain the same as 2026.",
+    ctaPrimary: "See the competitions",
+    ctaSecondary: "Rules and eligibility",
+    winners: {
+      label: "Celebrating the 2026 winners",
+      title: "Champions of",
+      accent: "HEBS Lagos 2026.",
+      note: "Each winner appears only once their approved photograph and verified details are in.",
+    },
+  },
+  highlights: {
+    label: "HEBS 2026 highlights",
+    title: "Lagos, 2026.",
+    accent: "The energy we carry forward.",
+    credit: "Photographed at HEBS Lagos 2026",
+    rows: [
+      [["hl-guest-a", "w2"], ["hl-floor-a", "w3"], ["hl-performance", "w1"], ["hl-guest-b", "w2"], ["hl-hall", "w4"], ["hl-runway", "w1"]],
+      [["hl-trophy", "w1"], ["hl-floor-b", "w3"], ["hl-guest-c", "w2"], ["hl-speaker", "w1"], ["hl-floor-c", "w3"], ["hl-guest-d", "w2"]],
+    ] as [string, string][][],
+  },
+  sponsors: {
+    label: "Sponsors and exhibitors",
+    title: "Position your brand at the center of",
+    accent: "beauty innovation.",
+    offers: ["Sponsorship", "Exhibition space", "Brand activations", "Strategic partnerships"],
+    ctaPrimary: "Become a sponsor",
+    ctaSecondary: "Exhibit at HEBS",
+    caption: "The 2026 hall",
+  },
+  final: {
+    label: "HEBS Lagos 2027",
+    title: "Your next beauty experience",
+    accent: "starts here.",
+    when: "July 23–25, 2027  |  NJS Royale Beach Resort, Lagos, Nigeria",
+    cta: "Be first to experience HEBS 2027",
+  },
+} as const;
+
+export const CATEGORY_NAMES = CATEGORIES.map((c) => c.name);

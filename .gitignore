@@ -38,3 +38,6 @@ next-env.d.ts
 .vercel
 /assets/
 /hands-on-hair-styling-02.png
+
+# Local-only review media for the 2027 design reviews (never committed)
+/public/_review/
