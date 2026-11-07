@@ -9,12 +9,12 @@
 # deployment. Vercel Authentication protects it, pages and media files alike.
 # It never deploys to production and stores no setting in the Vercel project.
 #
-# Needs: a signed-in Vercel CLI (`npx -y vercel@39.3.0 login`) and the project
+# Needs: a signed-in Vercel CLI (`npx -y vercel@65.1.0 login`) and the project
 # link in .vercel/project.json.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT=$(pwd)
-VERCEL="npx -y vercel@39.3.0"
+VERCEL="npx -y vercel@65.1.0"
 
 [ -d public/_review/home-2027 ] || { echo "public/_review/home-2027 is missing" >&2; exit 1; }
 [ -f .vercel/project.json ] || { echo ".vercel/project.json is missing" >&2; exit 1; }
