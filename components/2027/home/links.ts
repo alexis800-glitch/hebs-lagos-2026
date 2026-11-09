@@ -1,0 +1,13 @@
+import { HOME } from "@/lib/content/home-2027";
+import { pageHref, sitePage } from "@/lib/site/2027";
+
+/**
+ * Where the preferred homepage links to. Every target comes from the 2027 site map,
+ * so the homepage can only link to pages that are built, at their staging paths.
+ */
+
+/** The preferred homepage itself, the destination of the header mark. */
+export const HOME_HREF = "/2027/concepts/home";
+
+/** The header links, labelled as in the rest of the 2027 site. */
+export const NAV = HOME.nav.map((id) => ({ label: sitePage(id).nav, href: pageHref(id)! }));

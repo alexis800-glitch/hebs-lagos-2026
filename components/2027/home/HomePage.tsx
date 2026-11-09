@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element -- review files are local-only; the official mark is a small static logo */
 import "./home.css";
 import { HOME, CATEGORY_NAMES } from "@/lib/content/home-2027";
+import { dayAnchor } from "@/components/2027/editorial/sections";
 import { winnersView } from "@/lib/content/winners-2026";
 import { deployEnvironment } from "@/lib/publication";
 import { Clip, Pic, reviewMedia, reviewSrc } from "./media";
-import { DesignScale, DestinationSequence, ExperienceIndex, LiveCountdown, WinnersRail, type Scene } from "./client";
+import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
+import { DesignScale, DestinationSequence, ExperienceIndex, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
+import { HOME_HREF, NAV } from "./links";
 
 /** Official mark, used whenever the provisional 2027 mark isn't loaded for review. */
 const OFFICIAL_MARK = "/assets/logos/hebs_logo_nav.png";
@@ -23,10 +26,10 @@ function Hero() {
       </div>
       <div className="veil" />
       <div className="nav">
-        <Mark />
-        <span className="links">{HOME.nav.map((n) => <span key={n}>{n}</span>)}</span>
-        <span className="pill">Become a sponsor</span>
-        <span className="menu">Menu</span>
+        <a href={HOME_HREF} aria-label="HEBS Lagos 2027 home"><Mark /></a>
+        <nav aria-label="Main" className="links">{NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}</nav>
+        <a className="pill" href={pageHref("sponsorship")!}>Become a sponsor</a>
+        <MobileMenu home={HOME_HREF} links={SITE_MENU} cta={{ label: PRIORITY_CTA, href: PRIORITY_HREF }} />
       </div>
       <div className="live"><i />{h.live}</div>
       <div className="hcol">
@@ -38,7 +41,7 @@ function Hero() {
         <div className="rule" />
         <p className="sub">{h.sub}</p>
         <p className="when">{h.when}<br />{h.where}</p>
-        <div className="ctas"><span className="btn pri">{h.ctaPrimary}</span><span className="btn gh">{h.ctaSecondary}</span></div>
+        <div className="ctas"><a className="btn pri" href={PRIORITY_HREF}>{PRIORITY_CTA}</a><a className="btn gh" href={pageHref("experience")!}>{h.ctaSecondary}</a></div>
         <LiveCountdown />
       </div>
       <div className="cards">
@@ -113,7 +116,7 @@ function Days() {
             <div className="ph"><Pic id={it.media} className={cls[j]} /></div>
             <h3>{it.title}</h3>
             <p>{it.text}</p>
-            <span className="btn ln">{d.cta}</span>
+            <a className="btn ln" href={pageHref("programme", dayAnchor(it.date))!} aria-label={`${d.cta}: ${it.date}`}>{d.cta}</a>
           </div>
         ))}
       </div>
@@ -171,7 +174,7 @@ function Destination() {
           <h2 className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
           <div className="rule" />
           <p className="b">{d.body}</p>
-          <div className="ctas"><span className="btn gh">{d.cta}</span></div>
+          <div className="ctas"><a className="btn gh" href={pageHref("experience", "destination")!}>{d.cta}</a></div>
         </div>
       </DestinationSequence>
     </section>
@@ -243,7 +246,7 @@ function Competitions() {
           <p className="lab">{c.label}</p>
           <h2 className="disp">{c.title} <em className="it">{c.accent}</em></h2>
           <p className="b">{c.body}</p>
-          <div className="btnrow"><span className="btn pri">{c.ctaPrimary}</span><span className="btn ol">{c.ctaSecondary}</span></div>
+          <div className="btnrow"><a className="btn pri" href={pageHref("competitions", "categories")!}>{c.ctaPrimary}</a><a className="btn ol" href={pageHref("competitions", "eligibility")!}>{c.ctaSecondary}</a></div>
         </div>
         <div className="art">
           <div className="ph a"><Pic id="comp-main" className="grade kb" /></div>
@@ -284,7 +287,7 @@ function Sponsors() {
           <p className="lab">{s.label}</p>
           <h2 className="disp">{s.title} <em className="it">{s.accent}</em></h2>
           <ul>{s.offers.map((o) => <li key={o}>{o}</li>)}</ul>
-          <div className="ctas"><span className="btn dk">{s.ctaPrimary}</span><span className="btn ol">{s.ctaSecondary}</span></div>
+          <div className="ctas"><a className="btn dk" href={pageHref("sponsorship")!}>{s.ctaPrimary}</a><a className="btn ol" href={pageHref("exhibitors")!}>{s.ctaSecondary}</a></div>
         </div>
         <div className="art">
           <div className="ph a"><Pic id="sp-hall" className="grade kb" /></div>
@@ -307,7 +310,7 @@ function Final() {
         <div className="rule" />
         <p className="when">{f.when}</p>
         <LiveCountdown />
-        <span className="btn pri">{f.cta}</span>
+        <a className="btn pri" href={PRIORITY_HREF}>{f.cta}</a>
       </div>
     </section>
   );

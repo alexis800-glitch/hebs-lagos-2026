@@ -161,6 +161,63 @@ export function DestinationSequence({ scenes, children }: { scenes: Scene[]; chi
   );
 }
 
+/**
+ * The phone menu: a button that opens every 2027 page over the hero. Escape or the
+ * close button shuts it and returns focus to the button; Tab stays inside while open.
+ */
+export function MobileMenu({ home, links, cta }: { home: string; links: { label: string; href: string }[]; cta: { label: string; href: string } }) {
+  const [open, setOpen] = useState(false);
+  const button = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    window.scrollTo(0, 0);
+    const focusables = () => Array.from(panel.current?.querySelectorAll<HTMLElement>("a[href],button") ?? []);
+    focusables()[0]?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        button.current?.focus();
+      } else if (e.key === "Tab") {
+        const f = focusables();
+        const first = f[0];
+        const last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+  const close = () => {
+    setOpen(false);
+    button.current?.focus();
+  };
+  return (
+    <>
+      <button ref={button} type="button" className="menu" aria-expanded={open} aria-controls="hp-menu" onClick={() => setOpen(true)}>
+        Menu
+      </button>
+      <div ref={panel} id="hp-menu" className="mpanel" role="dialog" aria-modal="true" aria-label="Menu" hidden={!open}>
+        <button type="button" className="mclose" onClick={close}>Close</button>
+        <nav aria-label="All HEBS 2027 pages">
+          <ul>
+            <li><a href={home} onClick={() => setOpen(false)}>Home</a></li>
+            {links.map((l) => (
+              <li key={l.href}><a href={l.href} onClick={() => setOpen(false)}>{l.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+        <a className="btn pri" href={cta.href} onClick={() => setOpen(false)}>{cta.label}</a>
+      </div>
+    </>
+  );
+}
+
 /** The winners row, scrolled by the gold arrows on desktop and by swipe on the phone. */
 export function WinnersRail({ heading, count, children }: { heading: string; count: string | null; children: ReactNode }) {
   const rail = useRef<HTMLDivElement>(null);

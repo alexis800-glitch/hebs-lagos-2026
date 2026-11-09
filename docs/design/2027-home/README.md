@@ -3,6 +3,27 @@
 Route: `/2027/concepts/home` (staging only; the `/2027` layout returns 404 on
 production and marks every page noindex).
 
+On production, `middleware.ts` answers every `/2027` and `/_review` request as an
+ordinary missing page before any 2027 route renders, so no 2027 copy reaches a
+404's HTML, RSC payload or prefetch response. `tests/withhold-2027.test.ts` covers
+the decision; `npm run test:withheld -- <url>` checks a running production build
+request by request.
+
+The header, menu and buttons are real links to the built 2027 pages
+(`components/2027/home/links.ts`, `lib/site/2027.ts`). Priority-list buttons lead
+to the closed priority list and say it opens soon until forms are authorised.
+(Owner decision N1, 2026-11-09: "Priority list opens soon" while registration is
+closed; the approved registration wording returns when the list is activated.)
+
+## Known issue: two 2027 homepages
+
+The thirteen 2027 pages still link to the older homepage: their logo and "Home"
+lead to `/2027`, and the priority-list buttons to the closed form at
+`/2027/homepage#priority-list`. Nothing on those pages links back to this
+preferred homepage. The owner wants this homepage to become the one 2027 landing
+page; that move (decision A2, with where the priority list lives, N2) is to be
+done in its own approved phase, not as part of these fixes.
+
 This is the owner's **preferred creative design** (approved 2026-11-07), ported
 from the reviewed mockup. It is preserved here for content verification and
 final approval. It is not published, and no further redesign is authorised

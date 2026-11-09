@@ -21,14 +21,16 @@ export const HOME = {
     when: "July 23–25, 2027",
     where: "NJS Royale Beach Resort, Lagos, Nigeria",
     live: "HEBS Lagos 2026, the styling floor",
-    ctaPrimary: "Join the 2027 priority list",
+    // The primary button is the site-wide priority-list call to action (PRIORITY_CTA in
+    // lib/site/2027.ts): the directive's "Join the 2027 Priority List" only once the list is open.
     ctaSecondary: "Explore the experience",
     cards: [
       { media: "hero-card-guest", label: "The pre-party, 2026" },
       { media: "hero-card-terrace", label: "The NJS terrace, 2026" },
     ],
   },
-  nav: ["Experience", "Programme", "Competitions", "Education", "Travel"],
+  /** The header links, as pages of the 2027 site map (lib/site/2027.ts). */
+  nav: ["experience", "programme", "competitions", "education", "travel"],
   welcome: {
     label: "Welcome to HEBS 2027",
     title: "Where beauty, education",
