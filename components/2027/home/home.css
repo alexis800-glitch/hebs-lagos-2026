@@ -218,6 +218,20 @@
 .hp .wn .rail{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 84px) / 4);gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px 10px 14px;margin:0 -10px;scrollbar-width:none}
 .hp .wn .rail::-webkit-scrollbar{display:none}
 .hp .wn .card2{scroll-snap-align:start}
+.hp .wn .rvnote{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:44px;font-size:14px;color:#4A3F31}
+.hp .wn .tag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#7A5A22;border:1px solid rgba(184,145,76,.75);border-radius:999px;padding:4px 10px}
+.hp .wn figure{margin:0}
+.hp .wn .fpair{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:28px}
+.hp .wn .fpair .slot{height:560px}
+.hp .wn .fpair .slot>img,.hp .wn .hpair .slot>img,.hp .wn .card2 .slot>img{object-position:50% 35%}
+.hp .wn .fpair figcaption{margin-top:22px;border-left:1px solid rgba(184,145,76,.6);padding-left:22px}
+.hp .wn .fpair .k,.hp .wn .hpair .k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#7A5A22}
+.hp .wn .fpair .cmpx{font-family:var(--display);font-weight:500;font-size:30px;line-height:1.1;margin-top:6px;color:#16110A}
+.hp .wn .fpair .tbc{font-size:14px;font-style:italic;color:#6E685D;margin-top:6px}
+.hp .wn .hpair{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+.hp .wn .hpair .slot{height:300px}
+.hp .wn .hpair figcaption{margin-top:14px;font-family:var(--display);font-size:19px;color:#16110A}
+.hp .wn .card2 .who{color:#6E685D}
 .hp .wn .card2 .slot{height:300px}
 .hp .wn .card2 .slot span{font-size:17px}
 .hp .wn .card2 .cat{margin-top:20px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#9A7432}
@@ -313,6 +327,12 @@
   .hp .wn .arrows{display:none}
   .hp .wn .rail{grid-auto-columns:74%;gap:18px}
   .hp .wn .card2 .slot{height:260px}
+  .hp .wn .rvnote{margin-top:30px;font-size:13px}
+  .hp .wn .fpair{grid-template-columns:1fr;gap:34px;margin-top:22px}
+  .hp .wn .fpair .slot{height:380px}
+  .hp .wn .fpair .cmpx{font-size:24px}
+  .hp .wn .hpair{grid-template-columns:1fr;gap:24px;margin-top:34px}
+  .hp .wn .hpair .slot{height:230px}
 
   .hp .wl{padding:80px 22px 90px}
   .hp .wl .in{grid-template-columns:1fr;gap:56px}

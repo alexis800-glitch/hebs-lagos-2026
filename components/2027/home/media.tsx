@@ -6,7 +6,7 @@ import { reviewMedia, reviewSrc } from "./review-media";
 export { reviewMedia, reviewSrc };
 
 /** An image held for review, or the placeholder when it isn't available. */
-export function Pic({ id, className, style, alt }: { id: string; className?: string; style?: CSSProperties; alt?: string }) {
+export function Pic({ id, className, style, alt, sizes }: { id: string; className?: string; style?: CSSProperties; alt?: string; sizes?: string }) {
   const a = reviewMedia(id);
   if (!a) {
     const label = alt ?? findReviewAsset(id).alt;
@@ -16,7 +16,8 @@ export function Pic({ id, className, style, alt }: { id: string; className?: str
       <div className="rv" aria-hidden="true">Image held for review</div>
     );
   }
-  return <img className={className} src={a.src} alt={alt ?? a.alt} style={style} />;
+  const srcSet = a.widths?.map((w) => `${a.src.replace(/\.webp$/, `-${w}.webp`)} ${w}w`).join(", ");
+  return <img className={className} src={a.src} srcSet={srcSet} sizes={srcSet ? sizes : undefined} alt={alt ?? a.alt} style={style} />;
 }
 
 /** A clip with separate desktop and phone crops; placeholder when unavailable. */

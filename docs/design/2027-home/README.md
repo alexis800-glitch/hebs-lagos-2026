@@ -85,6 +85,36 @@ media in local development, place the files named in
 `/2027/concepts/home`. Never commit them and never copy them into any other
 folder under `public/`.
 
+## 2026 Champions (internal review)
+
+The winners block shows the prize-presentation photographs the owner approved
+on 2026-11-10 (`REVIEW_CHAMPIONS` in `lib/content/winners-2026.ts`):
+- two featured photographs and two highlights;
+- one photograph per competition in the rail. Lash Couture has none, and Fast &
+  Flawless Barber shows its 3rd-place presentation, labelled as such.
+
+Placings are as printed on the cheques. No winner is named and no prize is
+stated; both await the organisers' verification (and D8). The selection is
+review media, so a production build never shows it: production renders approved,
+verified winners only (`WINNERS`), and hides the block while there are none.
+
+The photographs are working copies of the photographers' originals (House of
+Snapp collection). Neither the originals nor the copies are committed. To
+rebuild the copies from the authorised originals:
+
+    python3 docs/design/2027-home/tools/champions-images.py <originals> public/_review/home-2027/champions
+
+`tools/champions-crops.json` holds, for each image:
+- the original's filename and SHA-256 (the script refuses any other file);
+- the crop, its role and its widths;
+- whether it is sharpened.
+
+Corrections are global only: crop, a 0.1% levels stretch, light sharpening after
+resizing (none for ISO 1600+ frames) and WebP quality 90. Each width is resampled
+once from the original, and the browser picks the closest size (`srcset`).
+Nothing is retouched, reconstructed or generated. With Pillow 10.4.0 the output
+is byte-identical.
+
 ## Provisional mark
 
 `tools/provisional-mark-2027.py` reproduces the provisional mark from the

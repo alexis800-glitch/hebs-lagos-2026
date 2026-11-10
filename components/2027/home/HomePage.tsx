@@ -191,7 +191,33 @@ function Winners() {
         <div><p className="lab">{w.label}</p><h3>{w.title} <em className="it">{w.accent}</em></h3></div>
         <p className="n">{w.note}</p>
       </div>
-      {v.featured ? (
+      {v.reviewFeatured.length > 0 ? (
+        <>
+          <p className="rvnote"><span className="tag">Internal review</span>Placings are as printed on the cheques. Winners&apos; names, placings and prizes await the organisers&apos; verification.</p>
+          <div className="fpair">
+            {v.reviewFeatured.map((r) => (
+              <figure key={r.media}>
+                <div className="slot"><Pic id={r.media} sizes="(max-width: 600px) calc((100vw - 44px) * 1.1), 602px" /></div>
+                <figcaption>
+                  <p className="k">{r.place}, as printed on the cheque</p>
+                  <p className="cmpx">{r.competition}</p>
+                  <p className="tbc">Winner and prize to be confirmed</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          {v.reviewHighlights.length > 0 ? (
+            <div className="hpair">
+              {v.reviewHighlights.map((r) => (
+                <figure key={r.media}>
+                  <div className="slot"><Pic id={r.media} sizes="(max-width: 600px) calc((100vw - 44px) * 1.17), 610px" /></div>
+                  <figcaption><span className="k">{r.place}</span> {r.competition}</figcaption>
+                </figure>
+              ))}
+            </div>
+          ) : null}
+        </>
+      ) : v.featured ? (
         <div className="feat2">
           <div className="slot"><img src={v.featured.photo} alt={v.featured.name} /></div>
           <div className="meta2">
@@ -220,9 +246,16 @@ function Winners() {
                 <p className="cmp">{c.competition}</p>
                 <p className="who ok">{c.winner.name}. {c.winner.prize}</p>
               </>
+            ) : c.review ? (
+              <>
+                <div className="slot"><Pic id={c.review.media} sizes="(max-width: 600px) 66vw, 291px" /></div>
+                <p className="cat">{c.category} · {c.review.place}</p>
+                <p className="cmp">{c.competition}</p>
+                <p className="who">{c.review.note ?? "Winner to be confirmed"}</p>
+              </>
             ) : (
               <>
-                <div className="slot"><span>Winner photograph<small>Review only</small></span></div>
+                <div className="slot"><span>Photograph awaited<small>Review only</small></span></div>
                 <p className="cat">{c.category}</p>
                 <p className="cmp">{c.competition}</p>
                 <p className="who">Winner to be confirmed</p>

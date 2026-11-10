@@ -26,7 +26,20 @@ export interface ReviewAsset extends AssetRecord {
   badge: ReviewBadge;
   /** What the media is, in words, for the rights register. */
   source: string;
+  /**
+   * Pre-sized widths of a responsive image, each a separate file named
+   * <src without .webp>-<width>.webp, so the browser picks one close to the
+   * displayed size instead of shrinking or stretching a single file.
+   */
+  widths?: number[];
 }
+
+/** Champions photographs: the role each one plays, and the widths cut for it. */
+const CHAMP_WIDTHS = { featured: [640, 960, 1280, 1800], highlight: [640, 960, 1280, 1600, 2000], card: [320, 600, 900] } as const;
+const CHAMP_ROLE: Record<string, keyof typeof CHAMP_WIDTHS> = {
+  "champ-img_7897": "featured", "champ-img_7854": "featured",
+  "champ-img_8012": "highlight", "champ-dsc_1897": "highlight",
+};
 
 export const REVIEW_DIR = "/_review/home-2027/";
 
@@ -40,10 +53,13 @@ const VMM_PENDING = {
 const S06 = "Frame or loop from VMM clip S06, the HEBS Lagos 2026 styling floor, chosen with no sponsor logos in shot";
 const PREVIEW = "Frame from a VMM clip preview of the HEBS Lagos 2026 summit days";
 const PREPARTY = "VMM photograph, HEBS Lagos 2026 Welcome Pre-Party at NJS Royale Beach Resort, 23 Oct 2026";
+const SNAPP_D1 = "House of Snapp photograph, HEBS Lagos 2026 summit day 1 prize presentation, 24 Oct 2026";
+const SNAPP_D2 = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2 prize presentation, 25 Oct 2026";
+const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
 const OCT22 =
   "VMM photograph of the 22 Oct 2026 gathering at a different Lagos hotel. Not confirmed as an official HEBS activity; never described as NJS";
 
-type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark", detail?: string];
+type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2", detail?: string];
 
 const SPECS: Spec[] = [
   ["hero-loop-wide", "video", "hair-wide.mp4", "", "photographed", "s06", "S06 0:32–0:35.5 and 0:01–0:04.5, half speed, colour graded"],
@@ -91,6 +107,22 @@ const SPECS: Spec[] = [
   ["hl-floor-c", "image", "hl-floor-c.webp", "", "photographed", "s06"],
   ["sp-hall", "image", "sp-hall.webp", "A packed hall at HEBS Lagos 2026", "photographed", "preview"],
   ["sp-exhibitor", "image", "sp-exhibitor.webp", "An exhibitor at HEBS Lagos 2026", "photographed", "preview", "Exhibitor brand visible; brand agreement needed"],
+  ["champ-img_7897", "image", "champions/champ-img_7897.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7897, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_7854", "image", "champions/champ-img_7854.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7854, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_8012", "image", "champions/champ-img_8012.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8012, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-dsc_1897", "image", "champions/champ-dsc_1897.webp", CHAMP_ALT, "photographed", "snapp-d1", "DSC_1897, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_8022", "image", "champions/champ-img_8022.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8022, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_8085", "image", "champions/champ-img_8085.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8085, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-0q1a0290", "image", "champions/champ-0q1a0290.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0290, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-dsc_1883", "image", "champions/champ-dsc_1883.webp", CHAMP_ALT, "photographed", "snapp-d1", "DSC_1883, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_7895", "image", "champions/champ-img_7895.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7895, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-0q1a0140", "image", "champions/champ-0q1a0140.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0140, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-0q1a0215", "image", "champions/champ-0q1a0215.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0215, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-0q1a0190", "image", "champions/champ-0q1a0190.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0190, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_7964", "image", "champions/champ-img_7964.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7964, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-0q1a0163", "image", "champions/champ-0q1a0163.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0163, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-0q1a0242", "image", "champions/champ-0q1a0242.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0242, cropped and tone-corrected working copy; the original is preserved unaltered"],
+  ["champ-img_8112", "image", "champions/champ-img_8112.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8112, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["mark-2027-a", "image", "mark-2027-a.png", "HEBS Lagos 2027, provisional mark", "brand", "mark", "Version A: 2027 on one line inside the continent"],
 ];
 
@@ -103,6 +135,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
     alt,
     status: "provisional" as const,
     permittedUsage: ["internal-review" as const],
+    ...(id.startsWith("champ-") ? { widths: [...CHAMP_WIDTHS[CHAMP_ROLE[id] ?? "card"]] } : {}),
   };
   const note = detail ? `. ${detail}` : "";
   switch (kindOf) {
@@ -176,6 +209,25 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
           "Clip in the NJS website folder, received by WhatsApp on 7 Oct 2026 (content credentials stripped). Appears AI-generated; its guests are illustrative and the terrace cinema is not a confirmed facility or event" + note,
         restriction:
           "Concept only: always labelled as a concept, never suggesting real people attended an NJS event. Needs confirmed origin and rights, and NJS permission.",
+      };
+    case "snapp-d1":
+    case "snapp-d2":
+      return {
+        ...base,
+        eventYear: 2026,
+        edition: "HEBS Lagos 2026",
+        location: "Lagos, Nigeria (summit days)",
+        origin: "hebs-lagos-event",
+        provenance: "hebs-event-photo",
+        rights: {
+          holder: kindOf === "snapp-d1" ? "House of Snapp" : "Day 2 photographer in the House of Snapp collection (owner recorded privately)",
+          permission: "not-recorded",
+          peopleConsent: "unknown",
+        },
+        permittedDepictions: ["real-event"],
+        source: (kindOf === "snapp-d1" ? SNAPP_D1 : SNAPP_D2) + note,
+        restriction:
+          "Internal review only. Needs the photographer's written permission, each recognisable person's consent, and the organisers' verification of the competition, placing, winner and prize before any public use.",
       };
     case "mark":
       return {

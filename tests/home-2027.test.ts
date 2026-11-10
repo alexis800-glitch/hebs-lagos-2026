@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { REVIEW_ASSETS, REVIEW_DIR, findReviewAsset } from "@/lib/assets/home-2027-review";
 import { HOME } from "@/lib/content/home-2027";
-import { winnersView, type Winner } from "@/lib/content/winners-2026";
+import { REVIEW_CHAMPIONS, winnersView, type Winner } from "@/lib/content/winners-2026";
 import { COMPETITIONS, COMPETITION_COUNT, CATEGORY_COUNT } from "@/lib/competitions";
 import { reviewMedia, reviewMediaAllowed } from "@/components/2027/home/review-media";
 
@@ -130,5 +130,55 @@ describe("winners", () => {
   it("never shows a winner without a recorded approval", () => {
     const v = winnersView("production", [winner({ approval: undefined })]);
     expect(v.visible).toBe(false);
+  });
+});
+
+describe("preferred homepage: 2026 Champions review photographs", () => {
+  it("keeps every review photograph out of production", () => {
+    const v = winnersView("production");
+    expect(v.reviewFeatured).toEqual([]);
+    expect(v.reviewHighlights).toEqual([]);
+    expect(v.cards.every((c) => c.review === null)).toBe(true);
+    expect(v.visible).toBe(false);
+  });
+
+  it("shows the owner's selection in review: two featured, two highlights, a photograph for twelve competitions", () => {
+    const v = winnersView("preview");
+    expect(v.reviewFeatured.map((r) => r.media)).toEqual(["champ-img_7897", "champ-img_7854"]);
+    expect(v.reviewHighlights.map((r) => r.media)).toEqual(["champ-img_8012", "champ-dsc_1897"]);
+    expect(v.cards).toHaveLength(COMPETITION_COUNT);
+    const missing = v.cards.filter((c) => !c.review).map((c) => c.competition);
+    expect(missing).toEqual(["Lash Couture Competition"]);
+    expect(v.count).toMatch(/^0 of 13 confirmed/);
+  });
+
+  it("can rebuild every photograph from an authorised original, as documented", () => {
+    const spec = JSON.parse(readFileSync(join(ROOT, "docs/design/2027-home/tools/champions-crops.json"), "utf8"));
+    expect(readFileSync(join(ROOT, "docs/design/2027-home/tools/champions-images.py"), "utf8")).toContain("SHA-256 mismatch");
+    expect(spec.images.map((i: { output: string }) => i.output).sort()).toEqual(REVIEW_CHAMPIONS.map((r) => r.media).sort());
+    for (const img of spec.images) {
+      expect(img.sha256, img.file).toMatch(/^[0-9a-f]{64}$/);
+      expect(findReviewAsset(img.output).widths, img.file).toEqual(img.widths);
+      expect(img.sharpen, img.file).toBe(img.iso < 1600);
+    }
+    expect(JSON.stringify(spec)).not.toMatch(/@|drive\.google|https?:/i);
+  });
+
+  it("uses only registered review media, names nobody and states no prize", () => {
+    for (const r of REVIEW_CHAMPIONS) {
+      const a = findReviewAsset(r.media);
+      expect(a.permittedUsage).toEqual(["internal-review"]);
+      expect(a.rights.permission).toBe("not-recorded");
+      expect(COMPETITIONS.some((c) => c.name === r.competition), r.competition).toBe(true);
+      expect(JSON.stringify(r)).not.toMatch(/₦|naira|\$|\d{1,3},\d{3}|million|thousand/i);
+    }
+    const champ = REVIEW_ASSETS.filter((a) => a.id.startsWith("champ-"));
+    expect(champ).toHaveLength(16);
+    // Each photograph is served in pre-sized widths, so no screen stretches or heavily shrinks it.
+    for (const a of champ) {
+      const role = REVIEW_CHAMPIONS.find((r) => r.media === a.id)!.role;
+      expect(a.widths, a.id).toEqual(role === "featured" ? [640, 960, 1280, 1800] : role === "highlight" ? [640, 960, 1280, 1600, 2000] : [320, 600, 900]);
+    }
+    for (const a of champ) expect(JSON.stringify(a)).not.toMatch(/@|drive\.google|houseofsnapp\b/i);
   });
 });
