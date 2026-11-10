@@ -17,7 +17,7 @@ import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/
 import { resolveSlot } from "@/lib/assets/register";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
-import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, ThreeDays, dayAnchor, type Targets } from "./sections";
+import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
 import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
 import { C, HORIZON, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
 
@@ -53,7 +53,7 @@ export function ExperiencePage(props: PageProps) {
     days: ["No 2027 session times are approved; the horizon is one abstract panorama and implies no time of day."],
   };
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Page", notes.hero], ["Three days", notes.days], ["Six experiences", notes.experiences]]}>
+    <Shell page="experience" opts={opts} notes={props.notes ?? "inline"} groups={[["Page", notes.hero], ["Three days", notes.days], ["Six experiences", notes.experiences]]}>
       <PageHero title={PAGES.experience.title.text} intro={PAGES.experience.intro.text} opts={opts} notes={notes.hero}>
         <PageContents items={[{ href: "#three-days", label: "The three days" }, { href: "#six-experiences", label: "The six experiences" }, { href: "#destination", label: "The destination" }]} />
       </PageHero>
@@ -116,7 +116,7 @@ export function ProgrammePage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [COPY_DRAFT, "No 2027 session is approved. Sessions are added to lib/editions/2027.ts only once confirmed, and appear here with their times."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Event programme", notes]]}>
+    <Shell page="programme" opts={opts} notes={props.notes ?? "inline"} groups={[["Event programme", notes]]}>
       <PageHero title={PAGES.programme.title.text} intro={PAGES.programme.intro.text} opts={opts} notes={notes}>
         <PageContents items={EDITION_DAYS.map((d) => ({ href: `#${dayAnchor(d.shortDate)}`, label: `${d.weekday}, ${d.shortDate}` }))} />
       </PageHero>
@@ -179,7 +179,7 @@ export function EducationPage(props: PageProps) {
   const notes = [COPY_DRAFT, "No speaker or educator is confirmed, so none is named.", "Education image reserved for an approved HEBS Lagos event photograph."];
   const register = portalLink("education-registration", opts.environment);
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Education & masterclasses", notes]]}>
+    <Shell page="education" opts={opts} notes={props.notes ?? "inline"} groups={[["Education & masterclasses", notes]]}>
       <PageHero title={sentenceCase(PAGES.education.title.text)} intro={PAGES.education.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={[{ href: "#tracks", label: "Learning tracks" }, { href: "#educators", label: "Educators" }, { href: "#registration", label: "Registration" }]} />
       </PageHero>
@@ -246,7 +246,7 @@ export function CompetitionsPage(props: PageProps) {
   ];
   const pathways = COPY.competitions.pathways.map((label, i) => ({ href: `#${COMPETITION_ANCHORS[i]}`, label }));
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
+    <Shell page="competitions" opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
       <PageHero title={sentenceCase(COPY.competitions.headline.text)} intro={PAGES.competitions.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={pathways} />
       </PageHero>
@@ -325,7 +325,7 @@ export function SponsorshipPage(props: PageProps) {
     "The prospectus download appears with an approved 2027 prospectus.",
   ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Sponsorship & partnerships", notes]]}>
+    <Shell page="sponsorship" opts={opts} notes={props.notes ?? "inline"} groups={[["Sponsorship & partnerships", notes]]}>
       <PageHero title={sentenceCase(COPY.partners.headline.text)} intro={PAGES.sponsorship.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="champagne">
         <PageContents light items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Inquiries" }]} />
       </PageHero>
@@ -385,7 +385,7 @@ export function ExhibitorsPage(props: PageProps) {
     "No application is collected. Submission follows INTEGRATION-CONTRACT-v1.1; the form stays closed until the private integration test and owner approval. The company-profile upload is not shown in this release (owner decision 7) until malware scanning or quarantine is approved.",
   ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>
+    <Shell page="exhibitors" opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>
       <PageHero title={PAGES.exhibitors.title.text} intro={PAGES.exhibitors.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="ivory">
         <PageContents light items={[{ href: "#exhibit", label: "Ways to exhibit" }, { href: "#apply", label: "Applications" }, { href: "#brands", label: "Participating brands" }]} />
       </PageHero>
@@ -453,7 +453,7 @@ export function TravelPage(props: PageProps) {
   ];
   const body = "text-[17px] leading-[1.7]";
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
+    <Shell page="travel" opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
       <PageHero title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="atlantic">
         <PageContents items={[
           { href: "#venue", label: "The venue" }, { href: "#arriving", label: "Arriving in Lagos" }, { href: "#stay", label: "Accommodation" },
@@ -516,7 +516,7 @@ export function TicketsPage(props: PageProps) {
   const buy = portalLink("tickets", opts.environment);
   const notes = [COPY_DRAFT, "Ticket categories, prices and payment gateway are approved separately (directive section 6). Payment collection is not authorised."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
+    <Shell page="tickets" opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
       <PageHero title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a href={PRIORITY_HREF} className="inline-flex min-h-[56px] items-center justify-center px-9 text-[13px] font-bold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-[#EAD7A8]" style={{ background: C.champ, color: C.black }}>
@@ -556,6 +556,7 @@ export function TicketsPage(props: PageProps) {
           </div>
         </div>
       </Section>
+      <PriorityList opts={opts} notes={[]} />
       <FinalCta to={TARGETS} />
     </Shell>
   );
@@ -568,7 +569,7 @@ export function GalleryPage(props: PageProps) {
   const g = PAGES.gallery;
   const notes = [COPY_DRAFT, "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
+    <Shell page="gallery" opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
       <PageHero title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} />
       <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
@@ -609,7 +610,7 @@ export function ContactPage(props: PageProps) {
   const c = PAGES.contact;
   const notes = [COPY_DRAFT, "Email addresses and social accounts withheld until public contacts are approved (D10). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
+    <Shell page="contact" opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
       <PageHero title={c.title.text} intro={c.intro.text} opts={opts} notes={notes.slice(0, 1)} />
       <Section id="message" ground="ivory" labelledBy="message-title">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
@@ -652,7 +653,7 @@ export function AboutPage(props: PageProps) {
     "Vision and impact copy awaiting owner approval.",
   ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["About HEBS", notes]]}>
+    <Shell page="about" opts={opts} notes={props.notes ?? "inline"} groups={[["About HEBS", notes]]}>
       <PageHero title={a.title.text} intro={COPY.welcome.body.text} opts={opts} />
       <Section id="history" ground="ivory" labelledBy="history-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
@@ -696,7 +697,7 @@ export function SpeakersPage(props: PageProps) {
   const sp = PAGES.speakers;
   const notes = [COPY_DRAFT, "No speaker or educator is confirmed, so none is named and no portrait is shown."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Speakers & educators", notes]]}>
+    <Shell page="speakers" opts={opts} notes={props.notes ?? "inline"} groups={[["Speakers & educators", notes]]}>
       <PageHero title={sp.title.text} intro={sp.intro.text} opts={opts} notes={notes.slice(0, 1)} />
       <Section id="announced" ground="ivory" labelledBy="announced-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">

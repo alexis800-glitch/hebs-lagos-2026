@@ -5,7 +5,6 @@
  */
 import Image from "next/image";
 import { findAsset } from "@/lib/assets/register";
-import { SITE_MENU } from "@/lib/site/2027";
 
 /* ── Preview banner ─────────────────────────────────────────────────── */
 
@@ -55,26 +54,3 @@ export function Header2027({ home }: { home: string }) {
   );
 }
 
-/* ── Footer ─────────────────────────────────────────────────────────── */
-
-export function Footer2027() {
-  return (
-    <footer className="h27-footer border-t border-h27-line bg-h27-ink text-h27-muted">
-      <nav aria-label="All HEBS 2027 pages" className="mx-auto max-w-6xl px-4 pt-10 sm:px-8">
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:grid-cols-3 lg:grid-cols-6">
-          {SITE_MENU.map((l) => (
-            <li key={l.href}><a className="inline-flex min-h-[44px] items-center hover:text-h27-ivory" href={l.href}>{l.label}</a></li>
-          ))}
-        </ul>
-      </nav>
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-8 py-10 text-xs sm:flex-row sm:items-center sm:justify-between">
-        <p>HEBS Lagos 2027, staging preview.</p>
-        <ul className="flex flex-wrap gap-5">
-          <li><a className="hover:text-h27-ivory" href="/privacy">Privacy</a></li>
-          <li><a className="hover:text-h27-ivory" href="/">HEBS Lagos 2026 site</a></li>
-          <li><a className="hover:text-h27-ivory" href="/2027/status">Approval status</a></li>
-        </ul>
-      </div>
-    </footer>
-  );
-}

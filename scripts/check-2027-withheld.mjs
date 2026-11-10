@@ -2,11 +2,12 @@
 // Request-level proof that a production build leaks nothing from the unpublished
 // HEBS 2027 pages or the review media.
 //
-// For every /2027 route (found in app/2027), an unknown /2027 path and review files,
+// For every /2027 route (found in app/(edition)/2027), an unknown /2027 path and review files,
 // it requests the page as a browser load, an RSC request, a router prefetch and an
 // RSC request with the _rsc query, and checks that each answer is a 404 identical to
 // the one for an ordinary missing page (once the echoed URL is removed), with none of
-// the 2027 markers in it.
+// the 2027 markers in it. It also checks that live 2026 pages never mention 2027,
+// not even in the name of a shared script chunk.
 //
 // usage:
 //   VERCEL_ENV=production npx next build && VERCEL_ENV=production npx next start -p 3000
@@ -25,13 +26,13 @@ const MODES = {
   rscQuery: { headers: { RSC: "1" }, query: "?_rsc=check" },
 };
 
-function routes(dir = join(ROOT, "app/2027")) {
+function routes(dir = join(ROOT, "app/(edition)/2027")) {
   const out = [];
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) out.push(...routes(p));
     else if (/^(page|route)\.tsx?$/.test(name)) {
-      out.push("/" + relative(join(ROOT, "app"), dir).split("/").map((s) => (s.startsWith("[") ? "sample" : s)).join("/"));
+      out.push("/" + relative(join(ROOT, "app"), dir).split("/").filter((s) => !/^\(.+\)$/.test(s)).map((s) => (s.startsWith("[") ? "sample" : s)).join("/"));
     }
   }
   return out;
@@ -51,6 +52,9 @@ async function get(path, mode) {
   return { status: res.status, body: await res.text() };
 }
 
+/** Live 2026 pages, which must not reveal that a 2027 site exists. */
+const LIVE = ["/", "/about", "/competitions", "/tickets", "/privacy", CONTROL];
+
 const paths = [...routes(), "/2027/not-a-page", "/_review/home-2027/mark-2027-a.png", "/_review/home-2027/hair-wide.mp4"];
 const failures = [];
 let checked = 0;
@@ -68,7 +72,13 @@ for (const [name, mode] of Object.entries(MODES)) {
   }
 }
 
-console.log(`${checked} requests: ${paths.length} paths × ${Object.keys(MODES).length} request types against ${BASE}`);
+for (const path of LIVE) {
+  const r = await get(path, MODES.page);
+  checked++;
+  if (/2027/.test(r.body)) failures.push(`live ${path}: mentions 2027`);
+}
+
+console.log(`${checked} requests: ${paths.length} paths × ${Object.keys(MODES).length} request types, and ${LIVE.length} live 2026 pages, against ${BASE}`);
 if (failures.length) {
   console.error(`FAILED (${failures.length}):\n  ` + failures.join("\n  "));
   process.exit(1);

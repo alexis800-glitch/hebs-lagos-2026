@@ -4,21 +4,11 @@ import { HOME, CATEGORY_NAMES } from "@/lib/content/home-2027";
 import { dayAnchor } from "@/components/2027/editorial/sections";
 import { winnersView } from "@/lib/content/winners-2026";
 import { deployEnvironment } from "@/lib/publication";
-import { Clip, Pic, reviewMedia, reviewSrc, srcSetOf } from "./media";
-import { HomeFooter } from "./footer";
+import { Clip, Pic, reviewSrc } from "./media";
+import { Mark } from "@/components/2027/site/mark";
 import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
 import { DesignScale, DestinationSequence, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
 import { HOME_HREF, NAV } from "./links";
-
-/** Official mark, used whenever the provisional 2027 mark isn't loaded for review. */
-const OFFICIAL_MARK = "/assets/logos/hebs_logo_nav.png";
-
-function Mark({ className = "logo", sizes = "(max-width: 600px) 84px, (max-width: 1279px) 96px, 108px", lazy = false }: { className?: string; sizes?: string; lazy?: boolean }) {
-  const provisional = reviewMedia("mark-2027-a");
-  if (!provisional) return <img className={className} src={OFFICIAL_MARK} alt="HEBS, Hair Education Beauty Summit" />;
-  // The 520 px PNG master is kept for reference; pages load the 240/480 px WebP cuts.
-  return <img className={className} src={provisional.src.replace(/\.png$/, "-480.webp")} srcSet={srcSetOf(provisional)} sizes={sizes} width={520} height={487} alt={provisional.alt} loading={lazy ? "lazy" : "eager"} decoding="async" />;
-}
 
 function Hero() {
   const h = HOME.hero;
@@ -371,7 +361,6 @@ export function PreferredHomepage() {
         <Highlights />
         <Sponsors />
         <Final />
-        <HomeFooter mark={<Mark className="pf-mark" sizes="96px" lazy />} />
       </div>
     </div>
   );

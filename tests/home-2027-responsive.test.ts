@@ -1,5 +1,5 @@
 /**
- * Responsive layout, media loading, the homepage footer and cookie controls.
+ * Responsive layout, media loading, the shared 2027 footer and cookie controls.
  */
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
@@ -7,6 +7,7 @@ import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { PreferredHomepage } from "@/components/2027/home/HomePage";
+import { SiteFooter } from "@/components/2027/site/SiteFooter";
 import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
 
 const ROOT = join(__dirname, "..");
@@ -52,14 +53,14 @@ describe("media loading", () => {
   });
 });
 
-describe("homepage footer and cookie controls", () => {
-  const html = renderToStaticMarkup(createElement(PreferredHomepage));
-  const footer = html.slice(html.indexOf('<footer class="pf"'));
+describe("2027 footer and cookie controls", () => {
+  const footer = renderToStaticMarkup(createElement(SiteFooter));
 
-  it("is one footer, linking built pages and the live Privacy & Cookie Notice only", () => {
-    expect(html.match(/<footer/g)).toHaveLength(1);
+  it("is one footer, rendered by the 2027 layout, linking built pages and the live Privacy & Cookie Notice only", () => {
+    expect(renderToStaticMarkup(createElement(PreferredHomepage))).not.toMatch(/<footer/);
+    expect(read("app/(edition)/2027/layout.tsx")).toContain("<SiteFooter />");
     const hrefs = Array.from(footer.matchAll(/href="([^"]+)"/g)).map((m) => m[1]);
-    for (const h of hrefs) expect(h === "/privacy" || h.startsWith("/2027/"), h).toBe(true);
+    for (const h of hrefs) expect(h === "/privacy" || h === "/2027" || h.startsWith("/2027/"), h).toBe(true);
     expect(footer).toContain("Cookie preferences</button>");
   });
 
@@ -70,7 +71,10 @@ describe("homepage footer and cookie controls", () => {
   });
 
   it("never loads the Meta Pixel outside production", () => {
-    expect(read("app/layout.tsx")).toContain('<TrackingConsent trackingAllowed={deployEnvironment() === "production"} />');
+    // Both root layouts: the live 2026 site and the 2027 site.
+    for (const f of ["app/(site)/layout.tsx", "app/(edition)/layout.tsx"]) {
+      expect(read(f), f).toContain('<TrackingConsent trackingAllowed={deployEnvironment() === "production"} />');
+    }
     expect(read("components/TrackingConsent.tsx")).toContain("decision === CONSENT_ACCEPTED && trackingAllowed && <MetaPixel />");
   });
 });

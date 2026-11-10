@@ -121,7 +121,7 @@ describe("asset register", () => {
   });
 
   it("references no HEBS archive image from any 2027 page or component", () => {
-    const files = [...walk(join(ROOT, "app/2027")), ...walk(join(ROOT, "components/2027"))].filter((f) => /\.(tsx?|css)$/.test(f));
+    const files = [...walk(join(ROOT, "app/(edition)/2027")), ...walk(join(ROOT, "components/2027"))].filter((f) => /\.(tsx?|css)$/.test(f));
     expect(files.length).toBeGreaterThan(5);
     for (const f of files) expect(readFileSync(f, "utf8"), f).not.toMatch(/\/images\/hebs-20(24|25)\//);
   });
@@ -139,7 +139,7 @@ describe("asset register", () => {
 
   it("never carries the 2026 venue address into the 2027 site (D9)", () => {
     // 2026 records keep their venue as recorded; 2027 waits for written confirmation.
-    const files = [...walk(join(ROOT, "app/2027")), ...walk(join(ROOT, "components/2027")),
+    const files = [...walk(join(ROOT, "app/(edition)/2027")), ...walk(join(ROOT, "components/2027")),
       join(ROOT, "lib/editions/2027.ts"), join(ROOT, "lib/content/2027.ts"), join(ROOT, "lib/content/2027-pages.ts"),
       join(ROOT, "lib/assets/register.ts"), ...walk(join(ROOT, "lib/site")), ...walk(join(ROOT, "lib/integrations"))]
       .filter((f) => /\.tsx?$/.test(f));
@@ -166,7 +166,7 @@ describe("traceability", () => {
   });
 
   it("submits forms from one component only, to the website's own route only", () => {
-    const files = [...walk(join(ROOT, "app/2027")), ...walk(join(ROOT, "components/2027"))].filter((f) => /\.tsx?$/.test(f));
+    const files = [...walk(join(ROOT, "app/(edition)/2027")), ...walk(join(ROOT, "components/2027"))].filter((f) => /\.tsx?$/.test(f));
     const form = join(ROOT, "components/2027/editorial/HebsForm.tsx");
     for (const f of files.filter((x) => x !== form)) {
       expect(readFileSync(f, "utf8"), f).not.toMatch(/<form\b|\baction=|onSubmit|type="submit"|fetch\(/);

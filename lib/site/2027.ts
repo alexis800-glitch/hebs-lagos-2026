@@ -32,7 +32,7 @@ export interface SitePage {
 }
 
 const page = (id: PageId, title: string, nav: string, slug: string, purpose: string, built: boolean, waitingOn: string[] = []): SitePage =>
-  ({ id, title, nav, path: slug ? `${BASE}/${slug}` : `${BASE}/homepage`, purpose, built, waitingOn });
+  ({ id, title, nav, path: slug ? `${BASE}/${slug}` : BASE, purpose, built, waitingOn });
 
 export const SITE_PAGES: SitePage[] = [
   page("home", "Home", "Home", "", "The complete premium landing page.", true),
@@ -74,8 +74,14 @@ export function pageHref(id: PageId, hash = ""): string | null {
   return p.built ? `${p.path}${hash ? `#${hash}` : ""}` : null;
 }
 
-/** Where every priority-list button leads. */
-export const PRIORITY_HREF = `${BASE}/homepage#priority-list`;
+/**
+ * Where every priority-list button leads: the priority-list section of the
+ * Tickets & registration page. While the list is closed (FORMS_OPEN.priority is
+ * false) that section explains it and collects nothing; once the list is
+ * authorised and opened, the approved form appears in the same section, so no
+ * button or link has to change.
+ */
+export const PRIORITY_HREF = `${BASE}/tickets#priority-list`;
 
 /**
  * The priority-list call to action. The directive's wording, "Join the 2027

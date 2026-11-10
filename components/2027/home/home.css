@@ -328,28 +328,6 @@
 .hp .dz .chap button{all:unset;display:grid;gap:5px;cursor:pointer;width:100%}
 .hp .dz .chap button:focus-visible{outline:2px solid var(--champagne);outline-offset:6px}
 
-/* FOOTER: one footer, black and champagne gold */
-body:has(.hp-wrap) .h27-footer{display:none}
-.hp .pf{background:var(--black);color:rgba(246,239,226,.78);border-top:1px solid rgba(217,193,146,.22);padding:84px 96px 40px}
-.hp .pf-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;padding-bottom:48px}
-.hp .pf-brand{display:flex;align-items:center;gap:28px}
-.hp .pf-mark{width:96px;height:auto}
-.hp .pf-tag{font-family:var(--display);font-size:40px;line-height:1.05;color:var(--ivory)}
-.hp .pf-tag em{font-style:italic;font-weight:400;background:linear-gradient(100deg,#C9A35E,#F6E6BD 40%,#C29A55);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hp .pf-meta{margin-top:12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--champagne)}
-.hp .pf-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;padding:48px 0;border-top:1px solid transparent;border-image:linear-gradient(90deg,rgba(184,145,76,0),#B8914C 20%,#E9D4A2 50%,#B8914C 80%,rgba(184,145,76,0)) 1}
-.hp .pf h2{font-family:var(--display);font-style:italic;font-weight:400;font-size:22px;color:var(--champagne);margin-bottom:16px}
-.hp .pf ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px}
-.hp .pf a:hover,.hp .pf .pf-link:hover{color:var(--champagne)}
-.hp .pf-note{font-size:14px;color:rgba(246,239,226,.62);max-width:30ch}
-.hp .pend{display:inline-block;margin-top:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--champagne);border:1px dashed rgba(217,193,146,.6);border-radius:3px;padding:2px 8px}
-.hp .pf-legal{display:flex;justify-content:space-between;align-items:center;gap:20px 32px;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(217,193,146,.18);font-size:13px;color:rgba(246,239,226,.66)}
-.hp .pf-legal ul{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;font-size:13px}
-.hp .pf-legal .pend{margin:0 0 0 6px}
-.hp .pf-off{color:rgba(246,239,226,.5)}
-.hp .pf-link{all:unset;cursor:pointer;color:inherit}
-.hp .pf-link:focus-visible{outline:2px solid var(--champagne);outline-offset:4px}
-.hp .pf-review{margin-top:18px;font-size:12px;color:rgba(217,193,146,.75)}
 
 /* ═══ Phone ═══ */
 @container (max-width:1279px){
@@ -490,14 +468,6 @@ body:has(.hp-wrap) .h27-footer{display:none}
   .hp .collage .c{width:150px;height:130px}
   .hp .collage .gold-chip{display:none}
   .hp .daygrid{display:flex;gap:14px;overflow:hidden;margin-top:30px;margin-right:-22px}
-  .hp .pf{padding:64px 22px 32px}
-  .hp .pf-brand{flex-direction:column;align-items:flex-start;gap:18px}
-  .hp .pf-mark{width:80px}
-  .hp .pf-tag{font-size:30px}
-  .hp .pf-cols{grid-template-columns:1fr 1fr;gap:34px 20px;padding:36px 0}
-  .hp .pf h2{font-size:19px;margin-bottom:12px}
-  .hp .pf ul{gap:12px;font-size:15px}
-  .hp .pf-legal{flex-direction:column;align-items:flex-start}
   .hp .vctl-hero{top:auto;bottom:auto;top:84px;right:22px}
   .hp .vctl-fn{right:16px;bottom:16px}
   .hp .dz .dzctl{position:relative;right:auto;bottom:auto;order:4;margin:22px 22px 0 auto}
@@ -609,17 +579,14 @@ body:has(.hp-wrap) .h27-footer{display:none}
   .hp .fn .when{font-size:12.5px}
   .hp .fn .count .n{font-size:40px}.hp .fn .count .u{padding:0 20px}
   .hp .fn .btn{font-size:12px;padding:0 26px}
-  .hp .pf{padding:80px 48px 36px}
-  .hp .pf-cols{grid-template-columns:repeat(4,minmax(0,1fr))}
   .hp .vctl-hero{top:120px;right:48px}
 }
 /* Desktop composition: small capitals sized so that, at the 0.89 laptop scale,
    they stay at about 12 px. */
 @container (min-width:1280px){
-  .hp .lab,.hp .btn,.hp .kick,.hp .nav,.hp .hcol .when,.hp .wn .card2 .cat,.hp .wn .meta2 .k,.hp .wn .fpair .k,.hp .wn .hpair .k,.hp .wn .slot small,.hp .pf-meta,.hp .wn .bar2 p{font-size:13.5px}
-  .hp .count .l,.hp .card p,.hp .wn .tag,.hp .pend,.hp .dz .badge,.hp .dz .chap span,.hp .hx .src2,.hp .live,.hp .pf-review,.hp .fn .when{font-size:13px}
+  .hp .lab,.hp .btn,.hp .kick,.hp .nav,.hp .hcol .when,.hp .wn .card2 .cat,.hp .wn .meta2 .k,.hp .wn .fpair .k,.hp .wn .hpair .k,.hp .wn .slot small,.hp .wn .bar2 p{font-size:13.5px}
+  .hp .count .l,.hp .card p,.hp .wn .tag,.hp .dz .badge,.hp .dz .chap span,.hp .hx .src2,.hp .live,.hp .fn .when{font-size:13px}
   .hp .dz .badge b{font-size:12px}
-  .hp .pf-legal,.hp .pf-legal ul{font-size:14px}
   .hp .sp ul{font-size:15px}
 }
 /* Wider tablets and small laptops: text and pictures side by side again. */

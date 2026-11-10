@@ -1,7 +1,8 @@
 # HEBS Lagos 2027: preferred homepage design
 
-Route: `/2027/concepts/home` (staging only; the `/2027` layout returns 404 on
-production and marks every page noindex).
+Route: `/2027`, the one 2027 homepage (staging only; the `/2027` layout returns
+404 on production and marks every page noindex). The earlier addresses
+`/2027/concepts/home` and `/2027/homepage` redirect here.
 
 On production, `middleware.ts` answers every `/2027` and `/_review` request as an
 ordinary missing page before any 2027 route renders, so no 2027 copy reaches a
@@ -15,14 +16,22 @@ to the closed priority list and say it opens soon until forms are authorised.
 (Owner decision N1, 2026-11-09: "Priority list opens soon" while registration is
 closed; the approved registration wording returns when the list is activated.)
 
-## Known issue: two 2027 homepages
+## One 2027 site (A2)
 
-The thirteen 2027 pages still link to the older homepage: their logo and "Home"
-lead to `/2027`, and the priority-list buttons to the closed form at
-`/2027/homepage#priority-list`. Nothing on those pages links back to this
-preferred homepage. The owner wants this homepage to become the one 2027 landing
-page; that move (decision A2, with where the priority list lives, N2) is to be
-done in its own approved phase, not as part of these fixes.
+The 2027 pages have their own root layout, `app/(edition)/layout.tsx`, through
+a route group; the live 2026 site keeps its own in `app/(site)/layout.tsx`. Each
+loads only its own fonts and styles, so neither site changes the other.
+
+Every 2027 page shares one header and one footer (`components/2027/site/`): the
+same mark, the same five headline pages, "Become a sponsor" and the full phone
+menu, and the same footer rendered once by `app/(edition)/2027/layout.tsx`. The
+homepage keeps its own overlaid hero header with the same items. All 2027 pages
+use Bodoni Moda and Jost.
+
+"Priority list opens soon" leads to `/2027/tickets#priority-list` (owner
+decision N2). Until the list is opened, that section explains that it is not
+open, with no form and no fields. When `FORMS_OPEN.priority` is set, the approved
+form takes its place at the same anchor.
 
 This is the owner's **preferred creative design** (approved 2026-11-07), ported
 from the reviewed mockup. It is preserved here for content verification and
@@ -82,7 +91,7 @@ The owner keeps the review files privately. To see the design with its real
 media in local development, place the files named in
 `lib/assets/home-2027-review.ts` (the `src` of each record) in
 `public/_review/home-2027/`, then run `npm run dev` and open
-`/2027/concepts/home`. Never commit them and never copy them into any other
+`/2027`. Never commit them and never copy them into any other
 folder under `public/`.
 
 ## Screen sizes
@@ -112,7 +121,7 @@ laptops from 601 px. Every label is at least 11 px. See the end of `home.css`.
 
 ## Footer and cookie preferences
 
-The homepage has one footer:
+Every 2027 page has the same single footer:
 - the pages of the 2027 site map;
 - the live Privacy & Cookie Notice, which serves as both Privacy Policy and Cookie Policy;
 - a working Cookie preferences control, which opens the site's consent dialog.
@@ -136,14 +145,19 @@ Lighthouse accessibility scores 100 at 1440, 1280, 834 and 412 px.
 
 ## Open follow-ups (recorded 2026-11-10)
 
-- **Phone load time (A2).** On a simulated slow 4G phone the largest element
-  appears at about 5.0 s, mostly render delay. The main cause is
-  `app/layout.tsx` (the live 2026 site's root layout): it preloads the 2026
-  fonts on every page, 2027 included. It is not changed here, so the live site
-  stays as it is. The fix belongs with A2: give the 2027 site its own root
-  layout, through route groups, that loads only its own fonts.
-- **A2.** One 2027 homepage (this one) and a shared header and footer across all
-  13 pages. The direction is approved; the work is not started.
+- **Phone load time.** With its own root layout (A2), the 2027 homepage no
+  longer preloads the 2026 fonts (8 font files, 369 KB, down to 4 files, 155 KB).
+  On Lighthouse's simulated slow 4G phone the largest element now appears at
+  about 4.0 s instead of 5.0 s (score 81 to 87; desktop 0.97 s to 0.77 s). That
+  element is the hero still, which downloads in under 0.4 s but paints about
+  2.8 s later. The cause of that remaining delay is not yet identified; finding
+  it may need a change to the hero, which stays as approved until then.
+- **404 page.** With two root layouts, Next.js 14 serves its built-in 404 for
+  missing addresses, outside the 2026 layout: same text, but it follows the
+  visitor's light or dark setting instead of the 2026 near-black page, and has
+  no consent banner. Keeping the 2026 layout there would need a catch-all route,
+  which made withheld /2027 addresses distinguishable from other missing pages,
+  so it is not used.
 - **A7.** Approved 2027 contact details and social accounts.
 - **A8.** Approved 2027 privacy and cookie notices, and Terms & Conditions. The
   footer links the existing HEBS Lagos 2026 Privacy & Cookie Notice only as the

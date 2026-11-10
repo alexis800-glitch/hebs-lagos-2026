@@ -461,9 +461,10 @@ export const COMPETITION_ANCHORS = ["categories", "eligibility", "rules", "apply
 
 
 /**
- * The priority list (directive section 6). The form is the working HebsForm;
- * it stays disabled, sending nothing, until submission is configured for this
- * deployment and the owner opens the list.
+ * The priority list (directive section 6). Until the owner opens the list it is
+ * a closed notice with no form and no fields, so nothing can be entered or sent.
+ * Once FORMS_OPEN.priority is true the approved form (the working HebsForm)
+ * takes the notice's place, at the same #priority-list anchor.
  */
 export function PriorityList({ opts, notes }: SectionProps) {
   return (
@@ -477,7 +478,17 @@ export function PriorityList({ opts, notes }: SectionProps) {
           <SectionNotes notes={notes} opts={opts} ground="ivory" className="mt-6" />
         </div>
         <div className="lg:col-span-6 lg:col-start-7">
-          <FormBlock form="priority" title="2027 priority list" gate="The priority list is not open yet. Nothing can be sent." submitLabel="Join the priority list" />
+          {FORMS_OPEN.priority ? (
+            <FormBlock form="priority" title="2027 priority list" gate="The priority list is not open yet. Nothing can be sent." submitLabel="Join the priority list" />
+          ) : (
+            <div role="status" className="border p-8 sm:p-10" style={{ borderColor: "rgba(122,90,34,.45)", background: "rgba(255,255,255,.55)" }}>
+              <p className="text-[13px] font-bold uppercase tracking-[0.18em]" style={{ color: "#7A5A22" }}>{PRIORITY_CTA}</p>
+              <p className="mt-5 text-[22px] leading-[1.35]" style={{ ...display, fontWeight: 500, color: C.black }}>The priority list is not open yet.</p>
+              <p className="mt-4 max-w-[46ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>
+                Nothing can be submitted here for now, and no personal details are collected. When the list opens, the sign-up form appears in this section.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </Section>

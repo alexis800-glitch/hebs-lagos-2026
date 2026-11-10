@@ -21,13 +21,13 @@ const PENDING = ["approved", "provisional"] as const;
 const REQUEST_TYPES: Record<string, string>[] = [{}, { RSC: "1" }, { RSC: "1", "Next-Router-Prefetch": "1" }];
 
 /** Every URL path the app router serves under /2027, dynamic segments filled in. */
-function routes2027(dir = join(ROOT, "app/2027")): string[] {
+function routes2027(dir = join(ROOT, "app/(edition)/2027")): string[] {
   const out: string[] = [];
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) out.push(...routes2027(p));
     else if (/^(page|route)\.tsx?$/.test(name)) {
-      out.push("/" + relative(join(ROOT, "app"), dir).split("/").map((s) => (s.startsWith("[") ? "sample" : s)).join("/"));
+      out.push("/" + relative(join(ROOT, "app"), dir).split("/").filter((s) => !/^\(.+\)$/.test(s)).map((s) => (s.startsWith("[") ? "sample" : s)).join("/"));
     }
   }
   return out;

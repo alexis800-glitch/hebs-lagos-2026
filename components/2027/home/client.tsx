@@ -286,7 +286,7 @@ export function FilmControl({ target, label }: { target: string; label: string }
  * The phone menu: a button that opens every 2027 page over the hero. Escape or the
  * close button shuts it and returns focus to the button; Tab stays inside while open.
  */
-export function MobileMenu({ home, links, cta }: { home: string; links: { label: string; href: string }[]; cta: { label: string; href: string } }) {
+export function MobileMenu({ home, links, cta, current }: { home: string; links: { label: string; href: string }[]; cta: { label: string; href: string }; current?: string }) {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -327,9 +327,9 @@ export function MobileMenu({ home, links, cta }: { home: string; links: { label:
         <button type="button" className="mclose" onClick={close}>Close</button>
         <nav aria-label="All HEBS 2027 pages">
           <ul>
-            <li><a href={home} onClick={() => setOpen(false)}>Home</a></li>
+            <li><a href={home} aria-current={current === home ? "page" : undefined} onClick={() => setOpen(false)}>Home</a></li>
             {links.map((l) => (
-              <li key={l.href}><a href={l.href} onClick={() => setOpen(false)}>{l.label}</a></li>
+              <li key={l.href}><a href={l.href} aria-current={current === l.href ? "page" : undefined} onClick={() => setOpen(false)}>{l.label}</a></li>
             ))}
           </ul>
         </nav>
