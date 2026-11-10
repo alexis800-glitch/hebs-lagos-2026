@@ -86,8 +86,8 @@ describe("preferred homepage: copy", () => {
     expect(CATEGORY_COUNT).toBe(7);
   });
 
-  it("shows the NJS terrace, not open sea, in the hero", () => {
-    expect(HOME.hero.cards.map((c) => c.media)).toEqual(["hero-card-guest", "hero-card-terrace"]);
+  it("carries the film only in the hero, without photograph cards (A3)", () => {
+    expect("cards" in HOME.hero).toBe(false); // A3: the hero carries the film only
   });
 });
 

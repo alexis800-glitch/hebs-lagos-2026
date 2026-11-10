@@ -5,6 +5,7 @@
   --black:#0D0B08; --onyx:#17130E; --champagne:#D9C192; --gold:#B8914C; --ivory:#F6EFE2; --white:#FFFDF8; --ocean:#2C6A70;
   --metal:linear-gradient(100deg,#8C6B34 0%,#E9D4A2 38%,#B8914C 56%,#F5E7C3 76%,#9A783E 100%);
   --display:var(--c-bodoni),"Didot","Bodoni 72",Georgia,serif; --text:var(--c-jost),"Futura","Avenir Next",system-ui,sans-serif;
+  --text-italic:var(--c-jost-italic),var(--c-jost),"Futura","Avenir Next",system-ui,sans-serif;
   container-type:inline-size;width:100%;margin:0 auto;background:var(--black);color:var(--ivory);font-family:var(--text);font-size:16px;line-height:1.6;overflow-x:clip}
 /* The desktop composition is drawn on a 1440 px canvas and scaled to the window
    (--hpz, set by DesignScale) only from 1280 px, so it is never reduced by more
@@ -37,20 +38,19 @@
 
 @keyframes push{from{transform:scale(1.0)}to{transform:scale(1.07)}}
 @keyframes drift{from{transform:scale(1.03) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(-1.5%,-1%,0)}}
-/* THE DESTINATION: editorial black column + a moving stage that dissolves through four
-   poolside scenes. The stage fades into the black so the two read as one space. */
+/* THE DESTINATION: editorial black column + a moving stage that dips through black between
+   three scenes. The stage stays black behind the headline, then fades in (A6). */
 .hp .dz{position:relative;height:900px;overflow:hidden;background:radial-gradient(60% 70% at 72% 45%,#2A2016 0%,#0D0B08 72%)}
-.hp .dz .stage{position:absolute;right:0;top:72px;width:1110px;height:640px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%);mask-image:linear-gradient(90deg,transparent 0,#000 16%)}
-.hp .dz .scene{position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease}
-.hp .dz .scene.on{opacity:1}
+.hp .dz .stage{position:absolute;right:0;top:72px;width:1110px;height:640px;-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 18%,#000 36%);mask-image:linear-gradient(90deg,transparent 0,transparent 18%,#000 36%)}
+/* A6b: a dip through black - the outgoing scene fades out before the next fades in, so two frames never overlap. */
+.hp .dz .scene{position:absolute;inset:0;opacity:0;transition:opacity .6s ease-in}
+.hp .dz .scene.on{opacity:1;transition:opacity .9s ease-out .6s}
 .hp .dz .scene video{animation:push 7s ease-out both}
 .hp .dz .scene:not(.on) video{animation:none}
 .hp .dz .pair{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:0}
 .hp .dz .pair .ph{position:relative;height:100%}
 .hp .dz .scene.on .pair img{animation:drift 7s ease-out both}
 .hp .dz .stage::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,11,8,.75) 0%,rgba(13,11,8,0) 28%),linear-gradient(180deg,rgba(13,11,8,.45),rgba(13,11,8,0) 22%);pointer-events:none}
-.hp .dz .frameline{position:absolute;right:56px;top:100px;width:1000px;height:640px;border:1px solid rgba(217,193,146,.4);pointer-events:none;z-index:2}
-.hp .dz .frameline::before{content:"";position:absolute;right:-1px;top:-1px;width:54px;height:54px;border:1px solid var(--champagne);border-left:0;border-bottom:0}
 .hp .dz .badge{position:absolute;z-index:5;right:96px;top:108px;display:flex;gap:10px;align-items:center;font-size:12px;line-height:1.35;letter-spacing:.03em;padding:7px 12px;border-radius:6px;background:rgba(10,8,6,.7);color:#F0E6D2;max-width:420px}
 .hp .dz .badge b{font-weight:500;letter-spacing:.2em;font-size:10.5px;padding:2px 7px;border-radius:3px;white-space:nowrap;background:var(--metal);color:#16110A}
 .hp .dz .badge.photo b{background:#F6EFE2}
@@ -117,7 +117,6 @@
 .hp .dy .d h3{font-family:var(--display);font-weight:500;font-size:30px;line-height:1.1;margin-top:28px}
 .hp .dy .d p{margin-top:10px;font-size:15px;color:#4A3F31;font-weight:300;max-width:36ch}
 .hp .dy .btn.ln,.hp .cp .btn.ln{color:#7A5A22;border-color:rgba(140,107,52,.6);margin-top:16px}
-.hp img.zoomgold{transform:scale(1.9);transform-origin:12% 92%}
 
 /* SIX EXPERIENCES: an index that cycles, with one framed image answering each line */
 .hp .ex{padding:140px 96px 90px}
@@ -210,7 +209,7 @@
 .hp .wn .meta2 .k{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A5A22;margin-top:18px}
 .hp .wn .meta2 .k:first-child{margin-top:0}
 .hp .wn .meta2 .v{font-family:var(--display);font-size:28px;line-height:1.15;color:#16110A}
-.hp .wn .meta2 .v.ph2{color:#6E685D;font-style:italic}
+.hp .wn .meta2 .v.ph2{color:#6E685D;font-family:var(--text-italic);font-style:italic}
 .hp .wn .bar2{display:flex;justify-content:space-between;align-items:center;margin-top:70px;padding-bottom:18px;border-bottom:1px solid rgba(184,145,76,.5)}
 .hp .wn .bar2 p{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A5A22}
 .hp .wn .bar2 .cnt{font-family:var(--display);font-style:italic;font-size:20px;letter-spacing:0;text-transform:none;color:#7A5A22}
@@ -229,7 +228,7 @@
 .hp .wn .fpair figcaption{margin-top:22px;border-left:1px solid rgba(184,145,76,.6);padding-left:22px}
 .hp .wn .fpair .k,.hp .wn .hpair .k{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#7A5A22}
 .hp .wn .fpair .cmpx{font-family:var(--display);font-weight:500;font-size:30px;line-height:1.1;margin-top:6px;color:#16110A}
-.hp .wn .fpair .tbc{font-size:14px;font-style:italic;color:#6E685D;margin-top:6px}
+.hp .wn .fpair .tbc{font-size:14px;font-family:var(--text-italic);font-style:italic;color:#6E685D;margin-top:6px}
 .hp .wn .hpair{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
 .hp .wn .hpair .slot{height:300px}
 .hp .wn .hpair figcaption{margin-top:14px;font-family:var(--display);font-size:19px;color:#16110A}
@@ -238,16 +237,20 @@
 .hp .wn .card2 .slot span{font-size:17px}
 .hp .wn .card2 .cat{margin-top:20px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#7A5A22}
 .hp .wn .card2 .cmp{font-family:var(--display);font-weight:500;font-size:21px;line-height:1.15;margin-top:6px;color:#16110A}
-.hp .wn .card2 .who{font-size:14px;margin-top:6px;color:#6E685D;font-style:italic}
+.hp .wn .card2 .who{font-size:14px;margin-top:6px;color:#6E685D;font-family:var(--text-italic);font-style:italic}
 .hp .wn .card2 .who.ok{color:#4A3F31;font-style:normal}
 
 /* concept strip */
 .hp .strip{position:relative;z-index:20;background:#2B2117;color:#F0E2C4;font-size:12px;letter-spacing:.04em;text-align:center;padding:7px 14px}
 .hp .strip b{color:#F5E7C3;font-weight:500}
+.hp .strip a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.hp .strip a:focus-visible{outline:2px solid var(--champagne);outline-offset:2px}
+/* One review strip on the homepage: the shared staging banner says the same. */
+body:has(.hp-wrap) [data-preview-banner]{display:none}
 
 /* HERO */
 .hp .hero{height:900px;overflow:hidden}
-.hp .hero>.ph{position:absolute;top:0;right:0;bottom:0;width:66%;background:#000;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
+.hp .hero>.ph{position:absolute;top:0;right:0;bottom:0;width:72%;background:#000;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);mask-image:linear-gradient(90deg,transparent 0,#000 30%)}
 .hp .hero video{filter:saturate(1.06) sepia(.16) contrast(1.06) brightness(.96)}
 .hp .hero .veil{position:absolute;inset:0;background:linear-gradient(0deg,rgba(13,11,8,.72) 0%,rgba(13,11,8,0) 30%),linear-gradient(180deg,rgba(13,11,8,.6) 0%,rgba(13,11,8,0) 18%),radial-gradient(45% 50% at 78% 18%,rgba(255,214,150,.18),rgba(255,214,150,0) 70%)}
 .hp .nav{position:absolute;left:0;right:0;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;padding:22px 96px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase}
@@ -283,11 +286,6 @@
 .hp .live{position:absolute;z-index:5;right:96px;top:150px;display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--ivory);text-shadow:0 1px 10px rgba(0,0,0,.6)}
 .hp .live i{width:8px;height:8px;border-radius:50%;background:#E9C27A;box-shadow:0 0 0 0 rgba(233,194,122,.7);animation:pulse 2.4s ease-out infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(233,194,122,.7)}70%,100%{box-shadow:0 0 0 12px rgba(233,194,122,0)}}
-.hp .cards{position:absolute;z-index:5;right:60px;bottom:64px;display:flex;gap:18px;align-items:flex-end}
-.hp .card{width:200px;display:grid;gap:8px}
-.hp .card .ph{height:250px;border-radius:3px;outline:1px solid rgba(217,193,146,.55);outline-offset:5px;box-shadow:0 24px 40px -18px rgba(0,0,0,.8)}
-.hp .card.tall .ph{height:300px}
-.hp .card p{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne)}
 
 /* WELCOME (ivory) */
 .hp .collage{position:relative;height:640px}
@@ -300,7 +298,6 @@
 
 /* THREE DAYS */
 .hp .daygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
-.hp img.zoomgold{transform:scale(1.9);transform-origin:12% 92%}
 
 /* EXPERIENCE (ivory mosaic) */
 
@@ -429,7 +426,6 @@
   .hp .dz{height:auto;display:flex;flex-direction:column;padding-bottom:44px}
   .hp .dz .stage{position:relative;right:auto;top:auto;width:100%;height:520px;order:1;-webkit-mask-image:none;mask-image:none}
   .hp .dz .stage::after{background:linear-gradient(0deg,#0D0B08 0%,rgba(13,11,8,0) 35%),linear-gradient(180deg,rgba(13,11,8,.55),rgba(13,11,8,0) 24%)}
-  .hp .dz .frameline{display:none}
   .hp .dz .badge{left:16px;right:16px;top:16px;max-width:none;font-size:11px}
   .hp .dz .badge b{font-size:11px}
   .hp .dz .txt{position:relative;left:auto;top:auto;width:auto;padding:0 22px;margin-top:-56px;order:2}
@@ -451,7 +447,6 @@
   .hp .nav .links,.hp .nav .pill{display:none}
   .hp .menu{display:block;border:1px solid rgba(246,239,226,.55);border-radius:999px;padding:8px 14px;font-size:10.5px;letter-spacing:.16em}
   .hp .live{left:22px;right:auto;top:96px;font-size:10.5px}
-  .hp .cards{display:none}
   .hp .hcol{left:22px;right:22px;top:auto;bottom:34px;width:auto}
   .hp .hcol h1{font-size:50px;margin-top:10px}
   .hp .hcol .kick{font-size:11px;letter-spacing:.3em}
@@ -584,8 +579,10 @@
 /* Desktop composition: small capitals sized so that, at the 0.89 laptop scale,
    they stay at about 12 px. */
 @container (min-width:1280px){
+  /* A3: the hero photographs are gone; the film's caption sits on a small dark pill at the bottom right. */
+  .hp .live{top:auto;bottom:64px;right:96px;padding:9px 16px;border-radius:999px;background:rgba(13,11,8,.66);border:1px solid rgba(217,193,146,.32);text-shadow:none}
   .hp .lab,.hp .btn,.hp .kick,.hp .nav,.hp .hcol .when,.hp .wn .card2 .cat,.hp .wn .meta2 .k,.hp .wn .fpair .k,.hp .wn .hpair .k,.hp .wn .slot small,.hp .wn .bar2 p{font-size:13.5px}
-  .hp .count .l,.hp .card p,.hp .wn .tag,.hp .dz .badge,.hp .dz .chap span,.hp .hx .src2,.hp .live,.hp .fn .when{font-size:13px}
+  .hp .count .l,.hp .wn .tag,.hp .dz .badge,.hp .dz .chap span,.hp .hx .src2,.hp .live,.hp .fn .when{font-size:13px}
   .hp .dz .badge b{font-size:12px}
   .hp .sp ul{font-size:15px}
 }

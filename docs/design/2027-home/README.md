@@ -47,7 +47,7 @@ unless the owner asks for one.
 | In three numbers | 3 days, 13 competitions, 7 categories as gold-edged photographic numerals. Counts come from `lib/competitions.ts`. |
 | Three days | Gold timeline, three staggered frames. |
 | Six experiences | Cycling index with one framed image per line. International Networking uses DSC00242 (desktop, cropped to keep all six guests) and DSC00257 (phone, shown in full). |
-| Destination | "Beauty meets paradise": four scenes (three NJS concept clips, then real HEBS 2026 guests at NJS), each labelled CONCEPT or PHOTOGRAPHED. No beach in any frame. |
+| Destination | "Beauty meets paradise": three scenes (two NJS concept clips, then real HEBS 2026 guests at NJS), each labelled CONCEPT or PHOTOGRAPHED, with a dip through black between them. No beach in any frame. |
 | Competitions | Framed images, the 2026 winners block (all 13 competitions), the ribbon of seven categories. |
 | Highlights, sponsors, final call | Drifting rows of 2026 photographs; the packed hall; the styling floor in shadow with the countdown. |
 
@@ -146,12 +146,14 @@ Lighthouse accessibility scores 100 at 1440, 1280, 834 and 412 px.
 ## Open follow-ups (recorded 2026-11-10)
 
 - **Phone load time.** With its own root layout (A2), the 2027 homepage no
-  longer preloads the 2026 fonts (8 font files, 369 KB, down to 4 files, 155 KB).
-  On Lighthouse's simulated slow 4G phone the largest element now appears at
-  about 4.0 s instead of 5.0 s (score 81 to 87; desktop 0.97 s to 0.77 s). That
-  element is the hero still, which downloads in under 0.4 s but paints about
-  2.8 s later. The cause of that remaining delay is not yet identified; finding
-  it may need a change to the hero, which stays as approved until then.
+  longer preloads the 2026 fonts. Measured over HTTP/2 (as Vercel serves it), a
+  simulated slow-4G phone shows the largest element at about 2.85 s. The hero
+  still is painted immediately; what delays it on a slow connection is mostly the
+  preloaded fonts sharing the bandwidth. P1 (approved) stops preloading Jost
+  italic, which no first screen uses: supporting pages no longer download it at
+  all, but the homepage figure is unchanged (2.85 s), because its Champions
+  captions still need it early. P2 (not preloading regular Jost) is not approved.
+  Confirm on a protected preview and a physical phone.
 - **404 page.** With two root layouts, Next.js 14 serves its built-in 404 for
   missing addresses, outside the 2026 layout: same text, but it follows the
   visitor's light or dark setting instead of the 2026 near-black page, and has
@@ -162,11 +164,15 @@ Lighthouse accessibility scores 100 at 1440, 1280, 834 and 412 px.
 - **A8.** Approved 2027 privacy and cookie notices, and Terms & Conditions. The
   footer links the existing HEBS Lagos 2026 Privacy & Cookie Notice only as the
   current live notice; that is not approval of any 2027 legal wording.
-- **Visual corrections still to authorise:**
-  - the two hero photographs;
-  - the NJS pool frame line;
-  - the surf-on-rocks scene;
-  - the 25 July image.
+- **Visual corrections (prepared for approval, not committed):**
+  - A3: the two hero photographs are removed; the film widens to 72% and its caption
+    sits on a small dark pill (desktop only; tablets and phones never showed them);
+  - A3b: the homepage shows one review strip instead of two;
+  - A4: the surf scene ("Evenings on the terrace") is removed, leaving three scenes;
+  - A5: 25 July shows DSC_2093 from the House of Snapp collection, cropped head to
+    gown, and the old runway frame leaves the highlights;
+  - A6 and A6b: no frame line around the destination film, a black column behind its
+    headline, and a dip through black between scenes.
 - **Media rights and owner approvals** in `MEDIA-REGISTER.md`.
 
 ## 2026 Champions (internal review)

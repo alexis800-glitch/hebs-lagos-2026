@@ -161,7 +161,6 @@ export function DestinationSequence({ scenes, children }: { scenes: Scene[]; chi
           </div>
         ))}
       </div>
-      <div className="frameline" />
       <div className={`badge${s.kind === "photographed" ? " photo" : ""}`}>
         <b>{s.kind === "photographed" ? "PHOTOGRAPHED" : "CONCEPT"}</b>
         <span>{s.note}</span>

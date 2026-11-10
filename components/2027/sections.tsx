@@ -10,7 +10,7 @@ import { findAsset } from "@/lib/assets/register";
 
 export function PreviewBanner() {
   return (
-    <div role="note" className="bg-h27-ocean text-h27-ivory">
+    <div role="note" data-preview-banner="" className="bg-h27-ocean text-h27-ivory">
       <p className="mx-auto max-w-6xl px-4 sm:px-8 py-2 text-center text-xs leading-relaxed">
         <strong className="font-semibold uppercase tracking-[0.14em]">Staging preview</strong> · Not published.
         <span className="hidden sm:inline">

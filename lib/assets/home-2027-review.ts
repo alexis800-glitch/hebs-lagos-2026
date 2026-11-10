@@ -68,11 +68,13 @@ const PREVIEW = "Frame from a VMM clip preview of the HEBS Lagos 2026 summit day
 const PREPARTY = "VMM photograph, HEBS Lagos 2026 Welcome Pre-Party at NJS Royale Beach Resort, 23 Oct 2026";
 const SNAPP_D1 = "House of Snapp photograph, HEBS Lagos 2026 summit day 1 prize presentation, 24 Oct 2026";
 const SNAPP_D2 = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2 prize presentation, 25 Oct 2026";
+/** A summit-day frame from the same collection that is not a prize presentation (A5). */
+const SNAPP_D2_FLOOR = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2, 25 Oct 2026 (collection folder \"HEBS DAY 2\")";
 const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
 const OCT22 =
   "VMM photograph of the 22 Oct 2026 gathering at a different Lagos hotel. Not confirmed as an official HEBS activity; never described as NJS";
 
-type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2", detail?: string];
+type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2" | "snapp-d2-floor", detail?: string];
 
 const SPECS: Spec[] = [
   ["hero-loop-wide", "video", "hair-wide.mp4", "", "photographed", "s06", "S06 0:32–0:35.5 and 0:01–0:04.5, half speed, colour graded"],
@@ -87,7 +89,7 @@ const SPECS: Spec[] = [
   ["num-categories", "image", "num-categories.webp", "", "photographed", "s06", "Numeral texture"],
   ["day-1", "image", "day-1.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00278"],
   ["day-2", "image", "day-2.webp", "Hair styling at HEBS Lagos 2026", "photographed", "s06"],
-  ["day-3", "image", "day-3.webp", "The 2026 runway", "photographed", "preview"],
+  ["day-3", "image", "day-3.webp", "A model in a feathered headdress and gown at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2093, cropped head to gown; one resample, no other change; the original is preserved unaltered"],
   ["exp-education", "image", "exp-education.webp", "A packed hall at HEBS Lagos 2026", "photographed", "preview"],
   ["exp-competitions", "image", "exp-competitions.webp", "A model on the 2026 styling floor", "photographed", "s06"],
   ["exp-exhibitions", "image", "exp-exhibitions.webp", "An exhibitor at HEBS Lagos 2026", "photographed", "preview", "Exhibitor brand visible; brand agreement needed"],
@@ -99,8 +101,6 @@ const SPECS: Spec[] = [
   ["dest-guests-tall", "video", "guests-tall.mp4", "", "concept", "njs-unknown", "Phone crop"],
   ["dest-pool-wide", "video", "pool-wide.mp4", "", "concept", "njs-ai", "0:00–0:02.9 at half speed, before any beach enters the shot"],
   ["dest-pool-tall", "video", "pool-tall.mp4", "", "concept", "njs-ai", "Phone crop"],
-  ["dest-cinema-wide", "video", "cinema-wide.mp4", "", "concept", "njs-unknown", "0:12.2–0:17.0 at 75% speed"],
-  ["dest-cinema-tall", "video", "cinema-tall.mp4", "", "concept", "njs-unknown", "Phone crop"],
   ["dest-poster", "image", "dest-poster.webp", "", "concept", "njs-unknown"],
   ["dest-terrace", "image", "hero-card-terrace.webp", "Guests on the NJS terrace at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00261"],
   ["dest-guest", "image", "dest-guest.webp", "A guest at the HEBS Lagos 2026 pre-party at NJS", "photographed", "preparty", "DSC00318"],
@@ -113,7 +113,6 @@ const SPECS: Spec[] = [
   ["hl-guest-c", "image", "hl-guest-c.webp", "", "photographed", "preparty", "DSC00326"],
   ["hl-guest-d", "image", "hl-guest-d.webp", "", "photographed", "preparty", "DSC00294"],
   ["hl-hall", "image", "hl-hall.webp", "", "photographed", "preview"],
-  ["hl-runway", "image", "hl-runway.webp", "", "photographed", "preview"],
   ["hl-trophy", "image", "hl-trophy.webp", "", "photographed", "preview"],
   ["hl-floor-a", "image", "hl-floor-a.webp", "", "photographed", "s06"],
   ["hl-floor-b", "image", "hl-floor-b.webp", "", "photographed", "s06"],
@@ -222,12 +221,13 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         rights: { holder: null, permission: "not-recorded", peopleConsent: "not-applicable" },
         permittedDepictions: ["decorative"],
         source:
-          "Clip in the NJS website folder, received by WhatsApp on 7 Oct 2026 (content credentials stripped). Appears AI-generated; its guests are illustrative and the terrace cinema is not a confirmed facility or event" + note,
+          "Clip in the NJS website folder, received by WhatsApp on 7 Oct 2026 (content credentials stripped). Appears AI-generated; its guests are illustrative" + note,
         restriction:
           "Concept only: always labelled as a concept, never suggesting real people attended an NJS event. Needs confirmed origin and rights, and NJS permission.",
       };
     case "snapp-d1":
     case "snapp-d2":
+    case "snapp-d2-floor":
       return {
         ...base,
         eventYear: 2026,
@@ -241,9 +241,10 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
           peopleConsent: "unknown",
         },
         permittedDepictions: ["real-event"],
-        source: (kindOf === "snapp-d1" ? SNAPP_D1 : SNAPP_D2) + note,
-        restriction:
-          "Internal review only. Needs the photographer's written permission, each recognisable person's consent, and the organisers' verification of the competition, placing, winner and prize before any public use.",
+        source: (kindOf === "snapp-d1" ? SNAPP_D1 : kindOf === "snapp-d2" ? SNAPP_D2 : SNAPP_D2_FLOOR) + note,
+        restriction: kindOf === "snapp-d2-floor"
+          ? "Internal review only. Needs the photographer's written permission and each recognisable person's consent before any public use."
+          : "Internal review only. Needs the photographer's written permission, each recognisable person's consent, and the organisers' verification of the competition, placing, winner and prize before any public use.",
       };
     case "mark":
       return {

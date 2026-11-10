@@ -38,10 +38,6 @@ function Hero() {
         <div className="ctas"><a className="btn pri" href={PRIORITY_HREF}>{PRIORITY_CTA}</a><a className="btn gh" href={pageHref("experience")!}>{h.ctaSecondary}</a></div>
         <LiveCountdown />
       </div>
-      <div className="cards">
-        <div className="card"><div className="ph"><Pic id={h.cards[0].media} className="grade kb" sizes="200px" /></div><p>{h.cards[0].label}</p></div>
-        <div className="card tall"><div className="ph"><Pic id={h.cards[1].media} className="grade" style={{ objectPosition: "50% 60%" }} sizes="200px" /></div><p>{h.cards[1].label}</p></div>
-      </div>
     </section>
   );
 }
@@ -99,7 +95,7 @@ function Numbers() {
 
 function Days() {
   const d = HOME.days;
-  const cls = ["grade kb", "grade kb", "grade zoomgold"];
+  const cls = ["grade kb", "grade kb", "grade"];
   return (
     <section className="dy">
       <div className="head"><h2 className="disp">{d.title} <em className="it">{d.accent}</em></h2><p>{d.body}</p></div>
@@ -291,7 +287,7 @@ function Competitions() {
 function Highlights() {
   const h = HOME.highlights;
   const row = (items: [string, string][]) => items.map(([id, w], j) => (
-    <div className={`ph ${w}`} key={`${id}-${j}`}><Pic id={id} className={id === "hl-runway" ? "grade zoomgold" : "grade"} alt="" sizes="(max-width: 600px) 250px, 420px" /></div>
+    <div className={`ph ${w}`} key={`${id}-${j}`}><Pic id={id} className="grade" alt="" sizes="(max-width: 600px) 250px, 420px" /></div>
   ));
   return (
     <section className="hx">
@@ -350,7 +346,11 @@ export function PreferredHomepage() {
     <div className="hp-wrap">
       <DesignScale />
       <div className="hp">
-        <div className="strip"><b>Internal concept, not for publication.</b> {HOME.strip.replace(/^Internal concept, not for publication\. /, "")}</div>
+        {/* A3b: the homepage's one review strip; the shared staging banner is hidden here (home.css). */}
+        <div className="strip" role="note">
+          <b>Internal concept, not for publication.</b> {HOME.strip.replace(/^Internal concept, not for publication\. /, "")} No registration or inquiry is collected.{" "}
+          <a href="/2027/status">Approval status</a>
+        </div>
         <Hero />
         <Welcome />
         <Numbers />

@@ -52,8 +52,9 @@ describe("preferred homepage links", () => {
     const anchors = knownAnchors();
     expect(hrefs.length).toBeGreaterThanOrEqual(30);
     for (const h of hrefs) {
-      // The footer links the live Privacy & Cookie Notice; nothing else outside /2027.
-      if (h === HOME_HREF || h === PRIORITY_HREF || h === "/privacy") continue;
+      // The footer links the live Privacy & Cookie Notice; nothing else outside /2027. The review
+      // strip links the approval-status page, as the shared staging banner does (A3b).
+      if (h === HOME_HREF || h === PRIORITY_HREF || h === "/privacy" || h === "/2027/status") continue;
       const [path, hash] = h.split("#");
       expect(paths.has(path), h).toBe(true);
       if (hash) expect(anchors.has(hash), h).toBe(true);

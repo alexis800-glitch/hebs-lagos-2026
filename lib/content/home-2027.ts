@@ -24,10 +24,6 @@ export const HOME = {
     // The primary button is the site-wide priority-list call to action (PRIORITY_CTA in
     // lib/site/2027.ts): the directive's "Join the 2027 Priority List" only once the list is open.
     ctaSecondary: "Explore the experience",
-    cards: [
-      { media: "hero-card-guest", label: "The pre-party, 2026" },
-      { media: "hero-card-terrace", label: "The NJS terrace, 2026" },
-    ],
   },
   /** The header links, as pages of the 2027 site map (lib/site/2027.ts). */
   nav: ["experience", "programme", "competitions", "education", "travel"],
@@ -82,8 +78,6 @@ export const HOME = {
         note: "Concept from NJS: illustrative guests at the second-floor pool. Not real attendees or the completed property." },
       { title: "The pool terrace", kind: "concept", seconds: 5.6, wide: "dest-pool-wide", tall: "dest-pool-tall",
         note: "Concept from the NJS website: the second-floor pool terrace. Not the completed property." },
-      { title: "Evenings on the terrace", kind: "concept", seconds: 6.2, wide: "dest-cinema-wide", tall: "dest-cinema-tall",
-        note: "Concept from NJS: an illustrative terrace evening. Not a confirmed event or facility." },
       { title: "HEBS at NJS, 2026", kind: "photographed", seconds: 6.0, pair: ["dest-terrace", "dest-guest"],
         note: "HEBS Lagos 2026 pre-party guests on the NJS terrace, 23 Oct 2026. VMM." },
     ],
@@ -108,7 +102,7 @@ export const HOME = {
     accent: "The energy we carry forward.",
     credit: "Photographed at HEBS Lagos 2026",
     rows: [
-      [["hl-guest-a", "w2"], ["hl-floor-a", "w3"], ["hl-performance", "w1"], ["hl-guest-b", "w2"], ["hl-hall", "w4"], ["hl-runway", "w1"]],
+      [["hl-guest-a", "w2"], ["hl-floor-a", "w3"], ["hl-performance", "w1"], ["hl-guest-b", "w2"], ["hl-hall", "w4"]],
       [["hl-trophy", "w1"], ["hl-floor-b", "w3"], ["hl-guest-c", "w2"], ["hl-speaker", "w1"], ["hl-floor-c", "w3"], ["hl-guest-d", "w2"]],
     ] as [string, string][][],
   },
