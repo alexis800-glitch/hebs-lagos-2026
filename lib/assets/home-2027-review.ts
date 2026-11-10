@@ -32,7 +32,20 @@ export interface ReviewAsset extends AssetRecord {
    * displayed size instead of shrinking or stretching a single file.
    */
   widths?: number[];
+  /** Natural width of `src`. When set, `src` itself is the largest size; smaller ones are <name>-480/-800.webp. */
+  fullWidth?: number;
+  /** For films: a still of the first frame, <clip>-poster.webp, shown until the film plays and when it cannot. */
+  poster?: string;
 }
+
+/** Review images wider than 800 px, with their natural widths (480 and 800 px copies exist beside them). */
+const IMAGE_WIDTH: Record<string, number> = {
+  "comp-main.webp": 843, "day-2.webp": 843, "dest-guest.webp": 1000, "exp-competitions.webp": 843, "exp-destination.webp": 900,
+  "exp-education.webp": 1200, "exp-entertainment.webp": 900, "exp-networking-desktop.webp": 900, "exp-networking-phone.webp": 1400,
+  "hero-card-guest.webp": 1000, "hero-card-terrace.webp": 900, "hl-floor-a.webp": 843, "hl-floor-b.webp": 843, "hl-floor-c.webp": 843,
+  "hl-guest-a.webp": 900, "hl-guest-b.webp": 900, "hl-guest-c.webp": 900, "hl-guest-d.webp": 900, "hl-hall.webp": 1200,
+  "sp-hall.webp": 1200, "welcome-arch.webp": 900,
+};
 
 /** Champions photographs: the role each one plays, and the widths cut for it. */
 const CHAMP_WIDTHS = { featured: [640, 960, 1280, 1800], highlight: [640, 960, 1280, 1600, 2000], card: [320, 600, 900] } as const;
@@ -136,6 +149,9 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
     status: "provisional" as const,
     permittedUsage: ["internal-review" as const],
     ...(id.startsWith("champ-") ? { widths: [...CHAMP_WIDTHS[CHAMP_ROLE[id] ?? "card"]] } : {}),
+    ...(IMAGE_WIDTH[file] ? { widths: [480, 800, IMAGE_WIDTH[file]], fullWidth: IMAGE_WIDTH[file] } : {}),
+    ...(file === "mark-2027-a.png" ? { widths: [240, 480] } : {}),
+    ...(kind === "video" ? { poster: REVIEW_DIR + file.replace(/\.mp4$/, "-poster.webp") } : {}),
   };
   const note = detail ? `. ${detail}` : "";
   switch (kindOf) {

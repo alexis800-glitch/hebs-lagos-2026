@@ -52,7 +52,8 @@ describe("preferred homepage links", () => {
     const anchors = knownAnchors();
     expect(hrefs.length).toBeGreaterThanOrEqual(30);
     for (const h of hrefs) {
-      if (h === HOME_HREF || h === PRIORITY_HREF) continue;
+      // The footer links the live Privacy & Cookie Notice; nothing else outside /2027.
+      if (h === HOME_HREF || h === PRIORITY_HREF || h === "/privacy") continue;
       const [path, hash] = h.split("#");
       expect(paths.has(path), h).toBe(true);
       if (hash) expect(anchors.has(hash), h).toBe(true);

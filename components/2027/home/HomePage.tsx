@@ -4,17 +4,20 @@ import { HOME, CATEGORY_NAMES } from "@/lib/content/home-2027";
 import { dayAnchor } from "@/components/2027/editorial/sections";
 import { winnersView } from "@/lib/content/winners-2026";
 import { deployEnvironment } from "@/lib/publication";
-import { Clip, Pic, reviewMedia, reviewSrc } from "./media";
+import { Clip, Pic, reviewMedia, reviewSrc, srcSetOf } from "./media";
+import { HomeFooter } from "./footer";
 import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
-import { DesignScale, DestinationSequence, ExperienceIndex, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
+import { DesignScale, DestinationSequence, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
 import { HOME_HREF, NAV } from "./links";
 
 /** Official mark, used whenever the provisional 2027 mark isn't loaded for review. */
 const OFFICIAL_MARK = "/assets/logos/hebs_logo_nav.png";
 
-function Mark() {
+function Mark({ className = "logo", sizes = "(max-width: 600px) 84px, (max-width: 1279px) 96px, 108px", lazy = false }: { className?: string; sizes?: string; lazy?: boolean }) {
   const provisional = reviewMedia("mark-2027-a");
-  return <img className="logo" src={provisional?.src ?? OFFICIAL_MARK} alt={provisional ? provisional.alt : "HEBS, Hair Education Beauty Summit"} />;
+  if (!provisional) return <img className={className} src={OFFICIAL_MARK} alt="HEBS, Hair Education Beauty Summit" />;
+  // The 520 px PNG master is kept for reference; pages load the 240/480 px WebP cuts.
+  return <img className={className} src={provisional.src.replace(/\.png$/, "-480.webp")} srcSet={srcSetOf(provisional)} sizes={sizes} width={520} height={487} alt={provisional.alt} loading={lazy ? "lazy" : "eager"} decoding="async" />;
 }
 
 function Hero() {
@@ -22,9 +25,10 @@ function Hero() {
   return (
     <section className="hero">
       <div className="ph">
-        <Clip wide="hero-loop-wide" tall="hero-loop-tall" poster="hero-poster" loop autoPlay />
+        <Clip id="hero-film" wide="hero-loop-wide" tall="hero-loop-tall" label="Film of the 2026 styling floor" loop autoPlay priority />
       </div>
       <div className="veil" />
+      <div className="vctl-hero"><FilmControl target="hero-film" label="the styling-floor film" /></div>
       <div className="nav">
         <a href={HOME_HREF} aria-label="HEBS Lagos 2027 home"><Mark /></a>
         <nav aria-label="Main" className="links">{NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}</nav>
@@ -45,8 +49,8 @@ function Hero() {
         <LiveCountdown />
       </div>
       <div className="cards">
-        <div className="card"><div className="ph"><Pic id={h.cards[0].media} className="grade kb" /></div><p>{h.cards[0].label}</p></div>
-        <div className="card tall"><div className="ph"><Pic id={h.cards[1].media} className="grade" style={{ objectPosition: "50% 60%" }} /></div><p>{h.cards[1].label}</p></div>
+        <div className="card"><div className="ph"><Pic id={h.cards[0].media} className="grade kb" sizes="200px" /></div><p>{h.cards[0].label}</p></div>
+        <div className="card tall"><div className="ph"><Pic id={h.cards[1].media} className="grade" style={{ objectPosition: "50% 60%" }} sizes="200px" /></div><p>{h.cards[1].label}</p></div>
       </div>
     </section>
   );
@@ -65,7 +69,7 @@ function Welcome() {
         </div>
         <div className="art">
           <div className="archline" />
-          <div className="ph arch"><Pic id="welcome-arch" className="grade kb" /></div>
+          <div className="ph arch"><Pic id="welcome-arch" className="grade kb" sizes="(max-width: 600px) 250px, 400px" /></div>
           <div className="ph inset"><Pic id="welcome-inset" className="grade" /></div>
           <svg className="seal" viewBox="0 0 200 200" aria-hidden="true">
             <defs><path id="hp-sealpath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
@@ -113,7 +117,7 @@ function Days() {
         {d.items.map((it, j) => (
           <div className="d" key={it.date}>
             <p className="date"><span>{it.date}</span></p>
-            <div className="ph"><Pic id={it.media} className={cls[j]} /></div>
+            <div className="ph"><Pic id={it.media} className={cls[j]} sizes="(max-width: 600px) calc(100vw - 44px), (max-width: 1279px) 33vw, 460px" /></div>
             <h3>{it.title}</h3>
             <p>{it.text}</p>
             <a className="btn ln" href={pageHref("programme", dayAnchor(it.date))!} aria-label={`${d.cta}: ${it.date}`}>{d.cta}</a>
@@ -133,14 +137,14 @@ function Experiences() {
         className: "nw",
         node: (
           <>
-            <Pic id={it.media} className="dsk grade" />
-            {reviewSrc(it.phoneMedia) ? <img className="bg mob" src={reviewSrc(it.phoneMedia)!} alt="" /> : null}
-            <Pic id={it.phoneMedia} className="fg mob grade" />
+            <Pic id={it.media} className="dsk grade" sizes="(max-width: 1279px) 560px, 540px" />
+            {reviewSrc(it.phoneMedia) ? <img className="bg mob" src={reviewSrc(it.phoneMedia)!.replace(/\.webp$/, "-480.webp")} alt="" loading="lazy" decoding="async" /> : null}
+            <Pic id={it.phoneMedia} className="fg mob grade" sizes="calc(100vw - 44px)" />
           </>
         ),
       };
     }
-    return { node: <Pic id={it.media} className="grade" style={it.media === "exp-education" ? { objectPosition: "45% 50%" } : undefined} /> };
+    return { node: <Pic id={it.media} className="grade" sizes="(max-width: 600px) calc(100vw - 58px), 560px" style={it.media === "exp-education" ? { objectPosition: "45% 50%" } : undefined} /> };
   });
   return (
     <section className="ex">
@@ -161,10 +165,10 @@ function Destination() {
     if ("pair" in s) {
       return {
         title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, plain: true,
-        node: <div className="pair">{s.pair.map((id) => <div className="ph" key={id}><Pic id={id} /></div>)}</div>,
+        node: <div className="pair">{s.pair.map((id) => <div className="ph" key={id}><Pic id={id} sizes="(max-width: 1279px) 50vw, 555px" /></div>)}</div>,
       };
     }
-    return { title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, node: <Clip wide={s.wide} tall={s.tall} poster={s.wide === "dest-guests-wide" ? "dest-poster" : undefined} /> };
+    return { title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, node: <Clip wide={s.wide} tall={s.tall} label={`Concept film: ${s.title}`} /> };
   });
   return (
     <section className="dz">
@@ -282,7 +286,7 @@ function Competitions() {
           <div className="btnrow"><a className="btn pri" href={pageHref("competitions", "categories")!}>{c.ctaPrimary}</a><a className="btn ol" href={pageHref("competitions", "eligibility")!}>{c.ctaSecondary}</a></div>
         </div>
         <div className="art">
-          <div className="ph a"><Pic id="comp-main" className="grade kb" /></div>
+          <div className="ph a"><Pic id="comp-main" className="grade kb" sizes="(max-width: 600px) 240px, 380px" /></div>
           <div className="ph b"><Pic id="comp-trophy" className="grade" /></div>
         </div>
       </div>
@@ -297,7 +301,7 @@ function Competitions() {
 function Highlights() {
   const h = HOME.highlights;
   const row = (items: [string, string][]) => items.map(([id, w], j) => (
-    <div className={`ph ${w}`} key={`${id}-${j}`}><Pic id={id} className={id === "hl-runway" ? "grade zoomgold" : "grade"} alt="" /></div>
+    <div className={`ph ${w}`} key={`${id}-${j}`}><Pic id={id} className={id === "hl-runway" ? "grade zoomgold" : "grade"} alt="" sizes="(max-width: 600px) 250px, 420px" /></div>
   ));
   return (
     <section className="hx">
@@ -323,7 +327,7 @@ function Sponsors() {
           <div className="ctas"><a className="btn dk" href={pageHref("sponsorship")!}>{s.ctaPrimary}</a><a className="btn ol" href={pageHref("exhibitors")!}>{s.ctaSecondary}</a></div>
         </div>
         <div className="art">
-          <div className="ph a"><Pic id="sp-hall" className="grade kb" /></div>
+          <div className="ph a"><Pic id="sp-hall" className="grade kb" sizes="(max-width: 600px) calc(100vw - 74px), 700px" /></div>
           <div className="ph b"><Pic id="sp-exhibitor" className="grade" /></div>
           <p className="cap2">{s.caption}</p>
         </div>
@@ -336,7 +340,8 @@ function Final() {
   const f = HOME.final;
   return (
     <section className="fn">
-      <div className="ph"><Clip wide="hero-loop-wide" tall="hero-loop-tall" poster="hero-poster" loop autoPlay /></div>
+      <div className="ph"><Clip id="final-film" wide="hero-loop-wide" tall="hero-loop-tall" label="Closing film of the 2026 styling floor" loop autoPlay /></div>
+      <div className="vctl-fn"><FilmControl target="final-film" label="the closing film" /></div>
       <div className="in">
         <p className="lab">{f.label}</p>
         <h2 className="disp">{f.title} <em className="it gold">{f.accent}</em></h2>
@@ -366,7 +371,7 @@ export function PreferredHomepage() {
         <Highlights />
         <Sponsors />
         <Final />
-        <footer><span>HEBS Lagos 2027</span><span>hebslagos.com</span></footer>
+        <HomeFooter mark={<Mark className="pf-mark" sizes="96px" lazy />} />
       </div>
     </div>
   );

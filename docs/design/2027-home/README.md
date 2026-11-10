@@ -85,6 +85,76 @@ media in local development, place the files named in
 `/2027/concepts/home`. Never commit them and never copy them into any other
 folder under `public/`.
 
+## Screen sizes
+
+The desktop composition is a 1440 px canvas, scaled to the window only from
+1280 px (never by more than about 11%). Below 1280 px the page is fluid: the
+phone composition up to 600 px, opened into columns for tablets and small
+laptops from 601 px. Every label is at least 11 px. See the end of `home.css`.
+
+## Films and pictures
+
+- **Films.** Each film shows its first-frame still (`<clip>-poster.webp`) at once.
+  - The hero's still is the page's first image and loads with high priority.
+  - Films load only when near the screen and pause when scrolled away.
+  - The phone or desktop crop is chosen in script, because Safari ignores
+    `media` on video sources.
+  - With reduced motion, nothing plays by itself and the destination waits for
+    its chapter buttons.
+  - Each looping film has a pause control.
+  - If a browser refuses to play (for example iPhone Low Power Mode), the still
+    remains.
+- **Pictures.** They load lazily, apart from the first screen, and come in 480
+  and 800 px cuts beside the review file. The provisional mark loads as 240 and
+  480 px WebP.
+- **Rebuilding the cuts.** `tools/review-variants.py` and `tools/video-poster.swift`
+  rebuild the cuts and stills from the review files.
+
+## Footer and cookie preferences
+
+The homepage has one footer:
+- the pages of the 2027 site map;
+- the live Privacy & Cookie Notice, which serves as both Privacy Policy and Cookie Policy;
+- a working Cookie preferences control, which opens the site's consent dialog.
+
+Terms & Conditions and the 2027 contact and social details appear only in
+internal review, marked pending (A7, A8), never as links. The consent banner
+keeps its wording and takes the 2027 colours on 2027 pages. The Meta Pixel can
+load only on production; previews store the choice but never track.
+
+## Contrast
+
+Small text on ivory uses `#7A5A22` (5.5:1). Other contrast choices:
+- The deeper `#8C6B34` (4.3:1) appears only on large italic headline text
+  (at least 24 px), where 3:1 is enough.
+- Inactive lines on black are ivory at 60% (6.5:1) or more.
+- Focus rings on ivory sections are `#7A5A22`.
+- The rail arrows' border is `#8C6B34` (4.3:1 against the 3:1 non-text minimum).
+- The gold "Photograph awaited" panels use `#4A3510` (at least 5.7:1).
+
+Lighthouse accessibility scores 100 at 1440, 1280, 834 and 412 px.
+
+## Open follow-ups (recorded 2026-11-10)
+
+- **Phone load time (A2).** On a simulated slow 4G phone the largest element
+  appears at about 5.0 s, mostly render delay. The main cause is
+  `app/layout.tsx` (the live 2026 site's root layout): it preloads the 2026
+  fonts on every page, 2027 included. It is not changed here, so the live site
+  stays as it is. The fix belongs with A2: give the 2027 site its own root
+  layout, through route groups, that loads only its own fonts.
+- **A2.** One 2027 homepage (this one) and a shared header and footer across all
+  13 pages. The direction is approved; the work is not started.
+- **A7.** Approved 2027 contact details and social accounts.
+- **A8.** Approved 2027 privacy and cookie notices, and Terms & Conditions. The
+  footer links the existing HEBS Lagos 2026 Privacy & Cookie Notice only as the
+  current live notice; that is not approval of any 2027 legal wording.
+- **Visual corrections still to authorise:**
+  - the two hero photographs;
+  - the NJS pool frame line;
+  - the surf-on-rocks scene;
+  - the 25 July image.
+- **Media rights and owner approvals** in `MEDIA-REGISTER.md`.
+
 ## 2026 Champions (internal review)
 
 The winners block shows the prize-presentation photographs the owner approved

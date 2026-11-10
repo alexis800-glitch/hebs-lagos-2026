@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import MetaPixel, { metaPixelIsLive } from "./MetaPixel";
 import {
@@ -25,7 +26,15 @@ import {
  * button on it, and nothing is pre-selected - Accept and Reject are the same
  * size, weight and colour, so neither is nudged.
  */
-export default function TrackingConsent() {
+/**
+ * `trackingAllowed` is false on every deployment except production (see
+ * app/layout.tsx): previews and local builds can show and store the choice, but
+ * never load the pixel, so review visits are never sent to the live account.
+ * On the 2027 staging pages the banner and dialog take the 2027 colours; their
+ * wording is unchanged.
+ */
+export default function TrackingConsent({ trackingAllowed = true }: { trackingAllowed?: boolean }) {
+  const theme = usePathname()?.startsWith("/2027") ? THEME_2027 : THEME_2026;
   const [decision, setDecision] = useState<ConsentDecision | null>(null);
   // The cookie is only readable in the browser, so the first render must not
   // guess. Until this flips, no banner is shown and no pixel is mounted.
@@ -64,10 +73,11 @@ export default function TrackingConsent() {
 
   return (
     <>
-      {decision === CONSENT_ACCEPTED && <MetaPixel />}
-      {showBanner && <ConsentBanner onAccept={accept} onReject={reject} />}
+      {decision === CONSENT_ACCEPTED && trackingAllowed && <MetaPixel />}
+      {showBanner && <ConsentBanner theme={theme} onAccept={accept} onReject={reject} />}
       {preferencesOpen && (
         <PreferencesDialog
+          theme={theme}
           decision={decision}
           onAccept={accept}
           onReject={reject}
@@ -77,6 +87,13 @@ export default function TrackingConsent() {
     </>
   );
 }
+
+interface Theme {
+  panel: string;
+  border: string;
+}
+const THEME_2026: Theme = { panel: "rgba(18,18,18,0.97)", border: "rgba(155,89,182,0.35)" };
+const THEME_2027: Theme = { panel: "rgba(13,11,8,0.97)", border: "rgba(184,145,76,0.6)" };
 
 /* ------------------------------------------------------------------ */
 /* Shared button - Accept and Reject must be indistinguishable in      */
@@ -119,9 +136,11 @@ function ChoiceButton({
 /* ------------------------------------------------------------------ */
 
 function ConsentBanner({
+  theme,
   onAccept,
   onReject,
 }: {
+  theme: Theme;
   onAccept: () => void;
   onReject: () => void;
 }) {
@@ -136,10 +155,10 @@ function ConsentBanner({
       <div
         className="mx-auto max-w-4xl rounded-xl p-5 sm:p-6"
         style={{
-          background: "rgba(18,18,18,0.97)",
+          background: theme.panel,
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          border: "1px solid rgba(155,89,182,0.35)",
+          border: `1px solid ${theme.border}`,
           boxShadow: "0 -8px 40px rgba(0,0,0,0.5)",
         }}
       >
@@ -186,11 +205,13 @@ const FOCUSABLE =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 function PreferencesDialog({
+  theme,
   decision,
   onAccept,
   onReject,
   onClose,
 }: {
+  theme: Theme;
   decision: ConsentDecision | null;
   onAccept: () => void;
   onReject: () => void;
@@ -254,8 +275,8 @@ function PreferencesDialog({
         onKeyDown={onKeyDown}
         className="w-full max-w-lg rounded-xl p-5 sm:p-6"
         style={{
-          background: "rgba(18,18,18,0.98)",
-          border: "1px solid rgba(155,89,182,0.35)",
+          background: theme.panel,
+          border: `1px solid ${theme.border}`,
           boxShadow: "0 10px 50px rgba(0,0,0,0.6)",
         }}
       >

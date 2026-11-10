@@ -59,7 +59,7 @@ export function Header2027({ home }: { home: string }) {
 
 export function Footer2027() {
   return (
-    <footer className="border-t border-h27-line bg-h27-ink text-h27-muted">
+    <footer className="h27-footer border-t border-h27-line bg-h27-ink text-h27-muted">
       <nav aria-label="All HEBS 2027 pages" className="mx-auto max-w-6xl px-4 pt-10 sm:px-8">
         <ul className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:grid-cols-3 lg:grid-cols-6">
           {SITE_MENU.map((l) => (

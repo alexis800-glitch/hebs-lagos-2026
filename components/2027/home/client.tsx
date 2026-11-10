@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { COUNTDOWN_TARGET_ISO } from "@/lib/editions/2027";
 import { timeLeftSeconds, type TimeLeftSeconds } from "@/lib/countdown";
+import { OPEN_PREFERENCES_EVENT } from "@/lib/consent";
 
 /** Scales the 1440 px desktop composition to the window (see .hp in home.css). */
 export function DesignScale() {
@@ -113,29 +114,49 @@ export interface Scene {
   plain?: boolean;
 }
 
+const prefersReducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /**
- * The destination sequence: each scene plays once from its start and dissolves
- * into the next. The corner label always says whether the scene is a concept or
- * a photograph.
+ * The destination sequence. It runs only while the section is on screen, plays
+ * each scene's film from its start, and dissolves into the next. With reduced
+ * motion it does not advance or play by itself: the chapters are buttons. The
+ * corner label always says whether the scene is a concept or a photograph.
  */
 export function DestinationSequence({ scenes, children }: { scenes: Scene[]; children: ReactNode }) {
   const [k, setK] = useState(0);
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   useEffect(() => {
-    const v = refs.current[k]?.querySelector("video");
-    if (v) {
-      v.currentTime = 0;
-      v.play().catch(() => {});
-    }
+    setReduced(prefersReducedMotion());
+    const el = root.current?.closest("section");
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.25 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const running = inView && !paused && !reduced;
+  useEffect(() => {
+    refs.current.forEach((r, j) => {
+      const v = r?.querySelector("video");
+      if (!v) return;
+      if (j === k && running) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      } else v.pause();
+    });
+    if (!running) return;
     const id = setTimeout(() => setK((x) => (x + 1) % scenes.length), scenes[k].seconds * 1000);
     return () => clearTimeout(id);
-  }, [k, scenes]);
+  }, [k, running, scenes]);
   const s = scenes[k];
   return (
     <>
-      <div className="stage">
+      <div className="stage" ref={root}>
         {scenes.map((sc, j) => (
-          <div key={sc.title} ref={(el) => { refs.current[j] = el; }} className={`scene${sc.plain ? "" : " ph"}${j === k ? " on" : ""}`}>
+          <div key={sc.title} ref={(el) => { refs.current[j] = el; }} className={`scene${sc.plain ? "" : " ph"}${j === k ? " on" : ""}`} aria-hidden={j !== k}>
             {sc.node}
           </div>
         ))}
@@ -146,18 +167,118 @@ export function DestinationSequence({ scenes, children }: { scenes: Scene[]; chi
         <span>{s.note}</span>
       </div>
       {children}
-      <ul className="chap">
+      <ul className="chap" aria-label="Destination scenes">
         {scenes.map((sc, j) => (
           <li key={sc.title} className={j === k ? "on" : undefined}>
-            <span className="bar">
-              <i key={j === k ? `run-${k}` : j < k ? "done" : "idle"} className={j === k ? "run" : j < k ? "done" : undefined} style={{ ["--dur" as string]: `${sc.seconds}s` }} />
-            </span>
-            <b>{sc.title}</b>
-            <span>{sc.kind === "photographed" ? "Photographed" : "Concept"}</span>
+            <button type="button" aria-pressed={j === k} onClick={() => setK(j)}>
+              <span className="bar">
+                <i key={j === k ? `run-${k}-${running}` : j < k ? "done" : "idle"} className={j === k && running ? "run" : j < k || (j === k && !running) ? "done" : undefined} style={{ ["--dur" as string]: `${sc.seconds}s` }} />
+              </span>
+              <b>{sc.title}</b>
+              <span>{sc.kind === "photographed" ? "Photographed" : "Concept"}</span>
+            </button>
           </li>
         ))}
       </ul>
+      {!reduced ? (
+        <button type="button" className="vctl dzctl" aria-label={paused ? "Play the destination films" : "Pause the destination films"} onClick={() => setPaused((p) => !p)}>
+          <span aria-hidden="true">{paused ? "\u25B6" : "\u275A\u275A"}</span>
+        </button>
+      ) : null}
     </>
+  );
+}
+
+/**
+ * A film that never holds up the page. Its first-frame still (a <picture> with
+ * the phone and desktop crops) paints first; the film fades in once it plays.
+ * Autoplaying films start only on screen and without reduced motion, pause when
+ * scrolled away, and stay paused once a visitor pauses them. If the browser
+ * refuses to play (iPhone Low Power Mode, data saver), the still remains.
+ */
+export function SmartVideo({
+  id, wide, tall, widePoster, tallPoster, label, loop = false, autoPlay = false, priority = false,
+}: {
+  id?: string; wide: string; tall: string; widePoster?: string; tallPoster?: string; label: string;
+  loop?: boolean; autoPlay?: boolean; priority?: boolean;
+}) {
+  const v = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  // The crop is chosen here, not with <source media>: Safari ignores `media` on
+  // video sources and would load the desktop crop on an iPhone. Nothing loads
+  // before hydration, so the still is always the first thing painted.
+  const [src, setSrc] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    setSrc(window.matchMedia("(max-width: 600px)").matches ? tall : wide);
+  }, [tall, wide]);
+  useEffect(() => {
+    const el = v.current;
+    if (!el || !src || !autoPlay || prefersReducedMotion()) return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        if (el.dataset.userPaused !== "1") el.play().catch(() => setPlaying(false));
+      } else el.pause();
+    }, { rootMargin: "200px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [autoPlay, src]);
+  return (
+    <>
+      {widePoster ? (
+        <picture className="vposter">
+          {tallPoster ? <source media="(max-width: 600px)" srcSet={tallPoster} /> : null}
+          {/* eslint-disable-next-line @next/next/no-img-element -- local review still */}
+          <img src={widePoster} alt="" loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : undefined} decoding="async" />
+        </picture>
+      ) : null}
+      <video
+        ref={v}
+        id={id}
+        className={playing ? "on" : undefined}
+        muted
+        playsInline
+        loop={loop}
+        preload={priority ? "metadata" : "none"}
+        aria-label={label}
+        onPlaying={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onError={() => setPlaying(false)}
+        src={src}
+      />
+    </>
+  );
+}
+
+/** Pause and play for a background film (WCAG 2.2.2), placed above the film's overlays. */
+export function FilmControl({ target, label }: { target: string; label: string }) {
+  const [playing, setPlaying] = useState(false);
+  useEffect(() => {
+    const el = document.getElementById(target) as HTMLVideoElement | null;
+    if (!el) return;
+    const sync = () => setPlaying(!el.paused);
+    sync();
+    el.addEventListener("play", sync);
+    el.addEventListener("pause", sync);
+    return () => {
+      el.removeEventListener("play", sync);
+      el.removeEventListener("pause", sync);
+    };
+  }, [target]);
+  const toggle = () => {
+    const el = document.getElementById(target) as HTMLVideoElement | null;
+    if (!el) return;
+    if (el.paused) {
+      el.dataset.userPaused = "0";
+      el.play().catch(() => {});
+    } else {
+      el.dataset.userPaused = "1";
+      el.pause();
+    }
+  };
+  return (
+    <button type="button" className="vctl" aria-label={`${playing ? "Pause" : "Play"} ${label}`} onClick={toggle}>
+      <span aria-hidden="true">{playing ? "\u275A\u275A" : "\u25B6"}</span>
+    </button>
   );
 }
 
@@ -237,5 +358,14 @@ export function WinnersRail({ heading, count, children }: { heading: string; cou
         {children}
       </div>
     </>
+  );
+}
+
+/** Opens the site's cookie preferences dialog (TrackingConsent), where the visitor can change their choice. */
+export function CookiePreferencesButton() {
+  return (
+    <button type="button" className="pf-link" onClick={() => window.dispatchEvent(new Event(OPEN_PREFERENCES_EVENT))}>
+      Cookie preferences
+    </button>
   );
 }
