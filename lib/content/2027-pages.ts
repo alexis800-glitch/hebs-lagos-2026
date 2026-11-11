@@ -33,7 +33,7 @@ export const PAGES = {
   },
   education: {
     title: directive("EDUCATION & MASTERCLASSES"),
-    intro: draft("Professional education is one of HEBS's strongest foundations. The 2027 programme is built around five areas of learning, led by educators who are announced as they are officially confirmed."),
+    intro: draft("Professional education is one of HEBS's strongest foundations. The 2027 programme is planned around five areas of learning."),
     tracks: [
       { id: "hair-education", title: "Hair education", body: draft("Cutting, colour, styling and care, taught by working professionals.") },
       { id: "technical-training", title: "Technical training", body: draft("Hands-on technique for stylists, barbers and beauty professionals who want to sharpen their craft.") },
@@ -43,9 +43,10 @@ export const PAGES = {
     ],
     educators: draft("Speakers and educators are added here as they are officially confirmed."),
     registration: draft("How to register for education sessions is published with the 2027 programme."),
+    leadCaption: draft("HEBS Lagos 2026"),
     photos: draft("Learning at HEBS Lagos 2026."),
     photosCaption: draft("Photographed at HEBS Lagos 2026."),
-    speakerCaption: draft("A speaker at HEBS Lagos 2026."),
+    speakerCaption: draft("A speaker at HEBS Lagos 2026. 2027 speakers will be announced once confirmed."),
   },
   competitions: {
     intro: draft("HEBS competitions recognise talent, creativity and professional excellence. The 2027 competition categories and prize values remain the same as 2026."),

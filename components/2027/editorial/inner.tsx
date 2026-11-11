@@ -220,10 +220,13 @@ export function EducationPage(props: PageProps) {
           <div className="lg:col-span-4 lg:col-start-9">
             <div className="lg:sticky lg:top-28">
               {photographed ? (
-                <div className="relative aspect-[4/5] w-full overflow-hidden">
-                  <Pic id={EDU_LEAD} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 32vw, 100vw" />
-                  <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
-                </div>
+                <figure>
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <Pic id={EDU_LEAD} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 32vw, 100vw" />
+                    <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
+                  </div>
+                  <figcaption className="mt-3 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>{PAGES.education.leadCaption.text}</figcaption>
+                </figure>
               ) : (
                 <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
                   <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />

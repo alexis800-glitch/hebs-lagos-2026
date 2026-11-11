@@ -40,7 +40,8 @@ describe("House of Snapp homepage photographs", () => {
       expect(a.source, m.slot).toMatch(m.day === 1 ? /summit day 1, 24 Oct 2026/ : /summit day 2, 25 Oct 2026/);
       expect(a.source, m.slot).not.toMatch(/prize presentation/);
       expect(a.rights.permission, m.slot).toBe("not-recorded");
-      expect(a.restriction, m.slot).toMatch(/photographer's written permission and each recognisable person's consent/);
+      // Approved and paid for, but payment is not a written licence: it stays review media.
+      expect(a.restriction, m.slot).toMatch(/Approved by Mrs\. Shuler.*payment alone is not a publishing licence/);
       expect(a.permittedUsage, m.slot).toEqual(["internal-review"]);
     }
   });
@@ -73,6 +74,16 @@ describe("Education & Masterclasses photographs", () => {
     const frames = EIGHT.map((id) => findReviewAsset(id).source.match(FRAME)?.[0]);
     expect(new Set(frames).size).toBe(8);
     expect(html).toContain("for internal review only");
+    expect(html).toContain(">HEBS Lagos 2026</figcaption>");
+    expect(html).toContain("2027 speakers will be announced once confirmed.");
+    expect(html).toContain("The 2027 programme is planned around five areas of learning.");
+    expect(html).not.toMatch(/built around five areas|being demonstrated/);
+  });
+
+  it("keeps the treatment banner and the children out of frame", () => {
+    expect(findReviewAsset("edu-skincare").alt).toBe("A skincare treatment on a client at HEBS Lagos 2026");
+    expect(findReviewAsset("edu-skincare").source).toMatch(/treatment claim is out of frame/);
+    expect(findReviewAsset("sp-hall").source).toMatch(/no child is in frame/);
   });
 
   it("keeps the reserved plate and no photographs anywhere else", () => {

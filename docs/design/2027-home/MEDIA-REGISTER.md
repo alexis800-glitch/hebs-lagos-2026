@@ -7,6 +7,23 @@ source and restriction of every file, is `lib/assets/home-2027-review.ts`.
 Source folders are not linked here on purpose: they are editable by anyone
 with the link and must not appear in this public repository.
 
+**House of Snapp approval (recorded 11 Nov 2026).** Mrs. Shuler has approved the
+House of Snapp photography and paid the photographer (owner's confirmation). The
+general photography approval is settled and is not reopened here. Payment is not
+itself a written publishing licence, so the usage terms are still to be filed for
+the project records, and `permission` stays "not-recorded" in the register until
+they are. That paperwork does not hold up other development.
+
+**Kept out of public publication until ownership is established:** the poolside
+guests film (origin unknown) and the pre-party photographs DSC00261–00353 (the
+photographer question below). Champions photographs stay in place with neutral
+descriptions; competition names, placings and prizes are not published until the
+organisers verify them (D8).
+
+**Image corrections (11 Nov 2026):** DSC_1276 is cropped below the PureO
+banner, so its treatment claim is out of frame. 0Q1A0444 is cropped to the stage
+and the front of the audience, so that no child is in frame.
+
 | Media or content | Where it appears | Source and status | Needed before public use |
 |---|---|---|---|
 | Hair-styling loop | Hero, final call | VMM clip S06, HEBS Lagos 2026 styling floor, chosen with no sponsor logos in shot. No licence on file. | VMM written permission. Consent of the stylists and models, with a guardian's signature for anyone under 18. |

@@ -84,6 +84,14 @@ const SNAPP_D2 = "Photograph from the House of Snapp collection, HEBS Lagos 2026
 /** Summit-day photographs from the same collection that are not prize presentations. */
 const SNAPP_D1_FLOOR = "House of Snapp photograph, HEBS Lagos 2026 summit day 1, 24 Oct 2026 (collection folder \"HEBS DAY 1\")";
 const SNAPP_D2_FLOOR = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2, 25 Oct 2026 (collection folder \"HEBS DAY 2\")";
+/**
+ * Mrs. Shuler approved the House of Snapp photography and has paid the
+ * photographer (owner's confirmation, 11 Nov 2026). Payment is not a written
+ * publishing licence, so `permission` stays "not-recorded" until the usage terms
+ * are filed; the photographs remain review media until then.
+ */
+const SNAPP_APPROVAL =
+  "Approved by Mrs. Shuler, who has paid the photographer (owner's confirmation, 11 Nov 2026). The written usage terms are still to be filed for the project records; payment alone is not a publishing licence.";
 const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
 const OCT22 =
   "VMM photograph of the 22 Oct 2026 gathering at a different Lagos hotel. Not confirmed as an official HEBS activity; never described as NJS";
@@ -131,12 +139,12 @@ const SPECS: Spec[] = [
   ["hl-floor-a", "image", "hl-floor-a.webp", "", "photographed", "snapp-d1-floor", "IMG_6721, cropped to the tile"],
   ["hl-floor-b", "image", "hl-floor-b.webp", "", "photographed", "snapp-d2-floor", "DSC_2034, cropped to the tile"],
   ["hl-floor-c", "image", "hl-floor-c.webp", "", "photographed", "snapp-d1-floor", "IMG_7299, cropped to the tile"],
-  ["sp-hall", "image", "sp-hall.webp", "A full session at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0444, shown in full; a session sponsor's name is on the backdrop, so its agreement is needed"],
+  ["sp-hall", "image", "sp-hall.webp", "A full session at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0444, cropped to the stage and the front of the audience so that no child is in frame; a session sponsor's name is on the backdrop and Men'T is on the speaker's shirt, so their agreement is needed"],
   ["sp-exhibitor", "image", "sp-exhibitor.webp", "A wig and styling exhibitor's display at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1734, cropped to the frame; exhibitor brand visible, so the brand's agreement is needed"],
   // Education & Masterclasses page (DSC_1194 and IMG_7809 reuse exp-education and welcome-inset; 0Q1A0444 reuses sp-hall).
   ["edu-session", "image", "edu-session.webp", "A speaker addressing a seated session at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1305, shown in full; an organisation's name is visible on attendees' shirts"],
   ["edu-styling", "image", "edu-styling.webp", "A stylist shaping a client's curls with a comb at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1942, cropped to the frame; the Men'T stand is visible, so the brand's agreement is needed"],
-  ["edu-skincare", "image", "edu-skincare.webp", "A skincare treatment being demonstrated on a client at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1276, cropped to the frame; the PureO stand and part of its banner are visible, so the brand's agreement is needed"],
+  ["edu-skincare", "image", "edu-skincare.webp", "A skincare treatment on a client at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1276, cropped below the stand's banner so its treatment claim is out of frame; the PureO stand is visible, so the brand's agreement is needed"],
   ["edu-technique", "image", "edu-technique.webp", "A design being cut into a client's short hair at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1996, cropped to the frame"],
   ["edu-loc", "image", "edu-loc.webp", "A stylist retwisting a client's locs at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2239, cropped to the frame; the PureO stand is visible, so the brand's agreement is needed"],
   ["champ-img_7897", "image", "champions/champ-img_7897.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7897, cropped and tone-corrected working copy; the original is preserved unaltered"],
@@ -265,8 +273,8 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         permittedDepictions: ["real-event"],
         source: ({ "snapp-d1": SNAPP_D1, "snapp-d2": SNAPP_D2, "snapp-d1-floor": SNAPP_D1_FLOOR, "snapp-d2-floor": SNAPP_D2_FLOOR } as const)[kindOf] + note,
         restriction: kindOf === "snapp-d1-floor" || kindOf === "snapp-d2-floor"
-          ? "Internal review only. Needs the photographer's written permission and each recognisable person's consent before any public use."
-          : "Internal review only. Needs the photographer's written permission, each recognisable person's consent, and the organisers' verification of the competition, placing, winner and prize before any public use.",
+          ? SNAPP_APPROVAL
+          : `${SNAPP_APPROVAL} Competition names, placings and prizes stay unpublished until the organisers verify them (D8).`,
       };
     case "mark":
       return {
