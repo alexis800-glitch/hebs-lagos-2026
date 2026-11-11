@@ -9,6 +9,7 @@ import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { PreferredHomepage } from "@/components/2027/home/HomePage";
+import { EducationPage } from "@/components/2027/editorial/inner";
 import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
 
 const ROOT = join(__dirname, "..");
@@ -19,7 +20,7 @@ const FRAME = /(DSC\d{5}|DSC_\d{4}|IMG_\d{4}|0Q1A\d{4})/;
 
 describe("House of Snapp homepage photographs", () => {
   it("rebuilds every slot from a fingerprinted original, cropped to the frame's shape", () => {
-    expect(manifest.images).toHaveLength(20);
+    expect(manifest.images).toHaveLength(25);
     for (const m of manifest.images) {
       expect(m.sha256, m.slot).toMatch(/^[0-9a-f]{64}$/);
       expect(m.folder, m.slot).toBe(m.day === 1 ? "HEBS DAY 1/PHOTOS" : "HEBS DAY 2/PHOTOS");
@@ -60,5 +61,30 @@ describe("House of Snapp homepage photographs", () => {
       seen.set(frame, a.id);
     }
     expect(seen.size).toBeGreaterThan(35);
+  });
+});
+
+describe("Education & Masterclasses photographs", () => {
+  const EIGHT = ["exp-education", "welcome-inset", "edu-session", "edu-styling", "edu-skincare", "edu-technique", "edu-loc", "sp-hall"];
+
+  it("shows the eight approved photographs, each once, only where review media may render", () => {
+    const html = renderToStaticMarkup(createElement(EducationPage, { environment: "development" }));
+    for (const id of EIGHT) expect(html.split(`src="${findReviewAsset(id).src}"`).length - 1, id).toBe(1);
+    const frames = EIGHT.map((id) => findReviewAsset(id).source.match(FRAME)?.[0]);
+    expect(new Set(frames).size).toBe(8);
+    expect(html).toContain("for internal review only");
+  });
+
+  it("keeps the reserved plate and no photographs anywhere else", () => {
+    for (const environment of ["production", "preview"] as const) {
+      const html = renderToStaticMarkup(createElement(EducationPage, { environment }));
+      for (const id of EIGHT) expect(html, `${environment} ${id}`).not.toContain(findReviewAsset(id).src.replace(/\.webp$/, ""));
+      expect(html, environment).not.toContain('id="photographs"');
+      expect(html, environment).toContain('data-media-slot="education"');
+    }
+  });
+
+  it("names no session, instructor or programme detail", () => {
+    for (const id of EIGHT) expect(findReviewAsset(id).alt, id).not.toMatch(/masterclass|session by|instructor|educator|led by/i);
   });
 });

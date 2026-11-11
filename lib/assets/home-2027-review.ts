@@ -57,6 +57,7 @@ const HOS_WIDTHS: Record<string, number[]> = {
   "comp-main": [480, 800], "comp-trophy": [480], "sp-hall": [480, 800, 1400], "sp-exhibitor": [480],
   "hl-floor-a": [480, 800], "hl-performance": [480], "hl-hall": [480, 840], "hl-trophy": [480],
   "hl-floor-b": [480, 800], "hl-speaker": [480], "hl-floor-c": [480, 800], "hl-guest-d": [480, 800],
+  "edu-session": [480, 800, 1200], "edu-styling": [480, 800], "edu-skincare": [480, 800], "edu-technique": [480, 800], "edu-loc": [480, 800],
 };
 
 /** Champions photographs: the role each one plays, and the widths cut for it. */
@@ -132,6 +133,12 @@ const SPECS: Spec[] = [
   ["hl-floor-c", "image", "hl-floor-c.webp", "", "photographed", "snapp-d1-floor", "IMG_7299, cropped to the tile"],
   ["sp-hall", "image", "sp-hall.webp", "A full session at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0444, shown in full; a session sponsor's name is on the backdrop, so its agreement is needed"],
   ["sp-exhibitor", "image", "sp-exhibitor.webp", "A wig and styling exhibitor's display at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1734, cropped to the frame; exhibitor brand visible, so the brand's agreement is needed"],
+  // Education & Masterclasses page (DSC_1194 and IMG_7809 reuse exp-education and welcome-inset; 0Q1A0444 reuses sp-hall).
+  ["edu-session", "image", "edu-session.webp", "A speaker addressing a seated session at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1305, shown in full; an organisation's name is visible on attendees' shirts"],
+  ["edu-styling", "image", "edu-styling.webp", "A stylist shaping a client's curls with a comb at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1942, cropped to the frame; the Men'T stand is visible, so the brand's agreement is needed"],
+  ["edu-skincare", "image", "edu-skincare.webp", "A skincare treatment being demonstrated on a client at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1276, cropped to the frame; the PureO stand and part of its banner are visible, so the brand's agreement is needed"],
+  ["edu-technique", "image", "edu-technique.webp", "A design being cut into a client's short hair at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1996, cropped to the frame"],
+  ["edu-loc", "image", "edu-loc.webp", "A stylist retwisting a client's locs at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2239, cropped to the frame; the PureO stand is visible, so the brand's agreement is needed"],
   ["champ-img_7897", "image", "champions/champ-img_7897.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7897, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_7854", "image", "champions/champ-img_7854.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7854, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_8012", "image", "champions/champ-img_8012.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8012, cropped and tone-corrected working copy; the original is preserved unaltered"],

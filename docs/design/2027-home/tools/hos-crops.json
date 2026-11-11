@@ -485,6 +485,127 @@
    ],
    "iso": 1000,
    "sharpen": true
+  },
+  {
+   "slot": "edu-session",
+   "file": "DSC_1305.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "13c5d2abff8bd40d3d11762e7dd72466dee5420818dd7a735e30f7ce642ad366",
+   "size": [
+    5834,
+    3889
+   ],
+   "crop": [
+    0,
+    0,
+    5834,
+    3889
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1200
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "edu-styling",
+   "file": "DSC_1942.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "8de6c829c7704bc23b3da8b8f857c5c73cadd3a103ac80346c1ce19ba872504e",
+   "size": [
+    3788,
+    5682
+   ],
+   "crop": [
+    0,
+    300,
+    3788,
+    5351
+   ],
+   "aspect": 0.75,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 400,
+   "sharpen": true
+  },
+  {
+   "slot": "edu-skincare",
+   "file": "DSC_1276.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "fe7d0a2454ba51f04b376113828f2334e2f3cf0923b616b025996de9c1427550",
+   "size": [
+    4032,
+    6048
+   ],
+   "crop": [
+    0,
+    500,
+    4032,
+    5876
+   ],
+   "aspect": 0.75,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "edu-technique",
+   "file": "DSC_1996.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "aee700352e746bc6c2651138c00ba158e5302b0bf91954a9524db8728b8d4e7c",
+   "size": [
+    4032,
+    5040
+   ],
+   "crop": [
+    252,
+    0,
+    4032,
+    5040
+   ],
+   "aspect": 0.75,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 500,
+   "sharpen": true
+  },
+  {
+   "slot": "edu-loc",
+   "file": "DSC_2239.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "64bad392848c0c5578ad61080abb3467f6c7beaf95ecb120ce12b278b69ff9fc",
+   "size": [
+    3956,
+    5934
+   ],
+   "crop": [
+    0,
+    0,
+    3956,
+    5275
+   ],
+   "aspect": 0.75,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
   }
  ]
 }

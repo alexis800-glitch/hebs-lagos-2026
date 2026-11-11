@@ -15,6 +15,7 @@ import {
 import { portalLink } from "@/lib/integrations/registration-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
 import { resolveSlot } from "@/lib/assets/register";
+import { Pic, reviewMedia } from "@/components/2027/home/media";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
@@ -174,9 +175,29 @@ export function ProgrammePage(props: PageProps) {
 
 /* ── Education & masterclasses ──────────────────────────────────────── */
 
+/**
+ * HEBS Lagos 2026 learning photographs for the Education page, from the review
+ * media (House of Snapp collection). Like the homepage's, they render only in
+ * development or the protected review preview; elsewhere the page keeps its
+ * reserved plate and leaves the photographs out.
+ */
+const EDU_LEAD = "exp-education";
+const EDU_SPEAKER = "welcome-inset";
+const EDU_PHOTOS = [
+  { id: "edu-session", wide: true }, { id: "edu-styling", wide: false }, { id: "edu-skincare", wide: false },
+  { id: "edu-technique", wide: false }, { id: "edu-loc", wide: false }, { id: "sp-hall", wide: true },
+] as const;
+
 export function EducationPage(props: PageProps) {
   const opts = optsOf(props);
-  const notes = [COPY_DRAFT, "No speaker or educator is confirmed, so none is named.", "Education image reserved for an approved HEBS Lagos event photograph."];
+  const photographed = [EDU_LEAD, EDU_SPEAKER, ...EDU_PHOTOS.map((p) => p.id)].every((id) => reviewMedia(id, opts.environment));
+  const notes = [
+    COPY_DRAFT,
+    "No speaker or educator is confirmed, so none is named.",
+    photographed
+      ? "Photographs from HEBS Lagos 2026 (House of Snapp collection), for internal review only: the photographer's permission and the consent of the people shown are not recorded."
+      : "Education image reserved for an approved HEBS Lagos event photograph.",
+  ];
   const register = portalLink("education-registration", opts.environment);
   return (
     <Shell page="education" opts={opts} notes={props.notes ?? "inline"} groups={[["Education & masterclasses", notes]]}>
@@ -198,16 +219,49 @@ export function EducationPage(props: PageProps) {
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <div className="lg:sticky lg:top-28">
-              <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
-                <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
-              </Plate>
+              {photographed ? (
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
+                  <Pic id={EDU_LEAD} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 32vw, 100vw" />
+                  <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
+                </div>
+              ) : (
+                <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
+                  <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
+                </Plate>
+              )}
+              {photographed && <SectionNotes notes={notes.slice(2)} opts={opts} ground="black" className="mt-4" />}
             </div>
           </div>
         </div>
       </Section>
+      {photographed && (
+        <Section id="photographs" ground="white" labelledBy="photographs-title">
+          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+            <h2 id="photographs-title" style={h2Style}>{PAGES.education.photos.text}</h2>
+            <p className="text-[14px]" style={{ color: C.body }}>{PAGES.education.photosCaption.text}</p>
+          </div>
+          <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+            {EDU_PHOTOS.map((p) => (
+              <li key={p.id} className={`relative overflow-hidden ${p.wide ? "col-span-2 aspect-[3/2]" : "aspect-[3/4] lg:aspect-auto"}`}>
+                <Pic id={p.id} className="absolute inset-0 h-full w-full object-cover" sizes={p.wide ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
       <Section id="educators" ground="ivory" labelledBy="educators-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <h2 id="educators-title" className="lg:col-span-5" style={h2Style}>Speakers and educators.</h2>
+          <div className="lg:col-span-5">
+            <h2 id="educators-title" style={h2Style}>Speakers and educators.</h2>
+            {photographed && (
+              <figure className="mt-10 max-w-[360px]">
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Pic id={EDU_SPEAKER} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 360px, 100vw" />
+                </div>
+                <figcaption className="mt-3 text-[14px]" style={{ color: C.body }}>{PAGES.education.speakerCaption.text}</figcaption>
+              </figure>
+            )}
+          </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <Pending>{PAGES.education.educators.text}</Pending>
             <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="ivory" className="mt-6" />

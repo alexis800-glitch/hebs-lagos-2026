@@ -43,6 +43,9 @@ export const PAGES = {
     ],
     educators: draft("Speakers and educators are added here as they are officially confirmed."),
     registration: draft("How to register for education sessions is published with the 2027 programme."),
+    photos: draft("Learning at HEBS Lagos 2026."),
+    photosCaption: draft("Photographed at HEBS Lagos 2026."),
+    speakerCaption: draft("A speaker at HEBS Lagos 2026."),
   },
   competitions: {
     intro: draft("HEBS competitions recognise talent, creativity and professional excellence. The 2027 competition categories and prize values remain the same as 2026."),
