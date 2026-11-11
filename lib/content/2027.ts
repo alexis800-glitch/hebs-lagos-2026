@@ -140,7 +140,7 @@ export const COPY = {
     pathways: [
       { title: "Sponsorship", body: draft("Put your brand beside the summit's education, competitions and celebrations.") },
       { title: "Exhibitions", body: draft("Show products, tools and services to the professionals who choose them.") },
-      { title: "Brand activation", body: draft("Create moments guests take part in, on the beachfront and on stage.") },
+      { title: "Brand activation", body: draft("Create moments guests take part in, at the resort and on stage.") },
       { title: "Strategic partnerships", body: draft("Build a longer relationship with HEBS and its professional community.") },
     ],
     gate: draft("Partner inquiries and the 2027 sponsorship prospectus open once approved."),

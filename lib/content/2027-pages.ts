@@ -72,7 +72,7 @@ export const PAGES = {
     opportunities: [
       { title: "Exhibition space", body: draft("A place on the exhibition floor to meet professionals and present your range.") },
       { title: "Brand showcases", body: draft("Present a launch, a collection or a service to the summit audience.") },
-      { title: "Brand activation", body: draft("Create a moment guests take part in, on the beachfront or on stage.") },
+      { title: "Brand activation", body: draft("Create a moment guests take part in, at the resort or on stage.") },
     ],
     brands: draft("Participating brands are listed here as they are confirmed."),
   },

@@ -17,12 +17,16 @@ import { eventJsonLd } from "@/components/2027/site/EventJsonLd";
 import { previewStatuses } from "@/lib/content/2027";
 import { PAGES } from "@/lib/content/2027-pages";
 import { EDITION_DAYS } from "@/lib/editions/2027";
-import { REVIEW_ASSETS } from "@/lib/assets/home-2027-review";
+import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
+import {
+  AboutPage, CompetitionsPage, ContactPage, EducationPage, ExhibitorsPage, ExperiencePage, GalleryPage, ProgrammePage,
+  SpeakersPage, SponsorshipPage, TicketsPage, TravelPage,
+} from "@/components/2027/editorial/inner";
 import { FORMS_OPEN, PORTAL_2027 } from "@/lib/integrations/registration-2027";
 import {
   LAUNCH_2027, REVIEW_MEDIA_BY_PAGE, launchBlockers, pagePublished, pathPublished, site2027Open, type LaunchConfig, type LaunchInputs,
 } from "@/lib/launch-2027";
-import { PRIORITY_CTA, SITE_PAGES } from "@/lib/site/2027";
+import { PRIORITY_CTA, SITE_PAGES, type PageId } from "@/lib/site/2027";
 import { pageMetadata, sitemapXml } from "@/lib/site/seo-2027";
 
 const ROOT = join(__dirname, "..");
@@ -106,6 +110,22 @@ describe("image-usage authorisation", () => {
     const rendered = REVIEW_ASSETS.filter((a) => html.includes(a.src) || (a.poster && html.includes(a.poster))).map((a) => a.id);
     expect(rendered.length).toBeGreaterThan(40);
     for (const id of rendered) expect(REVIEW_MEDIA_BY_PAGE.home, id).toContain(id);
+  });
+
+  it("knows every review photograph each inner page renders", () => {
+    const render = (Page: (p: { environment: "development" }) => React.ReactElement) => renderToStaticMarkup(createElement(Page, { environment: "development" }));
+    const pages: [PageId, (p: { environment: "development" }) => React.ReactElement][] = [
+      ["about", AboutPage], ["experience", ExperiencePage], ["programme", ProgrammePage], ["education", EducationPage],
+      ["competitions", CompetitionsPage], ["speakers", SpeakersPage], ["exhibitors", ExhibitorsPage], ["sponsorship", SponsorshipPage],
+      ["tickets", TicketsPage], ["travel", TravelPage], ["gallery", GalleryPage], ["contact", ContactPage],
+    ];
+    for (const [id, Page] of pages) {
+      const html = render(Page);
+      const used = REVIEW_ASSETS.filter((a) => a.kind === "image" && html.includes(`src="${a.src}"`)).map((a) => a.id);
+      for (const u of used) expect(REVIEW_MEDIA_BY_PAGE[id] ?? [], `${id} uses ${u}`).toContain(u);
+      // Never the pre-party photographs (ownership unresolved) or concept films.
+      for (const u of used) expect(findReviewAsset(u).source, `${id} uses ${u}`).not.toMatch(/Pre-Party|DSC00\d{3}|WhatsApp|Seedance/);
+    }
   });
 
   it("blocks every page that relies on review media, whose usage terms are not filed", () => {

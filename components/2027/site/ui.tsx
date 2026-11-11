@@ -18,8 +18,10 @@ const VARIANT: Record<ButtonVariant, string> = { primary: "s27-btn--pri", ghost:
  * A call to action. With no `href` it renders as a non-link with the same look
  * (for "opens soon" states), so a button never leads anywhere that is not open.
  */
-export function Button({ href, variant = "primary", tone = "dark", children, className = "" }: {
+export function Button({ href, variant = "primary", tone = "dark", external = false, children, className = "" }: {
   href?: string | null;
+  /** Another website: opened with rel="noopener". */
+  external?: boolean;
   variant?: ButtonVariant;
   tone?: Tone;
   children: React.ReactNode;
@@ -27,7 +29,7 @@ export function Button({ href, variant = "primary", tone = "dark", children, cla
 }) {
   const cls = `s27-btn ${VARIANT[variant]}${on(tone)} ${className}`.trim();
   if (!href) return <span className={cls} aria-disabled="true">{children}</span>;
-  return <a className={cls} href={href}>{children}</a>;
+  return <a className={cls} href={href} rel={external ? "noopener" : undefined}>{children}</a>;
 }
 
 /** The small letter-spaced label above a headline ("Welcome to HEBS 2027"). */

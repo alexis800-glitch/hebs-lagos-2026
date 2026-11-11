@@ -17,7 +17,10 @@ import { FORMS_OPEN } from "@/lib/integrations/registration-2027";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { EXPERIENCE_SLOTS } from "./notes";
 import { FormBlock, PageLink } from "./site";
-import { C, HORIZON, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
+import { C, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
+import { Button, MetaLine } from "@/components/2027/site/ui";
+import { SlotImage } from "./media";
+import { DAY_PHOTOS } from "@/lib/site/page-media-2027";
 
 export interface Targets {
   priority: string;
@@ -167,8 +170,8 @@ export function Welcome({ opts, notes }: SectionProps) {
 
 /* ── C. Three days ──────────────────────────────────────────────────── */
 
-/** `compact`: on phones, reserved day images become a short band (inner pages; the homepage keeps the approved proportions). */
-export function ThreeDays({ opts, notes, compact = false }: SectionProps & { compact?: boolean }) {
+/** The three days: a 2026 summit photograph for each summit day, the opening evening as a typographic panel. */
+export function ThreeDays({ opts, notes }: SectionProps) {
   return (
     <section id="three-days" aria-labelledby="three-days-title" style={{ background: C.black, color: C.ivory }}>
       <div className="mx-auto max-w-[1440px] px-5 py-20 lg:px-12 lg:py-28">
@@ -185,19 +188,8 @@ export function ThreeDays({ opts, notes, compact = false }: SectionProps & { com
         <ol className="mt-12 grid gap-12 lg:mt-14 lg:grid-cols-3 lg:gap-x-3">
           {EDITION_DAYS.map((d, i) => (
             <li key={d.isoDate} className="flex flex-col">
-              <Plate
-                slotId={`day-${i + 1}`}
-                opts={opts}
-                sizes="(min-width: 1024px) 33vw, 100vw"
-                className={`${compact && resolveSlot(`day-${i + 1}`, opts.environment).kind !== "asset" ? "aspect-[16/6] sm:aspect-[16/10]" : "aspect-[16/10]"} w-full lg:aspect-[5/6]`}
-                tone={PANORAMA}
-                style={{ backgroundSize: "300% 100%", backgroundPosition: `${i * 50}% 0` }}
-              >
-                <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />
-                <span aria-hidden="true" className="absolute left-5 top-4 leading-none lg:left-6 lg:top-5" style={{ ...display, fontWeight: 500, fontSize: "clamp(80px, 7.6vw, 124px)", color: C.ivory }}>
-                  {d.shortDate.split(" ")[1]}
-                </span>
-              </Plate>
+              <SlotImage slotId={`day-${i + 1}`} reviewId={DAY_PHOTOS[i]} composition="day1" opts={opts}
+                sizes="(min-width: 1024px) 33vw, 100vw" className="aspect-[16/10] w-full lg:aspect-[5/6]" />
               <div className="flex flex-1 flex-col pt-6 lg:pr-8">
                 <p className="text-[14px] font-medium" style={{ color: C.champ }}>
                   <time dateTime={d.isoDate}>{d.weekday}, {d.shortDate}, 2027</time>
@@ -269,17 +261,11 @@ export function Experience({ opts, notes }: SectionProps) {
 
 /* ── E. The destination ─────────────────────────────────────────────── */
 
-/** `compact`: on phones, the reserved gallery is shorter and the reserved video position is left out until a video exists. */
-export function Destination({ opts, notes, compact = false }: SectionProps & { compact?: boolean }) {
-  const videoReserved = resolveSlot("destination-video", opts.environment).kind !== "asset";
+/** The destination: no resort photograph is authorised, so its image position is a typographic composition until one is. */
+export function Destination({ opts, notes }: SectionProps) {
   return (
     <section id="destination" aria-labelledby="destination-title" style={{ background: C.atlantic, color: C.ivory }}>
-      {/* Edge to edge: the resort's own photograph will take this panorama. */}
-      <Plate slotId="destination-gallery" opts={opts} sizes="100vw" className={`${compact ? "aspect-[16/9]" : "aspect-[4/3]"} w-full sm:aspect-[21/9]`} tone={PANORAMA}>
-        <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />
-        <div className="absolute inset-x-0 bottom-0 h-1/2" style={{ background: `linear-gradient(180deg, transparent, ${C.atlantic})` }} />
-      </Plate>
-      <div className="relative mx-auto -mt-24 max-w-[1440px] px-5 pb-20 sm:-mt-32 lg:px-12 lg:pb-28">
+      <div className="relative mx-auto max-w-[1440px] px-5 py-20 lg:px-12 lg:py-28">
         <h2 id="destination-title" style={{ ...display, fontWeight: 500, fontSize: "clamp(44px, 6vw, 96px)", lineHeight: 1 }}>
           {sentenceCase(COPY.destination.headline.text)}
         </h2>
@@ -290,25 +276,12 @@ export function Destination({ opts, notes, compact = false }: SectionProps & { c
               {COPY.destination.topics.map((t) => <li key={t}>{t}</li>)}
             </ul>
             <p className="mt-3 text-[14px]" style={{ color: "rgba(245,239,228,.7)" }}>{COPY.destination.topicsNote.text}</p>
-            <a
-              href={VENUE.website}
-              rel="noopener"
-              className="mt-8 inline-flex min-h-[48px] items-center border px-6 text-[13px] font-semibold transition-colors duration-200 hover:bg-[#C8A96A] hover:text-black"
-              style={{ borderColor: C.champ, color: C.champL }}
-            >
-              Visit njsbeachresort.com
-            </a>
+            <Button href={VENUE.website} variant="ghost" className="mt-8">Visit njsbeachresort.com</Button>
             <SectionNotes notes={notes.slice(0, 3)} opts={opts} ground="atlantic" className="mt-8" />
           </div>
-          <Plate
-            slotId="destination-video"
-            opts={opts}
-            sizes="(min-width: 1024px) 55vw, 100vw"
-            className={`${compact && videoReserved ? "hidden lg:block" : ""} aspect-video w-full lg:col-span-7`}
-            tone={TONE.dark}
-          >
-            <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.22)" }} />
-          </Plate>
+          <div className="lg:col-span-7">
+            <SlotImage slotId="destination-gallery" composition="lagos" opts={opts} sizes="(min-width: 1024px) 55vw, 100vw" className="aspect-[16/10] w-full" />
+          </div>
         </div>
       </div>
     </section>
@@ -521,22 +494,13 @@ export function QrAccess({ opts, notes }: SectionProps) {
 export function FinalCta({ to }: { to: Targets }) {
   return (
     <section id="final-cta" aria-labelledby="final-title" className="relative overflow-hidden" style={{ background: C.black, color: C.ivory }}>
-      <div aria-hidden="true" className="absolute inset-0" style={{ background: `radial-gradient(70% 22% at 50% 100%, rgba(14,58,63,.9), transparent 75%)` }} />
+      <div aria-hidden="true" className="absolute inset-0" style={{ background: "radial-gradient(70% 60% at 50% 0%, #2A2016 0%, #0D0B08 70%)" }} />
       <div className="relative mx-auto max-w-[1440px] px-5 py-24 text-center lg:px-12 lg:py-32">
         <h2 id="final-title" className="mx-auto max-w-[18ch]" style={{ ...display, fontWeight: 500, fontSize: "clamp(40px, 5vw, 80px)", lineHeight: 1.04 }}>
           {sentenceCase(COPY.finalCta.headline.text)}
         </h2>
-        <p className="mt-8" style={{ ...display, fontWeight: 500, fontSize: "clamp(24px, 2.4vw, 32px)", color: C.champL }}>
-          <time dateTime="2027-07-23/2027-07-25">{CAMPAIGN.datesDisplay}</time>
-        </p>
-        <p className="mt-2 text-[16px]" style={{ color: "rgba(245,239,228,.85)" }}>{venueLine}</p>
-        <a
-          href={to.priority}
-          className="mt-10 flex min-h-[56px] w-full items-center justify-center px-4 text-[12px] font-bold uppercase tracking-[0.12em] transition-colors duration-200 hover:bg-[#EAD7A8] sm:mx-auto sm:inline-flex sm:w-auto sm:px-9 sm:text-[13px] sm:tracking-[0.18em]"
-          style={{ background: C.champ, color: C.black }}
-        >
-          {COPY.finalCta.button.text}
-        </a>
+        <MetaLine className="mt-8" style={{ color: "#F0E2C4" }} />
+        <Button href={to.priority} className="mt-10">{COPY.finalCta.button.text}</Button>
         {!FORMS_OPEN.priority && (
           <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>The priority list opens soon.</p>
         )}

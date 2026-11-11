@@ -27,6 +27,7 @@ import { REVIEW_ASSETS } from "./assets/home-2027-review";
 import { isPagePublishable, type DeployEnvironment, type PublicationStatus } from "./publication";
 import { BASE, SITE_PAGES, type PageId } from "./site/2027";
 import { LAUNCH_2027, type LaunchConfig } from "./launch-2027-config";
+import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "./site/page-media-2027";
 
 export { LAUNCH_2027, type LaunchAuthorisation, type LaunchConfig } from "./launch-2027-config";
 
@@ -34,11 +35,17 @@ export { LAUNCH_2027, type LaunchAuthorisation, type LaunchConfig } from "./laun
  * Review media each page renders: owner-authorised material for the private
  * preview only (lib/assets/home-2027-review.ts). Production never serves it.
  */
-export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = {
-  home: REVIEW_ASSETS.filter((a) => !/^(edu|gal)-/.test(a.id)).map((a) => a.id),
-  education: REVIEW_ASSETS.filter((a) => a.id.startsWith("edu-")).map((a) => a.id).concat(["exp-education", "welcome-inset", "sp-hall"]),
-  gallery: PAGES.gallery.categories.flatMap((c) => c.photos),
-};
+export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = (() => {
+  const out: Partial<Record<PageId, string[]>> = {
+    home: REVIEW_ASSETS.filter((a) => !/^(edu|gal)-/.test(a.id)).map((a) => a.id),
+    education: REVIEW_ASSETS.filter((a) => a.id.startsWith("edu-")).map((a) => a.id).concat(["exp-education", "welcome-inset", "sp-hall"]),
+    gallery: PAGES.gallery.categories.flatMap((c) => c.photos),
+    experience: [...Object.values(EXPERIENCE_PHOTOS), ...DAY_PHOTOS].filter((x): x is string => !!x),
+    programme: DAY_PHOTOS.filter((x): x is string => !!x),
+  };
+  for (const [page, id] of Object.entries(HERO_MEDIA) as [PageId, string][]) out[page] = [...(out[page] ?? []), id];
+  return out;
+})();
 
 export interface LaunchBlocker {
   /** Stable key, for tests and the checklist. */

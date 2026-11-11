@@ -3,51 +3,60 @@
  * masthead, links that exist only once their page is built, and form previews
  * that become a link to the Base44 2027 portal once that page is approved.
  */
-import { CAMPAIGN, VENUE } from "@/lib/editions/2027";
 import { pageHref, type PageId } from "@/lib/site/2027";
 import { FORM_FIELDS, type FormId } from "@/lib/integrations/registration-2027";
 import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
 import HebsForm from "./HebsForm";
 import { SectionNotes, type Opts } from "./parts";
-import { C, GROUND, display, type Ground } from "./tokens";
+import { AccentTitle, Kicker, MetaLine } from "@/components/2027/site/ui";
+import { SlotImage, type Composition } from "./media";
+import { C, display } from "./tokens";
 
 /* ── Page masthead ──────────────────────────────────────────────────── */
 
 /**
- * The inner-page opening: the page title in Bodoni over the event's dates and
- * venue, closed by the same champagne horizon the homepage hero ends on.
+ * The inner-page opening, on the homepage's pattern: the "HEBS Lagos 2027"
+ * label, the page title in Bodoni with the homepage's italic champagne accent
+ * on its last `accent` words, the intro, and the dates and venue; beside it, a
+ * captioned HEBS Lagos 2026 summit photograph (`media`) or, where none is
+ * suitable or allowed, a typographic composition (`composition`). Always on the
+ * homepage's black, closed by the champagne horizon the homepage hero ends on.
  */
 export function PageHero({
   title,
   intro,
   opts,
   notes = [],
-  ground = "black",
+  accent = 0,
+  media,
+  composition = "dates",
   children,
 }: {
   title: string;
   intro: string;
   opts: Opts;
   notes?: string[];
-  ground?: Ground;
+  accent?: number;
+  media?: string;
+  composition?: Composition;
   children?: React.ReactNode;
 }) {
-  const g = GROUND[ground];
   return (
-    <section aria-labelledby="page-title" className={`relative ${g.light ? "da-on-light" : ""}`} style={{ background: g.bg, color: g.fg }}>
-      <div id="main-content" className="mx-auto max-w-[1440px] px-5 pb-14 pt-14 lg:px-12 lg:pb-20 lg:pt-20">
-        <p className="text-[15px] font-medium" style={{ ...display, fontSize: "20px", color: ground === "champagne" ? C.onChamp : g.light ? "#5E5034" : C.champL }}>
-          <time dateTime="2027-07-23/2027-07-25">{CAMPAIGN.datesDisplay}</time>
-        </p>
-        <p className="mt-1 text-[14px]" style={{ color: g.muted }}>
-          <span translate="no">{VENUE.name.value}</span>, {VENUE.locality}
-        </p>
-        <h1 id="page-title" className="mt-5 max-w-[18ch]" style={{ ...display, fontWeight: 500, fontSize: "clamp(42px, 6vw, 96px)", lineHeight: 1.02 }}>
-          {title}
-        </h1>
-        <p className="mt-7 max-w-[58ch] text-[17px] leading-[1.7] lg:text-[19px]" style={{ color: g.muted }}>{intro}</p>
-        {children}
-        <SectionNotes notes={notes} opts={opts} ground={ground} className="mt-8" />
+    <section aria-labelledby="page-title" className="relative" style={{ background: "radial-gradient(70% 90% at 85% 8%, #2A2016 0%, #0D0B08 68%)", color: C.ivory }}>
+      <div id="main-content" className="mx-auto grid max-w-[1440px] gap-10 px-5 pb-14 pt-12 lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-12 lg:pb-20 lg:pt-20">
+        <div className="lg:col-span-7">
+          <Kicker>HEBS Lagos 2027</Kicker>
+          <h1 id="page-title" className="mt-5 max-w-[17ch]" style={{ ...display, fontWeight: 500, fontSize: "clamp(42px, 5.4vw, 88px)", lineHeight: 1.02 }}>
+            <AccentTitle text={title} accent={accent} />
+          </h1>
+          <p className="mt-7 max-w-[56ch] text-[17px] leading-[1.7] lg:text-[19px]" style={{ color: "rgba(246,239,226,.78)" }}>{intro}</p>
+          <MetaLine className="mt-7" style={{ color: "#F0E2C4" }} />
+          {children}
+          <SectionNotes notes={notes} opts={opts} ground="black" className="mt-8" />
+        </div>
+        <div className="lg:col-span-5">
+          <SlotImage reviewId={media} composition={composition} opts={opts} className="aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-[4/5]" sizes="(min-width: 1024px) 38vw, 100vw" />
+        </div>
       </div>
       <span aria-hidden="true" className="da-horizon block h-px" style={{ background: `linear-gradient(90deg, transparent, ${C.champL} 30%, #FFF6DE 50%, ${C.champL} 70%, transparent)` }} />
     </section>
