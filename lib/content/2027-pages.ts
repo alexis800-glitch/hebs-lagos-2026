@@ -109,6 +109,18 @@ export const PAGES = {
     pending: draft("HEBS Lagos 2026 photographs and videos appear here once approved, with rights and consent recorded for every image."),
     archive: draft("The HEBS Lagos 2026 website stays online as the record of the 2026 edition."),
     earlier: draft("HEBS held earlier editions in the United States. Their photographs belong to the HEBS archive and are not shown on the Lagos 2027 site."),
+    photosTitle: draft("HEBS Lagos 2026, in photographs."),
+    photosIntro: draft("Photographed on the two summit days, 24 and 25 October 2026."),
+    /** Review photographs (lib/assets/home-2027-review.ts), grouped by what each one shows. */
+    categories: [
+      { id: "hair", title: draft("Hair and barbering"), photos: ["gal-img_6721", "gal-img_6724", "gal-dsc_1947", "gal-dsc_1395", "gal-img_6824", "gal-dsc_2148", "gal-dsc_1969", "gal-dsc_2239"] },
+      { id: "competitions", title: draft("Competitions and awards"), photos: ["gal-img_6688", "gal-img_8357", "gal-img_6755", "gal-img_7937", "gal-img_7821"] },
+      { id: "beauty", title: draft("Beauty and nails"), photos: ["gal-dsc_1489", "gal-dsc_1452", "gal-dsc_1276"] },
+      { id: "stage", title: draft("Learning on stage"), photos: ["gal-dsc_1194", "gal-dsc_1305", "gal-0q1a0444", "gal-0q1a0445", "gal-img_7809", "gal-dsc_1786", "gal-dsc_1798"] },
+      { id: "fashion", title: draft("Fashion and runway"), photos: ["gal-dsc_2093", "gal-dsc_2097", "gal-dsc_2034", "gal-dsc_2037", "gal-0q1a0481", "gal-0q1a0117"] },
+      { id: "exhibitors", title: draft("Exhibitors"), photos: ["gal-0q1a0074", "gal-dsc_1734", "gal-0q1a0098", "gal-dsc_1727"] },
+      { id: "guests", title: draft("Guests and celebrations"), photos: ["gal-0q1a0470", "gal-img_7144", "gal-img_7147", "gal-img_7139", "gal-0q1a0374", "gal-img_7299"] },
+    ],
   },
   contact: {
     title: draft("Contact us"),

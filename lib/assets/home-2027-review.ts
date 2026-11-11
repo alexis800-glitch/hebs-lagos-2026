@@ -36,6 +36,8 @@ export interface ReviewAsset extends AssetRecord {
   fullWidth?: number;
   /** For films: a still of the first frame, <clip>-poster.webp, shown until the film plays and when it cannot. */
   poster?: string;
+  /** Width over height, for layouts that keep each photograph's own shape (the gallery). */
+  aspect?: number;
 }
 
 /** Review images wider than 800 px, with their natural widths (480 and 800 px copies exist beside them). */
@@ -58,6 +60,30 @@ const HOS_WIDTHS: Record<string, number[]> = {
   "hl-floor-a": [480, 800], "hl-performance": [480], "hl-hall": [480, 840], "hl-trophy": [480],
   "hl-floor-b": [480, 800], "hl-speaker": [480], "hl-floor-c": [480, 800], "hl-guest-d": [480, 800],
   "edu-session": [480, 800, 1200], "edu-styling": [480, 800], "edu-skincare": [480, 800], "edu-technique": [480, 800], "edu-loc": [480, 800],
+  "gal-img_6721": [480, 800, 1100], "gal-img_6724": [480, 800], "gal-dsc_1947": [480, 800], "gal-dsc_1395": [480, 800],
+  "gal-img_6824": [480, 800, 1100], "gal-dsc_2148": [480, 800], "gal-dsc_1969": [480, 800, 1100], "gal-dsc_2239": [480, 800],
+  "gal-img_6688": [480, 800], "gal-img_8357": [480, 800], "gal-img_6755": [480, 800, 1100], "gal-img_7937": [480, 800, 1100],
+  "gal-img_7821": [480, 800, 1100], "gal-dsc_1489": [480, 800, 1100], "gal-dsc_1452": [480, 800, 1100], "gal-dsc_1276": [480, 800],
+  "gal-dsc_1194": [480, 800], "gal-dsc_1305": [480, 800, 1100], "gal-0q1a0444": [480, 800, 1100], "gal-0q1a0445": [480, 800, 1100],
+  "gal-img_7809": [480, 800, 1100], "gal-dsc_1786": [480, 800], "gal-dsc_1798": [480, 800], "gal-dsc_2093": [480, 800],
+  "gal-dsc_2097": [480, 800], "gal-dsc_2034": [480, 800, 1100], "gal-dsc_2037": [480, 800, 1100], "gal-0q1a0481": [480, 800],
+  "gal-0q1a0117": [480, 800], "gal-0q1a0074": [480, 800, 1100], "gal-dsc_1734": [480, 800, 1100], "gal-0q1a0098": [480, 800],
+  "gal-dsc_1727": [480, 800, 1100], "gal-0q1a0470": [480, 800, 1100], "gal-img_7144": [480, 800, 1100], "gal-img_7147": [480, 800, 1100],
+  "gal-img_7139": [480, 800, 1100], "gal-0q1a0374": [480, 800, 1100], "gal-img_7299": [480, 800, 1100],
+};
+
+/** Gallery photographs keep their own shape: width over height of each crop (tools/hos-crops.json). */
+const GALLERY_ASPECT: Record<string, number> = {
+  "gal-img_6721": 1.5, "gal-img_6724": 0.6667, "gal-dsc_1947": 0.6667, "gal-dsc_1395": 0.6667,
+  "gal-img_6824": 1.5, "gal-dsc_2148": 0.6666, "gal-dsc_1969": 1.5001, "gal-dsc_2239": 0.6667,
+  "gal-img_6688": 0.8, "gal-img_8357": 0.6667, "gal-img_6755": 1.2501, "gal-img_7937": 1.5,
+  "gal-img_7821": 1.5001, "gal-dsc_1489": 1.5, "gal-dsc_1452": 1.5, "gal-dsc_1276": 0.75,
+  "gal-dsc_1194": 0.6667, "gal-dsc_1305": 1.5001, "gal-0q1a0444": 1.5, "gal-0q1a0445": 1.5,
+  "gal-img_7809": 1.25, "gal-dsc_1786": 0.6667, "gal-dsc_1798": 0.8, "gal-dsc_2093": 0.6667,
+  "gal-dsc_2097": 0.8, "gal-dsc_2034": 1.5, "gal-dsc_2037": 1.25, "gal-0q1a0481": 0.6667,
+  "gal-0q1a0117": 0.6667, "gal-0q1a0074": 1.2501, "gal-dsc_1734": 1.4999, "gal-0q1a0098": 0.6666,
+  "gal-dsc_1727": 1.1809, "gal-0q1a0470": 1.5, "gal-img_7144": 1.2501, "gal-img_7147": 1.25,
+  "gal-img_7139": 1.2501, "gal-0q1a0374": 1.4999, "gal-img_7299": 1.5,
 };
 
 /** Champions photographs: the role each one plays, and the widths cut for it. */
@@ -147,6 +173,46 @@ const SPECS: Spec[] = [
   ["edu-skincare", "image", "edu-skincare.webp", "A skincare treatment on a client at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1276, cropped below the stand's banner so its treatment claim is out of frame; the PureO stand is visible, so the brand's agreement is needed"],
   ["edu-technique", "image", "edu-technique.webp", "A design being cut into a client's short hair at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1996, cropped to the frame"],
   ["edu-loc", "image", "edu-loc.webp", "A stylist retwisting a client's locs at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2239, cropped to the frame; the PureO stand is visible, so the brand's agreement is needed"],
+  // Gallery & past events: summit-day photographs only (no pre-party, cheque or prize frames).
+  ["gal-img_6721", "image", "gal-img_6721.webp", "Cornrows being braided, seen from above at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6721, full frame"],
+  ["gal-img_6724", "image", "gal-img_6724.webp", "A braider parting a client's hair for cornrows at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6724, full frame"],
+  ["gal-dsc_1947", "image", "gal-dsc_1947.webp", "A stylist shaping a client's twists at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1947, full frame"],
+  ["gal-dsc_1395", "image", "gal-dsc_1395.webp", "A barber at work on a client's cut at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1395, full frame"],
+  ["gal-img_6824", "image", "gal-img_6824.webp", "A barber's clippers at the back of a client's neck at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6824, full frame"],
+  ["gal-dsc_2148", "image", "gal-dsc_2148.webp", "A barber grooming a client's beard at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2148, full frame"],
+  ["gal-dsc_1969", "image", "gal-dsc_1969.webp", "A stylist working on a client's hair at a product stand at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_1969, full frame"],
+  ["gal-dsc_2239", "image", "gal-dsc_2239.webp", "A stylist retwisting a client's locs at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2239, full frame"],
+  ["gal-img_6688", "image", "gal-img_6688.webp", "A client wearing a numbered competition bib during a haircut at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6688, full frame"],
+  ["gal-img_8357", "image", "gal-img_8357.webp", "A braiding competitor at work at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "IMG_8357, full frame"],
+  ["gal-img_6755", "image", "gal-img_6755.webp", "A barber competing in front of the 2026 trophies at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6755, full frame"],
+  ["gal-img_7937", "image", "gal-img_7937.webp", "A winner celebrating beside the HEBS trophy at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7937, full frame"],
+  ["gal-img_7821", "image", "gal-img_7821.webp", "Guests on stage with a HEBS trophy at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7821, full frame"],
+  ["gal-dsc_1489", "image", "gal-dsc_1489.webp", "A nail technician painting a client's nails at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1489, full frame"],
+  ["gal-dsc_1452", "image", "gal-dsc_1452.webp", "A manicure in progress at a beauty station at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1452, full frame"],
+  ["gal-dsc_1276", "image", "gal-dsc_1276.webp", "A skincare treatment on a client at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1276, cropped below the stand's banner so its treatment claim is out of frame"],
+  ["gal-dsc_1194", "image", "gal-dsc_1194.webp", "A stylist demonstrating on a mannequin head at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1194, full frame"],
+  ["gal-dsc_1305", "image", "gal-dsc_1305.webp", "A speaker addressing a seated session at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1305, full frame"],
+  ["gal-0q1a0444", "image", "gal-0q1a0444.webp", "A speaker on stage before a full audience at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0444, cropped to the stage and the front of the audience so that no child is in frame"],
+  ["gal-0q1a0445", "image", "gal-0q1a0445.webp", "Speakers on stage before an audience at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0445, full frame"],
+  ["gal-img_7809", "image", "gal-img_7809.webp", "A speaker addressing the audience at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7809, full frame"],
+  ["gal-dsc_1786", "image", "gal-dsc_1786.webp", "A speaker on stage in candlelight at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1786, full frame"],
+  ["gal-dsc_1798", "image", "gal-dsc_1798.webp", "A speaker on stage, seen past the audience at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1798, full frame"],
+  ["gal-dsc_2093", "image", "gal-dsc_2093.webp", "A model in a feathered headdress and gown at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2093, full frame"],
+  ["gal-dsc_2097", "image", "gal-dsc_2097.webp", "Models in feathered costumes with guests at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2097, full frame"],
+  ["gal-dsc_2034", "image", "gal-dsc_2034.webp", "A model in a red embroidered robe walking the floor at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2034, full frame"],
+  ["gal-dsc_2037", "image", "gal-dsc_2037.webp", "Models in gowns walking the floor at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2037, full frame"],
+  ["gal-0q1a0481", "image", "gal-0q1a0481.webp", "A guest in a green gele and fuchsia gown at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0481, full frame"],
+  ["gal-0q1a0117", "image", "gal-0q1a0117.webp", "A sculptural braided hairstyle at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0117, full frame"],
+  ["gal-0q1a0074", "image", "gal-0q1a0074.webp", "An exhibitor presenting products at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0074, full frame"],
+  ["gal-dsc_1734", "image", "gal-dsc_1734.webp", "A wig and styling exhibitor's display at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1734, full frame"],
+  ["gal-0q1a0098", "image", "gal-0q1a0098.webp", "A stylist working on a client's braids at an exhibitor's stand at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0098, full frame"],
+  ["gal-dsc_1727", "image", "gal-dsc_1727.webp", "Garments on display at a fashion exhibitor's stand at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1727, cropped to the garments, leaving out the exhibitor's banner with its phone numbers and portraits"],
+  ["gal-0q1a0470", "image", "gal-0q1a0470.webp", "Two attendees greeting each other at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0470, full frame"],
+  ["gal-img_7144", "image", "gal-img_7144.webp", "An attendee in a HEBS T-shirt at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7144, full frame"],
+  ["gal-img_7147", "image", "gal-img_7147.webp", "Attendees smiling for the camera at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7147, full frame"],
+  ["gal-img_7139", "image", "gal-img_7139.webp", "An attendee with a gift bag in the crowd at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7139, full frame"],
+  ["gal-0q1a0374", "image", "gal-0q1a0374.webp", "A performer on stage with a microphone at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0374, full frame"],
+  ["gal-img_7299", "image", "gal-img_7299.webp", "A performer singing in candlelight at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7299, full frame"],
   ["champ-img_7897", "image", "champions/champ-img_7897.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7897, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_7854", "image", "champions/champ-img_7854.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7854, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_8012", "image", "champions/champ-img_8012.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8012, cropped and tone-corrected working copy; the original is preserved unaltered"],
@@ -178,6 +244,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
     ...(id.startsWith("champ-") ? { widths: [...CHAMP_WIDTHS[CHAMP_ROLE[id] ?? "card"]] } : {}),
     ...(IMAGE_WIDTH[file] ? { widths: [480, 800, IMAGE_WIDTH[file]], fullWidth: IMAGE_WIDTH[file] } : {}),
     ...(HOS_WIDTHS[id] ? { widths: HOS_WIDTHS[id], fullWidth: HOS_WIDTHS[id][HOS_WIDTHS[id].length - 1] } : {}),
+    ...(GALLERY_ASPECT[id] ? { aspect: GALLERY_ASPECT[id] } : {}),
     ...(file === "mark-2027-a.png" ? { widths: [240, 480] } : {}),
     ...(kind === "video" ? { poster: REVIEW_DIR + file.replace(/\.mp4$/, "-poster.webp") } : {}),
   };

@@ -206,6 +206,9 @@ screen size), the widths and whether it is sharpened (not at ISO 1600 and above)
 The largest width of each slot is about twice its widest display size, and these are
 saved at WebP quality 75 (indistinguishable from 90 at 2× zoom), so the page
 weighs about what it did with the video stills these replace.
+The same script cuts the Education (`edu-*`) and Gallery (`gal-*`) photographs.
+Gallery photographs keep their own shape (`aspect` in the manifest), and the
+page lays them out in justified rows of even height.
 
 `tools/champions-crops.json` holds, for each image:
 - the original's filename and SHA-256 (the script refuses any other file);

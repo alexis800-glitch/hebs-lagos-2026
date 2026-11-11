@@ -7,6 +7,7 @@
  * dates, venue, competitions and programme from lib/editions/2027.ts, images
  * from register slots, and no control that pretends to work.
  */
+import type { CSSProperties } from "react";
 import { COPY } from "@/lib/content/2027";
 import { PAGES } from "@/lib/content/2027-pages";
 import {
@@ -16,6 +17,7 @@ import { portalLink } from "@/lib/integrations/registration-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
 import { resolveSlot } from "@/lib/assets/register";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
+import { findReviewAsset } from "@/lib/assets/home-2027-review";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
@@ -621,30 +623,126 @@ export function TicketsPage(props: PageProps) {
 
 /* ── Gallery & past events ──────────────────────────────────────────── */
 
+/**
+ * Splits photographs, in order, into rows whose widths-over-heights add up as
+ * evenly as possible to about `target`, so every full-width row has a similar
+ * height and no row is left with a lone photograph.
+ */
+export function justifiedRows<T>(items: readonly T[], aspect: (item: T) => number, target: number): T[][] {
+  const a = items.map(aspect);
+  const n = Math.max(1, Math.round(a.reduce((x, y) => x + y, 0) / target));
+  const ideal = a.reduce((x, y) => x + y, 0) / n;
+  // cost[i][k]: best squared deviation for the first i items in k rows.
+  const cost = Array.from({ length: items.length + 1 }, () => Array(n + 1).fill(Infinity));
+  const cut = Array.from({ length: items.length + 1 }, () => Array(n + 1).fill(0));
+  cost[0][0] = 0;
+  for (let i = 1; i <= items.length; i++) {
+    for (let k = 1; k <= Math.min(n, i); k++) {
+      let sum = 0;
+      for (let j = i; j >= k; j--) {
+        sum += a[j - 1];
+        const c = cost[j - 1][k - 1] + (sum - ideal) ** 2;
+        if (c < cost[i][k]) { cost[i][k] = c; cut[i][k] = j - 1; }
+      }
+    }
+  }
+  const rows: T[][] = [];
+  for (let i = items.length, k = n; k > 0; k--) { rows.unshift(items.slice(cut[i][k], i)); i = cut[i][k]; }
+  return rows;
+}
+
+/**
+ * The HEBS Lagos 2026 summit photographs, grouped by what each one shows. Like
+ * the Education page's, they render only in development or the protected review
+ * preview; elsewhere the page keeps its reserved plate.
+ */
+const aspectOf = (id: string) => findReviewAsset(id).aspect ?? 1.5;
+const sumOf = (ids: readonly string[]) => ids.reduce((n, id) => n + aspectOf(id), 0);
+
+function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) {
+  const g = PAGES.gallery;
+  const count = g.categories.reduce((n, c) => n + c.photos.length, 0);
+  return (
+    <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
+      <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+        <h2 id="lagos-2026-title" style={h2Style}>{g.photosTitle.text}</h2>
+        <p className="text-[15px]" style={{ color: C.body }}>{g.photosIntro.text} {count} photographs.</p>
+      </div>
+      <SectionNotes notes={notes} opts={opts} ground="white" className="mt-6" />
+      <nav aria-label="Photograph categories" className="mt-8">
+        <ul className="flex flex-wrap gap-2">
+          {g.categories.map((c) => (
+            <li key={c.id}>
+              <a href={`#gallery-${c.id}`} className="inline-flex min-h-[44px] items-center gap-2 border px-4 text-[14px] transition-colors duration-200 hover:bg-black hover:text-white" style={{ borderColor: "rgba(160,128,72,.55)", color: C.black }}>
+                {c.title.text}<span aria-hidden="true" style={{ color: C.body }}>{c.photos.length}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      {g.categories.map((c) => (
+        <section key={c.id} id={`gallery-${c.id}`} aria-labelledby={`gallery-${c.id}-title`} className="mt-14 scroll-mt-28 border-t pt-8 lg:mt-20" style={{ borderColor: "rgba(160,128,72,.35)" }}>
+          <h3 id={`gallery-${c.id}-title`} style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 38px)", lineHeight: 1.1 }}>{c.title.text}</h3>
+          {/*
+            Justified rows: each photograph grows in proportion to its width over height, so a row shares one
+            height. A desktop row too wide for a phone splits into balanced phone rows, stacked.
+          */}
+          <div className="mt-6 flex flex-col gap-3 lg:gap-4">
+            {justifiedRows(c.photos, aspectOf, 3.6).map((row) => (
+              <div key={row[0]} className="flex flex-col gap-3 lg:flex-row lg:gap-4">
+                {(sumOf(row) > 2.4 ? justifiedRows(row, aspectOf, 1.8) : [row]).map((part) => (
+                  <ul key={part[0]} className="flex gap-3 lg:basis-0 lg:grow-[var(--g)] lg:gap-4" style={{ "--g": sumOf(part) } as CSSProperties}>
+                    {part.map((id) => {
+                      const r = aspectOf(id);
+                      return (
+                        <li key={id} className="basis-0 overflow-hidden" style={{ flexGrow: r, aspectRatio: String(r) }}>
+                          <Pic id={id} className="h-full w-full object-cover" sizes={`(min-width: 1024px) ${Math.round(r * 340)}px, ${Math.round(r * 210)}px`} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </Section>
+  );
+}
+
 export function GalleryPage(props: PageProps) {
   const opts = optsOf(props);
   const g = PAGES.gallery;
-  const notes = [COPY_DRAFT, "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here."];
+  const photographed = g.categories.every((c) => c.photos.every((id) => reviewMedia(id, opts.environment)));
+  const notes = [
+    COPY_DRAFT,
+    photographed
+      ? "Photographs from the HEBS Lagos 2026 summit days (House of Snapp collection), for internal review only until the written usage terms are on file. No pre-party, cheque or prize photographs are included."
+      : "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here.",
+  ];
   return (
     <Shell page="gallery" opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
       <PageHero title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} />
-      <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
-          <div className="lg:col-span-4">
-            <h2 id="lagos-2026-title" style={h2Style}>{sentenceCase(COPY.highlights.headline.text)}</h2>
-            <div className="mt-8"><Pending>{g.pending.text}</Pending></div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px]" style={{ color: C.body }}>
-              {COPY.highlights.kinds.map((k) => <li key={k}>{k}</li>)}
-            </ul>
-            <SectionNotes notes={notes.slice(1)} opts={opts} ground="white" className="mt-6" />
+      {photographed ? <Lagos2026Photographs opts={opts} notes={notes.slice(1)} /> : (
+        <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
+            <div className="lg:col-span-4">
+              <h2 id="lagos-2026-title" style={h2Style}>{sentenceCase(COPY.highlights.headline.text)}</h2>
+              <div className="mt-8"><Pending>{g.pending.text}</Pending></div>
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px]" style={{ color: C.body }}>
+                {COPY.highlights.kinds.map((k) => <li key={k}>{k}</li>)}
+              </ul>
+              <SectionNotes notes={notes.slice(1)} opts={opts} ground="white" className="mt-6" />
+            </div>
+            <div className="lg:col-span-8">
+              <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/7] w-full" tone={TONE.light}>
+                <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
+              </Plate>
+            </div>
           </div>
-          <div className="lg:col-span-8">
-            <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/7] w-full" tone={TONE.light}>
-              <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
-            </Plate>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
       <Section id="archive" ground="ivory" labelledBy="archive-title" innerClassName="lg:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="archive-title" className="lg:col-span-5" style={h2Style}>Past events.</h2>

@@ -606,6 +606,965 @@
    ],
    "iso": 800,
    "sharpen": true
+  },
+  {
+   "slot": "gal-img_6721",
+   "file": "IMG_6721.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "51c90117c0d3e94c8dacd5257d8eb9c40c0139804f111d63ec0cc3895e45140f",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    0,
+    0,
+    6000,
+    4000
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-img_6724",
+   "file": "IMG_6724.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "b2d1bfee8caec5bac85db9a3a3a907a349042891e6f92cafa6d7d88ae678d9a1",
+   "size": [
+    4000,
+    6000
+   ],
+   "crop": [
+    0,
+    0,
+    4000,
+    6000
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1947",
+   "file": "DSC_1947.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "19ce8e2bdb22ab93cb183d9a36e9b84358468fd3202d214bcf201516513b6b45",
+   "size": [
+    4032,
+    6048
+   ],
+   "crop": [
+    0,
+    0,
+    4032,
+    6048
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 400,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1395",
+   "file": "DSC_1395.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "f252d0fa96a077591fabc1f9878dc74158f0b4c4d3a009870cf75a29330e5c1f",
+   "size": [
+    3993,
+    5989
+   ],
+   "crop": [
+    0,
+    0,
+    3993,
+    5989
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 320,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_6824",
+   "file": "IMG_6824.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "d772d918ad51af33fa3b96c1f6e6d04e8dbcb0d9e3397869ff763f9e3ef5e5c7",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    0,
+    0,
+    6000,
+    4000
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 320,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_2148",
+   "file": "DSC_2148.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "d44a23046b921ba682ed55cc866999a09bc4e2428b45905db74da3f6fe0d5aaf",
+   "size": [
+    3695,
+    5543
+   ],
+   "crop": [
+    0,
+    0,
+    3695,
+    5543
+   ],
+   "aspect": 0.6666,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-dsc_1969",
+   "file": "DSC_1969.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "69de69d3c3714c639adec61cbd9e53a7112555d75e282bad6dbf71bd93dc16fa",
+   "size": [
+    5849,
+    3899
+   ],
+   "crop": [
+    0,
+    0,
+    5849,
+    3899
+   ],
+   "aspect": 1.5001,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 400,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_2239",
+   "file": "DSC_2239.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "64bad392848c0c5578ad61080abb3467f6c7beaf95ecb120ce12b278b69ff9fc",
+   "size": [
+    3956,
+    5934
+   ],
+   "crop": [
+    0,
+    0,
+    3956,
+    5934
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_6688",
+   "file": "IMG_6688.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "7a35ff3950a9b97f8ecc39f7d70d6ed3de2d7da30d0ec7285d1fe817b72881e2",
+   "size": [
+    3741,
+    4676
+   ],
+   "crop": [
+    0,
+    0,
+    3741,
+    4676
+   ],
+   "aspect": 0.8,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_8357",
+   "file": "IMG_8357.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "55e57045f6652b5e6497b3a3ce853f7ba0327639ce89ded3f207ea819637506c",
+   "size": [
+    3907,
+    5860
+   ],
+   "crop": [
+    0,
+    0,
+    3907,
+    5860
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_6755",
+   "file": "IMG_6755.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "bc41bbf26f6da922b9a8830c131d20f1c8845944871cb5673ce6b451f5244e0b",
+   "size": [
+    4969,
+    3975
+   ],
+   "crop": [
+    0,
+    0,
+    4969,
+    3975
+   ],
+   "aspect": 1.2501,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_7937",
+   "file": "IMG_7937.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "f7e03e472e8a41ddf676c757918c3c8db441cd9024ffe132b6368bede11d3dbb",
+   "size": [
+    5871,
+    3914
+   ],
+   "crop": [
+    0,
+    0,
+    5871,
+    3914
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_7821",
+   "file": "IMG_7821.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "38d427b696626226d56d83b9ec05a8c4c2b6316b02da72c0f5370dff1cf460db",
+   "size": [
+    5510,
+    3673
+   ],
+   "crop": [
+    0,
+    0,
+    5510,
+    3673
+   ],
+   "aspect": 1.5001,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1489",
+   "file": "DSC_1489.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "028feef79c688ae34158d9122149eec2af46b450f0b0fa264d991742daf811f7",
+   "size": [
+    6048,
+    4032
+   ],
+   "crop": [
+    0,
+    0,
+    6048,
+    4032
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 640,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1452",
+   "file": "DSC_1452.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "aa91d9dc02186948349bbbcadc4b10be76d92c52adcc59e4225faa5b38f18c7a",
+   "size": [
+    5469,
+    3646
+   ],
+   "crop": [
+    0,
+    0,
+    5469,
+    3646
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 640,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1276",
+   "file": "DSC_1276.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "fe7d0a2454ba51f04b376113828f2334e2f3cf0923b616b025996de9c1427550",
+   "size": [
+    4032,
+    6048
+   ],
+   "crop": [
+    150,
+    1160,
+    3816,
+    6048
+   ],
+   "aspect": 0.75,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1194",
+   "file": "DSC_1194.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "1522c0719a5d6f0f3f120b787ee69e95f33889d2d903ed36de9e4400b48ee69b",
+   "size": [
+    4032,
+    6048
+   ],
+   "crop": [
+    0,
+    0,
+    4032,
+    6048
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 1250,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1305",
+   "file": "DSC_1305.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "13c5d2abff8bd40d3d11762e7dd72466dee5420818dd7a735e30f7ce642ad366",
+   "size": [
+    5834,
+    3889
+   ],
+   "crop": [
+    0,
+    0,
+    5834,
+    3889
+   ],
+   "aspect": 1.5001,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-0q1a0444",
+   "file": "0Q1A0444.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "67a0d1063da8708cfbbb4086ab78bc923132f613f048166130b8ed4c7ea254e8",
+   "size": [
+    5935,
+    3957
+   ],
+   "crop": [
+    0,
+    450,
+    3075,
+    2500
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-0q1a0445",
+   "file": "0Q1A0445.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "e7483d20b86bcaf57e31160d0f0bba85c412b82ac32712b8777a9334acdafc66",
+   "size": [
+    5889,
+    3926
+   ],
+   "crop": [
+    0,
+    0,
+    5889,
+    3926
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-img_7809",
+   "file": "IMG_7809.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "8a2f55a89a4dd4a64c017272d7d323ba56439548e0164dfc334ffd97d1cb08f5",
+   "size": [
+    4910,
+    3928
+   ],
+   "crop": [
+    0,
+    0,
+    4910,
+    3928
+   ],
+   "aspect": 1.25,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 1000,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1786",
+   "file": "DSC_1786.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "e1951b17e6db75c6be40ac4da9908782b53d30cfb5f61998479913f21a9a8848",
+   "size": [
+    4032,
+    6048
+   ],
+   "crop": [
+    0,
+    0,
+    4032,
+    6048
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 1250,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1798",
+   "file": "DSC_1798.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "c3f9e735b0df025f807a0e3606804c6e5977ad6cf6188e3791a3f83119c5498b",
+   "size": [
+    4032,
+    5040
+   ],
+   "crop": [
+    0,
+    0,
+    4032,
+    5040
+   ],
+   "aspect": 0.8,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 1250,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_2093",
+   "file": "DSC_2093.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "ef18ae96a39296ad77e94dfdfe8bb79c203be159284a37762c83964b5366ad83",
+   "size": [
+    4014,
+    6021
+   ],
+   "crop": [
+    0,
+    0,
+    4014,
+    6021
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 250,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_2097",
+   "file": "DSC_2097.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "418c221be246eae274b6b06080777deabfd80d5058c6afca893395de9ab80336",
+   "size": [
+    4005,
+    5006
+   ],
+   "crop": [
+    0,
+    0,
+    4005,
+    5006
+   ],
+   "aspect": 0.8,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 250,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_2034",
+   "file": "DSC_2034.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "4d2ffa85b12ff393d3bbefbab2409b14ec38340911a63acc71f41210aa31dd85",
+   "size": [
+    6048,
+    4032
+   ],
+   "crop": [
+    0,
+    0,
+    6048,
+    4032
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 320,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_2037",
+   "file": "DSC_2037.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "1d8d89f24804d0fe9304794b7cd1d8fb995d56fa2067eb1aa504c0649e6c7902",
+   "size": [
+    4340,
+    3472
+   ],
+   "crop": [
+    0,
+    0,
+    4340,
+    3472
+   ],
+   "aspect": 1.25,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 320,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-0q1a0481",
+   "file": "0Q1A0481.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "52fe6c9f5e8f28578c82d3d274fc629c333b3d493f7cb987c3ea9459143b17b7",
+   "size": [
+    4000,
+    6000
+   ],
+   "crop": [
+    0,
+    0,
+    4000,
+    6000
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-0q1a0117",
+   "file": "0Q1A0117.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "4117144aedf0eb3b91b7c962128e1a8630a4ace98819bff0d8c41b5a66e27fb9",
+   "size": [
+    4000,
+    6000
+   ],
+   "crop": [
+    0,
+    0,
+    4000,
+    6000
+   ],
+   "aspect": 0.6667,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 1600,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-0q1a0074",
+   "file": "0Q1A0074.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "ec6d0519df1d98c0ae0f9771e894867a02317279994a0da134b590087326a30c",
+   "size": [
+    4928,
+    3942
+   ],
+   "crop": [
+    0,
+    0,
+    4928,
+    3942
+   ],
+   "aspect": 1.2501,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1734",
+   "file": "DSC_1734.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "39c1a863239b85896bd50f82ccb3db817e8e60461698f5fba8a913768c3b18c3",
+   "size": [
+    5512,
+    3675
+   ],
+   "crop": [
+    0,
+    0,
+    5512,
+    3675
+   ],
+   "aspect": 1.4999,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 500,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-0q1a0098",
+   "file": "0Q1A0098.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "1f4096ef42e79163295261d61db794bd5a3ca6e170215955c45397ed7fa53a2d",
+   "size": [
+    3911,
+    5867
+   ],
+   "crop": [
+    0,
+    0,
+    3911,
+    5867
+   ],
+   "aspect": 0.6666,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-dsc_1727",
+   "file": "DSC_1727.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "276488ba4f1ac645eb0e8545d423cab690c4d6f6a81f253e3f9ef2daabbbcfcf",
+   "size": [
+    5878,
+    3919
+   ],
+   "crop": [
+    1250,
+    0,
+    5878,
+    3919
+   ],
+   "aspect": 1.1809,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 500,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-0q1a0470",
+   "file": "0Q1A0470.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "b17a2856f6da48ee0623dec5611572a5b0e1d910a851fc5ab32ba8bf7d52d72c",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    0,
+    0,
+    6000,
+    4000
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-img_7144",
+   "file": "IMG_7144.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "8f4e5628f33c31e310753276e972f84fe1f45cfdc4ec4d0f06682ea51f6bc952",
+   "size": [
+    4639,
+    3711
+   ],
+   "crop": [
+    0,
+    0,
+    4639,
+    3711
+   ],
+   "aspect": 1.2501,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 1000,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_7147",
+   "file": "IMG_7147.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "22e6702c29a6a70691a8e19bc8d0b4c850c9955c79192067c1713ebb36440fca",
+   "size": [
+    4450,
+    3560
+   ],
+   "crop": [
+    0,
+    0,
+    4450,
+    3560
+   ],
+   "aspect": 1.25,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 1000,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-img_7139",
+   "file": "IMG_7139.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "95faeaef83566878af43509a70dc39b2cbdc5c0f300f266f6417092c7dc70131",
+   "size": [
+    4429,
+    3543
+   ],
+   "crop": [
+    0,
+    0,
+    4429,
+    3543
+   ],
+   "aspect": 1.2501,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 1000,
+   "sharpen": true
+  },
+  {
+   "slot": "gal-0q1a0374",
+   "file": "0Q1A0374.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "3abea93ba0694d8ea2692796198c4dca697daee940b9ea4094f66de3d9cb3e7b",
+   "size": [
+    5752,
+    3835
+   ],
+   "crop": [
+    0,
+    0,
+    5752,
+    3835
+   ],
+   "aspect": 1.4999,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "gal-img_7299",
+   "file": "IMG_7299.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "025c85c0034ee55d757affd43a594386a6c4e61b3b01738635f2c013050881e3",
+   "size": [
+    4944,
+    3296
+   ],
+   "crop": [
+    0,
+    0,
+    4944,
+    3296
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1100
+   ],
+   "iso": 800,
+   "sharpen": true
   }
  ]
 }
