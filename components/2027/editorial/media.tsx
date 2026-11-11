@@ -17,8 +17,10 @@ import { C, display } from "./tokens";
  */
 
 /** A 2026 summit photograph, captioned as such so it is never read as 2027. */
-export function EventPhoto({ id, environment, className = "", sizes, tone = "dark" }: {
+export function EventPhoto({ id, environment, className = "", sizes, tone = "dark", priority = false }: {
   id: string;
+  /** First-screen image (a page hero): load at once rather than lazily. */
+  priority?: boolean;
   environment: DeployEnvironment;
   className?: string;
   sizes: string;
@@ -28,7 +30,7 @@ export function EventPhoto({ id, environment, className = "", sizes, tone = "dar
   return (
     <figure className="m-0">
       <div className={`relative overflow-hidden ${className}`}>
-        <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={sizes} />
+        <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={sizes} priority={priority} />
         <span aria-hidden="true" className="pointer-events-none absolute inset-3 border" style={{ borderColor: "rgba(217,193,146,.35)" }} />
       </div>
       <figcaption className="mt-3"><Kicker tone={tone} className="!text-[11px] !tracking-[.28em]">HEBS Lagos 2026</Kicker></figcaption>
@@ -85,7 +87,8 @@ export function TypePanel({ variant, className = "", tone = "dark" }: { variant:
  * One image position: the slot's approved asset if there is one, else the 2026
  * summit photograph `reviewId`, else the typographic composition.
  */
-export function SlotImage({ slotId, reviewId, composition, opts, className, sizes, tone = "dark", children }: {
+export function SlotImage({ slotId, reviewId, composition, opts, className, sizes, tone = "dark", priority = false, children }: {
+  priority?: boolean;
   slotId?: string;
   reviewId?: string;
   composition: Composition;
@@ -96,10 +99,10 @@ export function SlotImage({ slotId, reviewId, composition, opts, className, size
   children?: React.ReactNode;
 }) {
   if (slotId && resolveSlot(slotId, opts.environment).kind === "asset") {
-    return <Plate slotId={slotId} opts={opts} sizes={sizes} className={className} tone={C.black}>{children}</Plate>;
+    return <Plate slotId={slotId} opts={opts} sizes={sizes} className={className} tone={C.black} priority={priority}>{children}</Plate>;
   }
   if (reviewId && reviewMedia(reviewId, opts.environment)) {
-    return <EventPhoto id={reviewId} environment={opts.environment} className={className} sizes={sizes} tone={tone} />;
+    return <EventPhoto id={reviewId} environment={opts.environment} className={className} sizes={sizes} tone={tone} priority={priority} />;
   }
   return <TypePanel variant={composition} className={className} tone={tone} />;
 }
