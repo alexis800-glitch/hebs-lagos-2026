@@ -11,6 +11,9 @@ import type { LaunchConfig } from "./launch-2027-config";
 
 export const LAUNCH_CANDIDATE: Omit<LaunchConfig, "authorisation"> = {
   pages: ["home", "tickets"],
+  // Launched without, and added when each is ready (directive section 11). Takes
+  // effect only with Mrs. Shuler's written authorisation of this launch.
+  deferred: ["imagery", "priority-form", "qr", "partner-inquiry"],
   origin: {
     status: "approved",
     value: "https://www.hebslagos.com",

@@ -65,33 +65,35 @@ export const HOMEPAGE_SECTIONS: HomepageSection[] = [
     dependencies: ["Priority list live (D1, D13)"] },
 ];
 
+export type AnnouncementId = "identity" | "dates" | "venue" | "overview" | "imagery" | "priority-form" | "qr" | "partner-inquiry";
+
 export interface AnnouncementItem {
+  id: AnnouncementId;
   requirement: string;
   where: string;
   state: "built" | "built-pending-content" | "gated";
   dependency: string;
-  /**
-   * The owner's written decision to launch without this item for now. Recorded
-   * only from Mrs. Shuler's own decision; the launch gate then stops counting it.
-   */
-  deferred?: { by: string; on: string; reference: string };
 }
 
-/** An announcement item counts as approved once built, or once its deferral is recorded. */
-export function announcementStatus(i: AnnouncementItem): PublicationStatus {
-  return i.state === "built" || i.deferred ? "approved" : "awaiting-confirmation";
+/**
+ * An announcement item counts as approved once built, or once the owner's launch
+ * authorisation defers it (`deferred`: the ids LAUNCH_2027.deferred lists, in
+ * effect only once LAUNCH_2027.authorisation is recorded).
+ */
+export function announcementStatus(i: AnnouncementItem, deferred: readonly AnnouncementId[] = []): PublicationStatus {
+  return i.state === "built" || deferred.includes(i.id) ? "approved" : "awaiting-confirmation";
 }
 
 /** Directive section 11: the eight launch items. */
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
-  { requirement: "Official 2027 campaign identity", where: "Hero", state: "built", dependency: "" },
-  { requirement: "July 23–25, 2027 dates", where: "Hero, three-day overview, final CTA", state: "built", dependency: "" },
-  { requirement: "NJS Beach Resort venue", where: "Hero, destination", state: "built", dependency: "" },
-  { requirement: "Three-day event overview", where: "Three-day overview", state: "built", dependency: "" },
-  { requirement: "Luxury promotional imagery", where: "Hero, destination", state: "built-pending-content", dependency: "photographs of the NJS Beach Resort itself (the approved photographs show the 2026 summit)" },
-  { requirement: "Working priority registration form", where: "Priority list", state: "gated", dependency: "Storage and administration (D1), privacy terms (D13)" },
-  { requirement: "QR code for immediate access", where: "QR block", state: "gated", dependency: "Publication date (the address, hebslagos.com/2027, is decided: D7)" },
-  { requirement: "Sponsor/exhibitor inquiry option", where: "Partners", state: "gated", dependency: "Inquiry storage (D1), public contacts (D10)" },
+  { id: "identity", requirement: "Official 2027 campaign identity", where: "Hero", state: "built", dependency: "" },
+  { id: "dates", requirement: "July 23–25, 2027 dates", where: "Hero, three-day overview, final CTA", state: "built", dependency: "" },
+  { id: "venue", requirement: "NJS Beach Resort venue", where: "Hero, destination", state: "built", dependency: "" },
+  { id: "overview", requirement: "Three-day event overview", where: "Three-day overview", state: "built", dependency: "" },
+  { id: "imagery", requirement: "Luxury promotional imagery", where: "Hero, destination", state: "built-pending-content", dependency: "photographs of the NJS Beach Resort itself (the approved photographs show the 2026 summit)" },
+  { id: "priority-form", requirement: "Working priority registration form", where: "Priority list", state: "gated", dependency: "Storage and administration (D1), privacy terms (D13)" },
+  { id: "qr", requirement: "QR code for immediate access", where: "QR block", state: "gated", dependency: "Publication date (the address, hebslagos.com/2027, is decided: D7)" },
+  { id: "partner-inquiry", requirement: "Sponsor/exhibitor inquiry option", where: "Partners", state: "gated", dependency: "Inquiry storage (D1), public contacts (D10)" },
   // "Mobile-friendly presentation" is verified by the responsive checks, not rendered.
 ];
 
@@ -236,7 +238,7 @@ export function previewStatuses(): PublicationStatus[] {
     ...EDITION_DAYS.map((d) => d.hours.status),
     findAsset("hebs-logo-nav").status,
     ...MEDIA_SLOTS.map((s) => (s.assetId ? findAsset(s.assetId).status : "awaiting-confirmation" as const)),
-    ...ANNOUNCEMENT_ITEMS.map(announcementStatus),
+    ...ANNOUNCEMENT_ITEMS.map((i) => announcementStatus(i)),
   ];
 }
 

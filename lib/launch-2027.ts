@@ -62,12 +62,13 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
  * wording written in its layout (lib/content/layout-copy-2027.ts). A page's launch depends only on these, so
  * unapproved material on one page never holds back another.
  */
-export function pageStatuses(id: PageId): PublicationStatus[] {
-  return [...contentStatuses(id), ...layoutStatuses(id)];
+export function pageStatuses(id: PageId, config: LaunchConfig = LAUNCH_2027): PublicationStatus[] {
+  return [...contentStatuses(id, config), ...layoutStatuses(id)];
 }
 
 /** The approval states of the content-module copy and facts one page shows. */
-function contentStatuses(id: PageId): PublicationStatus[] {
+function contentStatuses(id: PageId, config: LaunchConfig): PublicationStatus[] {
+  const deferred = config.authorisation ? config.deferred ?? [] : [];
   const shared = [VENUE.name.status, MARK_2027_STATUS, ...copyStatuses(COPY.finalCta, "finalCta")];
   const hours = EDITION_DAYS.map((d) => d.hours.status);
   const slot = (slotId: string) => {
@@ -79,7 +80,7 @@ function contentStatuses(id: PageId): PublicationStatus[] {
       // The homepage states no opening hours, so the day hours do not count here. The announcement
       // items of directive section 11 do: each must be built, or its deferral recorded by the owner.
       return [...shared, HOME_COPY_STATUS, ...copyStatuses(COPY.seo.homeTitle, "seo.homeTitle"), ...copyStatuses(COPY.seo.homeDescription, "seo.homeDescription"),
-        ...ANNOUNCEMENT_ITEMS.map(announcementStatus)];
+        ...ANNOUNCEMENT_ITEMS.map((i) => announcementStatus(i, deferred))];
     case "about":
       return [...shared, ...copyStatuses(PAGES.about, "pages.about"), ...copyStatuses(COPY.welcome, "welcome"), ...copyStatuses(COPY.seo.aboutDescription, "seo.aboutDescription")];
     case "experience":
@@ -154,7 +155,7 @@ export function launchBlockers({
     if (!p?.built) add(`page-${id}`, "Every launched page is built", `${id} is not built.`);
   }
   for (const id of config.pages) {
-    const own = statuses ?? pageStatuses(id);
+    const own = statuses ?? pageStatuses(id, config);
     const pending = own.filter((s) => s !== "approved").length;
     if (pending > 0) add(`approvals-${id}`, "Every item a launched page shows approved", `${id}: ${pending} of ${own.length} items are not approved.`);
   }

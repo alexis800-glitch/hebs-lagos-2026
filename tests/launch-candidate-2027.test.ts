@@ -64,4 +64,14 @@ describe("launch candidate: homepage and Tickets", () => {
     expect(tickets).not.toMatch(/Secure online payment|How registration will work/);
     expect(tickets).not.toMatch(/<form|<input/);
   });
+
+  it("defers resort photography, the priority list, the QR code and partner inquiries only with the owner's authorisation", async () => {
+    const { pageStatuses } = await vi.importActual<typeof import("../lib/launch-2027")>("../lib/launch-2027");
+    const { LAUNCH_CANDIDATE } = await import("../lib/launch-2027-candidate");
+    expect(LAUNCH_CANDIDATE.deferred).toEqual(["imagery", "priority-form", "qr", "partner-inquiry"]);
+    const pending = (authorised: boolean) => pageStatuses("home", {
+      ...LAUNCH_CANDIDATE, authorisation: authorised ? { by: "Test only", on: "2027-01-01", reference: "test" } : null,
+    }).filter((x) => x !== "approved").length;
+    expect(pending(false) - pending(true)).toBe(4);
+  });
 });

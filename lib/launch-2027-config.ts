@@ -7,6 +7,7 @@
  */
 import type { Gated } from "./publication";
 import type { PageId } from "./site/2027";
+import type { AnnouncementId } from "./content/2027";
 
 export interface LaunchAuthorisation {
   /** Who authorised publication, as written in the approval. */
@@ -24,6 +25,11 @@ export interface LaunchConfig {
   pages: readonly PageId[];
   /** The canonical web address of the 2027 site, without a trailing slash. */
   origin: Gated<string>;
+  /**
+   * Directive section 11 items the owner's authorisation launches without, to be
+   * added when ready (AnnouncementItem ids). In effect only with `authorisation`.
+   */
+  deferred?: readonly AnnouncementId[];
 }
 
 /** The launch switch. Changing it is a reviewed commit, never a setting. */

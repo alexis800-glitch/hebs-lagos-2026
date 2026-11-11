@@ -1,40 +1,54 @@
-# HEBS Lagos 2027: owner sign-off for the first launch
+# HEBS Lagos 2027 website: launch approval
 
-For Mrs. Shuler, prepared by Veridion. Package reference 146e3ffb.
+For Mrs. Shuler, from Veridion. Reference 146e3ffb.
 
-The first launch is the homepage and the Tickets information page at hebslagos.com/2027. Veridion has verified the routine wording on both: navigation, headings, buttons, notices, image descriptions and dates, each checked against your directive and your decisions on the logo, the address and the venue. Your approved photographs and film are in place.
+## 1. What we are asking you to approve
 
-What remains is yours: 9 short blocks of wording in four groups, and one decision about the launch itself.
+1. **Publish two pages** at hebslagos.com/2027: the 2027 homepage and the Tickets information page.
+2. **Approve the wording** in section 3: 9 short passages (23 lines). We recommend 2 changes, clearly marked.
+3. **Launch without 4 features** that are not ready yet (section 4). Each is added when it is ready.
+4. **Approve a small update to the privacy notice** so it names the 2027 pages (section 5).
+5. **Give written authorisation** to publish (section 6).
 
-**How to reply:** for each block, *Approved*, *Changes* (with the change) or *Hold*. A block is approved only in the exact wording shown; if a line changes later, only that line comes back to you.
+Everything else on these two pages (menus, buttons, dates, captions and notices) has been checked by Veridion against your directive and your decisions on the logo, the web address and the venue name. Your approved photographs and film are in place.
 
-## 1. Wording to approve
+## 2. What visitors will see
 
-### A. The opening of the homepage
+**The homepage**, from top to bottom: the 2027 logo and dates; the styling-floor film; a welcome; the summit in numbers; the three days; six ways to take part; the destination, with photographs of HEBS 2026 at NJS; competitions; highlights of HEBS Lagos 2026; and a closing invitation to the priority list.
 
-What a visitor reads first.
+**The Tickets page** says plainly that tickets are not on sale yet. It shows no prices, no payment and no form. Tickets open only after you approve the categories, prices and payment system.
 
-**Homepage: Hero** (block `owner-home-hero`, reference 6cb26313)
+**The menus** show only these two pages, so nobody is sent to a page that is not ready. The footer links to the privacy notice and lets visitors change their cookie choice.
+
+## 3. Wording for your approval
+
+In the order a visitor reads it. Reply to each passage with *Approved*, *Changes* (with the change), or *Hold*. If you accept a recommendation, say so and we will use that wording.
+
+### 1. The opening screen
 
 > Three extraordinary days of beauty, education, innovation, competition, networking, and unforgettable luxury resort experiences.
 
 > The Hair Education Beauty Summit returns to Lagos, July 23–25, 2027: three days of education, competitions, exhibitions, networking and celebration.
 
-**Homepage: Welcome** (block `owner-home-welcome`, reference 113123c1)
+*Shown under the site's name in Google and other search results.*
+
+<sub>Passage reference owner-home-hero / 6cb26313</sub>
+
+### 2. Welcome
 
 > HEBS brings together the beauty industry's professionals, educators, innovators, entrepreneurs and emerging talent. For the first time, the whole experience takes place at one destination on the Atlantic: three days of learning, competition, business and celebration.
 
-**Homepage: Three numbers** (block `owner-home-three-numbers`, reference 2808e010)
+<sub>Passage reference owner-home-welcome / 113123c1</sub>
+
+### 3. The summit in numbers
 
 > The summit, in three numbers.
 
 *One headline, set in two styles.*
 
-### B. The summit days and experiences
+<sub>Passage reference owner-home-three-numbers / 2808e010</sub>
 
-How the three days and six experiences are described.
-
-**Homepage: Three days** (block `owner-home-three-days`, reference cbaadc40)
+### 4. The three days
 
 > Three days, one extraordinary destination.
 
@@ -42,7 +56,9 @@ How the three days and six experiences are described.
 
 > From an opening celebration at the resort to two full summit days of education, competitions and exhibitions.
 
-**Homepage: Six experiences** (block `owner-home-six-experiences`, reference a51b1021)
+<sub>Passage reference owner-home-three-days / cbaadc40</sub>
+
+### 5. Six experiences
 
 > Six ways to be part of it.
 
@@ -50,68 +66,94 @@ How the three days and six experiences are described.
 
 > Masterclasses, demonstrations and technical training.
 
+*Under "Professional Beauty Education".*
+
 > Thirteen competitions across seven categories.
+
+*Under "Hair and Beauty Competitions".*
 
 > The brands shaping the industry.
 
+*Under "Exhibitions and Brand Showcases".*
+
 > Nigeria, Africa, the US, Europe and beyond.
+
+*Under "International Networking".*
 
 > Glamorous evenings at the resort.
 
-*Suggested instead:* "An opening celebration at the resort and closing celebrations on the final day." Only one evening event, the Welcome Pre-Party, is confirmed. "Evenings" promises more than one.
+*Under "Entertainment and Celebrations".*
+
+**Our recommendation:** change this to "An opening celebration at the resort and closing celebrations on the final day." Only one evening event, the Welcome Pre-Party, is confirmed. "Evenings" promises more than one.
 
 > A resort setting for the whole summit.
 
-### C. Destination, competitions and 2026 highlights
+*Under "Luxury Destination Experiences".*
 
-The venue, the competitions and the look back at 2026.
+<sub>Passage reference owner-home-six-experiences / a51b1021</sub>
 
-**Homepage: The destination** (block `owner-home-the-destination`, reference 65321d25)
+### 6. The destination
 
 > NJS Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.
 
-*Suggested instead:* "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting." The ocean-facing pool terrace is shown only in NJS concept visuals, not the completed property. Describe it once NJS confirms it is complete and part of the HEBS programme.
+**Our recommendation:** change this to "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting." The ocean-facing pool terrace is shown only in NJS concept visuals, not the completed property. Describe it once NJS confirms it is complete and part of the HEBS programme.
 
-**Homepage: Competitions** (block `owner-home-competitions`, reference 48b6c07d)
+<sub>Passage reference owner-home-the-destination / 65321d25</sub>
+
+### 7. Competitions
 
 > Thirteen competitions across seven categories. Categories and prizes remain the same as 2026.
 
 > Champions of HEBS Lagos 2026.
 
-*One headline, set in two styles.*
+*Heading of the 2026 winners panel, which appears only once the winners' names and photographs are verified. One headline, set in two styles.*
 
-**Homepage: 2026 highlights** (block `owner-home-2026-highlights`, reference 3181db28)
+<sub>Passage reference owner-home-competitions / 48b6c07d</sub>
+
+### 8. HEBS Lagos 2026 highlights
 
 > Lagos, 2026. The energy we carry forward.
 
 *One headline, set in two styles.*
 
-### D. Tickets
+<sub>Passage reference owner-home-2026-highlights / 3181db28</sub>
 
-The one sentence of your own on the Tickets page. Everything else there is a verified notice that tickets are not on sale.
-
-**Tickets & registration** (block `owner-tickets`, reference 966d21d6)
+### 9. The Tickets page
 
 > Be first to hear when registration, tickets and the 2027 programme open.
 
-## 2. A decision about the launch
+*Tickets page, beside the notice that the priority list is not open yet.*
 
-Your directive (section 11) lists these for the announcement. They are not ready, because each waits on the decision named:
+<sub>Passage reference owner-tickets / 966d21d6</sub>
 
-- **Luxury promotional imagery**. Waiting on: photographs of the NJS Beach Resort itself (the approved photographs show the 2026 summit).
-- **Working priority registration form**. Waiting on: Storage and administration (D1), privacy terms (D13).
-- **QR code for immediate access**. Waiting on: Publication date (the address, hebslagos.com/2027, is decided: D7).
-- **Sponsor/exhibitor inquiry option**. Waiting on: Inquiry storage (D1), public contacts (D10).
+## 4. Launching without these, for now
 
-Please choose one: **launch now without them**, adding each as it is ready, or **wait** until they are ready. Either way they appear only once they work.
+Your directive lists these for the announcement. None is ready, and showing them half-finished would mislead visitors, so we recommend launching without them and adding each one when it works:
 
-## 3. Not needed for the first launch
+- **Luxury promotional imagery.** Needs photographs of NJS Beach Resort itself. The approved photographs show the 2026 summit.
+- **Working priority registration form.** Needs the sign-up system and its privacy terms agreed (decisions D1 and D13). Until then the site says the list is not open yet.
+- **QR code for immediate access.** Needs a publication date. It will point to hebslagos.com/2027.
+- **Sponsor/exhibitor inquiry option.** Needs the enquiry system and public contact details agreed (decisions D1 and D10).
 
-Later pages, for when you are ready: About HEBS; HEBS 2027 experience; Travel & accommodation; Travel & accommodation: commercial terms; Speakers & educators; Education & masterclasses; Competitions: commercial terms. Outstanding business decisions for those pages: 2027 opening hours for each day; Form contract and route (D1) and privacy notice (D13); Approved 2027 prospectus and packages; Exhibitor application route (D1); Ticket categories, prices and payment gateway.
+This is recorded in the launch plan itself, so these four will not hold the release back once you authorise it.
 
-## 4. Media
+## 5. Privacy
 
-- House of Snapp photographs, HEBS Lagos 2026 summit days: approved and in place.
-- VMM film of the 2026 styling floor: approved and in place.
-- VMM photographs of the 2026 Welcome Pre-Party (DSC00261–00353): kept off the site.
-- NJS concept films of the pool terrace and guests: kept off the site.
+The two pages collect no personal information: there is no form, sign-up or payment. Visitors see the same optional cookie choice as on the 2026 site. The Meta Pixel runs only if they choose *Accept*, and their choice is kept in one cookie. Nothing new is processed.
+
+The current Privacy & Cookie Notice describes this correctly, but it names only the 2026 website. We recommend these exact changes, and nothing else:
+
+- **Opening sentence:** "This notice explains the optional tracking used on the HEBS Lagos 2026 website and the choice you have about it." becomes "This notice explains the optional tracking used on the HEBS Lagos website at hebslagos.com, including the HEBS Lagos 2027 pages, and the choice you have about it."
+- **Who is responsible:** "Hair Education Beauty Summit (HEBS), organiser of HEBS Lagos 2026" becomes "Hair Education Beauty Summit (HEBS), organiser of HEBS Lagos 2026 and HEBS Lagos 2027"
+- **Page title (browser tab and search results):** "Privacy & Cookie Notice | HEBS Lagos 2026" becomes "Privacy & Cookie Notice | HEBS Lagos"
+- **Search description:** "How the HEBS Lagos 2026 website uses the Meta Pixel, why your consent is optional, and how to change or withdraw it at any time." becomes "How the HEBS Lagos website, including the 2027 pages, uses the Meta Pixel, why your consent is optional, and how to change or withdraw it at any time."
+
+The second change alters the organiser line you approved in September 2026, so it needs your confirmation.
+
+## 6. Your authorisation
+
+When you are happy with sections 3 to 5, please send this in writing (email is fine):
+
+> I authorise publication of the HEBS Lagos 2027 homepage and Tickets page at hebslagos.com/2027, with the wording approved in the launch approval document, launching without resort photography, the priority list, the QR code and partner enquiries, which will be added when ready.
+
+Veridion then records your decisions, adds the approved photographs to the release and prepares the launch for your final go-ahead. Nothing is published before that.
