@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 import { COPY } from "../content/2027";
 import { PAGES } from "../content/2027-pages";
 import { pagePublished, siteOrigin, type LaunchInputs } from "../launch-2027";
-import { deployEnvironment, type DeployEnvironment } from "../publication";
+import { clientPreview, deployEnvironment, type DeployEnvironment } from "../publication";
 import { BASE, SITE_PAGES, sitePage, type PageId } from "./2027";
 
 export const SITE_NAME = "HEBS Lagos 2027";
@@ -50,7 +50,7 @@ export function canonicalUrl(id: PageId, inputs: LaunchInputs = {}): string {
 
 export function pageMetadata(id: PageId, environment: DeployEnvironment = deployEnvironment(), inputs: LaunchInputs = {}): Metadata {
   if (!pagePublished(id, environment, inputs)) return {};
-  const live = environment === "production";
+  const live = environment === "production" && !clientPreview();
   const title = pageTitle(id);
   const description = pageDescription(id);
   const url = canonicalUrl(id, inputs);

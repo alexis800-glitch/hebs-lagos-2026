@@ -30,7 +30,7 @@ import { CONTRACT, NOTICE_VERSIONS } from "./forms-2027/contract";
 import { FORMS_OPEN, type FormId } from "./integrations/registration-2027";
 import { MARK_2027_STATUS, MEDIA_DIR, REVIEW_ASSETS } from "./assets/home-2027-review";
 import { MEDIA_RELEASED } from "./assets/published-media-2027";
-import { isPagePublishable, type DeployEnvironment, type PublicationStatus } from "./publication";
+import { clientPreview, isPagePublishable, type DeployEnvironment, type PublicationStatus } from "./publication";
 import { BASE, SITE_PAGES, type PageId } from "./site/2027";
 import { LAUNCH_2027, type LaunchConfig } from "./launch-2027-config";
 import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "./site/page-media-2027";
@@ -198,6 +198,8 @@ export const withholdSwitch = (): string | undefined => process.env.HEBS_2027_WI
  */
 export function site2027Open(environment: DeployEnvironment, inputs: LaunchInputs = {}): boolean {
   if (environment !== "production") return isPagePublishable(inputs.statuses ?? previewStatuses(), environment);
+  // The client design-review preview opens the whole built site; it is never a production deployment.
+  if (clientPreview()) return true;
   return launchBlockers({ withhold: withholdSwitch(), ...inputs }).length === 0;
 }
 
@@ -205,6 +207,7 @@ export function site2027Open(environment: DeployEnvironment, inputs: LaunchInput
 export function pagePublished(id: PageId, environment: DeployEnvironment, inputs: LaunchInputs = {}): boolean {
   if (!site2027Open(environment, inputs)) return false;
   if (environment !== "production") return true;
+  if (clientPreview()) return SITE_PAGES.some((p) => p.id === id && p.built);
   return (inputs.config ?? LAUNCH_2027).pages.includes(id);
 }
 

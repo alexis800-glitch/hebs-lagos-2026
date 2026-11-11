@@ -70,10 +70,10 @@ describe("2027 footer and cookie controls", () => {
     expect(footer).not.toMatch(/<a[^>]*>Terms/);
   });
 
-  it("never loads the Meta Pixel outside production", () => {
+  it("never loads the Meta Pixel outside production, nor on the client design-review preview", () => {
     // Both root layouts: the live 2026 site and the 2027 site.
     for (const f of ["app/(site)/layout.tsx", "app/(edition)/layout.tsx"]) {
-      expect(read(f), f).toContain('<TrackingConsent trackingAllowed={deployEnvironment() === "production"} />');
+      expect(read(f), f).toContain('<TrackingConsent trackingAllowed={deployEnvironment() === "production" && !clientPreview()} />');
     }
     expect(read("components/TrackingConsent.tsx")).toContain("decision === CONSENT_ACCEPTED && trackingAllowed && <MetaPixel />");
   });

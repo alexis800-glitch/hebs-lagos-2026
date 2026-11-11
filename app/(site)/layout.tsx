@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import { Cormorant_Garamond } from "next/font/google";
 import "../globals.css";
 import TrackingConsent from "@/components/TrackingConsent";
-import { deployEnvironment } from "@/lib/publication";
+import { clientPreview, deployEnvironment } from "@/lib/publication";
 import {
   COMPETITION_COUNT,
   CATEGORY_COUNT,
@@ -76,7 +76,7 @@ export default function RootLayout({
           outright - a visitor without JavaScript cannot have made a choice, so
           firing it would be tracking without consent.
         */}
-        <TrackingConsent trackingAllowed={deployEnvironment() === "production"} />
+        <TrackingConsent trackingAllowed={deployEnvironment() === "production" && !clientPreview()} />
       </body>
     </html>
   );

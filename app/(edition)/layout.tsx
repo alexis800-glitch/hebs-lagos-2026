@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import TrackingConsent from "@/components/TrackingConsent";
-import { deployEnvironment } from "@/lib/publication";
+import { clientPreview, deployEnvironment } from "@/lib/publication";
 import { HOME_FONTS } from "./2027/concepts/fonts-home";
 
 /**
@@ -32,7 +32,8 @@ export default function Root2027({ children }: { children: React.ReactNode }) {
     <html lang="en" className={`scroll-smooth overflow-x-clip ${HOME_FONTS}`}>
       <body className="antialiased overflow-x-clip bg-[#0D0B08] text-white" style={BODY_FONT}>
         {children}
-        <TrackingConsent trackingAllowed={deployEnvironment() === "production"} />
+        {/* clientPreview(): no tracking on the client design-review preview, which is not the public site. */}
+        <TrackingConsent trackingAllowed={deployEnvironment() === "production" && !clientPreview()} />
       </body>
     </html>
   );

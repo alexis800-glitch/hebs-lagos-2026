@@ -11,7 +11,7 @@
 /** Staging prefix. The 2026 site keeps the root until publication is approved. */
 import { FORMS_OPEN } from "../integrations/registration-2027";
 import { LAUNCH_2027 } from "../launch-2027-config";
-import { deployEnvironment } from "../publication";
+import { clientPreview, deployEnvironment } from "../publication";
 
 export const BASE = "/2027";
 
@@ -76,7 +76,7 @@ export function sitePage(id: PageId): SitePage {
  * linked.
  */
 export function linkable(id: PageId, environment = deployEnvironment()): boolean {
-  return sitePage(id).built && (environment !== "production" || LAUNCH_2027.pages.includes(id));
+  return sitePage(id).built && (environment !== "production" || clientPreview() || LAUNCH_2027.pages.includes(id));
 }
 
 /** The path of a linkable page, or null (render text, not a link). */

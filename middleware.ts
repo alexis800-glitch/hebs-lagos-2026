@@ -40,9 +40,9 @@ export function isWithheld(pathname: string, environment: DeployEnvironment, sta
  * Next.js passes a variable to middleware only when the code names it literally as
  * `process.env.NAME`. On Vercel without a VERCEL_ENV, it fails closed to production.
  */
-export function middlewareEnvironment(env: { VERCEL?: string; VERCEL_ENV?: string } = { VERCEL: process.env.VERCEL, VERCEL_ENV: process.env.VERCEL_ENV }): DeployEnvironment {
+export function middlewareEnvironment(env: { VERCEL?: string; VERCEL_ENV?: string; HEBS_CLIENT_PREVIEW?: string } = { VERCEL: process.env.VERCEL, VERCEL_ENV: process.env.VERCEL_ENV, HEBS_CLIENT_PREVIEW: process.env.HEBS_CLIENT_PREVIEW }): DeployEnvironment {
   if (env.VERCEL === "1" && !env.VERCEL_ENV) return "production";
-  return deployEnvironment({ VERCEL_ENV: env.VERCEL_ENV });
+  return deployEnvironment({ VERCEL_ENV: env.VERCEL_ENV, HEBS_CLIENT_PREVIEW: env.HEBS_CLIENT_PREVIEW });
 }
 
 export function middleware(request: NextRequest) {

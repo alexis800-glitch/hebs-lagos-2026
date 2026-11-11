@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { deployEnvironment } from "@/lib/publication";
+import { clientPreview, deployEnvironment } from "@/lib/publication";
 import { site2027Open } from "@/lib/launch-2027";
 import { PreviewBanner } from "@/components/2027/sections";
 import { SiteFooter } from "@/components/2027/site/SiteFooter";
@@ -25,7 +25,7 @@ export function generateMetadata(): Metadata {
     title: "HEBS Lagos 2027 — Staging Preview",
     description: "Staging preview of the HEBS Lagos 2027 website. Not published.",
     keywords: null,
-    robots: deployEnvironment() === "production" ? { index: true, follow: true } : { index: false, follow: false, nocache: true },
+    robots: deployEnvironment() === "production" && !clientPreview() ? { index: true, follow: true } : { index: false, follow: false, nocache: true },
     alternates: { canonical: null },
     openGraph: null,
     twitter: null,
