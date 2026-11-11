@@ -3,7 +3,7 @@ import { ASSETS, MEDIA_SLOTS } from "@/lib/assets/register";
 import { Header2027 } from "@/components/2027/sections";
 import { SITE_PAGES } from "@/lib/site/2027";
 import { PORTAL_2027, PORTAL_HOSTS } from "@/lib/integrations/registration-2027";
-import { launchBlockers } from "@/lib/launch-2027";
+import { launchBlockers, pageReadiness } from "@/lib/launch-2027";
 
 /** Reviewer view of what the preview contains and what each part is waiting for. */
 export default function Status2027() {
@@ -27,6 +27,21 @@ export default function Status2027() {
             <tbody>
               {launchBlockers().map((b) => (
                 <tr key={b.id}><td className={cell}>{b.requirement}</td><td className={cell}>{b.detail}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Page by page</h2>
+        <p className="mt-3 max-w-3xl text-h27-muted">
+          Each page launches on its own content alone. A page could be launched independently once everything it shows is approved and it relies on no review photographs.
+        </p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse">
+            <thead><tr className="text-h27-champagne"><th className={cell}>Page</th><th className={cell}>Items not approved</th><th className={cell}>Review photographs</th><th className={cell}>Still waiting for</th><th className={cell}>Could launch alone</th></tr></thead>
+            <tbody>
+              {pageReadiness().map((p) => (
+                <tr key={p.id}><td className={cell}>{p.title}</td><td className={cell}>{p.pending} of {p.total}</td><td className={cell}>{p.reviewMedia}</td><td className={cell}>{p.waitingOn.join("; ") || "Nothing beyond approvals"}</td><td className={cell}>{p.ready ? "Yes" : "Not yet"}</td></tr>
               ))}
             </tbody>
           </table>

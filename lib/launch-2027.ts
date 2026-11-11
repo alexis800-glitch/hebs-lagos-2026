@@ -20,7 +20,10 @@
  * Everything here is static data, safe for the Edge runtime (middleware).
  */
 import { PAGES } from "./content/2027-pages";
-import { previewStatuses } from "./content/2027";
+import { ANNOUNCEMENT_ITEMS, COPY, copyStatuses, previewStatuses } from "./content/2027";
+import { HOME_COPY_STATUS } from "./content/home-2027";
+import { EDITION_DAYS, VENUE } from "./editions/2027";
+import { MEDIA_SLOTS, findAsset } from "./assets/register";
 import { CONTRACT, NOTICE_VERSIONS } from "./forms-2027/contract";
 import { FORMS_OPEN, type FormId } from "./integrations/registration-2027";
 import { REVIEW_ASSETS } from "./assets/home-2027-review";
@@ -47,6 +50,44 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
   return out;
 })();
 
+/**
+ * Every approval state one page renders: what all pages share (the venue name in
+ * the dates-and-venue line, the logo, the closing call to action) plus the page's
+ * own copy, facts and image positions. A page's launch depends only on these, so
+ * unapproved material on one page never holds back another.
+ */
+export function pageStatuses(id: PageId): PublicationStatus[] {
+  const shared = [VENUE.name.status, findAsset("hebs-logo-nav").status, ...copyStatuses(COPY.finalCta)];
+  const hours = EDITION_DAYS.map((d) => d.hours.status);
+  const slot = (slotId: string) => {
+    const s = MEDIA_SLOTS.find((x) => x.id === slotId);
+    return s?.assetId ? findAsset(s.assetId).status : ("awaiting-confirmation" as const);
+  };
+  switch (id) {
+    case "home":
+      return [...shared, HOME_COPY_STATUS, ...copyStatuses(COPY.seo.homeTitle), ...copyStatuses(COPY.seo.homeDescription), ...hours,
+        ...ANNOUNCEMENT_ITEMS.map((i) => (i.state === "built" ? "approved" as const : "awaiting-confirmation" as const))];
+    case "about":
+      return [...shared, ...copyStatuses(PAGES.about), ...copyStatuses(COPY.welcome), ...copyStatuses(COPY.seo.aboutDescription)];
+    case "experience":
+      return [...shared, ...copyStatuses(PAGES.experience), ...copyStatuses(COPY.experience), ...copyStatuses(COPY.destination), ...hours];
+    case "programme":
+      return [...shared, ...copyStatuses(PAGES.programme), ...hours];
+    case "education":
+      return [...shared, ...copyStatuses(PAGES.education), slot("education")];
+    case "competitions":
+      return [...shared, ...copyStatuses(PAGES.competitions), ...copyStatuses(COPY.competitions)];
+    case "sponsorship":
+      return [...shared, ...copyStatuses(PAGES.sponsorship), ...copyStatuses(COPY.partners)];
+    case "tickets":
+      return [...shared, ...copyStatuses(PAGES.tickets), ...copyStatuses(COPY.priorityList)];
+    case "gallery":
+      return [...shared, ...copyStatuses(PAGES.gallery), ...copyStatuses(COPY.highlights), slot("highlights-2026")];
+    default:
+      return [...shared, ...copyStatuses(PAGES[id])];
+  }
+}
+
 export interface LaunchBlocker {
   /** Stable key, for tests and the checklist. */
   id: string;
@@ -70,7 +111,7 @@ export interface LaunchInputs {
  */
 export function launchBlockers({
   config = LAUNCH_2027,
-  statuses = previewStatuses(),
+  statuses,
   formsOpen = FORMS_OPEN,
   contractFinal = CONTRACT.final,
   privacyNotice = NOTICE_VERSIONS.privacy,
@@ -94,9 +135,10 @@ export function launchBlockers({
     const p = SITE_PAGES.find((x) => x.id === id);
     if (!p?.built) add(`page-${id}`, "Every launched page is built", `${id} is not built.`);
   }
-  const pending = statuses.filter((s) => s !== "approved").length;
-  if (pending > 0) {
-    add("approvals", "Every 2027 copy block, fact, media slot and launch item approved", `${pending} of ${statuses.length} items are not approved.`);
+  for (const id of config.pages) {
+    const own = statuses ?? pageStatuses(id);
+    const pending = own.filter((s) => s !== "approved").length;
+    if (pending > 0) add(`approvals-${id}`, "Every item a launched page shows approved", `${id}: ${pending} of ${own.length} items are not approved.`);
   }
   for (const id of config.pages) {
     const media = reviewMedia[id] ?? [];
@@ -156,3 +198,28 @@ export function pathPublished(pathname: string, environment: DeployEnvironment, 
 export function siteOrigin(config: LaunchConfig = LAUNCH_2027): string {
   return config.origin.status === "awaiting-confirmation" ? "https://www.hebslagos.com" : config.origin.value;
 }
+
+export interface PageReadiness {
+  id: PageId;
+  title: string;
+  /** Items on the page that are not approved yet, of all it shows. */
+  pending: number;
+  total: number;
+  /** Review photographs the page relies on (written usage terms not filed). */
+  reviewMedia: number;
+  /** What the finished page still waits for, from the site map. */
+  waitingOn: readonly string[];
+  /** Could launch on its own once authorised: everything approved, no review media. */
+  ready: boolean;
+}
+
+/** Page by page: what each 2027 page needs before it could be launched on its own. */
+export function pageReadiness(): PageReadiness[] {
+  return SITE_PAGES.map((p) => {
+    const own = pageStatuses(p.id);
+    const pending = own.filter((s) => s !== "approved").length;
+    const reviewMedia = (REVIEW_MEDIA_BY_PAGE[p.id] ?? []).length;
+    return { id: p.id, title: p.title, pending, total: own.length, reviewMedia, waitingOn: p.waitingOn, ready: p.built && pending === 0 && reviewMedia === 0 };
+  });
+}
+

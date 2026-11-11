@@ -20,7 +20,7 @@ media register and the switch itself, not a setting.
 | `authorisation` | The owner's written launch authorisation, recorded in `LAUNCH_2027.authorisation` (who, date, where it is recorded) | Owner approval, then a reviewed commit |
 | `pages`, `pages-tickets` | The launched pages listed, including the homepage and the Tickets page (every priority-list button leads there) | Reviewed commit |
 | `page-<id>` | Every launched page built | Development |
-| `approvals` | Every 2027 copy block, fact, media slot and launch item approved (`previewStatuses()`) | Owner approvals, recorded in `lib/content`, `lib/editions`, `lib/assets` |
+| `approvals-<page>` | Every item a launched page shows approved: its own copy, facts and image positions, plus what all pages share (venue name, logo, closing call to action). Each page is judged on its own (`pageStatuses()`), so unapproved material on one page never blocks another | Owner approvals, recorded in `lib/content`, `lib/editions`, `lib/assets` (homepage copy: `HOME_COPY_STATUS`) |
 | `review-media-<page>` | No launched page relies on review media. `public/_review` is never served on production; each photograph must have its written usage terms filed and be moved into the rights-gated register (`lib/assets/register.ts`), which refuses an asset without recorded permission | Usage terms filed; Veridion moves the files |
 | `form-<form>` | No form switched on (`FORMS_OPEN`) without the final integration contract (D1) and the approved privacy notice (D13) | Base44 portal and owner approvals |
 | `origin` | The canonical web address approved (D7) | Owner decision |
@@ -33,8 +33,9 @@ checked by `tests/launch-2027.test.ts`.
 
 1. Record the current production deployment ID (Vercel → Deployments →
    Production). This is the rollback target.
-2. Confirm `launchBlockers()` returns only `authorisation` (everything else
-   cleared), on the launch branch from the latest `origin/master`.
+2. Choose the pages to launch from the status page's "Page by page" table (any
+   page marked "could launch alone"), and confirm `launchBlockers()` for that
+   list returns only `authorisation`, on a branch from the latest `origin/master`.
 3. Decide whether 2027 stays under `/2027` or moves to the site root (D7). A move
    changes `BASE` in `lib/site/2027.ts` and needs its own reviewed plan for the
    2026 pages; it is not part of this procedure.

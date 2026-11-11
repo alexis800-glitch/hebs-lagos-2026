@@ -11,6 +11,7 @@
  * supplied: no speakers, sponsors, prices, times, amenities or figures.
  */
 
+import { HOME_COPY_STATUS } from "./home-2027";
 import type { PublicationStatus } from "../publication";
 import { EDITION_DAYS, VENUE } from "../editions/2027";
 import { MEDIA_SLOTS, findAsset } from "../assets/register";
@@ -190,7 +191,7 @@ export function contentRegister(node: unknown = { ...COPY, pages: PAGES }, path 
   return Object.entries(node).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k));
 }
 
-function copyStatuses(node: unknown): PublicationStatus[] {
+export function copyStatuses(node: unknown): PublicationStatus[] {
   if (!node || typeof node !== "object") return [];
   if ("status" in node && "text" in node) return [(node as CopyBlock).status];
   return Object.values(node).flatMap(copyStatuses);
@@ -206,6 +207,7 @@ function copyStatuses(node: unknown): PublicationStatus[] {
 export function previewStatuses(): PublicationStatus[] {
   return [
     ...copyStatuses(COPY),
+    HOME_COPY_STATUS,
     ...copyStatuses(PAGES),
     VENUE.name.status,
     ...EDITION_DAYS.map((d) => d.hours.status),

@@ -24,7 +24,7 @@ import {
 } from "@/components/2027/editorial/inner";
 import { FORMS_OPEN, PORTAL_2027 } from "@/lib/integrations/registration-2027";
 import {
-  LAUNCH_2027, REVIEW_MEDIA_BY_PAGE, launchBlockers, pagePublished, pathPublished, site2027Open, type LaunchConfig, type LaunchInputs,
+  LAUNCH_2027, REVIEW_MEDIA_BY_PAGE, launchBlockers, pagePublished, pageReadiness, pageStatuses, pathPublished, site2027Open, type LaunchConfig, type LaunchInputs,
 } from "@/lib/launch-2027";
 import { PRIORITY_CTA, SITE_PAGES, type PageId } from "@/lib/site/2027";
 import { pageMetadata, sitemapXml } from "@/lib/site/seo-2027";
@@ -53,7 +53,7 @@ describe("the launch switch today", () => {
   });
 
   it("lists today's launch blockers", () => {
-    expect(ids(launchBlockers())).toEqual(expect.arrayContaining(["authorisation", "pages", "approvals", "origin"]));
+    expect(ids(launchBlockers())).toEqual(["authorisation", "pages", "origin"]);
   });
 
   it("withholds every 2027 address on production, pages and site files alike", () => {
@@ -76,8 +76,8 @@ describe("production publication controls", () => {
       ["authorisation", { ...OPEN, config: { ...LAUNCHED, authorisation: { by: "Owner", on: "2027-06-01", reference: "" } } }],
       ["pages", { ...OPEN, config: { ...LAUNCHED, pages: ["tickets"] } }],
       ["pages-tickets", { ...OPEN, config: { ...LAUNCHED, pages: ["home"] } }],
-      ["approvals", { ...OPEN, statuses: ["approved", "provisional"] }],
-      ["approvals", { ...OPEN, statuses: ["approved", "awaiting-confirmation"] }],
+      ["approvals-home", { ...OPEN, statuses: ["approved", "provisional"] }],
+      ["approvals-tickets", { ...OPEN, statuses: ["approved", "awaiting-confirmation"] }],
       ["review-media-home", { ...OPEN, reviewMedia: { home: ["hero-loop-wide"] } }],
       ["form-priority", { ...OPEN, formsOpen: { ...FORMS_OPEN, priority: true } }],
       ["origin", { ...OPEN, config: { ...LAUNCHED, origin: { status: "provisional", value: "https://www.hebslagos.com", note: "D7" } } }],
@@ -101,6 +101,27 @@ describe("production publication controls", () => {
     expect(site2027Open("preview")).toBe(true);
     expect(site2027Open("development")).toBe(true);
     expect(site2027Open("preview", { statuses: ["draft"] })).toBe(false);
+  });
+});
+
+describe("page-by-page approvals", () => {
+  it("judges each launched page on its own content only", () => {
+    const real = { ...OPEN, statuses: undefined };
+    const blockers = ids(launchBlockers({ ...real, config: { ...LAUNCHED, pages: ["home", "tickets"] } }));
+    expect(blockers).toContain("approvals-home");
+    expect(blockers).toContain("approvals-tickets");
+    // The gallery's unapproved copy does not hold back a launch that leaves it out.
+    expect(blockers.filter((b) => b.includes("gallery"))).toEqual([]);
+  });
+
+  it("counts the homepage's own copy, which has no per-block states", () => {
+    expect(pageStatuses("home")).toContain("provisional");
+  });
+
+  it("summarises every page's readiness", () => {
+    const r = pageReadiness();
+    expect(r.map((p) => p.id)).toEqual(SITE_PAGES.map((p) => p.id));
+    for (const p of r) expect(p.ready, p.id).toBe(p.pending === 0 && p.reviewMedia === 0);
   });
 });
 

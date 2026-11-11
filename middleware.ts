@@ -1,6 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { deployEnvironment, type DeployEnvironment, type PublicationStatus } from "@/lib/publication";
-import { previewStatuses } from "@/lib/content/2027";
 import { pathPublished, type LaunchInputs } from "@/lib/launch-2027";
 
 /**
@@ -26,9 +25,13 @@ export const WITHHELD_PATH = "/_withheld";
  * Review media is internal-review material and never served on production; the
  * 2027 pages follow the publication gate.
  */
-export function isWithheld(pathname: string, environment: DeployEnvironment, statuses: readonly PublicationStatus[], inputs: LaunchInputs = {}): boolean {
+/**
+ * `statuses`, when given, stands in for every page's approvals (tests); live
+ * requests leave it out, so each page is judged on its own (lib/launch-2027.ts).
+ */
+export function isWithheld(pathname: string, environment: DeployEnvironment, statuses?: readonly PublicationStatus[], inputs: LaunchInputs = {}): boolean {
   if (/^\/_review(\/|$)/.test(pathname)) return environment === "production";
-  if (/^\/2027(\/|$)/.test(pathname)) return !pathPublished(pathname, environment, { statuses, ...inputs });
+  if (/^\/2027(\/|$)/.test(pathname)) return !pathPublished(pathname, environment, { ...(statuses ? { statuses } : {}), ...inputs });
   return false;
 }
 
@@ -43,7 +46,7 @@ export function middlewareEnvironment(env: { VERCEL?: string; VERCEL_ENV?: strin
 }
 
 export function middleware(request: NextRequest) {
-  if (!isWithheld(request.nextUrl.pathname, middlewareEnvironment(), previewStatuses())) return NextResponse.next();
+  if (!isWithheld(request.nextUrl.pathname, middlewareEnvironment())) return NextResponse.next();
   const url = request.nextUrl.clone();
   url.pathname = WITHHELD_PATH;
   url.search = "";

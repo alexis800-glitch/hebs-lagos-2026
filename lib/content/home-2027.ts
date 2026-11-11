@@ -9,6 +9,14 @@
  */
 
 import { CATEGORIES, CATEGORY_COUNT, COMPETITION_COUNT } from "../competitions";
+import type { PublicationStatus } from "../publication";
+
+/**
+ * The approval state of the homepage copy below, which carries no per-block
+ * states of its own. Set to "approved" only when the owner signs the homepage
+ * copy off; the launch gate (lib/launch-2027.ts) reads it.
+ */
+export const HOME_COPY_STATUS: PublicationStatus = "provisional";
 
 export const HOME = {
   strip:
