@@ -42,3 +42,14 @@ and the front of the audience, so that no child is in frame.
 | Prize currency | Competitions | Decision D8 is open; no prize figures are shown. | Organiser decision. |
 | Pre-party photographer | Welcome, numbers, days, experiences, destination, highlights | The House of Snapp pre-party folder holds DSC00266, 00277, 00301 and 00319; the VMM pre-party photographs used here are DSC00261, 00278, 00294, 00318 and 00353. The numbers interleave, which suggests one camera sequence. | The organisers to confirm who photographed the pre-party and who holds the rights. |
 | Excluded | Not used | Snappcode's NJS footage (no written authorisation for edits); the Soli Dasilva film (archive only); the pool, rooftop, cabanas and event hall as completed facilities. | Written authorisation from Snappcode; NJS confirmation of facilities and of the event hall's location. |
+
+## Update, 11 Nov 2026: publication preparation
+
+- **Approved and prepared for publication:** the House of Snapp summit photographs (except the prize-presentation `champ-*` photographs, which stay review-only until D8), the VMM styling-floor film, and the HEBS Lagos 2027 logo (D3).
+  - They are served from `/2027/media/` (`MEDIA_DIR`).
+  - They are copied by `npm run media:prepare` and recorded by SHA-256 in `lib/assets/published-media-2027.json`.
+  - They are gitignored until the launch commit.
+- **Homepage positions that held restricted media now show House of Snapp photographs**, cut by `tools/hos-images.py` (`hos-crops.json`). Those positions held the pre-party photographs DSC00261–00353, the NJS concept films and the guests film.
+  - The restricted records stay in the register under `x-` ids, with their `restricted` reason, and are never rendered.
+  - The destination section now shows two photographed scenes of the 2026 summit at the NJS Royale Events Center.
+

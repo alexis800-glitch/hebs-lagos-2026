@@ -31,8 +31,8 @@ export const LAUNCH_2027: LaunchConfig = {
   authorisation: null,
   pages: [],
   origin: {
-    status: "provisional",
+    status: "approved",
     value: "https://www.hebslagos.com",
-    note: "The live domain; the final 2027 landing address and publication date await decision D7.",
+    source: "Mrs. Shuler, decision D7, 11 Nov 2026: the public domain stays hebslagos.com, with the 2027 site under /2027",
   },
 };

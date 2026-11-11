@@ -24,6 +24,8 @@ trap 'git -C "$ROOT" worktree remove --force "$WORK" >/dev/null 2>&1 || true' EX
 git worktree add --detach "$WORK" HEAD >/dev/null
 mkdir -p "$WORK/public/_review" "$WORK/.vercel"
 cp -R public/_review/home-2027 "$WORK/public/_review/"
+# The approved media prepared for publication (gitignored until the launch commit).
+[ -d public/2027/media ] && mkdir -p "$WORK/public/2027" && cp -R public/2027/media "$WORK/public/2027/"
 cp .vercel/project.json "$WORK/.vercel/"
 
 cd "$WORK"

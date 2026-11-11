@@ -73,10 +73,10 @@ describe("sign-off register", () => {
     expect(c.blocks.owner).toBeLessThan(20);
   });
 
-  it("lists the outstanding decisions with the venue name and mark first", () => {
-    const d = pendingDecisions(items).map((x) => x.decision);
-    expect(d[0]).toMatch(/D9/);
-    expect(d[1]).toMatch(/D3/);
+  it("no longer lists the decided venue name, logo or web address", () => {
+    const d = pendingDecisions(items).map((x) => x.decision).join(" ");
+    expect(d).not.toMatch(/D9|D3|D7/);
+    expect(firstLaunchDecisions(items).map((x) => x.decision).join(" ")).not.toMatch(/D9|D3|D7/);
     expect(firstLaunchDecisions(items).map((x) => x.decision).join(" ")).toMatch(/Written launch authorisation/);
   });
 });
@@ -147,9 +147,9 @@ describe("media", () => {
 
   it("does not block a launch for paperwork; only restricted media or files still in the review folder", () => {
     const b = launchBlockers({ config: { ...OPEN, pages: ["home", "tickets", "gallery"] }, statuses: ["approved"] }).map((x) => x.id);
-    expect(b).toContain("media-restricted-home");
+    expect(b).not.toContain("media-restricted-home");
     expect(b).not.toContain("media-restricted-gallery");
-    expect(b).toContain("review-media-gallery");
+    expect(b).toContain("media-release-gallery");
     expect(b.join(" ")).not.toMatch(/terms|licence/);
   });
 });

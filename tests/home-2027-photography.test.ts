@@ -21,7 +21,7 @@ const FRAME = /(DSC\d{5}|DSC_\d{4}|IMG_\d{4}|0Q1A\d{4})/;
 
 describe("House of Snapp homepage photographs", () => {
   it("rebuilds every slot from a fingerprinted original, cropped to the frame's shape", () => {
-    expect(manifest.images).toHaveLength(64);
+    expect(manifest.images).toHaveLength(78);
     for (const m of manifest.images) {
       expect(m.sha256, m.slot).toMatch(/^[0-9a-f]{64}$/);
       expect(m.folder, m.slot).toBe(m.day === 1 ? "HEBS DAY 1/PHOTOS" : "HEBS DAY 2/PHOTOS");
@@ -45,7 +45,7 @@ describe("House of Snapp homepage photographs", () => {
       expect(a.ownerApproval?.by, m.slot).toMatch(/Mrs\. Shuler/);
       expect(a.restricted, m.slot).toBeUndefined();
       expect(a.followUp, m.slot).toMatch(/written usage terms/);
-      expect(a.permittedUsage, m.slot).toEqual(["internal-review"]);
+      expect(a.permittedUsage, m.slot).toEqual(["2027-site"]);
     }
   });
 

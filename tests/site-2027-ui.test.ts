@@ -25,7 +25,7 @@ describe("shared 2027 UI", () => {
   });
 
   it("states the dates and venue as the homepage does", () => {
-    expect(text(html(createElement(MetaLine)))).toBe("July 23–25, 2027NJS Royale Beach Resort, Lagos, Nigeria");
+    expect(text(html(createElement(MetaLine)))).toBe("July 23–25, 2027NJS Beach Resort, Lagos, Nigeria");
   });
 
   it("carries one staging notice with the approval-status link", () => {

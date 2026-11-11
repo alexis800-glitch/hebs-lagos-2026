@@ -24,13 +24,19 @@ export function reviewMediaAllowed(
   return env.HEBS_REVIEW_MEDIA === "on";
 }
 
+/**
+ * Media approved and prepared for publication (asset.published) renders on
+ * production too, once its page is published; until launch every such page is
+ * withheld, and so is /2027/media/ itself. Review-only media never does.
+ */
 export function reviewMedia(
   id: string,
   environment: DeployEnvironment = deployEnvironment(),
   env: Record<string, string | undefined> = process.env,
 ): ReviewAsset | null {
   const asset = findReviewAsset(id);
-  if (!reviewMediaAllowed(environment, env)) return null;
+  const allowed = asset.published ? environment === "production" || reviewMediaAllowed(environment, env) : reviewMediaAllowed(environment, env);
+  if (!allowed) return null;
   return existsSync(join(process.cwd(), "public", asset.src)) ? asset : null;
 }
 

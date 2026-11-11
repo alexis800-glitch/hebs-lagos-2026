@@ -39,7 +39,7 @@ export function SectionNotes({ notes, opts, ground, className = "" }: { notes: s
 }
 
 const SOURCE_WORDS: Record<string, string> = {
-  "njs-resort": "an approved NJS Royale Beach Resort photograph",
+  "njs-resort": "an approved NJS Beach Resort photograph",
   "hebs-lagos-event": "an approved HEBS Lagos event photograph",
 };
 

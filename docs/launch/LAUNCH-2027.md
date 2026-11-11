@@ -41,10 +41,10 @@ There are three categories (`lib/content/signoff-2027.ts`):
 
 Decisions are drafted on `/2027/review` (previews only, never on production) and exported to Veridion. Veridion records them in `lib/content/signoff-decisions-2027.ts` with the exact wording of every line. A block decision lists each line. If a line changes, only that line lapses.
 
-Media: Mrs. Shuler's approval of the selected website media is recorded (`OWNER_MEDIA_APPROVAL`). The gate blocks only:
+Media: Mrs. Shuler's approval of the selected website media is recorded (`OWNER_MEDIA_APPROVAL`, and `MARK_APPROVAL` for the 2027 logo, D3). Approved media is prepared in `public/2027/media/` (`npm run media:prepare`, hashes in `lib/assets/published-media-2027.json`). It is served from `/2027/media/`, which the middleware withholds on production until the site opens. The gate blocks only:
 
 - media with an evidence-based restriction: the disputed pre-party photographs, the NJS concept films and the 22 Oct gathering;
-- approved media still in the private review folder, which production does not serve.
+- prepared media not yet released: the files join the public repository only in the launch commit (`MEDIA_RELEASED`).
 
 Missing third-party paperwork is a records follow-up, not a blocker. Ticket links stay off until `TICKET_SALES` records approved prices and payment.
 
@@ -64,8 +64,15 @@ Missing third-party paperwork is a records follow-up, not a blocker. Ticket link
 
 ## 3. Launch
 
-1. With the owner's written approval, set `LAUNCH_2027.authorisation`,
-   `pages` and an approved `origin` in one commit. Open a PR to `master`.
+1. With the owner's written approval, set `LAUNCH_2027.authorisation` and
+   `pages` in one commit (the origin, hebslagos.com with the site under /2027,
+   is approved: D7). In the same commit release the media:
+   - run `npm run media:prepare` and check that the tests pass, so the files
+     match the recorded hashes;
+   - remove the `public/2027/media/` line from `.gitignore` and `git add public/2027/media`;
+   - set `MEDIA_RELEASED = true` in `lib/assets/published-media-2027.ts`.
+   The repository is public, so the files must not be committed before this
+   commit. Open a PR to `master`.
 2. Protected preview of the PR: check every launched page, `/2027/sitemap.xml`,
    `/2027/social-card`, the metadata and the Event data.
 3. Locally: `VERCEL_ENV=production npx next build && VERCEL_ENV=production npx next start -p 3000`,

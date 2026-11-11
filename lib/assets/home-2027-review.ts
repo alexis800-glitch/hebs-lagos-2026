@@ -28,12 +28,14 @@ export interface ReviewAsset extends AssetRecord {
   kind: "image" | "video";
   badge: ReviewBadge;
   collection: ReviewCollection;
-  /** The event owner's approval for the website, when given (OWNER_MEDIA_APPROVAL). */
-  ownerApproval?: typeof OWNER_MEDIA_APPROVAL;
+  /** The event owner's approval for the website, when given (OWNER_MEDIA_APPROVAL, MARK_APPROVAL). */
+  ownerApproval?: { readonly by: string; readonly date: string; readonly reference: string };
   /** A restriction backed by evidence: disputed ownership or a known usage limit. Restricted media is not published. */
   restricted?: string;
   /** Third-party paperwork still to file. Recorded, but it does not hold the media back. */
   followUp?: string;
+  /** Approved and prepared for publication: served from MEDIA_DIR, in every environment once the page is published. */
+  published: boolean;
   /** What the media is, in words, for the rights register. */
   source: string;
   /**
@@ -52,9 +54,9 @@ export interface ReviewAsset extends AssetRecord {
 
 /** Review images wider than 800 px, with their natural widths (480 and 800 px copies exist beside them). */
 const IMAGE_WIDTH: Record<string, number> = {
-  "dest-guest.webp": 1000, "exp-destination.webp": 900, "exp-entertainment.webp": 900, "hero-card-guest.webp": 1000,
-  "hero-card-terrace.webp": 900, "hl-guest-a.webp": 900, "hl-guest-b.webp": 900, "hl-guest-c.webp": 900,
-  "welcome-arch.webp": 900,
+  "x-dest-guest.webp": 1000, "x-exp-destination.webp": 900, "x-exp-entertainment.webp": 900, "x-hero-card-guest.webp": 1000,
+  "x-hero-card-terrace.webp": 900, "x-hl-guest-a.webp": 900, "x-hl-guest-b.webp": 900, "x-hl-guest-c.webp": 900,
+  "x-welcome-arch.webp": 900,
 };
 
 /**
@@ -67,6 +69,10 @@ const HOS_WIDTHS: Record<string, number[]> = {
   "exp-education": [480, 800, 1120], "exp-competitions": [480, 800, 1120], "exp-exhibitions": [480, 800, 1120],
   "exp-networking-desktop": [480, 800, 1120], "exp-networking-phone": [480, 800, 1260],
   "comp-main": [480, 800], "comp-trophy": [480], "sp-hall": [480, 800, 1400], "sp-exhibitor": [480],
+  "hero-card-guest": [480, 800, 1000], "hero-card-terrace": [480, 800, 900], "welcome-arch": [480, 800, 900], "num-days": [900],
+  "day-1": [480, 800, 920], "exp-entertainment": [480, 800, 900], "exp-destination": [480, 800, 900],
+  "dest-terrace": [480, 800, 1000], "dest-guest": [480, 800, 1000], "dest-floor-a": [480, 800, 1000], "dest-floor-b": [480, 800, 1000],
+  "hl-guest-a": [480, 800, 900], "hl-guest-b": [480, 800, 900], "hl-guest-c": [480, 800, 900],
   "hl-floor-a": [480, 800], "hl-performance": [480], "hl-hall": [480, 840], "hl-trophy": [480],
   "hl-floor-b": [480, 800], "hl-speaker": [480], "hl-floor-c": [480, 800], "hl-guest-d": [480, 800],
   "edu-session": [480, 800, 1200], "edu-styling": [480, 800], "edu-skincare": [480, 800], "edu-technique": [480, 800], "edu-loc": [480, 800],
@@ -104,6 +110,15 @@ const CHAMP_ROLE: Record<string, keyof typeof CHAMP_WIDTHS> = {
 };
 
 export const REVIEW_DIR = "/_review/home-2027/";
+/**
+ * Where media approved for publication lives: public/2027/media/. Like the review
+ * folder it is gitignored until launch, because this repository is public and a
+ * committed photograph would be downloadable before the site opens; the launch
+ * commit adds the files (lib/assets/published-media-2027.ts, MEDIA_RELEASED).
+ * The middleware answers /2027/media/* as a missing page on production until the
+ * 2027 site is open.
+ */
+export const MEDIA_DIR = "/2027/media/";
 
 const VMM = "Visualmedia Marketing (VMM)";
 const VMM_PENDING = {
@@ -134,6 +149,13 @@ export const OWNER_MEDIA_APPROVAL = {
   reference: "Owner's confirmation to Veridion, 11 Nov 2026, restated on later instructions",
 } as const;
 
+/** Decision D3: the existing HEBS Lagos 2027 logo (2027 inside the gold continent) is approved. */
+export const MARK_APPROVAL = {
+  by: "Mrs. Shuler, event owner",
+  date: "2026-11-11",
+  reference: "Decision D3: the existing HEBS Lagos 2027 logo is approved",
+} as const;
+
 export const SNAPP_APPROVAL =
   "Approved for the website by Mrs. Shuler, the event owner, who has also paid the photographer (11 Nov 2026). Filing the photographer's written usage terms is a records follow-up.";
 const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
@@ -146,14 +168,14 @@ const SPECS: Spec[] = [
   ["hero-loop-wide", "video", "hair-wide.mp4", "", "photographed", "s06", "S06 0:32–0:35.5 and 0:01–0:04.5, half speed, colour graded"],
   ["hero-loop-tall", "video", "hair-tall.mp4", "", "photographed", "s06", "Phone crop of the same loop"],
   ["hero-poster", "image", "hero-poster.webp", "", "photographed", "s06"],
-  ["hero-card-guest", "image", "hero-card-guest.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00318"],
-  ["hero-card-terrace", "image", "hero-card-terrace.webp", "Guests on the NJS terrace at the 2026 pre-party", "photographed", "preparty", "DSC00261"],
-  ["welcome-arch", "image", "welcome-arch.webp", "A guest at the floral entrance, HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00353"],
+  ["x-hero-card-guest", "image", "x-hero-card-guest.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00318"],
+  ["x-hero-card-terrace", "image", "x-hero-card-terrace.webp", "Guests on the NJS terrace at the 2026 pre-party", "photographed", "preparty", "DSC00261"],
+  ["x-welcome-arch", "image", "x-welcome-arch.webp", "A guest at the floral entrance, HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00353"],
   ["welcome-inset", "image", "welcome-inset.webp", "A speaker addressing the audience at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7809, cropped to the frame; a product name is visible on the speaker's top, so that brand's agreement is needed"],
-  ["num-days", "image", "num-days.webp", "", "photographed", "preparty", "DSC00262, used as numeral texture"],
+  ["x-num-days", "image", "x-num-days.webp", "", "photographed", "preparty", "DSC00262, used as numeral texture"],
   ["num-competitions", "image", "num-competitions.webp", "", "photographed", "s06", "Numeral texture"],
   ["num-categories", "image", "num-categories.webp", "", "photographed", "s06", "Numeral texture"],
-  ["day-1", "image", "day-1.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00278"],
+  ["x-day-1", "image", "x-day-1.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00278"],
   ["day-2", "image", "day-2.webp", "A stylist styling a client's hair at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1320, cropped to the frame; the Men'T stand and cape are visible, so the brand's agreement is needed"],
   ["day-3", "image", "day-3.webp", "A model in a feathered headdress and gown at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2093, cropped head to gown; one resample per width, no other change; the original is preserved unaltered"],
   ["exp-education", "image", "exp-education.webp", "A stylist demonstrating on a mannequin head at the HEBS stand, 2026", "photographed", "snapp-d1-floor", "DSC_1194, cropped to the frame; a product brand is visible behind, so its agreement is needed"],
@@ -161,22 +183,22 @@ const SPECS: Spec[] = [
   ["exp-exhibitions", "image", "exp-exhibitions.webp", "An exhibitor presenting products at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0074, cropped to the frame; exhibitor brand visible, so the brand's agreement is needed"],
   ["exp-networking-desktop", "image", "exp-networking-desktop.webp", "Two attendees greeting each other at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0470, cropped to the two attendees; a summit-day photograph, replacing the unconfirmed 22 Oct gathering"],
   ["exp-networking-phone", "image", "exp-networking-phone.webp", "Two attendees greeting each other at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0470, the same crop as the desktop image"],
-  ["exp-entertainment", "image", "exp-entertainment.webp", "A guest celebrating at the 2026 pre-party", "photographed", "preparty", "DSC00294"],
-  ["exp-destination", "image", "exp-destination.webp", "A guest at the NJS floral entrance, 2026", "photographed", "preparty", "DSC00347"],
-  ["dest-guests-wide", "video", "guests-wide.mp4", "", "concept", "njs-unknown", "0:00.2–0:03.2 at 75% speed"],
-  ["dest-guests-tall", "video", "guests-tall.mp4", "", "concept", "njs-unknown", "Phone crop"],
-  ["dest-pool-wide", "video", "pool-wide.mp4", "", "concept", "njs-ai", "0:00–0:02.9 at half speed, before any beach enters the shot"],
-  ["dest-pool-tall", "video", "pool-tall.mp4", "", "concept", "njs-ai", "Phone crop"],
-  ["dest-poster", "image", "dest-poster.webp", "", "concept", "njs-unknown"],
-  ["dest-terrace", "image", "hero-card-terrace.webp", "Guests on the NJS terrace at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00261"],
-  ["dest-guest", "image", "dest-guest.webp", "A guest at the HEBS Lagos 2026 pre-party at NJS", "photographed", "preparty", "DSC00318"],
+  ["x-exp-entertainment", "image", "x-exp-entertainment.webp", "A guest celebrating at the 2026 pre-party", "photographed", "preparty", "DSC00294"],
+  ["x-exp-destination", "image", "x-exp-destination.webp", "A guest at the NJS floral entrance, 2026", "photographed", "preparty", "DSC00347"],
+  ["x-dest-guests-wide", "video", "guests-wide.mp4", "", "concept", "njs-unknown", "0:00.2–0:03.2 at 75% speed"],
+  ["x-dest-guests-tall", "video", "guests-tall.mp4", "", "concept", "njs-unknown", "Phone crop"],
+  ["x-dest-pool-wide", "video", "pool-wide.mp4", "", "concept", "njs-ai", "0:00–0:02.9 at half speed, before any beach enters the shot"],
+  ["x-dest-pool-tall", "video", "pool-tall.mp4", "", "concept", "njs-ai", "Phone crop"],
+  ["x-dest-poster", "image", "x-dest-poster.webp", "", "concept", "njs-unknown"],
+  ["x-dest-terrace", "image", "x-hero-card-terrace.webp", "Guests on the NJS terrace at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00261"],
+  ["x-dest-guest", "image", "x-dest-guest.webp", "A guest at the HEBS Lagos 2026 pre-party at NJS", "photographed", "preparty", "DSC00318"],
   ["comp-main", "image", "comp-main.webp", "A braiding competitor at work, HEBS Lagos 2026", "photographed", "snapp-d2-floor", "IMG_8357, cropped to the frame"],
   ["comp-trophy", "image", "comp-trophy.webp", "A winner celebrating beside the HEBS trophy, 2026", "photographed", "snapp-d1-floor", "IMG_7937, cropped to the winner and trophy; no prize wording in frame (D8)"],
-  ["hl-guest-a", "image", "hl-guest-a.webp", "", "photographed", "preparty", "DSC00317"],
-  ["hl-guest-b", "image", "hl-guest-b.webp", "", "photographed", "preparty", "DSC00276"],
+  ["x-hl-guest-a", "image", "x-hl-guest-a.webp", "", "photographed", "preparty", "DSC00317"],
+  ["x-hl-guest-b", "image", "x-hl-guest-b.webp", "", "photographed", "preparty", "DSC00276"],
   ["hl-performance", "image", "hl-performance.webp", "", "photographed", "snapp-d2-floor", "0Q1A0481, cropped to the tile"],
   ["hl-speaker", "image", "hl-speaker.webp", "", "photographed", "snapp-d2-floor", "DSC_1996, cropped to the tile"],
-  ["hl-guest-c", "image", "hl-guest-c.webp", "", "photographed", "preparty", "DSC00326"],
+  ["x-hl-guest-c", "image", "x-hl-guest-c.webp", "", "photographed", "preparty", "DSC00326"],
   ["hl-guest-d", "image", "hl-guest-d.webp", "", "photographed", "snapp-d1-floor", "IMG_7144, cropped to the tile; replaces a repeat of the entertainment photograph"],
   ["hl-hall", "image", "hl-hall.webp", "", "photographed", "snapp-d1-floor", "IMG_6995, cropped to the tile"],
   ["hl-trophy", "image", "hl-trophy.webp", "", "photographed", "snapp-d2-floor", "0Q1A0117, cropped to the tile"],
@@ -247,7 +269,22 @@ const SPECS: Spec[] = [
   ["champ-0q1a0163", "image", "champions/champ-0q1a0163.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0163, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-0q1a0242", "image", "champions/champ-0q1a0242.webp", CHAMP_ALT, "photographed", "snapp-d2", "0Q1A0242, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_8112", "image", "champions/champ-img_8112.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8112, cropped and tone-corrected working copy; the original is preserved unaltered"],
-  ["mark-2027-a", "image", "mark-2027-a.png", "HEBS Lagos 2027, provisional mark", "brand", "mark", "Version A: 2027 on one line inside the continent"],
+  ["mark-2027-a", "image", "mark-2027-a.png", "HEBS Lagos 2027", "brand", "mark", "Version A: 2027 on one line inside the continent"],
+  // Replacements for positions that held restricted media (11 Nov 2026).
+  ["hero-card-guest", "image", "hero-card-guest.webp", "A guest smiling with a gift bag at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7139"],
+  ["hero-card-terrace", "image", "hero-card-terrace.webp", "Guests in the crowd at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7147"],
+  ["welcome-arch", "image", "welcome-arch.webp", "Models in carnival costumes and gowns with guests at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2097"],
+  ["num-days", "image", "num-days.webp", "", "photographed", "snapp-d1-floor", "DSC_1727, used as numeral texture"],
+  ["day-1", "image", "day-1.webp", "A performer singing on stage at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0374"],
+  ["exp-entertainment", "image", "exp-entertainment.webp", "A host performing on stage at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1786"],
+  ["exp-destination", "image", "exp-destination.webp", "Models walking through the hall at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2037"],
+  ["dest-terrace", "image", "dest-terrace.webp", "A session on the main stage at HEBS Lagos 2026, NJS Royale Events Center", "photographed", "snapp-d1-floor", "DSC_1305"],
+  ["dest-guest", "image", "dest-guest.webp", "A speaker in front of the NJS crest at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1798"],
+  ["dest-floor-a", "image", "dest-floor-a.webp", "A nail technician at work at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1452"],
+  ["dest-floor-b", "image", "dest-floor-b.webp", "A braider at work at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6724"],
+  ["hl-guest-a", "image", "hl-guest-a.webp", "A barbering competitor in the chair at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_6688"],
+  ["hl-guest-b", "image", "hl-guest-b.webp", "A barber cutting a client's hair at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1395"],
+  ["hl-guest-c", "image", "hl-guest-c.webp", "A loctician retwisting locs at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2239"],
 ];
 
 function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset {
@@ -258,21 +295,29 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
     : kindOf === "njs-ai" || kindOf === "njs-unknown" ? "njs-concept"
     : kindOf === "mark" ? "brand-mark"
     : "house-of-snapp";
+  // The event owner's approval covers the House of Snapp photographs and the VMM
+  // styling-floor film; D3 covers the 2027 logo. Everything else stays review-only.
+  // Prize-presentation photographs (champ-*) stay review-only: the winners rail shows
+  // them only in review until the organisers verify names, placings and prizes (D8).
+  const published = (collection === "house-of-snapp" && !id.startsWith("champ-")) || collection === "vmm-summit" || collection === "brand-mark";
+  const dir = published ? MEDIA_DIR : REVIEW_DIR;
   const base = {
     id,
     kind,
     badge,
     collection,
-    src: REVIEW_DIR + file,
+    published,
+    src: dir + file,
     alt,
-    status: "provisional" as const,
-    permittedUsage: ["internal-review" as const],
+    status: published ? ("approved" as const) : ("provisional" as const),
+    ...(published ? { approval: { by: collection === "brand-mark" ? MARK_APPROVAL.by : OWNER_MEDIA_APPROVAL.by, date: OWNER_MEDIA_APPROVAL.date } } : {}),
+    permittedUsage: published ? ["2027-site" as const] : ["internal-review" as const],
     ...(id.startsWith("champ-") ? { widths: [...CHAMP_WIDTHS[CHAMP_ROLE[id] ?? "card"]] } : {}),
     ...(IMAGE_WIDTH[file] ? { widths: [480, 800, IMAGE_WIDTH[file]], fullWidth: IMAGE_WIDTH[file] } : {}),
     ...(HOS_WIDTHS[id] ? { widths: HOS_WIDTHS[id], fullWidth: HOS_WIDTHS[id][HOS_WIDTHS[id].length - 1] } : {}),
     ...(GALLERY_ASPECT[id] ? { aspect: GALLERY_ASPECT[id] } : {}),
     ...(file === "mark-2027-a.png" ? { widths: [240, 480] } : {}),
-    ...(kind === "video" ? { poster: REVIEW_DIR + file.replace(/\.mp4$/, "-poster.webp") } : {}),
+    ...(kind === "video" ? { poster: dir + file.replace(/\.mp4$/, "-poster.webp") } : {}),
   };
   const note = detail ? `. ${detail}` : "";
   switch (kindOf) {
@@ -389,7 +434,8 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         permittedDepictions: ["brand"],
         source:
           "Adaptation of the official HEBS Lagos 2026 mark: the year digits redrawn as 2027 inside the gold continent. The 2026 master is unchanged" + note,
-        restriction: "Provisional, awaiting Mrs. Shuler's brand approval. The official mark stays in use until then.",
+        ownerApproval: MARK_APPROVAL,
+        restriction: "The approved HEBS Lagos 2027 logo (D3).",
       };
   }
 }
@@ -407,14 +453,14 @@ if (new Set(REVIEW_ASSETS.map((a) => a.id)).size !== REVIEW_ASSETS.length) {
   throw new Error("[review-media] ids must be unique");
 }
 for (const a of REVIEW_ASSETS) {
-  if (!a.src.startsWith(REVIEW_DIR)) throw new Error(`[review-media] ${a.id} must live in ${REVIEW_DIR}`);
-  if (a.permittedUsage.length !== 1 || a.permittedUsage[0] !== "internal-review") {
-    throw new Error(`[review-media] ${a.id} may only be used for internal review`);
-  }
-  if (a.status === "approved" || a.rights.permission === "recorded") {
-    throw new Error(`[review-media] ${a.id} is cleared; move it to the main asset register instead`);
-  }
+  if (!a.src.startsWith(a.published ? MEDIA_DIR : REVIEW_DIR)) throw new Error(`[media] ${a.id} must live in ${a.published ? MEDIA_DIR : REVIEW_DIR}`);
+  if (a.published && (!a.ownerApproval || a.restricted)) throw new Error(`[media] ${a.id} is published without an approval, or despite a restriction`);
+  if (!a.published && a.permittedUsage.join() !== "internal-review") throw new Error(`[media] ${a.id} may only be used for internal review`);
+  if (a.restricted && a.published) throw new Error(`[media] ${a.id} is restricted and cannot be published`);
   if ((a.origin === "generated" || a.provenance === "undocumented") && a.badge !== "concept") {
-    throw new Error(`[review-media] ${a.id} is generated or undocumented and must be labelled as a concept`);
+    throw new Error(`[media] ${a.id} is generated or undocumented and must be labelled as a concept`);
   }
 }
+
+/** The approval state of the HEBS Lagos 2027 logo, which every 2027 page shows. */
+export const MARK_2027_STATUS: "approved" | "provisional" = findReviewAsset("mark-2027-a").ownerApproval ? "approved" : "provisional";

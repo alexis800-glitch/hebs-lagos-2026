@@ -26,8 +26,9 @@ describe("visual corrections", () => {
     expect(css).toContain("body:has(.hp-wrap) [data-preview-banner]{display:none}");
   });
 
-  it("A4: the destination has three scenes and no surf scene", () => {
-    expect(HOME.destination.scenes.map((s) => s.title)).toEqual(["Sunset by the pool", "The pool terrace", "HEBS at NJS, 2026"]);
+  it("A4: the destination shows photographed scenes only, no concept film and no surf scene", () => {
+    expect(HOME.destination.scenes.map((s) => s.title)).toEqual(["HEBS at NJS, 2026", "The summit floor"]);
+    for (const s of HOME.destination.scenes) for (const id of s.pair) expect(findReviewAsset(id).collection, id).toBe("house-of-snapp");
     expect(REVIEW_ASSETS.some((a) => a.id.startsWith("dest-cinema"))).toBe(false);
   });
 

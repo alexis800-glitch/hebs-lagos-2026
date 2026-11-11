@@ -22,7 +22,7 @@ export const HOME = {
     accent: "Beyond Beauty.",
     sub: "Three extraordinary days of beauty, education, innovation, competition, networking, and unforgettable luxury resort experiences.",
     when: "July 23–25, 2027",
-    where: "NJS Royale Beach Resort, Lagos, Nigeria",
+    where: "NJS Beach Resort, Lagos, Nigeria",
     live: "HEBS Lagos 2026, the styling floor",
     // The primary button is the site-wide priority-list call to action (PRIORITY_CTA in
     // lib/site/2027.ts): the directive's "Join the 2027 Priority List" only once the list is open.
@@ -74,15 +74,14 @@ export const HOME = {
     label: "The destination",
     title: "Beauty meets",
     accent: "paradise.",
-    body: "NJS Royale Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.",
+    body: "NJS Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.",
     cta: "Explore the destination",
+    // Photographed scenes only: the NJS concept films and the pre-party photographs are restricted.
     scenes: [
-      { title: "Sunset by the pool", kind: "concept", seconds: 4.0, wide: "dest-guests-wide", tall: "dest-guests-tall",
-        note: "Concept from NJS: illustrative guests at the second-floor pool. Not real attendees or the completed property." },
-      { title: "The pool terrace", kind: "concept", seconds: 5.6, wide: "dest-pool-wide", tall: "dest-pool-tall",
-        note: "Concept from the NJS website: the second-floor pool terrace. Not the completed property." },
       { title: "HEBS at NJS, 2026", kind: "photographed", seconds: 6.0, pair: ["dest-terrace", "dest-guest"],
-        note: "HEBS Lagos 2026 pre-party guests on the NJS terrace, 23 Oct 2026. VMM." },
+        note: "HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp." },
+      { title: "The summit floor", kind: "photographed", seconds: 6.0, pair: ["dest-floor-a", "dest-floor-b"],
+        note: "Live work on the HEBS Lagos 2026 summit floor, 24 Oct 2026. House of Snapp." },
     ],
   },
   competitions: {
@@ -122,7 +121,7 @@ export const HOME = {
     label: "HEBS Lagos 2027",
     title: "Your next beauty experience",
     accent: "starts here.",
-    when: "July 23–25, 2027  |  NJS Royale Beach Resort, Lagos, Nigeria",
+    when: "July 23–25, 2027  |  NJS Beach Resort, Lagos, Nigeria",
     cta: "Be first to experience HEBS 2027",
   },
 } as const;

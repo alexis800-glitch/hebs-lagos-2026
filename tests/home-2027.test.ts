@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { execSync } from "node:child_process";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { REVIEW_ASSETS, REVIEW_DIR, findReviewAsset } from "@/lib/assets/home-2027-review";
+import { REVIEW_ASSETS, REVIEW_DIR, MEDIA_DIR, findReviewAsset } from "@/lib/assets/home-2027-review";
 import { HOME } from "@/lib/content/home-2027";
 import { REVIEW_CHAMPIONS, winnersView, type Winner } from "@/lib/content/winners-2026";
 import { COMPETITIONS, COMPETITION_COUNT, CATEGORY_COUNT } from "@/lib/competitions";
@@ -11,13 +11,20 @@ import { reviewMedia, reviewMediaAllowed } from "@/components/2027/home/review-m
 const ROOT = join(__dirname, "..");
 
 describe("preferred homepage: review media safeguards", () => {
-  it("keeps every review file in the gitignored review folder, for internal review only", () => {
+  it("keeps review-only files in the gitignored review folder, and publishes only approved, unrestricted media", () => {
     for (const a of REVIEW_ASSETS) {
-      expect(a.src.startsWith(REVIEW_DIR), a.id).toBe(true);
-      expect(a.permittedUsage, a.id).toEqual(["internal-review"]);
-      expect(a.status, a.id).not.toBe("approved");
-      expect(a.rights.permission, a.id).toBe("not-recorded");
+      if (a.published) {
+        expect(a.src.startsWith(MEDIA_DIR), a.id).toBe(true);
+        expect(a.ownerApproval, a.id).toBeDefined();
+        expect(a.restricted, a.id).toBeUndefined();
+        expect(a.permittedUsage, a.id).toEqual(["2027-site"]);
+      } else {
+        expect(a.src.startsWith(REVIEW_DIR), a.id).toBe(true);
+        expect(a.permittedUsage, a.id).toEqual(["internal-review"]);
+        expect(a.status, a.id).not.toBe("approved");
+      }
     }
+    for (const a of REVIEW_ASSETS.filter((x) => x.restricted)) expect(a.published, a.id).toBe(false);
     expect(readFileSync(join(ROOT, ".gitignore"), "utf8")).toMatch(/^\/public\/_review\/$/m);
   });
 
@@ -26,8 +33,8 @@ describe("preferred homepage: review media safeguards", () => {
     expect(tracked).toBe("");
   });
 
-  it("never serves review media on production, and on a preview only with the review switch", () => {
-    for (const a of REVIEW_ASSETS) {
+  it("never serves review-only media on production, and on a preview only with the review switch", () => {
+    for (const a of REVIEW_ASSETS.filter((x) => !x.published)) {
       expect(reviewMedia(a.id, "production", { HEBS_REVIEW_MEDIA: "on" }), a.id).toBeNull();
       expect(reviewMedia(a.id, "preview", {}), a.id).toBeNull();
     }
@@ -42,7 +49,7 @@ describe("preferred homepage: review media safeguards", () => {
     for (const a of REVIEW_ASSETS) {
       if (a.origin === "generated" || a.provenance === "undocumented") expect(a.badge, a.id).toBe("concept");
     }
-    expect(findReviewAsset("dest-pool-wide").provenance).toBe("ai-generated");
+    expect(findReviewAsset("x-dest-pool-wide").provenance).toBe("ai-generated");
   });
 
   it("records no Drive links or file IDs in the public repository", () => {
@@ -67,10 +74,11 @@ describe("preferred homepage: review media safeguards", () => {
     }
   });
 
-  it("keeps the 2027 mark provisional", () => {
+  it("records the 2027 logo as approved (D3)", () => {
     const mark = findReviewAsset("mark-2027-a");
     expect(mark.badge).toBe("brand");
-    expect(mark.status).toBe("provisional");
+    expect(mark.status).toBe("approved");
+    expect(mark.ownerApproval?.reference).toMatch(/D3/);
   });
 });
 
@@ -79,7 +87,7 @@ describe("preferred homepage: copy", () => {
 
   it("uses resort, poolside and terrace language rather than beach wording", () => {
     expect(text).not.toMatch(/beachfront|by the sea|Evenings on the Atlantic/i);
-    expect(text).toContain("NJS Royale Beach Resort");
+    expect(text).toContain("NJS Beach Resort");
   });
 
   it("takes its counts from the competition programme", () => {

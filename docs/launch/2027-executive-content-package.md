@@ -1,8 +1,8 @@
 # HEBS Lagos 2027 website: wording for approval
 
-Prepared by Veridion for Mrs. Shuler. Package reference 7d590810.
+Prepared by Veridion for Mrs. Shuler. Package reference 338397a8.
 
-This package holds only what needs your decision: 15 blocks of wording (55 lines) and 9 decisions. Routine wording (navigation, headings, buttons, notices, image descriptions and facts checked against your directive, 290 items) is verified by Veridion and is not included.
+This package holds only what needs your decision: 16 blocks of wording (56 lines) and 6 decisions. Routine wording (navigation, headings, buttons, notices, image descriptions and facts checked against your directive, 313 items) is verified by Veridion and is not included.
 
 The website photography and media you approved are recorded as approved. Nothing about them is asked here.
 
@@ -12,9 +12,6 @@ The website photography and media you approved are recorded as approved. Nothing
 
 | Decision | Who | What it unlocks |
 |---|---|---|
-| The public web address for the 2027 site (D7) | Mrs. Shuler | Search listings, sharing links and the sitemap |
-| Official venue name (D9) | Mrs. Shuler | 1 item: Every page |
-| Official 2027 mark (D3) | Mrs. Shuler | 1 item: Every page |
 | Form contract and route (D1) and privacy notice (D13); the form stays closed until then | HEBS organisers | 44 items: Every page, Exhibitors, Sponsorship & partnerships, Contact us |
 | Approved 2027 prospectus and packages; inquiry route (D1); public contacts (D10) | HEBS organisers | 15 items: Home, Sponsorship & partnerships |
 | Ticket categories, prices and payment gateway; ticketing route (D1) | HEBS organisers | 6 items: Tickets & registration |
@@ -112,13 +109,13 @@ Suggested alternative: "An opening celebration at the resort and closing celebra
 
 ### 6. Homepage: The destination
 
-For: Mrs. Shuler. Needed for: the first launch. Block `owner-home-the-destination`, reference f23fd957.
+For: Mrs. Shuler. Needed for: the first launch. Block `owner-home-the-destination`, reference 65321d25.
 
-> NJS Royale Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.
+> NJS Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.
 
 *Home, The destination. Source: Homepage design approved by Mrs. Shuler on 7 Nov 2026; its wording is provisional until approved.*
 
-Suggested alternative: "NJS Royale Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting." The ocean-facing pool terrace is shown only in NJS concept visuals, not the completed property. Describe it once NJS confirms it is complete and part of the HEBS programme.
+Suggested alternative: "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting." The ocean-facing pool terrace is shown only in NJS concept visuals, not the completed property. Describe it once NJS confirms it is complete and part of the HEBS programme.
 
 ### 7. Homepage: Competitions
 
@@ -148,9 +145,17 @@ For: Mrs. Shuler. Needed for: the first launch. Block `owner-home-2026-highlight
 
 *Home, 2026 highlights. Source: Homepage design approved by Mrs. Shuler on 7 Nov 2026; its wording is provisional until approved.*
 
-### 9. About HEBS
+### 9. Homepage: Page layout
 
-For: Mrs. Shuler. Needed for: the next pages. Block `owner-about`, reference 74f285d4.
+For: Mrs. Shuler. Needed for: the first launch. Block `owner-home-page-layout`, reference ace04109.
+
+> PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp.
+
+*Home, Page layout. Source: Wording in the page layout, as the page renders it.*
+
+### 10. About HEBS
+
+For: Mrs. Shuler. Needed for: the next pages. Block `owner-about`, reference 5d3a4842.
 
 > The Hair Education Beauty Summit: its history, mission and vision, from its United States editions to Lagos.
 
@@ -160,7 +165,7 @@ For: Mrs. Shuler. Needed for: the next pages. Block `owner-about`, reference 74f
 
 *About HEBS, Welcome. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 
-> In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Royale Beach Resort, on the Atlantic coast of Lagos.
+> In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Beach Resort, on the Atlantic coast of Lagos.
 
 *About HEBS, 2027. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 *Changed in this round from: "In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Royale Beach Resort, on the Atlantic beachfront in Lagos." (Venue wording rule (11 Nov 2026): keep the accurate Atlantic location, without suggesting HEBS activities take place on the beach.)*
@@ -181,9 +186,9 @@ Suggested alternative: "Creating a global network and a physical hub where hairs
 
 Suggested alternative: "Keeping the future of beauty, grooming and fashion inclusive, inventive and driven by technical excellence." Plainer wording with the same meaning ("completely inclusive, boundary-pushing, hyper-innovative").
 
-### 10. HEBS 2027 experience
+### 11. HEBS 2027 experience
 
-For: Mrs. Shuler. Needed for: the next pages. Block `owner-experience`, reference 162b01c6.
+For: Mrs. Shuler. Needed for: the next pages. Block `owner-experience`, reference c2f50a68.
 
 > THE HEBS EXPERIENCE
 
@@ -214,12 +219,12 @@ For: Mrs. Shuler. Needed for: the next pages. Block `owner-experience`, referenc
 *HEBS 2027 experience, Six experiences. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 *Changed in this round from: "A beachfront destination that turns a professional summit into a place to stay and enjoy." (Venue wording rule (11 Nov 2026): keep the accurate Atlantic location, without suggesting HEBS activities take place on the beach.)*
 
-> For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort, on the Atlantic coast of Lagos: education, competitions, exhibitions, networking and celebrations in one destination.
+> For the first time, the entire HEBS experience takes place at NJS Beach Resort, on the Atlantic coast of Lagos: education, competitions, exhibitions, networking and celebrations in one destination.
 
 *HEBS 2027 experience, The destination. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 *Changed in this round from: "For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort on the Atlantic Ocean beachfront in Lagos: education, competitions, exhibitions, networking and celebrations in one destination." (Venue wording rule (11 Nov 2026): keep the accurate Atlantic location, without suggesting HEBS activities take place on the beach.)*
 
-> Three days at NJS Royale Beach Resort, and six experiences that run through them: education, competitions, exhibitions, networking, celebrations and the destination itself.
+> Three days at NJS Beach Resort, and six experiences that run through them: education, competitions, exhibitions, networking, celebrations and the destination itself.
 
 *HEBS 2027 experience, Introduction. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 
@@ -240,20 +245,20 @@ For: Mrs. Shuler. Needed for: the next pages. Block `owner-experience`, referenc
 *HEBS 2027 experience, Six experiences. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 *Changed in this round from: "For the first time, the whole summit takes place at one beachfront resort on the Atlantic, so the event is also a place to stay and enjoy." (Venue wording rule (11 Nov 2026): keep the accurate Atlantic location, without suggesting HEBS activities take place on the beach.)*
 
-### 11. Travel & accommodation
+### 12. Travel & accommodation
 
-For: Mrs. Shuler. Needed for: the next pages. Block `owner-travel`, reference f9453b99.
+For: Mrs. Shuler. Needed for: the next pages. Block `owner-travel`, reference 0bd621d1.
 
-> For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort, on the Atlantic coast of Lagos.
+> For the first time, the entire HEBS experience takes place at NJS Beach Resort, on the Atlantic coast of Lagos.
 
 *Travel & accommodation, The venue. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 *Changed in this round from: "For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort on the Atlantic beachfront in Lagos." (Venue wording rule (11 Nov 2026): keep the accurate Atlantic location, without suggesting HEBS activities take place on the beach.)*
 
-### 12. Travel & accommodation: commercial terms
+### 13. Travel & accommodation: commercial terms
 
-For: HEBS organisers. Needed for: the next pages. Block `organisers-travel`, reference a315917f.
+For: HEBS organisers. Needed for: the next pages. Block `organisers-travel`, reference 9ea10f63.
 
-> Special HEBS accommodation and hospitality packages at NJS Royale Beach Resort are being explored and will be introduced once officially approved.
+> Special HEBS accommodation and hospitality packages at NJS Beach Resort are being explored and will be introduced once officially approved.
 
 *Travel & accommodation, Accommodation. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 
@@ -261,7 +266,7 @@ For: HEBS organisers. Needed for: the next pages. Block `organisers-travel`, ref
 
 *Travel & accommodation, Questions. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 
-### 13. Speakers & educators
+### 14. Speakers & educators
 
 For: Mrs. Shuler. Needed for: the next pages. Block `owner-speakers`, reference bd10b37e.
 
@@ -269,7 +274,7 @@ For: Mrs. Shuler. Needed for: the next pages. Block `owner-speakers`, reference 
 
 *Speakers & educators, Teaching at HEBS. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 
-### 14. Education & masterclasses
+### 15. Education & masterclasses
 
 For: Mrs. Shuler. Needed for: later pages. Block `owner-education`, reference f7603bb8.
 
@@ -297,7 +302,7 @@ For: Mrs. Shuler. Needed for: later pages. Block `owner-education`, reference f7
 
 *Education & masterclasses, Learning tracks. Source: Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf).*
 
-### 15. Competitions: commercial terms
+### 16. Competitions: commercial terms
 
 For: HEBS organisers. Needed for: later pages. Block `organisers-competitions`, reference acfac97d.
 
@@ -319,7 +324,7 @@ For: HEBS organisers. Needed for: later pages. Block `organisers-competitions`, 
 
 ## 3. Media
 
-- **House of Snapp photographs, HEBS Lagos 2026 summit days** (80 files): Approved by the event owner. Mrs. Shuler, event owner, 2026-11-11. Records follow-up: The photographer's written usage terms are to be filed for the records.
+- **House of Snapp photographs, HEBS Lagos 2026 summit days** (94 files): Approved by the event owner. Mrs. Shuler, event owner, 2026-11-11. Records follow-up: The photographer's written usage terms are to be filed for the records.
 - **VMM film of the 2026 styling floor** (5 files): Approved by the event owner. Mrs. Shuler, event owner, 2026-11-11. Records follow-up: VMM's written licence for the film is not on file. No restriction on its use is known.
 - **VMM photographs of the 2026 Welcome Pre-Party (DSC00261–00353)** (12 files): Restricted. Ownership of the pre-party photographs is disputed. They stay off public pages until it is resolved.
 - **NJS concept films of the pool terrace and guests** (5 files): Restricted. Origin and rights undocumented (received by WhatsApp, credentials stripped), and excluded from public use on Veridion's instruction. NJS's AI-generated concept of an unfinished property: needs NJS's permission and confirmation of the design, and may only ever be shown labelled as a concept.

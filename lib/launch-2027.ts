@@ -28,7 +28,8 @@ import { EDITION_DAYS, VENUE } from "./editions/2027";
 import { MEDIA_SLOTS, findAsset } from "./assets/register";
 import { CONTRACT, NOTICE_VERSIONS } from "./forms-2027/contract";
 import { FORMS_OPEN, type FormId } from "./integrations/registration-2027";
-import { REVIEW_ASSETS } from "./assets/home-2027-review";
+import { MARK_2027_STATUS, MEDIA_DIR, REVIEW_ASSETS } from "./assets/home-2027-review";
+import { MEDIA_RELEASED } from "./assets/published-media-2027";
 import { isPagePublishable, type DeployEnvironment, type PublicationStatus } from "./publication";
 import { BASE, SITE_PAGES, type PageId } from "./site/2027";
 import { LAUNCH_2027, type LaunchConfig } from "./launch-2027-config";
@@ -43,7 +44,8 @@ export { LAUNCH_2027, type LaunchAuthorisation, type LaunchConfig } from "./laun
  */
 export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = (() => {
   const out: Partial<Record<PageId, string[]>> = {
-    home: REVIEW_ASSETS.filter((a) => !/^(edu|gal)-/.test(a.id)).map((a) => a.id),
+    // Restricted media kept on record under x- ids is not on the homepage (tests/launch-2027.test.ts checks what it renders).
+    home: REVIEW_ASSETS.filter((a) => !/^(edu|gal|x)-/.test(a.id)).map((a) => a.id),
     education: REVIEW_ASSETS.filter((a) => a.id.startsWith("edu-")).map((a) => a.id).concat(["exp-education", "welcome-inset", "sp-hall"]),
     gallery: PAGES.gallery.categories.flatMap((c) => c.photos),
     experience: [...Object.values(EXPERIENCE_PHOTOS), ...DAY_PHOTOS].filter((x): x is string => !!x),
@@ -66,7 +68,7 @@ export function pageStatuses(id: PageId): PublicationStatus[] {
 
 /** The approval states of the content-module copy and facts one page shows. */
 function contentStatuses(id: PageId): PublicationStatus[] {
-  const shared = [VENUE.name.status, findAsset("hebs-logo-nav").status, ...copyStatuses(COPY.finalCta, "finalCta")];
+  const shared = [VENUE.name.status, MARK_2027_STATUS, ...copyStatuses(COPY.finalCta, "finalCta")];
   const hours = EDITION_DAYS.map((d) => d.hours.status);
   const slot = (slotId: string) => {
     const s = MEDIA_SLOTS.find((x) => x.id === slotId);
@@ -112,6 +114,8 @@ export interface LaunchInputs {
   privacyNotice?: string | null;
   withhold?: string | undefined;
   reviewMedia?: Partial<Record<PageId, readonly string[]>>;
+  /** Whether the prepared media files are committed for release (MEDIA_RELEASED). */
+  mediaReleased?: boolean;
 }
 
 /**
@@ -126,6 +130,7 @@ export function launchBlockers({
   privacyNotice = NOTICE_VERSIONS.privacy,
   withhold = undefined,
   reviewMedia = REVIEW_MEDIA_BY_PAGE,
+  mediaReleased = MEDIA_RELEASED,
 }: LaunchInputs = {}): LaunchBlocker[] {
   const out: LaunchBlocker[] = [];
   const add = (id: string, requirement: string, detail: string) => out.push({ id, requirement, detail });
@@ -154,7 +159,7 @@ export function launchBlockers({
     if (media.length === 0) continue;
     const restricted = media.filter((a) => a.restricted);
     const undecided = media.filter((a) => !a.restricted && !a.ownerApproval);
-    const approved = media.filter((a) => !a.restricted && a.ownerApproval);
+    const approved = media.filter((a) => a.published);
     if (restricted.length > 0) {
       add(`media-restricted-${id}`, "No launched page uses restricted media",
         `${id} uses ${restricted.length} restricted items (${Array.from(new Set(restricted.map((a) => a.collection))).join(", ")}); replace them or resolve the restriction.`);
@@ -162,10 +167,10 @@ export function launchBlockers({
     if (undecided.length > 0) {
       add(`media-undecided-${id}`, "Every image a launched page shows is decided", `${id} uses ${undecided.length} items awaiting a decision (${undecided.map((a) => a.id).join(", ")}).`);
     }
-    if (approved.length > 0) {
-      // Technical, not an approval: production never serves the private review folder.
-      add(`review-media-${id}`, "Approved media is in the published assets",
-        `${id} shows ${approved.length} owner-approved items still in the private review folder, which production does not serve; move them into the published asset register.`);
+    if (approved.length > 0 && !mediaReleased) {
+      // Technical, not an approval: the prepared files join the public repository only in the launch commit.
+      add(`media-release-${id}`, "Published media is in the release",
+        `${id} shows ${approved.length} approved media files prepared in public/2027/media/; add them in the launch commit (lib/assets/published-media-2027.ts, MEDIA_RELEASED).`);
     }
   }
   for (const form of Object.keys(formsOpen) as FormId[]) {
@@ -207,6 +212,8 @@ export function pathPublished(pathname: string, environment: DeployEnvironment, 
   if (environment !== "production") return true;
   const path = pathname.replace(/\/$/, "") || "/";
   if (siteFiles().includes(path)) return true;
+  // Approved media, once the site is open: restricted media never has a file there.
+  if (path.startsWith(MEDIA_DIR)) return true;
   const page = SITE_PAGES.find((p) => p.path === path);
   return page ? pagePublished(page.id, environment, inputs) : false;
 }

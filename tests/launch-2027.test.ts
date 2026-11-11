@@ -53,7 +53,7 @@ describe("the launch switch today", () => {
   });
 
   it("lists today's launch blockers", () => {
-    expect(ids(launchBlockers())).toEqual(["authorisation", "pages", "origin"]);
+    expect(ids(launchBlockers())).toEqual(["authorisation", "pages"]);
   });
 
   it("withholds every 2027 address on production, pages and site files alike", () => {
@@ -78,7 +78,7 @@ describe("production publication controls", () => {
       ["pages-tickets", { ...OPEN, config: { ...LAUNCHED, pages: ["home"] } }],
       ["approvals-home", { ...OPEN, statuses: ["approved", "provisional"] }],
       ["approvals-tickets", { ...OPEN, statuses: ["approved", "awaiting-confirmation"] }],
-      ["review-media-home", { ...OPEN, reviewMedia: { home: ["hero-loop-wide"] } }],
+      ["media-release-home", { ...OPEN, reviewMedia: { home: ["hero-loop-wide"] } }],
       ["form-priority", { ...OPEN, formsOpen: { ...FORMS_OPEN, priority: true } }],
       ["origin", { ...OPEN, config: { ...LAUNCHED, origin: { status: "provisional", value: "https://www.hebslagos.com", note: "D7" } } }],
       ["withhold", { ...OPEN, withhold: "on" }],
@@ -149,14 +149,22 @@ describe("image-usage authorisation", () => {
     }
   });
 
-  it("blocks every page that relies on review media, whose usage terms are not filed", () => {
+  it("blocks every page that shows media until the prepared files are in the release", () => {
     for (const page of ["home", "education", "gallery"] as const) {
       expect(REVIEW_MEDIA_BY_PAGE[page]?.length, page).toBeGreaterThan(0);
       const blockers = launchBlockers({ ...OPEN, config: { ...LAUNCHED, pages: ["home", "tickets", page] }, reviewMedia: REVIEW_MEDIA_BY_PAGE });
-      expect(ids(blockers), page).toContain(`review-media-${page}`);
+      expect(ids(blockers), page).toContain(`media-release-${page}`);
+      const released = launchBlockers({ ...OPEN, config: { ...LAUNCHED, pages: ["home", "tickets", page] }, reviewMedia: REVIEW_MEDIA_BY_PAGE, mediaReleased: true });
+      expect(ids(released).filter((b) => b.startsWith("media-")), page).toEqual([]);
     }
-    // None has recorded written permission yet.
-    expect(REVIEW_ASSETS.filter((a) => a.rights.permission === "recorded")).toEqual([]);
+  });
+
+  it("shows no restricted media on the homepage", () => {
+    const html = renderToStaticMarkup(createElement(PreferredHomepage));
+    for (const a of REVIEW_ASSETS.filter((x) => x.restricted)) {
+      expect(html.includes(a.src) || Boolean(a.poster && html.includes(a.poster)), a.id).toBe(false);
+      expect(REVIEW_MEDIA_BY_PAGE.home ?? [], a.id).not.toContain(a.id);
+    }
   });
 
   it("never serves review media on production, launched or not", () => {
@@ -225,11 +233,13 @@ describe("Event structured data", () => {
     const prod = eventJsonLd("production");
     expect(prod.startDate).toBe(EDITION_DAYS[0].isoDate);
     expect(prod.endDate).toBe("2027-07-25");
-    expect(prod).not.toHaveProperty("location");
+    // The venue name is confirmed (D9); its street address is not, so none is stated.
+    expect(prod).toHaveProperty("location.name", "NJS Beach Resort");
+    expect(JSON.stringify(prod)).not.toMatch(/streetAddress/);
     expect(prod).not.toHaveProperty("description");
     for (const key of ["offers", "performer", "doorTime", "price"]) expect(prod, key).not.toHaveProperty(key);
     const preview = eventJsonLd("preview");
-    expect(preview).toHaveProperty("location.name", "NJS Royale Beach Resort");
+    expect(preview).toHaveProperty("location.name", "NJS Beach Resort");
   });
 });
 

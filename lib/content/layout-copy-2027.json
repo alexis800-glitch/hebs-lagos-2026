@@ -92,12 +92,6 @@
    "text": "HEBS Lagos 2027 home"
   },
   {
-   "key": "layout.site.508e91d0b6",
-   "scope": "site",
-   "where": "alt",
-   "text": "HEBS, Hair Education Beauty Summit"
-  },
-  {
    "key": "layout.site.62bce9422f",
    "scope": "site",
    "where": "alt",
@@ -126,6 +120,12 @@
    "scope": "site",
    "where": "page",
    "text": "The priority list opens soon."
+  },
+  {
+   "key": "layout.site.508e91d0b6",
+   "scope": "site",
+   "where": "alt",
+   "text": "HEBS, Hair Education Beauty Summit"
   },
   {
    "key": "layout.site.9742d008c4",
@@ -236,22 +236,10 @@
    "text": "– Days – Hours – Minutes – Seconds"
   },
   {
-   "key": "layout.home.f8c64402f3",
+   "key": "layout.home.0ea58db9e7",
    "scope": "home",
    "where": "page",
-   "text": "CONCEPT Concept from NJS: illustrative guests at the second-floor pool. Not real attendees or the completed property."
-  },
-  {
-   "key": "layout.home.7d71e93875",
-   "scope": "home",
-   "where": "page",
-   "text": "Sunset by the pool Concept"
-  },
-  {
-   "key": "layout.home.56dc09a2fe",
-   "scope": "home",
-   "where": "page",
-   "text": "The pool terrace Concept"
+   "text": "PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp."
   },
   {
    "key": "layout.home.edbd493852",
@@ -260,10 +248,22 @@
    "text": "HEBS at NJS, 2026 Photographed"
   },
   {
+   "key": "layout.home.d3cb683091",
+   "scope": "home",
+   "where": "page",
+   "text": "The summit floor Photographed"
+  },
+  {
    "key": "layout.home.1c2595a317",
    "scope": "home",
    "where": "page",
    "text": "Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling"
+  },
+  {
+   "key": "layout.home.59cb14182d",
+   "scope": "home",
+   "where": "alt",
+   "text": "Film of the 2026 styling floor"
   },
   {
    "key": "layout.home.bce7739928",
@@ -278,10 +278,28 @@
    "text": "Counting down to July 23, 2027"
   },
   {
+   "key": "layout.home.0ee22ae360",
+   "scope": "home",
+   "where": "alt",
+   "text": "Models in carnival costumes and gowns with guests at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.fbf6d43cfe",
+   "scope": "home",
+   "where": "alt",
+   "text": "A speaker addressing the audience at HEBS Lagos 2026"
+  },
+  {
    "key": "layout.home.e419628ea5",
    "scope": "home",
    "where": "alt",
    "text": "HEBS Lagos 2027 in numbers: 3 days, 13 competitions, 7 categories"
+  },
+  {
+   "key": "layout.home.b7e5351b77",
+   "scope": "home",
+   "where": "alt",
+   "text": "A performer singing on stage at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.589801feed",
@@ -290,16 +308,88 @@
    "text": "The programme: July 23"
   },
   {
+   "key": "layout.home.f4e3da7971",
+   "scope": "home",
+   "where": "alt",
+   "text": "A stylist styling a client's hair at HEBS Lagos 2026"
+  },
+  {
    "key": "layout.home.b604cb0110",
    "scope": "home",
    "where": "alt",
    "text": "The programme: July 24"
   },
   {
+   "key": "layout.home.7784311f31",
+   "scope": "home",
+   "where": "alt",
+   "text": "A model in a feathered headdress and gown at HEBS Lagos 2026"
+  },
+  {
    "key": "layout.home.bc5a5417c5",
    "scope": "home",
    "where": "alt",
    "text": "The programme: July 25"
+  },
+  {
+   "key": "layout.home.8e192d5eff",
+   "scope": "home",
+   "where": "alt",
+   "text": "A stylist demonstrating on a mannequin head at the HEBS stand, 2026"
+  },
+  {
+   "key": "layout.home.80a06ab08b",
+   "scope": "home",
+   "where": "alt",
+   "text": "A barber competing in front of the 2026 trophies"
+  },
+  {
+   "key": "layout.home.dec917624f",
+   "scope": "home",
+   "where": "alt",
+   "text": "An exhibitor presenting products at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.17092e65fa",
+   "scope": "home",
+   "where": "alt",
+   "text": "Two attendees greeting each other at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.ca63e53fe9",
+   "scope": "home",
+   "where": "alt",
+   "text": "A host performing on stage at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.851fc4c9fb",
+   "scope": "home",
+   "where": "alt",
+   "text": "Models walking through the hall at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.6d0a223ce3",
+   "scope": "home",
+   "where": "alt",
+   "text": "A session on the main stage at HEBS Lagos 2026, NJS Royale Events Center"
+  },
+  {
+   "key": "layout.home.ac42129e22",
+   "scope": "home",
+   "where": "alt",
+   "text": "A speaker in front of the NJS crest at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.990bb45fc5",
+   "scope": "home",
+   "where": "alt",
+   "text": "A nail technician at work at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.737ad42d61",
+   "scope": "home",
+   "where": "alt",
+   "text": "A braider at work at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.41ca744484",
@@ -314,10 +404,40 @@
    "text": "Pause the destination films"
   },
   {
+   "key": "layout.home.54f56a34be",
+   "scope": "home",
+   "where": "alt",
+   "text": "A braiding competitor at work, HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.665c525c5c",
+   "scope": "home",
+   "where": "alt",
+   "text": "A winner celebrating beside the HEBS trophy, 2026"
+  },
+  {
    "key": "layout.home.a9b54743d5",
    "scope": "home",
    "where": "alt",
    "text": "The seven categories"
+  },
+  {
+   "key": "layout.home.4199de24d9",
+   "scope": "home",
+   "where": "alt",
+   "text": "A full session at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.9ab373439c",
+   "scope": "home",
+   "where": "alt",
+   "text": "A wig and styling exhibitor's display at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.03db82b6cc",
+   "scope": "home",
+   "where": "alt",
+   "text": "Closing film of the 2026 styling floor"
   },
   {
    "key": "layout.home.b86096005d",

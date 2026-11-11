@@ -53,7 +53,7 @@ export function ExperiencePage(props: PageProps) {
   const opts = optsOf(props);
   const notes = {
     hero: [COPY_DRAFT],
-    experiences: ["Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Royale Beach Resort photograph."],
+    experiences: ["Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Beach Resort photograph."],
     days: ["No 2027 session times are approved; the horizon is one abstract panorama and implies no time of day."],
   };
   return (

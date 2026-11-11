@@ -15,7 +15,7 @@ const draft = (text: string): CopyBlock => ({ status: "provisional", text });
 export const PAGES = {
   experience: {
     title: draft("The HEBS 2027 experience"),
-    intro: draft("Three days at NJS Royale Beach Resort, and six experiences that run through them: education, competitions, exhibitions, networking, celebrations and the destination itself."),
+    intro: draft("Three days at NJS Beach Resort, and six experiences that run through them: education, competitions, exhibitions, networking, celebrations and the destination itself."),
     daysIntro: draft("Each day has its own character. The detailed schedule is published on the event programme as sessions are confirmed."),
     /** Longer descriptions for the six experiences (directive 4D), by register slot. */
     more: {
@@ -69,7 +69,7 @@ export const PAGES = {
   },
   exhibitors: {
     title: draft("Exhibit at HEBS Lagos 2027"),
-    intro: draft("Show your products, tools and services to beauty professionals across three days at NJS Royale Beach Resort."),
+    intro: draft("Show your products, tools and services to beauty professionals across three days at NJS Beach Resort."),
     opportunities: [
       { title: "Exhibition space", body: draft("A place on the exhibition floor to meet professionals and present your range.") },
       { title: "Brand showcases", body: draft("Present a launch, a collection or a service to the summit audience.") },
@@ -80,15 +80,15 @@ export const PAGES = {
   travel: {
     title: draft("Travel & accommodation"),
     intro: draft("Everything visitors need to plan their trip to HEBS Lagos 2027, from arriving in Lagos to staying at the resort. Details are added as they are confirmed."),
-    venue: draft("For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort, on the Atlantic coast of Lagos."),
+    venue: draft("For the first time, the entire HEBS experience takes place at NJS Beach Resort, on the Atlantic coast of Lagos."),
     directions: draft("The resort's address and directions are published once the venue details are confirmed."),
     arrival: draft("International flights to Lagos arrive at Murtala Muhammed International Airport (LOS)."),
     airport: draft("Guidance on getting from the airport to the resort is published once transport arrangements are confirmed."),
-    accommodation: draft("Special HEBS accommodation and hospitality packages at NJS Royale Beach Resort are being explored and will be introduced once officially approved."),
+    accommodation: draft("Special HEBS accommodation and hospitality packages at NJS Beach Resort are being explored and will be introduced once officially approved."),
     visas: draft("Visa requirements depend on your nationality. Check them with the Nigeria Immigration Service before you book, and apply only through its official e-Visa portal."),
     support: draft("Support contacts for international visitors are published once approved."),
     faqs: [
-      { q: "When and where is HEBS Lagos 2027?", a: draft("July 23–25, 2027, at NJS Royale Beach Resort in Lagos, Nigeria.") },
+      { q: "When and where is HEBS Lagos 2027?", a: draft("July 23–25, 2027, at NJS Beach Resort in Lagos, Nigeria.") },
       { q: "Do I need a visa to visit Nigeria?", a: draft("It depends on your nationality. The Nigeria Immigration Service sets the rules; check its website before you travel and apply only through its official e-Visa portal.") },
       { q: "Where should I stay?", a: draft("HEBS accommodation packages at the resort are introduced once approved. Until then, no room or package is offered through this website.") },
       { q: "How do I get from the airport to the resort?", a: draft("Transport guidance is published here once arrangements are confirmed.") },
@@ -133,7 +133,7 @@ export const PAGES = {
     title: draft("About HEBS"),
     /** From the live HEBS Lagos 2026 About page; to be reconfirmed for 2027. */
     history: draft("After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit came home to Lagos for its fourth edition in October 2026."),
-    next: draft("In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Royale Beach Resort, on the Atlantic coast of Lagos."),
+    next: draft("In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Beach Resort, on the Atlantic coast of Lagos."),
     pillarsSource: "HEBS Lagos 2026 About page, as published",
     pillars: [
       { title: "Bridging Education with Opportunity", body: draft("Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.") },

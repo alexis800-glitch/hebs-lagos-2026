@@ -37,15 +37,15 @@ export const CAMPAIGN = {
 } as const;
 
 /**
- * Venue. The directive names NJS Royale Beach Resort, but the official name,
- * address and whether all three days share one site are an owner approval gate
- * (decision D9), so the name is provisional and the address is not stated.
+ * Venue. The directive named NJS Royale Beach Resort; the owner confirmed the
+ * official name as NJS Beach Resort (decision D9, 11 Nov 2026). The street
+ * address is not confirmed yet, so it is not stated.
  */
 export const VENUE = {
   name: {
-    status: "provisional",
-    value: "NJS Royale Beach Resort",
-    note: "Named in the directive; official name and address awaiting confirmation (D9).",
+    status: "approved",
+    value: "NJS Beach Resort",
+    source: "Mrs. Shuler, decision D9, 11 Nov 2026",
   } satisfies Gated<string>,
   locality: "Lagos, Nigeria",
   address: {

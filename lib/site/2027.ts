@@ -57,7 +57,7 @@ export const SITE_PAGES: SitePage[] = [
   page("tickets", "Tickets & registration", "Tickets", "tickets", "Ticket categories, registration forms and payment when ticket sales officially open.", true,
     ["Ticket categories, prices and payment gateway approval", "Ticketing route (D1)"]),
   page("travel", "Travel & accommodation", "Travel", "travel", "Venue information, transport, accommodation, travel information and international visitor guidance.", true,
-    ["Venue address and directions (D9)", "Approved accommodation packages", "Visitor support contacts (D10)"]),
+    ["Venue street address and directions", "Approved accommodation packages", "Visitor support contacts (D10)"]),
   page("gallery", "Gallery & past events", "Gallery", "gallery", "HEBS event history, photographs, videos, testimonials and highlights.", true,
     ["Approved HEBS Lagos 2026 photographs, video and testimonials"]),
   page("contact", "Contact us", "Contact", "contact", "Contact form, official email addresses, social media links and business inquiries.", true,

@@ -44,7 +44,7 @@ export interface HomepageSection {
 /** Directive section 4, A-J. Completion phase per the Phase 2A plan. */
 export const HOMEPAGE_SECTIONS: HomepageSection[] = [
   { id: "A", anchor: "hero", name: "Main hero", completesIn: "2B", structureBuilt: true,
-    dependencies: ["Approved resort hero media", "Official logo (D3)", "Venue confirmation (D9)", "Priority list live (D1, D13)"] },
+    dependencies: ["Approved resort hero media", "Priority list live (D1, D13)"] },
   { id: "B", anchor: "welcome", name: "Welcome to HEBS 2027", completesIn: "2B", structureBuilt: true,
     dependencies: ["Owner approval of body copy"] },
   { id: "C", anchor: "three-days", name: "Three days, one extraordinary destination", completesIn: "4", structureBuilt: true,
@@ -52,7 +52,7 @@ export const HOMEPAGE_SECTIONS: HomepageSection[] = [
   { id: "D", anchor: "experience", name: "The HEBS experience (six experiences)", completesIn: "4", structureBuilt: true,
     dependencies: ["One approved image per experience", "Destination pages each card links to (Phase 4)", "Owner approval of body copy"] },
   { id: "E", anchor: "destination", name: "The destination: Beauty meets paradise", completesIn: "2B", structureBuilt: true,
-    dependencies: ["NJS-approved photography and promotional video", "Venue confirmation (D9)"] },
+    dependencies: ["NJS-approved photography and promotional video"] },
   { id: "F", anchor: "competitions", name: "Competitions", completesIn: "4", structureBuilt: true,
     dependencies: ["2027 rules, eligibility, fees, schedule and deadline approvals", "Prize currency presentation (D8)", "Application route (D1)"] },
   { id: "G", anchor: "education", name: "Education and masterclasses", completesIn: "4", structureBuilt: true,
@@ -74,13 +74,13 @@ export interface AnnouncementItem {
 
 /** Directive section 11: the eight launch items. */
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
-  { requirement: "Official 2027 campaign identity", where: "Hero", state: "built-pending-content", dependency: "Official logo (D3)" },
+  { requirement: "Official 2027 campaign identity", where: "Hero", state: "built", dependency: "" },
   { requirement: "July 23–25, 2027 dates", where: "Hero, three-day overview, final CTA", state: "built", dependency: "" },
-  { requirement: "NJS Royale Beach Resort venue", where: "Hero, destination", state: "built-pending-content", dependency: "Venue confirmation (D9)" },
+  { requirement: "NJS Beach Resort venue", where: "Hero, destination", state: "built", dependency: "" },
   { requirement: "Three-day event overview", where: "Three-day overview", state: "built", dependency: "" },
   { requirement: "Luxury promotional imagery", where: "Hero, destination", state: "built-pending-content", dependency: "Approved NJS and campaign media" },
   { requirement: "Working priority registration form", where: "Priority list", state: "gated", dependency: "Storage and administration (D1), privacy terms (D13)" },
-  { requirement: "QR code for immediate access", where: "QR block", state: "gated", dependency: "Final landing URL and publication date (D7)" },
+  { requirement: "QR code for immediate access", where: "QR block", state: "gated", dependency: "Publication date (the address, hebslagos.com/2027, is decided: D7)" },
   { requirement: "Sponsor/exhibitor inquiry option", where: "Partners", state: "gated", dependency: "Inquiry storage (D1), public contacts (D10)" },
   // "Mobile-friendly presentation" is verified by the responsive checks, not rendered.
 ];
@@ -112,12 +112,12 @@ export const COPY = {
   destination: {
     headline: directive(D.destination),
     body: draft(
-      "For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort, on the Atlantic coast of Lagos: education, competitions, exhibitions, networking and celebrations in one destination.",
+      "For the first time, the entire HEBS experience takes place at NJS Beach Resort, on the Atlantic coast of Lagos: education, competitions, exhibitions, networking and celebrations in one destination.",
     ),
     restriction: "Rooms, packages, availability and amenities are published only once approved.",
     /** The directive's own list of what the destination section introduces (4E). */
     topics: ["The Atlantic coastline", "Resort atmosphere", "Hospitality", "Dining", "Planned event experiences"],
-    topicsNote: draft("Details of each are published as NJS Royale Beach Resort confirms them."),
+    topicsNote: draft("Details of each are published as NJS Beach Resort confirms them."),
   },
   competitions: {
     headline: directive(D.competitions),

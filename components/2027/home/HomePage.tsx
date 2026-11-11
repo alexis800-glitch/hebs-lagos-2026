@@ -147,15 +147,11 @@ function Experiences() {
 
 function Destination() {
   const d = HOME.destination;
-  const scenes: Scene[] = d.scenes.map((s) => {
-    if ("pair" in s) {
-      return {
-        title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, plain: true,
-        node: <div className="pair">{s.pair.map((id) => <div className="ph" key={id}><Pic id={id} sizes="(max-width: 1279px) 50vw, 555px" /></div>)}</div>,
-      };
-    }
-    return { title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, node: <Clip wide={s.wide} tall={s.tall} label={`Concept film: ${s.title}`} /> };
-  });
+  // Photographed pairs only; the concept films are restricted (lib/assets/home-2027-review.ts).
+  const scenes: Scene[] = d.scenes.map((s) => ({
+    title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, plain: true,
+    node: <div className="pair">{s.pair.map((id) => <div className="ph" key={id}><Pic id={id} sizes="(max-width: 1279px) 50vw, 555px" /></div>)}</div>,
+  }));
   return (
     <section className="dz">
       <DestinationSequence scenes={scenes}>

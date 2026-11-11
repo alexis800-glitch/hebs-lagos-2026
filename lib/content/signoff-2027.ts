@@ -30,8 +30,8 @@ import { homeCopyBlocks } from "./home-2027";
 import { LAYOUT_COPY, layoutStatus, type LayoutString } from "./layout-copy-2027";
 import { SIGNOFF_DECISIONS, latestDecision, wordingApproved, type SignoffDecision } from "./signoff-decisions-2027";
 import { EDITION_DAYS, VENUE } from "../editions/2027";
-import { findAsset } from "../assets/register";
-import { OWNER_MEDIA_APPROVAL, REVIEW_ASSETS, type ReviewCollection } from "../assets/home-2027-review";
+import { MEDIA_RELEASED } from "../assets/published-media-2027";
+import { MARK_2027_STATUS, OWNER_MEDIA_APPROVAL, REVIEW_ASSETS, type ReviewCollection } from "../assets/home-2027-review";
 import { REVIEW_MEDIA_BY_PAGE } from "../launch-2027";
 import { LAUNCH_2027 } from "../launch-2027-config";
 import { SITE_PAGES, type PageId } from "../site/2027";
@@ -191,7 +191,7 @@ const DEPENDS: [RegExp, string][] = [
   [/^pages\.sponsorship|^partners|^home\.sponsors\.offers/, "Approved 2027 prospectus and packages; inquiry route (D1); public contacts (D10)"],
   [/^pages\.exhibitors/, "Exhibitor application route (D1); confirmed participating brands"],
   [/^pages\.competitions\.(eligibility|rules|apply|awards)/, "2027 rules, eligibility, fees, schedule and deadline; prize presentation (D8); application route (D1)"],
-  [/^pages\.travel\.(directions|airport|support)|^pages\.travel\.faqs\.[34]/, "Venue address and transport (D9); visitor support contacts (D10)"],
+  [/^pages\.travel\.(directions|airport|support)|^pages\.travel\.faqs\.[34]/, "Venue street address and transport; visitor support contacts (D10)"],
   [/^pages\.travel\.(accommodation|faqs\.2)/, "Approved accommodation packages with NJS"],
   [/^pages\.contact/, "Public contacts and social accounts (D10); contact route (D1)"],
   [/^pages\.education\.(registration|educators)/, "Confirmed educators and sessions; registration route (D1)"],
@@ -206,7 +206,7 @@ const DEPENDS: [RegExp, string][] = [
 /** Suggested wording, where the current text overstates, misspells or relies on something unconfirmed. */
 const PROPOSALS: Record<string, { text: string; why: string }> = {
   "home.destination.body": {
-    text: "NJS Royale Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting.",
+    text: "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting.",
     why: "The ocean-facing pool terrace is shown only in NJS concept visuals, not the completed property. Describe it once NJS confirms it is complete and part of the HEBS programme.",
   },
   "home.experiences.items.4.text": {
@@ -251,7 +251,7 @@ const LAYOUT_NOTICE = /not open yet|opens soon|Nothing can be (sent|submitted)|N
 
 function classifyLayout(s: LayoutString): Pick<SignoffItem, "category" | "approver" | "kind" | "dependsOn" | "replacedWhen"> {
   const base = { dependsOn: [] as string[], replacedWhen: [] as string[] };
-  if (/Concept$|Photographed$|^CONCEPT/.test(s.text)) {
+  if (/Concept$|^CONCEPT/.test(s.text)) {
     return { ...base, category: "C", approver: "Veridion", kind: "Label or heading", dependsOn: ["Replace the homepage destination scenes, which use restricted media (NJS concept films, disputed pre-party photographs)"] };
   }
   if (FORM_WORDS.test(s.text)) return { ...base, category: "C", approver: "HEBS organisers", kind: "Form wording", dependsOn: [FORM_DECISION] };
@@ -380,8 +380,8 @@ export function signoffItems(decisions: readonly SignoffDecision[] = SIGNOFF_DEC
   const facts: SignoffItem[] = [
     fact("fact.venue-name", VENUE.name.value, VENUE.name.status, ALL_PAGES, "Dates-and-venue line, hero and footer", "Mrs. Shuler",
       ["Official venue name (D9)"], "VENUE.name in lib/editions/2027.ts"),
-    fact("fact.mark-2027", "The HEBS mark in the header and footer, until the official 2027 mark is confirmed", findAsset("hebs-logo-nav").status, ALL_PAGES,
-      "Header, footer and social card", "Mrs. Shuler", ["Official 2027 mark (D3)"], "hebs-logo-nav in lib/assets/register.ts"),
+    fact("fact.mark-2027", "The HEBS Lagos 2027 logo in the header and footer", MARK_2027_STATUS, ALL_PAGES,
+      "Header and footer", "Mrs. Shuler", ["Official 2027 mark (D3)"], "mark-2027-a in lib/assets/home-2027-review.ts"),
     ...EDITION_DAYS.map((d, i) => fact(`fact.hours.${d.isoDate}`, `${d.weekday}, ${d.shortDate}: ${d.title}. Opening hours not set.`, d.hours.status,
       ["home", "experience", "programme"], "Three days", "HEBS organisers", ["2027 opening hours for each day"], `EDITION_DAYS[${i}].hours in lib/editions/2027.ts`)),
   ];
@@ -505,14 +505,13 @@ export function firstLaunchDecisions(items: readonly SignoffItem[] = signoffItem
   const blocks = approvalBlocks(items).filter((b) => b.tier === 1);
   const out: LaunchDecision[] = [];
   if ((VENUE.name.status as PublicationStatus) !== "approved") out.push({ decision: "Official venue name (D9)", who: "Mrs. Shuler, with NJS", why: "Shown on every page." });
-  if (findAsset("hebs-logo-nav").status !== "approved") out.push({ decision: "The 2027 mark (D3)", who: "Mrs. Shuler", why: "In the header and footer of every page." });
+  if (MARK_2027_STATUS !== "approved") out.push({ decision: "The 2027 mark (D3)", who: "Mrs. Shuler", why: "In the header and footer of every page." });
   if (LAUNCH_2027.origin.status !== "approved") out.push({ decision: "The public web address (D7)", who: "Mrs. Shuler", why: "Canonical links, the sitemap and the social card use it." });
   const owner = blocks.filter((b) => b.category === "B");
   if (owner.length) out.push({ decision: `Homepage and Tickets wording: ${owner.length} blocks in the executive content package`, who: "Mrs. Shuler", why: "Editorial and commercial statements on the two launch pages." });
   const routine = blocks.filter((b) => b.category === "A");
   if (routine.length) out.push({ decision: `Routine wording on the launch pages: ${routine.reduce((n, b) => n + b.items.length, 0)} items in ${routine.length} blocks`, who: "Veridion", why: "Navigation, headings, buttons, notices and descriptions, verified page by page." });
-  out.push({ decision: "Homepage destination scenes and pre-party positions", who: "Veridion, then Mrs. Shuler to confirm", why: "They use restricted media (disputed pre-party photographs, NJS concept films). Replace them with owner-approved House of Snapp photographs." });
-  out.push({ decision: "Move the owner-approved media into the published assets", who: "Veridion", why: "A technical step: production never serves the private review folder." });
+  if (!MEDIA_RELEASED) out.push({ decision: "Add the prepared media to the launch commit", who: "Veridion", why: "The approved photographs, film and logo are prepared in public/2027/media/ but kept out of the public repository until launch." });
   if (!LAUNCH_2027.authorisation) out.push({ decision: "Written launch authorisation", who: "Mrs. Shuler", why: "The final switch, recorded in lib/launch-2027-config.ts." });
   return out;
 }

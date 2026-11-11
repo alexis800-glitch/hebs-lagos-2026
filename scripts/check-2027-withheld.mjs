@@ -55,7 +55,7 @@ async function get(path, mode) {
 /** Live 2026 pages, which must not reveal that a 2027 site exists. */
 const LIVE = ["/", "/about", "/competitions", "/tickets", "/privacy", CONTROL];
 
-const paths = [...routes(), "/2027/not-a-page", "/_review/home-2027/mark-2027-a.png", "/_review/home-2027/hair-wide.mp4"];
+const paths = [...routes(), "/2027/not-a-page", "/_review/home-2027/mark-2027-a.png", "/_review/home-2027/hair-wide.mp4", "/2027/media/hair-wide.mp4", "/2027/media/hero-card-guest.webp"];
 const failures = [];
 let checked = 0;
 for (const [name, mode] of Object.entries(MODES)) {
