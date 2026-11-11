@@ -62,10 +62,29 @@ Missing third-party paperwork is a records follow-up, not a blocker. Ticket link
    example to list `/2027/sitemap.xml`), it is a separate approved change,
    because it affects the 2026 site.
 
+## 2a. The first launch candidate
+
+- **Pages.** The homepage and the Tickets information page (`lib/launch-2027-candidate.ts`), at hebslagos.com/2027 (D7).
+- **How it is checked.** `tests/launch-candidate-2027.test.ts` renders both pages as production would, with only those two published. It confirms that:
+  - links go only to the two pages, the privacy notice and in-page anchors, and no button is left without a destination;
+  - nothing review-only or restricted appears, and every image comes from `/2027/media/`;
+  - Tickets shows no sales, prices, payment or form. The "How registration will work" section stays off production until its wording is approved.
+- **What still opens it.** Mrs. Shuler's approval of her wording blocks (`docs/launch/2027-executive-content-package.md`), and her choice to launch with or without the directive section 11 items. A recorded deferral is an `AnnouncementItem.deferred` entry. Then her written authorisation.
+
+## 2b. Media and the public repository
+
+The GitHub repository is public, so prepared media must not be committed before publication is authorised.
+
+- **Before launch.** The approved files live in `public/2027/media/`, which git ignores. Their SHA-256 is recorded in `lib/assets/published-media-2027.json`. They reach only the protected review preview: a CLI deploy from a local copy, behind Vercel Authentication, which covers every vercel.app address.
+- **Previews built from Git** carry no media, because the files are not in Git.
+- **On production** (www.hebslagos.com) the middleware answers `/2027/media/*` as a missing page until the site opens. That still holds if the files were somehow deployed early.
+- **At launch.** Production deploys from `master` through the Vercel Git integration, so the files must be in Git. The launch commit adds them (section 3). They become public on GitHub when that commit is pushed, so push it only once the launch is authorised, and merge it promptly.
+- **The alternative.** A one-off production deploy from a local build would keep the files out of Git, but the next deploy from Git would drop them. It is not recommended.
+
 ## 3. Launch
 
-1. With the owner's written approval, set `LAUNCH_2027.authorisation` and
-   `pages` in one commit (the origin, hebslagos.com with the site under /2027,
+1. With the owner's written approval, set `LAUNCH_2027.authorisation`, and
+   `pages` from `LAUNCH_CANDIDATE`, in one commit (the origin, hebslagos.com with the site under /2027,
    is approved: D7). In the same commit release the media:
    - run `npm run media:prepare` and check that the tests pass, so the files
      match the recorded hashes;

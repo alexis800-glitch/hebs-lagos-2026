@@ -12,6 +12,7 @@ import { Mark } from "./mark";
 export function SiteHeader({ current }: { current?: PageId }) {
   const here = current ? sitePage(current).path : undefined;
   const cur = (href: string) => (href === here ? ("page" as const) : undefined);
+  const sponsor = pageHref("sponsorship");
   return (
     <header className="s27h">
       <a className="skip" href="#main-content">Skip to content</a>
@@ -20,7 +21,8 @@ export function SiteHeader({ current }: { current?: PageId }) {
         <nav aria-label="Main" className="links">
           {NAV.map((n) => <a key={n.href} href={n.href} aria-current={cur(n.href)}>{n.label}</a>)}
         </nav>
-        <a className="pill" href={pageHref("sponsorship")!} aria-current={cur(pageHref("sponsorship")!)}>Become a sponsor</a>
+        {/* Only when Sponsorship is published: a launch without it shows no dead button. */}
+        {sponsor && <a className="pill" href={sponsor} aria-current={cur(sponsor)}>Become a sponsor</a>}
         <MobileMenu home={HOME_HREF} links={SITE_MENU} current={here} cta={{ label: PRIORITY_CTA, href: PRIORITY_HREF }} />
       </div>
     </header>

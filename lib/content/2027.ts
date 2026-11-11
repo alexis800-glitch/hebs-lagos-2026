@@ -70,6 +70,16 @@ export interface AnnouncementItem {
   where: string;
   state: "built" | "built-pending-content" | "gated";
   dependency: string;
+  /**
+   * The owner's written decision to launch without this item for now. Recorded
+   * only from Mrs. Shuler's own decision; the launch gate then stops counting it.
+   */
+  deferred?: { by: string; on: string; reference: string };
+}
+
+/** An announcement item counts as approved once built, or once its deferral is recorded. */
+export function announcementStatus(i: AnnouncementItem): PublicationStatus {
+  return i.state === "built" || i.deferred ? "approved" : "awaiting-confirmation";
 }
 
 /** Directive section 11: the eight launch items. */
@@ -78,7 +88,7 @@ export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
   { requirement: "July 23–25, 2027 dates", where: "Hero, three-day overview, final CTA", state: "built", dependency: "" },
   { requirement: "NJS Beach Resort venue", where: "Hero, destination", state: "built", dependency: "" },
   { requirement: "Three-day event overview", where: "Three-day overview", state: "built", dependency: "" },
-  { requirement: "Luxury promotional imagery", where: "Hero, destination", state: "built-pending-content", dependency: "Approved NJS and campaign media" },
+  { requirement: "Luxury promotional imagery", where: "Hero, destination", state: "built-pending-content", dependency: "photographs of the NJS Beach Resort itself (the approved photographs show the 2026 summit)" },
   { requirement: "Working priority registration form", where: "Priority list", state: "gated", dependency: "Storage and administration (D1), privacy terms (D13)" },
   { requirement: "QR code for immediate access", where: "QR block", state: "gated", dependency: "Publication date (the address, hebslagos.com/2027, is decided: D7)" },
   { requirement: "Sponsor/exhibitor inquiry option", where: "Partners", state: "gated", dependency: "Inquiry storage (D1), public contacts (D10)" },
@@ -201,7 +211,8 @@ export function contentRegister(node: unknown = { ...COPY, pages: PAGES }, path 
     const b = node as CopyBlock;
     return [{ key: path, status: blockStatus(path, b, decisions), text: b.text }];
   }
-  return Object.entries(node).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k, decisions));
+  // An absent field is skipped, never walked: the default argument would stand in the whole register.
+  return Object.entries(node).filter(([, v]) => v != null).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k, decisions));
 }
 
 /** The approval states of every copy block under `node`, whose register key is `path`. */
@@ -225,6 +236,15 @@ export function previewStatuses(): PublicationStatus[] {
     ...EDITION_DAYS.map((d) => d.hours.status),
     findAsset("hebs-logo-nav").status,
     ...MEDIA_SLOTS.map((s) => (s.assetId ? findAsset(s.assetId).status : "awaiting-confirmation" as const)),
-    ...ANNOUNCEMENT_ITEMS.map((i) => (i.state === "built" ? "approved" as const : "awaiting-confirmation" as const)),
+    ...ANNOUNCEMENT_ITEMS.map(announcementStatus),
   ];
+}
+
+/**
+ * Whether the Tickets page may describe what registration will include (secure
+ * payment, confirmation emails, ticket references). That is a business
+ * commitment, so production shows it only once its wording is approved.
+ */
+export function ticketingDetailsApproved(decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): boolean {
+  return blockStatus("pages.tickets.willSupportNote", PAGES.tickets.willSupportNote, decisions) === "approved";
 }

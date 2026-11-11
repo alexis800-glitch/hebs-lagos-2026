@@ -80,12 +80,6 @@
    "text": "Contact"
   },
   {
-   "key": "layout.site.50ffe77b05",
-   "scope": "site",
-   "where": "page",
-   "text": "Priority list opens soon"
-  },
-  {
    "key": "layout.site.a2c3f44283",
    "scope": "site",
    "where": "alt",
@@ -110,16 +104,10 @@
    "text": "Skip to content"
   },
   {
-   "key": "layout.site.82cda900c5",
+   "key": "layout.site.527617b32e",
    "scope": "site",
    "where": "page",
-   "text": "July 2027"
-  },
-  {
-   "key": "layout.site.8fc93593e2",
-   "scope": "site",
-   "where": "page",
-   "text": "The priority list opens soon."
+   "text": "The priority list is not open yet."
   },
   {
    "key": "layout.site.508e91d0b6",
@@ -128,40 +116,10 @@
    "text": "HEBS, Hair Education Beauty Summit"
   },
   {
-   "key": "layout.site.9742d008c4",
-   "scope": "site",
-   "where": "page",
-   "text": "Nigeria"
-  },
-  {
    "key": "layout.site.b6223b97ec",
    "scope": "site",
    "where": "page",
    "text": "Lagos"
-  },
-  {
-   "key": "layout.site.7e439c353e",
-   "scope": "site",
-   "where": "alt",
-   "text": "On this page"
-  },
-  {
-   "key": "layout.site.ab42293e29",
-   "scope": "site",
-   "where": "page",
-   "text": "Your name"
-  },
-  {
-   "key": "layout.site.2e8a57cc5c",
-   "scope": "site",
-   "where": "page",
-   "text": "Website"
-  },
-  {
-   "key": "layout.site.a1beb383af",
-   "scope": "site",
-   "where": "page",
-   "text": "Opens soon"
   },
   {
    "key": "layout.site.e7ce5ba37b",
@@ -188,10 +146,10 @@
    "text": "Plan your visit"
   },
   {
-   "key": "layout.site.1741d2cfd0",
+   "key": "layout.site.c9e85e00e6",
    "scope": "site",
    "where": "page",
-   "text": "© 2026 Hair Education Beauty Summit. All rights reserved."
+   "text": "© {year} Hair Education Beauty Summit. All rights reserved."
   },
   {
    "key": "layout.site.9db108ba6b",
@@ -260,6 +218,12 @@
    "text": "Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling"
   },
   {
+   "key": "layout.home.777333ca30",
+   "scope": "home",
+   "where": "page",
+   "text": "HAIR · EDUCATION · BEAUTY · SUMMIT · LAGOS ·"
+  },
+  {
    "key": "layout.home.59cb14182d",
    "scope": "home",
    "where": "alt",
@@ -302,34 +266,16 @@
    "text": "A performer singing on stage at HEBS Lagos 2026"
   },
   {
-   "key": "layout.home.589801feed",
-   "scope": "home",
-   "where": "alt",
-   "text": "The programme: July 23"
-  },
-  {
    "key": "layout.home.f4e3da7971",
    "scope": "home",
    "where": "alt",
    "text": "A stylist styling a client's hair at HEBS Lagos 2026"
   },
   {
-   "key": "layout.home.b604cb0110",
-   "scope": "home",
-   "where": "alt",
-   "text": "The programme: July 24"
-  },
-  {
    "key": "layout.home.7784311f31",
    "scope": "home",
    "where": "alt",
    "text": "A model in a feathered headdress and gown at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.bc5a5417c5",
-   "scope": "home",
-   "where": "alt",
-   "text": "The programme: July 25"
   },
   {
    "key": "layout.home.8e192d5eff",
@@ -356,10 +302,10 @@
    "text": "Two attendees greeting each other at HEBS Lagos 2026"
   },
   {
-   "key": "layout.home.ca63e53fe9",
+   "key": "layout.home.40972a2b69",
    "scope": "home",
    "where": "alt",
-   "text": "A host performing on stage at HEBS Lagos 2026"
+   "text": "A speaker with a microphone on stage at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.851fc4c9fb",
@@ -368,10 +314,10 @@
    "text": "Models walking through the hall at HEBS Lagos 2026"
   },
   {
-   "key": "layout.home.6d0a223ce3",
+   "key": "layout.home.4fc180f0f3",
    "scope": "home",
    "where": "alt",
-   "text": "A session on the main stage at HEBS Lagos 2026, NJS Royale Events Center"
+   "text": "A session on stage at HEBS Lagos 2026, NJS Royale Events Center"
   },
   {
    "key": "layout.home.ac42129e22",
@@ -398,10 +344,10 @@
    "text": "Destination scenes"
   },
   {
-   "key": "layout.home.121beb2296",
+   "key": "layout.home.2e2230a07a",
    "scope": "home",
    "where": "alt",
-   "text": "Pause the destination films"
+   "text": "Pause the destination scenes"
   },
   {
    "key": "layout.home.54f56a34be",
@@ -446,6 +392,12 @@
    "text": "Play the closing film"
   },
   {
+   "key": "layout.about.82cda900c5",
+   "scope": "about",
+   "where": "page",
+   "text": "July 2027"
+  },
+  {
    "key": "layout.about.48cdc098bb",
    "scope": "about",
    "where": "page",
@@ -480,6 +432,12 @@
    "scope": "about",
    "where": "seo",
    "text": "About HEBS | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.experience.82cda900c5",
+   "scope": "experience",
+   "where": "page",
+   "text": "July 2027"
   },
   {
    "key": "layout.experience.624d68b1a1",
@@ -542,6 +500,12 @@
    "text": "Six experiences, one destination."
   },
   {
+   "key": "layout.experience.9742d008c4",
+   "scope": "experience",
+   "where": "page",
+   "text": "Nigeria"
+  },
+  {
    "key": "layout.experience.443f155bb8",
    "scope": "experience",
    "where": "page",
@@ -590,10 +554,22 @@
    "text": "Visit njsbeachresort.com"
   },
   {
+   "key": "layout.experience.7e439c353e",
+   "scope": "experience",
+   "where": "alt",
+   "text": "On this page"
+  },
+  {
    "key": "layout.experience.7f46e981ec",
    "scope": "experience",
    "where": "seo",
    "text": "HEBS 2027 experience | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.programme.82cda900c5",
+   "scope": "programme",
+   "where": "page",
+   "text": "July 2027"
   },
   {
    "key": "layout.programme.f975287d6f",
@@ -612,6 +588,12 @@
    "scope": "programme",
    "where": "page",
    "text": "Sunday, July 25, 2027"
+  },
+  {
+   "key": "layout.programme.7e439c353e",
+   "scope": "programme",
+   "where": "alt",
+   "text": "On this page"
   },
   {
    "key": "layout.programme.2ccb6a74d7",
@@ -642,6 +624,18 @@
    "scope": "programme",
    "where": "seo",
    "text": "Event programme | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.education.82cda900c5",
+   "scope": "education",
+   "where": "page",
+   "text": "July 2027"
+  },
+  {
+   "key": "layout.education.7e439c353e",
+   "scope": "education",
+   "where": "alt",
+   "text": "On this page"
   },
   {
    "key": "layout.education.d10db582d3",
@@ -710,16 +704,28 @@
    "text": "Registration."
   },
   {
-   "key": "layout.education.069ac60e19",
+   "key": "layout.education.74630f47ae",
    "scope": "education",
    "where": "page",
-   "text": "To hear first, use the 2027 priority list, which opens soon."
+   "text": "To hear first, use the 2027 priority list (not open yet)."
   },
   {
    "key": "layout.education.1f4a47eb61",
    "scope": "education",
    "where": "seo",
    "text": "Education & masterclasses | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.competitions.82cda900c5",
+   "scope": "competitions",
+   "where": "page",
+   "text": "July 2027"
+  },
+  {
+   "key": "layout.competitions.7e439c353e",
+   "scope": "competitions",
+   "where": "alt",
+   "text": "On this page"
   },
   {
    "key": "layout.competitions.1fb4605dae",
@@ -782,10 +788,10 @@
    "text": "Application and registration."
   },
   {
-   "key": "layout.competitions.2f7489be76",
+   "key": "layout.competitions.977ccceae1",
    "scope": "competitions",
    "where": "page",
-   "text": "To hear when applications open, use the 2027 priority list, which opens soon."
+   "text": "To hear when applications open, use the 2027 priority list (not open yet)."
   },
   {
    "key": "layout.competitions.055fa4f9ea",
@@ -804,6 +810,12 @@
    "scope": "competitions",
    "where": "seo",
    "text": "Competitions | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.speakers.82cda900c5",
+   "scope": "speakers",
+   "where": "page",
+   "text": "July 2027"
   },
   {
    "key": "layout.speakers.16d00da6c1",
@@ -852,6 +864,18 @@
    "scope": "speakers",
    "where": "seo",
    "text": "Speakers & educators | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.exhibitors.82cda900c5",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "July 2027"
+  },
+  {
+   "key": "layout.exhibitors.7e439c353e",
+   "scope": "exhibitors",
+   "where": "alt",
+   "text": "On this page"
   },
   {
    "key": "layout.exhibitors.502c03b93a",
@@ -926,6 +950,12 @@
    "text": "Company or brand"
   },
   {
+   "key": "layout.exhibitors.ab42293e29",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Your name"
+  },
+  {
    "key": "layout.exhibitors.43205764a6",
    "scope": "exhibitors",
    "where": "page",
@@ -980,6 +1010,18 @@
    "text": "Send me HEBS news and event updates by email. I can unsubscribe at any time. (optional)"
   },
   {
+   "key": "layout.exhibitors.2e8a57cc5c",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Website"
+  },
+  {
+   "key": "layout.exhibitors.6b3e8d605d",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Not open yet"
+  },
+  {
    "key": "layout.exhibitors.7faa098abd",
    "scope": "exhibitors",
    "where": "page",
@@ -992,6 +1034,18 @@
    "text": "Exhibitors | HEBS Lagos 2027"
   },
   {
+   "key": "layout.sponsorship.82cda900c5",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "July 2027"
+  },
+  {
+   "key": "layout.sponsorship.7e439c353e",
+   "scope": "sponsorship",
+   "where": "alt",
+   "text": "On this page"
+  },
+  {
    "key": "layout.sponsorship.bce680ea0d",
    "scope": "sponsorship",
    "where": "page",
@@ -1002,6 +1056,12 @@
    "scope": "sponsorship",
    "where": "page",
    "text": "Company or brand"
+  },
+  {
+   "key": "layout.sponsorship.ab42293e29",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "Your name"
   },
   {
    "key": "layout.sponsorship.43205764a6",
@@ -1044,6 +1104,18 @@
    "scope": "sponsorship",
    "where": "page",
    "text": "Send me HEBS news and event updates by email. I can unsubscribe at any time. (optional)"
+  },
+  {
+   "key": "layout.sponsorship.2e8a57cc5c",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "Website"
+  },
+  {
+   "key": "layout.sponsorship.6b3e8d605d",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "Not open yet"
   },
   {
    "key": "layout.sponsorship.51b7a8a4c6",
@@ -1184,6 +1256,12 @@
    "text": "Sponsorship & partnerships | HEBS Lagos 2027"
   },
   {
+   "key": "layout.tickets.82cda900c5",
+   "scope": "tickets",
+   "where": "page",
+   "text": "July 2027"
+  },
+  {
    "key": "layout.tickets.e409afb22b",
    "scope": "tickets",
    "where": "page",
@@ -1196,52 +1274,10 @@
    "text": "Ticket categories."
   },
   {
-   "key": "layout.tickets.5b263ecb3c",
-   "scope": "tickets",
-   "where": "page",
-   "text": "How registration will work."
-  },
-  {
-   "key": "layout.tickets.dae37fff62",
-   "scope": "tickets",
-   "where": "page",
-   "text": "Different ticket categories"
-  },
-  {
-   "key": "layout.tickets.2da91dca70",
-   "scope": "tickets",
-   "where": "page",
-   "text": "Secure online payment"
-  },
-  {
-   "key": "layout.tickets.cf9aa37b3a",
-   "scope": "tickets",
-   "where": "page",
-   "text": "Automatic confirmation emails"
-  },
-  {
-   "key": "layout.tickets.bd3db9c0fc",
-   "scope": "tickets",
-   "where": "page",
-   "text": "A unique ticket reference and QR code"
-  },
-  {
-   "key": "layout.tickets.eefd34f0ce",
-   "scope": "tickets",
-   "where": "page",
-   "text": "Secure handling of attendee details"
-  },
-  {
    "key": "layout.tickets.8e6cd6c289",
    "scope": "tickets",
    "where": "page",
    "text": "No payment is requested through the priority list."
-  },
-  {
-   "key": "layout.tickets.527617b32e",
-   "scope": "tickets",
-   "where": "page",
-   "text": "The priority list is not open yet."
   },
   {
    "key": "layout.tickets.1a2d8a3ad8",
@@ -1256,10 +1292,22 @@
    "text": "Tickets & registration | HEBS Lagos 2027"
   },
   {
+   "key": "layout.travel.9742d008c4",
+   "scope": "travel",
+   "where": "page",
+   "text": "Nigeria"
+  },
+  {
    "key": "layout.travel.e0973fce7c",
    "scope": "travel",
    "where": "page",
    "text": "Visit njsbeachresort.com"
+  },
+  {
+   "key": "layout.travel.7e439c353e",
+   "scope": "travel",
+   "where": "alt",
+   "text": "On this page"
   },
   {
    "key": "layout.travel.2280a45ade",
@@ -1422,6 +1470,30 @@
    "scope": "gallery",
    "where": "seo",
    "text": "Gallery & past events | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.contact.9742d008c4",
+   "scope": "contact",
+   "where": "page",
+   "text": "Nigeria"
+  },
+  {
+   "key": "layout.contact.ab42293e29",
+   "scope": "contact",
+   "where": "page",
+   "text": "Your name"
+  },
+  {
+   "key": "layout.contact.2e8a57cc5c",
+   "scope": "contact",
+   "where": "page",
+   "text": "Website"
+  },
+  {
+   "key": "layout.contact.6b3e8d605d",
+   "scope": "contact",
+   "where": "page",
+   "text": "Not open yet"
   },
   {
    "key": "layout.contact.4238dc4122",

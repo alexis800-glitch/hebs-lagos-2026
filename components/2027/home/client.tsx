@@ -180,7 +180,7 @@ export function DestinationSequence({ scenes, children }: { scenes: Scene[]; chi
         ))}
       </ul>
       {!reduced ? (
-        <button type="button" className="vctl dzctl" aria-label={paused ? "Play the destination films" : "Pause the destination films"} onClick={() => setPaused((p) => !p)}>
+        <button type="button" className="vctl dzctl" aria-label={paused ? "Play the destination scenes" : "Pause the destination scenes"} onClick={() => setPaused((p) => !p)}>
           <span aria-hidden="true">{paused ? "\u25B6" : "\u275A\u275A"}</span>
         </button>
       ) : null}

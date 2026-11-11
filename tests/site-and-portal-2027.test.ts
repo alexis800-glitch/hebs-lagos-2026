@@ -116,7 +116,7 @@ describe("Base44 2027 portal hand-off", () => {
 
   it("never invites a sign-up while the priority list is closed", () => {
     expect(FORMS_OPEN.priority).toBe(false);
-    expect(PRIORITY_CTA).toBe("Priority list opens soon");
+    expect(PRIORITY_CTA).toBe("The 2027 priority list");
     for (const f of walk(join(ROOT, "components/2027/editorial"))) {
       expect(readFileSync(f, "utf8"), f).not.toMatch(/>\s*Join the 2027 Priority List\s*</i);
     }

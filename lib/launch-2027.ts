@@ -22,7 +22,7 @@
  * Everything here is static data, safe for the Edge runtime (middleware).
  */
 import { PAGES } from "./content/2027-pages";
-import { ANNOUNCEMENT_ITEMS, COPY, copyStatuses, previewStatuses } from "./content/2027";
+import { ANNOUNCEMENT_ITEMS, COPY, announcementStatus, copyStatuses, previewStatuses, ticketingDetailsApproved } from "./content/2027";
 import { HOME_COPY_STATUS } from "./content/home-2027";
 import { EDITION_DAYS, VENUE } from "./editions/2027";
 import { MEDIA_SLOTS, findAsset } from "./assets/register";
@@ -76,8 +76,10 @@ function contentStatuses(id: PageId): PublicationStatus[] {
   };
   switch (id) {
     case "home":
-      return [...shared, HOME_COPY_STATUS, ...copyStatuses(COPY.seo.homeTitle, "seo.homeTitle"), ...copyStatuses(COPY.seo.homeDescription, "seo.homeDescription"), ...hours,
-        ...ANNOUNCEMENT_ITEMS.map((i) => (i.state === "built" ? "approved" as const : "awaiting-confirmation" as const))];
+      // The homepage states no opening hours, so the day hours do not count here. The announcement
+      // items of directive section 11 do: each must be built, or its deferral recorded by the owner.
+      return [...shared, HOME_COPY_STATUS, ...copyStatuses(COPY.seo.homeTitle, "seo.homeTitle"), ...copyStatuses(COPY.seo.homeDescription, "seo.homeDescription"),
+        ...ANNOUNCEMENT_ITEMS.map(announcementStatus)];
     case "about":
       return [...shared, ...copyStatuses(PAGES.about, "pages.about"), ...copyStatuses(COPY.welcome, "welcome"), ...copyStatuses(COPY.seo.aboutDescription, "seo.aboutDescription")];
     case "experience":
@@ -91,7 +93,9 @@ function contentStatuses(id: PageId): PublicationStatus[] {
     case "sponsorship":
       return [...shared, ...copyStatuses(PAGES.sponsorship, "pages.sponsorship"), ...copyStatuses(COPY.partners, "partners")];
     case "tickets":
-      return [...shared, ...copyStatuses(PAGES.tickets, "pages.tickets"), ...copyStatuses(COPY.priorityList, "priorityList")];
+      // The ticketing details are not rendered on production until approved (ticketingDetailsApproved).
+      return [...shared, ...copyStatuses(ticketingDetailsApproved() ? PAGES.tickets : { ...PAGES.tickets, willSupportNote: undefined }, "pages.tickets"),
+        ...copyStatuses(COPY.priorityList, "priorityList")];
     case "gallery":
       return [...shared, ...copyStatuses(PAGES.gallery, "pages.gallery"), ...copyStatuses(COPY.highlights, "highlights"), slot("highlights-2026")];
     default:

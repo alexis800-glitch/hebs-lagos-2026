@@ -63,7 +63,7 @@ describe("preferred homepage links", () => {
 
   it("keeps the priority list closed: honest label, no form or submission on the homepage", () => {
     expect(FORMS_OPEN.priority).toBe(false);
-    expect(PRIORITY_CTA).toBe("Priority list opens soon");
+    expect(PRIORITY_CTA).toBe("The 2027 priority list");
     expect(html).toContain(`href="${PRIORITY_HREF}">${PRIORITY_CTA}</a>`);
     expect(html).not.toMatch(/<form|\/api\/hebs2027/);
   });

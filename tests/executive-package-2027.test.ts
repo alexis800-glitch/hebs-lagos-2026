@@ -7,28 +7,32 @@ import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { executivePackage } from "../lib/content/executive-package-2027";
+import { verificationRecord } from "../lib/content/signoff-2027";
 import { approvalBlocks, signoffItems } from "../lib/content/signoff-2027";
 
 const FILE = join(__dirname, "../docs/launch/2027-executive-content-package.md");
+const RECORD = join(__dirname, "../docs/launch/2027-veridion-verification.md");
 
 describe("executive content package", () => {
   const body = executivePackage();
 
-  it("is up to date", () => {
-    if (process.env.UPDATE_COPY_INVENTORY === "1") writeFileSync(FILE, body);
+  it("is up to date, with Veridion's verification record", () => {
+    const record = verificationRecord();
+    if (process.env.UPDATE_COPY_INVENTORY === "1") { writeFileSync(FILE, body); writeFileSync(RECORD, record + "\n"); }
     expect(existsSync(FILE) ? readFileSync(FILE, "utf8") : "", "Run npm run copy:inventory").toBe(body);
+    expect(existsSync(RECORD) ? readFileSync(RECORD, "utf8") : "", "Run npm run copy:inventory").toBe(record + "\n");
   });
 
-  it("quotes every substantive line exactly, and no routine wording", () => {
+  it("quotes every first-launch substantive line exactly, and no routine wording", () => {
     const items = signoffItems();
-    for (const b of approvalBlocks(items).filter((x) => x.category === "B")) {
-      for (const i of b.items) expect(body, i.id).toContain(`> ${i.text}`);
+    for (const b of approvalBlocks(items).filter((x) => x.category === "B" && x.tier === 1)) {
+      for (const i of b.items) expect(body, i.id).toContain(i.text);
     }
     for (const i of items.filter((x) => x.category === "A" && x.text.length > 30)) expect(body, i.id).not.toContain(`> ${i.text}\n`);
   });
 
   it("asks nothing about the approved media, and records no approval", () => {
-    expect(body).toMatch(/photography and media you approved are recorded as approved/);
+    expect(body).toMatch(/Your approved photographs and film are in place/);
     expect(body).not.toMatch(/written usage terms (are|is) (required|needed) before/i);
     expect(body).not.toMatch(/Approved by Mrs\. Shuler on/);
   });

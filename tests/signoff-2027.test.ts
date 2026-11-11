@@ -54,14 +54,17 @@ describe("sign-off register", () => {
 
   it("keeps navigation, buttons, notices and image descriptions routine", () => {
     const of = (text: string) => items.find((i) => i.text === text);
-    for (const t of ["Skip to content", "Privacy Policy", "Take part", "Priority list opens soon", "Ticket sales."]) expect(of(t)?.category, t).toBe("A");
+    for (const t of ["Skip to content", "Privacy Policy", "Take part", "Ticket sales."]) expect(of(t)?.category, t).toBe("A");
     expect(items.filter((i) => i.kind === "Image description" || i.kind === "Search and social").every((i) => i.category === "A")).toBe(true);
     expect(items.filter((i) => i.kind === "Status notice" && i.category !== "A").every((i) => i.approver === "HEBS organisers")).toBe(true);
   });
 
   it("holds form wording and ticket commitments until their decisions", () => {
     expect(items.filter((i) => i.kind === "Form wording").every((i) => i.category === "C")).toBe(true);
-    expect(items.find((i) => i.text === "Secure online payment")?.category).toBe("C");
+    // The ticketing commitments are not on production until approved, so they are not in the inventory.
+    expect(items.find((i) => i.id === "pages.tickets.willSupportNote")?.category).toBe("C");
+    expect(items.find((i) => i.id === "pages.tickets.willSupportNote")?.tier).toBe(3);
+    expect(items.some((i) => i.text === "Secure online payment")).toBe(false);
   });
 
   it("counts add up, and Mrs. Shuler's share is a short list of blocks", () => {
@@ -82,8 +85,25 @@ describe("sign-off register", () => {
 });
 
 describe("decisions", () => {
-  it("none is recorded on anyone's behalf yet", () => {
-    expect(SIGNOFF_DECISIONS).toEqual([]);
+  it("records only Veridion's verification so far, nothing on Mrs. Shuler's or the organisers' behalf", () => {
+    expect(SIGNOFF_DECISIONS.length).toBeGreaterThan(0);
+    for (const d of SIGNOFF_DECISIONS) {
+      expect(d.by).toBe("Veridion");
+      expect(d.reference).toMatch(/2027-veridion-verification\.md/);
+      expect(d.item).toMatch(/^block:routine-/);
+    }
+  });
+
+  it("Veridion's approvals cover only routine wording, still word for word as approved", () => {
+    const items = signoffItems();
+    for (const d of SIGNOFF_DECISIONS) {
+      for (const [key, text] of Object.entries(d.texts ?? {})) {
+        const i = items.find((x) => x.id === key);
+        expect(i?.category, key).toBe("A");
+        expect(i?.text, key).toBe(text);
+        expect(i?.status, key).toBe("approved");
+      }
+    }
   });
 
   it("an approval covers exactly the wording approved", () => {

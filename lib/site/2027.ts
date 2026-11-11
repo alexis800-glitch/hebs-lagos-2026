@@ -96,9 +96,9 @@ export const PRIORITY_HREF = `${BASE}/tickets#priority-list`;
 /**
  * The priority-list call to action. The directive's wording, "Join the 2027
  * Priority List", is used only once the list can actually be joined; until
- * then every button says it opens soon.
+ * then every button names the list without promising when it opens (no date is decided).
  */
-export const PRIORITY_CTA = FORMS_OPEN.priority ? "Join the 2027 Priority List" : "Priority list opens soon";
+export const PRIORITY_CTA = FORMS_OPEN.priority ? "Join the 2027 Priority List" : "The 2027 priority list";
 
 const PRIMARY: PageId[] = ["experience", "programme", "competitions", "education", "sponsorship", "tickets", "travel"];
 const link = (p: SitePage) => ({ label: p.nav, href: p.path });

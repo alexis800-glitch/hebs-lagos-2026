@@ -10,6 +10,14 @@ import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/202
 import { DesignScale, DestinationSequence, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
 import { HOME_HREF, NAV } from "./links";
 
+/**
+ * A link to another 2027 page, only when that page is published here: a launch
+ * that leaves the page out renders no button at all rather than a dead one.
+ */
+function To({ href, className, label, children }: { href: string | null; className: string; label?: string; children: React.ReactNode }) {
+  return href ? <a className={className} href={href} aria-label={label}>{children}</a> : null;
+}
+
 function Hero() {
   const h = HOME.hero;
   return (
@@ -22,7 +30,7 @@ function Hero() {
       <div className="nav">
         <a href={HOME_HREF} aria-label="HEBS Lagos 2027 home"><Mark /></a>
         <nav aria-label="Main" className="links">{NAV.map((n) => <a key={n.href} href={n.href}>{n.label}</a>)}</nav>
-        <a className="pill" href={pageHref("sponsorship")!}>Become a sponsor</a>
+        <To className="pill" href={pageHref("sponsorship")}>Become a sponsor</To>
         <MobileMenu home={HOME_HREF} links={SITE_MENU} cta={{ label: PRIORITY_CTA, href: PRIORITY_HREF }} />
       </div>
       <div className="live"><i />{h.live}</div>
@@ -35,7 +43,7 @@ function Hero() {
         <div className="rule" />
         <p className="sub">{h.sub}</p>
         <p className="when">{h.when}<br />{h.where}</p>
-        <div className="ctas"><a className="btn pri" href={PRIORITY_HREF}>{PRIORITY_CTA}</a><a className="btn gh" href={pageHref("experience")!}>{h.ctaSecondary}</a></div>
+        <div className="ctas"><a className="btn pri" href={PRIORITY_HREF}>{PRIORITY_CTA}</a><To className="btn gh" href={pageHref("experience")}>{h.ctaSecondary}</To></div>
         <LiveCountdown />
       </div>
     </section>
@@ -106,7 +114,7 @@ function Days() {
             <div className="ph"><Pic id={it.media} className={cls[j]} sizes="(max-width: 600px) calc(100vw - 44px), (max-width: 1279px) 33vw, 460px" /></div>
             <h3>{it.title}</h3>
             <p>{it.text}</p>
-            <a className="btn ln" href={pageHref("programme", dayAnchor(it.date))!} aria-label={`${d.cta}: ${it.date}`}>{d.cta}</a>
+            <To className="btn ln" href={pageHref("programme", dayAnchor(it.date))} label={`${d.cta}: ${it.date}`}>{d.cta}</To>
           </div>
         ))}
       </div>
@@ -160,7 +168,7 @@ function Destination() {
           <h2 className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
           <div className="rule" />
           <p className="b">{d.body}</p>
-          <div className="ctas"><a className="btn gh" href={pageHref("experience", "destination")!}>{d.cta}</a></div>
+          <div className="ctas"><To className="btn gh" href={pageHref("experience", "destination")}>{d.cta}</To></div>
         </div>
       </DestinationSequence>
     </section>
@@ -265,7 +273,7 @@ function Competitions() {
           <p className="lab">{c.label}</p>
           <h2 className="disp">{c.title} <em className="it">{c.accent}</em></h2>
           <p className="b">{c.body}</p>
-          <div className="btnrow"><a className="btn pri" href={pageHref("competitions", "categories")!}>{c.ctaPrimary}</a><a className="btn ol" href={pageHref("competitions", "eligibility")!}>{c.ctaSecondary}</a></div>
+          <div className="btnrow"><To className="btn pri" href={pageHref("competitions", "categories")}>{c.ctaPrimary}</To><To className="btn ol" href={pageHref("competitions", "eligibility")}>{c.ctaSecondary}</To></div>
         </div>
         <div className="art">
           <div className="ph a"><Pic id="comp-main" className="grade kb" sizes="(max-width: 600px) 240px, 380px" /></div>
@@ -306,7 +314,7 @@ function Sponsors() {
           <p className="lab">{s.label}</p>
           <h2 className="disp">{s.title} <em className="it">{s.accent}</em></h2>
           <ul>{s.offers.map((o) => <li key={o}>{o}</li>)}</ul>
-          <div className="ctas"><a className="btn dk" href={pageHref("sponsorship")!}>{s.ctaPrimary}</a><a className="btn ol" href={pageHref("exhibitors")!}>{s.ctaSecondary}</a></div>
+          <div className="ctas"><To className="btn dk" href={pageHref("sponsorship")}>{s.ctaPrimary}</To><To className="btn ol" href={pageHref("exhibitors")}>{s.ctaSecondary}</To></div>
         </div>
         <div className="art">
           <div className="ph a"><Pic id="sp-hall" className="grade kb" sizes="(max-width: 600px) calc(100vw - 74px), 700px" /></div>

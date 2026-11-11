@@ -247,7 +247,7 @@ describe("registration form safeguards", () => {
   it("keeps every form closed and every portal link unset", () => {
     expect(Object.values(FORMS_OPEN).every((open) => open === false)).toBe(true);
     expect(Object.values(PORTAL_2027).every((r) => r.status !== "approved")).toBe(true);
-    expect(PRIORITY_CTA).toBe("Priority list opens soon");
+    expect(PRIORITY_CTA).toBe("The 2027 priority list");
   });
 });
 

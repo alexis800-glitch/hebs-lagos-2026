@@ -223,7 +223,7 @@ export default function HebsForm({
               className={`s27-btn ${enabled ? "s27-btn--pri" : ""} disabled:cursor-not-allowed sm:col-span-2`}
               style={enabled ? undefined : { border: "1px solid rgba(0,0,0,.25)", color: muted, background: "transparent" }}
             >
-              {!enabled ? "Opens soon" : status.kind === "sending" ? "Sending…" : submitLabel}
+              {!enabled ? "Not open yet" : status.kind === "sending" ? "Sending…" : submitLabel}
             </button>
           </fieldset>
         </form>

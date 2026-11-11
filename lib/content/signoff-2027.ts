@@ -150,13 +150,14 @@ const rule = (group: Area, approver: Approver, kind: RuleKind) => ({ group, appr
 const KEY_RULES: Rule[] = [
   // Offers, registration and money.
   [/^pages\.tickets\.willSupportNote$/, rule("commercial", COMMERCIAL, "Copy")],
-  [/^priorityList\.intro$/, rule("commercial", COMMERCIAL, "Copy")],
+  [/^priorityList\.intro$/, rule("organiser", "Mrs. Shuler", "Copy")],
   [/^pages\.sponsorship\.(intro|steps\.)/, rule("commercial", COMMERCIAL, "Copy")],
   [/^partners\.(body|pathways\.|gate)/, rule("commercial", COMMERCIAL, "Copy")],
   [/^pages\.exhibitors\.(intro|opportunities\.)/, rule("commercial", COMMERCIAL, "Copy")],
   [/^pages\.competitions\.(eligibility|rules|apply|awards)$/, rule("commercial", COMMERCIAL, "Status notice")],
   [/^pages\.travel\.(accommodation|faqs\.2\.a)$/, rule("commercial", COMMERCIAL, "Status notice")],
-  [/^home\.sponsors\.offers\./, rule("commercial", COMMERCIAL, "Copy")],
+  // The four kinds of partnership named in directive 4H, not packages or prices.
+  [/^home\.sponsors\.offers\./, rule("factual", "Veridion", "Label or button")],
   // Checkable against the directive, the 2026 site or public sources.
   [/^(competitions\.body|pages\.competitions\.intro)$/, rule("factual", "Veridion", "Fact")],
   [/^pages\.experience\.more\.exp-(competitions|entertainment)$/, rule("factual", "Veridion", "Fact")],
@@ -187,8 +188,7 @@ function classify(key: string, text: string): { group: Area; approver: Approver;
 /** Decisions some wording waits on, by register key. */
 const DEPENDS: [RegExp, string][] = [
   [/^pages\.tickets/, "Ticket categories, prices and payment gateway; ticketing route (D1)"],
-  [/^priorityList/, "Priority list storage and administration (D1) and privacy notice (D13)"],
-  [/^pages\.sponsorship|^partners|^home\.sponsors\.offers/, "Approved 2027 prospectus and packages; inquiry route (D1); public contacts (D10)"],
+  [/^pages\.sponsorship|^partners/, "Approved 2027 prospectus and packages; inquiry route (D1); public contacts (D10)"],
   [/^pages\.exhibitors/, "Exhibitor application route (D1); confirmed participating brands"],
   [/^pages\.competitions\.(eligibility|rules|apply|awards)/, "2027 rules, eligibility, fees, schedule and deadline; prize presentation (D8); application route (D1)"],
   [/^pages\.travel\.(directions|airport|support)|^pages\.travel\.faqs\.[34]/, "Venue street address and transport; visitor support contacts (D10)"],
@@ -261,6 +261,7 @@ function classifyLayout(s: LayoutString): Pick<SignoffItem, "category" | "approv
   if (LAYOUT_NOTICE.test(s.text) || NOTICE.test(s.text)) return { ...base, category: "A", approver: "Veridion", kind: "Status notice" };
   const rest = CATEGORY_NAMES.reduce((t, n) => t.split(n).join(" "), s.text);
   if (!/[A-Za-z]/.test(rest)) return { ...base, category: "A", approver: "Veridion", kind: "Fact" };
+  if (/^PHOTOGRAPHED /.test(s.text)) return { ...base, category: "A", approver: "Veridion", kind: "Caption" };
   if (/^©|^See |\? See |\?( \+)?$/.test(s.text)) return { ...base, category: "A", approver: "Veridion", kind: "Label or heading" };
   if (s.where === "alt") return { ...base, category: "A", approver: "Veridion", kind: "Image description" };
   if (s.where === "seo" || s.where === "social") return { ...base, category: "A", approver: "Veridion", kind: "Search and social" };
@@ -338,7 +339,8 @@ function copyItem(key: string, text: string, status: PublicationStatus, decision
   const kind: SignoffItem["kind"] = c.kind === "Label or button" ? "Label or heading" : c.kind;
   return finish({
     id: key, approver: c.approver, kind, text, pages, section, status, dependsOn, replacedWhen: notice ? waits : [],
-    tier: tierOf(pages),
+    // Not shown on the first launch: production omits the ticketing details until approved.
+    tier: key === "pages.tickets.willSupportNote" ? 3 : tierOf(pages),
     source: sourceOf(key),
     proposed: PROPOSALS[key],
     revised: REVISIONS[key],
@@ -383,7 +385,7 @@ export function signoffItems(decisions: readonly SignoffDecision[] = SIGNOFF_DEC
     fact("fact.mark-2027", "The HEBS Lagos 2027 logo in the header and footer", MARK_2027_STATUS, ALL_PAGES,
       "Header and footer", "Mrs. Shuler", ["Official 2027 mark (D3)"], "mark-2027-a in lib/assets/home-2027-review.ts"),
     ...EDITION_DAYS.map((d, i) => fact(`fact.hours.${d.isoDate}`, `${d.weekday}, ${d.shortDate}: ${d.title}. Opening hours not set.`, d.hours.status,
-      ["home", "experience", "programme"], "Three days", "HEBS organisers", ["2027 opening hours for each day"], `EDITION_DAYS[${i}].hours in lib/editions/2027.ts`)),
+      ["experience", "programme"], "Three days", "HEBS organisers", ["2027 opening hours for each day"], `EDITION_DAYS[${i}].hours in lib/editions/2027.ts`)),
   ];
 
   const order = { C: 2, A: 0, B: 1 };
@@ -545,6 +547,50 @@ export function signoffCounts(items: readonly SignoffItem[] = signoffItems()): S
     },
     pendingDecisions: pendingDecisions(items).length,
   };
+}
+
+/* ------------------------------------------------------------------ */
+/* Verification evidence                                                */
+/* ------------------------------------------------------------------ */
+
+/** What a routine item was checked against, for Veridion's verification record. */
+export function evidenceOf(i: SignoffItem): string {
+  const t = i.text;
+  if (i.kind === "Image description") {
+    const a = REVIEW_ASSETS.find((x) => x.alt === t);
+    return a ? `Checked against the photograph or film itself: ${a.id} (${a.collection === "house-of-snapp" ? "House of Snapp" : a.collection === "vmm-summit" ? "VMM" : a.collection}, ${a.edition ?? "HEBS brand"}).`
+      : "An accessible label: says what the control or region does.";
+  }
+  if (/NJS Beach Resort/.test(t)) return "Venue name: decision D9 (VENUE.name, lib/editions/2027.ts); dates: owner directive (CAMPAIGN.datesDisplay).";
+  if (/^home\.(hero\.when|final\.when|numbers\.items\.0\.text|days\.items\.\d\.date)$/.test(i.id) || /July 23|2027$/.test(t) && i.kind !== "Label or heading") {
+    return "Dates and days: owner directive sections 2 and 4C (CAMPAIGN, EDITION_DAYS in lib/editions/2027.ts).";
+  }
+  if (/^home\.days\.items/.test(i.id)) return "Owner directive sections 2 and 4C, word for word (EDITION_DAYS).";
+  if (/^home\.numbers\.items\.[12]\.text$/.test(i.id) || i.kind === "Fact" && /Barbering/.test(t)) {
+    return "lib/competitions.ts (13 competitions in 7 categories) and the directive: categories and prize values unchanged from 2026.";
+  }
+  if (/^home\.experiences\.items\.\d\.title$/.test(i.id)) return "Owner directive 4D: the six experiences, by name.";
+  if (/^home\.sponsors\.offers\./.test(i.id)) return "Owner directive 4H: the four kinds of partnership, by name; no package or price.";
+  if (/^© \{year\}/.test(t)) return "Matches the live HEBS Lagos 2026 footer word for word (components/Footer.tsx).";
+  if (i.kind === "Status notice") return "True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check.";
+  if (i.kind === "Search and social") return "Built from the page title and the directive's dates (lib/site/seo-2027.ts).";
+  if (i.kind === "Caption" || i.kind === "Fact") return "Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts).";
+  return "A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts).";
+}
+
+/** Veridion's verification record: every routine item of the first launch, with its evidence. */
+export function verificationRecord(items: readonly SignoffItem[] = signoffItems()): string {
+  const blocks = approvalBlocks(items.map((i) => ({ ...i, status: "provisional" as const }))).filter((b) => b.category === "A" && b.tier === 1);
+  const out = ["# HEBS Lagos 2027: Veridion content verification, first launch", "",
+    "Routine wording (category A) on the homepage, the Tickets page and the shared navigation and footer, checked against its source.",
+    "Each block below is approved in signoff-decisions-2027.ts in exactly this wording. A line that changes later returns for verification.", ""];
+  for (const b of blocks) {
+    out.push(`## ${b.title} (${b.items.length} items, reference ${blockFingerprint(b.texts)})`, "");
+    out.push("| Wording | Where | Evidence |", "|---|---|---|");
+    for (const i of b.items) out.push(`| ${i.text.replace(/\|/g, "\\|")} | ${i.section} | ${evidenceOf(i)} |`);
+    out.push("");
+  }
+  return out.join("\n");
 }
 
 export const TIER_WORDS: Record<Tier, string> = { 1: "the first launch", 2: "the next pages", 3: "later pages" };

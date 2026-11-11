@@ -10,6 +10,7 @@
 import type { CSSProperties } from "react";
 import { COPY } from "@/lib/content/2027";
 import { PAGES } from "@/lib/content/2027-pages";
+import { ticketingDetailsApproved } from "@/lib/content/2027";
 import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
@@ -277,7 +278,7 @@ export function EducationPage(props: PageProps) {
               <Pending>{PAGES.education.registration.text}</Pending>
             )}
             <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a>, which opens soon.
+              To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a> (not open yet).
             </p>
           </div>
         </div>
@@ -345,7 +346,7 @@ export function CompetitionsPage(props: PageProps) {
               <Pending>{PAGES.competitions.apply.text}</Pending>
             )}
             <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              To hear when applications open, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a>, which opens soon.
+              To hear when applications open, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a> (not open yet).
             </p>
           </div>
         </div>
@@ -591,7 +592,9 @@ export function TicketsPage(props: PageProps) {
           <div className="lg:col-span-6 lg:col-start-7"><Pending>{t.categories.text}</Pending></div>
         </div>
       </Section>
-      <Section id="how" ground="black" labelledBy="how-title">
+      {/* What ticketing will offer is a business commitment: shown on production only once approved, and marked staging until then. */}
+      {(ticketingDetailsApproved() || opts.environment !== "production") && (
+      <Section id="how" ground="black" labelledBy="how-title" staging={!ticketingDetailsApproved()}>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="how-title" className="lg:col-span-5" style={h2Style}>How registration will work.</h2>
           <div className="lg:col-span-6 lg:col-start-7">
@@ -604,6 +607,7 @@ export function TicketsPage(props: PageProps) {
           </div>
         </div>
       </Section>
+      )}
       <PriorityList opts={opts} notes={[]} />
       <FinalCta to={TARGETS} />
     </Shell>

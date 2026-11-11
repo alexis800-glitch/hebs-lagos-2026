@@ -187,6 +187,7 @@ export function Section({
   labelledBy,
   className = "",
   innerClassName = "",
+  staging = false,
   children,
 }: {
   id: string;
@@ -194,11 +195,14 @@ export function Section({
   labelledBy: string;
   className?: string;
   innerClassName?: string;
+  /** Review-only: never rendered on production, and left out of the copy inventory. */
+  staging?: boolean;
   children: React.ReactNode;
 }) {
   const g = GROUND[ground];
   return (
     <section
+      {...(staging ? { "data-staging": "" } : {})}
       id={id}
       aria-labelledby={labelledBy}
       className={`${g.light ? "da-on-light" : ""} ${className}`}

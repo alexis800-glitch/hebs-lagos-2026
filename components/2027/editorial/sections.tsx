@@ -502,7 +502,7 @@ export function FinalCta({ to }: { to: Targets }) {
         <MetaLine className="mt-8" style={{ color: "#F0E2C4" }} />
         <Button href={to.priority} className="mt-10">{COPY.finalCta.button.text}</Button>
         {!FORMS_OPEN.priority && (
-          <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>The priority list opens soon.</p>
+          <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>The priority list is not open yet.</p>
         )}
       </div>
       <span aria-hidden="true" className="relative block h-px" style={{ background: `linear-gradient(90deg, transparent, ${C.champL} 30%, #FFF6DE 50%, ${C.champL} 70%, transparent)` }} />

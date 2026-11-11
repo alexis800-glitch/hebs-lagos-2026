@@ -10,4 +10,4 @@ import { pageHref, sitePage } from "@/lib/site/2027";
 export const HOME_HREF = "/2027";
 
 /** The header links, labelled as in the rest of the 2027 site. */
-export const NAV = HOME.nav.map((id) => ({ label: sitePage(id).nav, href: pageHref(id)! }));
+export const NAV = HOME.nav.flatMap((id) => { const href = pageHref(id); return href ? [{ label: sitePage(id).nav, href }] : []; });

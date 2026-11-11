@@ -41,7 +41,8 @@ const decode = (s: string) => s
   .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
   .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
   .replace(/&(\w+);/g, (m, n) => ENTITIES[n] ?? m);
-const clean = (s: string) => decode(s).replace(/\s+/g, " ").trim();
+// The footer's copyright year follows the calendar; it is recorded as "{year}" so its approval does not lapse each January.
+const clean = (s: string) => decode(s).replace(/\s+/g, " ").trim().replace(/^© \d{4} /, "© {year} ");
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9\u00C0-\u024F]+/g, " ").trim();
 
 /** Removes every element marked data-staging, with all it contains. */
@@ -64,12 +65,14 @@ function dropStaging(html: string): string {
 
 /** Visible strings and image descriptions in rendered markup, block by block. */
 function strings(markup: string): { text: string; where: "page" | "alt" }[] {
+  // Text drawn inside an SVG (the homepage seal) is visible too: keep it, drop the rest of the drawing.
+  const svgText = Array.from(dropStaging(markup).matchAll(/<(?:text|textPath)\b[^>]*>([^<]+)</g)).map((m) => clean(m[1]));
   let html = dropStaging(markup).replace(/<(style|script|svg)\b[\s\S]*?<\/\1>/gi, "");
   const alts = Array.from(html.matchAll(/\b(?:alt|aria-label)="([^"]+)"/g)).map((m) => clean(m[1]));
   // Inline elements, links included, join their text; buttons and pill labels stand alone.
   html = html.replace(/<br\s*\/?>/gi, " ").replace(/<\/?(span|a|b|i|em|strong|time|small|sup|sub|abbr|u)\b(?![^>]*\b(s27-btn|btn)\b)[^>]*>/gi, " ");
   const texts = html.split(/<[^>]+>/).map((t) => clean(t).replace(/ ([.,;:!?])/g, "$1"));
-  return [...texts.map((text) => ({ text, where: "page" as const })), ...alts.map((text) => ({ text, where: "alt" as const }))]
+  return [...texts.map((text) => ({ text, where: "page" as const })), ...svgText.map((text) => ({ text, where: "page" as const })), ...alts.map((text) => ({ text, where: "alt" as const }))]
     .filter((s) => /[A-Za-z]/.test(s.text));
 }
 
@@ -143,8 +146,9 @@ function collect(): LayoutString[] {
 
   const out: LayoutString[] = [];
   for (const [text, e] of Array.from(seen.entries())) {
-    const scope = e.pages.has("site") || e.pages.size >= 3 ? "site" : Array.from(e.pages)[0];
-    const pages = e.pages.size === 2 && !e.pages.has("site") ? Array.from(e.pages) : [scope];
+    // Site-wide: the footer, the social card, and wording on nearly every page (navigation).
+    // Anything else is recorded for each page it appears on, so it counts only there.
+    const pages = e.pages.has("site") || e.pages.size >= SITE_PAGES.length - 1 ? ["site"] : Array.from(e.pages);
     for (const s of pages) {
       out.push({ key: `layout.${s}.${createHash("sha1").update(text).digest("hex").slice(0, 10)}`, scope: s as LayoutString["scope"], where: e.where, text });
     }
