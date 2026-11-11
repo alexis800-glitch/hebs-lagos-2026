@@ -40,11 +40,23 @@ export interface ReviewAsset extends AssetRecord {
 
 /** Review images wider than 800 px, with their natural widths (480 and 800 px copies exist beside them). */
 const IMAGE_WIDTH: Record<string, number> = {
-  "comp-main.webp": 843, "day-2.webp": 843, "dest-guest.webp": 1000, "exp-competitions.webp": 843, "exp-destination.webp": 900,
-  "exp-education.webp": 1200, "exp-entertainment.webp": 900, "exp-networking-desktop.webp": 900, "exp-networking-phone.webp": 1400,
-  "hero-card-guest.webp": 1000, "hero-card-terrace.webp": 900, "hl-floor-a.webp": 843, "hl-floor-b.webp": 843, "hl-floor-c.webp": 843,
-  "hl-guest-a.webp": 900, "hl-guest-b.webp": 900, "hl-guest-c.webp": 900, "hl-guest-d.webp": 900, "hl-hall.webp": 1200,
-  "sp-hall.webp": 1200, "welcome-arch.webp": 900,
+  "dest-guest.webp": 1000, "exp-destination.webp": 900, "exp-entertainment.webp": 900, "hero-card-guest.webp": 1000,
+  "hero-card-terrace.webp": 900, "hl-guest-a.webp": 900, "hl-guest-b.webp": 900, "hl-guest-c.webp": 900,
+  "welcome-arch.webp": 900,
+};
+
+/**
+ * House of Snapp summit photographs in homepage slots: the widths cut for each by
+ * docs/design/2027-home/tools/hos-images.py (hos-crops.json). The largest is the
+ * slot's own file; smaller ones are <slot>-<width>.webp.
+ */
+const HOS_WIDTHS: Record<string, number[]> = {
+  "welcome-inset": [480, 800], "day-2": [480, 800, 920], "day-3": [480, 800, 920],
+  "exp-education": [480, 800, 1120], "exp-competitions": [480, 800, 1120], "exp-exhibitions": [480, 800, 1120],
+  "exp-networking-desktop": [480, 800, 1120], "exp-networking-phone": [480, 800, 1260],
+  "comp-main": [480, 800], "comp-trophy": [480], "sp-hall": [480, 800, 1400], "sp-exhibitor": [480],
+  "hl-floor-a": [480, 800], "hl-performance": [480], "hl-hall": [480, 840], "hl-trophy": [480],
+  "hl-floor-b": [480, 800], "hl-speaker": [480], "hl-floor-c": [480, 800], "hl-guest-d": [480, 800],
 };
 
 /** Champions photographs: the role each one plays, and the widths cut for it. */
@@ -68,13 +80,14 @@ const PREVIEW = "Frame from a VMM clip preview of the HEBS Lagos 2026 summit day
 const PREPARTY = "VMM photograph, HEBS Lagos 2026 Welcome Pre-Party at NJS Royale Beach Resort, 23 Oct 2026";
 const SNAPP_D1 = "House of Snapp photograph, HEBS Lagos 2026 summit day 1 prize presentation, 24 Oct 2026";
 const SNAPP_D2 = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2 prize presentation, 25 Oct 2026";
-/** A summit-day frame from the same collection that is not a prize presentation (A5). */
+/** Summit-day photographs from the same collection that are not prize presentations. */
+const SNAPP_D1_FLOOR = "House of Snapp photograph, HEBS Lagos 2026 summit day 1, 24 Oct 2026 (collection folder \"HEBS DAY 1\")";
 const SNAPP_D2_FLOOR = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2, 25 Oct 2026 (collection folder \"HEBS DAY 2\")";
 const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
 const OCT22 =
   "VMM photograph of the 22 Oct 2026 gathering at a different Lagos hotel. Not confirmed as an official HEBS activity; never described as NJS";
 
-type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2" | "snapp-d2-floor", detail?: string];
+type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2" | "snapp-d1-floor" | "snapp-d2-floor", detail?: string];
 
 const SPECS: Spec[] = [
   ["hero-loop-wide", "video", "hair-wide.mp4", "", "photographed", "s06", "S06 0:32–0:35.5 and 0:01–0:04.5, half speed, colour graded"],
@@ -83,18 +96,18 @@ const SPECS: Spec[] = [
   ["hero-card-guest", "image", "hero-card-guest.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00318"],
   ["hero-card-terrace", "image", "hero-card-terrace.webp", "Guests on the NJS terrace at the 2026 pre-party", "photographed", "preparty", "DSC00261"],
   ["welcome-arch", "image", "welcome-arch.webp", "A guest at the floral entrance, HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00353"],
-  ["welcome-inset", "image", "welcome-inset.webp", "A speaker at HEBS Lagos 2026", "photographed", "preview"],
+  ["welcome-inset", "image", "welcome-inset.webp", "A speaker addressing the audience at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "IMG_7809, cropped to the frame; a product name is visible on the speaker's top, so that brand's agreement is needed"],
   ["num-days", "image", "num-days.webp", "", "photographed", "preparty", "DSC00262, used as numeral texture"],
   ["num-competitions", "image", "num-competitions.webp", "", "photographed", "s06", "Numeral texture"],
   ["num-categories", "image", "num-categories.webp", "", "photographed", "s06", "Numeral texture"],
   ["day-1", "image", "day-1.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00278"],
-  ["day-2", "image", "day-2.webp", "Hair styling at HEBS Lagos 2026", "photographed", "s06"],
-  ["day-3", "image", "day-3.webp", "A model in a feathered headdress and gown at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2093, cropped head to gown; one resample, no other change; the original is preserved unaltered"],
-  ["exp-education", "image", "exp-education.webp", "A packed hall at HEBS Lagos 2026", "photographed", "preview"],
-  ["exp-competitions", "image", "exp-competitions.webp", "A model on the 2026 styling floor", "photographed", "s06"],
-  ["exp-exhibitions", "image", "exp-exhibitions.webp", "An exhibitor at HEBS Lagos 2026", "photographed", "preview", "Exhibitor brand visible; brand agreement needed"],
-  ["exp-networking-desktop", "image", "exp-networking-desktop.webp", "HEBS Lagos 2026 guests", "photographed", "oct22", "DSC00242, cropped to keep all six guests"],
-  ["exp-networking-phone", "image", "exp-networking-phone.webp", "HEBS Lagos 2026 guests", "photographed", "oct22", "DSC00257, shown in full"],
+  ["day-2", "image", "day-2.webp", "A stylist styling a client's hair at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1320, cropped to the frame; the Men'T stand and cape are visible, so the brand's agreement is needed"],
+  ["day-3", "image", "day-3.webp", "A model in a feathered headdress and gown at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "DSC_2093, cropped head to gown; one resample per width, no other change; the original is preserved unaltered"],
+  ["exp-education", "image", "exp-education.webp", "A stylist demonstrating on a mannequin head at the HEBS stand, 2026", "photographed", "snapp-d1-floor", "DSC_1194, cropped to the frame; a product brand is visible behind, so its agreement is needed"],
+  ["exp-competitions", "image", "exp-competitions.webp", "A barber competing in front of the 2026 trophies", "photographed", "snapp-d1-floor", "IMG_6755, cropped to the frame"],
+  ["exp-exhibitions", "image", "exp-exhibitions.webp", "An exhibitor presenting products at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0074, cropped to the frame; exhibitor brand visible, so the brand's agreement is needed"],
+  ["exp-networking-desktop", "image", "exp-networking-desktop.webp", "Two attendees greeting each other at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0470, cropped to the two attendees; a summit-day photograph, replacing the unconfirmed 22 Oct gathering"],
+  ["exp-networking-phone", "image", "exp-networking-phone.webp", "Two attendees greeting each other at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0470, the same crop as the desktop image"],
   ["exp-entertainment", "image", "exp-entertainment.webp", "A guest celebrating at the 2026 pre-party", "photographed", "preparty", "DSC00294"],
   ["exp-destination", "image", "exp-destination.webp", "A guest at the NJS floral entrance, 2026", "photographed", "preparty", "DSC00347"],
   ["dest-guests-wide", "video", "guests-wide.mp4", "", "concept", "njs-unknown", "0:00.2–0:03.2 at 75% speed"],
@@ -104,21 +117,21 @@ const SPECS: Spec[] = [
   ["dest-poster", "image", "dest-poster.webp", "", "concept", "njs-unknown"],
   ["dest-terrace", "image", "hero-card-terrace.webp", "Guests on the NJS terrace at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00261"],
   ["dest-guest", "image", "dest-guest.webp", "A guest at the HEBS Lagos 2026 pre-party at NJS", "photographed", "preparty", "DSC00318"],
-  ["comp-main", "image", "comp-main.webp", "A competitor on the 2026 styling floor", "photographed", "s06"],
-  ["comp-trophy", "image", "comp-trophy.webp", "The HEBS 2026 trophy", "photographed", "preview"],
+  ["comp-main", "image", "comp-main.webp", "A braiding competitor at work, HEBS Lagos 2026", "photographed", "snapp-d2-floor", "IMG_8357, cropped to the frame"],
+  ["comp-trophy", "image", "comp-trophy.webp", "A winner celebrating beside the HEBS trophy, 2026", "photographed", "snapp-d1-floor", "IMG_7937, cropped to the winner and trophy; no prize wording in frame (D8)"],
   ["hl-guest-a", "image", "hl-guest-a.webp", "", "photographed", "preparty", "DSC00317"],
   ["hl-guest-b", "image", "hl-guest-b.webp", "", "photographed", "preparty", "DSC00276"],
-  ["hl-performance", "image", "hl-performance.webp", "", "photographed", "preview"],
-  ["hl-speaker", "image", "hl-speaker.webp", "", "photographed", "preview"],
+  ["hl-performance", "image", "hl-performance.webp", "", "photographed", "snapp-d2-floor", "0Q1A0481, cropped to the tile"],
+  ["hl-speaker", "image", "hl-speaker.webp", "", "photographed", "snapp-d2-floor", "DSC_1996, cropped to the tile"],
   ["hl-guest-c", "image", "hl-guest-c.webp", "", "photographed", "preparty", "DSC00326"],
-  ["hl-guest-d", "image", "hl-guest-d.webp", "", "photographed", "preparty", "DSC00294"],
-  ["hl-hall", "image", "hl-hall.webp", "", "photographed", "preview"],
-  ["hl-trophy", "image", "hl-trophy.webp", "", "photographed", "preview"],
-  ["hl-floor-a", "image", "hl-floor-a.webp", "", "photographed", "s06"],
-  ["hl-floor-b", "image", "hl-floor-b.webp", "", "photographed", "s06"],
-  ["hl-floor-c", "image", "hl-floor-c.webp", "", "photographed", "s06"],
-  ["sp-hall", "image", "sp-hall.webp", "A packed hall at HEBS Lagos 2026", "photographed", "preview"],
-  ["sp-exhibitor", "image", "sp-exhibitor.webp", "An exhibitor at HEBS Lagos 2026", "photographed", "preview", "Exhibitor brand visible; brand agreement needed"],
+  ["hl-guest-d", "image", "hl-guest-d.webp", "", "photographed", "snapp-d1-floor", "IMG_7144, cropped to the tile; replaces a repeat of the entertainment photograph"],
+  ["hl-hall", "image", "hl-hall.webp", "", "photographed", "snapp-d1-floor", "IMG_6995, cropped to the tile"],
+  ["hl-trophy", "image", "hl-trophy.webp", "", "photographed", "snapp-d2-floor", "0Q1A0117, cropped to the tile"],
+  ["hl-floor-a", "image", "hl-floor-a.webp", "", "photographed", "snapp-d1-floor", "IMG_6721, cropped to the tile"],
+  ["hl-floor-b", "image", "hl-floor-b.webp", "", "photographed", "snapp-d2-floor", "DSC_2034, cropped to the tile"],
+  ["hl-floor-c", "image", "hl-floor-c.webp", "", "photographed", "snapp-d1-floor", "IMG_7299, cropped to the tile"],
+  ["sp-hall", "image", "sp-hall.webp", "A full session at HEBS Lagos 2026", "photographed", "snapp-d2-floor", "0Q1A0444, shown in full; a session sponsor's name is on the backdrop, so its agreement is needed"],
+  ["sp-exhibitor", "image", "sp-exhibitor.webp", "A wig and styling exhibitor's display at HEBS Lagos 2026", "photographed", "snapp-d1-floor", "DSC_1734, cropped to the frame; exhibitor brand visible, so the brand's agreement is needed"],
   ["champ-img_7897", "image", "champions/champ-img_7897.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7897, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_7854", "image", "champions/champ-img_7854.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_7854, cropped and tone-corrected working copy; the original is preserved unaltered"],
   ["champ-img_8012", "image", "champions/champ-img_8012.webp", CHAMP_ALT, "photographed", "snapp-d1", "IMG_8012, cropped and tone-corrected working copy; the original is preserved unaltered"],
@@ -149,6 +162,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
     permittedUsage: ["internal-review" as const],
     ...(id.startsWith("champ-") ? { widths: [...CHAMP_WIDTHS[CHAMP_ROLE[id] ?? "card"]] } : {}),
     ...(IMAGE_WIDTH[file] ? { widths: [480, 800, IMAGE_WIDTH[file]], fullWidth: IMAGE_WIDTH[file] } : {}),
+    ...(HOS_WIDTHS[id] ? { widths: HOS_WIDTHS[id], fullWidth: HOS_WIDTHS[id][HOS_WIDTHS[id].length - 1] } : {}),
     ...(file === "mark-2027-a.png" ? { widths: [240, 480] } : {}),
     ...(kind === "video" ? { poster: REVIEW_DIR + file.replace(/\.mp4$/, "-poster.webp") } : {}),
   };
@@ -227,6 +241,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
       };
     case "snapp-d1":
     case "snapp-d2":
+    case "snapp-d1-floor":
     case "snapp-d2-floor":
       return {
         ...base,
@@ -236,13 +251,13 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         origin: "hebs-lagos-event",
         provenance: "hebs-event-photo",
         rights: {
-          holder: kindOf === "snapp-d1" ? "House of Snapp" : "Day 2 photographer in the House of Snapp collection (owner recorded privately)",
+          holder: kindOf === "snapp-d1" || kindOf === "snapp-d1-floor" ? "House of Snapp" : "Day 2 photographer in the House of Snapp collection (owner recorded privately)",
           permission: "not-recorded",
           peopleConsent: "unknown",
         },
         permittedDepictions: ["real-event"],
-        source: (kindOf === "snapp-d1" ? SNAPP_D1 : kindOf === "snapp-d2" ? SNAPP_D2 : SNAPP_D2_FLOOR) + note,
-        restriction: kindOf === "snapp-d2-floor"
+        source: ({ "snapp-d1": SNAPP_D1, "snapp-d2": SNAPP_D2, "snapp-d1-floor": SNAPP_D1_FLOOR, "snapp-d2-floor": SNAPP_D2_FLOOR } as const)[kindOf] + note,
+        restriction: kindOf === "snapp-d1-floor" || kindOf === "snapp-d2-floor"
           ? "Internal review only. Needs the photographer's written permission and each recognisable person's consent before any public use."
           : "Internal review only. Needs the photographer's written permission, each recognisable person's consent, and the organisers' verification of the competition, placing, winner and prize before any public use.",
       };

@@ -12,7 +12,7 @@ import { CATEGORIES, CATEGORY_COUNT, COMPETITION_COUNT } from "../competitions";
 
 export const HOME = {
   strip:
-    "Internal concept, not for publication. All footage and photographs are real HEBS Lagos 2026 material from VMM, not yet cleared. The destination's pool and guest scenes are NJS concept visuals. The 2027 mark is provisional.",
+    "Internal concept, not for publication. All footage and photographs are real HEBS Lagos 2026 material from VMM and the House of Snapp collection, not yet cleared. The destination's pool and guest scenes are NJS concept visuals. The 2027 mark is provisional.",
   hero: {
     kicker: "HEBS Lagos 2027",
     lines: ["Bigger.", "Bolder."],

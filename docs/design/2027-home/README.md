@@ -194,6 +194,19 @@ rebuild the copies from the authorised originals:
 
     python3 docs/design/2027-home/tools/champions-images.py <originals> public/_review/home-2027/champions
 
+The House of Snapp summit photographs in the other homepage slots (welcome
+inset, days, experiences, competitions, sponsors and highlights) are rebuilt the
+same way, by slot, from the verified originals:
+
+    python3 docs/design/2027-home/tools/hos-images.py <originals> public/_review/home-2027
+
+`tools/hos-crops.json` holds, for each slot, the original's file, folder and
+SHA-256, the crop (matched to the measured shape of the slot's frame at every
+screen size), the widths and whether it is sharpened (not at ISO 1600 and above).
+The largest width of each slot is about twice its widest display size, and these are
+saved at WebP quality 75 (indistinguishable from 90 at 2× zoom), so the page
+weighs about what it did with the video stills these replace.
+
 `tools/champions-crops.json` holds, for each image:
 - the original's filename and SHA-256 (the script refuses any other file);
 - the crop, its role and its widths;

@@ -60,8 +60,10 @@ describe("preferred homepage: review media safeguards", () => {
   it("keeps the networking photographs neutral until the organisers identify the guests", () => {
     for (const id of ["exp-networking-desktop", "exp-networking-phone"]) {
       const a = findReviewAsset(id);
-      expect(a.alt).toBe("HEBS Lagos 2026 guests");
-      expect(`${a.alt} ${a.location}`).not.toMatch(/American|NJS Royale/);
+      expect(a.alt).toBe("Two attendees greeting each other at HEBS Lagos 2026");
+      expect(`${a.alt} ${a.location}`).not.toMatch(/American|international|foreign|guest from|NJS Royale/i);
+      // A confirmed summit day, not the unconfirmed 22 Oct gathering.
+      expect(a.source).toMatch(/summit day 2, 25 Oct 2026/);
     }
   });
 

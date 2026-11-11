@@ -1,0 +1,490 @@
+{
+ "generator": "docs/design/2027-home/tools/hos-images.py",
+ "pillow": "10.4.0",
+ "note": "House of Snapp collection originals (summit days 24-25 Oct 2026); never committed. Crops are in pixels of each original after EXIF orientation, matched to the measured shape of each homepage frame.",
+ "images": [
+  {
+   "slot": "welcome-inset",
+   "file": "IMG_7809.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "8a2f55a89a4dd4a64c017272d7d323ba56439548e0164dfc334ffd97d1cb08f5",
+   "size": [
+    4910,
+    3928
+   ],
+   "crop": [
+    815,
+    0,
+    3800,
+    3928
+   ],
+   "aspect": 0.76,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 1000,
+   "sharpen": true
+  },
+  {
+   "slot": "day-2",
+   "file": "DSC_1320.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "d9e4213db4ca85a9ffeab4408c34a8ccacfda5f98c1b40c95d0abf7b7d7c0b85",
+   "size": [
+    3740,
+    5610
+   ],
+   "crop": [
+    0,
+    408,
+    3740,
+    4304
+   ],
+   "aspect": 0.96,
+   "widths": [
+    480,
+    800,
+    920
+   ],
+   "iso": 1250,
+   "sharpen": true
+  },
+  {
+   "slot": "day-3",
+   "file": "DSC_2093.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "ef18ae96a39296ad77e94dfdfe8bb79c203be159284a37762c83964b5366ad83",
+   "size": [
+    4014,
+    6021
+   ],
+   "crop": [
+    437,
+    97,
+    3825,
+    3612
+   ],
+   "aspect": 0.964,
+   "widths": [
+    480,
+    800,
+    920
+   ],
+   "iso": 250,
+   "sharpen": true
+  },
+  {
+   "slot": "exp-education",
+   "file": "DSC_1194.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "1522c0719a5d6f0f3f120b787ee69e95f33889d2d903ed36de9e4400b48ee69b",
+   "size": [
+    4032,
+    6048
+   ],
+   "crop": [
+    0,
+    472,
+    4032,
+    5576
+   ],
+   "aspect": 0.79,
+   "widths": [
+    480,
+    800,
+    1120
+   ],
+   "iso": 1250,
+   "sharpen": true
+  },
+  {
+   "slot": "exp-competitions",
+   "file": "IMG_6755.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "bc41bbf26f6da922b9a8830c131d20f1c8845944871cb5673ce6b451f5244e0b",
+   "size": [
+    4969,
+    3975
+   ],
+   "crop": [
+    914,
+    0,
+    4054,
+    3975
+   ],
+   "aspect": 0.79,
+   "widths": [
+    480,
+    800,
+    1120
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "exp-exhibitions",
+   "file": "0Q1A0074.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "ec6d0519df1d98c0ae0f9771e894867a02317279994a0da134b590087326a30c",
+   "size": [
+    4928,
+    3942
+   ],
+   "crop": [
+    316,
+    0,
+    3430,
+    3942
+   ],
+   "aspect": 0.79,
+   "widths": [
+    480,
+    800,
+    1120
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "exp-networking-desktop",
+   "file": "0Q1A0470.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "b17a2856f6da48ee0623dec5611572a5b0e1d910a851fc5ab32ba8bf7d52d72c",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    2620,
+    0,
+    5780,
+    4000
+   ],
+   "aspect": 0.79,
+   "widths": [
+    480,
+    800,
+    1120
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "exp-networking-phone",
+   "file": "0Q1A0470.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "b17a2856f6da48ee0623dec5611572a5b0e1d910a851fc5ab32ba8bf7d52d72c",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    2620,
+    0,
+    5780,
+    4000
+   ],
+   "aspect": 0.79,
+   "widths": [
+    480,
+    800,
+    1260
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "comp-main",
+   "file": "IMG_8357.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "55e57045f6652b5e6497b3a3ce853f7ba0327639ce89ded3f207ea819637506c",
+   "size": [
+    3907,
+    5860
+   ],
+   "crop": [
+    0,
+    57,
+    3907,
+    5803
+   ],
+   "aspect": 0.68,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "comp-trophy",
+   "file": "IMG_7937.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "f7e03e472e8a41ddf676c757918c3c8db441cd9024ffe132b6368bede11d3dbb",
+   "size": [
+    5871,
+    3914
+   ],
+   "crop": [
+    2025,
+    783,
+    4373,
+    3914
+   ],
+   "aspect": 0.75,
+   "widths": [
+    480
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "sp-hall",
+   "file": "0Q1A0444.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "67a0d1063da8708cfbbb4086ab78bc923132f613f048166130b8ed4c7ea254e8",
+   "size": [
+    5935,
+    3957
+   ],
+   "crop": [
+    0,
+    0,
+    5935,
+    3957
+   ],
+   "aspect": 1.5,
+   "widths": [
+    480,
+    800,
+    1400
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "sp-exhibitor",
+   "file": "DSC_1734.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "39c1a863239b85896bd50f82ccb3db817e8e60461698f5fba8a913768c3b18c3",
+   "size": [
+    5512,
+    3675
+   ],
+   "crop": [
+    1396,
+    0,
+    4116,
+    3675
+   ],
+   "aspect": 0.74,
+   "widths": [
+    480
+   ],
+   "iso": 500,
+   "sharpen": true
+  },
+  {
+   "slot": "hl-floor-a",
+   "file": "IMG_6721.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "51c90117c0d3e94c8dacd5257d8eb9c40c0139804f111d63ec0cc3895e45140f",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    640,
+    0,
+    5360,
+    4000
+   ],
+   "aspect": 1.18,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "hl-performance",
+   "file": "0Q1A0481.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "52fe6c9f5e8f28578c82d3d274fc629c333b3d493f7cb987c3ea9459143b17b7",
+   "size": [
+    4000,
+    6000
+   ],
+   "crop": [
+    20,
+    0,
+    3980,
+    6000
+   ],
+   "aspect": 0.66,
+   "widths": [
+    480
+   ],
+   "iso": 2000,
+   "sharpen": false
+  },
+  {
+   "slot": "hl-hall",
+   "file": "IMG_6995.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "acd622c9ab8b2616bbfe14b79b1135317de7ea04b49bc2832c63acc8b38f0632",
+   "size": [
+    6000,
+    4000
+   ],
+   "crop": [
+    0,
+    39,
+    6000,
+    3961
+   ],
+   "aspect": 1.53,
+   "widths": [
+    480,
+    840
+   ],
+   "iso": 500,
+   "sharpen": true
+  },
+  {
+   "slot": "hl-trophy",
+   "file": "0Q1A0117.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "4117144aedf0eb3b91b7c962128e1a8630a4ace98819bff0d8c41b5a66e27fb9",
+   "size": [
+    4000,
+    6000
+   ],
+   "crop": [
+    0,
+    347,
+    4000,
+    5053
+   ],
+   "aspect": 0.85,
+   "widths": [
+    480
+   ],
+   "iso": 1600,
+   "sharpen": false
+  },
+  {
+   "slot": "hl-floor-b",
+   "file": "DSC_2034.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "4d2ffa85b12ff393d3bbefbab2409b14ec38340911a63acc71f41210aa31dd85",
+   "size": [
+    6048,
+    4032
+   ],
+   "crop": [
+    0,
+    40,
+    6048,
+    3993
+   ],
+   "aspect": 1.53,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 320,
+   "sharpen": true
+  },
+  {
+   "slot": "hl-speaker",
+   "file": "DSC_1996.jpg",
+   "folder": "HEBS DAY 2/PHOTOS",
+   "day": 2,
+   "sha256": "aee700352e746bc6c2651138c00ba158e5302b0bf91954a9524db8728b8d4e7c",
+   "size": [
+    4032,
+    5040
+   ],
+   "crop": [
+    0,
+    148,
+    4032,
+    4892
+   ],
+   "aspect": 0.85,
+   "widths": [
+    480
+   ],
+   "iso": 500,
+   "sharpen": true
+  },
+  {
+   "slot": "hl-floor-c",
+   "file": "IMG_7299.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "025c85c0034ee55d757affd43a594386a6c4e61b3b01738635f2c013050881e3",
+   "size": [
+    4944,
+    3296
+   ],
+   "crop": [
+    1533,
+    646,
+    4598,
+    2649
+   ],
+   "aspect": 1.53,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 800,
+   "sharpen": true
+  },
+  {
+   "slot": "hl-guest-d",
+   "file": "IMG_7144.jpg",
+   "folder": "HEBS DAY 1/PHOTOS",
+   "day": 1,
+   "sha256": "8f4e5628f33c31e310753276e972f84fe1f45cfdc4ec4d0f06682ea51f6bc952",
+   "size": [
+    4639,
+    3711
+   ],
+   "crop": [
+    371,
+    0,
+    4639,
+    3711
+   ],
+   "aspect": 1.15,
+   "widths": [
+    480,
+    800
+   ],
+   "iso": 1000,
+   "sharpen": true
+  }
+ ]
+}
