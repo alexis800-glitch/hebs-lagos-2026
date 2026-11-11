@@ -57,7 +57,7 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
  * unapproved material on one page never holds back another.
  */
 export function pageStatuses(id: PageId): PublicationStatus[] {
-  const shared = [VENUE.name.status, findAsset("hebs-logo-nav").status, ...copyStatuses(COPY.finalCta)];
+  const shared = [VENUE.name.status, findAsset("hebs-logo-nav").status, ...copyStatuses(COPY.finalCta, "finalCta")];
   const hours = EDITION_DAYS.map((d) => d.hours.status);
   const slot = (slotId: string) => {
     const s = MEDIA_SLOTS.find((x) => x.id === slotId);
@@ -65,26 +65,26 @@ export function pageStatuses(id: PageId): PublicationStatus[] {
   };
   switch (id) {
     case "home":
-      return [...shared, HOME_COPY_STATUS, ...copyStatuses(COPY.seo.homeTitle), ...copyStatuses(COPY.seo.homeDescription), ...hours,
+      return [...shared, HOME_COPY_STATUS, ...copyStatuses(COPY.seo.homeTitle, "seo.homeTitle"), ...copyStatuses(COPY.seo.homeDescription, "seo.homeDescription"), ...hours,
         ...ANNOUNCEMENT_ITEMS.map((i) => (i.state === "built" ? "approved" as const : "awaiting-confirmation" as const))];
     case "about":
-      return [...shared, ...copyStatuses(PAGES.about), ...copyStatuses(COPY.welcome), ...copyStatuses(COPY.seo.aboutDescription)];
+      return [...shared, ...copyStatuses(PAGES.about, "pages.about"), ...copyStatuses(COPY.welcome, "welcome"), ...copyStatuses(COPY.seo.aboutDescription, "seo.aboutDescription")];
     case "experience":
-      return [...shared, ...copyStatuses(PAGES.experience), ...copyStatuses(COPY.experience), ...copyStatuses(COPY.destination), ...hours];
+      return [...shared, ...copyStatuses(PAGES.experience, "pages.experience"), ...copyStatuses(COPY.experience, "experience"), ...copyStatuses(COPY.destination, "destination"), ...hours];
     case "programme":
-      return [...shared, ...copyStatuses(PAGES.programme), ...hours];
+      return [...shared, ...copyStatuses(PAGES.programme, "pages.programme"), ...hours];
     case "education":
-      return [...shared, ...copyStatuses(PAGES.education), slot("education")];
+      return [...shared, ...copyStatuses(PAGES.education, "pages.education"), slot("education")];
     case "competitions":
-      return [...shared, ...copyStatuses(PAGES.competitions), ...copyStatuses(COPY.competitions)];
+      return [...shared, ...copyStatuses(PAGES.competitions, "pages.competitions"), ...copyStatuses(COPY.competitions, "competitions")];
     case "sponsorship":
-      return [...shared, ...copyStatuses(PAGES.sponsorship), ...copyStatuses(COPY.partners)];
+      return [...shared, ...copyStatuses(PAGES.sponsorship, "pages.sponsorship"), ...copyStatuses(COPY.partners, "partners")];
     case "tickets":
-      return [...shared, ...copyStatuses(PAGES.tickets), ...copyStatuses(COPY.priorityList)];
+      return [...shared, ...copyStatuses(PAGES.tickets, "pages.tickets"), ...copyStatuses(COPY.priorityList, "priorityList")];
     case "gallery":
-      return [...shared, ...copyStatuses(PAGES.gallery), ...copyStatuses(COPY.highlights), slot("highlights-2026")];
+      return [...shared, ...copyStatuses(PAGES.gallery, "pages.gallery"), ...copyStatuses(COPY.highlights, "highlights"), slot("highlights-2026")];
     default:
-      return [...shared, ...copyStatuses(PAGES[id])];
+      return [...shared, ...copyStatuses(PAGES[id], `pages.${id}`)];
   }
 }
 

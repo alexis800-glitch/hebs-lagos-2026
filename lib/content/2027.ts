@@ -16,6 +16,8 @@ import type { PublicationStatus } from "../publication";
 import { EDITION_DAYS, VENUE } from "../editions/2027";
 import { MEDIA_SLOTS, findAsset } from "../assets/register";
 import { PAGES } from "./2027-pages";
+import { DIRECTIVE_HEADLINES as D } from "./directive-headlines-2027";
+import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "./signoff-decisions-2027";
 
 export interface CopyBlock {
   status: PublicationStatus;
@@ -91,7 +93,7 @@ export const COPY = {
     aboutDescription: draft("The Hair Education Beauty Summit: its history, mission and vision, from its United States editions to Lagos."),
   },
   welcome: {
-    headline: directive("WHERE BEAUTY, EDUCATION & OPPORTUNITY MEET."),
+    headline: directive(D.welcome),
     body: draft(
       "HEBS brings together the beauty industry's professionals, educators, innovators, entrepreneurs and emerging talents. For three days in Lagos, the summit is built around education, professional development, excellence, collaboration and opportunity.",
     ),
@@ -104,21 +106,21 @@ export const COPY = {
       { slot: "exp-exhibitions", title: "Exhibitions and Brand Showcases", body: draft("Brands and businesses presenting products, tools and services to the professionals who use them.") },
       { slot: "exp-networking", title: "International Networking", body: draft("Built to bring together beauty professionals from Nigeria, across Africa, the United States, Europe and beyond.") },
       { slot: "exp-entertainment", title: "Entertainment and Celebrations", body: draft("An opening celebration, live moments on stage and closing celebrations across the three days.") },
-      { slot: "exp-destination", title: "Luxury Destination Experiences", body: draft("A beachfront destination that turns a professional summit into a place to stay and enjoy.") },
+      { slot: "exp-destination", title: "Luxury Destination Experiences", body: draft("A resort on the Atlantic coast that turns a professional summit into a place to stay and enjoy.") },
     ],
   },
   destination: {
-    headline: directive("BEAUTY MEETS PARADISE."),
+    headline: directive(D.destination),
     body: draft(
-      "For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort on the Atlantic Ocean beachfront in Lagos: education, competitions, exhibitions, networking and celebrations in one destination.",
+      "For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort, on the Atlantic coast of Lagos: education, competitions, exhibitions, networking and celebrations in one destination.",
     ),
     restriction: "Rooms, packages, availability and amenities are published only once approved.",
     /** The directive's own list of what the destination section introduces (4E). */
-    topics: ["The Atlantic Ocean beachfront", "Resort atmosphere", "Hospitality", "Dining", "Planned event experiences"],
+    topics: ["The Atlantic coastline", "Resort atmosphere", "Hospitality", "Dining", "Planned event experiences"],
     topicsNote: draft("Details of each are published as NJS Royale Beach Resort confirms them."),
   },
   competitions: {
-    headline: directive("THE NEXT GENERATION OF BEAUTY CHAMPIONS."),
+    headline: directive(D.competitions),
     body: draft(
       "HEBS competitions recognise talent, creativity and professional excellence. The 2027 competition categories and prize values remain the same as 2026.",
     ),
@@ -134,7 +136,7 @@ export const COPY = {
     tracks: ["Hair education", "Technical training", "Live demonstrations", "Beauty business development", "Professional masterclasses"],
   },
   partners: {
-    headline: directive("POSITION YOUR BRAND AT THE CENTER OF BEAUTY INNOVATION."),
+    headline: directive(D.partners),
     body: draft(
       "Sponsorship, exhibition, brand activation and strategic partnership opportunities for businesses that want to reach the beauty industry in Lagos and beyond.",
     ),
@@ -155,11 +157,11 @@ export const COPY = {
     kinds: ["Photographs", "Videos", "Testimonials", "Competition highlights", "Major moments"],
   },
   finalCta: {
-    headline: directive("YOUR NEXT BEAUTY EXPERIENCE STARTS HERE."),
-    button: directive("BE FIRST TO EXPERIENCE HEBS 2027"),
+    headline: directive(D.finalCta),
+    button: directive(D.finalButton),
   },
   priorityList: {
-    headline: directive("JOIN THE 2027 PRIORITY LIST"),
+    headline: directive(D.priorityList),
     gateNotice:
       "Preview only. The priority list is not collecting registrations yet. It opens once secure storage, administration and privacy terms are approved.",
     intro: draft("Be first to hear when registration, tickets and the 2027 programme open."),
@@ -181,20 +183,30 @@ export interface ContentEntry {
   text: string;
 }
 
+/**
+ * A copy block's approval state: approved if written so (a directive headline),
+ * or if a recorded sign-off approved exactly this wording at this key
+ * (lib/content/signoff-decisions-2027.ts). Changing approved wording returns it
+ * to its written state, so an approval never covers words nobody saw.
+ */
+export function blockStatus(key: string, block: CopyBlock, decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): PublicationStatus {
+  if (block.status === "approved") return "approved";
+  return wordingApproved(key, block.text, decisions) ? "approved" : block.status;
+}
+
 /** Every copy block the 2027 pages render, with its approval state (the content register). */
-export function contentRegister(node: unknown = { ...COPY, pages: PAGES }, path = ""): ContentEntry[] {
+export function contentRegister(node: unknown = { ...COPY, pages: PAGES }, path = "", decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): ContentEntry[] {
   if (!node || typeof node !== "object") return [];
   if ("status" in node && "text" in node) {
     const b = node as CopyBlock;
-    return [{ key: path, status: b.status, text: b.text }];
+    return [{ key: path, status: blockStatus(path, b, decisions), text: b.text }];
   }
-  return Object.entries(node).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k));
+  return Object.entries(node).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k, decisions));
 }
 
-export function copyStatuses(node: unknown): PublicationStatus[] {
-  if (!node || typeof node !== "object") return [];
-  if ("status" in node && "text" in node) return [(node as CopyBlock).status];
-  return Object.values(node).flatMap(copyStatuses);
+/** The approval states of every copy block under `node`, whose register key is `path`. */
+export function copyStatuses(node: unknown, path = ""): PublicationStatus[] {
+  return contentRegister(node, path).map((e) => e.status);
 }
 
 /**
@@ -208,7 +220,7 @@ export function previewStatuses(): PublicationStatus[] {
   return [
     ...copyStatuses(COPY),
     HOME_COPY_STATUS,
-    ...copyStatuses(PAGES),
+    ...copyStatuses(PAGES, "pages"),
     VENUE.name.status,
     ...EDITION_DAYS.map((d) => d.hours.status),
     findAsset("hebs-logo-nav").status,

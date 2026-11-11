@@ -1,0 +1,27 @@
+/* Content sign-off page (/2027/review): internal, previews only. */
+.rv-page{padding-bottom:160px}
+.rv-item{border:1px solid #2A261F;background:#15130F;padding:20px}
+.rv-item[data-status="approved"]{border-color:rgba(217,193,146,.45)}
+.rv-quote{margin-top:12px;border-left:2px solid #B8914C;padding-left:14px;font-size:16px;line-height:1.6;color:#F6EFE2}
+.rv-proposed{margin-top:12px;border-left:2px solid #7FB3BA;padding-left:14px;font-size:15px;line-height:1.6;color:#F6EFE2}
+.rv-tag{display:inline-flex;align-items:center;border:1px solid #2A261F;border-radius:999px;padding:2px 10px;font-size:12px;line-height:1.6;color:#B9B0A0}
+.rv-tag--status{border-color:rgba(217,193,146,.5);color:#E6D5A8}
+.rv-tag--dep{border-color:rgba(230,150,120,.55);color:#F0C2AE}
+.rv-tag--now{border-color:rgba(127,179,186,.6);color:#BFDDE1}
+.rv-choice{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid #3A352C;border-radius:999px;font-size:14px;color:#F6EFE2;cursor:pointer}
+.rv-choice input{accent-color:#D9C192}
+.rv-choice:focus-within{outline:2px solid #D9C192;outline-offset:2px}
+.rv-choice.is-on[data-kind="approved"]{border-color:#D9C192;background:rgba(217,193,146,.12)}
+.rv-choice.is-on[data-kind="revision-required"]{border-color:#E69678;background:rgba(230,150,120,.12)}
+.rv-choice.is-on[data-kind="pending-decision"]{border-color:#7FB3BA;background:rgba(127,179,186,.12)}
+.rv-clear{min-height:44px;padding:0 12px;font-size:13px;color:#B9B0A0;text-decoration:underline;text-underline-offset:3px}
+.rv-clear:focus-visible{outline:2px solid #D9C192;outline-offset:2px}
+.rv-note,.rv-name{width:100%;margin-top:6px;border:1px solid #3A352C;background:#0D0B08;padding:10px 12px;font-size:15px;color:#F6EFE2}
+.rv-name{width:auto;min-width:220px;margin-top:0;min-height:44px}
+.rv-note:focus-visible,.rv-name:focus-visible{outline:2px solid #D9C192;outline-offset:1px}
+.rv-tray{position:fixed;inset:auto 0 0 0;z-index:40;border-top:1px solid #3A352C;background:rgba(13,11,8,.96);backdrop-filter:blur(6px)}
+.rv-tray .s27-btn{min-height:44px;padding:0 20px}
+.rv-tray .s27-btn:disabled{opacity:.4;cursor:not-allowed;filter:none}
+.rv-table th,.rv-table td{border-bottom:1px solid #2A261F;padding:10px 12px;text-align:left;vertical-align:top}
+.rv-table th{color:#C8B07A;font-weight:500}
+.rv-table td.num{text-align:right;font-variant-numeric:tabular-nums}

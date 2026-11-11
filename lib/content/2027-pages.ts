@@ -7,6 +7,7 @@
  * prices, times, packages, addresses, contacts or figures are stated.
  */
 import type { CopyBlock } from "./2027";
+import { DIRECTIVE_HEADLINES as D } from "./directive-headlines-2027";
 
 const directive = (text: string): CopyBlock => ({ status: "approved", text });
 const draft = (text: string): CopyBlock => ({ status: "provisional", text });
@@ -23,7 +24,7 @@ export const PAGES = {
       "exp-exhibitions": draft("Brands and businesses showing products, tools and services to the professionals who choose and use them."),
       "exp-networking": draft("Beauty professionals, educators, entrepreneurs and brands from Nigeria, across Africa, the United States, Europe and beyond, in one place for three days."),
       "exp-entertainment": draft("The Welcome Pre-Party opens the summit on July 23, and closing celebrations end it on July 25."),
-      "exp-destination": draft("For the first time, the whole summit takes place at one beachfront resort on the Atlantic, so the event is also a place to stay and enjoy."),
+      "exp-destination": draft("For the first time, the whole summit takes place at one resort on the Atlantic coast, so the event is also a place to stay and enjoy."),
     } as Record<string, CopyBlock>,
   },
   programme: {
@@ -32,7 +33,7 @@ export const PAGES = {
     empty: draft("No 2027 session is confirmed yet. This day's sessions appear here as they are approved."),
   },
   education: {
-    title: directive("EDUCATION & MASTERCLASSES"),
+    title: directive(D.education),
     intro: draft("Professional education is one of HEBS's strongest foundations. The 2027 programme is planned around five areas of learning."),
     tracks: [
       { id: "hair-education", title: "Hair education", body: draft("Cutting, colour, styling and care, taught by working professionals.") },
@@ -79,7 +80,7 @@ export const PAGES = {
   travel: {
     title: draft("Travel & accommodation"),
     intro: draft("Everything visitors need to plan their trip to HEBS Lagos 2027, from arriving in Lagos to staying at the resort. Details are added as they are confirmed."),
-    venue: draft("For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort on the Atlantic beachfront in Lagos."),
+    venue: draft("For the first time, the entire HEBS experience takes place at NJS Royale Beach Resort, on the Atlantic coast of Lagos."),
     directions: draft("The resort's address and directions are published once the venue details are confirmed."),
     arrival: draft("International flights to Lagos arrive at Murtala Muhammed International Airport (LOS)."),
     airport: draft("Guidance on getting from the airport to the resort is published once transport arrangements are confirmed."),
@@ -132,7 +133,7 @@ export const PAGES = {
     title: draft("About HEBS"),
     /** From the live HEBS Lagos 2026 About page; to be reconfirmed for 2027. */
     history: draft("After United States editions in 2024 and 2025, and another sold-out edition from 2–4 May 2026, the Hair Education Beauty Summit came home to Lagos for its fourth edition in October 2026."),
-    next: draft("In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Royale Beach Resort, on the Atlantic beachfront in Lagos."),
+    next: draft("In 2027, for the first time, the entire HEBS experience takes place at one destination: NJS Royale Beach Resort, on the Atlantic coast of Lagos."),
     pillarsSource: "HEBS Lagos 2026 About page, as published",
     pillars: [
       { title: "Bridging Education with Opportunity", body: draft("Providing beauty and industry professionals with world-class technical training, mentorship programs, and immediate access to the latest global trends and product innovations.") },

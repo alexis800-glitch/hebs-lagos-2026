@@ -10,13 +10,8 @@
 
 import { CATEGORIES, CATEGORY_COUNT, COMPETITION_COUNT } from "../competitions";
 import type { PublicationStatus } from "../publication";
-
-/**
- * The approval state of the homepage copy below, which carries no per-block
- * states of its own. Set to "approved" only when the owner signs the homepage
- * copy off; the launch gate (lib/launch-2027.ts) reads it.
- */
-export const HOME_COPY_STATUS: PublicationStatus = "provisional";
+import { isDirectiveHeadline } from "./directive-headlines-2027";
+import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "./signoff-decisions-2027";
 
 export const HOME = {
   strip:
@@ -133,3 +128,50 @@ export const HOME = {
 } as const;
 
 export const CATEGORY_NAMES = CATEGORIES.map((c) => c.name);
+
+/**
+ * Fields of HOME that are not visitor-facing wording: media ids, layout, the
+ * internal staging strip, figures derived from lib/competitions.ts, and the
+ * destination scenes, which belong to concept and pre-party media that cannot be
+ * published (their records are in lib/assets/home-2027-review.ts).
+ */
+const NOT_COPY = new Set(["strip", "media", "phoneMedia", "wide", "tall", "pair", "kind", "seconds", "nav", "rows", "scenes", "value"]);
+
+export interface HomeCopyBlock {
+  key: string;
+  text: string;
+  /** Part of a headline the directive quotes word for word, so approved as written. */
+  directive: boolean;
+}
+
+/**
+ * The full headline a homepage line belongs to: the hero's lines and accent, or a
+ * section's title and accent, which the page sets in two styles.
+ */
+function headlineOf(path: string, parent: Record<string, unknown>): string | null {
+  if (/^home\.hero\.(lines\.\d|accent)$/.test(path)) return [...HOME.hero.lines, HOME.hero.accent].join(" ");
+  if (/\.(title|accent)$/.test(path) && typeof parent.title === "string" && typeof parent.accent === "string") return `${parent.title} ${parent.accent}`;
+  return null;
+}
+
+/** Every piece of homepage wording, keyed "home.<path>" for sign-off (lib/content/signoff-2027.ts). */
+export function homeCopyBlocks(node: unknown = HOME, path = "home", parent: Record<string, unknown> = {}): HomeCopyBlock[] {
+  if (typeof node === "string") {
+    const headline = headlineOf(path, parent);
+    return [{ key: path, text: node, directive: isDirectiveHeadline(headline ?? node) }];
+  }
+  if (!node || typeof node !== "object") return [];
+  const own = node as Record<string, unknown>;
+  return Object.entries(own).flatMap(([k, v]) => (NOT_COPY.has(k) ? [] : homeCopyBlocks(v, `${path}.${k}`, Array.isArray(own) ? parent : own)));
+}
+
+/**
+ * The approval state of the homepage copy, which carries no per-block states of
+ * its own: approved once every piece of its wording is a directive headline or
+ * has a recorded sign-off of exactly that wording. The launch gate (lib/launch-2027.ts) reads it.
+ */
+export function homeCopyStatus(decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): PublicationStatus {
+  return homeCopyBlocks().every((b) => b.directive || wordingApproved(b.key, b.text, decisions)) ? "approved" : "provisional";
+}
+
+export const HOME_COPY_STATUS: PublicationStatus = homeCopyStatus();

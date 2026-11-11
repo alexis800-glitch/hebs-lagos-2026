@@ -21,9 +21,13 @@ export type ReviewBadge =
   | "photographed" // genuine HEBS Lagos 2026 material
   | "brand"; // provisional HEBS mark
 
+/** Where review material came from, for its publication record (lib/content/signoff-2027.ts). */
+export type ReviewCollection = "house-of-snapp" | "vmm-summit" | "vmm-preparty" | "vmm-oct22" | "njs-concept" | "brand-mark";
+
 export interface ReviewAsset extends AssetRecord {
   kind: "image" | "video";
   badge: ReviewBadge;
+  collection: ReviewCollection;
   /** What the media is, in words, for the rights register. */
   source: string;
   /**
@@ -116,7 +120,7 @@ const SNAPP_D2_FLOOR = "Photograph from the House of Snapp collection, HEBS Lago
  * publishing licence, so `permission` stays "not-recorded" until the usage terms
  * are filed; the photographs remain review media until then.
  */
-const SNAPP_APPROVAL =
+export const SNAPP_APPROVAL =
   "Approved by Mrs. Shuler, who has paid the photographer (owner's confirmation, 11 Nov 2026). The written usage terms are still to be filed for the project records; payment alone is not a publishing licence.";
 const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
 const OCT22 =
@@ -233,10 +237,18 @@ const SPECS: Spec[] = [
 ];
 
 function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset {
+  const collection: ReviewCollection =
+    kindOf === "s06" || kindOf === "preview" ? "vmm-summit"
+    : kindOf === "preparty" ? "vmm-preparty"
+    : kindOf === "oct22" ? "vmm-oct22"
+    : kindOf === "njs-ai" || kindOf === "njs-unknown" ? "njs-concept"
+    : kindOf === "mark" ? "brand-mark"
+    : "house-of-snapp";
   const base = {
     id,
     kind,
     badge,
+    collection,
     src: REVIEW_DIR + file,
     alt,
     status: "provisional" as const,

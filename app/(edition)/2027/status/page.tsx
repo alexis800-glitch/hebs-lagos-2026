@@ -16,6 +16,9 @@ export default function Status2027() {
         <p className="mt-3 max-w-3xl text-h27-muted">
           Generated from the same data the pages render. Nothing below is approved unless it says so.
         </p>
+        <p className="mt-2 max-w-3xl text-h27-muted">
+          To approve wording, use the <a className="underline underline-offset-2 text-h27-ivory" href="/2027/review">content sign-off page</a>.
+        </p>
 
         <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Launch blockers</h2>
         <p className="mt-3 max-w-3xl text-h27-muted">

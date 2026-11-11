@@ -29,6 +29,17 @@ media register and the switch itself, not a setting.
 The current list is shown on the protected preview's `/2027/status` page and
 checked by `tests/launch-2027.test.ts`.
 
+## 1a. Content sign-off
+
+Copy approvals are recorded, not hand-edited into the content files:
+
+1. Reviewers open `/2027/review` on the protected preview (never served on production, even after launch). Items are grouped by who approves them: shared facts, wording Veridion can verify, organiser wording for Mrs. Shuler, commercial and registration wording, and media records. Each item is marked First launch, Next pages or Later.
+2. A reviewer chooses Approved, Revision required or Pending decision for each item. Drafts stay in their browser. They then export the decision record and send it to Veridion.
+3. Veridion adds the entries to `lib/content/signoff-decisions-2027.ts`, with who decided, the date and where the decision is evidenced. An approval covers the exact wording approved. If the wording changes, the approval lapses and the launch gate counts the item as unapproved again.
+4. Facts (the venue name D9, the mark D3, the day hours) are approved in their own records as well: `lib/editions/2027.ts` and `lib/assets/register.ts`.
+
+Photography is not decided there. Mrs. Shuler's approval of the House of Snapp photographs is recorded. The written usage terms are what remain outstanding.
+
 ## 2. Before launch day
 
 1. Record the current production deployment ID (Vercel → Deployments →
