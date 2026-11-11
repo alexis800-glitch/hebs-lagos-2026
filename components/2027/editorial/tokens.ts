@@ -6,10 +6,11 @@
 import type { CSSProperties } from "react";
 
 export const C = {
-  black: "#000000",
+  /** The homepage's black and ivory (components/2027/home/home.css), shared by every 2027 page. */
+  black: "#0D0B08",
   champ: "#C8A96A",
   champL: "#EAD7A8",
-  ivory: "#F5EFE4",
+  ivory: "#F6EFE2",
   white: "#FFFFFF",
   atlantic: "#0E3A3F",
   body: "#3B362F",

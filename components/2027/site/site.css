@@ -79,3 +79,37 @@ html:has(.s27h){scroll-padding-top:120px}
   .s27f h2{font-size:19px;margin-bottom:12px}
   .s27f .pf-legal{flex-direction:column;align-items:flex-start}
 }
+
+/* SHARED UI: the homepage's buttons, labels, meta lines, accents and staging strip,
+   for every 2027 page (components/2027/site/ui.tsx). Values are the homepage's own
+   (components/2027/home/home.css): pill buttons, the metal gradient, Jost labels
+   spaced .3–.38em, Bodoni with an italic champagne accent. */
+.s27-btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;font-family:var(--c-jost),"Futura","Avenir Next",system-ui,sans-serif;font-size:12.5px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;white-space:nowrap;text-decoration:none;transition:filter .2s,background-color .2s,color .2s,border-color .2s}
+.s27-btn--pri{background:linear-gradient(100deg,#8C6B34 0%,#E9D4A2 38%,#B8914C 56%,#F5E7C3 76%,#9A783E 100%);color:#16110A;box-shadow:0 10px 30px -12px rgba(184,145,76,.8)}
+.s27-btn--pri:hover{filter:brightness(1.06)}
+.s27-btn--gh{border:1px solid rgba(246,239,226,.6);color:#F6EFE2}
+.s27-btn--gh:hover{border-color:#D9C192;color:#D9C192}
+.s27-btn--ol{border:1px solid #16110A;color:#16110A}
+.s27-btn--ol:hover{background:#16110A;color:#F6EFE2}
+.s27-btn--ln{min-height:44px;padding:0;border-radius:0;letter-spacing:.14em;color:#D9C192;background:linear-gradient(rgba(217,193,146,.7),rgba(217,193,146,.7)) left calc(50% + 12px)/100% 1px no-repeat}
+.s27-btn--ln.s27-on-light{color:#7A5A22;background-image:linear-gradient(rgba(140,107,52,.6),rgba(140,107,52,.6))}
+.s27-btn[aria-disabled="true"]{cursor:default;filter:none;opacity:.92}
+.s27-btn:focus-visible{outline:2px solid #D9C192;outline-offset:4px}
+.s27-on-light.s27-btn:focus-visible,.s27-btn--ol:focus-visible{outline-color:#16110A}
+.s27-kick{font-family:var(--c-jost),"Futura",system-ui,sans-serif;font-size:12.5px;letter-spacing:.38em;text-transform:uppercase;color:#D9C192}
+.s27-kick.s27-on-light{color:#7A5A22}
+.s27-meta{font-family:var(--c-jost),"Futura",system-ui,sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;line-height:1.8}
+.s27-accent{font-style:italic;font-weight:400;background:linear-gradient(100deg,#C9A35E 0%,#F6E6BD 34%,#D8B776 55%,#FFF1CF 76%,#C29A55 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.06em}
+.s27-accent.s27-on-light{background:none;color:#8C6B34}
+@media (forced-colors:active){.s27-accent{background:none;color:CanvasText}}
+.s27-strip{position:relative;z-index:41;background:#2B2117;color:#F0E2C4;font-family:var(--c-jost),system-ui,sans-serif;font-size:12px;letter-spacing:.04em;text-align:center;padding:7px 14px;margin:0}
+.s27-strip b{color:#F5E7C3;font-weight:500}
+.s27-strip a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.s27-strip a:focus-visible{outline:2px solid #D9C192;outline-offset:2px}
+@media (max-width:600px){
+  .s27-btn{min-height:48px;padding:0 20px;font-size:12px}
+  .s27-kick{font-size:11.5px;letter-spacing:.3em}
+  .s27-meta{font-size:11.5px;letter-spacing:.14em}
+  .s27-strip{font-size:11px;padding:6px 10px}
+}
+@media (min-width:1600px){ .s27-btn,.s27-kick,.s27-meta{font-size:13.5px} }
