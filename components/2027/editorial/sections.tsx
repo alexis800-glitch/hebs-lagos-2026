@@ -17,6 +17,7 @@ import { FORMS_OPEN } from "@/lib/integrations/registration-2027";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { EXPERIENCE_SLOTS } from "./notes";
 import { FormBlock, PageLink } from "./site";
+import { formsUnderTest } from "@/lib/forms-2027/config";
 import { C, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
 import { Button, MetaLine } from "@/components/2027/site/ui";
 import { SlotImage } from "./media";
@@ -440,6 +441,8 @@ export const COMPETITION_ANCHORS = ["categories", "eligibility", "rules", "apply
  * takes the notice's place, at the same #priority-list anchor.
  */
 export function PriorityList({ opts, notes }: SectionProps) {
+  // The live form once the list is open; in a staging or mock test run, the form under test.
+  const showForm = FORMS_OPEN.priority || formsUnderTest();
   return (
     <Section id="priority-list" ground="ivory" labelledBy="priority-title">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
@@ -451,7 +454,7 @@ export function PriorityList({ opts, notes }: SectionProps) {
           <SectionNotes notes={notes} opts={opts} ground="ivory" className="mt-6" />
         </div>
         <div className="lg:col-span-6 lg:col-start-7">
-          {FORMS_OPEN.priority ? (
+          {showForm ? (
             <FormBlock form="priority" title="2027 priority list" gate="The priority list is not open yet. Nothing can be sent." submitLabel="Join the priority list" />
           ) : (
             <div role="status" className="border p-8 sm:p-10" style={{ borderColor: "rgba(122,90,34,.45)", background: "rgba(255,255,255,.55)" }}>

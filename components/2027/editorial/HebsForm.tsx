@@ -32,7 +32,7 @@ function newAttempt() {
 const PDF_MAX = 3_000_000;
 
 export default function HebsForm({
-  form, fields, enabled, uploads = false, gate, submitLabel, title,
+  form, fields, enabled, uploads = false, gate, submitLabel, title, testSystem = false,
 }: {
   form: FormId;
   fields: readonly FieldSpec[];
@@ -44,6 +44,8 @@ export default function HebsForm({
   submitLabel: string;
   /** Accessible name of the form. */
   title: string;
+  /** The deployment submits to a test system, never the live one. */
+  testSystem?: boolean;
 }) {
   const uid = useId();
   const started = useRef(Date.now());
@@ -124,6 +126,11 @@ export default function HebsForm({
   return (
     <div className="border bg-[#FBF8F2] p-6 sm:p-8" style={{ borderColor: "rgba(0,0,0,.14)", colorScheme: "light", color: ink }}>
       {!enabled && <p id={id("gate")} className="text-[14px] font-semibold" style={{ color: atlantic }}>{gate}</p>}
+      {testSystem && (
+        <p data-staging="" className="mb-4 border-l-2 pl-3 text-[13px] font-medium" style={{ borderColor: atlantic, color: atlantic }}>
+          Test system: what you send here goes to the HEBS test system, not the live registration system.
+        </p>
+      )}
 
       <div ref={result} tabIndex={-1} aria-live="polite" className="outline-none">
         {status.kind === "confirmed" && (

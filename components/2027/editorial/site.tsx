@@ -5,7 +5,7 @@
  */
 import { pageHref, type PageId } from "@/lib/site/2027";
 import { FORM_FIELDS, type FormId } from "@/lib/integrations/registration-2027";
-import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
+import { formEnabled, submitConfig, formsUnderTest } from "@/lib/forms-2027/config";
 import HebsForm from "./HebsForm";
 import { SectionNotes, type Opts } from "./parts";
 import { AccentTitle, Kicker, MetaLine } from "@/components/2027/site/ui";
@@ -115,7 +115,7 @@ export function FormBlock({ form, title, gate, submitLabel }: {
 }) {
   const cfg = submitConfig();
   const enabled = formEnabled(form, cfg);
-  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} uploads={enabled && cfg.uploads && form === "exhibitor"} gate={gate} submitLabel={submitLabel} title={title} />;
+  return <HebsForm form={form} fields={FORM_FIELDS[form]} enabled={enabled} uploads={enabled && cfg.uploads && form === "exhibitor"} gate={gate} submitLabel={submitLabel} title={title} testSystem={formsUnderTest(cfg)} />;
 }
 
 /** "To be announced" for a fact that does not exist yet, set quietly in the page's own type. */

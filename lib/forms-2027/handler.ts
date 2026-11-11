@@ -112,7 +112,7 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   try {
     const who = createHash("sha256").update(`${config.ipSalt}:${req.ip ?? "unknown"}`).digest("hex");
     const n = await deps.store.hit(`hebs27:rl:${who}`, RATE_LIMIT.windowSeconds);
-    if (n > RATE_LIMIT.max) {
+    if (n > (config.rateLimitMax ?? RATE_LIMIT.max)) {
       log(form, "rate_limited");
       return done({ status: "rate_limited" });
     }
