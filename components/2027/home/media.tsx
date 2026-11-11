@@ -27,9 +27,9 @@ export function Pic({
   if (!a) {
     const label = alt ?? findReviewAsset(id).alt;
     return label ? (
-      <div className="rv" role="img" aria-label={`${label} (held for review)`}>Image held for review</div>
+      <div className="rv" data-staging="" role="img" aria-label={`${label} (held for review)`}>Image held for review</div>
     ) : (
-      <div className="rv" aria-hidden="true">Image held for review</div>
+      <div className="rv" data-staging="" aria-hidden="true">Image held for review</div>
     );
   }
   const srcSet = srcSetOf(a);
@@ -60,7 +60,7 @@ export function Clip({
 }: { wide: string; tall: string; id?: string; label: string; loop?: boolean; autoPlay?: boolean; priority?: boolean }) {
   const w = reviewMedia(wide);
   const t = reviewMedia(tall);
-  if (!w || !t) return <div className="rv" role="img" aria-label="Film held for review">Film held for review</div>;
+  if (!w || !t) return <div className="rv" data-staging="" role="img" aria-label="Film held for review">Film held for review</div>;
   return (
     <SmartVideo
       id={id}

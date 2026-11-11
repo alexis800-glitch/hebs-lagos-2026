@@ -51,7 +51,7 @@ export function SiteFooter() {
           </nav>
         ))}
         {review ? (
-          <div>
+          <div data-staging="">
             <h2>Contact &amp; social</h2>
             <p className="pf-note">Official 2027 email, phone and social accounts appear here once confirmed.</p>
             <Pending>Pending approval: A7</Pending>
@@ -64,11 +64,11 @@ export function SiteFooter() {
           <li><a href="/privacy">Privacy Policy</a></li>
           <li><a href="/privacy">Cookie Policy</a></li>
           <li><CookiePreferencesButton /></li>
-          {review ? <li><span className="pf-off">Terms &amp; Conditions</span> <Pending>Pending approval: A8</Pending></li> : null}
+          {review ? <li data-staging=""><span className="pf-off">Terms &amp; Conditions</span> <Pending>Pending approval: A8</Pending></li> : null}
         </ul>
       </div>
       {review ? (
-        <p className="pf-review">
+        <p className="pf-review" data-staging="">
           Internal review: Privacy Policy and Cookie Policy open the current HEBS Lagos 2026 Privacy &amp; Cookie Notice; 2027 wording awaits approval (A8).{" "}
           <a href="/2027/status">Approval status</a>
         </p>

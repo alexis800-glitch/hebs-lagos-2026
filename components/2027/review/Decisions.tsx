@@ -71,7 +71,7 @@ const CHOICES: { value: SignoffDecisionKind; label: string }[] = [
 ];
 
 /** The three-way decision for one item, with a note for revisions and pending decisions. */
-export function DecisionControl({ id, text, proposed }: { id: string; text: string; proposed?: string }) {
+export function DecisionControl({ id, text, proposed, label }: { id: string; text: string; proposed?: string; label?: string }) {
   const drafts = useDrafts();
   const uid = useId();
   const draft = drafts[id];
@@ -88,7 +88,7 @@ export function DecisionControl({ id, text, proposed }: { id: string; text: stri
   };
   return (
     <fieldset className="mt-4 border-t border-h27-line pt-4">
-      <legend className="sr-only">Decision for {id}</legend>
+      <legend className="sr-only">Decision for {label ?? id}</legend>
       {stale && <p className="mb-2 text-xs text-h27-champagne">The wording changed after you drafted a decision. Decide again.</p>}
       <div className="flex flex-wrap gap-2">
         {CHOICES.map((c) => (
@@ -104,7 +104,7 @@ export function DecisionControl({ id, text, proposed }: { id: string; text: stri
       {current && current.decision !== "approved" && (
         <div className="mt-3">
           <label htmlFor={`${uid}-n`} className="block text-xs text-h27-muted">
-            {current.decision === "revision-required" ? "Wording you want instead, or what to change" : "What it waits for"}
+            {current.decision === "revision-required" ? "What to change, and in which line" : "What it waits for"}
           </label>
           <textarea
             id={`${uid}-n`}
@@ -121,17 +121,18 @@ export function DecisionControl({ id, text, proposed }: { id: string; text: stri
 }
 
 /** The record a reviewer sends to Veridion, in the shape lib/content/signoff-decisions-2027.ts keeps. */
-function record(drafts: Drafts, by: string, proposals: Record<string, string>, texts: Record<string, string>): SignoffDecision[] {
+function record(drafts: Drafts, by: string, proposals: Record<string, string>, texts: Record<string, string>, blocks: Record<string, Record<string, string>>): SignoffDecision[] {
   const on = new Date().toISOString().slice(0, 10);
   return Object.entries(drafts)
     .filter(([id, d]) => texts[id] === d.text)
     .map(([item, d]) => ({
       item,
       decision: d.decision,
-      ...(d.decision === "approved" ? { text: d.text } : {}),
+      // A block records every line's exact wording; its draft text is the block's fingerprint.
+      ...(d.decision === "approved" ? (blocks[item] ? { texts: blocks[item] } : { text: d.text }) : {}),
       by,
       on,
-      reference: `Content sign-off page, ${on}`,
+      reference: blocks[item] ? `Content sign-off page, ${on}, block reference ${d.text}` : `Content sign-off page, ${on}`,
       ...(d.note || (d.decision === "revision-required" && proposals[item]) ? { note: d.note || `Use the proposed wording: ${proposals[item]}` } : {}),
     }));
 }
@@ -149,7 +150,12 @@ const useName = () =>
  * The bar that exports the drafts. `texts` is every item's current wording, so a
  * draft made on older wording is left out of the record.
  */
-export function DecisionTray({ texts, proposals }: { texts: Record<string, string>; proposals: Record<string, string> }) {
+export function DecisionTray({ texts, proposals, blocks }: {
+  texts: Record<string, string>;
+  proposals: Record<string, string>;
+  /** "block:<id>" to the exact wording of every line in the block. */
+  blocks: Record<string, Record<string, string>>;
+}) {
   const drafts = useDrafts();
   const name = useName();
   const [said, say] = useState("");
@@ -163,7 +169,7 @@ export function DecisionTray({ texts, proposals }: { texts: Record<string, strin
     }
     listeners.forEach((l) => l());
   };
-  const json = () => JSON.stringify(record(drafts, name.trim(), proposals, texts), null, 2);
+  const json = () => JSON.stringify(record(drafts, name.trim(), proposals, texts, blocks), null, 2);
   const ready = live.length > 0 && name.trim().length > 0;
   const copy = async () => {
     try {

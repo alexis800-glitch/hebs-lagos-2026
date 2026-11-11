@@ -28,6 +28,12 @@ export interface ReviewAsset extends AssetRecord {
   kind: "image" | "video";
   badge: ReviewBadge;
   collection: ReviewCollection;
+  /** The event owner's approval for the website, when given (OWNER_MEDIA_APPROVAL). */
+  ownerApproval?: typeof OWNER_MEDIA_APPROVAL;
+  /** A restriction backed by evidence: disputed ownership or a known usage limit. Restricted media is not published. */
+  restricted?: string;
+  /** Third-party paperwork still to file. Recorded, but it does not hold the media back. */
+  followUp?: string;
   /** What the media is, in words, for the rights register. */
   source: string;
   /**
@@ -115,13 +121,21 @@ const SNAPP_D2 = "Photograph from the House of Snapp collection, HEBS Lagos 2026
 const SNAPP_D1_FLOOR = "House of Snapp photograph, HEBS Lagos 2026 summit day 1, 24 Oct 2026 (collection folder \"HEBS DAY 1\")";
 const SNAPP_D2_FLOOR = "Photograph from the House of Snapp collection, HEBS Lagos 2026 summit day 2, 25 Oct 2026 (collection folder \"HEBS DAY 2\")";
 /**
- * Mrs. Shuler approved the House of Snapp photography and has paid the
- * photographer (owner's confirmation, 11 Nov 2026). Payment is not a written
- * publishing licence, so `permission` stays "not-recorded" until the usage terms
- * are filed; the photographs remain review media until then.
+ * The event owner's approval of the website media (Mrs. Shuler, confirmed on
+ * 11 Nov 2026 and repeatedly since). It covers the photographs and films selected
+ * for the 2027 pages. It does not override third-party rights: media with
+ * disputed ownership or a known usage limit keeps its restriction (`restricted`).
+ * Paperwork that is simply not on file yet is a records follow-up (`followUp`),
+ * not a reason to withhold the media.
  */
+export const OWNER_MEDIA_APPROVAL = {
+  by: "Mrs. Shuler, event owner",
+  date: "2026-11-11",
+  reference: "Owner's confirmation to Veridion, 11 Nov 2026, restated on later instructions",
+} as const;
+
 export const SNAPP_APPROVAL =
-  "Approved by Mrs. Shuler, who has paid the photographer (owner's confirmation, 11 Nov 2026). The written usage terms are still to be filed for the project records; payment alone is not a publishing licence.";
+  "Approved for the website by Mrs. Shuler, the event owner, who has also paid the photographer (11 Nov 2026). Filing the photographer's written usage terms is a records follow-up.";
 const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with a ceremonial cheque";
 const OCT22 =
   "VMM photograph of the 22 Oct 2026 gathering at a different Lagos hotel. Not confirmed as an official HEBS activity; never described as NJS";
@@ -274,7 +288,9 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         rights: VMM_PENDING,
         permittedDepictions: ["real-event"],
         source: (kindOf === "s06" ? S06 : PREVIEW) + note,
-        restriction: "Internal review only until VMM's written permission and the consent of everyone recognisable are recorded.",
+        ownerApproval: OWNER_MEDIA_APPROVAL,
+        followUp: "VMM's written licence for the film is not on file. No restriction on its use is known.",
+        restriction: "Approved by the event owner. VMM licence to file for the records.",
       };
     case "preparty":
       return {
@@ -287,7 +303,8 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         rights: VMM_PENDING,
         permittedDepictions: ["real-event"],
         source: PREPARTY + note,
-        restriction: "Internal review only until VMM's written permission and guest consent are recorded.",
+        restricted: "Ownership of the pre-party photographs is disputed. They stay off public pages until it is resolved.",
+        restriction: "Disputed ownership: not for public pages.",
       };
     case "oct22":
       return {
@@ -300,6 +317,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         rights: VMM_PENDING,
         permittedDepictions: ["real-event"],
         source: OCT22 + note,
+        restricted: "Not confirmed as an official HEBS activity, and the guests are not identified.",
         restriction:
           "Internal review only. Needs HEBS to confirm the gathering was official, organisers to identify the guests (no nationality is assumed), each guest's consent and VMM's permission.",
       };
@@ -315,6 +333,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         permittedDepictions: ["decorative"],
         source:
           "NJS website master njs-hero-02-sunset-pool-approved.mp4. Its C2PA content credentials mark it as AI-generated (Seedance 2.0). The building differs from the building photographed in Oct 2026" + note,
+        restricted: "NJS's AI-generated concept of an unfinished property: needs NJS's permission and confirmation of the design, and may only ever be shown labelled as a concept.",
         restriction:
           "Concept only: always labelled as a concept, never presented as the completed property. Needs NJS permission to reuse and NJS confirmation of the approved design.",
       };
@@ -330,6 +349,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         permittedDepictions: ["decorative"],
         source:
           "Clip in the NJS website folder, received by WhatsApp on 7 Oct 2026 (content credentials stripped). Appears AI-generated; its guests are illustrative" + note,
+        restricted: "Origin and rights undocumented (received by WhatsApp, credentials stripped), and excluded from public use on Veridion's instruction.",
         restriction:
           "Concept only: always labelled as a concept, never suggesting real people attended an NJS event. Needs confirmed origin and rights, and NJS permission.",
       };
@@ -350,6 +370,8 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
           peopleConsent: "unknown",
         },
         permittedDepictions: ["real-event"],
+        ownerApproval: OWNER_MEDIA_APPROVAL,
+        followUp: "The photographer's written usage terms are to be filed for the records.",
         source: ({ "snapp-d1": SNAPP_D1, "snapp-d2": SNAPP_D2, "snapp-d1-floor": SNAPP_D1_FLOOR, "snapp-d2-floor": SNAPP_D2_FLOOR } as const)[kindOf] + note,
         restriction: kindOf === "snapp-d1-floor" || kindOf === "snapp-d2-floor"
           ? SNAPP_APPROVAL

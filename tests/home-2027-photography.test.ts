@@ -41,8 +41,10 @@ describe("House of Snapp homepage photographs", () => {
       expect(a.source, m.slot).toMatch(m.day === 1 ? /summit day 1, 24 Oct 2026/ : /summit day 2, 25 Oct 2026/);
       expect(a.source, m.slot).not.toMatch(/prize presentation/);
       expect(a.rights.permission, m.slot).toBe("not-recorded");
-      // Approved and paid for, but payment is not a written licence: it stays review media.
-      expect(a.restriction, m.slot).toMatch(/Approved by Mrs\. Shuler.*payment alone is not a publishing licence/);
+      // The event owner's approval is recorded; the photographer's terms are a records follow-up, not a restriction.
+      expect(a.ownerApproval?.by, m.slot).toMatch(/Mrs\. Shuler/);
+      expect(a.restricted, m.slot).toBeUndefined();
+      expect(a.followUp, m.slot).toMatch(/written usage terms/);
       expect(a.permittedUsage, m.slot).toEqual(["internal-review"]);
     }
   });

@@ -52,6 +52,18 @@ export const PORTAL_2027: Record<PortalDestination, Gated<string>> = {
  */
 export const PORTAL_HOSTS: readonly string[] = [];
 
+/**
+ * Ticket sales open only when both business decisions are recorded: approved
+ * ticket categories and prices, and an approved payment gateway. Until then no
+ * page shows a buy link, whatever the portal route says, so nothing implies that
+ * sales are active.
+ */
+export const TICKET_SALES: { prices: boolean; payment: boolean; note: string } = {
+  prices: false,
+  payment: false,
+  note: "Ticket categories and prices, and the payment gateway, are awaiting approval.",
+};
+
 /** The live portal address for a destination, or null ("Opens soon"). */
 export function portalLink(
   destination: PortalDestination,
@@ -61,6 +73,7 @@ export function portalLink(
 ): string | null {
   const field = routes[destination];
   if (field.status !== "approved") return null;
+  if (destination === "tickets" && !(TICKET_SALES.prices && TICKET_SALES.payment)) return null;
   const raw = gatedValue(field, environment);
   if (!raw) return null;
   let u: URL;

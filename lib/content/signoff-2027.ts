@@ -1,89 +1,88 @@
 /**
  * The HEBS Lagos 2027 content sign-off register: every piece of wording and
- * every fact the 13 pages show that is not approved yet, sorted by who can
- * approve it, how soon it is needed, and what it waits for.
+ * every fact the 13 pages show that is not approved yet, in three categories:
+ *
+ *   A  routine     navigation, headings, buttons, captions, image descriptions,
+ *                  search titles, status notices and facts checkable against a
+ *                  source. Veridion verifies these, page by page.
+ *   B  substantive the summit's own voice and its business and commercial
+ *                  statements. Mrs. Shuler (or the HEBS organisers, for
+ *                  commercial wording) approves these in coherent blocks: the
+ *                  executive content package (approvalBlocks).
+ *   C  waiting     wording or facts that cannot be approved until an outstanding
+ *                  decision is made (venue D9, mark D3, routes D1, privacy D13,
+ *                  prizes D8, contacts D10, ticket prices and payment, ...).
  *
  * Derived from the content itself (lib/content/2027.ts, 2027-pages.ts,
- * home-2027.ts) and the facts the launch gate reads, so it cannot fall out of
- * date. Decisions are recorded in lib/content/signoff-decisions-2027.ts; the
- * review page /2027/review (previews only) shows this register and drafts them.
+ * home-2027.ts), the layout wording the pages render (layout-copy-2027.ts) and
+ * the facts the launch gate reads, so it cannot fall out of date. Decisions are
+ * recorded in lib/content/signoff-decisions-2027.ts, for one item or a whole
+ * block, always with the exact wording. The review page /2027/review (previews
+ * only) shows it all and drafts decisions.
  *
- * Five groups, not equally urgent:
- *   shared      - facts every page shows: the venue name, the 2027 mark, day hours
- *   factual     - wording Veridion can check against a source: facts from the
- *                 directive or the 2026 site, status notices ("published once
- *                 approved"), captions, labels and buttons
- *   organiser   - the summit's own voice and claims, for Mrs. Shuler
- *   commercial  - offers, registration and money, needing business decisions
- *   media       - photograph and film publication records (no re-review: the
- *                 House of Snapp approval stands; the written terms are outstanding)
+ * Media is not decided here: the event owner's approval of the website media is
+ * recorded (lib/assets/home-2027-review.ts). mediaRecords() reports only
+ * evidence-based restrictions and third-party paperwork to file.
  */
 import { COPY, contentRegister } from "./2027";
 import { PAGES } from "./2027-pages";
 import { homeCopyBlocks } from "./home-2027";
+import { LAYOUT_COPY, layoutStatus, type LayoutString } from "./layout-copy-2027";
 import { SIGNOFF_DECISIONS, latestDecision, wordingApproved, type SignoffDecision } from "./signoff-decisions-2027";
 import { EDITION_DAYS, VENUE } from "../editions/2027";
 import { findAsset } from "../assets/register";
-import { REVIEW_ASSETS, SNAPP_APPROVAL, type ReviewCollection } from "../assets/home-2027-review";
+import { OWNER_MEDIA_APPROVAL, REVIEW_ASSETS, type ReviewCollection } from "../assets/home-2027-review";
 import { REVIEW_MEDIA_BY_PAGE } from "../launch-2027";
 import { LAUNCH_2027 } from "../launch-2027-config";
 import { SITE_PAGES, type PageId } from "../site/2027";
+import { CATEGORIES as COMPETITION_CATEGORIES } from "../competitions";
 import type { PublicationStatus } from "../publication";
 
-export type SignoffGroup = "shared" | "factual" | "organiser" | "commercial" | "media";
+export type Category = "A" | "B" | "C";
 export type Approver = "Veridion" | "Mrs. Shuler" | "HEBS organisers";
-/** 1: needed for the first public launch; 2: the next pages; 3: pages with outside dependencies. */
+/** 1: needed for the smallest public launch; 2: the next pages; 3: pages waiting on forms or commercial decisions. */
 export type Tier = 1 | 2 | 3;
+type Area = "shared" | "factual" | "organiser" | "commercial";
 
-export const GROUPS: Record<SignoffGroup, { title: string; summary: string }> = {
-  shared: {
-    title: "Shared across pages",
-    summary: "Facts every page shows. One decision clears the item on every page at once, so these come first.",
+export const CATEGORIES: Record<Category, { title: string; summary: string }> = {
+  A: {
+    title: "A. Routine wording Veridion verifies",
+    summary: "Navigation, headings, buttons, captions, image descriptions, search titles, notices that say something is not open yet, and facts checkable against the directive or the 2026 site. Verified page by page; none needs the organisers.",
   },
-  factual: {
-    title: "Factual content Veridion can verify",
-    summary: "Facts taken from the directive or the 2026 site, status notices that say what is not open yet, captions, labels and buttons. Each can be checked against a source, so Veridion approves them without waiting for the organisers.",
+  B: {
+    title: "B. Substantive wording for Mrs. Shuler and the HEBS organisers",
+    summary: "What HEBS says about itself, the summit and its offers. Approved block by block in the executive content package, never line by line.",
   },
-  organiser: {
-    title: "Organiser wording for Mrs. Shuler",
-    summary: "The summit's own voice: what HEBS is, what the days hold, what visitors can expect. Only Mrs. Shuler can confirm these.",
-  },
-  commercial: {
-    title: "Commercial and registration information",
-    summary: "What is offered, sold or registered, and on what terms. Each waits on a business decision (routes D1, privacy D13, prize presentation D8, contacts D10, prospectus, packages).",
-  },
-  media: {
-    title: "Media rights and photograph records",
-    summary: "Where each set of photographs and film stands. Mrs. Shuler's approval of the House of Snapp photography is recorded and is not reopened; what remains is filing the written usage terms.",
+  C: {
+    title: "C. Waiting on an outstanding decision",
+    summary: "Wording and facts that cannot be approved until the decision named is made. Listed by decision, so each decision clears its items at once.",
   },
 };
 
 export interface SignoffItem {
   /** Register key; also the key a decision is recorded under. */
   id: string;
-  group: Exclude<SignoffGroup, "media">;
-  tier: Tier;
+  category: Category;
+  /** Who approves it; for category C, who makes the decision it waits on. */
   approver: Approver;
+  tier: Tier;
   /** The wording as it stands. */
   text: string;
-  /** Kind of wording, for the reviewer. */
-  kind: "Fact" | "Status notice" | "Caption" | "Label or button" | "Copy";
+  kind: "Fact" | "Status notice" | "Caption" | "Label or heading" | "Image description" | "Search and social" | "Form wording" | "Commitment" | "Copy";
   pages: PageId[];
   /** Section of the page, in words. */
   section: string;
   status: PublicationStatus;
-  /** Open decisions or facts this wording depends on. Empty = it can be decided now. */
+  /** Category C: the decisions it waits on. */
   dependsOn: string[];
-  /**
-   * For a status notice: the decisions that will replace it with real details. The
-   * notice itself is true until then, so it can be approved now.
-   */
+  /** A status notice: the decisions that will replace it with real details. The notice is true until then. */
   replacedWhen: string[];
-  /** A suggested correction, where one is needed. */
+  /** The approval block it belongs to (categories A and B). */
+  block?: string;
+  /** Where the wording comes from: the evidence behind an approval. */
+  source: string;
   proposed?: { text: string; why: string };
-  /** Wording already changed in this round, with the earlier text. */
   revised?: { from: string; why: string };
-  /** The standing recorded decision, if any. */
   recorded?: SignoffDecision;
   /** Where approval is written down: "decision" (signoff-decisions-2027.ts) or the record named. */
   recordIn: string;
@@ -100,7 +99,7 @@ const OFF_SITE = /^(education|qr)\./;
 
 const PLACE: [RegExp, PageId[] | ((m: RegExpMatchArray) => PageId[]), string][] = [
   [/^home\.(\w+)/, ["home"], ""],
-  [/^seo\.home/, ["home"], "Search and social preview"],
+  [/^seo\.home/, ["home"], "Hero"],
   [/^seo\.about/, ["about"], "Search and social preview"],
   [/^welcome\./, ["about"], "Welcome"],
   [/^experience\./, ["experience"], "Six experiences"],
@@ -142,9 +141,10 @@ function place(key: string): { pages: PageId[]; section: string } {
 /* Who approves it, and what it waits for                               */
 /* ------------------------------------------------------------------ */
 
-type Rule = [RegExp, Pick<SignoffItem, "group" | "approver" | "kind">];
-const COMMERCIAL: SignoffItem["approver"] = "HEBS organisers";
-const rule = (group: SignoffItem["group"], approver: Approver, kind: SignoffItem["kind"]) => ({ group, approver, kind });
+type Rule = [RegExp, { group: Area; approver: Approver; kind: RuleKind }];
+type RuleKind = "Fact" | "Status notice" | "Caption" | "Label or button" | "Copy";
+const COMMERCIAL: Approver = "HEBS organisers";
+const rule = (group: Area, approver: Approver, kind: RuleKind) => ({ group, approver, kind });
 
 /** First match wins. Keys first, then the shape of the wording. */
 const KEY_RULES: Rule[] = [
@@ -178,14 +178,16 @@ const KEY_RULES: Rule[] = [
 /** Wording that only reports that something is not open or not confirmed yet. */
 const NOTICE = /once (it is |they are |each is |officially )?(officially )?(approved|confirmed|opened)|published (here )?once|published (with|as)|(added|listed|appear) here as|as (they are|each one is|sessions are|it is) (officially )?(confirmed|cleared)|is confirmed yet|not on sale|are not open|until ticket sales|being explored/i;
 
-function classify(key: string, text: string): Pick<SignoffItem, "group" | "approver" | "kind"> {
+function classify(key: string, text: string): { group: Area; approver: Approver; kind: RuleKind } {
   for (const [re, r] of KEY_RULES) if (re.test(key)) return r;
   if (NOTICE.test(text)) return rule("factual", "Veridion", "Status notice");
   return rule("organiser", "Mrs. Shuler", "Copy");
 }
 
+/** Decisions some wording waits on, by register key. */
 const DEPENDS: [RegExp, string][] = [
-  [/^pages\.tickets|^priorityList/, "Ticket categories, prices and payment gateway; registration route (D1) and privacy notice (D13)"],
+  [/^pages\.tickets/, "Ticket categories, prices and payment gateway; ticketing route (D1)"],
+  [/^priorityList/, "Priority list storage and administration (D1) and privacy notice (D13)"],
   [/^pages\.sponsorship|^partners|^home\.sponsors\.offers/, "Approved 2027 prospectus and packages; inquiry route (D1); public contacts (D10)"],
   [/^pages\.exhibitors/, "Exhibitor application route (D1); confirmed participating brands"],
   [/^pages\.competitions\.(eligibility|rules|apply|awards)/, "2027 rules, eligibility, fees, schedule and deadline; prize presentation (D8); application route (D1)"],
@@ -193,7 +195,7 @@ const DEPENDS: [RegExp, string][] = [
   [/^pages\.travel\.(accommodation|faqs\.2)/, "Approved accommodation packages with NJS"],
   [/^pages\.contact/, "Public contacts and social accounts (D10); contact route (D1)"],
   [/^pages\.education\.(registration|educators)/, "Confirmed educators and sessions; registration route (D1)"],
-  [/^pages\.speakers/, "At least one officially confirmed speaker or educator"],
+  [/^pages\.speakers\.(intro|pending)$/, "At least one officially confirmed speaker or educator"],
   [/^pages\.programme/, "Confirmed 2027 sessions and times"],
 ];
 
@@ -239,16 +241,92 @@ const REVISIONS: Record<string, { from: string; why: string }> = {
 };
 
 /* ------------------------------------------------------------------ */
+/* Layout wording                                                       */
+/* ------------------------------------------------------------------ */
+
+const CATEGORY_NAMES = COMPETITION_CATEGORIES.map((c) => c.name);
+const FORM_WORDS = /^(Your name|Work email|Email|Company or brand|Country|Website|Phone number|Social media|Handles or links|Message|Topic|Choose one|General question|Attending|Competing|Business inquiries|What you would exhibit|What would you like|Contact form|Sponsorship inquiry|Exhibitor application|Sponsorship inquiries|Exhibitor applications|Tell (us|the HEBS team) about)|\(optional\)$|^I understand HEBS|^Send me/;
+const FORM_DECISION = "Form contract and route (D1) and privacy notice (D13); the form stays closed until then";
+const LAYOUT_NOTICE = /not open yet|opens soon|Nothing can be (sent|submitted)|No payment is requested|are published when|is not open/i;
+
+function classifyLayout(s: LayoutString): Pick<SignoffItem, "category" | "approver" | "kind" | "dependsOn" | "replacedWhen"> {
+  const base = { dependsOn: [] as string[], replacedWhen: [] as string[] };
+  if (/Concept$|Photographed$|^CONCEPT/.test(s.text)) {
+    return { ...base, category: "C", approver: "Veridion", kind: "Label or heading", dependsOn: ["Replace the homepage destination scenes, which use restricted media (NJS concept films, disputed pre-party photographs)"] };
+  }
+  if (FORM_WORDS.test(s.text)) return { ...base, category: "C", approver: "HEBS organisers", kind: "Form wording", dependsOn: [FORM_DECISION] };
+  if (s.scope === "tickets" && (PAGES.tickets.willSupport as readonly string[]).includes(s.text)) {
+    return { ...base, category: "C", approver: "HEBS organisers", kind: "Commitment", dependsOn: ["Ticket categories, prices and payment gateway; ticketing route (D1)"] };
+  }
+  if (LAYOUT_NOTICE.test(s.text) || NOTICE.test(s.text)) return { ...base, category: "A", approver: "Veridion", kind: "Status notice" };
+  const rest = CATEGORY_NAMES.reduce((t, n) => t.split(n).join(" "), s.text);
+  if (!/[A-Za-z]/.test(rest)) return { ...base, category: "A", approver: "Veridion", kind: "Fact" };
+  if (/^©|^See |\? See |\?( \+)?$/.test(s.text)) return { ...base, category: "A", approver: "Veridion", kind: "Label or heading" };
+  if (s.where === "alt") return { ...base, category: "A", approver: "Veridion", kind: "Image description" };
+  if (s.where === "seo" || s.where === "social") return { ...base, category: "A", approver: "Veridion", kind: "Search and social" };
+  if ((s.text.match(/[A-Za-z']+/g) ?? []).length <= 6) return { ...base, category: "A", approver: "Veridion", kind: "Label or heading" };
+  if (/sponsor|exhibit|ticket|payment|price|prize|package|prospectus|registration|appl(y|ication)/i.test(s.text)) {
+    return { ...base, category: "B", approver: "HEBS organisers", kind: "Copy" };
+  }
+  return { ...base, category: "B", approver: "Mrs. Shuler", kind: "Copy" };
+}
+
+/* ------------------------------------------------------------------ */
 /* The register                                                         */
 /* ------------------------------------------------------------------ */
 
-/** The pages of the recommended first public launch: the two the gate requires, and two with no review media. */
-export const FIRST_LAUNCH: readonly PageId[] = ["home", "tickets", "contact", "speakers"];
-const NEXT: readonly PageId[] = ["travel", "about", "experience", "programme"];
+/**
+ * What each page is, for launch: information only; availability notices (what
+ * opens later, with nothing for sale or submission); or forms and commercial
+ * functions, which need their routes and terms (D1, D13) before they can work.
+ */
+export const PAGE_KIND: Record<PageId, "information" | "notices" | "forms"> = {
+  home: "information", about: "information", experience: "information", travel: "information", gallery: "information",
+  tickets: "notices", programme: "notices", speakers: "notices", competitions: "notices", education: "notices",
+  sponsorship: "forms", exhibitors: "forms", contact: "forms",
+};
+export const PAGE_KIND_WORDS = {
+  information: "Public information",
+  notices: "Future availability notices",
+  forms: "Forms or commercial functions",
+} as const;
 
-function tierOf(pages: readonly PageId[], group: SignoffItem["group"]): Tier {
-  if (group === "shared" || pages.some((p) => FIRST_LAUNCH.includes(p))) return 1;
+/** The smallest public launch the gate allows: the homepage and Tickets, which every priority-list button leads to. */
+export const FIRST_LAUNCH: readonly PageId[] = ["home", "tickets"];
+const NEXT: readonly PageId[] = ["speakers", "programme", "travel", "about", "experience", "gallery"];
+
+function tierOf(pages: readonly PageId[], shared = false): Tier {
+  if (shared || pages.some((p) => FIRST_LAUNCH.includes(p))) return 1;
   return pages.some((p) => NEXT.includes(p)) ? 2 : 3;
+}
+
+const SOURCE = {
+  directive: "Written for the preview from the owner directive's own wording (HEBS LAGOS 2027.pdf)",
+  home: "Homepage design approved by Mrs. Shuler on 7 Nov 2026; its wording is provisional until approved",
+  about2026: "HEBS Lagos 2026 About page, as published on hebslagos.com",
+  layout: "Wording in the page layout, as the page renders it",
+  fact: "Owner directive; official confirmation outstanding",
+} as const;
+
+function sourceOf(key: string): string {
+  if (/^pages\.about\.(history|pillars)/.test(key)) return SOURCE.about2026;
+  if (key.startsWith("home.")) return SOURCE.home;
+  return SOURCE.directive;
+}
+
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+function blockOf(i: Pick<SignoffItem, "category" | "approver" | "pages" | "section">): string | undefined {
+  if (i.category === "C") return undefined;
+  const page = i.pages.length >= 13 ? "site" : i.pages[0];
+  if (i.category === "A") return `routine-${page}`;
+  return `${i.approver === "Mrs. Shuler" ? "owner" : "organisers"}-${page}${page === "home" ? `-${slug(i.section)}` : ""}`;
+}
+
+function finish(i: Omit<SignoffItem, "category" | "block">, category: Category): SignoffItem {
+  const out: SignoffItem = { ...i, category };
+  out.block = blockOf(out);
+  return out;
 }
 
 function copyItem(key: string, text: string, status: PublicationStatus, decisions: readonly SignoffDecision[]): SignoffItem {
@@ -256,15 +334,29 @@ function copyItem(key: string, text: string, status: PublicationStatus, decision
   const c = classify(key, text);
   const waits = /\.title$/.test(key) ? [] : DEPENDS.filter(([re]) => re.test(key)).map(([, d]) => d);
   const notice = c.kind === "Status notice";
-  const dependsOn = [...(/NJS Royale Beach Resort/.test(text) ? ["Official venue name (D9)"] : []), ...(notice ? [] : waits)];
-  return {
-    id: key, ...c, text, pages, section, status, dependsOn, replacedWhen: notice ? waits : [],
-    tier: tierOf(pages, c.group),
+  const dependsOn = notice ? [] : waits;
+  const kind: SignoffItem["kind"] = c.kind === "Label or button" ? "Label or heading" : c.kind;
+  return finish({
+    id: key, approver: c.approver, kind, text, pages, section, status, dependsOn, replacedWhen: notice ? waits : [],
+    tier: tierOf(pages),
+    source: sourceOf(key),
     proposed: PROPOSALS[key],
     revised: REVISIONS[key],
     recorded: latestDecision(key, decisions),
     recordIn: "decision",
-  };
+  }, dependsOn.length > 0 ? "C" : c.approver === "Veridion" ? "A" : "B");
+}
+
+function layoutItem(s: LayoutString, decisions: readonly SignoffDecision[]): SignoffItem {
+  const c = classifyLayout(s);
+  const pages = s.scope === "site" ? SITE_PAGES.map((p) => p.id) : [s.scope];
+  return finish({
+    id: s.key, approver: c.approver, kind: c.kind, text: s.text, pages,
+    section: s.scope === "site" ? "Navigation, footer and shared elements" : s.where === "seo" ? "Search and social preview" : s.where === "alt" ? "Image descriptions and labels" : "Page layout",
+    status: layoutStatus(s, decisions), dependsOn: c.dependsOn, replacedWhen: c.replacedWhen,
+    tier: tierOf(pages, s.scope === "site"), source: SOURCE.layout,
+    recorded: latestDecision(s.key, decisions), recordIn: "decision",
+  }, c.category);
 }
 
 /** Wording written as `approved` (directive headlines) is not listed; everything else is, approved by sign-off or not. */
@@ -281,21 +373,81 @@ export function signoffItems(decisions: readonly SignoffDecision[] = SIGNOFF_DEC
   const home = homeCopyBlocks().filter((b) => !b.directive).map((b) =>
     copyItem(b.key, b.text, wordingApproved(b.key, b.text, decisions) ? "approved" : "provisional", decisions));
 
-  const fact = (id: string, text: string, status: PublicationStatus, pages: PageId[], section: string, approver: Approver, dependsOn: string[], recordIn: string): SignoffItem => ({
-    id, group: "shared", tier: 1, approver, kind: "Fact", text, pages, section, status, dependsOn, replacedWhen: [], recordIn,
-    recorded: latestDecision(id, decisions),
-  });
+  const layout = LAYOUT_COPY.map((s) => layoutItem(s, decisions));
+
+  const fact = (id: string, text: string, status: PublicationStatus, pages: PageId[], section: string, approver: Approver, dependsOn: string[], recordIn: string): SignoffItem =>
+    finish({ id, tier: 1, approver, kind: "Fact", text, pages, section, status, dependsOn, replacedWhen: [], source: SOURCE.fact, recordIn, recorded: latestDecision(id, decisions) }, "C");
   const facts: SignoffItem[] = [
     fact("fact.venue-name", VENUE.name.value, VENUE.name.status, ALL_PAGES, "Dates-and-venue line, hero and footer", "Mrs. Shuler",
       ["Official venue name (D9)"], "VENUE.name in lib/editions/2027.ts"),
     fact("fact.mark-2027", "The HEBS mark in the header and footer, until the official 2027 mark is confirmed", findAsset("hebs-logo-nav").status, ALL_PAGES,
       "Header, footer and social card", "Mrs. Shuler", ["Official 2027 mark (D3)"], "hebs-logo-nav in lib/assets/register.ts"),
     ...EDITION_DAYS.map((d, i) => fact(`fact.hours.${d.isoDate}`, `${d.weekday}, ${d.shortDate}: ${d.title}. Opening hours not set.`, d.hours.status,
-      ["home", "experience", "programme"], "Three days", "HEBS organisers", ["2027 opening hours for this day"], `EDITION_DAYS[${i}].hours in lib/editions/2027.ts`)),
+      ["home", "experience", "programme"], "Three days", "HEBS organisers", ["2027 opening hours for each day"], `EDITION_DAYS[${i}].hours in lib/editions/2027.ts`)),
   ];
 
-  const order = { shared: 0, factual: 1, organiser: 2, commercial: 3 };
-  return [...facts, ...home, ...copy].sort((a, b) => order[a.group] - order[b.group] || a.tier - b.tier);
+  const order = { C: 2, A: 0, B: 1 };
+  return [...facts, ...home, ...copy, ...layout].sort((a, b) => order[a.category] - order[b.category] || a.tier - b.tier);
+}
+
+/* ------------------------------------------------------------------ */
+/* Approval blocks: the executive content package                       */
+/* ------------------------------------------------------------------ */
+
+export interface ApprovalBlock {
+  /** Recorded as "block:<id>". */
+  id: string;
+  category: Exclude<Category, "C">;
+  approver: Approver;
+  title: string;
+  tier: Tier;
+  items: SignoffItem[];
+  /** The exact wording of every item, as a decision on the block records it. */
+  texts: Record<string, string>;
+}
+
+const PAGE_WORDS = (id: string) => (id === "site" ? "Every page" : PAGE_TITLE[id as PageId]);
+
+/** The open items of categories A and B, in blocks that can each be approved in one decision. */
+export function approvalBlocks(items: readonly SignoffItem[] = signoffItems()): ApprovalBlock[] {
+  const map = new Map<string, ApprovalBlock>();
+  for (const i of items) {
+    if (!i.block || i.status === "approved") continue;
+    const [, page] = /^(?:routine|owner|organisers)-([a-z]+)/.exec(i.block) ?? [];
+    const b = map.get(i.block) ?? {
+      id: i.block, category: i.category as "A" | "B", approver: i.approver, tier: i.tier, items: [], texts: {},
+      title: i.category === "A" ? `${PAGE_WORDS(page)}: routine wording` : page === "home" ? `Homepage: ${i.section}` : `${PAGE_WORDS(page)}${i.approver === "HEBS organisers" ? ": commercial terms" : ""}`,
+    };
+    b.items.push(i);
+    b.texts[i.id] = i.text;
+    b.tier = Math.min(b.tier, i.tier) as Tier;
+    map.set(i.block, b);
+  }
+  return Array.from(map.values()).sort((a, b) => a.category.localeCompare(b.category) || a.tier - b.tier);
+}
+
+/** A short fingerprint of a block's wording, so a decision can be checked against the package it was made on. */
+export function blockFingerprint(texts: Record<string, string>): string {
+  let h = 0x811c9dc5;
+  for (const [k, v] of Object.entries(texts).sort(([a], [b]) => a.localeCompare(b))) {
+    for (const ch of `${k}=${v};`) h = Math.imul(h ^ ch.charCodeAt(0), 0x01000193) >>> 0;
+  }
+  return h.toString(16).padStart(8, "0");
+}
+
+/** The outstanding decisions that category C waits on, each with the items it clears. */
+export function pendingDecisions(items: readonly SignoffItem[] = signoffItems()): { decision: string; approver: Approver; items: SignoffItem[] }[] {
+  const map = new Map<string, { decision: string; approver: Approver; items: SignoffItem[] }>();
+  for (const i of items) {
+    if (i.category !== "C" || i.status === "approved") continue;
+    const d = i.dependsOn[0] ?? "Outstanding decision";
+    const e = map.get(d) ?? { decision: d, approver: i.approver, items: [] };
+    e.items.push(i);
+    map.set(d, e);
+  }
+  const facts = (d: { items: SignoffItem[] }) => (d.items.some((i) => i.kind === "Fact" && i.pages.length >= 13) ? 0 : 1);
+  return Array.from(map.values()).sort((a, b) => facts(a) - facts(b)
+    || Math.min(...a.items.map((i) => i.tier)) - Math.min(...b.items.map((i) => i.tier)) || b.items.length - a.items.length);
 }
 
 /* ------------------------------------------------------------------ */
@@ -307,60 +459,34 @@ export interface MediaRecord {
   title: string;
   count: number;
   pages: PageId[];
-  state: "Approved; written terms outstanding" | "Permission needed" | "Excluded from publication" | "Recorded under the 2027 mark";
-  /** What has been decided already. */
-  settled: string;
-  /** What is still needed, and from whom. */
-  outstanding: string;
-  approver: Approver;
-  tier: Tier;
+  state: "Approved by the event owner" | "Restricted";
+  /** The approval, or the evidence for the restriction. */
+  basis: string;
+  /** Third-party paperwork to file, which does not hold the media back. */
+  followUp?: string;
 }
 
-const MEDIA_TEXT: Record<Exclude<ReviewCollection, "brand-mark">, Omit<MediaRecord, "id" | "count" | "pages" | "tier">> = {
-  "house-of-snapp": {
-    title: "House of Snapp photographs, HEBS Lagos 2026 summit days",
-    state: "Approved; written terms outstanding",
-    settled: SNAPP_APPROVAL,
-    outstanding: "File the photographer's written usage terms. Then the photographs move into the rights-gated register and stop counting as review media. Competition names, placings and prize amounts stay unpublished until the organisers verify them (D8).",
-    approver: "Mrs. Shuler",
-  },
-  "vmm-summit": {
-    title: "VMM film of the 2026 styling floor (homepage hero loop)",
-    state: "Permission needed",
-    settled: "Chosen with no sponsor logos in shot.",
-    outstanding: "VMM's written permission and the consent of everyone recognisable. Without them, the homepage hero needs a House of Snapp photograph instead.",
-    approver: "HEBS organisers",
-  },
-  "vmm-preparty": {
-    title: "VMM photographs of the 2026 Welcome Pre-Party (DSC00261–00353)",
-    state: "Excluded from publication",
-    settled: "Ownership is disputed; kept out of public publication.",
-    outstanding: "Nothing for launch. The homepage positions that use them need House of Snapp photographs or typographic panels before the homepage can launch.",
-    approver: "HEBS organisers",
-  },
-  "vmm-oct22": {
-    title: "VMM photographs of the 22 Oct 2026 gathering",
-    state: "Excluded from publication",
-    settled: "Not confirmed as an official HEBS activity; never described as NJS.",
-    outstanding: "Nothing for launch. Replace wherever used.",
-    approver: "HEBS organisers",
-  },
-  "njs-concept": {
-    title: "NJS concept films of the pool terrace and guests",
-    state: "Excluded from publication",
-    settled: "Concept visuals, one marked AI-generated; the guests film is kept out of public publication.",
-    outstanding: "Nothing for launch. Use only with NJS's permission and confirmation of the finished design, always labelled as a concept.",
-    approver: "HEBS organisers",
-  },
+const MEDIA_TITLE: Record<ReviewCollection, string> = {
+  "house-of-snapp": "House of Snapp photographs, HEBS Lagos 2026 summit days",
+  "vmm-summit": "VMM film of the 2026 styling floor",
+  "vmm-preparty": "VMM photographs of the 2026 Welcome Pre-Party (DSC00261–00353)",
+  "vmm-oct22": "VMM photographs of the 22 Oct 2026 gathering",
+  "njs-concept": "NJS concept films of the pool terrace and guests",
+  "brand-mark": "Provisional 2027 mark",
 };
 
 export function mediaRecords(): MediaRecord[] {
-  return (Object.keys(MEDIA_TEXT) as (keyof typeof MEDIA_TEXT)[]).map((id) => {
-    const ids = REVIEW_ASSETS.filter((a) => a.collection === id).map((a) => a.id);
+  return (Object.keys(MEDIA_TITLE) as ReviewCollection[]).filter((c) => c !== "brand-mark").map((id) => {
+    const assets = REVIEW_ASSETS.filter((a) => a.collection === id);
+    const ids = assets.map((a) => a.id);
     const pages = (Object.entries(REVIEW_MEDIA_BY_PAGE) as [PageId, readonly string[]][])
       .filter(([, used]) => used.some((u) => ids.includes(u))).map(([p]) => p);
-    const t = MEDIA_TEXT[id];
-    return { id, ...t, count: ids.length, pages, tier: t.state === "Excluded from publication" ? 3 : tierOf(pages, "factual") };
+    const restricted = Array.from(new Set(assets.map((a) => a.restricted).filter(Boolean))).join(" ") || undefined;
+    const followUp = assets.find((a) => a.followUp)?.followUp;
+    return restricted
+      ? { id, title: MEDIA_TITLE[id], count: assets.length, pages, state: "Restricted" as const, basis: restricted }
+      : { id, title: MEDIA_TITLE[id], count: assets.length, pages, state: "Approved by the event owner" as const,
+          basis: `${OWNER_MEDIA_APPROVAL.by}, ${OWNER_MEDIA_APPROVAL.date}.`, followUp };
   }).filter((r) => r.count > 0);
 }
 
@@ -370,47 +496,59 @@ export function mediaRecords(): MediaRecord[] {
 
 export interface LaunchDecision {
   decision: string;
-  who: Approver | "Mrs. Shuler and NJS" | "Mrs. Shuler (written)";
+  who: string;
   why: string;
 }
 
-/** What has to be decided before the first public launch, in the order it unblocks the most. */
+/** What still stands between today and the smallest public launch (FIRST_LAUNCH), most far-reaching first. */
 export function firstLaunchDecisions(items: readonly SignoffItem[] = signoffItems()): LaunchDecision[] {
-  const open = (pred: (i: SignoffItem) => boolean) => items.filter((i) => i.status !== "approved" && i.tier === 1 && pred(i)).length;
+  const blocks = approvalBlocks(items).filter((b) => b.tier === 1);
   const out: LaunchDecision[] = [];
-  if ((VENUE.name.status as PublicationStatus) !== "approved") out.push({ decision: "Official venue name (D9)", who: "Mrs. Shuler and NJS", why: "Shown on every page; no page can launch without it." });
+  if ((VENUE.name.status as PublicationStatus) !== "approved") out.push({ decision: "Official venue name (D9)", who: "Mrs. Shuler, with NJS", why: "Shown on every page." });
   if (findAsset("hebs-logo-nav").status !== "approved") out.push({ decision: "The 2027 mark (D3)", who: "Mrs. Shuler", why: "In the header and footer of every page." });
-  if (LAUNCH_2027.origin.status !== "approved") out.push({ decision: "The public web address (D7)", who: "Mrs. Shuler", why: "Canonical links, the sitemap and the social card depend on it." });
-  out.push({ decision: `Homepage wording (${open((i) => i.pages.includes("home") && i.approver === "Mrs. Shuler")} items for Mrs. Shuler)`, who: "Mrs. Shuler", why: "The gate requires the homepage in every launch." });
-  out.push({ decision: "House of Snapp written usage terms", who: "Mrs. Shuler", why: "The homepage relies on review photographs until the terms are filed." });
-  out.push({ decision: "Homepage film and pre-party positions", who: "HEBS organisers", why: "The VMM hero film needs VMM's permission; pre-party and concept media are excluded, so those positions need House of Snapp photographs." });
-  if (!LAUNCH_2027.authorisation) out.push({ decision: "Written launch authorisation", who: "Mrs. Shuler (written)", why: "The final switch, recorded in lib/launch-2027-config.ts." });
+  if (LAUNCH_2027.origin.status !== "approved") out.push({ decision: "The public web address (D7)", who: "Mrs. Shuler", why: "Canonical links, the sitemap and the social card use it." });
+  const owner = blocks.filter((b) => b.category === "B");
+  if (owner.length) out.push({ decision: `Homepage and Tickets wording: ${owner.length} blocks in the executive content package`, who: "Mrs. Shuler", why: "Editorial and commercial statements on the two launch pages." });
+  const routine = blocks.filter((b) => b.category === "A");
+  if (routine.length) out.push({ decision: `Routine wording on the launch pages: ${routine.reduce((n, b) => n + b.items.length, 0)} items in ${routine.length} blocks`, who: "Veridion", why: "Navigation, headings, buttons, notices and descriptions, verified page by page." });
+  out.push({ decision: "Homepage destination scenes and pre-party positions", who: "Veridion, then Mrs. Shuler to confirm", why: "They use restricted media (disputed pre-party photographs, NJS concept films). Replace them with owner-approved House of Snapp photographs." });
+  out.push({ decision: "Move the owner-approved media into the published assets", who: "Veridion", why: "A technical step: production never serves the private review folder." });
+  if (!LAUNCH_2027.authorisation) out.push({ decision: "Written launch authorisation", who: "Mrs. Shuler", why: "The final switch, recorded in lib/launch-2027-config.ts." });
   return out;
 }
 
 export interface SignoffCounts {
   total: number;
   open: number;
+  byCategory: Record<Category, number>;
   byApprover: Record<Approver, number>;
-  byGroup: Record<Exclude<SignoffGroup, "media">, number>;
   byTier: Record<Tier, number>;
-  /** Open items that wait on no outstanding decision: they can be signed off now. */
-  decidableNow: number;
+  blocks: { A: number; B: number; owner: number; organisers: number };
+  pendingDecisions: number;
 }
 
 export function signoffCounts(items: readonly SignoffItem[] = signoffItems()): SignoffCounts {
   const open = items.filter((i) => i.status !== "approved");
   const tally = <K extends string>(keys: readonly K[], f: (i: SignoffItem) => K) =>
     Object.fromEntries(keys.map((k) => [k, open.filter((i) => f(i) === k).length])) as Record<K, number>;
+  const blocks = approvalBlocks(items);
   return {
     total: items.length,
     open: open.length,
+    byCategory: tally(["A", "B", "C"] as const, (i) => i.category),
     byApprover: tally(["Veridion", "Mrs. Shuler", "HEBS organisers"] as const, (i) => i.approver),
-    byGroup: tally(["shared", "factual", "organiser", "commercial"] as const, (i) => i.group),
     byTier: { 1: open.filter((i) => i.tier === 1).length, 2: open.filter((i) => i.tier === 2).length, 3: open.filter((i) => i.tier === 3).length },
-    decidableNow: open.filter((i) => i.dependsOn.length === 0).length,
+    blocks: {
+      A: blocks.filter((b) => b.category === "A").length,
+      B: blocks.filter((b) => b.category === "B").length,
+      owner: blocks.filter((b) => b.category === "B" && b.approver === "Mrs. Shuler").length,
+      organisers: blocks.filter((b) => b.category === "B" && b.approver === "HEBS organisers").length,
+    },
+    pendingDecisions: pendingDecisions(items).length,
   };
 }
 
-/** For the review page: the 13 pages' titles. */
+export const TIER_WORDS: Record<Tier, string> = { 1: "the first launch", 2: "the next pages", 3: "later pages" };
+
+/** The 13 pages' titles. */
 export const PAGE_TITLE = Object.fromEntries(SITE_PAGES.map((p) => [p.id, p.title])) as Record<PageId, string>;

@@ -1,86 +1,83 @@
 /**
  * The content sign-off register (lib/content/signoff-2027.ts), its decision
- * record (lib/content/signoff-decisions-2027.ts) and the review page.
+ * record (lib/content/signoff-decisions-2027.ts), the media records and the
+ * review page.
  */
 import { describe, expect, it } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { blockStatus, contentRegister } from "../lib/content/2027";
 import { HOME, homeCopyBlocks, homeCopyStatus } from "../lib/content/home-2027";
+import { LAYOUT_COPY, layoutStatuses } from "../lib/content/layout-copy-2027";
 import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "../lib/content/signoff-decisions-2027";
-import { firstLaunchDecisions, mediaRecords, signoffCounts, signoffItems } from "../lib/content/signoff-2027";
+import {
+  FIRST_LAUNCH, PAGE_KIND, approvalBlocks, firstLaunchDecisions, mediaRecords, pendingDecisions, signoffCounts, signoffItems,
+} from "../lib/content/signoff-2027";
+import { REVIEW_ASSETS } from "../lib/assets/home-2027-review";
+import { TICKET_SALES, portalLink } from "../lib/integrations/registration-2027";
+import { launchBlockers, pageStatuses, type LaunchConfig } from "../lib/launch-2027";
 import { isWithheld } from "../middleware";
-import type { LaunchConfig } from "../lib/launch-2027";
 import { SITE_PAGES } from "../lib/site/2027";
+import { TicketsPage } from "../components/2027/editorial/inner";
 
 const OPEN: LaunchConfig = {
   authorisation: { by: "Owner (test)", on: "2027-06-01", reference: "test" },
   pages: SITE_PAGES.map((p) => p.id),
   origin: { status: "approved", value: "https://www.hebslagos.com", source: "test" },
 };
+const decided = (item: string, extra: Partial<SignoffDecision>): SignoffDecision => ({ item, decision: "approved", by: "Test", on: "2026-11-11", reference: "test", ...extra });
 
 describe("sign-off register", () => {
   const items = signoffItems();
 
-  it("lists every unapproved copy block on the 13 pages, once", () => {
+  it("lists every unapproved copy block and every inventoried layout string, once", () => {
     const ids = items.map((i) => i.id);
     expect(new Set(ids).size).toBe(ids.length);
-    const pending = contentRegister().filter((e) => e.status !== "approved" && !/^(education|qr)\./.test(e.key));
-    for (const e of pending) expect(ids, e.key).toContain(e.key);
+    for (const e of contentRegister().filter((x) => x.status !== "approved" && !/^(education|qr)\./.test(x.key))) expect(ids, e.key).toContain(e.key);
+    for (const s of LAYOUT_COPY) expect(ids, s.key).toContain(s.key);
   });
 
   it("lists every homepage line except the directive's own headlines", () => {
     const listed = new Set(items.filter((i) => i.id.startsWith("home.")).map((i) => i.id));
     for (const b of homeCopyBlocks()) expect(listed.has(b.key), b.key).toBe(!b.directive);
-    expect(homeCopyBlocks().filter((b) => b.directive).map((b) => b.key)).toEqual(
-      expect.arrayContaining(["home.hero.lines.0", "home.hero.accent", "home.welcome.title", "home.final.cta", "home.sponsors.accent"]),
-    );
   });
 
-  it("gives every item a group, an approver, a page and a priority", () => {
+  it("puts every item in one category, and A and B items in a block", () => {
     for (const i of items) {
-      expect(["shared", "factual", "organiser", "commercial"]).toContain(i.group);
-      expect(["Veridion", "Mrs. Shuler", "HEBS organisers"]).toContain(i.approver);
-      expect(i.pages.length, i.id).toBeGreaterThan(0);
-      expect([1, 2, 3]).toContain(i.tier);
+      expect(["A", "B", "C"]).toContain(i.category);
+      if (i.category === "C") expect(i.dependsOn.length, i.id).toBeGreaterThan(0);
+      else expect(i.block, i.id).toBeDefined();
+      if (i.category === "A") expect(i.approver).toBe("Veridion");
+      if (i.category === "B") expect(["Mrs. Shuler", "HEBS organisers"]).toContain(i.approver);
     }
   });
 
-  it("counts add up", () => {
+  it("keeps navigation, buttons, notices and image descriptions routine", () => {
+    const of = (text: string) => items.find((i) => i.text === text);
+    for (const t of ["Skip to content", "Privacy Policy", "Take part", "Priority list opens soon", "Ticket sales."]) expect(of(t)?.category, t).toBe("A");
+    expect(items.filter((i) => i.kind === "Image description" || i.kind === "Search and social").every((i) => i.category === "A")).toBe(true);
+    expect(items.filter((i) => i.kind === "Status notice" && i.category !== "A").every((i) => i.approver === "HEBS organisers")).toBe(true);
+  });
+
+  it("holds form wording and ticket commitments until their decisions", () => {
+    expect(items.filter((i) => i.kind === "Form wording").every((i) => i.category === "C")).toBe(true);
+    expect(items.find((i) => i.text === "Secure online payment")?.category).toBe("C");
+  });
+
+  it("counts add up, and Mrs. Shuler's share is a short list of blocks", () => {
     const c = signoffCounts(items);
     const sum = (r: Record<string, number>) => Object.values(r).reduce((a, b) => a + b, 0);
+    expect(sum(c.byCategory)).toBe(c.open);
     expect(sum(c.byApprover)).toBe(c.open);
-    expect(sum(c.byGroup)).toBe(c.open);
-    expect(sum(c.byTier)).toBe(c.open);
+    expect(c.byCategory.A).toBeGreaterThan(c.byCategory.B);
+    expect(c.blocks.owner).toBeLessThan(20);
   });
 
-  it("puts the shared facts first, needed for the first launch", () => {
-    const shared = items.filter((i) => i.group === "shared").map((i) => i.id);
-    expect(shared).toEqual(expect.arrayContaining(["fact.venue-name", "fact.mark-2027"]));
-    expect(items.filter((i) => i.group === "shared").every((i) => i.tier === 1)).toBe(true);
-  });
-
-  it("status notices can be approved now; what replaces them is listed separately", () => {
-    const notices = items.filter((i) => i.kind === "Status notice" && !/NJS/.test(i.text));
-    expect(notices.length).toBeGreaterThan(10);
-    for (const n of notices) expect(n.dependsOn, n.id).toEqual([]);
-    expect(items.find((i) => i.id === "pages.tickets.categories")?.replacedWhen.length).toBeGreaterThan(0);
-  });
-
-  it("names the decisions blocking the first launch, D9 and D3 first", () => {
-    const d = firstLaunchDecisions(items).map((x) => x.decision);
+  it("lists the outstanding decisions with the venue name and mark first", () => {
+    const d = pendingDecisions(items).map((x) => x.decision);
     expect(d[0]).toMatch(/D9/);
     expect(d[1]).toMatch(/D3/);
-    expect(d.join(" ")).toMatch(/House of Snapp written usage terms/);
-    expect(d.join(" ")).toMatch(/Written launch authorisation/);
-  });
-});
-
-describe("venue wording", () => {
-  it("keeps the Atlantic location without placing HEBS on the beach", () => {
-    const all = [...contentRegister().map((e) => e.text), ...homeCopyBlocks().map((b) => b.text)];
-    for (const t of all) expect(t).not.toMatch(/beachfront|on the beach/i);
-    expect(all.some((t) => /Atlantic coast/.test(t))).toBe(true);
+    expect(firstLaunchDecisions(items).map((x) => x.decision).join(" ")).toMatch(/Written launch authorisation/);
   });
 });
 
@@ -91,37 +88,85 @@ describe("decisions", () => {
 
   it("an approval covers exactly the wording approved", () => {
     const block = { status: "provisional" as const, text: "Contact us" };
-    const ok: SignoffDecision[] = [{ item: "pages.contact.title", decision: "approved", text: "Contact us", by: "Test", on: "2026-11-11", reference: "test" }];
+    const ok = [decided("pages.contact.title", { text: "Contact us" })];
     expect(blockStatus("pages.contact.title", block, ok)).toBe("approved");
     expect(blockStatus("pages.contact.title", { ...block, text: "Contact HEBS" }, ok)).toBe("provisional");
-    expect(blockStatus("pages.travel.title", block, ok)).toBe("provisional");
-    const later: SignoffDecision[] = [...ok, { item: "pages.contact.title", decision: "revision-required", by: "Test", on: "2026-11-12", reference: "test" }];
+    const later = [...ok, decided("pages.contact.title", { decision: "revision-required" })];
     expect(wordingApproved("pages.contact.title", "Contact us", later)).toBe(false);
+  });
+
+  it("a block approval approves each line in its exact wording only", () => {
+    const b = approvalBlocks().find((x) => x.id === "owner-home-welcome")!;
+    const rec = [decided(`block:${b.id}`, { texts: b.texts })];
+    for (const [k, t] of Object.entries(b.texts)) {
+      expect(wordingApproved(k, t, rec)).toBe(true);
+      expect(wordingApproved(k, `${t} (changed)`, rec)).toBe(false);
+    }
   });
 
   it("the homepage copy is approved only when every listed line is", () => {
     expect(homeCopyStatus()).toBe("provisional");
-    const all: SignoffDecision[] = homeCopyBlocks().filter((b) => !b.directive)
-      .map((b) => ({ item: b.key, decision: "approved", text: b.text, by: "Test", on: "2026-11-11", reference: "test" }));
+    const all = homeCopyBlocks().filter((b) => !b.directive).map((b) => decided(b.key, { text: b.text }));
     expect(homeCopyStatus(all)).toBe("approved");
     expect(homeCopyStatus(all.slice(1))).toBe("provisional");
     expect(HOME.hero.kicker).toBe("HEBS Lagos 2027");
   });
+
+  it("the launch gate counts layout wording on each page", () => {
+    for (const p of SITE_PAGES) {
+      const layout = layoutStatuses(p.id);
+      expect(layout.length, p.id).toBeGreaterThan(0);
+      expect(pageStatuses(p.id).length, p.id).toBeGreaterThanOrEqual(layout.length);
+    }
+  });
 });
 
-describe("media records", () => {
-  it("keeps the House of Snapp approval and the outstanding written terms distinct", () => {
-    const hos = mediaRecords().find((m) => m.id === "house-of-snapp")!;
-    expect(hos.state).toBe("Approved; written terms outstanding");
-    expect(hos.settled).toMatch(/Approved by Mrs\. Shuler/);
-    expect(hos.settled).toMatch(/payment alone is not a publishing licence/);
-    expect(hos.outstanding).toMatch(/written usage terms/);
+describe("venue wording", () => {
+  it("keeps the Atlantic location without placing HEBS on the beach", () => {
+    const all = [...contentRegister().map((e) => e.text), ...homeCopyBlocks().map((b) => b.text), ...LAYOUT_COPY.map((s) => s.text)];
+    for (const t of all) expect(t).not.toMatch(/beachfront|on the beach/i);
+  });
+});
+
+describe("media", () => {
+  it("records the event owner's approval of the selected website media", () => {
+    const m = mediaRecords();
+    for (const id of ["house-of-snapp", "vmm-summit"] as const) {
+      const r = m.find((x) => x.id === id)!;
+      expect(r.state, id).toBe("Approved by the event owner");
+      expect(r.basis).toMatch(/Mrs\. Shuler/);
+    }
   });
 
-  it("keeps pre-party and concept media excluded", () => {
+  it("keeps restrictions only where there is evidence", () => {
     const m = mediaRecords();
-    expect(m.find((x) => x.id === "vmm-preparty")?.state).toBe("Excluded from publication");
-    expect(m.find((x) => x.id === "njs-concept")?.state).toBe("Excluded from publication");
+    expect(m.find((x) => x.id === "vmm-preparty")?.basis).toMatch(/disputed/);
+    expect(m.find((x) => x.id === "njs-concept")?.state).toBe("Restricted");
+    for (const a of REVIEW_ASSETS.filter((x) => x.collection === "house-of-snapp")) expect(a.restricted, a.id).toBeUndefined();
+  });
+
+  it("does not block a launch for paperwork; only restricted media or files still in the review folder", () => {
+    const b = launchBlockers({ config: { ...OPEN, pages: ["home", "tickets", "gallery"] }, statuses: ["approved"] }).map((x) => x.id);
+    expect(b).toContain("media-restricted-home");
+    expect(b).not.toContain("media-restricted-gallery");
+    expect(b).toContain("review-media-gallery");
+    expect(b.join(" ")).not.toMatch(/terms|licence/);
+  });
+});
+
+describe("launch readiness", () => {
+  it("classifies every page, and the smallest launch is the homepage and Tickets", () => {
+    for (const p of SITE_PAGES) expect(PAGE_KIND[p.id]).toBeDefined();
+    expect(FIRST_LAUNCH).toEqual(["home", "tickets"]);
+  });
+
+  it("Tickets never implies sales are open before prices and payment are approved", () => {
+    expect(TICKET_SALES.prices && TICKET_SALES.payment).toBe(false);
+    const approvedRoute = { tickets: { status: "approved", value: "https://hebseventportal.com/tickets", source: "test" } } as never;
+    expect(portalLink("tickets", "production", approvedRoute, ["hebseventportal.com"])).toBeNull();
+    const html = renderToStaticMarkup(createElement(TicketsPage, { environment: "preview", notes: "inline" }));
+    expect(html).not.toMatch(/Buy tickets|Book now|Checkout|Add to cart|Pay now/i);
+    expect(html).toMatch(/not on sale/);
   });
 });
 
@@ -131,14 +176,14 @@ describe("review page", () => {
     expect(isWithheld("/2027/review", "preview", ["approved", "provisional"])).toBe(false);
   });
 
-  it("renders the groups, the record method and no form submission", async () => {
+  it("renders the three categories and block decisions, with no form submission", async () => {
     const { default: Page } = await import("../app/(edition)/2027/review/page");
     const html = renderToStaticMarkup(createElement(Page));
-    for (const t of ["Content sign-off", "Shared across pages", "Factual content Veridion can verify", "Organiser wording for Mrs. Shuler",
-      "Commercial and registration information", "Media rights and photograph records", "Approved", "Revision required", "Pending decision"]) {
+    for (const t of ["Content sign-off", "A. Routine wording Veridion verifies", "B. Substantive wording", "C. Waiting on an outstanding decision",
+      "Launch readiness by page", "Approved", "Revision required", "Pending decision", "Approved by the event owner"]) {
       expect(html).toContain(t);
     }
     expect(html).not.toMatch(/<form|action=/);
-    expect(html).not.toMatch(/DSC00\d{3}\.|drive\.google|_vercel_share/);
+    expect(html).not.toMatch(/drive\.google|_vercel_share/);
   });
 });

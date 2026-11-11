@@ -1,5 +1,6 @@
 import "./site.css";
 import { CAMPAIGN, VENUE } from "@/lib/editions/2027";
+import { deployEnvironment } from "@/lib/publication";
 
 /**
  * The 2027 design system's small parts, taken from the approved homepage so every
@@ -64,10 +65,15 @@ export function AccentTitle({ text, accent = 0, tone = "dark" }: { text: string;
   );
 }
 
-/** The one staging notice every 2027 page carries until launch. */
+/**
+ * The one staging notice every 2027 page carries in previews. Never on
+ * production, so a launched page shows none of it. Elements marked
+ * data-staging are left out of the copy inventory (tests/copy-inventory-2027.test.ts).
+ */
 export function StagingStrip({ children }: { children?: React.ReactNode }) {
+  if (deployEnvironment() === "production") return null;
   return (
-    <div className="s27-strip" role="note" data-preview-banner="">
+    <div className="s27-strip" role="note" data-preview-banner="" data-staging="">
       <b>Internal preview, not for publication.</b>{" "}
       {children ?? "Provisional copy and details are marked."} No registration or inquiry is collected.{" "}
       <a href="/2027/status">Approval status</a>

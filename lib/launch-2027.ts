@@ -6,8 +6,10 @@
  * one fails (see `launchBlockers`):
  *   - LAUNCH_2027.authorisation records the owner's written authorisation;
  *   - every 2027 copy block, fact, media slot and launch item is approved;
- *   - no published page relies on review media (public/_review is never served
- *     on production, so such a page would show placeholders);
+ *   - no published page uses restricted media (disputed ownership, a known usage
+ *     limit) or media awaiting a decision, and every owner-approved file it shows
+ *     has been moved out of the private review folder, which production never
+ *     serves (a technical step, not an approval);
  *   - no form is switched on without its approved contract and privacy notice;
  *   - the canonical web address is approved (D7);
  *   - the emergency switch HEBS_2027_WITHHOLD is not "on".
@@ -31,6 +33,7 @@ import { isPagePublishable, type DeployEnvironment, type PublicationStatus } fro
 import { BASE, SITE_PAGES, type PageId } from "./site/2027";
 import { LAUNCH_2027, type LaunchConfig } from "./launch-2027-config";
 import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "./site/page-media-2027";
+import { layoutStatuses } from "./content/layout-copy-2027";
 
 export { LAUNCH_2027, type LaunchAuthorisation, type LaunchConfig } from "./launch-2027-config";
 
@@ -52,11 +55,17 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
 
 /**
  * Every approval state one page renders: what all pages share (the venue name in
- * the dates-and-venue line, the logo, the closing call to action) plus the page's
- * own copy, facts and image positions. A page's launch depends only on these, so
+ * the dates-and-venue line, the logo, the closing call to action, the navigation
+ * and footer wording) plus the page's own copy, facts, image positions and the
+ * wording written in its layout (lib/content/layout-copy-2027.ts). A page's launch depends only on these, so
  * unapproved material on one page never holds back another.
  */
 export function pageStatuses(id: PageId): PublicationStatus[] {
+  return [...contentStatuses(id), ...layoutStatuses(id)];
+}
+
+/** The approval states of the content-module copy and facts one page shows. */
+function contentStatuses(id: PageId): PublicationStatus[] {
   const shared = [VENUE.name.status, findAsset("hebs-logo-nav").status, ...copyStatuses(COPY.finalCta, "finalCta")];
   const hours = EDITION_DAYS.map((d) => d.hours.status);
   const slot = (slotId: string) => {
@@ -141,14 +150,22 @@ export function launchBlockers({
     if (pending > 0) add(`approvals-${id}`, "Every item a launched page shows approved", `${id}: ${pending} of ${own.length} items are not approved.`);
   }
   for (const id of config.pages) {
-    const media = reviewMedia[id] ?? [];
-    if (media.length > 0) {
-      const unrecorded = REVIEW_ASSETS.filter((a) => media.includes(a.id) && a.rights.permission !== "recorded").length;
-      add(
-        `review-media-${id}`,
-        "No launched page relies on review media",
-        `${id} renders ${media.length} review items (${unrecorded} without recorded written usage terms); each must be cleared and moved into the rights-gated register.`,
-      );
+    const media = REVIEW_ASSETS.filter((a) => (reviewMedia[id] ?? []).includes(a.id));
+    if (media.length === 0) continue;
+    const restricted = media.filter((a) => a.restricted);
+    const undecided = media.filter((a) => !a.restricted && !a.ownerApproval);
+    const approved = media.filter((a) => !a.restricted && a.ownerApproval);
+    if (restricted.length > 0) {
+      add(`media-restricted-${id}`, "No launched page uses restricted media",
+        `${id} uses ${restricted.length} restricted items (${Array.from(new Set(restricted.map((a) => a.collection))).join(", ")}); replace them or resolve the restriction.`);
+    }
+    if (undecided.length > 0) {
+      add(`media-undecided-${id}`, "Every image a launched page shows is decided", `${id} uses ${undecided.length} items awaiting a decision (${undecided.map((a) => a.id).join(", ")}).`);
+    }
+    if (approved.length > 0) {
+      // Technical, not an approval: production never serves the private review folder.
+      add(`review-media-${id}`, "Approved media is in the published assets",
+        `${id} shows ${approved.length} owner-approved items still in the private review folder, which production does not serve; move them into the published asset register.`);
     }
   }
   for (const form of Object.keys(formsOpen) as FormId[]) {

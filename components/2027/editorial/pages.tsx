@@ -70,7 +70,7 @@ export function Shell({ page, opts, nav = SITE_NAV, home = sitePage("home").path
       <style>{EDITORIAL_CSS}</style>
       {page ? <SiteHeader current={page} /> : <Nav brand={opts.brand} links={nav} menuLinks={nav === SITE_NAV ? SITE_MENU : nav} priorityHref={home === "#hero" ? "#priority-list" : PRIORITY_HREF} homeHref={home} />}
       <main id="main-content">{children}</main>
-      {notes === "panel" && <ReviewPanel groups={groups} brand={opts.brand} />}
+      {notes === "panel" && opts.environment !== "production" && <ReviewPanel groups={groups} brand={opts.brand} />}
     </div>
   );
 }
@@ -137,7 +137,7 @@ const launchGroups = (n: ReviewNotes): [string, string[]][] => [
 export function ReviewPanel({ groups, brand }: { groups: [string, string[]][]; brand: BrandVariant }) {
   const view = (b: BrandVariant, m: NotesMode) => `?brand=${b}&notes=${m}`;
   return (
-    <aside aria-labelledby="review-notes-title" className="border-t-2 border-dashed" style={{ background: "#0B2226", borderColor: "rgba(200,169,106,.6)", color: C.ivory }}>
+    <aside data-staging="" aria-labelledby="review-notes-title" className="border-t-2 border-dashed" style={{ background: "#0B2226", borderColor: "rgba(200,169,106,.6)", color: C.ivory }}>
       <div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-12">
         <h2 id="review-notes-title" className="text-[18px] font-semibold">Staging review notes</h2>
         <p className="mt-2 max-w-[70ch] text-[14px] leading-relaxed" style={{ color: "rgba(245,239,228,.8)" }}>

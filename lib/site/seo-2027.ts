@@ -17,7 +17,14 @@ import { BASE, SITE_PAGES, sitePage, type PageId } from "./2027";
 
 export const SITE_NAME = "HEBS Lagos 2027";
 
-export const SOCIAL_CARD = { path: `${BASE}/social-card`, width: 1200, height: 630, alt: "HEBS Lagos 2027, July 23–25, 2027" };
+export const SOCIAL_CARD = {
+  path: `${BASE}/social-card`,
+  width: 1200,
+  height: 630,
+  alt: "HEBS Lagos 2027, July 23–25, 2027",
+  /** The card's wording, line by line (app/(edition)/2027/social-card/route.tsx). */
+  lines: { kicker: "HAIR EDUCATION BEAUTY SUMMIT", name: "HEBS", city: "Lagos", year: "2027", dates: "JULY 23–25, 2027" },
+} as const;
 
 /** Shortens to at most `max` characters at a word boundary. */
 export function clip(text: string, max = 160): string {

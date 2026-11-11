@@ -20,14 +20,14 @@ export async function GET() {
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "0 96px", background: "radial-gradient(70% 80% at 78% 30%, #2A2016 0%, #0D0B08 70%)", color: "#F6EFE2" }}>
-        <div style={{ fontFamily: "Jost", fontSize: 22, letterSpacing: 9, color: "#D9C192" }}>HAIR EDUCATION BEAUTY SUMMIT</div>
+        <div style={{ fontFamily: "Jost", fontSize: 22, letterSpacing: 9, color: "#D9C192" }}>{SOCIAL_CARD.lines.kicker}</div>
         <div style={{ display: "flex", alignItems: "baseline", fontFamily: "Bodoni", fontSize: 128, marginTop: 22, lineHeight: 1 }}>
-          <span style={{ marginRight: 34 }}>HEBS</span>
-          <span style={{ fontFamily: "Bodoni Italic", backgroundImage: gold, backgroundClip: "text", color: "transparent" }}>Lagos</span>
+          <span style={{ marginRight: 34 }}>{SOCIAL_CARD.lines.name}</span>
+          <span style={{ fontFamily: "Bodoni Italic", backgroundImage: gold, backgroundClip: "text", color: "transparent" }}>{SOCIAL_CARD.lines.city}</span>
         </div>
-        <div style={{ fontFamily: "Bodoni", fontSize: 128, lineHeight: 1.05 }}>2027</div>
+        <div style={{ fontFamily: "Bodoni", fontSize: 128, lineHeight: 1.05 }}>{SOCIAL_CARD.lines.year}</div>
         <div style={{ width: 180, height: 2, background: "linear-gradient(90deg, #8C6B34, #E9D4A2 50%, #B8914C)", marginTop: 34 }} />
-        <div style={{ fontFamily: "Jost", fontSize: 28, letterSpacing: 7, marginTop: 28, color: "#F0E2C4" }}>JULY 23–25, 2027</div>
+        <div style={{ fontFamily: "Jost", fontSize: 28, letterSpacing: 7, marginTop: 28, color: "#F0E2C4" }}>{SOCIAL_CARD.lines.dates}</div>
       </div>
     ),
     {

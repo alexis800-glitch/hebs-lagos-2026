@@ -18,11 +18,19 @@
 export type SignoffDecisionKind = "approved" | "revision-required" | "pending-decision";
 
 export interface SignoffDecision {
-  /** The sign-off item, e.g. "pages.travel.venue" or "home.welcome.body" (lib/content/signoff-2027.ts). */
+  /**
+   * The sign-off item, e.g. "pages.travel.venue" or "home.welcome.body", or a
+   * whole approval block, "block:<id>" (lib/content/signoff-2027.ts, APPROVAL_BLOCKS).
+   */
   item: string;
   decision: SignoffDecisionKind;
-  /** The exact wording decided on. Required for an approval. */
+  /** The exact wording decided on. Required for an approval of one item. */
   text?: string;
+  /**
+   * For a block: every item in it, with the exact wording decided on, as the
+   * approval package showed it. Each item is approved only for that wording.
+   */
+  texts?: Readonly<Record<string, string>>;
   /** Who decided: "Mrs. Shuler", "HEBS organisers (name)", "Veridion (name)". */
   by: string;
   /** ISO date of the decision. */
@@ -36,14 +44,18 @@ export interface SignoffDecision {
 /** Oldest first; the latest entry for an item is the one that counts. */
 export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [];
 
-/** The decision that currently stands for `item`, if any. */
+/** The decision that currently stands for `item`, made on the item itself or on a block that includes it. */
 export function latestDecision(item: string, decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): SignoffDecision | undefined {
-  for (let i = decisions.length - 1; i >= 0; i--) if (decisions[i].item === item) return decisions[i];
+  for (let i = decisions.length - 1; i >= 0; i--) {
+    const d = decisions[i];
+    if (d.item === item || (d.texts && item in d.texts)) return d;
+  }
   return undefined;
 }
 
 /** Whether `text` at `item` carries a standing approval of exactly that wording. */
 export function wordingApproved(item: string, text: string, decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): boolean {
   const d = latestDecision(item, decisions);
-  return d?.decision === "approved" && d.text === text;
+  if (d?.decision !== "approved") return false;
+  return d.item === item ? d.text === text : d.texts?.[item] === text;
 }

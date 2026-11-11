@@ -31,14 +31,22 @@ checked by `tests/launch-2027.test.ts`.
 
 ## 1a. Content sign-off
 
-Copy approvals are recorded, not hand-edited into the content files:
+All visible wording counts towards launch. That includes copy in the content modules and wording written in the page layouts: navigation, headings, buttons, footer, notices, image descriptions, search titles and the social card. The layout wording is inventoried from what each page renders (`lib/content/layout-copy-2027.json`). Run `npm run copy:inventory` after changing page wording; the tests fail until you do.
 
-1. Reviewers open `/2027/review` on the protected preview (never served on production, even after launch). Items are grouped by who approves them: shared facts, wording Veridion can verify, organiser wording for Mrs. Shuler, commercial and registration wording, and media records. Each item is marked First launch, Next pages or Later.
-2. A reviewer chooses Approved, Revision required or Pending decision for each item. Drafts stay in their browser. They then export the decision record and send it to Veridion.
-3. Veridion adds the entries to `lib/content/signoff-decisions-2027.ts`, with who decided, the date and where the decision is evidenced. An approval covers the exact wording approved. If the wording changes, the approval lapses and the launch gate counts the item as unapproved again.
-4. Facts (the venue name D9, the mark D3, the day hours) are approved in their own records as well: `lib/editions/2027.ts` and `lib/assets/register.ts`.
+There are three categories (`lib/content/signoff-2027.ts`):
 
-Photography is not decided there. Mrs. Shuler's approval of the House of Snapp photographs is recorded. The written usage terms are what remain outstanding.
+- **A. Routine:** labels, headings, buttons, notices, captions, descriptions and checkable facts. Veridion verifies these, one block per page.
+- **B. Substantive:** editorial, brand and commercial wording. Mrs. Shuler or the HEBS organisers approve whole blocks, using the executive content package (`docs/launch/2027-executive-content-package.md`, generated, with exact wording).
+- **C. Waiting:** items that wait on an outstanding decision (D9, D3, D1, D13, ticket prices and payment, and so on). Each decision clears its items.
+
+Decisions are drafted on `/2027/review` (previews only, never on production) and exported to Veridion. Veridion records them in `lib/content/signoff-decisions-2027.ts` with the exact wording of every line. A block decision lists each line. If a line changes, only that line lapses.
+
+Media: Mrs. Shuler's approval of the selected website media is recorded (`OWNER_MEDIA_APPROVAL`). The gate blocks only:
+
+- media with an evidence-based restriction: the disputed pre-party photographs, the NJS concept films and the 22 Oct gathering;
+- approved media still in the private review folder, which production does not serve.
+
+Missing third-party paperwork is a records follow-up, not a blocker. Ticket links stay off until `TICKET_SALES` records approved prices and payment.
 
 ## 2. Before launch day
 

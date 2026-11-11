@@ -347,10 +347,10 @@ export function PreferredHomepage() {
       <DesignScale />
       <div className="hp">
         {/* A3b: the homepage's one review strip; the shared staging banner is hidden here (home.css). */}
-        <div className="strip" role="note">
+        {deployEnvironment() !== "production" && <div className="strip" role="note" data-staging="">
           <b>Internal concept, not for publication.</b> {HOME.strip.replace(/^Internal concept, not for publication\. /, "")} No registration or inquiry is collected.{" "}
           <a href="/2027/status">Approval status</a>
-        </div>
+        </div>}
         <Hero />
         <Welcome />
         <Numbers />
