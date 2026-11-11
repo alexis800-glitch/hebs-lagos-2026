@@ -1,7 +1,7 @@
 import "./site.css";
 import { HOME } from "@/lib/content/home-2027";
 import { deployEnvironment } from "@/lib/publication";
-import { PRIORITY_CTA, PRIORITY_HREF, sitePage, type PageId } from "@/lib/site/2027";
+import { PRIORITY_CTA, PRIORITY_HREF, linkable, sitePage, type PageId } from "@/lib/site/2027";
 import { CookiePreferencesButton } from "@/components/2027/home/client";
 import { HOME_HREF } from "@/components/2027/home/links";
 import { Mark } from "./mark";
@@ -45,7 +45,7 @@ export function SiteFooter() {
             <ul>
               {c.pages.map((id) => {
                 const p = sitePage(id);
-                return p.built ? <li key={id}><a href={p.path}>{p.title}</a></li> : null;
+                return linkable(id) ? <li key={id}><a href={p.path}>{p.title}</a></li> : null;
               })}
             </ul>
           </nav>

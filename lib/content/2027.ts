@@ -83,6 +83,12 @@ export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
 ];
 
 export const COPY = {
+  /** Search and social sharing: the homepage title and description, and pages without an intro. */
+  seo: {
+    homeTitle: draft("HEBS Lagos 2027 | Hair Education Beauty Summit"),
+    homeDescription: draft("The Hair Education Beauty Summit returns to Lagos, July 23–25, 2027: three days of education, competitions, exhibitions, networking and celebration."),
+    aboutDescription: draft("The Hair Education Beauty Summit: its history, mission and vision, from its United States editions to Lagos."),
+  },
   welcome: {
     headline: directive("WHERE BEAUTY, EDUCATION & OPPORTUNITY MEET."),
     body: draft(

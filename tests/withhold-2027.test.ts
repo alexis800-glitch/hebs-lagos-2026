@@ -13,10 +13,17 @@ import { NextRequest } from "next/server";
 import { config, isWithheld, middleware, middlewareEnvironment, WITHHELD_PATH } from "../middleware";
 import { previewStatuses } from "../lib/content/2027";
 import { isPagePublishable } from "../lib/publication";
+import type { LaunchConfig } from "../lib/launch-2027";
 
 const ROOT = join(__dirname, "..");
 const APPROVED = ["approved"] as const;
 const PENDING = ["approved", "provisional"] as const;
+/** A launch with everything in place, for the open path. */
+const LAUNCHED: LaunchConfig = {
+  authorisation: { by: "Owner (test)", on: "2027-06-01", reference: "test" },
+  pages: ["home", "tickets"],
+  origin: { status: "approved", value: "https://www.hebslagos.com", source: "test" },
+};
 /** A page load, an RSC request and a router prefetch. */
 const REQUEST_TYPES: Record<string, string>[] = [{}, { RSC: "1" }, { RSC: "1", "Next-Router-Prefetch": "1" }];
 
@@ -51,9 +58,14 @@ describe("withholding decision", () => {
     }
   });
 
-  it("opens the 2027 pages on production only together with the layout's gate", () => {
-    expect(isWithheld("/2027/tickets", "production", APPROVED)).toBe(false);
-    expect(isWithheld("/2027/tickets", "production", PENDING)).toBe(!isPagePublishable(PENDING, "production"));
+  it("never opens on production from approvals alone: launch must be authorised (lib/launch-2027.ts)", () => {
+    expect(isWithheld("/2027/tickets", "production", APPROVED)).toBe(true);
+    const launched = { config: LAUNCHED, reviewMedia: {}, withhold: undefined };
+    expect(isWithheld("/2027/tickets", "production", APPROVED, launched)).toBe(false);
+    expect(isWithheld("/2027/tickets", "production", PENDING, launched)).toBe(true);
+    // Pages left out of the launch stay withheld, and so do concept studies.
+    expect(isWithheld("/2027/gallery", "production", APPROVED, launched)).toBe(true);
+    expect(isWithheld("/2027/concepts/home", "production", APPROVED, launched)).toBe(true);
   });
 
   it("never serves review media on production, whatever the approvals", () => {

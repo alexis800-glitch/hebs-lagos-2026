@@ -10,6 +10,8 @@
 
 /** Staging prefix. The 2026 site keeps the root until publication is approved. */
 import { FORMS_OPEN } from "../integrations/registration-2027";
+import { LAUNCH_2027 } from "../launch-2027-config";
+import { deployEnvironment } from "../publication";
 
 export const BASE = "/2027";
 
@@ -68,10 +70,18 @@ export function sitePage(id: PageId): SitePage {
   return p;
 }
 
-/** The path of a built page, or null when it is not built yet (render text, not a link). */
+/**
+ * Whether a page may be linked to: built, and on production also listed for
+ * launch (lib/launch-2027-config.ts), so a page left out of a launch is never
+ * linked.
+ */
+export function linkable(id: PageId, environment = deployEnvironment()): boolean {
+  return sitePage(id).built && (environment !== "production" || LAUNCH_2027.pages.includes(id));
+}
+
+/** The path of a linkable page, or null (render text, not a link). */
 export function pageHref(id: PageId, hash = ""): string | null {
-  const p = sitePage(id);
-  return p.built ? `${p.path}${hash ? `#${hash}` : ""}` : null;
+  return linkable(id) ? `${sitePage(id).path}${hash ? `#${hash}` : ""}` : null;
 }
 
 /**
@@ -94,9 +104,9 @@ const PRIMARY: PageId[] = ["experience", "programme", "competitions", "education
 const link = (p: SitePage) => ({ label: p.nav, href: p.path });
 
 /** Desktop navigation: the seven pages visitors look for first. */
-export const SITE_NAV = SITE_PAGES.filter((p) => p.built && PRIMARY.includes(p.id)).map(link);
+export const SITE_NAV = SITE_PAGES.filter((p) => linkable(p.id) && PRIMARY.includes(p.id)).map(link);
 
 /** Mobile menu and footer: every built page, in directive order. */
-export const SITE_MENU = SITE_PAGES.filter((p) => p.built && p.id !== "home").map(link);
+export const SITE_MENU = SITE_PAGES.filter((p) => linkable(p.id) && p.id !== "home").map(link);
 
 if (SITE_PAGES.length !== 13) throw new Error("[lib/site/2027] directive section 5 lists thirteen pages");

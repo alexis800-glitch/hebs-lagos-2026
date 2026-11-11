@@ -14,7 +14,7 @@ import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
 import { portalLink } from "@/lib/integrations/registration-2027";
-import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
+import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { resolveSlot } from "@/lib/assets/register";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
 import { findReviewAsset } from "@/lib/assets/home-2027-review";
@@ -885,8 +885,6 @@ export function SpeakersPage(props: PageProps) {
   );
 }
 
-/** Title used in the browser tab for each inner page. */
-export const pageTitle = (id: PageId) => `${sitePage(id).title} — HEBS Lagos 2027 (staging)`;
 
 /** The review variants every 2027 page accepts: ?brand=champagne and ?notes=panel. */
 export function reviewProps(searchParams: { brand?: string; notes?: string }): Pick<PageProps, "brand" | "notes"> {

@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { deployEnvironment, isPagePublishable } from "@/lib/publication";
-import { previewStatuses } from "@/lib/content/2027";
+import { deployEnvironment } from "@/lib/publication";
+import { site2027Open } from "@/lib/launch-2027";
 import { PreviewBanner } from "@/components/2027/sections";
 import { SiteFooter } from "@/components/2027/site/SiteFooter";
 
 /**
- * Staging-only HEBS 2027 preview.
+ * The HEBS 2027 site, staging until launch.
  *
- * Fails closed: the 2027 pages hold provisional and awaiting-confirmation
- * material, so on a production deployment they are withheld (404) until every
- * item they render is approved. Previews are also kept out of search engines.
+ * Fails closed: on a production deployment the pages are withheld (404) until
+ * lib/launch-2027.ts opens the site. Each page's own metadata (lib/site/seo-2027.ts)
+ * sets its title, description, canonical address, social card and indexing.
  */
-const withheld = () => !isPagePublishable(previewStatuses(), deployEnvironment());
+const withheld = () => !site2027Open(deployEnvironment());
 
 /**
  * Metadata follows the same gate. A withheld page gets none of its own, so its
@@ -25,7 +25,7 @@ export function generateMetadata(): Metadata {
     title: "HEBS Lagos 2027 — Staging Preview",
     description: "Staging preview of the HEBS Lagos 2027 website. Not published.",
     keywords: null,
-    robots: { index: false, follow: false, nocache: true },
+    robots: deployEnvironment() === "production" ? { index: true, follow: true } : { index: false, follow: false, nocache: true },
     alternates: { canonical: null },
     openGraph: null,
     twitter: null,

@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { deployEnvironment, isPagePublishable, type DeployEnvironment, type PublicationStatus } from "@/lib/publication";
+import { deployEnvironment, type DeployEnvironment, type PublicationStatus } from "@/lib/publication";
 import { previewStatuses } from "@/lib/content/2027";
+import { pathPublished, type LaunchInputs } from "@/lib/launch-2027";
 
 /**
  * Withholds the unpublished HEBS 2027 pages on production before Next.js renders anything.
@@ -12,8 +13,9 @@ import { previewStatuses } from "@/lib/content/2027";
  * missing page. That covers page loads, RSC requests and router prefetches alike,
  * since all three are requests for the same path. Review media is withheld the same way.
  *
- * The gate is the layout's own (`isPagePublishable` over the 2027 statuses), so the
- * two can only open together, once every item is approved.
+ * The gate is lib/launch-2027.ts, the same one the layout and pages use, so they
+ * can only open together: on production, once launch is authorised, every
+ * mandatory requirement is met, and only for the pages listed for launch.
  */
 
 /** A path with no route, so Next.js serves its standard 404 for it. */
@@ -24,9 +26,9 @@ export const WITHHELD_PATH = "/_withheld";
  * Review media is internal-review material and never served on production; the
  * 2027 pages follow the publication gate.
  */
-export function isWithheld(pathname: string, environment: DeployEnvironment, statuses: readonly PublicationStatus[]): boolean {
+export function isWithheld(pathname: string, environment: DeployEnvironment, statuses: readonly PublicationStatus[], inputs: LaunchInputs = {}): boolean {
   if (/^\/_review(\/|$)/.test(pathname)) return environment === "production";
-  if (/^\/2027(\/|$)/.test(pathname)) return !isPagePublishable(statuses, environment);
+  if (/^\/2027(\/|$)/.test(pathname)) return !pathPublished(pathname, environment, { statuses, ...inputs });
   return false;
 }
 

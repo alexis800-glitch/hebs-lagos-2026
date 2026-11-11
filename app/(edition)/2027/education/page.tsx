@@ -1,12 +1,12 @@
 import type { Viewport } from "next";
-import { EducationPage, pageTitle, reviewProps } from "@/components/2027/editorial/inner";
+import { EducationPage, reviewProps } from "@/components/2027/editorial/inner";
 import { deployEnvironment } from "@/lib/publication";
-import { stagingMetadata } from "@/lib/site/metadata-2027";
+import { pageMetadata } from "@/lib/site/seo-2027";
 
 export const viewport: Viewport = { themeColor: "#000000", colorScheme: "dark" };
 
 export function generateMetadata() {
-  return stagingMetadata(pageTitle("education"));
+  return pageMetadata("education");
 }
 
 export default function Page({ searchParams }: { searchParams: { brand?: string; notes?: string } }) {

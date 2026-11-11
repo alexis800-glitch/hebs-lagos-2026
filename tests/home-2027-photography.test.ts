@@ -88,7 +88,9 @@ describe("Education & Masterclasses photographs", () => {
   });
 
   it("keeps the reserved plate and no photographs anywhere else", () => {
-    for (const environment of ["production", "preview"] as const) {
+    // Production refuses the page outright until launch (lib/launch-2027.ts).
+    expect(() => renderToStaticMarkup(createElement(EducationPage, { environment: "production" }))).toThrow(/NEXT_NOT_FOUND/);
+    for (const environment of ["preview"] as const) {
       const html = renderToStaticMarkup(createElement(EducationPage, { environment }));
       for (const id of EIGHT) expect(html, `${environment} ${id}`).not.toContain(findReviewAsset(id).src.replace(/\.webp$/, ""));
       expect(html, environment).not.toContain('id="photographs"');
@@ -142,7 +144,8 @@ describe("Gallery & past events photographs", () => {
   });
 
   it("shows no photograph outside development and the review preview", () => {
-    for (const environment of ["production", "preview"] as const) {
+    expect(() => renderToStaticMarkup(createElement(GalleryPage, { environment: "production" }))).toThrow(/NEXT_NOT_FOUND/);
+    for (const environment of ["preview"] as const) {
       const html = renderToStaticMarkup(createElement(GalleryPage, { environment }));
       for (const id of ids) expect(html, `${environment} ${id}`).not.toContain(findReviewAsset(id).src.replace(/\.webp$/, ""));
       expect(html, environment).not.toContain('id="gallery-hair"');

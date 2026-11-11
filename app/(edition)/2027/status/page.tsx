@@ -3,6 +3,7 @@ import { ASSETS, MEDIA_SLOTS } from "@/lib/assets/register";
 import { Header2027 } from "@/components/2027/sections";
 import { SITE_PAGES } from "@/lib/site/2027";
 import { PORTAL_2027, PORTAL_HOSTS } from "@/lib/integrations/registration-2027";
+import { launchBlockers } from "@/lib/launch-2027";
 
 /** Reviewer view of what the preview contains and what each part is waiting for. */
 export default function Status2027() {
@@ -15,6 +16,21 @@ export default function Status2027() {
         <p className="mt-3 max-w-3xl text-h27-muted">
           Generated from the same data the pages render. Nothing below is approved unless it says so.
         </p>
+
+        <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Launch blockers</h2>
+        <p className="mt-3 max-w-3xl text-h27-muted">
+          What still stops production from publishing the 2027 site (lib/launch-2027.ts). Publication is impossible until this list is empty; see docs/launch/LAUNCH-2027.md.
+        </p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[640px] border-collapse">
+            <thead><tr className="text-h27-champagne"><th className={cell}>Requirement</th><th className={cell}>Now</th></tr></thead>
+            <tbody>
+              {launchBlockers().map((b) => (
+                <tr key={b.id}><td className={cell}>{b.requirement}</td><td className={cell}>{b.detail}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <h2 className="mt-12 font-serif text-2xl text-h27-ivory">Announcement page: directive section 11</h2>
         <div className="mt-4 overflow-x-auto">

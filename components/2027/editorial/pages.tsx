@@ -24,6 +24,8 @@ import {
 } from "./sections";
 import { C, EDITORIAL_CSS, type BrandVariant, type NotesMode } from "./tokens";
 import type { DeployEnvironment } from "@/lib/publication";
+import { notFound } from "next/navigation";
+import { pagePublished } from "@/lib/launch-2027";
 import { PRIORITY_HREF, SITE_MENU, SITE_NAV, pageHref, sitePage, type PageId } from "@/lib/site/2027";
 import { SiteHeader } from "@/components/2027/site/SiteHeader";
 
@@ -61,6 +63,8 @@ export function Shell({ page, opts, nav = SITE_NAV, home = sitePage("home").path
   groups: [string, string[]][];
   children: React.ReactNode;
 }) {
+  // A 2027 page that is not published in this environment is a missing page.
+  if (page && !pagePublished(page, opts.environment)) notFound();
   return (
     <div className="da relative">
       <style>{EDITORIAL_CSS}</style>

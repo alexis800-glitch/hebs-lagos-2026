@@ -1,8 +1,14 @@
 import type { Viewport } from "next";
 import { notFound } from "next/navigation";
-import { deployEnvironment, isPagePublishable } from "@/lib/publication";
-import { previewStatuses } from "@/lib/content/2027";
+import { deployEnvironment } from "@/lib/publication";
+import { pagePublished } from "@/lib/launch-2027";
+import { pageMetadata } from "@/lib/site/seo-2027";
+import { EventJsonLd } from "@/components/2027/site/EventJsonLd";
 import { PreferredHomepage } from "@/components/2027/home/HomePage";
+
+export function generateMetadata() {
+  return pageMetadata("home");
+}
 
 export const viewport: Viewport = { themeColor: "#0D0B08", colorScheme: "dark" };
 
@@ -15,6 +21,11 @@ export const viewport: Viewport = { themeColor: "#0D0B08", colorScheme: "dark" }
  * docs/design/2027-home/README.md.
  */
 export default function Home2027() {
-  if (!isPagePublishable(previewStatuses(), deployEnvironment())) notFound();
-  return <PreferredHomepage />;
+  if (!pagePublished("home", deployEnvironment())) notFound();
+  return (
+    <>
+      <EventJsonLd />
+      <PreferredHomepage />
+    </>
+  );
 }
