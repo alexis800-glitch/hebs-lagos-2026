@@ -7,19 +7,26 @@
  * dates, venue, competitions and programme from lib/editions/2027.ts, images
  * from register slots, and no control that pretends to work.
  */
+import type { CSSProperties } from "react";
 import { COPY } from "@/lib/content/2027";
 import { PAGES } from "@/lib/content/2027-pages";
+import { ticketingDetailsApproved } from "@/lib/content/2027";
 import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
 import { portalLink } from "@/lib/integrations/registration-2027";
-import { PRIORITY_CTA, PRIORITY_HREF, pageHref, sitePage, type PageId } from "@/lib/site/2027";
-import { resolveSlot } from "@/lib/assets/register";
+import { bookingLink } from "@/lib/integrations/booking-2027";
+import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
+import { Pic, reviewMedia } from "@/components/2027/home/media";
+import { findReviewAsset } from "@/lib/assets/home-2027-review";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
-import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, ThreeDays, dayAnchor, type Targets } from "./sections";
+import { SlotImage } from "./media";
+import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "@/lib/site/page-media-2027";
+import { Button } from "@/components/2027/site/ui";
+import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
 import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
-import { C, HORIZON, PANORAMA, TONE, display, h2Style, sentenceCase } from "./tokens";
+import { C, TONE, display, h2Style, sentenceCase } from "./tokens";
 
 const COPY_DRAFT = "Body copy provisional, awaiting owner approval.";
 
@@ -32,7 +39,6 @@ const TARGETS: Targets = {
 const optsOf = ({ environment, brand = "mark", notes = "inline" }: PageProps): Opts => ({ environment, brand, inline: notes === "inline" });
 
 const quietLink = "inline-flex min-h-[44px] items-center underline decoration-[#C8A96A] underline-offset-[7px] transition-colors duration-200";
-const outbound = "inline-flex min-h-[48px] items-center border px-6 text-[13px] font-semibold transition-colors duration-200";
 
 /** What a link to another page says, by page. */
 const LINK_WORDS: Partial<Record<PageId, string>> = {
@@ -49,15 +55,15 @@ export function ExperiencePage(props: PageProps) {
   const opts = optsOf(props);
   const notes = {
     hero: [COPY_DRAFT],
-    experiences: ["Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Royale Beach Resort photograph."],
+    experiences: ["Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Beach Resort photograph."],
     days: ["No 2027 session times are approved; the horizon is one abstract panorama and implies no time of day."],
   };
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Page", notes.hero], ["Three days", notes.days], ["Six experiences", notes.experiences]]}>
-      <PageHero title={PAGES.experience.title.text} intro={PAGES.experience.intro.text} opts={opts} notes={notes.hero}>
+    <Shell page="experience" opts={opts} notes={props.notes ?? "inline"} groups={[["Page", notes.hero], ["Three days", notes.days], ["Six experiences", notes.experiences]]}>
+      <PageHero accent={1} media={HERO_MEDIA.experience} title={PAGES.experience.title.text} intro={PAGES.experience.intro.text} opts={opts} notes={notes.hero}>
         <PageContents items={[{ href: "#three-days", label: "The three days" }, { href: "#six-experiences", label: "The six experiences" }, { href: "#destination", label: "The destination" }]} />
       </PageHero>
-      <ThreeDays opts={opts} notes={notes.days} compact />
+      <ThreeDays opts={opts} notes={notes.days} />
       <Section id="six-experiences" ground="white" labelledBy="six-title">
         <h2 id="six-title" className="max-w-[20ch]" style={h2Style}>Six experiences, one destination.</h2>
         <SectionNotes notes={notes.experiences} opts={opts} ground="white" className="mt-6" />
@@ -66,23 +72,13 @@ export function ExperiencePage(props: PageProps) {
           {COPY.experience.items.map((item, i) => {
             const [to, hash] = EXPERIENCE_LINKS[item.slot];
             const self = to === "experience";
-            // An approved photograph takes the full 4:3 frame; until then the slot is a slim band,
-            // so reserved positions hold the layout without dominating it.
-            const filled = resolveSlot(item.slot, opts.environment).kind === "asset";
+            // An approved photograph where one exists (the 2026 summit photographs in review);
+            // the destination, with no authorised photograph, takes a typographic composition.
             return (
               <li key={item.slot} id={item.slot} className="flex flex-col">
-                <Plate
-                  slotId={item.slot}
-                  opts={opts}
-                  noteLight={i !== 5}
-                  sizes="(min-width: 768px) 45vw, 100vw"
-                  className={filled ? "aspect-[4/3] w-full" : "hidden aspect-[16/5] w-full md:block"}
-                  tone={i === 5 ? PANORAMA : TONE.light}
-                  style={i === 5 ? { backgroundSize: "300% 100%", backgroundPosition: "50% 0" } : undefined}
-                >
-                  {i === 5 && <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />}
-                </Plate>
-                <div className={`${filled ? "mt-6" : "md:mt-6"} grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4`}>
+                <SlotImage slotId={item.slot} reviewId={EXPERIENCE_PHOTOS[item.slot]} composition="lagos" tone="light" opts={opts}
+                  sizes="(min-width: 768px) 45vw, 100vw" className="aspect-[4/3] w-full" />
+                <div className="mt-6 grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4">
                   <span aria-hidden="true" className="leading-none" style={{ ...display, fontWeight: 500, fontSize: "44px", color: "#8A6D3B" }}>{i + 1}</span>
                   <div>
                     <h3 style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.4vw, 34px)", lineHeight: 1.12 }}>{item.title}</h3>
@@ -99,7 +95,7 @@ export function ExperiencePage(props: PageProps) {
           })}
         </ol>
       </Section>
-      <Destination opts={opts} notes={[COPY_DRAFT, "Venue name provisional until confirmed (D9)."]} compact />
+      <Destination opts={opts} notes={[COPY_DRAFT, "Venue name provisional until confirmed (D9)."]} />
       <FinalCta to={TARGETS} />
     </Shell>
   );
@@ -116,8 +112,8 @@ export function ProgrammePage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [COPY_DRAFT, "No 2027 session is approved. Sessions are added to lib/editions/2027.ts only once confirmed, and appear here with their times."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Event programme", notes]]}>
-      <PageHero title={PAGES.programme.title.text} intro={PAGES.programme.intro.text} opts={opts} notes={notes}>
+    <Shell page="programme" opts={opts} notes={props.notes ?? "inline"} groups={[["Event programme", notes]]}>
+      <PageHero accent={1} media={HERO_MEDIA.programme} title={PAGES.programme.title.text} intro={PAGES.programme.intro.text} opts={opts} notes={notes}>
         <PageContents items={EDITION_DAYS.map((d) => ({ href: `#${dayAnchor(d.shortDate)}`, label: `${d.weekday}, ${d.shortDate}` }))} />
       </PageHero>
       {EDITION_DAYS.map((d, i) => {
@@ -133,10 +129,13 @@ export function ProgrammePage(props: PageProps) {
                 <p className="mt-4 text-[15px] font-medium">
                   <time dateTime={d.isoDate}>{d.weekday}, {d.shortDate}, 2027</time>
                 </p>
-                <Plate slotId={`day-${i + 1}`} opts={opts} noteLight={i !== 0} sizes="(min-width: 1024px) 28vw, 100vw" className="mt-8 aspect-[16/10] w-full" tone={i === 0 ? PANORAMA : TONE.light}
-                  style={i === 0 ? { backgroundSize: "300% 100%" } : undefined}>
-                  {i === 0 && <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />}
-                </Plate>
+                {/* July 23's large numeral is its typographic panel; the summit days carry their 2026 photograph. */}
+                {i > 0 && (
+                  <div className="mt-8">
+                    <SlotImage slotId={`day-${i + 1}`} reviewId={DAY_PHOTOS[i]} composition="dates" tone="light" opts={opts}
+                      sizes="(min-width: 1024px) 28vw, 100vw" className="aspect-[16/10] w-full" />
+                  </div>
+                )}
               </div>
               <div className="lg:col-span-7 lg:col-start-6">
                 <p className="text-[15px] font-semibold" style={{ color: "#5E5034" }}>{d.officialName}</p>
@@ -174,13 +173,33 @@ export function ProgrammePage(props: PageProps) {
 
 /* ── Education & masterclasses ──────────────────────────────────────── */
 
+/**
+ * HEBS Lagos 2026 learning photographs for the Education page, from the review
+ * media (House of Snapp collection). Like the homepage's, they render only in
+ * development or the protected review preview; elsewhere the page keeps its
+ * reserved plate and leaves the photographs out.
+ */
+const EDU_LEAD = "exp-education";
+const EDU_SPEAKER = "welcome-inset";
+const EDU_PHOTOS = [
+  { id: "edu-session", wide: true }, { id: "edu-styling", wide: false }, { id: "edu-skincare", wide: false },
+  { id: "edu-technique", wide: false }, { id: "edu-loc", wide: false }, { id: "sp-hall", wide: true },
+] as const;
+
 export function EducationPage(props: PageProps) {
   const opts = optsOf(props);
-  const notes = [COPY_DRAFT, "No speaker or educator is confirmed, so none is named.", "Education image reserved for an approved HEBS Lagos event photograph."];
+  const photographed = [EDU_LEAD, EDU_SPEAKER, ...EDU_PHOTOS.map((p) => p.id)].every((id) => reviewMedia(id, opts.environment));
+  const notes = [
+    COPY_DRAFT,
+    "No speaker or educator is confirmed, so none is named.",
+    photographed
+      ? "Photographs from HEBS Lagos 2026 (House of Snapp collection), for internal review only: the photographer's permission and the consent of the people shown are not recorded."
+      : "Education image reserved for an approved HEBS Lagos event photograph.",
+  ];
   const register = portalLink("education-registration", opts.environment);
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Education & masterclasses", notes]]}>
-      <PageHero title={sentenceCase(PAGES.education.title.text)} intro={PAGES.education.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+    <Shell page="education" opts={opts} notes={props.notes ?? "inline"} groups={[["Education & masterclasses", notes]]}>
+      <PageHero accent={1} media={HERO_MEDIA.education} title={sentenceCase(PAGES.education.title.text)} intro={PAGES.education.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={[{ href: "#tracks", label: "Learning tracks" }, { href: "#educators", label: "Educators" }, { href: "#registration", label: "Registration" }]} />
       </PageHero>
       <Section id="tracks" ground="black" labelledBy="tracks-title">
@@ -198,16 +217,52 @@ export function EducationPage(props: PageProps) {
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <div className="lg:sticky lg:top-28">
-              <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
-                <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
-              </Plate>
+              {photographed ? (
+                <figure>
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <Pic id={EDU_LEAD} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 32vw, 100vw" />
+                    <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
+                  </div>
+                  <figcaption className="mt-3 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>{PAGES.education.leadCaption.text}</figcaption>
+                </figure>
+              ) : (
+                <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
+                  <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
+                </Plate>
+              )}
+              {photographed && <SectionNotes notes={notes.slice(2)} opts={opts} ground="black" className="mt-4" />}
             </div>
           </div>
         </div>
       </Section>
+      {photographed && (
+        <Section id="photographs" ground="white" labelledBy="photographs-title">
+          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+            <h2 id="photographs-title" style={h2Style}>{PAGES.education.photos.text}</h2>
+            <p className="text-[14px]" style={{ color: C.body }}>{PAGES.education.photosCaption.text}</p>
+          </div>
+          <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+            {EDU_PHOTOS.map((p) => (
+              <li key={p.id} className={`relative overflow-hidden ${p.wide ? "col-span-2 aspect-[3/2]" : "aspect-[3/4] lg:aspect-auto"}`}>
+                <Pic id={p.id} className="absolute inset-0 h-full w-full object-cover" sizes={p.wide ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
       <Section id="educators" ground="ivory" labelledBy="educators-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <h2 id="educators-title" className="lg:col-span-5" style={h2Style}>Speakers and educators.</h2>
+          <div className="lg:col-span-5">
+            <h2 id="educators-title" style={h2Style}>Speakers and educators.</h2>
+            {photographed && (
+              <figure className="mt-10 max-w-[360px]">
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Pic id={EDU_SPEAKER} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 360px, 100vw" />
+                </div>
+                <figcaption className="mt-3 text-[14px]" style={{ color: C.body }}>{PAGES.education.speakerCaption.text}</figcaption>
+              </figure>
+            )}
+          </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <Pending>{PAGES.education.educators.text}</Pending>
             <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="ivory" className="mt-6" />
@@ -219,12 +274,12 @@ export function EducationPage(props: PageProps) {
           <h2 id="registration-title" className="lg:col-span-5" style={h2Style}>Registration.</h2>
           <div className="lg:col-span-6 lg:col-start-7">
             {register ? (
-              <a href={register} className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Register for education sessions</a>
+              <Button href={register} variant="outline" tone="light">Register for education sessions</Button>
             ) : (
               <Pending>{PAGES.education.registration.text}</Pending>
             )}
             <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a>, which opens soon.
+              To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a> (not open yet).
             </p>
           </div>
         </div>
@@ -246,8 +301,8 @@ export function CompetitionsPage(props: PageProps) {
   ];
   const pathways = COPY.competitions.pathways.map((label, i) => ({ href: `#${COMPETITION_ANCHORS[i]}`, label }));
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
-      <PageHero title={sentenceCase(COPY.competitions.headline.text)} intro={PAGES.competitions.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+    <Shell page="competitions" opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
+      <PageHero accent={2} media={HERO_MEDIA.competitions} title={sentenceCase(COPY.competitions.headline.text)} intro={PAGES.competitions.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={pathways} />
       </PageHero>
       <Section id="categories" ground="ivory" labelledBy="categories-title">
@@ -263,7 +318,16 @@ export function CompetitionsPage(props: PageProps) {
               <div key={cat.slug} className="grid gap-4 border-b py-8 lg:grid-cols-12 lg:gap-12" style={{ borderColor: "rgba(0,0,0,.18)" }}>
                 <h3 className="lg:col-span-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 36px)", lineHeight: 1.1 }}>{cat.name}</h3>
                 <ul className="grid gap-x-10 gap-y-2 sm:grid-cols-2 lg:col-span-8">
-                  {list.map((c) => <li key={c.slug} className="text-[17px] leading-snug">{c.name}</li>)}
+                  {list.map((c) => {
+                    // Staging only: registration on the test copy, with the competition's contract code.
+                    const register = bookingLink("compete", c.slug);
+                    return (
+                      <li key={c.slug} className="text-[17px] leading-snug">
+                        {c.name}
+                        {register && <> <a href={register} className="ml-1 text-[14px] underline underline-offset-4">Register</a></>}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             );
@@ -287,12 +351,12 @@ export function CompetitionsPage(props: PageProps) {
           <h2 id="apply-title" className="lg:col-span-5" style={h2Style}>Application and registration.</h2>
           <div className="lg:col-span-6 lg:col-start-7">
             {apply ? (
-              <a href={apply} className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Apply to compete</a>
+              <Button href={apply} variant="outline" tone="light">Apply to compete</Button>
             ) : (
               <Pending>{PAGES.competitions.apply.text}</Pending>
             )}
             <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              To hear when applications open, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a>, which opens soon.
+              To hear when applications open, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a> (not open yet).
             </p>
           </div>
         </div>
@@ -325,9 +389,9 @@ export function SponsorshipPage(props: PageProps) {
     "The prospectus download appears with an approved 2027 prospectus.",
   ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Sponsorship & partnerships", notes]]}>
-      <PageHero title={sentenceCase(COPY.partners.headline.text)} intro={PAGES.sponsorship.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="champagne">
-        <PageContents light items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Inquiries" }]} />
+    <Shell page="sponsorship" opts={opts} notes={props.notes ?? "inline"} groups={[["Sponsorship & partnerships", notes]]}>
+      <PageHero accent={2} media={HERO_MEDIA.sponsorship} title={sentenceCase(COPY.partners.headline.text)} intro={PAGES.sponsorship.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+        <PageContents items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Inquiries" }]} />
       </PageHero>
       <Section id="opportunities" ground="ivory" labelledBy="opportunities-title">
         <h2 id="opportunities-title" style={h2Style}>Four ways to take part.</h2>
@@ -385,9 +449,9 @@ export function ExhibitorsPage(props: PageProps) {
     "No application is collected. Submission follows INTEGRATION-CONTRACT-v1.1; the form stays closed until the private integration test and owner approval. The company-profile upload is not shown in this release (owner decision 7) until malware scanning or quarantine is approved.",
   ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>
-      <PageHero title={PAGES.exhibitors.title.text} intro={PAGES.exhibitors.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="ivory">
-        <PageContents light items={[{ href: "#exhibit", label: "Ways to exhibit" }, { href: "#apply", label: "Applications" }, { href: "#brands", label: "Participating brands" }]} />
+    <Shell page="exhibitors" opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>
+      <PageHero accent={2} media={HERO_MEDIA.exhibitors} title={PAGES.exhibitors.title.text} intro={PAGES.exhibitors.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+        <PageContents items={[{ href: "#exhibit", label: "Ways to exhibit" }, { href: "#apply", label: "Applications" }, { href: "#brands", label: "Participating brands" }]} />
       </PageHero>
       <Section id="exhibit" ground="white" labelledBy="exhibit-title">
         <h2 id="exhibit-title" style={h2Style}>Ways to exhibit.</h2>
@@ -453,20 +517,17 @@ export function TravelPage(props: PageProps) {
   ];
   const body = "text-[17px] leading-[1.7]";
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
-      <PageHero title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)} ground="atlantic">
+    <Shell page="travel" opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
+      <PageHero accent={1} composition="lagos" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={[
           { href: "#venue", label: "The venue" }, { href: "#arriving", label: "Arriving in Lagos" }, { href: "#stay", label: "Accommodation" },
           { href: "#visas", label: "Visas" }, { href: "#faq", label: "Travel questions" },
         ]} />
       </PageHero>
-      <Plate slotId="destination-gallery" opts={opts} sizes="100vw" className="aspect-[4/3] w-full sm:aspect-[21/9]" tone={PANORAMA}>
-        <span aria-hidden="true" className="absolute inset-x-0 block h-px" style={{ top: HORIZON, background: "rgba(234,215,168,.45)" }} />
-      </Plate>
       <TravelBlock id="venue" title="The venue." ground="white">
         <p className={body} style={{ color: C.body }}>{t.venue.text}</p>
         <Pending>{t.directions.text}</Pending>
-        <a href={VENUE.website} rel="noopener" className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Visit njsbeachresort.com</a>
+        <Button href={VENUE.website} variant="outline" tone="light" external>Visit njsbeachresort.com</Button>
         <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="white" />
       </TravelBlock>
       <TravelBlock id="arriving" title="Arriving in Lagos." ground="ivory">
@@ -480,8 +541,8 @@ export function TravelPage(props: PageProps) {
       <TravelBlock id="visas" title="Visas." ground="ivory">
         <p className={body} style={{ color: C.body }}>{t.visas.text}</p>
         <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <li><a href={NIS.site} rel="noopener" className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Nigeria Immigration Service</a></li>
-          <li><a href={NIS.evisa} rel="noopener" className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Official e-Visa portal</a></li>
+          <li><Button href={NIS.site} variant="outline" tone="light" external>Nigeria Immigration Service</Button></li>
+          <li><Button href={NIS.evisa} variant="outline" tone="light" external>Official e-Visa portal</Button></li>
         </ul>
       </TravelBlock>
       <Section id="faq" ground="black" labelledBy="faq-title">
@@ -513,15 +574,15 @@ export function TravelPage(props: PageProps) {
 export function TicketsPage(props: PageProps) {
   const opts = optsOf(props);
   const t = PAGES.tickets;
-  const buy = portalLink("tickets", opts.environment);
+  // Staging: the test copy's booking pages (lib/integrations/booking-2027.ts). Production: closed until ticket sales are approved.
+  const buy = bookingLink("tickets") ?? portalLink("tickets", opts.environment);
+  const myBooking = bookingLink("booking");
   const notes = [COPY_DRAFT, "Ticket categories, prices and payment gateway are approved separately (directive section 6). Payment collection is not authorised."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
-      <PageHero title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+    <Shell page="tickets" opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
+      <PageHero accent={1} composition="dates" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a href={PRIORITY_HREF} className="inline-flex min-h-[56px] items-center justify-center px-9 text-[13px] font-bold uppercase tracking-[0.18em] transition-colors duration-200 hover:bg-[#EAD7A8]" style={{ background: C.champ, color: C.black }}>
-            {PRIORITY_CTA}
-          </a>
+          <Button href={PRIORITY_HREF} className="mt-8">{PRIORITY_CTA}</Button>
         </div>
       </PageHero>
       <Section id="status" ground="ivory" labelledBy="status-title">
@@ -529,7 +590,10 @@ export function TicketsPage(props: PageProps) {
           <h2 id="status-title" className="lg:col-span-5" style={h2Style}>Ticket sales.</h2>
           <div className="space-y-6 lg:col-span-6 lg:col-start-7">
             {buy ? (
-              <a href={buy} className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Buy tickets</a>
+              <div className="flex flex-wrap gap-3">
+                <Button href={buy} variant="outline" tone="light">Buy tickets</Button>
+                {myBooking && <Button href={myBooking} variant="link" tone="light">Find my booking</Button>}
+              </div>
             ) : (
               <Pending>{t.status.text}</Pending>
             )}
@@ -543,7 +607,9 @@ export function TicketsPage(props: PageProps) {
           <div className="lg:col-span-6 lg:col-start-7"><Pending>{t.categories.text}</Pending></div>
         </div>
       </Section>
-      <Section id="how" ground="black" labelledBy="how-title">
+      {/* What ticketing will offer is a business commitment: shown on production only once approved, and marked staging until then. */}
+      {(ticketingDetailsApproved() || opts.environment !== "production") && (
+      <Section id="how" ground="black" labelledBy="how-title" staging={!ticketingDetailsApproved()}>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="how-title" className="lg:col-span-5" style={h2Style}>How registration will work.</h2>
           <div className="lg:col-span-6 lg:col-start-7">
@@ -556,6 +622,8 @@ export function TicketsPage(props: PageProps) {
           </div>
         </div>
       </Section>
+      )}
+      <PriorityList opts={opts} notes={[]} />
       <FinalCta to={TARGETS} />
     </Shell>
   );
@@ -563,36 +631,132 @@ export function TicketsPage(props: PageProps) {
 
 /* ── Gallery & past events ──────────────────────────────────────────── */
 
+/**
+ * Splits photographs, in order, into rows whose widths-over-heights add up as
+ * evenly as possible to about `target`, so every full-width row has a similar
+ * height and no row is left with a lone photograph.
+ */
+export function justifiedRows<T>(items: readonly T[], aspect: (item: T) => number, target: number): T[][] {
+  const a = items.map(aspect);
+  const n = Math.max(1, Math.round(a.reduce((x, y) => x + y, 0) / target));
+  const ideal = a.reduce((x, y) => x + y, 0) / n;
+  // cost[i][k]: best squared deviation for the first i items in k rows.
+  const cost = Array.from({ length: items.length + 1 }, () => Array(n + 1).fill(Infinity));
+  const cut = Array.from({ length: items.length + 1 }, () => Array(n + 1).fill(0));
+  cost[0][0] = 0;
+  for (let i = 1; i <= items.length; i++) {
+    for (let k = 1; k <= Math.min(n, i); k++) {
+      let sum = 0;
+      for (let j = i; j >= k; j--) {
+        sum += a[j - 1];
+        const c = cost[j - 1][k - 1] + (sum - ideal) ** 2;
+        if (c < cost[i][k]) { cost[i][k] = c; cut[i][k] = j - 1; }
+      }
+    }
+  }
+  const rows: T[][] = [];
+  for (let i = items.length, k = n; k > 0; k--) { rows.unshift(items.slice(cut[i][k], i)); i = cut[i][k]; }
+  return rows;
+}
+
+/**
+ * The HEBS Lagos 2026 summit photographs, grouped by what each one shows. Like
+ * the Education page's, they render only in development or the protected review
+ * preview; elsewhere the page keeps its reserved plate.
+ */
+const aspectOf = (id: string) => findReviewAsset(id).aspect ?? 1.5;
+const sumOf = (ids: readonly string[]) => ids.reduce((n, id) => n + aspectOf(id), 0);
+
+function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) {
+  const g = PAGES.gallery;
+  const count = g.categories.reduce((n, c) => n + c.photos.length, 0);
+  return (
+    <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
+      <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+        <h2 id="lagos-2026-title" style={h2Style}>{g.photosTitle.text}</h2>
+        <p className="text-[15px]" style={{ color: C.body }}>{g.photosIntro.text} {count} photographs.</p>
+      </div>
+      <SectionNotes notes={notes} opts={opts} ground="white" className="mt-6" />
+      <nav aria-label="Photograph categories" className="mt-8">
+        <ul className="flex flex-wrap gap-2">
+          {g.categories.map((c) => (
+            <li key={c.id}>
+              <a href={`#gallery-${c.id}`} className="inline-flex min-h-[44px] items-center gap-2 border px-4 text-[14px] transition-colors duration-200 hover:bg-black hover:text-white" style={{ borderColor: "rgba(160,128,72,.55)", color: C.black }}>
+                {c.title.text}<span aria-hidden="true" style={{ color: C.body }}>{c.photos.length}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      {g.categories.map((c) => (
+        <section key={c.id} id={`gallery-${c.id}`} aria-labelledby={`gallery-${c.id}-title`} className="mt-14 scroll-mt-28 border-t pt-8 lg:mt-20" style={{ borderColor: "rgba(160,128,72,.35)" }}>
+          <h3 id={`gallery-${c.id}-title`} style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 38px)", lineHeight: 1.1 }}>{c.title.text}</h3>
+          {/*
+            Justified rows: each photograph grows in proportion to its width over height, so a row shares one
+            height. A desktop row too wide for a phone splits into balanced phone rows, stacked.
+          */}
+          <div className="mt-6 flex flex-col gap-3 lg:gap-4">
+            {justifiedRows(c.photos, aspectOf, 3.6).map((row) => (
+              <div key={row[0]} className="flex flex-col gap-3 lg:flex-row lg:gap-4">
+                {(sumOf(row) > 2.4 ? justifiedRows(row, aspectOf, 1.8) : [row]).map((part) => (
+                  <ul key={part[0]} className="flex gap-3 lg:basis-0 lg:grow-[var(--g)] lg:gap-4" style={{ "--g": sumOf(part) } as CSSProperties}>
+                    {part.map((id) => {
+                      const r = aspectOf(id);
+                      return (
+                        <li key={id} className="basis-0 overflow-hidden" style={{ flexGrow: r, aspectRatio: String(r) }}>
+                          <Pic id={id} className="h-full w-full object-cover" sizes={`(min-width: 1024px) ${Math.round(r * 340)}px, ${Math.round(r * 210)}px`} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </Section>
+  );
+}
+
 export function GalleryPage(props: PageProps) {
   const opts = optsOf(props);
   const g = PAGES.gallery;
-  const notes = [COPY_DRAFT, "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here."];
+  const photographed = g.categories.every((c) => c.photos.every((id) => reviewMedia(id, opts.environment)));
+  const notes = [
+    COPY_DRAFT,
+    photographed
+      ? "Photographs from the HEBS Lagos 2026 summit days (House of Snapp collection), for internal review only until the written usage terms are on file. No pre-party, cheque or prize photographs are included."
+      : "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here.",
+  ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
-      <PageHero title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} />
-      <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
-          <div className="lg:col-span-4">
-            <h2 id="lagos-2026-title" style={h2Style}>{sentenceCase(COPY.highlights.headline.text)}</h2>
-            <div className="mt-8"><Pending>{g.pending.text}</Pending></div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px]" style={{ color: C.body }}>
-              {COPY.highlights.kinds.map((k) => <li key={k}>{k}</li>)}
-            </ul>
-            <SectionNotes notes={notes.slice(1)} opts={opts} ground="white" className="mt-6" />
+    <Shell page="gallery" opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
+      <PageHero accent={2} composition="archive" title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+      {photographed ? <Lagos2026Photographs opts={opts} notes={notes.slice(1)} /> : (
+        <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
+            <div className="lg:col-span-4">
+              <h2 id="lagos-2026-title" style={h2Style}>{sentenceCase(COPY.highlights.headline.text)}</h2>
+              <div className="mt-8"><Pending>{g.pending.text}</Pending></div>
+              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[15px]" style={{ color: C.body }}>
+                {COPY.highlights.kinds.map((k) => <li key={k}>{k}</li>)}
+              </ul>
+              <SectionNotes notes={notes.slice(1)} opts={opts} ground="white" className="mt-6" />
+            </div>
+            <div className="lg:col-span-8">
+              <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/7] w-full" tone={TONE.light}>
+                <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
+              </Plate>
+            </div>
           </div>
-          <div className="lg:col-span-8">
-            <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/7] w-full" tone={TONE.light}>
-              <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
-            </Plate>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      )}
       <Section id="archive" ground="ivory" labelledBy="archive-title" innerClassName="lg:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="archive-title" className="lg:col-span-5" style={h2Style}>Past events.</h2>
           <div className="space-y-6 lg:col-span-6 lg:col-start-7">
             <p className="text-[17px] leading-[1.7]" style={{ color: C.body }}>{g.archive.text}</p>
-            <a href="/" className={`${outbound} hover:bg-black hover:text-white`} style={{ borderColor: C.black, color: C.black }}>Visit the HEBS Lagos 2026 website</a>
+            <Button href="/" variant="outline" tone="light">Visit the HEBS Lagos 2026 website</Button>
             <p className="text-[15px] leading-relaxed" style={{ color: C.body }}>{g.earlier.text}</p>
           </div>
         </div>
@@ -609,8 +773,8 @@ export function ContactPage(props: PageProps) {
   const c = PAGES.contact;
   const notes = [COPY_DRAFT, "Email addresses and social accounts withheld until public contacts are approved (D10). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
-      <PageHero title={c.title.text} intro={c.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+    <Shell page="contact" opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
+      <PageHero composition="lagos" title={c.title.text} intro={c.intro.text} opts={opts} notes={notes.slice(0, 1)} />
       <Section id="message" ground="ivory" labelledBy="message-title">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="space-y-8 lg:col-span-5">
@@ -652,8 +816,8 @@ export function AboutPage(props: PageProps) {
     "Vision and impact copy awaiting owner approval.",
   ];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["About HEBS", notes]]}>
-      <PageHero title={a.title.text} intro={COPY.welcome.body.text} opts={opts} />
+    <Shell page="about" opts={opts} notes={props.notes ?? "inline"} groups={[["About HEBS", notes]]}>
+      <PageHero accent={1} media={HERO_MEDIA.about} title={a.title.text} intro={COPY.welcome.body.text} opts={opts} />
       <Section id="history" ground="ivory" labelledBy="history-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="history-title" className="max-w-[14ch] lg:col-span-5" style={h2Style}>{sentenceCase(COPY.welcome.headline.text)}</h2>
@@ -696,8 +860,8 @@ export function SpeakersPage(props: PageProps) {
   const sp = PAGES.speakers;
   const notes = [COPY_DRAFT, "No speaker or educator is confirmed, so none is named and no portrait is shown."];
   return (
-    <Shell opts={opts} notes={props.notes ?? "inline"} groups={[["Speakers & educators", notes]]}>
-      <PageHero title={sp.title.text} intro={sp.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+    <Shell page="speakers" opts={opts} notes={props.notes ?? "inline"} groups={[["Speakers & educators", notes]]}>
+      <PageHero accent={1} composition="dates" title={sp.title.text} intro={sp.intro.text} opts={opts} notes={notes.slice(0, 1)} />
       <Section id="announced" ground="ivory" labelledBy="announced-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="announced-title" className="lg:col-span-5" style={h2Style}>Announced so far.</h2>
@@ -729,8 +893,6 @@ export function SpeakersPage(props: PageProps) {
   );
 }
 
-/** Title used in the browser tab for each inner page. */
-export const pageTitle = (id: PageId) => `${sitePage(id).title} — HEBS Lagos 2027 (staging)`;
 
 /** The review variants every 2027 page accepts: ?brand=champagne and ?notes=panel. */
 export function reviewProps(searchParams: { brand?: string; notes?: string }): Pick<PageProps, "brand" | "notes"> {

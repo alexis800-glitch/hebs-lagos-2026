@@ -1,0 +1,333 @@
+{
+ "generator": "docs/design/2027-home/tools/champions-images.py",
+ "pillow": "10.4.0",
+ "note": "Crops are in pixels of each original after EXIF orientation. Originals are the photographers' files (House of Snapp collection); they are never committed.",
+ "images": [
+  {
+   "file": "IMG_7897.jpg",
+   "day": 1,
+   "sha256": "1b6e2cab7e8820b893b4c55e37d8989cbc784fabff01eb4a67960c353054a17b",
+   "role": "featured",
+   "crop": [
+    1679,
+    0,
+    5312,
+    3633
+   ],
+   "widths": [
+    640,
+    960,
+    1280,
+    1800
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_7897"
+  },
+  {
+   "file": "IMG_7854.jpg",
+   "day": 1,
+   "sha256": "b47d4664c691a2f9280604bfe2e7cb9108aacdc2f4b596acf124e34f1b54d7a9",
+   "role": "featured",
+   "crop": [
+    1553,
+    0,
+    4936,
+    3383
+   ],
+   "widths": [
+    640,
+    960,
+    1280,
+    1800
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_7854"
+  },
+  {
+   "file": "IMG_8012.jpg",
+   "day": 1,
+   "sha256": "f5a11bb39450e3ff881cd6fe5fc3f5d32ad85640961f8628abaa3cc2b1083544",
+   "role": "highlight",
+   "crop": [
+    273,
+    81,
+    5054,
+    2812
+   ],
+   "widths": [
+    640,
+    960,
+    1280,
+    1600,
+    2000
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_8012"
+  },
+  {
+   "file": "DSC_1897.jpg",
+   "day": 1,
+   "sha256": "8642ef3f8c36033a500e1b43703f014bc505cc5dd3ef2844fd6f353a5084c806",
+   "role": "highlight",
+   "crop": [
+    0,
+    85,
+    4667,
+    2752
+   ],
+   "widths": [
+    640,
+    960,
+    1280,
+    1600,
+    2000
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-dsc_1897"
+  },
+  {
+   "file": "IMG_8022.jpg",
+   "day": 1,
+   "sha256": "87d746666a461f1e3fd056be0c7a029f78d57c016383d3c0a69f8deacb936459",
+   "role": "card",
+   "crop": [
+    1999,
+    0,
+    5659,
+    3773
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_8022"
+  },
+  {
+   "file": "IMG_8085.jpg",
+   "day": 1,
+   "sha256": "9e1747580f2edff2e4bb48ea58ecfd280aa761806f3fa617d7b2bad48178c0e5",
+   "role": "card",
+   "crop": [
+    188,
+    0,
+    2972,
+    2869
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_8085"
+  },
+  {
+   "file": "0Q1A0290.jpg",
+   "day": 2,
+   "sha256": "8c3af0c750bf7a844d566e650d13c98019bec0203e5e937e793f19ebe5141f52",
+   "role": "card",
+   "crop": [
+    1306,
+    0,
+    3934,
+    2709
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": false,
+   "iso": 2000,
+   "output": "champ-0q1a0290"
+  },
+  {
+   "file": "DSC_1883.jpg",
+   "day": 1,
+   "sha256": "04418b6c21091ce712a338db2d72cab3e36d86f0bc93fbb6efb3f6fe1f16e599",
+   "role": "card",
+   "crop": [
+    2067,
+    0,
+    5257,
+    3288
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-dsc_1883"
+  },
+  {
+   "file": "IMG_7895.jpg",
+   "day": 1,
+   "sha256": "e41b4215d4ee4bc1845a750fdbc1d56b79ab7767f99bc29e45c2e303808193e9",
+   "role": "card",
+   "crop": [
+    1401,
+    0,
+    4968,
+    3678
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_7895"
+  },
+  {
+   "file": "0Q1A0140.jpg",
+   "day": 2,
+   "sha256": "7e05f680690333f60afd3cf46e59544ce57713400b1df86ccd0456bc178fa94c",
+   "role": "card",
+   "crop": [
+    54,
+    113,
+    2841,
+    2987
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": false,
+   "iso": 1600,
+   "output": "champ-0q1a0140"
+  },
+  {
+   "file": "0Q1A0215.jpg",
+   "day": 2,
+   "sha256": "e41e60d4f4cdd773bebf0e1256d3face2eb1cc0bcf092a6a05c5efa710bf2937",
+   "role": "card",
+   "crop": [
+    2626,
+    0,
+    5058,
+    2506
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": false,
+   "iso": 1600,
+   "output": "champ-0q1a0215"
+  },
+  {
+   "file": "0Q1A0190.jpg",
+   "day": 2,
+   "sha256": "5d1d48a22d496e47e6d5764bd12d3cdfceb3ce4df6e10d5667e0ee1bdaa34f76",
+   "role": "card",
+   "crop": [
+    0,
+    0,
+    2698,
+    2782
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": false,
+   "iso": 2000,
+   "output": "champ-0q1a0190"
+  },
+  {
+   "file": "IMG_7964.jpg",
+   "day": 1,
+   "sha256": "e7145d830c855bbe61512b7419e15519288b0c2acb35f4a2407ed42a858cac72",
+   "role": "card",
+   "crop": [
+    728,
+    0,
+    4128,
+    3505
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_7964"
+  },
+  {
+   "file": "0Q1A0163.jpg",
+   "day": 2,
+   "sha256": "70763e24f3cc82442957de7647776b3941afff40f1f83a2be8f2546dadb37780",
+   "role": "card",
+   "crop": [
+    1182,
+    0,
+    2854,
+    1723
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": false,
+   "iso": 1600,
+   "output": "champ-0q1a0163"
+  },
+  {
+   "file": "0Q1A0242.jpg",
+   "day": 2,
+   "sha256": "63f3c119baec0851a3b639d88734720dfba73123b120f52bc997598d30e6d028",
+   "role": "card",
+   "crop": [
+    1595,
+    0,
+    4586,
+    3083
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": false,
+   "iso": 2000,
+   "output": "champ-0q1a0242"
+  },
+  {
+   "file": "IMG_8112.jpg",
+   "day": 1,
+   "sha256": "8cd2c7056fe682a1367c946e974572e6ec17ded04c205001138c520300a38f9c",
+   "role": "card",
+   "crop": [
+    1456,
+    0,
+    3882,
+    2500
+   ],
+   "widths": [
+    320,
+    600,
+    900
+   ],
+   "sharpen": true,
+   "iso": 800,
+   "output": "champ-img_8112"
+  }
+ ]
+}

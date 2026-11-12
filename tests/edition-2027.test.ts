@@ -48,8 +48,9 @@ describe("HEBS 2027 edition", () => {
     expect(new Date(COUNTDOWN_TARGET_ISO).toISOString()).toBe("2027-07-22T23:00:00.000Z");
   });
 
-  it("keeps the venue provisional and the address unstated", () => {
-    expect(VENUE.name.status).toBe("provisional");
+  it("records the confirmed venue name (D9) and keeps the address unstated", () => {
+    expect(VENUE.name.status).toBe("approved");
+    expect(VENUE.name.value).toBe("NJS Beach Resort");
     expect(VENUE.address.status).toBe("awaiting-confirmation");
   });
 });

@@ -1,0 +1,59 @@
+{
+  "_note": "Public extract of HEBS 2027 booking contract v1.0 (12 Nov 2026): each competition's portal code and exact name, nothing else. The authoritative contract is kept privately, outside Git; competition_codes_sha256 is the SHA-256 of its competition-codes.json, checked by tests/booking-2027.test.ts where that file is present.",
+  "competition_codes_sha256": "4f6c5e0791f05bdf5927f341eb94cba09046dc877bd5ec908bbf0e1d71b85682",
+  "param": "category",
+  "competitions": [
+    {
+      "code": "BOF",
+      "category_name": "Battle of the Fades Competition"
+    },
+    {
+      "code": "FDB",
+      "category_name": "Freestyle Design Competition"
+    },
+    {
+      "code": "FFR",
+      "category_name": "Fast & Flawless Barber Competition"
+    },
+    {
+      "code": "FFB",
+      "category_name": "Fast & Flawless Braiding Competition"
+    },
+    {
+      "code": "FBA",
+      "category_name": "Freestyle Braid Art Competition"
+    },
+    {
+      "code": "TBC",
+      "category_name": "Traditional Braiding Competition"
+    },
+    {
+      "code": "FLF",
+      "category_name": "Flawless Frontals Competition"
+    },
+    {
+      "code": "MKP",
+      "category_name": "Bridal Beauty Makeup Competition"
+    },
+    {
+      "code": "LSH",
+      "category_name": "Lash Couture Competition"
+    },
+    {
+      "code": "NAL",
+      "category_name": "Gilded Heritage Nail Art Competition"
+    },
+    {
+      "code": "FRW",
+      "category_name": "Roots to Royalty Fashion Runway Competition"
+    },
+    {
+      "code": "TOC",
+      "category_name": "Taste of Culture Food Tasting Competition"
+    },
+    {
+      "code": "LRS",
+      "category_name": "Loc Retwist & Style Competition"
+    }
+  ]
+}

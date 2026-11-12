@@ -38,3 +38,19 @@ export function timeLeft(targetIso: string, nowMs: number): TimeLeft | null {
     minutes: Math.floor((diff % HOUR) / MINUTE),
   };
 }
+
+export interface TimeLeftSeconds extends TimeLeft {
+  seconds: number;
+}
+
+/** As timeLeft, with whole seconds too, for a timer that visibly ticks. */
+export function timeLeftSeconds(targetIso: string, nowMs: number): TimeLeftSeconds | null {
+  const diff = parseTargetInstant(targetIso) - nowMs;
+  if (diff <= 0) return null;
+  return {
+    days: Math.floor(diff / DAY),
+    hours: Math.floor((diff % DAY) / HOUR),
+    minutes: Math.floor((diff % HOUR) / MINUTE),
+    seconds: Math.floor((diff % MINUTE) / 1000),
+  };
+}

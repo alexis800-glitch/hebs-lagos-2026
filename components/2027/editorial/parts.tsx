@@ -19,6 +19,7 @@ export interface Opts {
 export function StagingNote({ children, light = false, className = "" }: { children: React.ReactNode; light?: boolean; className?: string }) {
   return (
     <span
+      data-staging=""
       className={`inline-block max-w-full border border-dashed px-2 py-1 text-[11px] leading-snug ${className}`}
       style={light ? { borderColor: "#5E5034", color: "#33291A" } : { borderColor: "rgba(200,169,106,.55)", color: "rgba(245,239,228,.82)" }}
     >
@@ -29,7 +30,7 @@ export function StagingNote({ children, light = false, className = "" }: { child
 
 /** A section's staging notes, in inline mode only. */
 export function SectionNotes({ notes, opts, ground, className = "" }: { notes: string[]; opts: Opts; ground: Ground; className?: string }) {
-  if (!opts.inline || notes.length === 0) return null;
+  if (!opts.inline || opts.environment === "production" || notes.length === 0) return null;
   return (
     <div className={`flex flex-col items-start gap-2 ${className}`}>
       {notes.map((n) => <StagingNote key={n} light={GROUND[ground].light}>{n}</StagingNote>)}
@@ -38,7 +39,7 @@ export function SectionNotes({ notes, opts, ground, className = "" }: { notes: s
 }
 
 const SOURCE_WORDS: Record<string, string> = {
-  "njs-resort": "an approved NJS Royale Beach Resort photograph",
+  "njs-resort": "an approved NJS Beach Resort photograph",
   "hebs-lagos-event": "an approved HEBS Lagos event photograph",
 };
 
@@ -88,7 +89,7 @@ export function Plate({
       ) : (
         <>
           {children}
-          {opts.inline && (
+          {opts.inline && opts.environment !== "production" && (
             <StagingNote light={noteLight} className="absolute bottom-2 left-2 right-2 w-fit">
               reserved for {slotWords(r.slot)}.
             </StagingNote>
@@ -186,6 +187,7 @@ export function Section({
   labelledBy,
   className = "",
   innerClassName = "",
+  staging = false,
   children,
 }: {
   id: string;
@@ -193,11 +195,14 @@ export function Section({
   labelledBy: string;
   className?: string;
   innerClassName?: string;
+  /** Review-only: never rendered on production, and left out of the copy inventory. */
+  staging?: boolean;
   children: React.ReactNode;
 }) {
   const g = GROUND[ground];
   return (
     <section
+      {...(staging ? { "data-staging": "" } : {})}
       id={id}
       aria-labelledby={labelledBy}
       className={`${g.light ? "da-on-light" : ""} ${className}`}

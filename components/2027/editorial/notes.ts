@@ -20,7 +20,7 @@ export function reviewNotes(brand: BrandVariant) {
         ? "The logo shown is a champagne-and-ivory colour study of the official HEBS mark, for internal comparison only (D3). The official mark itself is unchanged."
         : "Official HEBS mark shown as supplied; the 2027 logo treatment is open until confirmed (D3).",
       "Venue name provisional until confirmed (D9).",
-      "Hero photography reserved for approved HEBS Lagos event and NJS Royale Beach Resort media; until then the hero is set in type only.",
+      "Hero photography reserved for approved HEBS Lagos event and NJS Beach Resort media; until then the hero is set in type only.",
     ],
     welcome: [COPY_DRAFT, reserved("welcome")],
     threeDays: [
@@ -29,7 +29,7 @@ export function reviewNotes(brand: BrandVariant) {
     ],
     experience: [
       COPY_DRAFT,
-      "Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Royale Beach Resort photograph.",
+      "Experience images reserved: five for approved HEBS Lagos event photographs, the destination one for an approved NJS Beach Resort photograph.",
     ],
     destination: [
       COPY_DRAFT,

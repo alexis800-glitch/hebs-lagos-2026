@@ -10,6 +10,8 @@
 
 /** Staging prefix. The 2026 site keeps the root until publication is approved. */
 import { FORMS_OPEN } from "../integrations/registration-2027";
+import { LAUNCH_2027 } from "../launch-2027-config";
+import { clientPreview, deployEnvironment } from "../publication";
 
 export const BASE = "/2027";
 
@@ -32,7 +34,7 @@ export interface SitePage {
 }
 
 const page = (id: PageId, title: string, nav: string, slug: string, purpose: string, built: boolean, waitingOn: string[] = []): SitePage =>
-  ({ id, title, nav, path: slug ? `${BASE}/${slug}` : `${BASE}/homepage`, purpose, built, waitingOn });
+  ({ id, title, nav, path: slug ? `${BASE}/${slug}` : BASE, purpose, built, waitingOn });
 
 export const SITE_PAGES: SitePage[] = [
   page("home", "Home", "Home", "", "The complete premium landing page.", true),
@@ -55,7 +57,7 @@ export const SITE_PAGES: SitePage[] = [
   page("tickets", "Tickets & registration", "Tickets", "tickets", "Ticket categories, registration forms and payment when ticket sales officially open.", true,
     ["Ticket categories, prices and payment gateway approval", "Ticketing route (D1)"]),
   page("travel", "Travel & accommodation", "Travel", "travel", "Venue information, transport, accommodation, travel information and international visitor guidance.", true,
-    ["Venue address and directions (D9)", "Approved accommodation packages", "Visitor support contacts (D10)"]),
+    ["Venue street address and directions", "Approved accommodation packages", "Visitor support contacts (D10)"]),
   page("gallery", "Gallery & past events", "Gallery", "gallery", "HEBS event history, photographs, videos, testimonials and highlights.", true,
     ["Approved HEBS Lagos 2026 photographs, video and testimonials"]),
   page("contact", "Contact us", "Contact", "contact", "Contact form, official email addresses, social media links and business inquiries.", true,
@@ -68,29 +70,43 @@ export function sitePage(id: PageId): SitePage {
   return p;
 }
 
-/** The path of a built page, or null when it is not built yet (render text, not a link). */
-export function pageHref(id: PageId, hash = ""): string | null {
-  const p = sitePage(id);
-  return p.built ? `${p.path}${hash ? `#${hash}` : ""}` : null;
+/**
+ * Whether a page may be linked to: built, and on production also listed for
+ * launch (lib/launch-2027-config.ts), so a page left out of a launch is never
+ * linked.
+ */
+export function linkable(id: PageId, environment = deployEnvironment()): boolean {
+  return sitePage(id).built && (environment !== "production" || clientPreview() || LAUNCH_2027.pages.includes(id));
 }
 
-/** Where every priority-list button leads. */
-export const PRIORITY_HREF = `${BASE}/homepage#priority-list`;
+/** The path of a linkable page, or null (render text, not a link). */
+export function pageHref(id: PageId, hash = ""): string | null {
+  return linkable(id) ? `${sitePage(id).path}${hash ? `#${hash}` : ""}` : null;
+}
+
+/**
+ * Where every priority-list button leads: the priority-list section of the
+ * Tickets & registration page. While the list is closed (FORMS_OPEN.priority is
+ * false) that section explains it and collects nothing; once the list is
+ * authorised and opened, the approved form appears in the same section, so no
+ * button or link has to change.
+ */
+export const PRIORITY_HREF = `${BASE}/tickets#priority-list`;
 
 /**
  * The priority-list call to action. The directive's wording, "Join the 2027
  * Priority List", is used only once the list can actually be joined; until
- * then every button says it opens soon.
+ * then every button names the list without promising when it opens (no date is decided).
  */
-export const PRIORITY_CTA = FORMS_OPEN.priority ? "Join the 2027 Priority List" : "Priority list opens soon";
+export const PRIORITY_CTA = FORMS_OPEN.priority ? "Join the 2027 Priority List" : "The 2027 priority list";
 
 const PRIMARY: PageId[] = ["experience", "programme", "competitions", "education", "sponsorship", "tickets", "travel"];
 const link = (p: SitePage) => ({ label: p.nav, href: p.path });
 
 /** Desktop navigation: the seven pages visitors look for first. */
-export const SITE_NAV = SITE_PAGES.filter((p) => p.built && PRIMARY.includes(p.id)).map(link);
+export const SITE_NAV = SITE_PAGES.filter((p) => linkable(p.id) && PRIMARY.includes(p.id)).map(link);
 
 /** Mobile menu and footer: every built page, in directive order. */
-export const SITE_MENU = SITE_PAGES.filter((p) => p.built && p.id !== "home").map(link);
+export const SITE_MENU = SITE_PAGES.filter((p) => linkable(p.id) && p.id !== "home").map(link);
 
 if (SITE_PAGES.length !== 13) throw new Error("[lib/site/2027] directive section 5 lists thirteen pages");

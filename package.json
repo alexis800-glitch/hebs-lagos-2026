@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:withheld": "node scripts/check-2027-withheld.mjs",
+    "copy:inventory": "UPDATE_COPY_INVENTORY=1 vitest run tests/copy-inventory-2027.test.ts tests/executive-package-2027.test.ts",
+    "media:prepare": "UPDATE_PUBLISHED_MEDIA=1 vitest run tests/published-media-2027.test.ts"
   },
   "dependencies": {
     "framer-motion": "^12.40.0",

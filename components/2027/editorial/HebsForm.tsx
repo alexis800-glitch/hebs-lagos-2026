@@ -232,10 +232,10 @@ export default function HebsForm({
             </div>
             <button
               type="submit"
-              className="min-h-[52px] px-6 text-[12px] font-bold uppercase tracking-[0.18em] transition-colors duration-200 enabled:hover:bg-[#EAD7A8] disabled:cursor-not-allowed sm:col-span-2"
-              style={enabled ? { background: champ, color: ink } : { border: "1px solid rgba(0,0,0,.25)", color: muted, background: "transparent" }}
+              className={`s27-btn ${enabled ? "s27-btn--pri" : ""} disabled:cursor-not-allowed sm:col-span-2`}
+              style={enabled ? undefined : { border: "1px solid rgba(0,0,0,.25)", color: muted, background: "transparent" }}
             >
-              {!enabled ? "Opens soon" : status.kind === "sending" ? "Sending…" : submitLabel}
+              {!enabled ? "Not open yet" : status.kind === "sending" ? "Sending…" : submitLabel}
             </button>
           </fieldset>
         </form>

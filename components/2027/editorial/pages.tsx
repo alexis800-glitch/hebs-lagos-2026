@@ -24,7 +24,10 @@ import {
 } from "./sections";
 import { C, EDITORIAL_CSS, type BrandVariant, type NotesMode } from "./tokens";
 import type { DeployEnvironment } from "@/lib/publication";
-import { PRIORITY_HREF, SITE_MENU, SITE_NAV, pageHref, sitePage } from "@/lib/site/2027";
+import { notFound } from "next/navigation";
+import { pagePublished } from "@/lib/launch-2027";
+import { PRIORITY_HREF, SITE_MENU, SITE_NAV, pageHref, sitePage, type PageId } from "@/lib/site/2027";
+import { SiteHeader } from "@/components/2027/site/SiteHeader";
 
 export interface PageProps {
   environment: DeployEnvironment;
@@ -50,7 +53,9 @@ const LAUNCH_NAV: NavLink[] = [
 ];
 
 /** Every 2027 page: the site navigation, the page, and (panel mode) its staging notes. */
-export function Shell({ opts, nav = SITE_NAV, home = sitePage("home").path, notes, groups, children }: {
+export function Shell({ page, opts, nav = SITE_NAV, home = sitePage("home").path, notes, groups, children }: {
+  /** A 2027 site page: it gets the shared HEBS 2027 header. Concept studies omit it and keep their own. */
+  page?: PageId;
   opts: Opts;
   nav?: NavLink[];
   home?: string;
@@ -58,12 +63,14 @@ export function Shell({ opts, nav = SITE_NAV, home = sitePage("home").path, note
   groups: [string, string[]][];
   children: React.ReactNode;
 }) {
+  // A 2027 page that is not published in this environment is a missing page.
+  if (page && !pagePublished(page, opts.environment)) notFound();
   return (
     <div className="da relative">
       <style>{EDITORIAL_CSS}</style>
-      <Nav brand={opts.brand} links={nav} menuLinks={nav === SITE_NAV ? SITE_MENU : nav} priorityHref={home === "#hero" ? "#priority-list" : PRIORITY_HREF} homeHref={home} />
-      <main>{children}</main>
-      {notes === "panel" && <ReviewPanel groups={groups} brand={opts.brand} />}
+      {page ? <SiteHeader current={page} /> : <Nav brand={opts.brand} links={nav} menuLinks={nav === SITE_NAV ? SITE_MENU : nav} priorityHref={home === "#hero" ? "#priority-list" : PRIORITY_HREF} homeHref={home} />}
+      <main id="main-content">{children}</main>
+      {notes === "panel" && opts.environment !== "production" && <ReviewPanel groups={groups} brand={opts.brand} />}
     </div>
   );
 }
@@ -130,7 +137,7 @@ const launchGroups = (n: ReviewNotes): [string, string[]][] => [
 export function ReviewPanel({ groups, brand }: { groups: [string, string[]][]; brand: BrandVariant }) {
   const view = (b: BrandVariant, m: NotesMode) => `?brand=${b}&notes=${m}`;
   return (
-    <aside aria-labelledby="review-notes-title" className="border-t-2 border-dashed" style={{ background: "#0B2226", borderColor: "rgba(200,169,106,.6)", color: C.ivory }}>
+    <aside data-staging="" aria-labelledby="review-notes-title" className="border-t-2 border-dashed" style={{ background: "#0B2226", borderColor: "rgba(200,169,106,.6)", color: C.ivory }}>
       <div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-12">
         <h2 id="review-notes-title" className="text-[18px] font-semibold">Staging review notes</h2>
         <p className="mt-2 max-w-[70ch] text-[14px] leading-relaxed" style={{ color: "rgba(245,239,228,.8)" }}>

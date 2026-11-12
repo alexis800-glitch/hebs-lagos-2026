@@ -20,6 +20,11 @@ Follows the Gate C run sheet, revision 2, section 9. The test runs between the w
   - the website log lines for the case;
   - the copy's admin view, recorded by Claude Desktop;
   - all kept in one dated folder for Gary.
+- **Which dataset (open question, hold before E2).** The forms go server to server to `evSubmitPublicForm`, which has no `base44_data_env` link parameter. Booking contract v1.0 does not say whether these calls write to the copy's main data or its test (`dev`) data.
+  - Before E2, Claude Desktop states which dataset they write to.
+  - Every admin check for E2 to E12 then reads that same dataset.
+  - A record found in the other dataset stops the test.
+- **Never submit the 2026 contact form on the Preview.** It sends real email while `RESEND_API_KEY` reaches Preview (configuration checklist, pre-test check 6).
 - **Any unexpected answer stops the test.** The forms are closed and the result is reported.
 
 ## Order and hold points

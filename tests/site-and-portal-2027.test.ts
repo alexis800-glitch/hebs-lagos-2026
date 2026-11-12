@@ -25,7 +25,7 @@ describe("2027 site map (directive section 5)", () => {
 
   it("marks a page built exactly when its route exists", () => {
     for (const p of SITE_PAGES) {
-      const route = join(ROOT, "app", ...p.path.split("/").filter(Boolean), "page.tsx");
+      const route = join(ROOT, "app", "(edition)", ...p.path.split("/").filter(Boolean), "page.tsx");
       expect(existsSync(route), `${p.id} at ${p.path}`).toBe(p.built);
     }
   });
@@ -33,7 +33,7 @@ describe("2027 site map (directive section 5)", () => {
   it("never links to a page that is not built", () => {
     for (const p of SITE_PAGES.filter((x) => !x.built)) expect(pageHref(p.id)).toBeNull();
     const unbuilt = SITE_PAGES.filter((x) => !x.built).map((x) => x.path);
-    const files = [...walk(join(ROOT, "components/2027")), ...walk(join(ROOT, "app/2027"))].filter((f) => /\.tsx?$/.test(f));
+    const files = [...walk(join(ROOT, "components/2027")), ...walk(join(ROOT, "app/(edition)/2027"))].filter((f) => /\.tsx?$/.test(f));
     for (const f of files) {
       const src = readFileSync(f, "utf8");
       for (const path of unbuilt) expect(src, f).not.toContain(`"${path}`);
@@ -110,13 +110,13 @@ describe("Base44 2027 portal hand-off", () => {
   });
 
   it("never renders a prize amount while D8 is open", () => {
-    const files = [...walk(join(ROOT, "components/2027")), ...walk(join(ROOT, "app/2027"))].filter((f) => /\.tsx?$/.test(f));
+    const files = [...walk(join(ROOT, "components/2027")), ...walk(join(ROOT, "app/(edition)/2027"))].filter((f) => /\.tsx?$/.test(f));
     for (const f of files) expect(readFileSync(f, "utf8"), f).not.toMatch(/prizeUsd|TOTAL_PRIZE|PRIZE_TOTAL|NGN_PER_USD/);
   });
 
   it("never invites a sign-up while the priority list is closed", () => {
     expect(FORMS_OPEN.priority).toBe(false);
-    expect(PRIORITY_CTA).toBe("Priority list opens soon");
+    expect(PRIORITY_CTA).toBe("The 2027 priority list");
     for (const f of walk(join(ROOT, "components/2027/editorial"))) {
       expect(readFileSync(f, "utf8"), f).not.toMatch(/>\s*Join the 2027 Priority List\s*</i);
     }

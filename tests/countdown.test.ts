@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseTargetInstant, timeLeft } from "@/lib/countdown";
+import { parseTargetInstant, timeLeft, timeLeftSeconds } from "@/lib/countdown";
 
 const TARGET = "2027-07-23T00:00:00+01:00";
 
@@ -21,5 +21,18 @@ describe("countdown", () => {
 
   it("refuses a target without an explicit offset", () => {
     expect(() => parseTargetInstant("2027-07-23T00:00:00")).toThrow(/explicit UTC offset/);
+  });
+});
+
+describe("timeLeftSeconds", () => {
+  const target = "2027-07-23T00:00:00+01:00";
+  it("adds whole seconds to the same days, hours and minutes", () => {
+    const now = Date.parse("2027-07-21T21:58:30.400Z"); // 1 day 1 h 1 min 29.6 s before 23:00Z
+    expect(timeLeftSeconds(target, now)).toEqual({ days: 1, hours: 1, minutes: 1, seconds: 29 });
+    const { seconds: _s, ...rest } = timeLeftSeconds(target, now)!;
+    expect(rest).toEqual(timeLeft(target, now));
+  });
+  it("is null once the target has passed", () => {
+    expect(timeLeftSeconds(target, Date.parse("2027-07-22T23:00:00Z"))).toBeNull();
   });
 });

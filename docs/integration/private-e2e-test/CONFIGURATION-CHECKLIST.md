@@ -1,6 +1,6 @@
 # HEBS 2027 private end-to-end test: configuration checklist
 
-Prepared 5 Nov 2026 for the Gate C run sheet, revision 2, section 9 (P1 to P8). **Nothing in this list is set yet.** No setting below may be created until its approval is given in writing. Every value is either an exact public identifier (copied from run sheet P3) or a secret that Lex types directly into the provider; Claude Code never sees a secret.
+Prepared 5 Nov 2026 for the Gate C run sheet, revision 2, section 9 (P1 to P8). **Observed 12 Nov 2026 (setting names and scopes only):** rows 1–8 exist in Vercel, Preview scope of `website/2027-private-e2e-test` only; row 9 is not set. Row 8, the E0 token meant to last only for E0, has been set since 5 Nov 2026 12:03 WAT and is built into the branch's latest Preview (5 Nov, 12:32 WAT). No E0 evidence exists, and Vercel keeps no runtime logs from then, so E0 is treated as **not run**. The owner either removes row 8 now and sets it again just before E0, or runs E0 promptly and removes it straight after. No setting below may be created until its approval is given in writing. Every value is either an exact public identifier (copied from run sheet P3) or a secret that Lex types directly into the provider; Claude Code never sees a secret.
 
 ## Where the test runs
 
@@ -25,8 +25,11 @@ Normal staging (`website/2027-pages-batch-1`) and Production get none of these s
 | 6 | `HEBS_RATE_LIMIT_REST_TOKEN` | that store's REST token; Sensitive | Lex only, typed in | same | close-down |
 | 7 | `HEBS_RATE_LIMIT_SALT` | 16+ random characters; Sensitive | Lex | same | close-down |
 | 8 | `HEBS_PRIVATE_TEST_PROBE_TOKEN` | E0 operator token: 32+ random characters, different from row 4; Sensitive. **For E0 only.** The operator sends it in the `X-HEBS-Probe-Token` header | Lex only, typed in | P8 | straight after E0 |
+| 9 | `HEBS_STAGING_PORTAL_ORIGIN` | the private copy's Base44 preview origin, `https://<host>` only: no path, query or `_preview_token` (booking contract v1.0, annex A section 3). Not secret, but kept out of Git and reports | Lex, typed in | P-B3 (booking checklist) | booking close-down |
 
 The secret in row 4 is the one Lex also types into the copy's `EV_FORM_HMAC_SECRET` (P2). The copy's self-test secret is restored at close-down.
+
+Never set anywhere: a Base44 `_preview_token`. It is short-lived; the tester's browser gets it from the Base44 editor.
 
 Not set, and refused if set, on this branch: `HEBS_FORMS_PRODUCTION_APPROVED`, `HEBS_FORMS_MOCK_UPLOADS`. Uploads, payments and emails have no setting: they are off in code.
 
@@ -56,6 +59,7 @@ Vercel system variables: `VERCEL_ENV` and `VERCEL_GIT_COMMIT_REF` must reach the
 3. **Test branch access.** An anonymous request to the test branch's Preview gets the sign-in redirect (302).
 4. **Store isolation.** The rate-limit store is new and test-only, and is not connected to Production. If it is added through a Marketplace integration, it may inject `KV_REST_API_*` into every environment. Untick Production, or use rows 5–6 instead.
 5. **P1 and P7.** The copy has the test-only 2027 Edition (P1). Its forms stay closed until P7.
+6. **No real email from the Preview.** `RESEND_API_KEY` and `RESEND_FROM` are scoped Production only (Preview unticked; owner approval needed), so the 2026 `/api/contact` route cannot send from any Preview. Until then, nobody submits the 2026 contact form on a Preview.
 
 ## Decisions recorded (Gary, 5 Nov 2026)
 

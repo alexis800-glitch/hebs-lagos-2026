@@ -25,9 +25,25 @@ export type Gated<T> =
 
 export type DeployEnvironment = "production" | "preview" | "development";
 
-/** The environment this build is for. Vercel sets VERCEL_ENV; local builds are development. */
+/**
+ * The client design-review preview: a preview deployment built with
+ * HEBS_CLIENT_PREVIEW=on, for the owner to see the 2027 site as production
+ * would show it, every built page open (lib/launch-2027.ts), with nothing
+ * indexed or tracked. Never true on a production deployment, whatever the flag.
+ * The variables are named literally so Next.js passes them to the middleware.
+ */
+export function clientPreview(env: Record<string, string | undefined> = { VERCEL_ENV: process.env.VERCEL_ENV, HEBS_CLIENT_PREVIEW: process.env.HEBS_CLIENT_PREVIEW }): boolean {
+  return env.VERCEL_ENV === "preview" && env.HEBS_CLIENT_PREVIEW === "on";
+}
+
+/**
+ * The environment this build is for. Vercel sets VERCEL_ENV; local builds are
+ * development. The client preview renders as production, so it shows exactly
+ * what production would: no staging notes, no review-only media.
+ */
 export function deployEnvironment(env: Record<string, string | undefined> = process.env): DeployEnvironment {
   if (env.VERCEL_ENV === "production") return "production";
+  if (clientPreview(env)) return "production";
   if (env.VERCEL_ENV === "preview") return "preview";
   return "development";
 }

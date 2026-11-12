@@ -6,10 +6,11 @@
 import type { CSSProperties } from "react";
 
 export const C = {
-  black: "#000000",
+  /** The homepage's black and ivory (components/2027/home/home.css), shared by every 2027 page. */
+  black: "#0D0B08",
   champ: "#C8A96A",
   champL: "#EAD7A8",
-  ivory: "#F5EFE4",
+  ivory: "#F6EFE2",
   white: "#FFFFFF",
   atlantic: "#0E3A3F",
   body: "#3B362F",
@@ -48,7 +49,8 @@ export const GROUND: Record<Ground, { bg: string; fg: string; muted: string; lig
 /* One orchestrated moment on load (the horizon draws, the metallic line catches
    the light once); nothing else moves. Reduced motion: the final state, still. */
 export const EDITORIAL_CSS = `
-.da { font-family: var(--c-manrope), sans-serif; }
+/* Site pages take Jost from the 2027 root layout; the concept studies still load Manrope. */
+.da { font-family: var(--c-manrope, var(--c-jost)), sans-serif; }
 .da a:focus-visible, .da summary:focus-visible { outline: 2px solid ${C.champL}; outline-offset: 3px; }
 .da .da-on-light a:focus-visible, .da .da-on-light summary:focus-visible { outline-color: ${C.black}; }
 .da a, .da summary { touch-action: manipulation; -webkit-tap-highlight-color: rgba(200,169,106,.25); }

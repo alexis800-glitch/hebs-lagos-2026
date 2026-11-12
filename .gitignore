@@ -38,3 +38,12 @@ next-env.d.ts
 .vercel
 /assets/
 /hands-on-hair-styling-02.png
+
+# Local-only review media for the 2027 design reviews (never committed)
+/public/_review/
+
+# HEBS 2027 media prepared for publication: added only in the launch commit (lib/assets/published-media-2027.ts).
+public/2027/media
+
+# HEBS 2027 booking contract v1.0: private authoritative records, kept locally only (never in the public repo)
+/docs/integration/hebs-2027-booking-contract-v1.0/

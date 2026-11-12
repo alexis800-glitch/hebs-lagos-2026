@@ -23,6 +23,8 @@ describe.skipIf(!canary || !existsSync(STATIC))("browser bundles", () => {
       canary!, MOCK_SECRET, "HEBS_PORTAL_FORM_SECRET", "HEBS_PORTAL_FORM_URL", "HEBS_PORTAL_APP_ID", "HEBS_RATE_LIMIT", "X-HEBS-Signature", "createHmac", "evSubmitPublicForm",
       // The private test's notice, banner, copy id and switch stay on the server.
       PRIVATE_TEST.noticeVersion, PRIVATE_TEST.banner, PRIVATE_TEST.appId, "HEBS_PRIVATE_TEST_PROBE_TOKEN", "X-HEBS-Probe-Token", "private-test",
+      // The staging booking origin setting stays on the server too.
+      "HEBS_STAGING_PORTAL_ORIGIN",
     ];
     for (const f of files) {
       const src = readFileSync(f, "utf8");

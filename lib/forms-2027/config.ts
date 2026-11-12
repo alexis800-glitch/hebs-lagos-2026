@@ -186,3 +186,8 @@ export function formEnabled(form: FormId, cfg: SubmitConfig): boolean {
   // A real form also needs the approved privacy notice it refers to.
   return cfg.mode === "portal" && FORMS_OPEN[form] && !!cfg.notices.privacy;
 }
+
+/** Whether this deployment submits to a test system (the local mock, or the private test copy), so the forms under test are shown. */
+export function formsUnderTest(cfg: SubmitConfig = submitConfig()): boolean {
+  return cfg.mode === "mock" || cfg.mode === "private-test";
+}
