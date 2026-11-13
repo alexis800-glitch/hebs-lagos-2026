@@ -30,8 +30,8 @@ import { logSubmit } from "./log";
 import { preparePdf, type PreparedPdf, type UploadedFile } from "./pdf";
 import { callPortal, type FetchLike } from "./portal-client";
 import { PRIVATE_TEST } from "./private-test.mjs";
-import { probePortal, type ProbeResult } from "./reachability";
-import type { SharedStore } from "./store";
+import { probePortal, probeStore, type ProbeResult } from "./reachability";
+import { storeReason, type SharedStore } from "./store";
 import { isFormId, validateForm } from "./validate";
 
 export const MAX_BODY_BYTES = LIMITS.bodyBytes;
@@ -90,7 +90,7 @@ function sameOrigin(origin: string | null, host: string | null): boolean {
 
 export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promise<SubmitResponse> {
   const { config } = deps;
-  const log = (form: string, outcome: string, extra: { portalStatus?: number; clientRequestId?: string } = {}) =>
+  const log = (form: string, outcome: string, extra: { portalStatus?: number; clientRequestId?: string; store?: string } = {}) =>
     logSubmit({ form, outcome, ...extra }, deps.log);
 
   // While the feature is unpublished the route answers like a missing page.
@@ -129,8 +129,8 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
       log(form, "rate_limited");
       return done({ status: "rate_limited" });
     }
-  } catch {
-    log(form, "store_error");
+  } catch (e) {
+    log(form, "store_error", { store: `rate_limit_${storeReason(e)}` });
     return done({ status: "unavailable" });
   }
 
@@ -176,8 +176,8 @@ export async function handleSubmit(req: SubmitRequest, deps: SubmitDeps): Promis
   try {
     const attemptKey = createHash("sha256").update(`${config.ipSalt}:${attempt}`).digest("hex");
     clientRequestId = await deps.store.claim(`${storePrefix(config)}id:${attemptKey}`, (deps.newId ?? randomUUID)(), 3600);
-  } catch {
-    log(form, "store_error");
+  } catch (e) {
+    log(form, "store_error", { store: `request_id_${storeReason(e)}` });
     return done({ status: "unavailable" });
   }
 
@@ -218,8 +218,9 @@ function operatorAuthorised(expected: string | undefined, given: string | null |
 
 /**
  * Run sheet E0: only in private-test mode, only with the operator's token, and
- * otherwise as if it did not exist (404). It writes nothing anywhere: not even
- * the rate-limit store; the token is what limits it.
+ * otherwise as if it did not exist (404). It writes nothing in Base44, and in the
+ * shared store only its two 60-second probe keys (probeStore); the token is
+ * what limits it.
  */
 async function probe(parsed: Record<string, unknown>, req: SubmitRequest, deps: SubmitDeps): Promise<SubmitResponse> {
   const { config } = deps;
@@ -229,6 +230,7 @@ async function probe(parsed: Record<string, unknown>, req: SubmitRequest, deps: 
     url: config.portal.url, appId: config.portal.appId, secret: config.portal.secret,
     fetch: deps.portalFetch, nowSeconds: deps.nowSeconds, newId: deps.newId,
   });
+  results.push(await probeStore(deps.store, storePrefix(config), deps.newId));
   for (const r of results) logSubmit({ form: "probe", outcome: `${r.request}:${r.error ?? "none"}`, portalStatus: r.status }, deps.log);
   return { httpStatus: 200, outcome: { status: "probe", results } };
 }

@@ -548,16 +548,19 @@ describe("production isolation and the unpublished route", () => {
     for (const form of ["priority", "sponsor", "exhibitor", "enquiry"] as const) expect(formEnabled(form, submitConfig({ VERCEL_ENV: "preview" }))).toBe(false);
   });
 
-  it("talks to the shared store with one pipelined INCR/EXPIRE and SET NX", async () => {
+  it("talks to the shared store in one transaction each: SET NX EX then INCR, and SET NX EX then GET (tests/forms-store-2027.test.ts)", async () => {
     const seen: unknown[] = [];
-    const s = restStore({ url: "https://kv.test", token: "t" }, async (_u, init) => {
+    const s = restStore({ url: "https://kv.test", token: "t" }, async (u, init) => {
       const cmds = JSON.parse(String(init.body));
-      seen.push(cmds);
-      return new Response(JSON.stringify(cmds[0][0] === "INCR" ? [{ result: 3 }, { result: 1 }] : [{ result: "OK" }, { result: "id-1" }]));
+      seen.push([new URL(u).pathname, cmds]);
+      return new Response(JSON.stringify(cmds[1][0] === "INCR" ? [{ result: null }, { result: 3 }] : [{ result: "OK" }, { result: "id-1" }]));
     });
     expect(await s.hit("k", 600)).toBe(3);
     expect(await s.claim("c", "id-1", 3600)).toBe("id-1");
-    expect(seen).toEqual([[["INCR", "k"], ["EXPIRE", "k", 600, "NX"]], [["SET", "c", "id-1", "NX", "EX", 3600], ["GET", "c"]]]);
+    expect(seen).toEqual([
+      ["/multi-exec", [["SET", "k", "0", "EX", 600, "NX"], ["INCR", "k"]]],
+      ["/multi-exec", [["SET", "c", "id-1", "NX", "EX", 3600], ["GET", "c"]]],
+    ]);
     await expect(restStore({ url: "https://kv.test", token: "t" }, async () => new Response("no", { status: 500 })).hit("k", 600)).rejects.toThrow();
   });
 });

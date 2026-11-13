@@ -353,14 +353,16 @@ describe("reachability probe (run sheet E0)", () => {
     }
   });
 
-  it("with the token, sends one unsigned and one signed request that cannot store anything, writes nothing, and reports only status and error code", async () => {
+  it("with the token, sends one unsigned and one signed request that cannot store anything, checks the shared store on probe keys only, and reports only status and error code", async () => {
     const r = testRig(probeCfg(), {});
     const res = await r.send({ probe: "reachability" }, { probeToken: PROBE_TOKEN });
     expect(res).toEqual({ httpStatus: 200, outcome: { status: "probe", results: [
       { request: "unsigned", status: 401, error: "unauthorized" },
       { request: "signed", status: 403, error: "not_open" },
+      { request: "store", status: 200, error: null },
     ] } });
-    expect(r.storeWrites).toHaveLength(0);
+    expect(r.storeWrites).toHaveLength(2);
+    for (const k of r.storeWrites) expect(k).toMatch(/^hebs27-e2e:probe:(rl|id):/);
     expect(r.seen).toHaveLength(2);
     expect(r.seen[0].headers["X-HEBS-Signature"]).toBeUndefined();
     expect(r.seen[1].headers["X-HEBS-Signature"]).toMatch(/^[0-9a-f]{64}$/);
@@ -375,7 +377,7 @@ describe("reachability probe (run sheet E0)", () => {
     // Even with a form open, the empty signed body is refused, never stored.
     const open = testRig(probeCfg());
     const o = await open.send({ probe: "reachability" }, { probeToken: PROBE_TOKEN });
-    expect(o.outcome).toMatchObject({ results: [{ status: 401 }, { status: 400, error: "missing_field" }] });
+    expect(o.outcome).toMatchObject({ results: [{ status: 401 }, { status: 400, error: "missing_field" }, { request: "store", status: 200 }] });
     expect(probeBody("x").data).toEqual({});
   });
 

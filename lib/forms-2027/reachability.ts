@@ -4,19 +4,25 @@
  * only through the existing submit route, only in private-test mode and only
  * with the operator token (HEBS_PRIVATE_TEST_PROBE_TOKEN, sent as
  * X-HEBS-Probe-Token; handler.ts); there is no separate self-check endpoint,
- * and none in production. It writes nothing on the website side either.
+ * and none in production.
  *
  * Neither request can store anything: the unsigned one is refused at the
  * signature check, and the signed one carries no form fields, so it is refused
  * as not_open (forms closed) or missing_field (form open). The answer reports
  * HTTP status and error code only, never a body, header or secret.
+ *
+ * It also checks the website's shared store (probeStore) the way a submission
+ * uses it: one rate-limit count and one request-id claim, on two fresh probe
+ * keys that expire after 60 seconds. Nothing else is written, and nothing at all
+ * in Base44.
  */
 import { randomUUID } from "node:crypto";
 import { signedRequest } from "./sign";
 import type { FetchLike } from "./portal-client";
+import { storeReason, type SharedStore } from "./store";
 
 export interface ProbeResult {
-  request: "unsigned" | "signed";
+  request: "unsigned" | "signed" | "store";
   status: number;
   error: string | null;
 }
@@ -55,4 +61,17 @@ export async function probePortal(p: {
   const { raw, headers } = signedRequest(p.secret, p.appId, probeBody((p.newId ?? randomUUID)()), now);
   const signed = await send(fetchImpl, p.url, headers, raw, timeoutMs);
   return [{ request: "unsigned", ...unsigned }, { request: "signed", ...signed }];
+}
+
+/** The store check: status 200 when a count and a claim both work as a submission needs, else 0 with the store's reason. */
+export async function probeStore(store: SharedStore | null, prefix: string, newId: () => string = randomUUID): Promise<ProbeResult> {
+  if (!store) return { request: "store", status: 0, error: "no_store" };
+  const id = newId();
+  try {
+    const n = await store.hit(`${prefix}probe:rl:${id}`, 60);
+    const claimed = await store.claim(`${prefix}probe:id:${id}`, id, 60);
+    return n === 1 && claimed === id ? { request: "store", status: 200, error: null } : { request: "store", status: 0, error: "bad_response" };
+  } catch (e) {
+    return { request: "store", status: 0, error: storeReason(e) };
+  }
 }
