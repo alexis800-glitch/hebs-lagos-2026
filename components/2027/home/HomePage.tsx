@@ -8,8 +8,10 @@ import { Clip, Pic, reviewSrc } from "./media";
 import { Mark } from "@/components/2027/site/mark";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
 import { PRIZES, WATCH } from "@/lib/content/media-sections-2027";
+import { PAGES } from "@/lib/content/2027-pages";
+import { reviewMedia } from "./review-media";
 import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
-import { DesignScale, DestinationSequence, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
+import { DesignScale, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail } from "./client";
 import { HOME_HREF, NAV } from "./links";
 
 /**
@@ -155,24 +157,39 @@ function Experiences() {
   );
 }
 
+/**
+ * The destination: a still editorial composition (owner feedback, 17 Nov 2026).
+ * Real HEBS Lagos 2026 photographs taken at the 2026 summit venue, shown at their
+ * true colour and labelled as the 2026 event. No resort photograph is shown until
+ * verified pool, terrace or building photography is supplied; no concept scene.
+ */
 function Destination() {
   const d = HOME.destination;
-  // Photographed pairs only; the concept films are restricted (lib/assets/home-2027-review.ts).
-  const scenes: Scene[] = d.scenes.map((s) => ({
-    title: s.title, kind: s.kind, seconds: s.seconds, note: s.note, plain: true,
-    node: <div className="pair">{s.pair.map((id) => <div className="ph" key={id}><Pic id={id} sizes="(max-width: 1279px) 50vw, 555px" /></div>)}</div>,
-  }));
+  // The two photographed scenes, as still captioned pairs; nothing moves or advances on its own.
+  const groups = d.scenes.filter((sc) => sc.pair.every((id) => reviewSrc(id)));
   return (
-    <section className="dz">
-      <DestinationSequence scenes={scenes}>
-        <div className="txt">
-          <p className="lab">{d.label}</p>
-          <h2 className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
-          <div className="rule" />
-          <p className="b">{d.body}</p>
-          <div className="ctas"><To className="btn gh" href={pageHref("experience", "destination")}>{d.cta}</To></div>
+    <section className="ds" aria-labelledby="ds-title">
+      <div className="txt">
+        <p className="lab">{d.label}</p>
+        <h2 id="ds-title" className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
+        <div className="rule" />
+        <p className="b">{d.body}</p>
+        <div className="ctas"><To className="btn ol" href={pageHref("experience", "destination")}>{d.cta}</To></div>
+      </div>
+      {groups.length ? (
+        <div className="art" role="group" aria-label="Destination scenes">
+          {groups.map((sc, g) => (
+            <figure className={`grp g${g}`} key={sc.title}>
+              <p className="st"><b>{sc.title}</b> <span>Photographed</span></p>
+              <div className="pr">
+                {sc.pair.map((id) => <div className="ph" key={id}><Pic id={id} sizes="(max-width: 600px) 50vw, (max-width: 1279px) 45vw, 420px" /></div>)}
+              </div>
+              {g === 0 ? <figcaption className="cap"><b>PHOTOGRAPHED</b> {sc.note}</figcaption> : null}
+            </figure>
+          ))}
+          <p className="nt">Photographed at HEBS Lagos 2026 at NJS. These are past-event photographs, not photographs of the resort&apos;s facilities.</p>
         </div>
-      </DestinationSequence>
+      ) : null}
     </section>
   );
 }
@@ -353,7 +370,43 @@ function Highlights() {
           <div className={`rw${j ? " rev" : ""}`} key={j}>{row(r)}{row(r)}</div>
         ))}
       </div>
+      <GalleryIndex />
     </section>
+  );
+}
+
+/**
+ * The way into the HEBS Lagos 2026 Gallery: every collection this deployment may
+ * show, with its count, linked to its place on the Gallery page. The review-only
+ * prize presentations are marked as internal review. Absent where the Gallery is
+ * not published.
+ */
+function GalleryIndex() {
+  const all = pageHref("gallery", "lagos-2026");
+  if (!all) return null;
+  const collections = PAGES.gallery.categories
+    .map((c) => ({ id: c.id, title: c.title.text, review: "review" in c, count: c.photos.filter((id) => reviewMedia(id)).length }))
+    .filter((c) => c.count > 0);
+  if (collections.length === 0) return null;
+  const total = collections.reduce((n, c) => n + c.count, 0);
+  return (
+    <nav className="gi" aria-labelledby="gi-title">
+      <div className="gih">
+        <h3 id="gi-title">Explore the HEBS 2026 galleries</h3>
+        <a className="btn ol" href={all}>All {total} photographs</a>
+      </div>
+      <ul>
+        {collections.map((c) => (
+          <li key={c.id}>
+            <a href={pageHref("gallery", `gallery-${c.id}`) ?? all}>
+              <b>{c.title}</b>
+              <span>{c.count} photographs{c.review ? <em>Internal review</em> : null}</span>
+              <i aria-hidden="true">→</i>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

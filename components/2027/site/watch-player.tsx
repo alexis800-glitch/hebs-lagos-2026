@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 export type LibraryCut = { src: string; poster?: string; w: number; h: number };
 export type LibraryFilm = {
   key: string;
+  category: string;
   title: string;
   meta: string;
   status: "approved" | "internal-review";
@@ -45,7 +46,7 @@ export function WatchLibrary({ films, tone }: { films: LibraryFilm[]; tone: "dar
 
   const shape = playing ?? film.wide;
   return (
-    <div className="wp" data-tone={tone}>
+    <div className="wp" data-tone={tone} data-layout={films.length > 1 ? "library" : "single"}>
       <figure className="wp-film">
         <div className="wp-frame" style={{ aspectRatio: `${shape.w} / ${shape.h}` }} data-tall={film.tall ? "" : undefined}>
           {playing ? (
@@ -95,8 +96,8 @@ export function WatchLibrary({ films, tone }: { films: LibraryFilm[]; tone: "dar
               <button type="button" className="wp-card" aria-current={i === current ? "true" : undefined} onClick={() => play(i)} aria-label={`Play the film: ${f.title}`}>
                 <span className="wp-thumb">{f.wide.poster ? <img src={f.tall?.poster ?? f.wide.poster} alt="" loading="lazy" decoding="async" /> : null}<i aria-hidden="true" /></span>
                 <span className="wp-ct">
+                  <small>{f.category}</small>
                   <b>{f.title}</b>
-                  <span>{f.meta}</span>
                   <em className={`wp-status wp-${f.status}`}>{f.status === "approved" ? "Cleared" : "Internal review"}</em>
                 </span>
               </button>

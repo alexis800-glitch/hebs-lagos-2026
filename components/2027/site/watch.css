@@ -15,29 +15,32 @@
 .wp-status{font-style:normal;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid currentColor;line-height:1.3}
 .wp-approved{color:#9FC9A4}
 .wp-internal-review{color:#E9B872}
-/* The film list: poster cards in one scrolling row. */
-.wp-list{list-style:none;margin:0;padding:0 0 6px;display:grid;grid-auto-flow:column;grid-auto-columns:172px;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain}
-.wp-list li{scroll-snap-align:start}
+/* The library: one prominent player beside a grid of film cards (stacked on phones). */
+.wp[data-layout="library"]{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+.wp-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .wp-card{display:grid;gap:10px;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer;color:inherit;font:inherit}
-.wp-thumb{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#1A150F;border-radius:2px}
+.wp-thumb{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#1A150F;border-radius:2px}
 .wp-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .wp-thumb i{position:absolute;left:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:var(--wp-gold)}
 .wp-thumb i::after{content:"";position:absolute;left:12px;top:9px;border-style:solid;border-width:6px 0 6px 9px;border-color:transparent transparent transparent #0D0B08}
 .wp-card:hover .wp-thumb img{transform:scale(1.04)}
 .wp-card[aria-current="true"] .wp-thumb{box-shadow:0 0 0 2px var(--wp-gold)}
-.wp-ct{display:grid;gap:4px;font-size:12px;line-height:1.35}
-.wp-ct b{font-weight:500;font-size:13px;letter-spacing:.06em}
-.wp-ct .wp-status{justify-self:start;margin-top:4px}
+.wp-ct{display:grid;gap:3px;font-size:12px;line-height:1.35}
+.wp-ct small{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.wp-ct b{font-weight:500;font-size:14px;letter-spacing:.03em}
+.wp-ct .wp-status{justify-self:start;margin-top:5px}
 .wp[data-tone="dark"] .wp-film figcaption,.wp[data-tone="dark"] .wp-ct{color:rgba(246,239,226,.78)}
 .wp[data-tone="dark"] .wp-film figcaption b,.wp[data-tone="dark"] .wp-ct b{color:var(--wp-gold)}
 .wp[data-tone="light"] .wp-film figcaption,.wp[data-tone="light"] .wp-ct{color:#4A3F31}
 .wp[data-tone="light"] .wp-film figcaption b,.wp[data-tone="light"] .wp-ct b{color:#8C6B34}
 .wp[data-tone="light"] .wp-approved{color:#2F6B3A}
 .wp[data-tone="light"] .wp-internal-review{color:#8A5A12}
+@media (min-width:601px) and (max-width:1000px){.wp[data-layout="library"]{grid-template-columns:1fr}.wp-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (prefers-reduced-motion: reduce){.wp-thumb img,.wp-play{transition:none}.wp-card:hover .wp-thumb img{transform:none}}
 @media (max-width:600px){
   .wp-frame{max-height:82vh}
   .wp-frame[data-tall]{aspect-ratio:720 / 1280 !important}
   .wp-play{min-height:52px;padding:0 22px 0 16px;font-size:13px}
-  .wp-list{grid-auto-columns:144px}
+  .wp[data-layout="library"]{grid-template-columns:1fr;gap:22px}
+  .wp-list{gap:12px}
 }

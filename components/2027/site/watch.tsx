@@ -17,18 +17,20 @@ function cutOf(c: Cut): (LibraryCut & { published: boolean }) | null {
  * internal review. Review-only films never reach production (reviewMedia).
  */
 export function libraryFilms(): LibraryFilm[] {
-  return (WATCH.films as readonly { key: string; title: string; meta: string; wide: Cut; tall?: Cut }[]).flatMap((f) => {
+  return (WATCH.films as readonly { key: string; category: string; title: string; meta: string; wide: Cut; tall?: Cut }[]).flatMap((f) => {
     const wide = cutOf(f.wide);
     const tall = f.tall ? cutOf(f.tall) : undefined;
     if (!wide || tall === null) return [];
     const status = wide.published && (!tall || tall.published) ? "approved" : "internal-review";
-    return [{ key: f.key, title: f.title, meta: f.meta, status, wide, ...(tall ? { tall } : {}) }];
+    return [{ key: f.key, category: f.category, title: f.title, meta: f.meta, status, wide, ...(tall ? { tall } : {}) }];
   });
 }
 
 /** The film library, or nothing when no film can be shown here. */
 export function WatchFilms({ tone }: { tone: "dark" | "light" }) {
   const films = libraryFilms();
+  // Films still awaiting their footage (WATCH.pending) are not shown at all: a film joins the
+  // library only once its cut exists, has been inspected and is registered (Lex, 17 Nov 2026).
   return films.length ? <WatchLibrary films={films} tone={tone} /> : null;
 }
 

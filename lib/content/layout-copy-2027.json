@@ -206,22 +206,28 @@
    "text": "– Days – Hours – Minutes – Seconds"
   },
   {
-   "key": "layout.home.0ea58db9e7",
-   "scope": "home",
-   "where": "page",
-   "text": "PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp."
-  },
-  {
    "key": "layout.home.edbd493852",
    "scope": "home",
    "where": "page",
    "text": "HEBS at NJS, 2026 Photographed"
   },
   {
+   "key": "layout.home.0ea58db9e7",
+   "scope": "home",
+   "where": "page",
+   "text": "PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp."
+  },
+  {
    "key": "layout.home.d3cb683091",
    "scope": "home",
    "where": "page",
    "text": "The summit floor Photographed"
+  },
+  {
+   "key": "layout.home.825d499a26",
+   "scope": "home",
+   "where": "page",
+   "text": "Photographed at HEBS Lagos 2026 at NJS. These are past-event photographs, not photographs of the resort's facilities."
   },
   {
    "key": "layout.home.1c2595a317",
@@ -356,6 +362,12 @@
    "text": "Models walking through the hall at HEBS Lagos 2026"
   },
   {
+   "key": "layout.home.41ca744484",
+   "scope": "home",
+   "where": "alt",
+   "text": "Destination scenes"
+  },
+  {
    "key": "layout.home.4fc180f0f3",
    "scope": "home",
    "where": "alt",
@@ -378,18 +390,6 @@
    "scope": "home",
    "where": "alt",
    "text": "A braider at work at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.41ca744484",
-   "scope": "home",
-   "where": "alt",
-   "text": "Destination scenes"
-  },
-  {
-   "key": "layout.home.2e2230a07a",
-   "scope": "home",
-   "where": "alt",
-   "text": "Pause the destination scenes"
   },
   {
    "key": "layout.home.54f56a34be",

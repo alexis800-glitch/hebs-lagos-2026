@@ -127,7 +127,7 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
       "layout.home.990bb45fc5": "A nail technician at work at HEBS Lagos 2026",
       "layout.home.737ad42d61": "A braider at work at HEBS Lagos 2026",
       "layout.home.41ca744484": "Destination scenes",
-      "layout.home.2e2230a07a": "Pause the destination scenes",
+      // "layout.home.2e2230a07a" ("Pause the destination scenes") retired 17 Nov 2026: the destination no longer moves, so its pause control was removed (Lex).
       "layout.home.54f56a34be": "A braiding competitor at work, HEBS Lagos 2026",
       "layout.home.665c525c5c": "A winner celebrating beside the HEBS trophy, 2026",
       "layout.home.a9b54743d5": "The seven categories",

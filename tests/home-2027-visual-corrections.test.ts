@@ -41,11 +41,16 @@ describe("visual corrections", () => {
     expect(css).not.toContain("zoomgold");
   });
 
-  it("A6 and A6b: no frame line, a black column behind the headline, and a dip through black", () => {
+  it("A6: no frame line; the destination is a still composition (Lex, 17 Nov 2026, supersedes A6b)", () => {
     expect(html).not.toContain("frameline");
     expect(css).not.toContain("frameline");
-    expect(css).toContain("linear-gradient(90deg,transparent 0,transparent 18%,#000 36%)");
-    expect(css).toContain(".hp .dz .scene.on{opacity:1;transition:opacity .9s ease-out .6s}");
+    // No moving sequence, progress bars or automatic transitions; the photographs are shown at true colour.
+    expect(html).toContain('<section class="ds"');
+    expect(html).not.toMatch(/class="(dz|chap|dzctl)"/);
+    expect(css).not.toMatch(/\.hp \.dz\b/);
+    const ds = html.slice(html.indexOf('<section class="ds"'), html.indexOf("</section>", html.indexOf('<section class="ds"')));
+    expect(ds).not.toContain('class="grade');
+    expect(ds).toContain("PHOTOGRAPHED");
   });
 
   it("P1: Jost italic is not preloaded, and every italic Jost rule names its real italic face", () => {

@@ -41,7 +41,19 @@ export const WATCH = {
    * production). A film whose files are absent is simply left out.
    */
   films: [
-    { key: "styling-floor", title: "The styling floor", meta: "HEBS Lagos 2026 · Film by VMM · 12 seconds, silent", wide: { id: "hero-loop-wide", w: 960, h: 900 }, tall: { id: "hero-loop-tall", w: 720, h: 1280 } },
+    { key: "styling-floor", category: "Styling", title: "The styling floor", meta: "HEBS Lagos 2026 · Film by VMM · 12 seconds, silent", wide: { id: "hero-loop-wide", w: 960, h: 900 }, tall: { id: "hero-loop-tall", w: 720, h: 1280 } },
+  ],
+  /**
+   * Films selected from the Lagos Event shortlist whose footage is not yet
+   * retrieved (Google Drive download quota, 17 Nov 2026). Not shown anywhere: a
+   * film moves to \`films\` once its cut exists, has been inspected and is
+   * registered (review-only until cleared).
+   */
+  pending: [
+    { key: "hall", category: "Event highlights", title: "The summit hall", source: "DJI Event Day 1 · 0172" },
+    { key: "braiding", category: "Braiding", title: "Braiding competition", source: "Event Day 2 · C1493" },
+    { key: "education", category: "Education", title: "Education on stage", source: "Event Day 1 · C1546" },
+    { key: "fashion", category: "Fashion", title: "Fashion and runway", source: "Event Day 2 · C1547" },
   ],
 } as const;
 
