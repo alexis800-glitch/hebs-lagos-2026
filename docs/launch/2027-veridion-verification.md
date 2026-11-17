@@ -3,7 +3,7 @@
 Routine wording (category A) on the homepage, the Tickets page and the shared navigation and footer, checked against its source.
 Each block below is approved in signoff-decisions-2027.ts in exactly this wording. A line that changes later returns for verification.
 
-## Home: routine wording (95 items, reference 8a0dd481)
+## Home: routine wording (89 items, reference 3415cf42)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -62,8 +62,6 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp. | Page layout | Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts). |
 | HEBS at NJS, 2026 Photographed | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | The summit floor Photographed | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
-| HEBS 2026 Awards & Competition Moments | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
-| Trophies, celebrations and the competition floor, 24–25 October 2026. Winners and placings are published once the organisers have verified them. | Page layout | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling | Page layout | lib/competitions.ts (13 competitions in 7 categories) and the directive: categories and prize values unchanged from 2026. |
 | Watch HEBS 2026 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Watch HEBS Lagos 2026. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
@@ -91,11 +89,7 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Destination scenes | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Pause the destination scenes | Image descriptions and labels | An accessible label: says what the control or region does. |
 | A braiding competitor at work, HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-main (House of Snapp, HEBS Lagos 2026). |
-| A barber's clippers at the back of a client's neck at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-img_6824 (House of Snapp, HEBS Lagos 2026). |
-| Guests on stage with a HEBS trophy at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-img_7821 (House of Snapp, HEBS Lagos 2026). |
 | A winner celebrating beside the HEBS trophy, 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-trophy (House of Snapp, HEBS Lagos 2026). |
-| A barber grooming a client's beard at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-dsc_2148 (House of Snapp, HEBS Lagos 2026). |
-| A nail technician painting a client's nails at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-dsc_1489 (House of Snapp, HEBS Lagos 2026). |
 | The seven categories | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Play the film: The styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |
 | A full session at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: sp-hall (House of Snapp, HEBS Lagos 2026). |
@@ -118,7 +112,7 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Nothing can be submitted here for now, and no personal details are collected. When the list opens, the sign-up form appears in this section. | Page layout | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Tickets & registration \| HEBS Lagos 2027 | Search and social preview | Dates and days: owner directive sections 2 and 4C (CAMPAIGN, EDITION_DAYS in lib/editions/2027.ts). |
 
-## Every page: routine wording (31 items, reference 18f6f91f)
+## Every page: routine wording (32 items, reference 72fadc69)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -131,6 +125,7 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Programme | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Education | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Speakers | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Exhibitors | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Tickets | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Travel | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Gallery | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |

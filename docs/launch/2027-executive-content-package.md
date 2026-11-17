@@ -1,6 +1,6 @@
 # HEBS Lagos 2027 website: launch approval
 
-For Mrs. Shuler, from Veridion. Reference fa294238.
+For Mrs. Shuler, from Veridion. Reference d649b4e6.
 
 ## 1. What we are asking you to approve
 
@@ -26,11 +26,11 @@ In the order a visitor reads it. Reply to each passage with *Approved*, *Changes
 
 ### Homepage: Page layout
 
-> The styling floor at HEBS Lagos 2026, filmed by VMM. More films from the summit days will be added once they are selected.
+> Moments from the HEBS Lagos 2026 summit days, filmed by VMM. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.
 
-> The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent
+> The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent Cleared for the website
 
-<sub>Passage reference owner-home-page-layout / 0603ea6c</sub>
+<sub>Passage reference owner-home-page-layout / 940febb2</sub>
 
 ### 1. The opening screen
 

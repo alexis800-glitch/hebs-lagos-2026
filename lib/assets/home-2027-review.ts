@@ -100,6 +100,11 @@ const GALLERY_ASPECT: Record<string, number> = {
   "gal-0q1a0117": 0.6667, "gal-0q1a0074": 1.2501, "gal-dsc_1734": 1.4999, "gal-0q1a0098": 0.6666,
   "gal-dsc_1727": 1.1809, "gal-0q1a0470": 1.5, "gal-img_7144": 1.2501, "gal-img_7147": 1.25,
   "gal-img_7139": 1.2501, "gal-0q1a0374": 1.4999, "gal-img_7299": 1.5,
+  // Prize presentations, as cut for the champions panel (900 x 928 cards; 2000 x 1143 and 1800 x 1800 features).
+  "champ-0q1a0215": 0.9698, "champ-img_7964": 0.9698, "champ-img_8022": 0.9698, "champ-0q1a0190": 0.9698,
+  "champ-0q1a0163": 0.9698, "champ-0q1a0140": 0.9698, "champ-img_8112": 0.9698, "champ-0q1a0242": 0.9698,
+  "champ-img_8085": 0.9698, "champ-0q1a0290": 0.9698, "champ-dsc_1883": 0.9698, "champ-img_7895": 0.9698,
+  "champ-img_8012": 1.7498, "champ-dsc_1897": 1.7498, "champ-img_7854": 1, "champ-img_7897": 1,
 };
 
 /** Champions photographs: the role each one plays, and the widths cut for it. */

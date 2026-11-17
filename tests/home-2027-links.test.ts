@@ -2,6 +2,7 @@
  * The preferred homepage's navigation and calls to action: real links and
  * controls, pointing only at built 2027 pages or at the closed priority list.
  */
+import { PAGES } from "@/lib/content/2027-pages";
 import { describe, expect, it } from "vitest";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -19,7 +20,8 @@ const hrefs = Array.from(html.matchAll(/<a\b[^>]*\bhref="([^"]*)"/g), (m) => m[1
 /** Every element id the 2027 pages can render, read from their source. */
 function knownAnchors(): Set<string> {
   const dir = join(ROOT, "components/2027/editorial");
-  const ids = new Set(["july-23", "july-24", "july-25"]);
+  // The day anchors, and the Gallery's collections (rendered as gallery-<id>).
+  const ids = new Set(["july-23", "july-24", "july-25", ...PAGES.gallery.categories.map((c) => `gallery-${c.id}`)]);
   for (const f of readdirSync(dir)) {
     for (const m of Array.from(readFileSync(join(dir, f), "utf8").matchAll(/\bid="([a-z0-9-]+)"/g))) ids.add(m[1]);
   }

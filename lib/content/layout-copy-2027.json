@@ -56,6 +56,12 @@
    "text": "Speakers"
   },
   {
+   "key": "layout.site.24029bd0be",
+   "scope": "site",
+   "where": "page",
+   "text": "Exhibitors"
+  },
+  {
    "key": "layout.site.5c622a5170",
    "scope": "site",
    "where": "page",
@@ -218,18 +224,6 @@
    "text": "The summit floor Photographed"
   },
   {
-   "key": "layout.home.b82ec712a1",
-   "scope": "home",
-   "where": "page",
-   "text": "HEBS 2026 Awards & Competition Moments"
-  },
-  {
-   "key": "layout.home.405d24081f",
-   "scope": "home",
-   "where": "page",
-   "text": "Trophies, celebrations and the competition floor, 24–25 October 2026. Winners and placings are published once the organisers have verified them."
-  },
-  {
    "key": "layout.home.1c2595a317",
    "scope": "home",
    "where": "page",
@@ -248,10 +242,10 @@
    "text": "Watch HEBS Lagos 2026."
   },
   {
-   "key": "layout.home.d3d3e2c834",
+   "key": "layout.home.b48ece4436",
    "scope": "home",
    "where": "page",
-   "text": "The styling floor at HEBS Lagos 2026, filmed by VMM. More films from the summit days will be added once they are selected."
+   "text": "Moments from the HEBS Lagos 2026 summit days, filmed by VMM. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication."
   },
   {
    "key": "layout.home.5d12bd5355",
@@ -260,10 +254,10 @@
    "text": "Play"
   },
   {
-   "key": "layout.home.bd4fad2a2c",
+   "key": "layout.home.a183b6e21c",
    "scope": "home",
    "where": "page",
-   "text": "The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent"
+   "text": "The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent Cleared for the website"
   },
   {
    "key": "layout.home.777333ca30",
@@ -404,34 +398,10 @@
    "text": "A braiding competitor at work, HEBS Lagos 2026"
   },
   {
-   "key": "layout.home.67e22ec84f",
-   "scope": "home",
-   "where": "alt",
-   "text": "A barber's clippers at the back of a client's neck at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.a4de601a55",
-   "scope": "home",
-   "where": "alt",
-   "text": "Guests on stage with a HEBS trophy at HEBS Lagos 2026"
-  },
-  {
    "key": "layout.home.665c525c5c",
    "scope": "home",
    "where": "alt",
    "text": "A winner celebrating beside the HEBS trophy, 2026"
-  },
-  {
-   "key": "layout.home.205b0b5f21",
-   "scope": "home",
-   "where": "alt",
-   "text": "A barber grooming a client's beard at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.5cd9751dba",
-   "scope": "home",
-   "where": "alt",
-   "text": "A nail technician painting a client's nails at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.a9b54743d5",

@@ -112,16 +112,25 @@ export const PAGES = {
     earlier: draft("HEBS held earlier editions in the United States. Their photographs belong to the HEBS archive and are not shown on the Lagos 2027 site."),
     photosTitle: draft("HEBS Lagos 2026, in photographs."),
     photosIntro: draft("Photographed on the two summit days, 24 and 25 October 2026."),
-    /** Review photographs (lib/assets/home-2027-review.ts), grouped by what each one shows. */
+    /**
+     * Review photographs (lib/assets/home-2027-review.ts), grouped by what each one shows.
+     * "Winners & Prize Presentations" holds review-only cheque photographs: it shows only in the
+     * protected internal preview, labelled as unverified (D8), and never on production.
+     */
     categories: [
-      { id: "hair", title: draft("Hair and barbering"), photos: ["gal-img_6721", "gal-img_6724", "gal-dsc_1947", "gal-dsc_1395", "gal-img_6824", "gal-dsc_2148", "gal-dsc_1969", "gal-dsc_2239"] },
-      { id: "competitions", title: draft("Competitions and awards"), photos: ["gal-img_6688", "gal-img_8357", "gal-img_6755", "gal-img_7937", "gal-img_7821"] },
-      { id: "beauty", title: draft("Beauty and nails"), photos: ["gal-dsc_1489", "gal-dsc_1452", "gal-dsc_1276"] },
-      { id: "stage", title: draft("Learning on stage"), photos: ["gal-dsc_1194", "gal-dsc_1305", "gal-0q1a0444", "gal-0q1a0445", "gal-img_7809", "gal-dsc_1786", "gal-dsc_1798"] },
-      { id: "fashion", title: draft("Fashion and runway"), photos: ["gal-dsc_2093", "gal-dsc_2097", "gal-dsc_2034", "gal-dsc_2037", "gal-0q1a0481", "gal-0q1a0117"] },
-      { id: "exhibitors", title: draft("Exhibitors"), photos: ["gal-0q1a0074", "gal-dsc_1734", "gal-0q1a0098", "gal-dsc_1727"] },
-      { id: "guests", title: draft("Guests and celebrations"), photos: ["gal-0q1a0470", "gal-img_7144", "gal-img_7147", "gal-img_7139", "gal-0q1a0374", "gal-img_7299"] },
+      {
+        id: "winners", title: draft("Winners & Prize Presentations"), review: true,
+        photos: ["champ-0q1a0215", "champ-img_7964", "champ-img_8022", "champ-0q1a0190", "champ-0q1a0163", "champ-0q1a0140", "champ-img_8112", "champ-0q1a0242", "champ-img_8085", "champ-img_7854", "champ-0q1a0290", "champ-img_8012", "champ-dsc_1897", "champ-img_7897"],
+      },
+      { id: "hair", title: draft("Hair and Barbering Competitions"), photos: ["gal-img_6755", "gal-img_6688", "gal-img_8357", "gal-img_6721", "gal-img_6724", "gal-dsc_1395", "gal-img_6824", "gal-dsc_2148", "gal-dsc_1947", "gal-dsc_2239", "gal-dsc_1969"] },
+      { id: "beauty", title: draft("Nails, Makeup and Beauty"), photos: ["gal-dsc_1489", "gal-dsc_1452", "gal-dsc_1276"] },
+      { id: "education", title: draft("Education and Masterclasses"), photos: ["gal-dsc_1194", "gal-dsc_1305", "gal-0q1a0444", "gal-0q1a0445", "gal-img_7809", "gal-dsc_1786", "gal-dsc_1798"] },
+      { id: "fashion", title: draft("Fashion and Runway"), photos: ["gal-dsc_2093", "gal-dsc_2097", "gal-dsc_2034", "gal-dsc_2037", "gal-0q1a0481", "gal-0q1a0117"] },
+      { id: "exhibitions", title: draft("Exhibitions and Networking"), photos: ["gal-0q1a0074", "gal-dsc_1734", "gal-dsc_1727", "gal-0q1a0098", "gal-0q1a0470", "gal-img_7147", "gal-img_7139", "gal-img_7144"] },
+      { id: "highlights", title: draft("Event Highlights and Celebrations"), photos: ["gal-img_7937", "gal-img_7821", "gal-0q1a0374", "gal-img_7299"] },
     ],
+    /** Shown above the review-only collection; the photographs are not evidence of approved results. */
+    winnersNote: draft("Internal review, not for publication. Prize presentations as photographed on 24 and 25 October 2026. Winners, placings and prize amounts are not verified: the organisers' verification (D8) is open, and conflicting first-place records, including Freestyle Braid Art, remain unresolved."),
   },
   contact: {
     title: draft("Contact us"),

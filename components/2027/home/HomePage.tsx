@@ -7,7 +7,7 @@ import { deployEnvironment } from "@/lib/publication";
 import { Clip, Pic, reviewSrc } from "./media";
 import { Mark } from "@/components/2027/site/mark";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
-import { AWARDS, WATCH } from "@/lib/content/media-sections-2027";
+import { PRIZES, WATCH } from "@/lib/content/media-sections-2027";
 import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
 import { DesignScale, DestinationSequence, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
 import { HOME_HREF, NAV } from "./links";
@@ -184,20 +184,26 @@ function Destination() {
  */
 const SHOW_WINNERS = false;
 
-/** HEBS 2026 Awards & Competition Moments: approved trophy and celebration photographs, no cheque details. */
-function Awards() {
-  const a = AWARDS;
-  const shown = a.photos.filter((id) => reviewSrc(id));
+/**
+ * Winners & Prize Presentations: review-only cheque photographs, in the protected
+ * preview only (they never render on production), labelled as unverified.
+ */
+function Prizes() {
+  const p = PRIZES;
+  const shown = p.photos.filter((id) => reviewSrc(id));
   if (shown.length < 2) return null;
   return (
     <div className="aw" role="group" aria-labelledby="aw-title">
       <div className="awh">
-        <div><p className="lab">{a.label}</p><h3 id="aw-title">{a.title} <em className="it">{a.accent}</em></h3></div>
-        <p className="n">{a.note}</p>
+        <div><p className="lab">{p.label}</p><h3 id="aw-title">{p.title} <em className="it">{p.accent}</em></h3></div>
+        <div>
+          <p className="n"><span className="tag">Internal review</span> {p.note}</p>
+          <To className="btn ln" href={pageHref("gallery", "gallery-winners")}>{p.cta}</To>
+        </div>
       </div>
-      <div className="awg" data-count={shown.length}>
-        {shown.map((id, j) => (
-          <div className="ph" key={id}><Pic id={id} className="grade" sizes={j === 0 ? "(max-width: 600px) 100vw, 640px" : "(max-width: 600px) 50vw, 420px"} /></div>
+      <div className="awg pz">
+        {shown.map((id) => (
+          <div className="ph" key={id}><Pic id={id} className="grade" sizes="(max-width: 600px) 50vw, 400px" /></div>
         ))}
       </div>
     </div>
@@ -306,11 +312,11 @@ function Competitions() {
         </div>
         <div className="art">
           <div className="ph a"><Pic id="comp-main" className="grade kb" sizes="(max-width: 600px) 240px, 380px" /></div>
-          <div className="ph b"><Pic id="gal-img_6824" className="grade" sizes="210px" /></div>
+          <div className="ph b"><Pic id="comp-trophy" className="grade" /></div>
         </div>
       </div>
       {SHOW_WINNERS && <Winners />}
-      <Awards />
+      <Prizes />
       <div className="mq" aria-label="The seven categories">
         <div className="tr">{ribbon}</div>
       </div>

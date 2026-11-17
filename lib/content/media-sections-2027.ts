@@ -1,23 +1,26 @@
 /**
  * Wording and media for the two photo-and-film sections added for the private
- * preview on 17 Nov 2026: "HEBS 2026 Awards & Competition Moments" (homepage,
- * inside Competitions) and "Watch HEBS 2026" (homepage and Gallery). Kept apart
+ * preview: "Winners & Prize Presentations" (homepage, inside Competitions) and
+ * "Watch HEBS 2026" (homepage and Gallery). Kept apart
  * from the owner-approved homepage copy (home-2027.ts): their visible wording is
  * inventoried as page wording (layout-copy-2027.json) like other section labels.
  */
 
 /**
- * Approved House of Snapp trophy, celebration and competition-floor photographs,
- * with no cheque, name, placing or prize in frame. comp-trophy is IMG_7937,
- * cropped to the winner and trophy. Shown while the 2026 Champions block waits
- * for D8 verification.
+ * Winners & Prize Presentations (homepage, inside Competitions): genuine on-stage
+ * cheque presentations from the House of Snapp collection (review-only champ-*
+ * photographs). Internal review only: shown in the protected preview, never on
+ * production, and never as verified results. No names, placings or amounts are
+ * stated; the D8 verification, including the conflicting Freestyle Braid Art
+ * first-place records, is open. The full set is in the Gallery.
  */
-export const AWARDS = {
+export const PRIZES = {
   label: "HEBS Lagos 2026",
-  title: "HEBS 2026 Awards",
-  accent: "& Competition Moments",
-  note: "Trophies, celebrations and the competition floor, 24–25 October 2026. Winners and placings are published once the organisers have verified them.",
-  photos: ["gal-img_7821", "comp-trophy", "gal-dsc_2148", "gal-dsc_1489"],
+  title: "Winners &",
+  accent: "Prize Presentations",
+  note: "Not for publication. Prize presentations as photographed on 24 and 25 October 2026. Winners, placings and prize amounts are not verified and await the organisers' confirmation.",
+  cta: "See every prize presentation",
+  photos: ["champ-0q1a0215", "champ-img_7964", "champ-img_8022", "champ-0q1a0190", "champ-0q1a0163", "champ-img_8112"],
 } as const;
 
 /**
@@ -30,11 +33,18 @@ export const WATCH = {
   label: "Watch HEBS 2026",
   title: "Watch",
   accent: "HEBS Lagos 2026.",
-  body: "The styling floor at HEBS Lagos 2026, filmed by VMM. More films from the summit days will be added once they are selected.",
+  body: "Moments from the HEBS Lagos 2026 summit days, filmed by VMM. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.",
+  /**
+   * The film library, in order. Each film names its register assets and their pixel
+   * sizes. A film's status follows its register entry: owner-approved and published,
+   * or review-only (shown in the protected preview, marked as not cleared, never on
+   * production). A film whose files are absent is simply left out.
+   */
   films: [
-    { wide: "hero-loop-wide", tall: "hero-loop-tall", title: "The styling floor", meta: "HEBS Lagos 2026 · Film by VMM · 12 seconds, silent" },
+    { key: "styling-floor", title: "The styling floor", meta: "HEBS Lagos 2026 · Film by VMM · 12 seconds, silent", wide: { id: "hero-loop-wide", w: 960, h: 900 }, tall: { id: "hero-loop-tall", w: 720, h: 1280 } },
   ],
 } as const;
 
-/** Every asset the two sections use, by page (for the launch media registry). */
-export const WATCH_MEDIA: string[] = WATCH.films.flatMap((f) => [f.wide, f.tall]);
+/** Every asset the films use (for the launch media registry). */
+type FilmCuts = { wide: { id: string }; tall?: { id: string } };
+export const WATCH_MEDIA: string[] = (WATCH.films as readonly FilmCuts[]).flatMap((f) => (f.tall ? [f.wide.id, f.tall.id] : [f.wide.id]));

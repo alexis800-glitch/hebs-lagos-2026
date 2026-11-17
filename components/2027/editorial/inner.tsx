@@ -671,7 +671,11 @@ const sumOf = (ids: readonly string[]) => ids.reduce((n, id) => n + aspectOf(id)
 
 function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) {
   const g = PAGES.gallery;
-  const count = g.categories.reduce((n, c) => n + c.photos.length, 0);
+  // Only photographs this deployment may show: the review-only collection is absent on production.
+  const categories = g.categories
+    .map((c) => ({ ...c, photos: c.photos.filter((id) => reviewMedia(id, opts.environment)) }))
+    .filter((c) => c.photos.length > 0);
+  const count = categories.reduce((n, c) => n + c.photos.length, 0);
   return (
     <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
       <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
@@ -681,7 +685,7 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
       <SectionNotes notes={notes} opts={opts} ground="white" className="mt-6" />
       <nav aria-label="Photograph categories" className="mt-8">
         <ul className="flex flex-wrap gap-2">
-          {g.categories.map((c) => (
+          {categories.map((c) => (
             <li key={c.id}>
               <a href={`#gallery-${c.id}`} className="inline-flex min-h-[44px] items-center gap-2 border px-4 text-[14px] transition-colors duration-200 hover:bg-black hover:text-white" style={{ borderColor: "rgba(160,128,72,.55)", color: C.black }}>
                 {c.title.text}<span aria-hidden="true" style={{ color: C.body }}>{c.photos.length}</span>
@@ -690,9 +694,12 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
           ))}
         </ul>
       </nav>
-      {g.categories.map((c) => (
+      {categories.map((c) => (
         <section key={c.id} id={`gallery-${c.id}`} aria-labelledby={`gallery-${c.id}-title`} className="mt-14 scroll-mt-28 border-t pt-8 lg:mt-20" style={{ borderColor: "rgba(160,128,72,.35)" }}>
           <h3 id={`gallery-${c.id}-title`} style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 38px)", lineHeight: 1.1 }}>{c.title.text}</h3>
+          {"review" in c ? (
+            <p className="mt-4 max-w-[78ch] border-l-2 py-1 pl-4 text-[14px] leading-relaxed" style={{ borderColor: "#B8914C", color: C.body }}>{g.winnersNote.text}</p>
+          ) : null}
           {/*
             Justified rows: each photograph grows in proportion to its width over height, so a row shares one
             height. A desktop row too wide for a phone splits into balanced phone rows, stacked.
@@ -724,11 +731,12 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
 export function GalleryPage(props: PageProps) {
   const opts = optsOf(props);
   const g = PAGES.gallery;
-  const photographed = g.categories.every((c) => c.photos.every((id) => reviewMedia(id, opts.environment)));
+  // The review-only prize presentations never decide whether the gallery is photographed.
+  const photographed = g.categories.filter((c) => !("review" in c)).every((c) => c.photos.every((id) => reviewMedia(id, opts.environment)));
   const notes = [
     COPY_DRAFT,
     photographed
-      ? "Photographs from the HEBS Lagos 2026 summit days (House of Snapp collection), for internal review only until the written usage terms are on file. No pre-party, cheque or prize photographs are included."
+      ? "Photographs from the HEBS Lagos 2026 summit days (House of Snapp collection). The prize-presentation photographs are internal review only and are never published until the organisers verify the results (D8). No pre-party photographs are included."
       : "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here.",
   ];
   return (

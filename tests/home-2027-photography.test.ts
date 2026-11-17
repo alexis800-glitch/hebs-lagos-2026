@@ -3,6 +3,7 @@
  * from a verified original, cut to its frame, recorded with its source and
  * clearance, and never repeated elsewhere on the page.
  */
+import { reviewMedia } from "@/components/2027/home/review-media";
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -68,10 +69,13 @@ describe("House of Snapp homepage photographs", () => {
     expect(seen.size).toBeGreaterThan(30);
   });
 
-  it("hides the 2026 Champions block and its photographs until D8 verification", () => {
+  it("shows prize presentations only as labelled internal review, with no placing, name or amount (D8)", () => {
     const html = renderToStaticMarkup(createElement(PreferredHomepage));
+    // The champions panel, which names competitions and placings, stays hidden.
     expect(html).not.toMatch(/Champions of HEBS|as printed on the cheque|class="wn"/);
-    for (const a of REVIEW_ASSETS.filter((x) => x.id.startsWith("champ-"))) expect(html.includes(a.src), a.id).toBe(false);
+    expect(html).toContain("Winners &amp;");
+    expect(html).toMatch(/Internal review<\/span> Not for publication\./);
+    expect(html).not.toMatch(/1st Place|2nd Place|3rd Place|₦/);
     expect(html).toContain("comp-main");
   });
 });
@@ -114,7 +118,9 @@ describe("Education & Masterclasses photographs", () => {
 });
 
 describe("Gallery & past events photographs", () => {
-  const ids = PAGES.gallery.categories.flatMap((c) => c.photos);
+  // The summit-day collections; the review-only prize presentations are checked separately below.
+  const summit = PAGES.gallery.categories.filter((c) => !("review" in c));
+  const ids = summit.flatMap((c) => c.photos);
 
   it("shows every summit-day photograph once, in its category, keeping its own shape", () => {
     expect(PAGES.gallery.categories).toHaveLength(7);
@@ -142,7 +148,24 @@ describe("Gallery & past events photographs", () => {
     }
   });
 
-  it("leaves out pre-party, cheque and prize photographs and names no one", () => {
+  it("keeps prize presentations in their own review-only collection, labelled as unverified (D8)", () => {
+    const winners = PAGES.gallery.categories.find((c) => c.id === "winners")!;
+    expect("review" in winners).toBe(true);
+    expect(winners.photos.length).toBeGreaterThanOrEqual(12);
+    for (const id of winners.photos) {
+      const a = findReviewAsset(id);
+      expect(a.published, id).toBe(false);
+      expect(a.permittedUsage, id).toEqual(["internal-review"]);
+      expect(a.alt, id).not.toMatch(/1st|2nd|3rd|place|₦|\$/i);
+    }
+    expect(PAGES.gallery.winnersNote.text).toMatch(/Internal review, not for publication\..*not verified.*Freestyle Braid Art/);
+    const html = renderToStaticMarkup(createElement(GalleryPage, { environment: "development" }));
+    expect(html).toContain("Internal review, not for publication. Prize presentations as photographed on 24 and 25 October 2026.");
+    // Production never serves a review-only photograph (the Gallery itself is withheld there until launch).
+    for (const id of winners.photos) expect(reviewMedia(id, "production"), id).toBeNull();
+  });
+
+  it("leaves out pre-party, cheque and prize photographs from the summit-day collections and names no one", () => {
     for (const id of ids) {
       const a = findReviewAsset(id);
       const m = manifest.images.find((i) => i.slot === id)!;
