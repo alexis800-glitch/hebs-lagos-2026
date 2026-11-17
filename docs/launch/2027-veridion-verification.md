@@ -125,11 +125,11 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Gallery | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Contact | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | HEBS Lagos 2027 home | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
+| HEBS, Hair Education Beauty Summit | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
 | Main | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
 | All HEBS 2027 pages | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
 | Skip to content | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | The priority list is not open yet. | Navigation, footer and shared elements | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
-| HEBS, Hair Education Beauty Summit | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
 | Lagos | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | HEBS 2027 experience | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Take part | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |

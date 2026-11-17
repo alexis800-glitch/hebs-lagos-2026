@@ -1,17 +1,28 @@
-/* eslint-disable @next/next/no-img-element -- review files are local-only; the official mark is a small static logo */
-import { reviewMedia, srcSetOf } from "@/components/2027/home/media";
-
-/** Official mark, used whenever the provisional 2027 mark isn't loaded for review. */
-const OFFICIAL_MARK = "/assets/logos/hebs_logo_nav.png";
-
+/* eslint-disable @next/next/no-img-element -- the mark is a small static logo served at two fixed cuts */
 /**
- * The HEBS Lagos 2027 mark, the same on every 2027 page: the provisional 2027
- * mark in internal review (awaiting Mrs. Shuler's approval, A1), the official
- * HEBS mark everywhere else. Loaded as 240/480 px WebP cuts.
+ * The approved 2027 mark (mark-2027-a, decision D3). Its 240/480 px cuts are
+ * committed under public/2027/brand/ (byte-identical to the approved files in
+ * published-media-2027.json, tests/mark-2027.test.ts), so it renders in every
+ * build, with or without the gitignored media folder. No other logo is ever
+ * substituted on a 2027 page. The alt text is the signed-off site wording
+ * (layout.site.508e91d0b6); the home link around it names HEBS Lagos 2027.
  */
+export const MARK_2027_DIR = "/2027/brand/";
+const cut = (w: 240 | 480) => `${MARK_2027_DIR}mark-2027-a-${w}.webp`;
+
+/** The HEBS Lagos 2027 mark, the same on every 2027 page. */
 export function Mark({ className = "logo", sizes = "(max-width: 600px) 84px, (max-width: 1279px) 96px, 108px", lazy = false }: { className?: string; sizes?: string; lazy?: boolean }) {
-  const provisional = reviewMedia("mark-2027-a");
-  if (!provisional) return <img className={className} src={OFFICIAL_MARK} alt="HEBS, Hair Education Beauty Summit" />;
-  // The 520 px PNG master is kept for reference; pages load the 240/480 px WebP cuts.
-  return <img className={className} src={provisional.src.replace(/\.png$/, "-480.webp")} srcSet={srcSetOf(provisional)} sizes={sizes} width={520} height={487} alt={provisional.alt} loading={lazy ? "lazy" : "eager"} decoding="async" />;
+  return (
+    <img
+      className={className}
+      src={cut(480)}
+      srcSet={`${cut(240)} 240w, ${cut(480)} 480w`}
+      sizes={sizes}
+      width={480}
+      height={450}
+      alt="HEBS, Hair Education Beauty Summit"
+      loading={lazy ? "lazy" : "eager"}
+      decoding="async"
+    />
+  );
 }

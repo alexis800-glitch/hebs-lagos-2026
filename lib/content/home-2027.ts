@@ -15,7 +15,7 @@ import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "./sign
 
 export const HOME = {
   strip:
-    "Internal concept, not for publication. All footage and photographs are real HEBS Lagos 2026 material from VMM and the House of Snapp collection, not yet cleared. The destination's pool and guest scenes are NJS concept visuals. The 2027 mark is provisional.",
+    "Internal concept, not for publication. All footage and photographs are real HEBS Lagos 2026 material from VMM and the House of Snapp collection, approved by the event owner for the 2027 website; the champions' photographs are for internal review only. The 2027 mark is approved.",
   hero: {
     kicker: "HEBS Lagos 2027",
     lines: ["Bigger.", "Bolder."],

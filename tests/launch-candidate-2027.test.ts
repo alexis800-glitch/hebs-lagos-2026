@@ -53,7 +53,7 @@ describe("launch candidate: homepage and Tickets", () => {
       expect(html, name).not.toMatch(/data-staging|Internal preview|Staging note|Approval status|held for review|\/_review\//);
       for (const a of REVIEW_ASSETS.filter((x) => !x.published)) expect(html.includes(a.src), `${name}: ${a.id}`).toBe(false);
       const media = Array.from(html.matchAll(/(?:src|srcSet|poster)="([^"]+)"/gi)).flatMap((m) => m[1].split(",").map((s) => s.trim().split(" ")[0]));
-      for (const m of media.filter((x) => x.startsWith("/"))) expect(m, `${name}: ${m}`).toMatch(/^\/(2027\/media\/|assets\/logos\/)/);
+      for (const m of media.filter((x) => x.startsWith("/"))) expect(m, `${name}: ${m}`).toMatch(/^\/(2027\/media\/|2027\/brand\/|assets\/logos\/)/);
     }
   });
 

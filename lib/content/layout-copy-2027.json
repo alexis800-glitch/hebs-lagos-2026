@@ -86,6 +86,12 @@
    "text": "HEBS Lagos 2027 home"
   },
   {
+   "key": "layout.site.508e91d0b6",
+   "scope": "site",
+   "where": "alt",
+   "text": "HEBS, Hair Education Beauty Summit"
+  },
+  {
    "key": "layout.site.62bce9422f",
    "scope": "site",
    "where": "alt",
@@ -108,12 +114,6 @@
    "scope": "site",
    "where": "page",
    "text": "The priority list is not open yet."
-  },
-  {
-   "key": "layout.site.508e91d0b6",
-   "scope": "site",
-   "where": "alt",
-   "text": "HEBS, Hair Education Beauty Summit"
   },
   {
    "key": "layout.site.b6223b97ec",
