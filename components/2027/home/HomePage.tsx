@@ -7,7 +7,7 @@ import { deployEnvironment } from "@/lib/publication";
 import { Clip, Pic, reviewSrc } from "./media";
 import { Mark } from "@/components/2027/site/mark";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
-import { PRIZES, WATCH } from "@/lib/content/media-sections-2027";
+import { EXHIBITION, PRIZES, WATCH } from "@/lib/content/media-sections-2027";
 import { PAGES } from "@/lib/content/2027-pages";
 import { reviewMedia } from "./review-media";
 import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
@@ -158,38 +158,37 @@ function Experiences() {
 }
 
 /**
- * The destination: a still editorial composition (owner feedback, 17 Nov 2026).
- * Real HEBS Lagos 2026 photographs taken at the 2026 summit venue, shown at their
- * true colour and labelled as the 2026 event. No resort photograph is shown until
- * verified pool, terrace or building photography is supplied; no concept scene.
+ * The destination (Lex, 17 Nov 2026): HEBS Lagos 2026 photographed at NJS, never
+ * presented as the resort's facilities, and the destination itself in type. No
+ * resort photograph is shown until verified NJS photography is supplied.
+ * Black editorial composition, three staggered photographs (Option B, Gary, 17 Nov 2026).
  */
+
 function Destination() {
   const d = HOME.destination;
-  // The two photographed scenes, as still captioned pairs; nothing moves or advances on its own.
-  const groups = d.scenes.filter((sc) => sc.pair.every((id) => reviewSrc(id)));
+  const note = d.scenes[0].note;
+  const [lead, second, third] = ["dest-guest", "dest-floor-b", "dest-terrace"];
+  if (![lead, second, third].every((id) => reviewSrc(id))) return null;
+  const words = (
+    <>
+      <p className="lab">{d.label}</p>
+      <h2 id="ds-title" className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
+      <p className="b">{d.body}</p>
+    </>
+  );
   return (
-    <section className="ds" aria-labelledby="ds-title">
+    <section className="dsb" aria-labelledby="ds-title">
       <div className="txt">
-        <p className="lab">{d.label}</p>
-        <h2 id="ds-title" className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
-        <div className="rule" />
-        <p className="b">{d.body}</p>
-        <div className="ctas"><To className="btn ol" href={pageHref("experience", "destination")}>{d.cta}</To></div>
+        {words}
+        <p className="when">{HOME.final.when}</p>
+        <To className="btn gh" href={pageHref("experience", "destination")}>{d.cta}</To>
       </div>
-      {groups.length ? (
-        <div className="art" role="group" aria-label="Destination scenes">
-          {groups.map((sc, g) => (
-            <figure className={`grp g${g}`} key={sc.title}>
-              <p className="st"><b>{sc.title}</b> <span>Photographed</span></p>
-              <div className="pr">
-                {sc.pair.map((id) => <div className="ph" key={id}><Pic id={id} sizes="(max-width: 600px) 50vw, (max-width: 1279px) 45vw, 420px" /></div>)}
-              </div>
-              {g === 0 ? <figcaption className="cap"><b>PHOTOGRAPHED</b> {sc.note}</figcaption> : null}
-            </figure>
-          ))}
-          <p className="nt">Photographed at HEBS Lagos 2026 at NJS. These are past-event photographs, not photographs of the resort&apos;s facilities.</p>
-        </div>
-      ) : null}
+      <figure className="reel" role="group" aria-label="Destination scenes">
+        <div className="ph p1"><Pic id={third} sizes="(max-width: 600px) 33vw, 260px" /></div>
+        <div className="ph p2"><Pic id={lead} sizes="(max-width: 600px) 40vw, 320px" /></div>
+        <div className="ph p3"><Pic id={second} sizes="(max-width: 600px) 33vw, 260px" /></div>
+        <figcaption className="cap"><b>PHOTOGRAPHED</b> {note}</figcaption>
+      </figure>
     </section>
   );
 }
@@ -214,7 +213,7 @@ function Prizes() {
       <div className="awh">
         <div><p className="lab">{p.label}</p><h3 id="aw-title">{p.title} <em className="it">{p.accent}</em></h3></div>
         <div>
-          <p className="n"><span className="tag">Internal review</span> {p.note}</p>
+          <p className="n">{p.note}</p>
           <To className="btn ln" href={pageHref("gallery", "gallery-winners")}>{p.cta}</To>
         </div>
       </div>
@@ -421,11 +420,13 @@ function Sponsors() {
           <ul>{s.offers.map((o) => <li key={o}>{o}</li>)}</ul>
           <div className="ctas"><To className="btn dk" href={pageHref("sponsorship")}>{s.ctaPrimary}</To><To className="btn ol" href={pageHref("exhibitors")}>{s.ctaSecondary}</To></div>
         </div>
-        <div className="art">
-          <div className="ph a"><Pic id="sp-hall" className="grade kb" sizes="(max-width: 600px) calc(100vw - 74px), 700px" /></div>
-          <div className="ph b"><Pic id="sp-exhibitor" className="grade" /></div>
-          <p className="cap2">{s.caption}</p>
-        </div>
+        {/* The 2026 exhibition floor: several stands and products, as historical examples. */}
+        <figure className="mos">
+          {EXHIBITION.home.filter((id) => reviewSrc(id)).map((id, j) => (
+            <div className={`ph m${j}`} key={id}><Pic id={id} sizes={j === 0 ? "(max-width: 600px) 100vw, 520px" : "(max-width: 600px) 50vw, 260px"} /></div>
+          ))}
+          <figcaption><span className="cap2">{s.caption}</span> {EXHIBITION.homeNote}</figcaption>
+        </figure>
       </div>
     </section>
   );

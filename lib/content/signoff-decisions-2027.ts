@@ -103,8 +103,8 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
       "seo.homeTitle": "HEBS Lagos 2027 | Hair Education Beauty Summit",
       "layout.home.9f9511c48b": "– Days – Hours – Minutes – Seconds",
       "layout.home.0ea58db9e7": "PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp.",
-      "layout.home.edbd493852": "HEBS at NJS, 2026 Photographed",
-      "layout.home.d3cb683091": "The summit floor Photographed",
+      // "layout.home.edbd493852" ("HEBS at NJS, 2026 Photographed") retired 17 Nov 2026: the destination scene labels were removed (Lex: fewer captions and labels).
+      // "layout.home.d3cb683091" ("The summit floor Photographed") retired 17 Nov 2026, as above.
       "layout.home.1c2595a317": "Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling",
       "layout.home.777333ca30": "HAIR · EDUCATION · BEAUTY · SUMMIT · LAGOS ·",
       "layout.home.59cb14182d": "Film of the 2026 styling floor",
@@ -124,7 +124,7 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
       "layout.home.851fc4c9fb": "Models walking through the hall at HEBS Lagos 2026",
       "layout.home.4fc180f0f3": "A session on stage at HEBS Lagos 2026, NJS Royale Events Center",
       "layout.home.ac42129e22": "A speaker in front of the NJS crest at HEBS Lagos 2026",
-      "layout.home.990bb45fc5": "A nail technician at work at HEBS Lagos 2026",
+      // "layout.home.990bb45fc5" ("A nail technician at work at HEBS Lagos 2026") retired 17 Nov 2026: that photograph left the destination section (Lex: fewer, stronger photographs).
       "layout.home.737ad42d61": "A braider at work at HEBS Lagos 2026",
       "layout.home.41ca744484": "Destination scenes",
       // "layout.home.2e2230a07a" ("Pause the destination scenes") retired 17 Nov 2026: the destination no longer moves, so its pause control was removed (Lex).

@@ -24,7 +24,7 @@
 import { PAGES } from "./content/2027-pages";
 import { ANNOUNCEMENT_ITEMS, COPY, announcementStatus, copyStatuses, previewStatuses, ticketingDetailsApproved } from "./content/2027";
 import { HOME_COPY_STATUS } from "./content/home-2027";
-import { WATCH_MEDIA } from "./content/media-sections-2027";
+import { EXHIBITION, SUMMIT_DAYS, WATCH_MEDIA } from "./content/media-sections-2027";
 import { EDITION_DAYS, VENUE } from "./editions/2027";
 import { MEDIA_SLOTS, findAsset } from "./assets/register";
 import { CONTRACT, NOTICE_VERSIONS } from "./forms-2027/contract";
@@ -46,13 +46,15 @@ export { LAUNCH_2027, type LaunchAuthorisation, type LaunchConfig } from "./laun
 export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = (() => {
   const out: Partial<Record<PageId, string[]>> = {
     // Restricted media kept on record under x- ids is not on the homepage (tests/launch-2027.test.ts checks what it renders).
-    home: REVIEW_ASSETS.filter((a) => !/^(edu|gal|x)-/.test(a.id)).map((a) => a.id),
+    home: REVIEW_ASSETS.filter((a) => !/^(edu|gal|x)-/.test(a.id)).map((a) => a.id).concat(EXHIBITION.home),
     education: REVIEW_ASSETS.filter((a) => a.id.startsWith("edu-")).map((a) => a.id).concat(["exp-education", "welcome-inset", "sp-hall"]),
-    gallery: ([...PAGES.gallery.categories.flatMap((c) => c.photos)] as string[]).concat(WATCH_MEDIA),
+    gallery: ([...PAGES.gallery.categories.flatMap((c) => c.photos)] as string[]).concat(WATCH_MEDIA, SUMMIT_DAYS.flatMap((d) => [...d.photos])),
     experience: [...Object.values(EXPERIENCE_PHOTOS), ...DAY_PHOTOS].filter((x): x is string => !!x),
     programme: DAY_PHOTOS.filter((x): x is string => !!x),
   };
   for (const [page, id] of Object.entries(HERO_MEDIA) as [PageId, string][]) out[page] = [...(out[page] ?? []), id];
+  // The 2026 exhibition floor on the Sponsorship page (EXHIBITION.page).
+  out.sponsorship = [...(out.sponsorship ?? []), ...EXHIBITION.page];
   return out;
 })();
 

@@ -31,6 +31,7 @@ export function PageHero({
   accent = 0,
   media,
   composition = "dates",
+  aside,
   children,
 }: {
   title: string;
@@ -40,6 +41,8 @@ export function PageHero({
   accent?: number;
   media?: string;
   composition?: Composition;
+  /** Replaces the page image: a composition of its own (the Gallery's two summit days). */
+  aside?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
@@ -56,7 +59,7 @@ export function PageHero({
           <SectionNotes notes={notes} opts={opts} ground="black" className="mt-8" />
         </div>
         <div className="lg:col-span-5">
-          <SlotImage reviewId={media} composition={composition} opts={opts} className="aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-[4/5]" sizes="(min-width: 1024px) 38vw, 100vw" priority />
+          {aside ?? <SlotImage reviewId={media} composition={composition} opts={opts} className="aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-[4/5]" sizes="(min-width: 1024px) 38vw, 100vw" priority />}
         </div>
       </div>
       <span aria-hidden="true" className="da-horizon block h-px" style={{ background: `linear-gradient(90deg, transparent, ${C.champL} 30%, #FFF6DE 50%, ${C.champL} 70%, transparent)` }} />

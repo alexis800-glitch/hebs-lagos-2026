@@ -51,6 +51,15 @@ export interface ReviewChampion {
   note?: string;
 }
 
+/**
+ * Open D8 items (internal register, not shown to visitors; the pages say only
+ * "Results subject to final verification"):
+ *  - Freestyle Braid Art and Fast & Flawless Barber each have first-place records
+ *    on both summit days; unresolved.
+ *  - Several cheques read N8,166,000 (about $5,830 at N1,400/USD), above the
+ *    approved "up to $5,000" prize figures.
+ *  - Winners' names, placings and amounts are unverified.
+ */
 export const REVIEW_CHAMPIONS: ReviewChampion[] = [
   { competition: "Freestyle Braid Art Competition", place: "1st Place", media: "champ-img_7897", role: "featured" },
   { competition: "Fast & Flawless Braiding Competition", place: "1st Place", media: "champ-img_7854", role: "featured" },

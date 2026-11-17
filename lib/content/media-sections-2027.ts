@@ -18,7 +18,7 @@ export const PRIZES = {
   label: "HEBS Lagos 2026",
   title: "Winners &",
   accent: "Prize Presentations",
-  note: "Not for publication. Prize presentations as photographed on 24 and 25 October 2026. Winners, placings and prize amounts are not verified and await the organisers' confirmation.",
+  note: "HEBS Lagos 2026 prize presentations. Results subject to final verification.",
   cta: "See every prize presentation",
   photos: ["champ-0q1a0215", "champ-img_7964", "champ-img_8022", "champ-0q1a0190", "champ-0q1a0163", "champ-img_8112"],
 } as const;
@@ -60,3 +60,35 @@ export const WATCH = {
 /** Every asset the films use (for the launch media registry). */
 type FilmCuts = { wide: { id: string }; tall?: { id: string } };
 export const WATCH_MEDIA: string[] = (WATCH.films as readonly FilmCuts[]).flatMap((f) => (f.tall ? [f.wide.id, f.tall.id] : [f.wide.id]));
+
+/**
+ * The Gallery's retrospective of the two 2026 summit days, in place of a typographic
+ * panel (Lex, 17 Nov 2026). Approved House of Snapp photographs whose frames are not
+ * in the Gallery's collections, so nothing repeats on the page. Each day links to the
+ * collections that show it.
+ */
+export const SUMMIT_DAYS = [
+  {
+    key: "day-1", date: "Saturday 24 October 2026", title: "Day one",
+    line: "Stage showcases, live barbering and the first competitions.",
+    photos: ["hl-hall", "day-2"], links: [["hair", "Hair and barbering"], ["education", "Education"]],
+  },
+  {
+    key: "day-2", date: "Sunday 25 October 2026", title: "Day two",
+    line: "Precision cuts, colour and styling, and the final competitions.",
+    photos: ["edu-styling", "edu-technique"], links: [["fashion", "Fashion and runway"], ["winners", "Prize presentations"]],
+  },
+] as const;
+
+/**
+ * The 2026 exhibition floor, for the sponsor and exhibitor story (Lex, 17 Nov 2026):
+ * several different stands and products, shown as historical examples. No 2027
+ * sponsorship or endorsement is implied; brands visible in frame are not sponsors.
+ */
+export const EXHIBITION = {
+  homeNote: "Exhibitors and brands at HEBS Lagos 2026.",
+  home: ["sp-hall", "sp-exhibitor", "gal-0q1a0098", "gal-dsc_1276"],
+  pageTitle: "The 2026 exhibition floor",
+  pageNote: "Exhibitors and brands at HEBS Lagos 2026, shown as examples of the exhibition floor. They are not 2027 sponsors.",
+  page: ["gal-0q1a0074", "gal-dsc_1734", "gal-0q1a0098", "gal-dsc_1727", "gal-dsc_1276"],
+} as const;

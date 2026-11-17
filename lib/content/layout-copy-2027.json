@@ -206,28 +206,10 @@
    "text": "– Days – Hours – Minutes – Seconds"
   },
   {
-   "key": "layout.home.edbd493852",
-   "scope": "home",
-   "where": "page",
-   "text": "HEBS at NJS, 2026 Photographed"
-  },
-  {
    "key": "layout.home.0ea58db9e7",
    "scope": "home",
    "where": "page",
    "text": "PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp."
-  },
-  {
-   "key": "layout.home.d3cb683091",
-   "scope": "home",
-   "where": "page",
-   "text": "The summit floor Photographed"
-  },
-  {
-   "key": "layout.home.825d499a26",
-   "scope": "home",
-   "where": "page",
-   "text": "Photographed at HEBS Lagos 2026 at NJS. These are past-event photographs, not photographs of the resort's facilities."
   },
   {
    "key": "layout.home.1c2595a317",
@@ -264,6 +246,12 @@
    "scope": "home",
    "where": "page",
    "text": "The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent Cleared for the website"
+  },
+  {
+   "key": "layout.home.ec14ff3a08",
+   "scope": "home",
+   "where": "page",
+   "text": "The 2026 hall Exhibitors and brands at HEBS Lagos 2026."
   },
   {
    "key": "layout.home.777333ca30",
@@ -380,12 +368,6 @@
    "text": "A speaker in front of the NJS crest at HEBS Lagos 2026"
   },
   {
-   "key": "layout.home.990bb45fc5",
-   "scope": "home",
-   "where": "alt",
-   "text": "A nail technician at work at HEBS Lagos 2026"
-  },
-  {
    "key": "layout.home.737ad42d61",
    "scope": "home",
    "where": "alt",
@@ -426,6 +408,18 @@
    "scope": "home",
    "where": "alt",
    "text": "A wig and styling exhibitor's display at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.b8e03144d5",
+   "scope": "home",
+   "where": "alt",
+   "text": "A stylist working on a client's braids at an exhibitor's stand at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.d9e7d4ee08",
+   "scope": "home",
+   "where": "alt",
+   "text": "A skincare treatment on a client at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.03db82b6cc",
@@ -1458,18 +1452,6 @@
    "scope": "travel",
    "where": "seo",
    "text": "Travel & accommodation | HEBS Lagos 2027"
-  },
-  {
-   "key": "layout.gallery.85569b4316",
-   "scope": "gallery",
-   "where": "page",
-   "text": "The summit days"
-  },
-  {
-   "key": "layout.gallery.1b31fe7e13",
-   "scope": "gallery",
-   "where": "page",
-   "text": "24–25 October, Lagos"
   },
   {
    "key": "layout.gallery.b6d50d0706",

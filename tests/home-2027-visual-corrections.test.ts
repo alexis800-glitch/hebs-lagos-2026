@@ -44,13 +44,16 @@ describe("visual corrections", () => {
   it("A6: no frame line; the destination is a still composition (Lex, 17 Nov 2026, supersedes A6b)", () => {
     expect(html).not.toContain("frameline");
     expect(css).not.toContain("frameline");
-    // No moving sequence, progress bars or automatic transitions; the photographs are shown at true colour.
-    expect(html).toContain('<section class="ds"');
+    // No moving sequence, progress bars or automatic transitions; the photographs keep their true colour.
+    expect(html).toMatch(/<section class="ds[ab]"/);
     expect(html).not.toMatch(/class="(dz|chap|dzctl)"/);
     expect(css).not.toMatch(/\.hp \.dz\b/);
-    const ds = html.slice(html.indexOf('<section class="ds"'), html.indexOf("</section>", html.indexOf('<section class="ds"')));
+    const at = html.search(/<section class="ds[ab]"/);
+    const ds = html.slice(at, html.indexOf("</section>", at));
     expect(ds).not.toContain('class="grade');
+    // One caption identifies the photographs as the 2026 event, not the resort.
     expect(ds).toContain("PHOTOGRAPHED");
+    expect(ds).toContain("HEBS Lagos 2026 at the NJS Royale Events Center");
   });
 
   it("P1: Jost italic is not preloaded, and every italic Jost rule names its real italic face", () => {

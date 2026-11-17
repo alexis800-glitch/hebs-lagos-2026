@@ -25,7 +25,8 @@ import { SlotImage } from "./media";
 import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "@/lib/site/page-media-2027";
 import { Button, Kicker } from "@/components/2027/site/ui";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
-import { WATCH } from "@/lib/content/media-sections-2027";
+import { EXHIBITION, SUMMIT_DAYS, WATCH } from "@/lib/content/media-sections-2027";
+import { GalleryNav } from "./gallery-nav";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
 import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
 import { C, TONE, display, h2Style, sentenceCase } from "./tokens";
@@ -395,6 +396,7 @@ export function SponsorshipPage(props: PageProps) {
       <PageHero accent={2} media={HERO_MEDIA.sponsorship} title={sentenceCase(COPY.partners.headline.text)} intro={PAGES.sponsorship.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Inquiries" }]} />
       </PageHero>
+      <ExhibitionFloor opts={opts} />
       <Section id="opportunities" ground="ivory" labelledBy="opportunities-title">
         <h2 id="opportunities-title" style={h2Style}>Four ways to take part.</h2>
         <ul className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -669,6 +671,66 @@ export function justifiedRows<T>(items: readonly T[], aspect: (item: T) => numbe
 const aspectOf = (id: string) => findReviewAsset(id).aspect ?? 1.5;
 const sumOf = (ids: readonly string[]) => ids.reduce((n, id) => n + aspectOf(id), 0);
 
+/**
+ * The 2026 exhibition floor on the Sponsorship page: several stands and products,
+ * as historical examples, with the two ways in. Left out when the photographs are
+ * unavailable; implies no 2027 sponsorship.
+ */
+function ExhibitionFloor({ opts }: { opts: Opts }) {
+  const ids = EXHIBITION.page.filter((id) => reviewMedia(id, opts.environment));
+  if (ids.length < 4) return null;
+  const sponsor = pageHref("sponsorship", "inquiry");
+  const exhibit = pageHref("exhibitors");
+  return (
+    <Section id="exhibition-2026" ground="ivory" labelledBy="exhibition-2026-title">
+      <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
+        <h2 id="exhibition-2026-title" style={h2Style}>{EXHIBITION.pageTitle}</h2>
+        <div className="flex flex-wrap gap-3">
+          {sponsor ? <Button href={sponsor} variant="primary" tone="light">Become a sponsor</Button> : null}
+          {exhibit ? <Button href={exhibit} variant="outline" tone="light">Become an exhibitor</Button> : null}
+        </div>
+      </div>
+      <ul className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-6 lg:grid-rows-[260px_260px] lg:gap-4">
+        {ids.map((id, j) => (
+          <li key={id} className={`relative overflow-hidden ${["lg:col-span-3 lg:row-span-2 aspect-[4/3] lg:aspect-auto col-span-2", "lg:col-span-2 aspect-square lg:aspect-auto", "lg:col-span-1 aspect-square lg:aspect-auto", "lg:col-span-1 aspect-square lg:aspect-auto", "lg:col-span-2 aspect-[2/1] col-span-2 lg:aspect-auto"][j] ?? "aspect-square"}`}>
+            <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={j === 0 ? "(min-width: 1024px) 620px, 100vw" : "(min-width: 1024px) 300px, 50vw"} />
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 text-[13.5px]" style={{ color: C.body }}>{EXHIBITION.pageNote}</p>
+    </Section>
+  );
+}
+
+/**
+ * The two 2026 summit days as a photographic retrospective (the Gallery's masthead
+ * image). Falls back to the typographic panel when the photographs are unavailable.
+ */
+function SummitDays({ opts }: { opts: Opts }) {
+  const days = SUMMIT_DAYS.filter((d) => d.photos.every((id) => reviewMedia(id, opts.environment)));
+  if (days.length !== SUMMIT_DAYS.length) return null;
+  return (
+    <div className="grid gap-6" aria-label="The 2026 summit days">
+      {days.map((d) => (
+        <article key={d.key} className="grid grid-cols-[1.35fr_1fr] gap-3">
+          <div className="relative aspect-[4/3] overflow-hidden"><Pic id={d.photos[0]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 300px, 58vw" /></div>
+          <div className="relative aspect-[4/3] overflow-hidden"><Pic id={d.photos[1]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 220px, 42vw" /></div>
+          <div className="col-span-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <p className="text-[11.5px] uppercase tracking-[.24em]" style={{ color: "#D9C192" }}>{d.date}</p>
+            <h2 style={{ ...display, fontWeight: 500, fontSize: "24px", lineHeight: 1.1 }}>{d.title}</h2>
+          </div>
+          <p className="col-span-2 -mt-1 text-[15px]" style={{ color: "rgba(246,239,226,.8)" }}>{d.line}</p>
+          <p className="col-span-2 flex flex-wrap gap-x-5 gap-y-1 text-[13.5px]">
+            {d.links.filter(([id]) => PAGES.gallery.categories.some((c) => c.id === id && c.photos.some((p) => reviewMedia(p, opts.environment)))).map(([id, label]) => (
+              <a key={id} href={`#gallery-${id}`} className="underline decoration-[#B8914C] underline-offset-4 hover:text-[#F5E7C3]" style={{ color: "#F0E2C4" }}>{label}</a>
+            ))}
+          </p>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) {
   const g = PAGES.gallery;
   // Only photographs this deployment may show: the review-only collection is absent on production.
@@ -683,17 +745,7 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
         <p className="text-[15px]" style={{ color: C.body }}>{g.photosIntro.text} {count} photographs.</p>
       </div>
       <SectionNotes notes={notes} opts={opts} ground="white" className="mt-6" />
-      <nav aria-label="Photograph categories" className="mt-8">
-        <ul className="flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <li key={c.id}>
-              <a href={`#gallery-${c.id}`} className="inline-flex min-h-[44px] items-center gap-2 border px-4 text-[14px] transition-colors duration-200 hover:bg-black hover:text-white" style={{ borderColor: "rgba(160,128,72,.55)", color: C.black }}>
-                {c.title.text}<span aria-hidden="true" style={{ color: C.body }}>{c.photos.length}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <GalleryNav items={categories.map((c) => ({ id: c.id, title: c.title.text, count: c.photos.length, review: "review" in c }))} />
       {categories.map((c) => (
         <section key={c.id} id={`gallery-${c.id}`} aria-labelledby={`gallery-${c.id}-title`} className="mt-14 scroll-mt-28 border-t pt-8 lg:mt-20" style={{ borderColor: "rgba(160,128,72,.35)" }}>
           <h3 id={`gallery-${c.id}-title`} style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 38px)", lineHeight: 1.1 }}>{c.title.text}</h3>
@@ -736,12 +788,12 @@ export function GalleryPage(props: PageProps) {
   const notes = [
     COPY_DRAFT,
     photographed
-      ? "Photographs from the HEBS Lagos 2026 summit days (House of Snapp collection). The prize-presentation photographs are internal review only and are never published until the organisers verify the results (D8). No pre-party photographs are included."
+      ? "Photographs from the HEBS Lagos 2026 summit days (House of Snapp collection). The prize-presentation photographs are internal review only; results are subject to final verification. No pre-party photographs are included."
       : "Images reserved for approved HEBS Lagos 2026 event photographs only. HEBS US photographs stay in the archive and are never shown here.",
   ];
   return (
     <Shell page="gallery" opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
-      <PageHero accent={2} composition="archive" title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} />
+      <PageHero accent={2} composition="archive" title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} aside={<SummitDays opts={opts} />} />
       {photographed ? <Lagos2026Photographs opts={opts} notes={notes.slice(1)} /> : (
         <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">

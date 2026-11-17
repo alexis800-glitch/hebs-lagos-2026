@@ -74,7 +74,8 @@ describe("House of Snapp homepage photographs", () => {
     // The champions panel, which names competitions and placings, stays hidden.
     expect(html).not.toMatch(/Champions of HEBS|as printed on the cheque|class="wn"/);
     expect(html).toContain("Winners &amp;");
-    expect(html).toMatch(/Internal review<\/span> Not for publication\./);
+    expect(html).toContain("HEBS Lagos 2026 prize presentations. Results subject to final verification.");
+    expect(html).not.toMatch(/D8|conflicting|Freestyle Braid Art/);
     expect(html).not.toMatch(/1st Place|2nd Place|3rd Place|₦/);
     expect(html).toContain("comp-main");
   });
@@ -158,9 +159,10 @@ describe("Gallery & past events photographs", () => {
       expect(a.permittedUsage, id).toEqual(["internal-review"]);
       expect(a.alt, id).not.toMatch(/1st|2nd|3rd|place|₦|\$/i);
     }
-    expect(PAGES.gallery.winnersNote.text).toMatch(/Internal review, not for publication\..*not verified.*Freestyle Braid Art/);
+    expect(PAGES.gallery.winnersNote.text).toBe("HEBS Lagos 2026 prize presentations. Results subject to final verification.");
     const html = renderToStaticMarkup(createElement(GalleryPage, { environment: "development" }));
-    expect(html).toContain("Internal review, not for publication. Prize presentations as photographed on 24 and 25 October 2026.");
+    expect(html).toContain("Results subject to final verification.");
+    expect(html).not.toMatch(/conflicting first-place|\(D8\)/);
     // Production never serves a review-only photograph (the Gallery itself is withheld there until launch).
     for (const id of winners.photos) expect(reviewMedia(id, "production"), id).toBeNull();
   });

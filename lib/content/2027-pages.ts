@@ -129,8 +129,8 @@ export const PAGES = {
       { id: "exhibitions", title: draft("Exhibitions and Networking"), photos: ["gal-0q1a0074", "gal-dsc_1734", "gal-dsc_1727", "gal-0q1a0098", "gal-0q1a0470", "gal-img_7147", "gal-img_7139", "gal-img_7144"] },
       { id: "highlights", title: draft("Event Highlights and Celebrations"), photos: ["gal-img_7937", "gal-img_7821", "gal-0q1a0374", "gal-img_7299"] },
     ],
-    /** Shown above the review-only collection; the photographs are not evidence of approved results. */
-    winnersNote: draft("Internal review, not for publication. Prize presentations as photographed on 24 and 25 October 2026. Winners, placings and prize amounts are not verified: the organisers' verification (D8) is open, and conflicting first-place records, including Freestyle Braid Art, remain unresolved."),
+    /** One discreet line above the review-only collection; the D8 detail stays in lib/content/winners-2026.ts. */
+    winnersNote: draft("HEBS Lagos 2026 prize presentations. Results subject to final verification."),
   },
   contact: {
     title: draft("Contact us"),

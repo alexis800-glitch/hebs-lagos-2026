@@ -146,10 +146,13 @@
 .hp .sp li{display:flex;gap:16px;align-items:center}
 .hp .sp li::before{content:"";width:8px;height:8px;transform:rotate(45deg);background:var(--metal)}
 .hp .sp .ctas{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
-.hp .sp .art{position:relative;height:560px}
-.hp .sp .art .a{position:absolute;left:60px;right:0;top:0;height:460px}
-.hp .sp .art .b{position:absolute;left:0;bottom:0;width:200px;height:270px;box-shadow:0 30px 60px -22px rgba(40,26,10,.6)}
-.hp .sp .cap2{position:absolute;right:0;bottom:44px;font-family:var(--display);font-style:italic;font-size:20px;color:#7A5A22}
+.hp .sp .mos{margin:0;display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:250px 230px;gap:12px}
+.hp .sp .mos .ph{position:relative;overflow:hidden;background:#E9DFCB}
+.hp .sp .mos .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hp .sp .mos .m0{grid-column:1 / span 2}
+.hp .sp .mos .m1{grid-row:1 / span 2;grid-column:3}
+.hp .sp .mos figcaption{grid-column:1 / -1;font-size:13px;color:#6B5E4C}
+.hp .sp .mos .cap2{font-family:var(--display);font-style:italic;font-size:18px;color:#7A5A22;margin-right:8px}
 
 /* FINAL CALL: the styling floor again, deep in shadow, with the countdown */
 .hp .fn{position:relative;height:780px;overflow:hidden;display:grid;place-items:center;text-align:center}
@@ -384,10 +387,6 @@ body:has(.hp-wrap) [data-preview-banner]{display:none}
   .hp .sp h2{font-size:40px}
   .hp .sp ul{font-size:12px}
   .hp .sp .ctas{flex-direction:column;align-items:stretch}
-  .hp .sp .art{height:380px}
-  .hp .sp .art .a{left:30px;height:280px}
-  .hp .sp .art .b{width:130px;height:176px}
-  .hp .sp .cap2{bottom:20px;font-size:16px}
 
   .hp .fn{height:720px}
   .hp .fn .in{padding:0 22px}
@@ -515,9 +514,6 @@ body:has(.hp-wrap) [data-preview-banner]{display:none}
   .hp .sp h2{font-size:50px}
   .hp .sp ul{font-size:13px}
   .hp .sp .ctas{flex-direction:row;align-items:center}
-  .hp .sp .art{height:480px}
-  .hp .sp .art .a{left:60px;height:380px}
-  .hp .sp .art .b{width:170px;height:230px}
 
   .hp .fn{height:clamp(640px,90svh,800px)}
   .hp .fn .in{padding:0 48px}
@@ -592,41 +588,39 @@ body:has(.hp-wrap) [data-preview-banner]{display:none}
   .hp .aw,.hp .wt{padding-left:48px;padding-right:48px}
   .hp .awg{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
-/* ═══ The destination: a still editorial composition (17 Nov 2026) ═══ */
-.hp .ds{background:var(--ivory);color:#16110A;padding:88px 96px;display:grid;grid-template-columns:400px minmax(0,1fr);gap:88px;align-items:center}
-.hp .ds h2{font-size:64px;margin-top:18px}
-.hp .ds h2 .gold{color:#8C6B34;-webkit-text-fill-color:#8C6B34;background:none}
-.hp .ds .rule{width:96px;height:1px;background:#B8914C;margin:28px 0 22px}
-.hp .ds p.b{font-weight:300;font-size:17px;color:#4A3F31;max-width:40ch}
-.hp .ds .ctas{margin-top:32px}
-.hp .ds .art{display:grid;gap:22px;min-width:0}
-.hp .ds .grp{margin:0;display:grid;gap:12px}
-.hp .ds .st{display:flex;gap:12px;align-items:baseline}
-.hp .ds .st b{font-family:var(--display);font-weight:500;font-size:22px}
-.hp .ds .st span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8C6B34}
-.hp .ds .pr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.hp .ds .pr .ph{position:relative;overflow:hidden;background:#E9DFCB;height:250px}
-.hp .ds .g1 .pr .ph{height:200px}
-.hp .ds .pr .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hp .ds .cap{font-size:13px;color:#6B5E4C;line-height:1.5}
-.hp .ds .cap b{display:inline-block;margin-right:8px;padding:2px 7px;border-radius:3px;background:#16110A;color:#F6EFE2;font-weight:500;font-size:10px;letter-spacing:.2em;vertical-align:1px}
-.hp .ds .nt{font-size:13px;font-family:var(--text-italic);font-style:italic;color:#8A7A62;margin-top:-8px}
+/* ═══ The destination (17 Nov 2026): black editorial composition, three staggered photographs ═══ */
+.hp .dsb .cap{font-size:12.5px;line-height:1.5}
+.hp .dsb .cap b{display:inline-block;margin-right:8px;padding:2px 7px;border-radius:3px;font-weight:500;font-size:10px;letter-spacing:.2em;vertical-align:1px}
+.hp .dsb .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hp .dsb .ph{position:relative;overflow:hidden}
+.hp .dsb{background:var(--black);color:var(--ivory);padding:104px 96px;display:grid;grid-template-columns:420px minmax(0,1fr);gap:72px;align-items:center}
+.hp .dsb h2{font-size:64px;margin-top:16px}
+.hp .dsb p.b{margin-top:22px;font-weight:300;font-size:17px;color:rgba(246,239,226,.84);max-width:40ch}
+.hp .dsb .when{margin:30px 0 26px;padding-top:18px;border-top:1px solid rgba(217,193,146,.45);font-family:var(--display);font-size:20px;line-height:1.35;color:#EAD9AE;white-space:pre-wrap}
+.hp .dsb .reel{margin:0;display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:16px;align-items:start}
+.hp .dsb .p1{height:380px;margin-top:90px}
+.hp .dsb .p2{height:560px}
+.hp .dsb .p3{height:380px;margin-top:40px}
+.hp .dsb .cap{grid-column:1 / -1;color:rgba(246,239,226,.72);margin-top:4px}
+.hp .dsb .cap b{background:#F6EFE2;color:#0D0B08}
 @container (max-width:1279px){
-  .hp .ds{grid-template-columns:1fr;gap:26px;padding:56px 22px}
-  .hp .ds h2{font-size:46px}
-  .hp .ds p.b{font-size:16px}
-  .hp .ds .pr .ph,.hp .ds .g1 .pr .ph{height:auto;aspect-ratio:4/3}
-  .hp .ds .art{gap:18px}
-  .hp .ds .grp{gap:9px}
-  .hp .ds .ctas{margin-top:24px}
-  .hp .ds .rule{margin:20px 0 16px}
-  .hp .ds .st b{font-size:19px}
+  .hp .dsb{grid-template-columns:1fr;gap:30px;padding:60px 22px}
+  .hp .dsb h2{font-size:44px}
+  .hp .dsb p.b{font-size:16px}
+  .hp .dsb .when{font-size:18px;margin:22px 0 20px}
+  .hp .dsb .reel{gap:8px}
+  .hp .dsb .p1,.hp .dsb .p3{height:auto;aspect-ratio:2/3;margin-top:36px}
+  .hp .dsb .p2{height:auto;aspect-ratio:2/3}
 }
 @container (min-width:601px) and (max-width:1279px){
-  .hp .ds{padding:96px 48px}
-  .hp .ds h2{font-size:56px}
-  .hp .ds .pr .ph{height:300px;aspect-ratio:auto}
-  .hp .ds .g1 .pr .ph{height:240px}
+  .hp .dsb{padding:80px 48px}
+}
+@container (max-width:1279px){
+  .hp .sp .mos{grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:8px}
+  .hp .sp .mos .ph{aspect-ratio:1/1}
+  .hp .sp .mos .m0{grid-column:1 / -1;aspect-ratio:16/10}
+  .hp .sp .mos .m1{grid-row:auto;grid-column:auto}
+  .hp .sp .mos .m3{grid-column:1 / -1;aspect-ratio:16/10}
 }
 /* ═══ Way into the HEBS 2026 Gallery (17 Nov 2026) ═══ */
 .hp .gi{margin:72px 96px 0;border-top:1px solid rgba(217,193,146,.3);padding-top:36px}
