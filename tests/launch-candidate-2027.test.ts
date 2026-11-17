@@ -41,7 +41,7 @@ describe("launch candidate: homepage and Tickets", () => {
   it("links only to published pages, the 2026 privacy notice and in-page anchors", async () => {
     for (const [name, html] of Object.entries(await pages())) {
       const hrefs = Array.from(html.matchAll(/<a\b[^>]*?href="([^"]*)"/g)).map((m) => m[1]);
-      for (const h of hrefs) expect(h, `${name}: ${h}`).toMatch(/^(\/2027|\/2027\/tickets(#[\w-]+)?|\/privacy|#[\w-]+)$/);
+      for (const h of hrefs) expect(h, `${name}: ${h}`).toMatch(/^(\/2027(#[\w-]+)?|\/2027\/tickets(#[\w-]+)?|\/privacy|#[\w-]+)$/);
       // No anchor without a destination: a launch that leaves a page out renders no button for it.
       expect(html, name).not.toMatch(/<a(?![^>]*href=)[^>]*>/);
     }

@@ -1,11 +1,11 @@
 # HEBS Lagos 2027 website: launch approval
 
-For Mrs. Shuler, from Veridion. Reference 146e3ffb.
+For Mrs. Shuler, from Veridion. Reference fa294238.
 
 ## 1. What we are asking you to approve
 
 1. **Publish two pages** at hebslagos.com/2027: the 2027 homepage and the Tickets information page.
-2. **Approve the wording** in section 3: 9 short passages (23 lines). We recommend 2 changes, clearly marked.
+2. **Approve the wording** in section 3: 10 short passages (25 lines). We recommend 2 changes, clearly marked.
 3. **Launch without 4 features** that are not ready yet (section 4). Each is added when it is ready.
 4. **Approve a small update to the privacy notice** so it names the 2027 pages (section 5).
 5. **Give written authorisation** to publish (section 6).
@@ -23,6 +23,14 @@ Everything else on these two pages (menus, buttons, dates, captions and notices)
 ## 3. Wording for your approval
 
 In the order a visitor reads it. Reply to each passage with *Approved*, *Changes* (with the change), or *Hold*. If you accept a recommendation, say so and we will use that wording.
+
+### Homepage: Page layout
+
+> The styling floor at HEBS Lagos 2026, filmed by VMM. More films from the summit days will be added once they are selected.
+
+> The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent
+
+<sub>Passage reference owner-home-page-layout / 0603ea6c</sub>
 
 ### 1. The opening screen
 

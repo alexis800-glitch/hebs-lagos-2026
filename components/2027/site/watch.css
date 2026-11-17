@@ -1,0 +1,22 @@
+/* "Watch HEBS 2026" player, shared by the homepage and the Gallery. Scoped to .wp. */
+.wp{--wp-gold:#D9C192;display:grid;gap:28px}
+.wp-film{margin:0}
+.wp-frame{position:relative;overflow:hidden;background:#0D0B08;aspect-ratio:960/900;max-height:78vh;margin:0 auto;border-radius:2px}
+.wp-frame img,.wp-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.wp-frame video{object-fit:contain;background:#0D0B08}
+.wp-frame picture::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(13,11,8,.05) 0%,rgba(13,11,8,.45) 100%)}
+.wp-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 28px 0 20px;border:0;border-radius:999px;background:rgba(13,11,8,.72);color:#F6EFE2;font:500 14px/1 var(--c-jost),"Futura","Avenir Next",system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s,transform .2s}
+.wp-play svg{width:30px;height:30px;padding:7px;border-radius:50%;background:var(--wp-gold);fill:#0D0B08;flex:none}
+.wp-play:hover{background:rgba(13,11,8,.88)}
+.wp-play:focus-visible{outline:2px solid var(--wp-gold);outline-offset:4px}
+.wp-replay{top:auto;bottom:72px}
+.wp-film figcaption{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;margin-top:14px;font-size:13px;letter-spacing:.04em}
+.wp-film figcaption b{font-weight:500;letter-spacing:.18em;text-transform:uppercase;font-size:12px}
+.wp[data-tone="dark"] .wp-film figcaption{color:rgba(246,239,226,.78)}
+.wp[data-tone="dark"] .wp-film figcaption b{color:var(--wp-gold)}
+.wp[data-tone="light"] .wp-film figcaption{color:#4A3F31}
+.wp[data-tone="light"] .wp-film figcaption b{color:#8C6B34}
+@media (max-width:600px){
+  .wp-frame{aspect-ratio:9/16;max-height:82vh}
+  .wp-play{min-height:52px;padding:0 22px 0 16px;font-size:13px}
+}

@@ -48,7 +48,7 @@ export function Pic({
   );
 }
 
-const posterOf = (a: ReviewAsset) => (a.poster && existsSync(join(process.cwd(), "public", a.poster)) ? a.poster : undefined);
+export const posterOf = (a: ReviewAsset) => (a.poster && existsSync(join(process.cwd(), "public", a.poster)) ? a.poster : undefined);
 
 /**
  * A film with separate desktop and phone crops. Its first-frame still shows at

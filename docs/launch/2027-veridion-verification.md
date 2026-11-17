@@ -3,7 +3,7 @@
 Routine wording (category A) on the homepage, the Tickets page and the shared navigation and footer, checked against its source.
 Each block below is approved in signoff-decisions-2027.ts in exactly this wording. A line that changes later returns for verification.
 
-## Home: routine wording (84 items, reference 0cb9977c)
+## Home: routine wording (95 items, reference 8a0dd481)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -57,11 +57,17 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | HEBS Lagos 2027 | Closing call to action | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | July 23–25, 2027  \|  NJS Beach Resort, Lagos, Nigeria | Closing call to action | Venue name: decision D9 (VENUE.name, lib/editions/2027.ts); dates: owner directive (CAMPAIGN.datesDisplay). |
 | HEBS Lagos 2027 \| Hair Education Beauty Summit | Hero | Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts). |
+| HEBS Lagos 2026, the styling floor Watch | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | – Days – Hours – Minutes – Seconds | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp. | Page layout | Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts). |
 | HEBS at NJS, 2026 Photographed | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | The summit floor Photographed | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| HEBS 2026 Awards & Competition Moments | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Trophies, celebrations and the competition floor, 24–25 October 2026. Winners and placings are published once the organisers have verified them. | Page layout | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling | Page layout | lib/competitions.ts (13 competitions in 7 categories) and the directive: categories and prize values unchanged from 2026. |
+| Watch HEBS 2026 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Watch HEBS Lagos 2026. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Play | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | HAIR · EDUCATION · BEAUTY · SUMMIT · LAGOS · | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Film of the 2026 styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Play the styling-floor film | Image descriptions and labels | An accessible label: says what the control or region does. |
@@ -85,8 +91,13 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Destination scenes | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Pause the destination scenes | Image descriptions and labels | An accessible label: says what the control or region does. |
 | A braiding competitor at work, HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-main (House of Snapp, HEBS Lagos 2026). |
+| A barber's clippers at the back of a client's neck at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-img_6824 (House of Snapp, HEBS Lagos 2026). |
+| Guests on stage with a HEBS trophy at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-img_7821 (House of Snapp, HEBS Lagos 2026). |
 | A winner celebrating beside the HEBS trophy, 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-trophy (House of Snapp, HEBS Lagos 2026). |
+| A barber grooming a client's beard at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-dsc_2148 (House of Snapp, HEBS Lagos 2026). |
+| A nail technician painting a client's nails at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: gal-dsc_1489 (House of Snapp, HEBS Lagos 2026). |
 | The seven categories | Image descriptions and labels | An accessible label: says what the control or region does. |
+| Play the film: The styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |
 | A full session at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: sp-hall (House of Snapp, HEBS Lagos 2026). |
 | A wig and styling exhibitor's display at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: sp-exhibitor (House of Snapp, HEBS Lagos 2026). |
 | Closing film of the 2026 styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |

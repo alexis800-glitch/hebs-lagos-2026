@@ -23,7 +23,9 @@ import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { SlotImage } from "./media";
 import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "@/lib/site/page-media-2027";
-import { Button } from "@/components/2027/site/ui";
+import { Button, Kicker } from "@/components/2027/site/ui";
+import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
+import { WATCH } from "@/lib/content/media-sections-2027";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
 import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
 import { C, TONE, display, h2Style, sentenceCase } from "./tokens";
@@ -751,6 +753,18 @@ export function GalleryPage(props: PageProps) {
           </div>
         </Section>
       )}
+      {hasWatchFilms() ? (
+        <Section id="watch" ground="black" labelledBy="watch-title">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <div className="lg:col-span-5">
+              <Kicker tone="dark">{WATCH.label}</Kicker>
+              <h2 id="watch-title" className="mt-5" style={{ ...h2Style, color: C.ivory }}>{WATCH.title} {WATCH.accent}</h2>
+              <p className="mt-6 max-w-[42ch] text-[17px] leading-[1.7]" style={{ color: "rgba(246,239,226,.82)" }}>{WATCH.body}</p>
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7"><WatchFilms tone="dark" /></div>
+          </div>
+        </Section>
+      ) : null}
       <Section id="archive" ground="ivory" labelledBy="archive-title" innerClassName="lg:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="archive-title" className="lg:col-span-5" style={h2Style}>Past events.</h2>

@@ -6,6 +6,8 @@ import { winnersView } from "@/lib/content/winners-2026";
 import { deployEnvironment } from "@/lib/publication";
 import { Clip, Pic, reviewSrc } from "./media";
 import { Mark } from "@/components/2027/site/mark";
+import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
+import { AWARDS, WATCH } from "@/lib/content/media-sections-2027";
 import { pageHref, PRIORITY_CTA, PRIORITY_HREF, SITE_MENU } from "@/lib/site/2027";
 import { DesignScale, DestinationSequence, ExperienceIndex, FilmControl, LiveCountdown, MobileMenu, WinnersRail, type Scene } from "./client";
 import { HOME_HREF, NAV } from "./links";
@@ -33,7 +35,7 @@ function Hero() {
         <To className="pill" href={pageHref("sponsorship")}>Become a sponsor</To>
         <MobileMenu home={HOME_HREF} links={SITE_MENU} cta={{ label: PRIORITY_CTA, href: PRIORITY_HREF }} />
       </div>
-      <div className="live"><i />{h.live}</div>
+      {hasWatchFilms() ? <a className="live" href={`${HOME_HREF}#watch`}><i />{h.live}<span className="wl-cue">Watch</span></a> : <div className="live"><i />{h.live}</div>}
       <div className="hcol">
         <p className="kick">{h.kicker}</p>
         <h1 className="disp">
@@ -111,7 +113,7 @@ function Days() {
         {d.items.map((it, j) => (
           <div className="d" key={it.date}>
             <p className="date"><span>{it.date}</span></p>
-            <div className="ph"><Pic id={it.media} className={cls[j]} sizes="(max-width: 600px) calc(100vw - 44px), (max-width: 1279px) 33vw, 460px" /></div>
+            <div className="ph"><Pic id={it.media} className={cls[j]} sizes="(max-width: 600px) calc(100vw - 44px), (max-width: 1279px) 33vw, 460px" />{reviewSrc(it.media) ? <span className="yr">HEBS Lagos 2026</span> : null}</div>
             <h3>{it.title}</h3>
             <p>{it.text}</p>
             <To className="btn ln" href={pageHref("programme", dayAnchor(it.date))} label={`${d.cta}: ${it.date}`}>{d.cta}</To>
@@ -181,6 +183,26 @@ function Destination() {
  * approval evidence are kept (lib/content/winners-2026.ts) for that review.
  */
 const SHOW_WINNERS = false;
+
+/** HEBS 2026 Awards & Competition Moments: approved trophy and celebration photographs, no cheque details. */
+function Awards() {
+  const a = AWARDS;
+  const shown = a.photos.filter((id) => reviewSrc(id));
+  if (shown.length < 2) return null;
+  return (
+    <div className="aw" role="group" aria-labelledby="aw-title">
+      <div className="awh">
+        <div><p className="lab">{a.label}</p><h3 id="aw-title">{a.title} <em className="it">{a.accent}</em></h3></div>
+        <p className="n">{a.note}</p>
+      </div>
+      <div className="awg" data-count={shown.length}>
+        {shown.map((id, j) => (
+          <div className="ph" key={id}><Pic id={id} className="grade" sizes={j === 0 ? "(max-width: 600px) 100vw, 640px" : "(max-width: 600px) 50vw, 420px"} /></div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Winners() {
   const v = winnersView(deployEnvironment());
@@ -284,13 +306,30 @@ function Competitions() {
         </div>
         <div className="art">
           <div className="ph a"><Pic id="comp-main" className="grade kb" sizes="(max-width: 600px) 240px, 380px" /></div>
-          <div className="ph b"><Pic id="comp-trophy" className="grade" /></div>
+          <div className="ph b"><Pic id="gal-img_6824" className="grade" sizes="210px" /></div>
         </div>
       </div>
       {SHOW_WINNERS && <Winners />}
+      <Awards />
       <div className="mq" aria-label="The seven categories">
         <div className="tr">{ribbon}</div>
       </div>
+    </section>
+  );
+}
+
+function Watch() {
+  if (!hasWatchFilms()) return null;
+  const w = WATCH;
+  return (
+    <section className="wt" id="watch" aria-labelledby="watch-title">
+      <div className="wth">
+        <p className="lab">{w.label}</p>
+        <h2 id="watch-title" className="disp">{w.title} <em className="it">{w.accent}</em></h2>
+        <p className="b">{w.body}</p>
+        <To className="btn ol" href={pageHref("gallery", "watch")}>Gallery &amp; past events</To>
+      </div>
+      <WatchFilms tone="dark" />
     </section>
   );
 }
@@ -370,6 +409,7 @@ export function PreferredHomepage() {
         <Destination />
         <Competitions />
         <Highlights />
+        <Watch />
         <Sponsors />
         <Final />
       </div>
