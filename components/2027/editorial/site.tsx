@@ -32,6 +32,7 @@ export function PageHero({
   media,
   composition = "dates",
   aside,
+  noMedia = false,
   children,
 }: {
   title: string;
@@ -43,12 +44,14 @@ export function PageHero({
   composition?: Composition;
   /** Replaces the page image: a composition of its own (the Gallery's two summit days). */
   aside?: React.ReactNode;
+  /** A text-only masthead: the page's own first section carries the photography. */
+  noMedia?: boolean;
   children?: React.ReactNode;
 }) {
   return (
     <section aria-labelledby="page-title" className="relative" style={{ background: "radial-gradient(70% 90% at 85% 8%, #2A2016 0%, #0D0B08 68%)", color: C.ivory }}>
       <div id="main-content" className="mx-auto grid max-w-[1440px] gap-10 px-5 pb-14 pt-12 lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-12 lg:pb-20 lg:pt-20">
-        <div className="lg:col-span-7">
+        <div className={noMedia ? "lg:col-span-9" : "lg:col-span-7"}>
           <Kicker>HEBS Lagos 2027</Kicker>
           <h1 id="page-title" className="mt-5 max-w-[17ch]" style={{ ...display, fontWeight: 500, fontSize: "clamp(42px, 5.4vw, 88px)", lineHeight: 1.02 }}>
             <AccentTitle text={title} accent={accent} />
@@ -58,9 +61,9 @@ export function PageHero({
           {children}
           <SectionNotes notes={notes} opts={opts} ground="black" className="mt-8" />
         </div>
-        <div className="lg:col-span-5">
+        {noMedia ? null : <div className="lg:col-span-5">
           {aside ?? <SlotImage reviewId={media} composition={composition} opts={opts} className="aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-[4/5]" sizes="(min-width: 1024px) 38vw, 100vw" priority />}
-        </div>
+        </div>}
       </div>
       <span aria-hidden="true" className="da-horizon block h-px" style={{ background: `linear-gradient(90deg, transparent, ${C.champL} 30%, #FFF6DE 50%, ${C.champL} 70%, transparent)` }} />
     </section>

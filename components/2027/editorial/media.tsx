@@ -31,7 +31,6 @@ export function EventPhoto({ id, environment, className = "", sizes, tone = "dar
     <figure className="m-0">
       <div className={`relative overflow-hidden ${className}`}>
         <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={sizes} priority={priority} />
-        <span aria-hidden="true" className="pointer-events-none absolute inset-3 border" style={{ borderColor: "rgba(217,193,146,.35)" }} />
       </div>
       <figcaption className="mt-3"><Kicker tone={tone} className="!text-[11px] !tracking-[.28em]">HEBS Lagos 2026</Kicker></figcaption>
     </figure>
@@ -50,7 +49,6 @@ export function TypePanel({ variant, className = "", tone = "dark" }: { variant:
   const day = EDITION_DAYS[0];
   return (
     <div aria-hidden="true" className={`relative flex flex-col justify-between overflow-hidden p-7 lg:p-9 ${className}`} style={{ background: bg }}>
-      <span className="pointer-events-none absolute inset-3 border" style={{ borderColor: dark ? "rgba(217,193,146,.35)" : "rgba(140,107,52,.35)" }} />
       {variant === "dates" && (
         <>
           <Kicker tone={tone}>July 2027</Kicker>

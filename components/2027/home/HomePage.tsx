@@ -7,6 +7,7 @@ import { deployEnvironment } from "@/lib/publication";
 import { Clip, Pic, reviewSrc } from "./media";
 import { Mark } from "@/components/2027/site/mark";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
+import { LightboxGroup, LightboxTrigger } from "@/components/2027/site/lightbox";
 import { EXHIBITION, PRIZES, WATCH } from "@/lib/content/media-sections-2027";
 import { PAGES } from "@/lib/content/2027-pages";
 import { reviewMedia } from "./review-media";
@@ -167,28 +168,33 @@ function Experiences() {
 function Destination() {
   const d = HOME.destination;
   const note = d.scenes[0].note;
-  const [lead, second, third] = ["dest-guest", "dest-floor-b", "dest-terrace"];
-  if (![lead, second, third].every((id) => reviewSrc(id))) return null;
-  const words = (
-    <>
-      <p className="lab">{d.label}</p>
-      <h2 id="ds-title" className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
-      <p className="b">{d.body}</p>
-    </>
-  );
+  // Left to right: the session, the speaker before the NJS crest, the braider.
+  const ids = ["dest-terrace", "dest-guest", "dest-floor-b"];
+  const shown = ids.flatMap((id) => { const a = reviewMedia(id); return a ? [a] : []; });
+  if (shown.length !== ids.length) return null;
   return (
     <section className="dsb" aria-labelledby="ds-title">
-      <div className="txt">
-        {words}
-        <p className="when">{HOME.final.when}</p>
-        <To className="btn gh" href={pageHref("experience", "destination")}>{d.cta}</To>
+      <div className="hd">
+        <div>
+          <p className="lab">{d.label}</p>
+          <h2 id="ds-title" className="disp">{d.title} <span className="it gold">{d.accent}</span></h2>
+        </div>
+        <div>
+          <p className="b">{d.body}</p>
+          <p className="when">{HOME.final.when}</p>
+          <To className="btn gh" href={pageHref("experience", "destination")}>{d.cta}</To>
+        </div>
       </div>
-      <figure className="reel" role="group" aria-label="Destination scenes">
-        <div className="ph p1"><Pic id={third} sizes="(max-width: 600px) 33vw, 260px" /></div>
-        <div className="ph p2"><Pic id={lead} sizes="(max-width: 600px) 40vw, 320px" /></div>
-        <div className="ph p3"><Pic id={second} sizes="(max-width: 600px) 33vw, 260px" /></div>
-        <figcaption className="cap"><b>PHOTOGRAPHED</b> {note}</figcaption>
-      </figure>
+      <LightboxGroup items={shown.map((a) => ({ src: a.src, alt: a.alt }))} label="HEBS Lagos 2026 at NJS">
+        <figure className="tri" role="group" aria-label="Destination scenes">
+          {shown.map((a, j) => (
+            <div className={`ph t${j}`} key={a.id}>
+              <LightboxTrigger index={j} label={a.alt}><Pic id={a.id} sizes={j === 1 ? "(max-width: 600px) 100vw, 560px" : "(max-width: 600px) 50vw, 420px"} /></LightboxTrigger>
+            </div>
+          ))}
+          <figcaption className="cap"><b>PHOTOGRAPHED</b> {note}</figcaption>
+        </figure>
+      </LightboxGroup>
     </section>
   );
 }
@@ -421,12 +427,16 @@ function Sponsors() {
           <div className="ctas"><To className="btn dk" href={pageHref("sponsorship")}>{s.ctaPrimary}</To><To className="btn ol" href={pageHref("exhibitors")}>{s.ctaSecondary}</To></div>
         </div>
         {/* The 2026 exhibition floor: several stands and products, as historical examples. */}
-        <figure className="mos">
-          {EXHIBITION.home.filter((id) => reviewSrc(id)).map((id, j) => (
-            <div className={`ph m${j}`} key={id}><Pic id={id} sizes={j === 0 ? "(max-width: 600px) 100vw, 520px" : "(max-width: 600px) 50vw, 260px"} /></div>
-          ))}
-          <figcaption><span className="cap2">{s.caption}</span> {EXHIBITION.homeNote}</figcaption>
-        </figure>
+        <LightboxGroup items={EXHIBITION.home.flatMap((id) => { const a = reviewMedia(id); return a ? [{ src: a.src, alt: a.alt || s.caption }] : []; })} label={EXHIBITION.homeNote}>
+          <figure className="mos">
+            {EXHIBITION.home.filter((id) => reviewSrc(id)).map((id, j) => (
+              <div className={`ph m${j}`} key={id}>
+                <LightboxTrigger index={j} label={reviewMedia(id)?.alt || s.caption}><Pic id={id} sizes={j === 0 ? "(max-width: 600px) 100vw, 520px" : "(max-width: 600px) 50vw, 260px"} /></LightboxTrigger>
+              </div>
+            ))}
+            <figcaption><span className="cap2">{s.caption}</span> {EXHIBITION.homeNote}</figcaption>
+          </figure>
+        </LightboxGroup>
       </div>
     </section>
   );

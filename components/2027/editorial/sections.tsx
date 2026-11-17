@@ -162,7 +162,6 @@ export function Welcome({ opts, notes }: SectionProps) {
           <SectionNotes notes={notes.slice(0, 1)} opts={opts} ground="ivory" className="mt-6" />
         </div>
         <Plate slotId="welcome" opts={opts} noteLight sizes="(min-width: 1024px) 40vw, 100vw" className="aspect-[4/5] w-full lg:col-span-5 lg:col-start-8" tone={TONE.light}>
-          <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.45)" }} />
         </Plate>
       </div>
     </section>
@@ -358,7 +357,6 @@ export function Education({ opts, notes }: SectionProps) {
           <SectionNotes notes={notes.slice(0, 2)} opts={opts} ground="black" className="mt-6" />
         </div>
         <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 36vw, 100vw" className="aspect-[4/5] w-full lg:col-span-4 lg:col-start-9 lg:mt-20" tone={TONE.dark}>
-          <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
         </Plate>
       </div>
     </Section>
@@ -417,7 +415,6 @@ export function Highlights({ opts, notes }: SectionProps) {
         </div>
         <div className="lg:col-span-8">
           <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-video w-full" tone={TONE.light}>
-            <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
           </Plate>
           <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-[14px]" style={{ color: C.body }}>
             {COPY.highlights.kinds.map((k) => <li key={k}>{k}</li>)}

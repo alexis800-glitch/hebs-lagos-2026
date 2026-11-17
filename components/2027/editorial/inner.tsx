@@ -27,6 +27,7 @@ import { Button, Kicker } from "@/components/2027/site/ui";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
 import { EXHIBITION, SUMMIT_DAYS, WATCH } from "@/lib/content/media-sections-2027";
 import { GalleryNav } from "./gallery-nav";
+import { LightboxGroup, LightboxTrigger, type LightboxItem } from "@/components/2027/site/lightbox";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
 import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
 import { C, TONE, display, h2Style, sentenceCase } from "./tokens";
@@ -224,13 +225,11 @@ export function EducationPage(props: PageProps) {
                 <figure>
                   <div className="relative aspect-[4/5] w-full overflow-hidden">
                     <Pic id={EDU_LEAD} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 32vw, 100vw" />
-                    <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
                   </div>
                   <figcaption className="mt-3 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>{PAGES.education.leadCaption.text}</figcaption>
                 </figure>
               ) : (
                 <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
-                  <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(200,169,106,.28)" }} />
                 </Plate>
               )}
               {photographed && <SectionNotes notes={notes.slice(2)} opts={opts} ground="black" className="mt-4" />}
@@ -499,16 +498,10 @@ export function ExhibitorsPage(props: PageProps) {
 /** Official Nigeria Immigration Service sites (both checked 2026-11-03). */
 const NIS = { site: "https://immigration.gov.ng/", evisa: "https://evisa.immigration.gov.ng/" } as const;
 
-function TravelBlock({ id, title, ground, children }: { id: string; title: string; ground: "white" | "ivory"; children: React.ReactNode }) {
-  return (
-    <Section id={id} ground={ground} labelledBy={`${id}-title`} innerClassName="lg:py-20">
-      <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
-        <h2 id={`${id}-title`} className="lg:col-span-4" style={h2Style}>{title}</h2>
-        <div className="space-y-6 lg:col-span-7 lg:col-start-6">{children}</div>
-      </div>
-    </Section>
-  );
-}
+
+/** HEBS Lagos 2026 at NJS, for the Travel page: past-event photographs at the venue, never resort facilities. */
+const TRAVEL_HERO = "gal-dsc_1798";
+const TRAVEL_VENUE_PHOTOS = ["gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
 
 export function TravelPage(props: PageProps) {
   const opts = optsOf(props);
@@ -516,43 +509,75 @@ export function TravelPage(props: PageProps) {
   const notes = [
     COPY_DRAFT,
     "Venue name provisional, address and directions withheld until confirmed (D9).",
-    "No room, package or availability is offered until approved.",
+    "No room, package or availability is offered until approved. No accommodation photograph is shown until NJS supplies verified photographs of its rooms.",
     "Visitor support contacts pending (D10).",
   ];
-  const body = "text-[17px] leading-[1.7]";
+  const venuePhotos = TRAVEL_VENUE_PHOTOS.filter((id) => reviewMedia(id, opts.environment));
+  // The journey: three steps, led by type; facts only, nothing implied about rooms or facilities.
+  // `anchor` keeps the page's earlier links (#arriving, #stay) landing on the right step.
+  const steps: { n: string; anchor: string; word: string; title: string; text: string; later: string; action?: React.ReactNode }[] = [
+    { n: "01", anchor: "arriving", word: "LOS", title: "Arrive in Lagos", text: t.arrival.text, later: t.airport.text },
+    { n: "02", anchor: "resort", word: "NJS", title: "The resort", text: t.venue.text, later: t.directions.text, action: <Button href={VENUE.website} variant="outline" tone="light" external>Visit njsbeachresort.com</Button> },
+    { n: "03", anchor: "stay", word: "Stay", title: "Accommodation", text: t.accommodation.text, later: "" },
+  ];
   return (
     <Shell page="travel" opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
-      <PageHero accent={1} composition="lagos" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+      <PageHero accent={1} media={TRAVEL_HERO} composition="lagos" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={[
-          { href: "#venue", label: "The venue" }, { href: "#arriving", label: "Arriving in Lagos" }, { href: "#stay", label: "Accommodation" },
+          { href: "#journey", label: "Your journey" }, { href: "#venue", label: "HEBS at NJS" },
           { href: "#visas", label: "Visas" }, { href: "#faq", label: "Travel questions" },
         ]} />
       </PageHero>
-      <TravelBlock id="venue" title="The venue." ground="white">
-        <p className={body} style={{ color: C.body }}>{t.venue.text}</p>
-        <Pending>{t.directions.text}</Pending>
-        <Button href={VENUE.website} variant="outline" tone="light" external>Visit njsbeachresort.com</Button>
-        <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="white" />
-      </TravelBlock>
-      <TravelBlock id="arriving" title="Arriving in Lagos." ground="ivory">
-        <p className={body} style={{ color: C.body }}>{t.arrival.text}</p>
-        <Pending>{t.airport.text}</Pending>
-      </TravelBlock>
-      <TravelBlock id="stay" title="Accommodation." ground="white">
-        <Pending>{t.accommodation.text}</Pending>
-        <SectionNotes notes={notes.slice(2, 3)} opts={opts} ground="white" />
-      </TravelBlock>
-      <TravelBlock id="visas" title="Visas." ground="ivory">
-        <p className={body} style={{ color: C.body }}>{t.visas.text}</p>
-        <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <li><Button href={NIS.site} variant="outline" tone="light" external>Nigeria Immigration Service</Button></li>
-          <li><Button href={NIS.evisa} variant="outline" tone="light" external>Official e-Visa portal</Button></li>
-        </ul>
-      </TravelBlock>
+      <Section id="journey" ground="ivory" labelledBy="journey-title" innerClassName="lg:py-24">
+        <h2 id="journey-title" style={h2Style}>Your journey to HEBS Lagos 2027.</h2>
+        <ol className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-14">
+          {steps.map((st) => (
+            <li key={st.n} id={st.anchor} className="flex scroll-mt-28 flex-col">
+              <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: "#8C6B34" }}>{st.n} · {st.title}</p>
+              <p aria-hidden="true" className="mt-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(64px, 6.4vw, 104px)", lineHeight: 0.95, color: "#8C6B34" }}>{st.word}</p>
+              <p className="mt-6 text-[17px] leading-[1.7]" style={{ color: C.black }}>{st.text}</p>
+              {st.later ? <p className="mt-3 text-[14.5px] leading-[1.6]" style={{ color: C.body }}>{st.later}</p> : null}
+              {st.action ? <div className="mt-6">{st.action}</div> : null}
+            </li>
+          ))}
+        </ol>
+        <SectionNotes notes={notes.slice(1, 3)} opts={opts} ground="ivory" className="mt-10" />
+      </Section>
+      {venuePhotos.length === TRAVEL_VENUE_PHOTOS.length ? (
+        <Section id="venue" ground="black" labelledBy="venue-title" innerClassName="lg:py-20">
+          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+            <h2 id="venue-title" style={h2Style}>HEBS at NJS, 2026.</h2>
+            <p className="max-w-[52ch] text-[15px]" style={{ color: "rgba(246,239,226,.78)" }}>The summit halls at NJS, photographed during HEBS Lagos 2026.</p>
+          </div>
+          <LightboxGroup items={viewerItems(venuePhotos, opts)} label="HEBS at NJS, 2026">
+            <ul className="mt-8 grid grid-cols-2 gap-1.5 lg:grid-cols-[1fr_1.4fr_1fr]">
+              {venuePhotos.map((id, j) => (
+                <li key={id} className={`relative overflow-hidden ${j === 1 ? "col-span-2 aspect-[4/3] lg:col-span-1 lg:aspect-auto" : "aspect-[4/5]"} lg:h-[520px]`}>
+                  <LightboxTrigger index={j} label={findReviewAsset(id).alt}>
+                    <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={j === 1 ? "(min-width: 1024px) 560px, 100vw" : "(min-width: 1024px) 400px, 50vw"} />
+                  </LightboxTrigger>
+                </li>
+              ))}
+            </ul>
+          </LightboxGroup>
+        </Section>
+      ) : null}
+      <Section id="visas" ground="white" labelledBy="visas-title" innerClassName="lg:py-20">
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <h2 id="visas-title" className="lg:col-span-4" style={h2Style}>Visas.</h2>
+          <div className="space-y-6 lg:col-span-7 lg:col-start-6">
+            <p className="text-[17px] leading-[1.7]" style={{ color: C.body }}>{t.visas.text}</p>
+            <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <li><Button href={NIS.site} variant="outline" tone="light" external>Nigeria Immigration Service</Button></li>
+              <li><Button href={NIS.evisa} variant="outline" tone="light" external>Official e-Visa portal</Button></li>
+            </ul>
+          </div>
+        </div>
+      </Section>
       <Section id="faq" ground="black" labelledBy="faq-title">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="faq-title" className="lg:col-span-4" style={h2Style}>Travel questions.</h2>
-          <div className="border-t lg:col-span-7 lg:col-start-6" style={{ borderColor: "rgba(200,169,106,.45)" }}>
+          <div className="lg:col-span-7 lg:col-start-6">
             {t.faqs.map((f) => (
               <details key={f.q} className="group border-b" style={{ borderColor: "rgba(245,239,228,.14)" }}>
                 <summary className="flex min-h-[64px] cursor-pointer list-none items-center justify-between gap-6 py-4 [&::-webkit-details-marker]:hidden"
@@ -563,9 +588,9 @@ export function TravelPage(props: PageProps) {
                 <p className="max-w-[56ch] pb-6 text-[16px] leading-[1.7]" style={{ color: "rgba(245,239,228,.8)" }}>{f.a.text}</p>
               </details>
             ))}
+            <p className="mt-8 max-w-[60ch] text-[15px]" style={{ color: "rgba(246,239,226,.7)" }}>{t.support.text}</p>
           </div>
         </div>
-        <div className="mt-12 max-w-[60ch]"><Pending light={false}>{t.support.text}</Pending></div>
         <SectionNotes notes={notes.slice(3)} opts={opts} ground="black" className="mt-6" />
       </Section>
       <FinalCta to={TARGETS} />
@@ -671,6 +696,14 @@ export function justifiedRows<T>(items: readonly T[], aspect: (item: T) => numbe
 const aspectOf = (id: string) => findReviewAsset(id).aspect ?? 1.5;
 const sumOf = (ids: readonly string[]) => ids.reduce((n, id) => n + aspectOf(id), 0);
 
+/** The full-size files of photographs this deployment may show, for the photograph viewer. */
+function viewerItems(ids: readonly string[], opts: Opts): LightboxItem[] {
+  return ids.flatMap((id) => {
+    const a = reviewMedia(id, opts.environment);
+    return a ? [{ src: a.src, alt: a.alt || findReviewAsset(id).alt || "HEBS Lagos 2026" }] : [];
+  });
+}
+
 /**
  * The 2026 exhibition floor on the Sponsorship page: several stands and products,
  * as historical examples, with the two ways in. Left out when the photographs are
@@ -690,44 +723,67 @@ function ExhibitionFloor({ opts }: { opts: Opts }) {
           {exhibit ? <Button href={exhibit} variant="outline" tone="light">Become an exhibitor</Button> : null}
         </div>
       </div>
+      <LightboxGroup items={viewerItems(ids, opts)} label={EXHIBITION.pageTitle}>
       <ul className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-6 lg:grid-rows-[260px_260px] lg:gap-4">
         {ids.map((id, j) => (
           <li key={id} className={`relative overflow-hidden ${["lg:col-span-3 lg:row-span-2 aspect-[4/3] lg:aspect-auto col-span-2", "lg:col-span-2 aspect-square lg:aspect-auto", "lg:col-span-1 aspect-square lg:aspect-auto", "lg:col-span-1 aspect-square lg:aspect-auto", "lg:col-span-2 aspect-[2/1] col-span-2 lg:aspect-auto"][j] ?? "aspect-square"}`}>
-            <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={j === 0 ? "(min-width: 1024px) 620px, 100vw" : "(min-width: 1024px) 300px, 50vw"} />
+            <LightboxTrigger index={j} label={findReviewAsset(id).alt}>
+              <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={j === 0 ? "(min-width: 1024px) 620px, 100vw" : "(min-width: 1024px) 300px, 50vw"} />
+            </LightboxTrigger>
           </li>
         ))}
       </ul>
+      </LightboxGroup>
       <p className="mt-4 text-[13.5px]" style={{ color: C.body }}>{EXHIBITION.pageNote}</p>
     </Section>
   );
 }
 
+const summitDaysShown = (opts: Opts) => SUMMIT_DAYS.every((d) => d.photos.every((id) => reviewMedia(id, opts.environment)));
+
 /**
- * The two 2026 summit days as a photographic retrospective (the Gallery's masthead
- * image). Falls back to the typographic panel when the photographs are unavailable.
+ * The two 2026 summit days: a full-width photographic retrospective under the
+ * Gallery masthead, each day a large photograph and a second one, a date, one
+ * line and its collections. Every photograph opens in the viewer. Absent (and the
+ * masthead keeps its panel) when the photographs are unavailable.
  */
 function SummitDays({ opts }: { opts: Opts }) {
-  const days = SUMMIT_DAYS.filter((d) => d.photos.every((id) => reviewMedia(id, opts.environment)));
-  if (days.length !== SUMMIT_DAYS.length) return null;
+  if (!summitDaysShown(opts)) return null;
+  const ids = SUMMIT_DAYS.flatMap((d) => [...d.photos]);
   return (
-    <div className="grid gap-6" aria-label="The 2026 summit days">
-      {days.map((d) => (
-        <article key={d.key} className="grid grid-cols-[1.35fr_1fr] gap-3">
-          <div className="relative aspect-[4/3] overflow-hidden"><Pic id={d.photos[0]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 300px, 58vw" /></div>
-          <div className="relative aspect-[4/3] overflow-hidden"><Pic id={d.photos[1]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 220px, 42vw" /></div>
-          <div className="col-span-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <p className="text-[11.5px] uppercase tracking-[.24em]" style={{ color: "#D9C192" }}>{d.date}</p>
-            <h2 style={{ ...display, fontWeight: 500, fontSize: "24px", lineHeight: 1.1 }}>{d.title}</h2>
-          </div>
-          <p className="col-span-2 -mt-1 text-[15px]" style={{ color: "rgba(246,239,226,.8)" }}>{d.line}</p>
-          <p className="col-span-2 flex flex-wrap gap-x-5 gap-y-1 text-[13.5px]">
-            {d.links.filter(([id]) => PAGES.gallery.categories.some((c) => c.id === id && c.photos.some((p) => reviewMedia(p, opts.environment)))).map(([id, label]) => (
-              <a key={id} href={`#gallery-${id}`} className="underline decoration-[#B8914C] underline-offset-4 hover:text-[#F5E7C3]" style={{ color: "#F0E2C4" }}>{label}</a>
-            ))}
-          </p>
-        </article>
-      ))}
-    </div>
+    <Section id="summit-days" ground="black" labelledBy="summit-days-title" innerClassName="lg:py-20">
+      <h2 id="summit-days-title" className="sr-only">The 2026 summit days</h2>
+      <LightboxGroup items={viewerItems(ids, opts)} label="The 2026 summit days">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-10">
+          {SUMMIT_DAYS.map((d) => (
+            <article key={d.key} className="grid grid-cols-[1.5fr_1fr] gap-3 lg:gap-4">
+              <div className="relative aspect-[4/5] overflow-hidden lg:aspect-[4/5]">
+                <LightboxTrigger index={ids.indexOf(d.photos[0])} label={findReviewAsset(d.photos[0]).alt || d.title}>
+                  <Pic id={d.photos[0]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 400px, 60vw" />
+                </LightboxTrigger>
+              </div>
+              <div className="grid content-end gap-3">
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  <LightboxTrigger index={ids.indexOf(d.photos[1])} label={findReviewAsset(d.photos[1]).alt || d.title}>
+                    <Pic id={d.photos[1]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 270px, 40vw" />
+                  </LightboxTrigger>
+                </div>
+              </div>
+              <div className="col-span-2 mt-2">
+                <p className="text-[11.5px] uppercase tracking-[.24em]" style={{ color: "#D9C192" }}>{d.date}</p>
+                <h3 className="mt-2" style={{ ...display, fontWeight: 500, fontSize: "clamp(28px, 2.6vw, 38px)", lineHeight: 1.05 }}>{d.title}</h3>
+                <p className="mt-3 max-w-[46ch] text-[16px] leading-relaxed" style={{ color: "rgba(246,239,226,.82)" }}>{d.line}</p>
+                <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-[14px]">
+                  {d.links.filter(([id]) => PAGES.gallery.categories.some((c) => c.id === id && c.photos.some((p) => reviewMedia(p, opts.environment)))).map(([id, label]) => (
+                    <a key={id} href={`#gallery-${id}`} className="underline decoration-[#B8914C] underline-offset-4 hover:text-[#F5E7C3]" style={{ color: "#F0E2C4" }}>{label} →</a>
+                  ))}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </LightboxGroup>
+    </Section>
   );
 }
 
@@ -756,6 +812,7 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
             Justified rows: each photograph grows in proportion to its width over height, so a row shares one
             height. A desktop row too wide for a phone splits into balanced phone rows, stacked.
           */}
+          <LightboxGroup items={viewerItems(c.photos, opts)} label={c.title.text}>
           <div className="mt-6 flex flex-col gap-3 lg:gap-4">
             {justifiedRows(c.photos, aspectOf, 3.6).map((row) => (
               <div key={row[0]} className="flex flex-col gap-3 lg:flex-row lg:gap-4">
@@ -765,7 +822,9 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
                       const r = aspectOf(id);
                       return (
                         <li key={id} className="basis-0 overflow-hidden" style={{ flexGrow: r, aspectRatio: String(r) }}>
-                          <Pic id={id} className="h-full w-full object-cover" sizes={`(min-width: 1024px) ${Math.round(r * 340)}px, ${Math.round(r * 210)}px`} />
+                          <LightboxTrigger index={c.photos.indexOf(id)} label={findReviewAsset(id).alt || c.title.text}>
+                            <Pic id={id} className="h-full w-full object-cover" sizes={`(min-width: 1024px) ${Math.round(r * 340)}px, ${Math.round(r * 210)}px`} />
+                          </LightboxTrigger>
                         </li>
                       );
                     })}
@@ -774,6 +833,7 @@ function Lagos2026Photographs({ opts, notes }: { opts: Opts; notes: string[] }) 
               </div>
             ))}
           </div>
+          </LightboxGroup>
         </section>
       ))}
     </Section>
@@ -793,7 +853,8 @@ export function GalleryPage(props: PageProps) {
   ];
   return (
     <Shell page="gallery" opts={opts} notes={props.notes ?? "inline"} groups={[["Gallery & past events", notes]]}>
-      <PageHero accent={2} composition="archive" title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} aside={<SummitDays opts={opts} />} />
+      <PageHero accent={2} composition="archive" title={g.title.text} intro={g.intro.text} opts={opts} notes={notes.slice(0, 1)} noMedia={summitDaysShown(opts)} />
+      <SummitDays opts={opts} />
       {photographed ? <Lagos2026Photographs opts={opts} notes={notes.slice(1)} /> : (
         <Section id="lagos-2026" ground="white" labelledBy="lagos-2026-title">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-12">
@@ -807,7 +868,6 @@ export function GalleryPage(props: PageProps) {
             </div>
             <div className="lg:col-span-8">
               <Plate slotId="highlights-2026" opts={opts} noteLight sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/7] w-full" tone={TONE.light}>
-                <span aria-hidden="true" className="absolute inset-4 border" style={{ borderColor: "rgba(160,128,72,.4)" }} />
               </Plate>
             </div>
           </div>

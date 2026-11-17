@@ -356,16 +356,34 @@
    "text": "Destination scenes"
   },
   {
+   "key": "layout.home.28b7d3a694",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A session on stage at HEBS Lagos 2026, NJS Royale Events Center"
+  },
+  {
    "key": "layout.home.4fc180f0f3",
    "scope": "home",
    "where": "alt",
    "text": "A session on stage at HEBS Lagos 2026, NJS Royale Events Center"
   },
   {
+   "key": "layout.home.c76860d6f1",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A speaker in front of the NJS crest at HEBS Lagos 2026"
+  },
+  {
    "key": "layout.home.ac42129e22",
    "scope": "home",
    "where": "alt",
    "text": "A speaker in front of the NJS crest at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.1a013cd0df",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A braider at work at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.737ad42d61",
@@ -398,10 +416,22 @@
    "text": "Play the film: The styling floor"
   },
   {
+   "key": "layout.home.d602667017",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A full session at HEBS Lagos 2026"
+  },
+  {
    "key": "layout.home.4199de24d9",
    "scope": "home",
    "where": "alt",
    "text": "A full session at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.19b3019530",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A wig and styling exhibitor's display at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.9ab373439c",
@@ -410,10 +440,22 @@
    "text": "A wig and styling exhibitor's display at HEBS Lagos 2026"
   },
   {
+   "key": "layout.home.349ed90eb0",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A stylist working on a client's braids at an exhibitor's stand at HEBS Lagos 2026"
+  },
+  {
    "key": "layout.home.b8e03144d5",
    "scope": "home",
    "where": "alt",
    "text": "A stylist working on a client's braids at an exhibitor's stand at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.a048ee2186",
+   "scope": "home",
+   "where": "alt",
+   "text": "Enlarge photograph: A skincare treatment on a client at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.d9e7d4ee08",
@@ -1352,22 +1394,16 @@
    "text": "On this page"
   },
   {
-   "key": "layout.travel.2280a45ade",
+   "key": "layout.travel.8379d05871",
    "scope": "travel",
    "where": "page",
-   "text": "The venue"
+   "text": "Your journey"
   },
   {
-   "key": "layout.travel.dd163c2804",
+   "key": "layout.travel.efe7e1865e",
    "scope": "travel",
    "where": "page",
-   "text": "Arriving in Lagos"
-  },
-  {
-   "key": "layout.travel.b2ca1cb457",
-   "scope": "travel",
-   "where": "page",
-   "text": "Accommodation"
+   "text": "HEBS at NJS"
   },
   {
    "key": "layout.travel.3e195025b9",
@@ -1382,22 +1418,46 @@
    "text": "Travel questions"
   },
   {
-   "key": "layout.travel.4be3e1f319",
+   "key": "layout.travel.40aff07beb",
    "scope": "travel",
    "where": "page",
-   "text": "The venue."
+   "text": "Your journey to HEBS Lagos 2027."
   },
   {
-   "key": "layout.travel.25297d1fbd",
+   "key": "layout.travel.4c7b47f47d",
    "scope": "travel",
    "where": "page",
-   "text": "Arriving in Lagos."
+   "text": "01 · Arrive in Lagos"
   },
   {
-   "key": "layout.travel.f126147a01",
+   "key": "layout.travel.7ae98aef6d",
    "scope": "travel",
    "where": "page",
-   "text": "Accommodation."
+   "text": "LOS"
+  },
+  {
+   "key": "layout.travel.c70abd1787",
+   "scope": "travel",
+   "where": "page",
+   "text": "02 · The resort"
+  },
+  {
+   "key": "layout.travel.9da33311f7",
+   "scope": "travel",
+   "where": "page",
+   "text": "NJS"
+  },
+  {
+   "key": "layout.travel.31b5730778",
+   "scope": "travel",
+   "where": "page",
+   "text": "03 · Accommodation"
+  },
+  {
+   "key": "layout.travel.ae768f766f",
+   "scope": "travel",
+   "where": "page",
+   "text": "Stay"
   },
   {
    "key": "layout.travel.3c8aa6694c",
@@ -1452,6 +1512,18 @@
    "scope": "travel",
    "where": "seo",
    "text": "Travel & accommodation | HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.gallery.85569b4316",
+   "scope": "gallery",
+   "where": "page",
+   "text": "The summit days"
+  },
+  {
+   "key": "layout.gallery.1b31fe7e13",
+   "scope": "gallery",
+   "where": "page",
+   "text": "24–25 October, Lagos"
   },
   {
    "key": "layout.gallery.b6d50d0706",
