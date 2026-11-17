@@ -175,6 +175,13 @@ function Destination() {
   );
 }
 
+/**
+ * The 2026 Champions block stays hidden until the winners and placings complete
+ * D8 verification (Gary, 17 Nov 2026). The records, review photographs and
+ * approval evidence are kept (lib/content/winners-2026.ts) for that review.
+ */
+const SHOW_WINNERS = false;
+
 function Winners() {
   const v = winnersView(deployEnvironment());
   if (!v.visible) return null;
@@ -280,7 +287,7 @@ function Competitions() {
           <div className="ph b"><Pic id="comp-trophy" className="grade" /></div>
         </div>
       </div>
-      <Winners />
+      {SHOW_WINNERS && <Winners />}
       <div className="mq" aria-label="The seven categories">
         <div className="tr">{ribbon}</div>
       </div>

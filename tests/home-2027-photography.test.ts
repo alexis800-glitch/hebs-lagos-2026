@@ -64,7 +64,15 @@ describe("House of Snapp homepage photographs", () => {
       expect(seen.get(frame), `${a.id} repeats ${seen.get(frame)} (${frame})`).toBeUndefined();
       seen.set(frame, a.id);
     }
-    expect(seen.size).toBeGreaterThan(35);
+    // Floor lowered from 35 when the 2026 Champions block was hidden pending D8 (17 Nov 2026).
+    expect(seen.size).toBeGreaterThan(30);
+  });
+
+  it("hides the 2026 Champions block and its photographs until D8 verification", () => {
+    const html = renderToStaticMarkup(createElement(PreferredHomepage));
+    expect(html).not.toMatch(/Champions of HEBS|as printed on the cheque|class="wn"/);
+    for (const a of REVIEW_ASSETS.filter((x) => x.id.startsWith("champ-"))) expect(html.includes(a.src), a.id).toBe(false);
+    expect(html).toContain("comp-main");
   });
 });
 

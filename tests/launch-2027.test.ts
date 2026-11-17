@@ -129,7 +129,8 @@ describe("image-usage authorisation", () => {
   it("knows every review photograph the homepage renders", () => {
     const html = renderToStaticMarkup(createElement(PreferredHomepage));
     const rendered = REVIEW_ASSETS.filter((a) => html.includes(a.src) || (a.poster && html.includes(a.poster))).map((a) => a.id);
-    expect(rendered.length).toBeGreaterThan(40);
+    // Floor lowered from 40 when the 2026 Champions block was hidden pending D8 (17 Nov 2026).
+    expect(rendered.length).toBeGreaterThan(34);
     for (const id of rendered) expect(REVIEW_MEDIA_BY_PAGE.home, id).toContain(id);
   });
 
