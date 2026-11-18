@@ -1412,16 +1412,16 @@
    "text": "Visit njsbeachresort.com"
   },
   {
-   "key": "layout.travel.7e439c353e",
-   "scope": "travel",
-   "where": "alt",
-   "text": "On this page"
-  },
-  {
-   "key": "layout.travel.17bd7673cf",
+   "key": "layout.travel.ae2649aace",
    "scope": "travel",
    "where": "page",
-   "text": "Arriving"
+   "text": "Your HEBS Lagos Experience"
+  },
+  {
+   "key": "layout.travel.72112f4fc2",
+   "scope": "travel",
+   "where": "page",
+   "text": "Beauty, creativity and connection on the Atlantic coast of Lagos."
   },
   {
    "key": "layout.travel.2280a45ade",
@@ -1436,94 +1436,40 @@
    "text": "Accommodation"
   },
   {
-   "key": "layout.travel.be3e4e4120",
-   "scope": "travel",
-   "where": "page",
-   "text": "Visas & questions"
-  },
-  {
-   "key": "layout.travel.d0ac585185",
-   "scope": "travel",
-   "where": "page",
-   "text": "HEBS Lagos 2027 · Your trip"
-  },
-  {
-   "key": "layout.travel.a814ef84f7",
-   "scope": "travel",
-   "where": "page",
-   "text": "Fly into"
-  },
-  {
-   "key": "layout.travel.7ae98aef6d",
-   "scope": "travel",
-   "where": "page",
-   "text": "LOS"
-  },
-  {
-   "key": "layout.travel.c0fd27ee64",
-   "scope": "travel",
-   "where": "page",
-   "text": "Stay and summit"
-  },
-  {
-   "key": "layout.travel.9da33311f7",
-   "scope": "travel",
-   "where": "page",
-   "text": "NJS"
-  },
-  {
-   "key": "layout.travel.10fca503b5",
-   "scope": "travel",
-   "where": "page",
-   "text": "Murtala Muhammed International Airport, Lagos"
-  },
-  {
-   "key": "layout.travel.1bd5fadc4d",
-   "scope": "travel",
-   "where": "page",
-   "text": "Friday July 23 Saturday July 24 Sunday July 25"
-  },
-  {
-   "key": "layout.travel.0e825f4e9b",
-   "scope": "travel",
-   "where": "page",
-   "text": "Your journey to HEBS Lagos 2027"
-  },
-  {
-   "key": "layout.travel.e13274341a",
-   "scope": "travel",
-   "where": "page",
-   "text": "01 · Arriving in Lagos"
-  },
-  {
-   "key": "layout.travel.d901db81b6",
-   "scope": "travel",
-   "where": "page",
-   "text": "02 · The venue"
-  },
-  {
-   "key": "layout.travel.31b5730778",
-   "scope": "travel",
-   "where": "page",
-   "text": "03 · Accommodation"
-  },
-  {
-   "key": "layout.travel.ae768f766f",
-   "scope": "travel",
-   "where": "page",
-   "text": "Stay"
-  },
-  {
    "key": "layout.travel.5b60881cc3",
    "scope": "travel",
    "where": "page",
    "text": "The venue · Lagos, Nigeria"
   },
   {
-   "key": "layout.travel.3c8aa6694c",
+   "key": "layout.travel.bbb69b22ff",
    "scope": "travel",
    "where": "page",
-   "text": "Visas."
+   "text": "Stay at the resort."
+  },
+  {
+   "key": "layout.travel.e372e27338",
+   "scope": "travel",
+   "where": "page",
+   "text": "Arrangements to be announced"
+  },
+  {
+   "key": "layout.travel.eaa90191d4",
+   "scope": "travel",
+   "where": "page",
+   "text": "Plan your visit."
+  },
+  {
+   "key": "layout.travel.dd163c2804",
+   "scope": "travel",
+   "where": "page",
+   "text": "Arriving in Lagos"
+  },
+  {
+   "key": "layout.travel.3e195025b9",
+   "scope": "travel",
+   "where": "page",
+   "text": "Visas"
   },
   {
    "key": "layout.travel.06ede1e5aa",
@@ -1532,10 +1478,10 @@
    "text": "Nigeria Immigration Service"
   },
   {
-   "key": "layout.travel.828b0a1639",
+   "key": "layout.travel.e2f352903d",
    "scope": "travel",
    "where": "page",
-   "text": "Travel questions."
+   "text": "Travel questions"
   },
   {
    "key": "layout.travel.29dc49cfc7",

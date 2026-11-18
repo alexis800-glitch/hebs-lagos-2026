@@ -23,7 +23,7 @@ import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { SlotImage } from "./media";
 import { DAY_PHOTOS, EXPERIENCE_PHOTOS, HERO_MEDIA } from "@/lib/site/page-media-2027";
-import { Button, Kicker } from "@/components/2027/site/ui";
+import { Button, Kicker, MetaLine } from "@/components/2027/site/ui";
 import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
 import { EXHIBITION, SUMMIT_DAYS, WATCH } from "@/lib/content/media-sections-2027";
 import { GalleryNav } from "./gallery-nav";
@@ -508,50 +508,32 @@ const NIS = { site: "https://immigration.gov.ng/", evisa: "https://evisa.immigra
 
 
 /**
- * Travel & accommodation (Lex, 18 Nov 2026): the destination carried by design, not
- * by event photography. No verified NJS resort or room photograph is on file, so none
- * is shown and nothing is implied about facilities; two images are requested from the
- * owner (TRAVEL_IMAGES_NEEDED). The 2026 summit at NJS appears only as a small,
- * labelled "last year" strip.
+ * Travel & accommodation (Lex, 18 Nov 2026; Option B, luxury magazine, approved by
+ * Gary for staging): the destination first, photograph-led, practical information
+ * second. Five reserved photograph positions show only an approved photograph
+ * registered under the position's id (lib/assets/home-2027-review.ts); none is
+ * approved yet, so the layout falls back to type. Nothing invented: no generated or
+ * concept image, no room type, view, price or package. The hero heading and line are
+ * new wording awaiting owner approval.
  */
-const TRAVEL_LAST_YEAR = ["gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
-/**
- * Reserved for the two verified NJS photographs (TRAVEL_IMAGES_NEEDED). Each shows only
- * once an asset with this id is registered (lib/assets/home-2027-review.ts) with its
- * approval and its file is present; until then nothing is shown in its place.
- */
-const TRAVEL_VENUE_PHOTO = "travel-venue";
-const TRAVEL_ROOM_PHOTO = "travel-room";
+const TRAVEL_SLOTS = {
+  "travel-coast": { need: "The Atlantic coast from the resort (terrace edge or beachfront), landscape" },
+  "travel-terrace": { need: "The resort terrace and façade, portrait" },
+  "travel-architecture": { need: "The resort's architecture or exterior, landscape" },
+  "travel-arrival": { need: "The arrival area, colonnade or entrance, portrait" },
+  "travel-room": { need: "An actual NJS guest room or suite (a scenic view only if verified)" },
+} as const;
+type TravelSlot = keyof typeof TRAVEL_SLOTS;
+export const TRAVEL_IMAGES_NEEDED = Object.values(TRAVEL_SLOTS).map((v) => v.need);
 const registered = (id: string) => REVIEW_ASSETS.some((a) => a.id === id);
-export const TRAVEL_IMAGES_NEEDED = [
-  "NJS Beach Resort: one verified photograph of the exterior or arrival (no guests as the subject), approved by NJS and the owner.",
-  "Accommodation: one verified photograph of an actual NJS room or suite, ideally ocean-facing, approved by NJS and the owner.",
-] as const;
+/** Whether an approved photograph is registered and available for this position here. */
+const hasTravelImage = (slot: TravelSlot, opts: Opts) => registered(slot) && reviewMedia(slot, opts.environment) !== null;
 
-/** The trip at a glance, like a travel pass: facts only (airport, venue, dates). */
-function TravelPass() {
-  const gold = { color: "#D9C192" };
+function TravelPhoto({ slot, opts, className, sizes }: { slot: TravelSlot; opts: Opts; className: string; sizes: string }) {
+  if (!hasTravelImage(slot, opts)) return null;
   return (
-    <div className="relative overflow-hidden rounded-[2px] p-7 lg:p-10" style={{ background: "linear-gradient(135deg, #1D170F 0%, #0D0B08 70%)", boxShadow: "inset 0 0 0 1px rgba(217,193,146,.35)" }}>
-      <p className="text-[11.5px] uppercase tracking-[.32em]" style={gold}>HEBS Lagos 2027 · Your trip</p>
-      <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-end gap-4">
-        <div>
-          <p className="text-[11px] uppercase tracking-[.24em]" style={{ color: "rgba(246,239,226,.6)" }}>Fly into</p>
-          <p style={{ ...display, fontWeight: 500, fontSize: "clamp(56px, 6vw, 92px)", lineHeight: 0.9, color: C.ivory }}>LOS</p>
-        </div>
-        <p aria-hidden="true" className="pb-3 text-[28px]" style={gold}>→</p>
-        <div className="text-right">
-          <p className="text-[11px] uppercase tracking-[.24em]" style={{ color: "rgba(246,239,226,.6)" }}>Stay and summit</p>
-          <p style={{ ...display, fontWeight: 500, fontSize: "clamp(56px, 6vw, 92px)", lineHeight: 0.9, ...gold }}>NJS</p>
-        </div>
-      </div>
-      <div className="mt-6 grid grid-cols-2 gap-4 border-t pt-5 text-[14px]" style={{ borderColor: "rgba(217,193,146,.28)", color: "rgba(246,239,226,.82)" }}>
-        <p>Murtala Muhammed International Airport, Lagos</p>
-        <p className="text-right"><span translate="no">{VENUE.name.value}</span>, {VENUE.locality}</p>
-      </div>
-      <div className="mt-5 flex flex-wrap justify-between gap-3 text-[12px] uppercase tracking-[.22em]" style={gold}>
-        {EDITION_DAYS.map((d) => <span key={d.isoDate}>{d.weekday} {d.shortDate}</span>)}
-      </div>
+    <div className={`relative overflow-hidden ${className}`}>
+      <Pic id={slot} className="absolute inset-0 h-full w-full object-cover" sizes={sizes} />
     </div>
   );
 }
@@ -562,111 +544,125 @@ export function TravelPage(props: PageProps) {
   const notes = [
     COPY_DRAFT,
     "Venue name provisional, address and directions withheld until confirmed (D9).",
-    `No room, package or availability is offered until approved. Images needed from the owner: ${TRAVEL_IMAGES_NEEDED.join(" ")}`,
+    `No room, package or availability is offered until approved. Photographs needed from the owner: ${TRAVEL_IMAGES_NEEDED.join("; ")}.`,
     "Visitor support contacts pending (D10).",
+    "New wording for approval: the heading \"Your HEBS Lagos Experience\" and the line \"Beauty, creativity and connection on the Atlantic coast of Lagos.\"",
   ];
-  const lastYear = TRAVEL_LAST_YEAR.filter((id) => reviewMedia(id, opts.environment));
-  const venuePhoto = registered(TRAVEL_VENUE_PHOTO) ? reviewMedia(TRAVEL_VENUE_PHOTO, opts.environment) : null;
-  const roomPhoto = registered(TRAVEL_ROOM_PHOTO) ? reviewMedia(TRAVEL_ROOM_PHOTO, opts.environment) : null;
-  const gold = "#8C6B34";
+  const has = (slot: TravelSlot) => hasTravelImage(slot, opts);
+  const ivoryText = "rgba(246,239,226,.84)";
+  const gold = "#D9C192";
+  const heroTitle = "Your HEBS Lagos Experience";
+  const heroLine = "Beauty, creativity and connection on the Atlantic coast of Lagos.";
+  /* ── Hero ── */
+  const hero = (
+    <section aria-labelledby="page-title" style={{ background: C.ivory, color: C.black }}>
+      <div id="main-content" className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-12 lg:py-20">
+        <div className={has("travel-terrace") ? "lg:col-span-6" : "lg:col-span-9"}>
+          <Kicker tone="light">{t.title.text}</Kicker>
+          <h1 id="page-title" className="mt-5 max-w-[13ch]" style={{ ...display, fontWeight: 500, fontSize: "clamp(46px, 6vw, 100px)", lineHeight: 0.98 }}>{heroTitle}</h1>
+          <p className="mt-6 max-w-[38ch] text-[18px] leading-[1.6] lg:text-[20px]" style={{ color: C.body }}>{heroLine}</p>
+          <MetaLine className="mt-7" style={{ color: "#5E5034" }} />
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button href="#venue" variant="primary" tone="light">The venue</Button>
+            <Button href="#stay" variant="outline" tone="light">Accommodation</Button>
+          </div>
+          <SectionNotes notes={[notes[0], notes[4]]} opts={opts} ground="ivory" className="mt-8" />
+        </div>
+        {has("travel-terrace") ? (
+          <div className="relative lg:col-span-6">
+            <TravelPhoto slot="travel-terrace" opts={opts} className="aspect-[4/5] w-full lg:w-[86%]" sizes="(min-width: 1024px) 42vw, 100vw" />
+            {has("travel-arrival") ? <div className="absolute -bottom-8 right-0 hidden w-[42%] shadow-[0_30px_60px_-24px_rgba(40,26,10,.55)] lg:block" style={{ border: `8px solid ${C.ivory}` }}><TravelPhoto slot="travel-arrival" opts={opts} className="aspect-[4/5] w-full" sizes="260px" /></div> : null}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+
+  /* ── The venue ── */
+  const venueText = (
+    <>
+      <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: gold }}>The venue · {VENUE.locality}</p>
+      <h2 id="venue-title" className="mt-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(40px, 4.6vw, 76px)", lineHeight: 1, color: C.ivory }}><span translate="no">{VENUE.name.value}</span></h2>
+      <p id="resort" className="mt-6 max-w-[44ch] scroll-mt-28 text-[17px] leading-[1.65]" style={{ color: ivoryText }}>{t.venue.text}</p>
+      <p className="mt-3 max-w-[44ch] text-[14px] leading-[1.6]" style={{ color: "rgba(246,239,226,.6)" }}>{t.directions.text}</p>
+      <div className="mt-8"><Button href={VENUE.website} variant="ghost" tone="dark" external>Visit njsbeachresort.com</Button></div>
+    </>
+  );
+  const venue = (
+    <Section id="venue" ground="black" labelledBy="venue-title" innerClassName="lg:py-24">
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-5 lg:pt-6">{venueText}</div>
+        {has("travel-coast") ? (
+          <div className="grid gap-4 lg:col-span-7">
+            <TravelPhoto slot="travel-coast" opts={opts} className="aspect-[16/10] w-full" sizes="(min-width: 1024px) 56vw, 100vw" />
+            {has("travel-architecture") ? <TravelPhoto slot="travel-architecture" opts={opts} className="aspect-[16/10] w-[70%] justify-self-end" sizes="(min-width: 1024px) 40vw, 70vw" /> : null}
+          </div>
+        ) : null}
+      </div>
+    </Section>
+  );
+
+  /* ── Accommodation ── */
+  const room = has("travel-room");
+  const accommodation = (
+    <Section id="stay" ground="ivory" labelledBy="stay-title" innerClassName="lg:py-24">
+      <div className={`grid gap-10 lg:items-center lg:gap-14 ${room ? "lg:grid-cols-12" : ""}`}>
+        {room ? <div className="lg:col-span-7"><TravelPhoto slot="travel-room" opts={opts} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 56vw, 100vw" /></div> : null}
+        <div className={room ? "lg:col-span-5" : "max-w-[820px]"}>
+          <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: "#8C6B34" }}>Accommodation</p>
+          <h2 id="stay-title" className="mt-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(36px, 4vw, 64px)", lineHeight: 1.02 }}>Stay at the resort.</h2>
+          <p className="mt-6 text-[18px] leading-[1.65]" style={{ color: C.black }}>{t.accommodation.text}</p>
+          <p className="mt-6"><span className="inline-block rounded-full border px-4 py-1.5 text-[11.5px] uppercase tracking-[.18em]" style={{ borderColor: "rgba(140,107,52,.55)", color: "#8C6B34" }}>Arrangements to be announced</span></p>
+          <SectionNotes notes={notes.slice(2, 3)} opts={opts} ground="ivory" className="mt-6" />
+        </div>
+      </div>
+    </Section>
+  );
+
+  /* ── Plan your visit (practical, secondary) ── */
+  const plan = (
+    <Section id="journey" ground="white" labelledBy="plan-title" innerClassName="lg:py-20">
+      <h2 id="plan-title" style={h2Style}>Plan your visit.</h2>
+      <div className="mt-10 grid gap-10 lg:grid-cols-3 lg:gap-12">
+        <article id="arriving" className="scroll-mt-28">
+          <h3 style={{ ...display, fontWeight: 500, fontSize: "26px", lineHeight: 1.15 }}>Arriving in Lagos</h3>
+          <p className="mt-3 text-[16px] leading-[1.65]" style={{ color: C.black }}>{t.arrival.text}</p>
+          <p className="mt-2 text-[14px] leading-[1.6]" style={{ color: C.body }}>{t.airport.text}</p>
+        </article>
+        <article id="visas" className="scroll-mt-28">
+          <h3 id="visas-title" style={{ ...display, fontWeight: 500, fontSize: "26px", lineHeight: 1.15 }}>Visas</h3>
+          <p className="mt-3 text-[16px] leading-[1.65]" style={{ color: C.black }}>{t.visas.text}</p>
+          <ul className="mt-5 flex flex-wrap gap-3">
+            <li><Button href={NIS.site} variant="outline" tone="light" external>Nigeria Immigration Service</Button></li>
+            <li><Button href={NIS.evisa} variant="outline" tone="light" external>Official e-Visa portal</Button></li>
+          </ul>
+        </article>
+        <div id="faq" className="scroll-mt-28">
+          <h3 id="faq-title" style={{ ...display, fontWeight: 500, fontSize: "26px", lineHeight: 1.15 }}>Travel questions</h3>
+          <div className="mt-2">
+            {t.faqs.map((f) => (
+              <details key={f.q} className="group border-b" style={{ borderColor: "rgba(0,0,0,.12)" }}>
+                <summary className="flex min-h-[52px] cursor-pointer list-none items-center justify-between gap-4 py-3 text-[16px] font-medium [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <span aria-hidden="true" className="shrink-0 text-[22px] leading-none transition-transform duration-200 group-open:rotate-45" style={{ color: "#8C6B34" }}>+</span>
+                </summary>
+                <p className="pb-4 text-[15px] leading-[1.65]" style={{ color: C.body }}>{f.a.text}</p>
+              </details>
+            ))}
+            <p className="mt-4 text-[14px]" style={{ color: C.body }}>{t.support.text}</p>
+          </div>
+        </div>
+      </div>
+      <SectionNotes notes={[notes[1], notes[3]]} opts={opts} ground="white" className="mt-8" />
+    </Section>
+  );
+
   return (
     <Shell page="travel" opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
-      <PageHero accent={1} title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)} aside={<TravelPass />}>
-        <PageContents items={[
-          { href: "#arriving", label: "Arriving" }, { href: "#venue", label: "The venue" },
-          { href: "#stay", label: "Accommodation" }, { href: "#visas", label: "Visas & questions" },
-        ]} />
-      </PageHero>
-      {/* Arriving · The venue · Accommodation: one bold band, three chapters. */}
-      <Section id="journey" ground="ivory" labelledBy="journey-title" innerClassName="lg:py-24">
-        <h2 id="journey-title" className="sr-only">Your journey to HEBS Lagos 2027</h2>
-        <div className="grid gap-px overflow-hidden lg:grid-cols-3" style={{ background: "rgba(140,107,52,.25)" }}>
-          {[
-            { id: "arriving", n: "01", label: "Arriving in Lagos", word: "LOS", text: t.arrival.text, later: t.airport.text },
-            { id: "resort", n: "02", label: "The venue", word: "NJS", text: t.venue.text, later: t.directions.text },
-            { id: "stay", n: "03", label: "Accommodation", word: "Stay", text: t.accommodation.text, later: "" },
-          ].map((st) => (
-            <article key={st.id} id={st.id} className="flex scroll-mt-28 flex-col p-8 lg:p-12" style={{ background: C.ivory }}>
-              <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: gold }}>{st.n} · {st.label}</p>
-              <p aria-hidden="true" className="mt-5" style={{ ...display, fontWeight: 500, fontSize: "clamp(72px, 7.2vw, 120px)", lineHeight: 0.9, color: gold }}>{st.word}</p>
-              <p className="mt-7 text-[18px] leading-[1.6]" style={{ color: C.black }}>{st.text}</p>
-              {st.later ? <p className="mt-3 text-[14px] leading-[1.6]" style={{ color: C.body }}>{st.later}</p> : null}
-              {st.id === "stay" && roomPhoto ? (
-                <div className="relative mt-7 aspect-[4/3] overflow-hidden">
-                  <Pic id={TRAVEL_ROOM_PHOTO} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
-                </div>
-              ) : null}
-            </article>
-          ))}
-        </div>
-        <SectionNotes notes={notes.slice(1, 3)} opts={opts} ground="ivory" className="mt-8" />
-      </Section>
-      {/* The venue: the destination in type, with the official site; last year's summit at NJS as a small labelled strip. */}
-      <Section id="venue" ground="black" labelledBy="venue-title" innerClassName="lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-12">
-          <div className="lg:col-span-7">
-            <p className="text-[12px] uppercase tracking-[.32em]" style={{ color: "#D9C192" }}>The venue · {VENUE.locality}</p>
-            <h2 id="venue-title" className="mt-5" style={{ ...display, fontWeight: 500, fontSize: "clamp(48px, 6.4vw, 104px)", lineHeight: 0.95, color: C.ivory }}>
-              <span translate="no">{VENUE.name.value}</span>
-            </h2>
-            <div className="mt-9"><Button href={VENUE.website} variant="ghost" tone="dark" external>Visit njsbeachresort.com</Button></div>
-          </div>
-          {venuePhoto ? (
-            <div className="lg:col-span-12 lg:row-start-2">
-              <div className="relative aspect-[16/9] overflow-hidden lg:aspect-[21/9]">
-                <Pic id={TRAVEL_VENUE_PHOTO} className="absolute inset-0 h-full w-full object-cover" sizes="100vw" />
-              </div>
-            </div>
-          ) : null}
-          {lastYear.length === TRAVEL_LAST_YEAR.length ? (
-            <div className="lg:col-span-5">
-              <p className="text-[12px] uppercase tracking-[.26em]" style={{ color: "rgba(246,239,226,.66)" }}>Last year at NJS · HEBS Lagos 2026</p>
-              <LightboxGroup items={viewerItems(lastYear, opts)} label="HEBS Lagos 2026 at NJS">
-                <ul className="mt-4 grid grid-cols-3 gap-1.5">
-                  {lastYear.map((id, j) => (
-                    <li key={id} className="relative aspect-[3/4] overflow-hidden">
-                      <LightboxTrigger index={j} label={findReviewAsset(id).alt}>
-                        <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 180px, 33vw" />
-                      </LightboxTrigger>
-                    </li>
-                  ))}
-                </ul>
-              </LightboxGroup>
-              <p className="mt-3 text-[13px]" style={{ color: "rgba(246,239,226,.6)" }}>The summit halls during HEBS Lagos 2026, not the resort&apos;s rooms or facilities.</p>
-            </div>
-          ) : null}
-        </div>
-      </Section>
-      {/* Visas and travel questions, together. */}
-      <Section id="visas" ground="white" labelledBy="visas-title" innerClassName="lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
-            <h2 id="visas-title" style={h2Style}>Visas.</h2>
-            <p className="mt-6 text-[17px] leading-[1.7]" style={{ color: C.body }}>{t.visas.text}</p>
-            <ul className="mt-7 flex flex-col gap-3">
-              <li><Button href={NIS.site} variant="outline" tone="light" external>Nigeria Immigration Service</Button></li>
-              <li><Button href={NIS.evisa} variant="outline" tone="light" external>Official e-Visa portal</Button></li>
-            </ul>
-          </div>
-          <div id="faq" className="scroll-mt-28 lg:col-span-6 lg:col-start-7">
-            <h2 id="faq-title" style={h2Style}>Travel questions.</h2>
-            <div className="mt-6">
-              {t.faqs.map((f) => (
-                <details key={f.q} className="group border-b" style={{ borderColor: "rgba(0,0,0,.14)" }}>
-                  <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-6 py-4 [&::-webkit-details-marker]:hidden"
-                    style={{ ...display, fontWeight: 500, fontSize: "clamp(19px, 1.8vw, 24px)", lineHeight: 1.2 }}>
-                    {f.q}
-                    <span aria-hidden="true" className="shrink-0 text-[26px] leading-none transition-transform duration-200 group-open:rotate-45" style={{ color: gold }}>+</span>
-                  </summary>
-                  <p className="max-w-[56ch] pb-5 text-[16px] leading-[1.7]" style={{ color: C.body }}>{f.a.text}</p>
-                </details>
-              ))}
-              <p className="mt-6 text-[14.5px]" style={{ color: C.body }}>{t.support.text}</p>
-            </div>
-          </div>
-        </div>
-        <SectionNotes notes={notes.slice(3)} opts={opts} ground="white" className="mt-6" />
-      </Section>
+      {hero}
+      {venue}
+      {accommodation}
+      {plan}
       <FinalCta to={TARGETS} />
     </Shell>
   );
