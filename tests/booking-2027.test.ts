@@ -11,7 +11,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import {
-  BOOKING_PATHS, COMPETITION_CODES, COMPETITION_CODE_PARAM, STAGING_DATA_ENV, bookingLink, competitionCodeProblems, stagingOriginRefusal, stagingPortalOrigin,
+  BOOKING_PATHS, COMPETITION_CODES, COMPETITION_CODE_PARAM, CONTRACT_COMPETITION_CODES, STAGING_DATA_ENV, bookingLink, competitionCodeProblems, stagingOriginRefusal, stagingPortalOrigin,
 } from "../lib/integrations/booking-2027";
 import { PRIVATE_TEST } from "../lib/forms-2027/private-test.mjs";
 import { COMPETITIONS, REGISTRATION_URL } from "../lib/competitions";
@@ -23,6 +23,8 @@ const ORIGIN = "https://hebs-test-copy.example.test";
 const STAGING = { VERCEL_ENV: "preview", VERCEL_GIT_COMMIT_REF: PRIVATE_TEST.branch, HEBS_STAGING_PORTAL_ORIGIN: ORIGIN };
 // Synthetic codes for the test only (no real code starts with X); the real 13 come from booking contract v1.0.
 const FIXTURE = { codes: Object.fromEntries(COMPETITIONS.map((c, i) => [c.slug, `XA${String.fromCharCode(65 + i)}`])), param: "test_code" };
+// Links use the table passed in, but only ever a contract code: the 13 v1.0 codes, rotated one place.
+const LINK_FIXTURE = { codes: Object.fromEntries(COMPETITIONS.map((c, i) => [c.slug, CONTRACT_COMPETITION_CODES[(i + 1) % CONTRACT_COMPETITION_CODES.length]])), param: "test_code" };
 const DEV = `${STAGING_DATA_ENV.param}=${STAGING_DATA_ENV.value}`;
 // Public extract of booking contract v1.0 (codes and exact names only), committed.
 const FIXTURE_FILE = join(ROOT, "tests/fixtures/booking-contract-v1.0-competitions.json");
@@ -51,7 +53,8 @@ describe("booking destinations", () => {
 
   it("send each competition's code to /2027/compete, and nothing without one", () => {
     for (const c of COMPETITIONS) {
-      expect(bookingLink("compete", c.slug, STAGING, FIXTURE)).toBe(`${ORIGIN}/2027/compete?test_code=${FIXTURE.codes[c.slug]}&${DEV}`);
+      expect(bookingLink("compete", c.slug, STAGING, LINK_FIXTURE)).toBe(`${ORIGIN}/2027/compete?test_code=${LINK_FIXTURE.codes[c.slug]}&${DEV}`);
+      expect(bookingLink("compete", c.slug, STAGING, FIXTURE), "a code outside the contract is never sent").toBeNull();
     }
     expect(bookingLink("compete", undefined, STAGING, FIXTURE)).toBeNull();
     expect(bookingLink("compete", "not-a-competition", STAGING, FIXTURE)).toBeNull();

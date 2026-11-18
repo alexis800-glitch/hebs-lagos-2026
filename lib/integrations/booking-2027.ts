@@ -63,6 +63,15 @@ export const COMPETITION_CODES: Readonly<Record<string, string>> = {
   "loc-retwist-and-style": "LRS",
 };
 
+/**
+ * The only competition codes the portal accepts: booking contract v1.0, confirmed
+ * unchanged for the 2027 production candidate by Claude Desktop (18 Nov 2026). A
+ * code outside this list is never put on a link, whatever table is passed in.
+ */
+export const CONTRACT_COMPETITION_CODES: readonly string[] = [
+  "BOF", "FDB", "FFR", "FFB", "FBA", "TBC", "FLF", "MKP", "LSH", "NAL", "FRW", "TOC", "LRS",
+];
+
 /** The query parameter the portal reads the competition code from (booking contract v1.0, section 2). */
 export const COMPETITION_CODE_PARAM: string | null = "category";
 
@@ -113,7 +122,10 @@ export function stagingPortalOrigin(env: Env = runtimeEnv()): string | null {
  */
 export const PRODUCTION_PORTAL: Gated<string> = {
   status: "awaiting-confirmation",
-  note: "2027 production portal origin to be confirmed after joint website and portal acceptance.",
+  // Paths, codes and live-data isolation confirmed by Claude Desktop (18 Nov 2026). The
+  // public domain is proposed but not yet connected or approved, so no origin is set
+  // here and every production link fails closed.
+  note: "2027 production portal domain not yet connected or approved; paths and codes confirmed 18 Nov 2026.",
 };
 
 /**
@@ -124,6 +136,23 @@ export const PRODUCTION_PORTAL: Gated<string> = {
  * production that is https://www.hebslagos.com.
  */
 export const PORTAL_RETURN_ORIGIN = /^https:\/\/((www\.)?hebslagos\.com|hebs-lagos-2026-[a-z0-9]+-veridion-systems-projects\.vercel\.app)$/;
+
+/** The only return origins a production deployment sends: the public domain, with or without www. */
+export const PUBLIC_RETURN_ORIGIN = /^https:\/\/(www\.)?hebslagos\.com$/;
+
+/**
+ * Which website origins may be sent as `site` on production booking links, as a
+ * pattern source for the browser (PortalReturn), or undefined when production links
+ * are not in use (staging links keep their existing behaviour unchanged).
+ *   - production: hebslagos.com and www.hebslagos.com only, so a visitor on a
+ *     *.vercel.app host never sends it after public launch;
+ *   - the launch PR's protected Preview: also the deployment's own host, for joint
+ *     acceptance testing only.
+ */
+export function portalReturnRule(env: Env = runtimeEnv(), p: ProductionPortal = PRODUCTION): string | undefined {
+  if (stagingPortalOrigin(env) || !productionPortalOrigin(env, p)) return undefined;
+  return (env.VERCEL_ENV === "production" ? PUBLIC_RETURN_ORIGIN : PORTAL_RETURN_ORIGIN).source;
+}
 
 /** Hosts a production booking link may point at. Empty until the production portal is accepted. */
 export const PRODUCTION_PORTAL_HOSTS: readonly string[] = [];
@@ -186,8 +215,9 @@ export function bookingLink(
   if (!staging && journey === "tickets" && !(production.ticketSales.prices && production.ticketSales.payment)) return null;
   const url = new URL(BOOKING_PATHS[journey], origin);
   if (journey === "compete") {
-    const code = competitionSlug ? contract.codes[competitionSlug] : undefined;
-    if (!code || !contract.param) return null;
+    // Own keys only (never an inherited property such as "constructor"), and only a contract code.
+    const code = competitionSlug && Object.prototype.hasOwnProperty.call(contract.codes, competitionSlug) ? contract.codes[competitionSlug] : undefined;
+    if (typeof code !== "string" || !CONTRACT_COMPETITION_CODES.includes(code) || !contract.param) return null;
     url.searchParams.set(contract.param, code);
   }
   // The copy's test dataset, on staging links only. Production links never carry it.

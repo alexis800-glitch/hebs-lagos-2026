@@ -23,10 +23,14 @@ export function siteOrigin(raw: string): string | null {
   return u.origin;
 }
 
-/** `link` with `site=<origin>` added, or `link` unchanged when the origin is not valid (fails safe). */
-export function withSite(link: string, origin: string): string {
+/**
+ * `link` with `site=<origin>` added, or `link` unchanged when the origin is not valid
+ * or, given `allow` (a pattern source), does not match it (fails safe).
+ */
+export function withSite(link: string, origin: string, allow?: string): string {
   const o = siteOrigin(origin);
   if (!o) return link;
+  if (allow !== undefined && !new RegExp(allow).test(o)) return link;
   let u: URL;
   try {
     u = new URL(link);
