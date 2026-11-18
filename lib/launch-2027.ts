@@ -55,8 +55,10 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
   for (const [page, id] of Object.entries(HERO_MEDIA) as [PageId, string][]) out[page] = [...(out[page] ?? []), id];
   // The 2026 exhibition floor on the Sponsorship page (EXHIBITION.page).
   out.sponsorship = [...(out.sponsorship ?? []), ...EXHIBITION.page];
-  // The Travel page: HEBS Lagos 2026 at NJS (components/2027/editorial/inner.tsx).
-  out.travel = [...(out.travel ?? []), "gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
+  // The Travel page (Option B): its five reserved photograph positions, which render only
+  // approved, registered assets (components/2027/editorial/inner.tsx, TRAVEL_SLOTS). None is
+  // registered yet; each one counts here from the day it is.
+  out.travel = [...(out.travel ?? []), "travel-terrace", "travel-arrival", "travel-coast", "travel-architecture", "travel-room"];
   return out;
 })();
 

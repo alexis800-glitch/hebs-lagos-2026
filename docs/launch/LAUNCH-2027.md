@@ -101,6 +101,26 @@ The GitHub repository is public, so prepared media must not be committed before 
 5. On production: open each launched page, the sitemap and the social card;
    confirm the 2026 pages are unchanged.
 
+## 3a. Production booking links
+
+Booking is a plain link to the 2027 production portal, never a transaction on
+this website. `bookingLink()` in `lib/integrations/booking-2027.ts` builds the
+same three journeys as staging, with no test dataset:
+
+- `<portal>/2027/tickets`, shown only when `TICKET_SALES` records approved prices and payment;
+- `<portal>/2027/compete?category=<CODE>`, one per competition (booking contract v1.0 codes);
+- `<portal>/2027/booking`.
+
+Each link also gets `site=https://www.hebslagos.com`, added in the browser, for
+the portal's Back to website. The links stay closed until a reviewed commit sets
+`PRODUCTION_PORTAL` to `approved` and lists its host in
+`PRODUCTION_PORTAL_HOSTS`. Make that commit only after the production portal
+passes acceptance together with this website, on the launch PR's protected
+preview (production links are honoured on every Preview except the private test
+branch, which keeps the staging copy). Production links can never carry
+`base44_data_env`, a Base44 preview host, the test copy's app id, a preview
+token or credentials (`tests/booking-production-2027.test.ts`).
+
 ## 4. Rollback
 
 Use the fastest step that fixes the problem; all three restore the

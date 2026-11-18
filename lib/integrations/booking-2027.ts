@@ -17,7 +17,9 @@
  * test branch). It is honoured only on a Preview of the private test branch
  * (PRIVATE_TEST.branch); everywhere else, production included, every booking
  * link stays closed and the pages say "Opens soon". The live portal is refused.
- * Production booking links are a separate, later decision (not configured here).
+ * Production booking links follow the same contract without the test dataset
+ * (PRODUCTION_PORTAL below). They stay closed until the 2027 production portal
+ * passes acceptance with this website and its origin is approved.
  *
  * Every link also carries base44_data_env=dev, so the copy serves its test
  * dataset (booking open, sandbox payments) rather than its main data.
@@ -29,6 +31,8 @@
  * preview token is ever added: the tester's browser holds its own.
  */
 import { PRIVATE_TEST } from "../forms-2027/private-test.mjs";
+import type { Gated } from "../publication";
+import { TICKET_SALES } from "./registration-2027";
 // The return link: the website's own origin, added in the browser (portal-site.ts, PortalReturn).
 export { SITE_PARAM, siteOrigin, withSite } from "./portal-site";
 import { COMPETITIONS } from "../competitions";
@@ -98,6 +102,59 @@ export function stagingPortalOrigin(env: Env = runtimeEnv()): string | null {
   return stagingOriginRefusal(env) ? null : new URL(env.HEBS_STAGING_PORTAL_ORIGIN!).origin;
 }
 
+/**
+ * The 2027 production portal: the same three journeys (tickets, compete, booking)
+ * with no test dataset, no sandbox and no preview token. Closed until BOTH:
+ *   - Claude Desktop's production portal passes acceptance together with this
+ *     website, and the owner approves its origin (status "approved");
+ *   - its host is listed in PRODUCTION_PORTAL_HOSTS.
+ * Setting them is a reviewed commit, never an environment variable, so a stray
+ * setting cannot open real bookings.
+ */
+export const PRODUCTION_PORTAL: Gated<string> = {
+  status: "awaiting-confirmation",
+  note: "2027 production portal origin to be confirmed after joint website and portal acceptance.",
+};
+
+/** Hosts a production booking link may point at. Empty until the production portal is accepted. */
+export const PRODUCTION_PORTAL_HOSTS: readonly string[] = [];
+
+export interface ProductionPortal {
+  portal: Gated<string>;
+  hosts: readonly string[];
+  /** Ticket sales need approved prices and an approved payment gateway (registration-2027.ts). */
+  ticketSales: { prices: boolean; payment: boolean };
+}
+
+const PRODUCTION: ProductionPortal = { portal: PRODUCTION_PORTAL, hosts: PRODUCTION_PORTAL_HOSTS, ticketSales: TICKET_SALES };
+
+/** Why the production portal origin is not used, or null when it is. */
+export function productionOriginRefusal(env: Env = runtimeEnv(), p: ProductionPortal = PRODUCTION): string | null {
+  // Production, or a Preview of any branch except the private test branch (the launch PR's
+  // preview, where the website and the production portal are accepted together). Never the
+  // client design preview, never development.
+  if (env.HEBS_CLIENT_PREVIEW === "on") return "the client design preview never links to the portal";
+  if (env.VERCEL_ENV !== "production" && env.VERCEL_ENV !== "preview") return "production booking links run only on Vercel deployments";
+  if (env.VERCEL_ENV === "preview" && env.VERCEL_GIT_COMMIT_REF === PRIVATE_TEST.branch) return "the private test branch uses the staging portal";
+  if (p.portal.status !== "approved") return "the 2027 production portal is not approved";
+  let u: URL;
+  try {
+    u = new URL(p.portal.value);
+  } catch {
+    return "the production portal origin is not a URL";
+  }
+  if (u.protocol !== "https:") return "the portal origin must be https";
+  if (u.username || u.password || u.search || u.hash || (u.pathname !== "/" && u.pathname !== "")) return "the portal origin must be an origin only";
+  if (!p.hosts.includes(u.hostname)) return "the production portal host is not listed";
+  if (u.hostname.startsWith("preview--") || p.portal.value.includes(PRIVATE_TEST.appId)) return "a test copy or Base44 preview is never the production portal";
+  return null;
+}
+
+/** The approved production portal origin, or null. */
+export function productionPortalOrigin(env: Env = runtimeEnv(), p: ProductionPortal = PRODUCTION): string | null {
+  return productionOriginRefusal(env, p) || p.portal.status !== "approved" ? null : new URL(p.portal.value).origin;
+}
+
 export interface BookingContractValues {
   codes: Readonly<Record<string, string>>;
   param: string | null;
@@ -109,16 +166,21 @@ export function bookingLink(
   competitionSlug?: string,
   env: Env = runtimeEnv(),
   contract: BookingContractValues = { codes: COMPETITION_CODES, param: COMPETITION_CODE_PARAM },
+  production: ProductionPortal = PRODUCTION,
 ): string | null {
-  const origin = stagingPortalOrigin(env);
+  const staging = stagingPortalOrigin(env);
+  const origin = staging ?? productionPortalOrigin(env, production);
   if (!origin) return null;
+  // Production sells tickets only once prices and the payment gateway are approved.
+  if (!staging && journey === "tickets" && !(production.ticketSales.prices && production.ticketSales.payment)) return null;
   const url = new URL(BOOKING_PATHS[journey], origin);
   if (journey === "compete") {
     const code = competitionSlug ? contract.codes[competitionSlug] : undefined;
     if (!code || !contract.param) return null;
     url.searchParams.set(contract.param, code);
   }
-  url.searchParams.set(STAGING_DATA_ENV.param, STAGING_DATA_ENV.value);
+  // The copy's test dataset, on staging links only. Production links never carry it.
+  if (staging) url.searchParams.set(STAGING_DATA_ENV.param, STAGING_DATA_ENV.value);
   return url.toString();
 }
 

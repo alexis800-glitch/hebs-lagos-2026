@@ -310,8 +310,8 @@ export function CompetitionsPage(props: PageProps) {
   const pathways = COPY.competitions.pathways.map((label, i) => ({ href: `#${COMPETITION_ANCHORS[i]}`, label }));
   return (
     <Shell page="competitions" opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
-      {/* Staging only: booking links carry the website's own origin back to the portal. */}
-      {bookingLink("tickets") ? <PortalReturn /> : null}
+      {/* Booking links (staging, or the approved production portal) carry the website's own origin back to the portal. */}
+      {bookingLink("booking") ? <PortalReturn /> : null}
       <PageHero accent={2} media={HERO_MEDIA.competitions} title={sentenceCase(COPY.competitions.headline.text)} intro={PAGES.competitions.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={pathways} />
       </PageHero>
@@ -329,7 +329,7 @@ export function CompetitionsPage(props: PageProps) {
                 <h3 className="lg:col-span-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 36px)", lineHeight: 1.1 }}>{cat.name}</h3>
                 <ul className="grid gap-x-10 gap-y-2 sm:grid-cols-2 lg:col-span-8">
                   {list.map((c) => {
-                    // Staging only: registration on the test copy, with the competition's contract code.
+                    // Registration on the portal (staging copy, or the approved production portal), by contract code.
                     const register = bookingLink("compete", c.slug);
                     return (
                       <li key={c.slug} className="text-[17px] leading-snug">
@@ -679,8 +679,8 @@ export function TicketsPage(props: PageProps) {
   const notes = [COPY_DRAFT, "Ticket categories, prices and payment gateway are approved separately (directive section 6). Payment collection is not authorised."];
   return (
     <Shell page="tickets" opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
-      {/* Staging only: booking links carry the website's own origin back to the portal. */}
-      {bookingLink("tickets") ? <PortalReturn /> : null}
+      {/* Booking links (staging, or the approved production portal) carry the website's own origin back to the portal. */}
+      {bookingLink("booking") ? <PortalReturn /> : null}
       <PageHero accent={1} composition="dates" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button href={PRIORITY_HREF} className="mt-8">{PRIORITY_CTA}</Button>
