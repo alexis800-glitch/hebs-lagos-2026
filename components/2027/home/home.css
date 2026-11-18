@@ -405,7 +405,7 @@ body:has(.hp-wrap) [data-preview-banner]{display:none}
   .hp .nav .logo{width:84px}
   .hp .nav .links,.hp .nav .pill{display:none}
   .hp .menu{display:block;border:1px solid rgba(246,239,226,.55);border-radius:999px;padding:8px 14px;font-size:10.5px;letter-spacing:.16em}
-  .hp .live{left:22px;right:auto;top:96px;font-size:10.5px}
+  .hp .live{left:22px;right:80px;top:96px;font-size:10.5px}
   .hp .hcol{left:22px;right:22px;top:auto;bottom:34px;width:auto}
   .hp .hcol h1{font-size:50px;margin-top:10px}
   .hp .hcol .kick{font-size:11px;letter-spacing:.3em}
