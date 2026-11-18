@@ -89,8 +89,9 @@ describe("Education & Masterclasses photographs", () => {
     for (const id of EIGHT) expect(html.split(`src="${findReviewAsset(id).src}"`).length - 1, id).toBe(1);
     const frames = EIGHT.map((id) => findReviewAsset(id).source.match(FRAME)?.[0]);
     expect(new Set(frames).size).toBe(8);
-    expect(html).toContain("for internal review only");
-    expect(html).toContain(">HEBS Lagos 2026</figcaption>");
+    // Redesign of 18 Nov 2026: each learning track carries its photograph; one credit line for them.
+    expect(html).toContain("Photographed at HEBS Lagos 2026.");
+    expect(html).toContain("Sessions announced once confirmed");
     expect(html).toContain("2027 speakers will be announced once confirmed.");
     expect(html).toContain("The 2027 programme is planned around five areas of learning.");
     expect(html).not.toMatch(/built around five areas|being demonstrated/);
@@ -102,14 +103,15 @@ describe("Education & Masterclasses photographs", () => {
     expect(findReviewAsset("sp-hall").source).toMatch(/no child is in frame/);
   });
 
-  it("keeps the reserved plate and no photographs anywhere else", () => {
+  it("shows no photograph where review media may not render, and keeps the page's structure", () => {
     // Production refuses the page outright until launch (lib/launch-2027.ts).
     expect(() => renderToStaticMarkup(createElement(EducationPage, { environment: "production" }))).toThrow(/NEXT_NOT_FOUND/);
     for (const environment of ["preview"] as const) {
       const html = renderToStaticMarkup(createElement(EducationPage, { environment }));
       for (const id of EIGHT) expect(html, `${environment} ${id}`).not.toContain(findReviewAsset(id).src.replace(/\.webp$/, ""));
       expect(html, environment).not.toContain('id="photographs"');
-      expect(html, environment).toContain('data-media-slot="education"');
+      // Without photographs the page keeps its full structure: tracks, programme, educators, registration.
+      for (const anchor of ["tracks", "programme-2027", "educators", "registration"]) expect(html, `${environment} ${anchor}`).toContain(`id="${anchor}"`);
     }
   });
 

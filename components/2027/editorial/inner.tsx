@@ -18,7 +18,7 @@ import { portalLink } from "@/lib/integrations/registration-2027";
 import { bookingLink } from "@/lib/integrations/booking-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
-import { findReviewAsset } from "@/lib/assets/home-2027-review";
+import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
 import { type PageProps, Shell } from "./pages";
 import { Plate, Section, SectionNotes, type Opts } from "./parts";
 import { SlotImage } from "./media";
@@ -184,106 +184,111 @@ export function ProgrammePage(props: PageProps) {
  * development or the protected review preview; elsewhere the page keeps its
  * reserved plate and leaves the photographs out.
  */
-const EDU_LEAD = "exp-education";
+/**
+ * Education & masterclasses (Lex, 18 Nov 2026): fuller and more structured. Each
+ * learning track carries a HEBS Lagos 2026 photograph; the 2027 programme is laid
+ * out by summit day in the directive's own words, with sessions announced once
+ * confirmed; speakers and registration share one section. No speaker or session
+ * is named.
+ */
+const EDU_TRACK_PHOTO: Record<string, string> = {
+  "hair-education": "edu-styling", "technical-training": "edu-technique", demonstrations: "exp-education",
+  business: "edu-session", masterclasses: "sp-hall",
+};
+const EDU_DAY_PHOTO = ["edu-loc", "edu-skincare"];
 const EDU_SPEAKER = "welcome-inset";
-const EDU_PHOTOS = [
-  { id: "edu-session", wide: true }, { id: "edu-styling", wide: false }, { id: "edu-skincare", wide: false },
-  { id: "edu-technique", wide: false }, { id: "edu-loc", wide: false }, { id: "sp-hall", wide: true },
-] as const;
 
 export function EducationPage(props: PageProps) {
   const opts = optsOf(props);
-  const photographed = [EDU_LEAD, EDU_SPEAKER, ...EDU_PHOTOS.map((p) => p.id)].every((id) => reviewMedia(id, opts.environment));
+  const e = PAGES.education;
+  const ids = [...Object.values(EDU_TRACK_PHOTO), ...EDU_DAY_PHOTO, EDU_SPEAKER];
+  const photographed = ids.every((id) => reviewMedia(id, opts.environment));
   const notes = [
     COPY_DRAFT,
     "No speaker or educator is confirmed, so none is named.",
     photographed
-      ? "Photographs from HEBS Lagos 2026 (House of Snapp collection), for internal review only: the photographer's permission and the consent of the people shown are not recorded."
-      : "Education image reserved for an approved HEBS Lagos event photograph.",
+      ? "Photographs from HEBS Lagos 2026 (House of Snapp collection), approved by the event owner for the 2027 website."
+      : "Education images reserved for approved HEBS Lagos event photographs.",
   ];
   const register = portalLink("education-registration", opts.environment);
+  const summitDays = EDITION_DAYS.filter((d) => d.isoDate !== "2027-07-23");
+  const goldD = "#8C6B34";
   return (
     <Shell page="education" opts={opts} notes={props.notes ?? "inline"} groups={[["Education & masterclasses", notes]]}>
-      <PageHero accent={1} media={HERO_MEDIA.education} title={sentenceCase(PAGES.education.title.text)} intro={PAGES.education.intro.text} opts={opts} notes={notes.slice(0, 1)}>
-        <PageContents items={[{ href: "#tracks", label: "Learning tracks" }, { href: "#educators", label: "Educators" }, { href: "#registration", label: "Registration" }]} />
+      <PageHero accent={1} media={HERO_MEDIA.education} title={sentenceCase(e.title.text)} intro={e.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+        <PageContents items={[{ href: "#tracks", label: "Learning tracks" }, { href: "#programme-2027", label: "The 2027 programme" }, { href: "#educators", label: "Educators" }, { href: "#registration", label: "Registration" }]} />
       </PageHero>
-      <Section id="tracks" ground="black" labelledBy="tracks-title">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
-            <h2 id="tracks-title" style={h2Style}>Five ways to learn.</h2>
-            <ul className="mt-10 border-t" style={{ borderColor: "rgba(200,169,106,.45)" }}>
-              {PAGES.education.tracks.map((t) => (
-                <li key={t.id} id={t.id} className="grid gap-2 border-b py-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8 lg:py-7" style={{ borderColor: "rgba(245,239,228,.14)" }}>
-                  <h3 style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.6vw, 38px)", lineHeight: 1.1 }}>{t.title}</h3>
-                  <p className="text-[16px] leading-[1.7]" style={{ color: "rgba(245,239,228,.78)" }}>{t.body.text}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9">
-            <div className="lg:sticky lg:top-28">
+      {/* Five learning tracks, each a photographed card. */}
+      <Section id="tracks" ground="black" labelledBy="tracks-title" innerClassName="lg:py-24">
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+          <h2 id="tracks-title" style={h2Style}>Five ways to learn.</h2>
+          {photographed ? <p className="text-[13.5px]" style={{ color: "rgba(246,239,226,.62)" }}>{e.photosCaption.text}</p> : null}
+        </div>
+        <ol className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 lg:gap-x-6 lg:gap-y-12">
+          {e.tracks.map((t, k) => (
+            <li key={t.id} id={t.id} className={`scroll-mt-28 ${k < 3 ? "lg:col-span-2" : "lg:col-span-3"}`}>
               {photographed ? (
-                <figure>
-                  <div className="relative aspect-[4/5] w-full overflow-hidden">
-                    <Pic id={EDU_LEAD} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 32vw, 100vw" />
-                  </div>
-                  <figcaption className="mt-3 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>{PAGES.education.leadCaption.text}</figcaption>
-                </figure>
-              ) : (
-                <Plate slotId="education" opts={opts} sizes="(min-width: 1024px) 32vw, 100vw" className="aspect-[4/5] w-full" tone={TONE.dark}>
-                </Plate>
-              )}
-              {photographed && <SectionNotes notes={notes.slice(2)} opts={opts} ground="black" className="mt-4" />}
-            </div>
-          </div>
-        </div>
-      </Section>
-      {photographed && (
-        <Section id="photographs" ground="white" labelledBy="photographs-title">
-          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
-            <h2 id="photographs-title" style={h2Style}>{PAGES.education.photos.text}</h2>
-            <p className="text-[14px]" style={{ color: C.body }}>{PAGES.education.photosCaption.text}</p>
-          </div>
-          <ul className="mt-10 grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
-            {EDU_PHOTOS.map((p) => (
-              <li key={p.id} className={`relative overflow-hidden ${p.wide ? "col-span-2 aspect-[3/2]" : "aspect-[3/4] lg:aspect-auto"}`}>
-                <Pic id={p.id} className="absolute inset-0 h-full w-full object-cover" sizes={p.wide ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"} />
-              </li>
-            ))}
-          </ul>
-        </Section>
-      )}
-      <Section id="educators" ground="ivory" labelledBy="educators-title">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
-            <h2 id="educators-title" style={h2Style}>Speakers and educators.</h2>
-            {photographed && (
-              <figure className="mt-10 max-w-[360px]">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <Pic id={EDU_SPEAKER} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 360px, 100vw" />
+                <div className={`relative overflow-hidden ${k < 3 ? "aspect-[4/3]" : "aspect-[16/9]"}`}>
+                  <Pic id={EDU_TRACK_PHOTO[t.id]} className="absolute inset-0 h-full w-full object-cover" sizes={k < 3 ? "(min-width: 1024px) 30vw, 100vw" : "(min-width: 1024px) 46vw, 100vw"} />
                 </div>
-                <figcaption className="mt-3 text-[14px]" style={{ color: C.body }}>{PAGES.education.speakerCaption.text}</figcaption>
-              </figure>
-            )}
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <Pending>{PAGES.education.educators.text}</Pending>
-            <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="ivory" className="mt-6" />
-          </div>
+              ) : null}
+              <p className="mt-5" aria-hidden="true" style={{ ...display, fontWeight: 500, fontSize: "40px", lineHeight: 1, color: "#D9C192" }}>{String(k + 1).padStart(2, "0")}</p>
+              <h3 className="mt-2" style={{ ...display, fontWeight: 500, fontSize: "clamp(24px, 2.2vw, 32px)", lineHeight: 1.1 }}>{t.title}</h3>
+              <p className="mt-2 max-w-[44ch] text-[16px] leading-[1.65]" style={{ color: "rgba(245,239,228,.78)" }}>{t.body.text}</p>
+            </li>
+          ))}
+        </ol>
+        <SectionNotes notes={notes.slice(2)} opts={opts} ground="black" className="mt-10" />
+      </Section>
+      {/* The 2027 programme, by summit day: the directive's own day descriptions; sessions to follow. */}
+      <Section id="programme-2027" ground="ivory" labelledBy="programme-2027-title" innerClassName="lg:py-24">
+        <h2 id="programme-2027-title" style={h2Style}>The 2027 programme.</h2>
+        <div className="mt-10 grid gap-5 lg:grid-cols-2 lg:gap-6">
+          {summitDays.map((d, k) => (
+            <article key={d.isoDate} className="grid overflow-hidden sm:grid-cols-[1fr_1.1fr]" style={{ background: "#FFFDF8", boxShadow: "0 1px 0 rgba(140,107,52,.25)" }}>
+              {photographed ? (
+                <div className="relative aspect-[4/3] sm:aspect-auto sm:min-h-[300px]">
+                  <Pic id={EDU_DAY_PHOTO[k]} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 300px, 100vw" />
+                </div>
+              ) : null}
+              <div className="flex flex-col p-7 lg:p-8">
+                <p className="text-[12px] uppercase tracking-[.28em]" style={{ color: goldD }}>{d.weekday}, {d.shortDate}, 2027</p>
+                <h3 className="mt-3" style={{ ...display, fontWeight: 500, fontSize: "clamp(26px, 2.4vw, 34px)", lineHeight: 1.08 }}>{d.title}</h3>
+                <p className="mt-3 text-[15.5px] leading-[1.65]" style={{ color: C.body }}>{d.description}</p>
+                <p className="mt-auto pt-6"><span className="inline-block rounded-full border px-3 py-1 text-[11px] uppercase tracking-[.18em]" style={{ borderColor: "rgba(140,107,52,.55)", color: goldD }}>Sessions announced once confirmed</span></p>
+              </div>
+            </article>
+          ))}
         </div>
       </Section>
-      <Section id="registration" ground="white" labelledBy="registration-title">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <h2 id="registration-title" className="lg:col-span-5" style={h2Style}>Registration.</h2>
-          <div className="lg:col-span-6 lg:col-start-7">
-            {register ? (
-              <Button href={register} variant="outline" tone="light">Register for education sessions</Button>
-            ) : (
-              <Pending>{PAGES.education.registration.text}</Pending>
-            )}
-            <p className="mt-6 text-[15px]" style={{ color: C.body }}>
-              To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a> (not open yet).
-            </p>
+      {/* Speakers, educators and registration, together. */}
+      <Section id="educators" ground="white" labelledBy="educators-title" innerClassName="lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-12">
+          {photographed ? (
+            <figure className="lg:col-span-5">
+              <div className="relative aspect-[4/5] overflow-hidden">
+                <Pic id={EDU_SPEAKER} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 40vw, 100vw" />
+              </div>
+              <figcaption className="mt-3 text-[13.5px]" style={{ color: C.body }}>{e.speakerCaption.text}</figcaption>
+            </figure>
+          ) : null}
+          <div className={photographed ? "lg:col-span-6 lg:col-start-7" : "lg:col-span-8"}>
+            <h2 id="educators-title" style={h2Style}>Speakers and educators.</h2>
+            <p className="mt-6 text-[18px] leading-[1.6]" style={{ color: C.black }}>{e.educators.text}</p>
+            <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="white" className="mt-5" />
+            <div id="registration" className="mt-12 scroll-mt-28 border-t pt-10" style={{ borderColor: "rgba(140,107,52,.3)" }}>
+              <h2 id="registration-title" style={{ ...display, fontWeight: 500, fontSize: "clamp(30px, 3vw, 42px)", lineHeight: 1.05 }}>Registration.</h2>
+              <div className="mt-5">
+                {register ? (
+                  <Button href={register} variant="outline" tone="light">Register for education sessions</Button>
+                ) : (
+                  <p className="text-[16px] leading-[1.65]" style={{ color: C.body }}>{e.registration.text}</p>
+                )}
+              </div>
+              <p className="mt-5 text-[15px]" style={{ color: C.body }}>
+                To hear first, use the <a href={PRIORITY_HREF} className={quietLink} style={{ color: C.black }}>2027 priority list</a> (not open yet).
+              </p>
+            </div>
           </div>
         </div>
       </Section>
@@ -502,9 +507,54 @@ export function ExhibitorsPage(props: PageProps) {
 const NIS = { site: "https://immigration.gov.ng/", evisa: "https://evisa.immigration.gov.ng/" } as const;
 
 
-/** HEBS Lagos 2026 at NJS, for the Travel page: past-event photographs at the venue, never resort facilities. */
-const TRAVEL_HERO = "gal-dsc_1798";
-const TRAVEL_VENUE_PHOTOS = ["gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
+/**
+ * Travel & accommodation (Lex, 18 Nov 2026): the destination carried by design, not
+ * by event photography. No verified NJS resort or room photograph is on file, so none
+ * is shown and nothing is implied about facilities; two images are requested from the
+ * owner (TRAVEL_IMAGES_NEEDED). The 2026 summit at NJS appears only as a small,
+ * labelled "last year" strip.
+ */
+const TRAVEL_LAST_YEAR = ["gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
+/**
+ * Reserved for the two verified NJS photographs (TRAVEL_IMAGES_NEEDED). Each shows only
+ * once an asset with this id is registered (lib/assets/home-2027-review.ts) with its
+ * approval and its file is present; until then nothing is shown in its place.
+ */
+const TRAVEL_VENUE_PHOTO = "travel-venue";
+const TRAVEL_ROOM_PHOTO = "travel-room";
+const registered = (id: string) => REVIEW_ASSETS.some((a) => a.id === id);
+export const TRAVEL_IMAGES_NEEDED = [
+  "NJS Beach Resort: one verified photograph of the exterior or arrival (no guests as the subject), approved by NJS and the owner.",
+  "Accommodation: one verified photograph of an actual NJS room or suite, ideally ocean-facing, approved by NJS and the owner.",
+] as const;
+
+/** The trip at a glance, like a travel pass: facts only (airport, venue, dates). */
+function TravelPass() {
+  const gold = { color: "#D9C192" };
+  return (
+    <div className="relative overflow-hidden rounded-[2px] p-7 lg:p-10" style={{ background: "linear-gradient(135deg, #1D170F 0%, #0D0B08 70%)", boxShadow: "inset 0 0 0 1px rgba(217,193,146,.35)" }}>
+      <p className="text-[11.5px] uppercase tracking-[.32em]" style={gold}>HEBS Lagos 2027 · Your trip</p>
+      <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-end gap-4">
+        <div>
+          <p className="text-[11px] uppercase tracking-[.24em]" style={{ color: "rgba(246,239,226,.6)" }}>Fly into</p>
+          <p style={{ ...display, fontWeight: 500, fontSize: "clamp(56px, 6vw, 92px)", lineHeight: 0.9, color: C.ivory }}>LOS</p>
+        </div>
+        <p aria-hidden="true" className="pb-3 text-[28px]" style={gold}>→</p>
+        <div className="text-right">
+          <p className="text-[11px] uppercase tracking-[.24em]" style={{ color: "rgba(246,239,226,.6)" }}>Stay and summit</p>
+          <p style={{ ...display, fontWeight: 500, fontSize: "clamp(56px, 6vw, 92px)", lineHeight: 0.9, ...gold }}>NJS</p>
+        </div>
+      </div>
+      <div className="mt-6 grid grid-cols-2 gap-4 border-t pt-5 text-[14px]" style={{ borderColor: "rgba(217,193,146,.28)", color: "rgba(246,239,226,.82)" }}>
+        <p>Murtala Muhammed International Airport, Lagos</p>
+        <p className="text-right"><span translate="no">{VENUE.name.value}</span>, {VENUE.locality}</p>
+      </div>
+      <div className="mt-5 flex flex-wrap justify-between gap-3 text-[12px] uppercase tracking-[.22em]" style={gold}>
+        {EDITION_DAYS.map((d) => <span key={d.isoDate}>{d.weekday} {d.shortDate}</span>)}
+      </div>
+    </div>
+  );
+}
 
 export function TravelPage(props: PageProps) {
   const opts = optsOf(props);
@@ -512,89 +562,110 @@ export function TravelPage(props: PageProps) {
   const notes = [
     COPY_DRAFT,
     "Venue name provisional, address and directions withheld until confirmed (D9).",
-    "No room, package or availability is offered until approved. No accommodation photograph is shown until NJS supplies verified photographs of its rooms.",
+    `No room, package or availability is offered until approved. Images needed from the owner: ${TRAVEL_IMAGES_NEEDED.join(" ")}`,
     "Visitor support contacts pending (D10).",
   ];
-  const venuePhotos = TRAVEL_VENUE_PHOTOS.filter((id) => reviewMedia(id, opts.environment));
-  // The journey: three steps, led by type; facts only, nothing implied about rooms or facilities.
-  // `anchor` keeps the page's earlier links (#arriving, #stay) landing on the right step.
-  const steps: { n: string; anchor: string; word: string; title: string; text: string; later: string; action?: React.ReactNode }[] = [
-    { n: "01", anchor: "arriving", word: "LOS", title: "Arrive in Lagos", text: t.arrival.text, later: t.airport.text },
-    { n: "02", anchor: "resort", word: "NJS", title: "The resort", text: t.venue.text, later: t.directions.text, action: <Button href={VENUE.website} variant="outline" tone="light" external>Visit njsbeachresort.com</Button> },
-    { n: "03", anchor: "stay", word: "Stay", title: "Accommodation", text: t.accommodation.text, later: "" },
-  ];
+  const lastYear = TRAVEL_LAST_YEAR.filter((id) => reviewMedia(id, opts.environment));
+  const venuePhoto = registered(TRAVEL_VENUE_PHOTO) ? reviewMedia(TRAVEL_VENUE_PHOTO, opts.environment) : null;
+  const roomPhoto = registered(TRAVEL_ROOM_PHOTO) ? reviewMedia(TRAVEL_ROOM_PHOTO, opts.environment) : null;
+  const gold = "#8C6B34";
   return (
     <Shell page="travel" opts={opts} notes={props.notes ?? "inline"} groups={[["Travel & accommodation", notes]]}>
-      <PageHero accent={1} media={TRAVEL_HERO} composition="lagos" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+      <PageHero accent={1} title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)} aside={<TravelPass />}>
         <PageContents items={[
-          { href: "#journey", label: "Your journey" }, { href: "#venue", label: "HEBS at NJS" },
-          { href: "#visas", label: "Visas" }, { href: "#faq", label: "Travel questions" },
+          { href: "#arriving", label: "Arriving" }, { href: "#venue", label: "The venue" },
+          { href: "#stay", label: "Accommodation" }, { href: "#visas", label: "Visas & questions" },
         ]} />
       </PageHero>
+      {/* Arriving · The venue · Accommodation: one bold band, three chapters. */}
       <Section id="journey" ground="ivory" labelledBy="journey-title" innerClassName="lg:py-24">
-        <h2 id="journey-title" style={h2Style}>Your journey to HEBS Lagos 2027.</h2>
-        <ol className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-14">
-          {steps.map((st) => (
-            <li key={st.n} id={st.anchor} className="flex scroll-mt-28 flex-col">
-              <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: "#8C6B34" }}>{st.n} · {st.title}</p>
-              <p aria-hidden="true" className="mt-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(64px, 6.4vw, 104px)", lineHeight: 0.95, color: "#8C6B34" }}>{st.word}</p>
-              <p className="mt-6 text-[17px] leading-[1.7]" style={{ color: C.black }}>{st.text}</p>
-              {st.later ? <p className="mt-3 text-[14.5px] leading-[1.6]" style={{ color: C.body }}>{st.later}</p> : null}
-              {st.action ? <div className="mt-6">{st.action}</div> : null}
-            </li>
+        <h2 id="journey-title" className="sr-only">Your journey to HEBS Lagos 2027</h2>
+        <div className="grid gap-px overflow-hidden lg:grid-cols-3" style={{ background: "rgba(140,107,52,.25)" }}>
+          {[
+            { id: "arriving", n: "01", label: "Arriving in Lagos", word: "LOS", text: t.arrival.text, later: t.airport.text },
+            { id: "resort", n: "02", label: "The venue", word: "NJS", text: t.venue.text, later: t.directions.text },
+            { id: "stay", n: "03", label: "Accommodation", word: "Stay", text: t.accommodation.text, later: "" },
+          ].map((st) => (
+            <article key={st.id} id={st.id} className="flex scroll-mt-28 flex-col p-8 lg:p-12" style={{ background: C.ivory }}>
+              <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: gold }}>{st.n} · {st.label}</p>
+              <p aria-hidden="true" className="mt-5" style={{ ...display, fontWeight: 500, fontSize: "clamp(72px, 7.2vw, 120px)", lineHeight: 0.9, color: gold }}>{st.word}</p>
+              <p className="mt-7 text-[18px] leading-[1.6]" style={{ color: C.black }}>{st.text}</p>
+              {st.later ? <p className="mt-3 text-[14px] leading-[1.6]" style={{ color: C.body }}>{st.later}</p> : null}
+              {st.id === "stay" && roomPhoto ? (
+                <div className="relative mt-7 aspect-[4/3] overflow-hidden">
+                  <Pic id={TRAVEL_ROOM_PHOTO} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
+                </div>
+              ) : null}
+            </article>
           ))}
-        </ol>
-        <SectionNotes notes={notes.slice(1, 3)} opts={opts} ground="ivory" className="mt-10" />
+        </div>
+        <SectionNotes notes={notes.slice(1, 3)} opts={opts} ground="ivory" className="mt-8" />
       </Section>
-      {venuePhotos.length === TRAVEL_VENUE_PHOTOS.length ? (
-        <Section id="venue" ground="black" labelledBy="venue-title" innerClassName="lg:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
-            <h2 id="venue-title" style={h2Style}>HEBS at NJS, 2026.</h2>
-            <p className="max-w-[52ch] text-[15px]" style={{ color: "rgba(246,239,226,.78)" }}>The summit halls at NJS, photographed during HEBS Lagos 2026.</p>
+      {/* The venue: the destination in type, with the official site; last year's summit at NJS as a small labelled strip. */}
+      <Section id="venue" ground="black" labelledBy="venue-title" innerClassName="lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <div className="lg:col-span-7">
+            <p className="text-[12px] uppercase tracking-[.32em]" style={{ color: "#D9C192" }}>The venue · {VENUE.locality}</p>
+            <h2 id="venue-title" className="mt-5" style={{ ...display, fontWeight: 500, fontSize: "clamp(48px, 6.4vw, 104px)", lineHeight: 0.95, color: C.ivory }}>
+              <span translate="no">{VENUE.name.value}</span>
+            </h2>
+            <div className="mt-9"><Button href={VENUE.website} variant="ghost" tone="dark" external>Visit njsbeachresort.com</Button></div>
           </div>
-          <LightboxGroup items={viewerItems(venuePhotos, opts)} label="HEBS at NJS, 2026">
-            <ul className="mt-8 grid grid-cols-2 gap-1.5 lg:grid-cols-[1fr_1.4fr_1fr]">
-              {venuePhotos.map((id, j) => (
-                <li key={id} className={`relative overflow-hidden ${j === 1 ? "col-span-2 aspect-[4/3] lg:col-span-1 lg:aspect-auto" : "aspect-[4/5]"} lg:h-[520px]`}>
-                  <LightboxTrigger index={j} label={findReviewAsset(id).alt}>
-                    <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes={j === 1 ? "(min-width: 1024px) 560px, 100vw" : "(min-width: 1024px) 400px, 50vw"} />
-                  </LightboxTrigger>
-                </li>
-              ))}
-            </ul>
-          </LightboxGroup>
-        </Section>
-      ) : null}
-      <Section id="visas" ground="white" labelledBy="visas-title" innerClassName="lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
-          <h2 id="visas-title" className="lg:col-span-4" style={h2Style}>Visas.</h2>
-          <div className="space-y-6 lg:col-span-7 lg:col-start-6">
-            <p className="text-[17px] leading-[1.7]" style={{ color: C.body }}>{t.visas.text}</p>
-            <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          {venuePhoto ? (
+            <div className="lg:col-span-12 lg:row-start-2">
+              <div className="relative aspect-[16/9] overflow-hidden lg:aspect-[21/9]">
+                <Pic id={TRAVEL_VENUE_PHOTO} className="absolute inset-0 h-full w-full object-cover" sizes="100vw" />
+              </div>
+            </div>
+          ) : null}
+          {lastYear.length === TRAVEL_LAST_YEAR.length ? (
+            <div className="lg:col-span-5">
+              <p className="text-[12px] uppercase tracking-[.26em]" style={{ color: "rgba(246,239,226,.66)" }}>Last year at NJS · HEBS Lagos 2026</p>
+              <LightboxGroup items={viewerItems(lastYear, opts)} label="HEBS Lagos 2026 at NJS">
+                <ul className="mt-4 grid grid-cols-3 gap-1.5">
+                  {lastYear.map((id, j) => (
+                    <li key={id} className="relative aspect-[3/4] overflow-hidden">
+                      <LightboxTrigger index={j} label={findReviewAsset(id).alt}>
+                        <Pic id={id} className="absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 180px, 33vw" />
+                      </LightboxTrigger>
+                    </li>
+                  ))}
+                </ul>
+              </LightboxGroup>
+              <p className="mt-3 text-[13px]" style={{ color: "rgba(246,239,226,.6)" }}>The summit halls during HEBS Lagos 2026, not the resort&apos;s rooms or facilities.</p>
+            </div>
+          ) : null}
+        </div>
+      </Section>
+      {/* Visas and travel questions, together. */}
+      <Section id="visas" ground="white" labelledBy="visas-title" innerClassName="lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
+            <h2 id="visas-title" style={h2Style}>Visas.</h2>
+            <p className="mt-6 text-[17px] leading-[1.7]" style={{ color: C.body }}>{t.visas.text}</p>
+            <ul className="mt-7 flex flex-col gap-3">
               <li><Button href={NIS.site} variant="outline" tone="light" external>Nigeria Immigration Service</Button></li>
               <li><Button href={NIS.evisa} variant="outline" tone="light" external>Official e-Visa portal</Button></li>
             </ul>
           </div>
-        </div>
-      </Section>
-      <Section id="faq" ground="black" labelledBy="faq-title">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <h2 id="faq-title" className="lg:col-span-4" style={h2Style}>Travel questions.</h2>
-          <div className="lg:col-span-7 lg:col-start-6">
-            {t.faqs.map((f) => (
-              <details key={f.q} className="group border-b" style={{ borderColor: "rgba(245,239,228,.14)" }}>
-                <summary className="flex min-h-[64px] cursor-pointer list-none items-center justify-between gap-6 py-4 [&::-webkit-details-marker]:hidden"
-                  style={{ ...display, fontWeight: 500, fontSize: "clamp(20px, 2vw, 26px)", lineHeight: 1.2 }}>
-                  {f.q}
-                  <span aria-hidden="true" className="shrink-0 text-[28px] leading-none transition-transform duration-200 group-open:rotate-45" style={{ color: C.champ }}>+</span>
-                </summary>
-                <p className="max-w-[56ch] pb-6 text-[16px] leading-[1.7]" style={{ color: "rgba(245,239,228,.8)" }}>{f.a.text}</p>
-              </details>
-            ))}
-            <p className="mt-8 max-w-[60ch] text-[15px]" style={{ color: "rgba(246,239,226,.7)" }}>{t.support.text}</p>
+          <div id="faq" className="scroll-mt-28 lg:col-span-6 lg:col-start-7">
+            <h2 id="faq-title" style={h2Style}>Travel questions.</h2>
+            <div className="mt-6">
+              {t.faqs.map((f) => (
+                <details key={f.q} className="group border-b" style={{ borderColor: "rgba(0,0,0,.14)" }}>
+                  <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-6 py-4 [&::-webkit-details-marker]:hidden"
+                    style={{ ...display, fontWeight: 500, fontSize: "clamp(19px, 1.8vw, 24px)", lineHeight: 1.2 }}>
+                    {f.q}
+                    <span aria-hidden="true" className="shrink-0 text-[26px] leading-none transition-transform duration-200 group-open:rotate-45" style={{ color: gold }}>+</span>
+                  </summary>
+                  <p className="max-w-[56ch] pb-5 text-[16px] leading-[1.7]" style={{ color: C.body }}>{f.a.text}</p>
+                </details>
+              ))}
+              <p className="mt-6 text-[14.5px]" style={{ color: C.body }}>{t.support.text}</p>
+            </div>
           </div>
         </div>
-        <SectionNotes notes={notes.slice(3)} opts={opts} ground="black" className="mt-6" />
+        <SectionNotes notes={notes.slice(3)} opts={opts} ground="white" className="mt-6" />
       </Section>
       <FinalCta to={TARGETS} />
     </Shell>

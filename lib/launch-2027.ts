@@ -56,7 +56,7 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
   // The 2026 exhibition floor on the Sponsorship page (EXHIBITION.page).
   out.sponsorship = [...(out.sponsorship ?? []), ...EXHIBITION.page];
   // The Travel page: HEBS Lagos 2026 at NJS (components/2027/editorial/inner.tsx).
-  out.travel = [...(out.travel ?? []), "gal-dsc_1798", "gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
+  out.travel = [...(out.travel ?? []), "gal-dsc_1305", "gal-0q1a0444", "gal-dsc_1786"];
   return out;
 })();
 

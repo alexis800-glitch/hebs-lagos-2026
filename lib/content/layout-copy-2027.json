@@ -716,6 +716,18 @@
    "text": "July 2027"
   },
   {
+   "key": "layout.education.4a1a2ce7c3",
+   "scope": "education",
+   "where": "page",
+   "text": "Saturday, July 24, 2027"
+  },
+  {
+   "key": "layout.education.91dbe2d96e",
+   "scope": "education",
+   "where": "page",
+   "text": "Sunday, July 25, 2027"
+  },
+  {
    "key": "layout.education.7e439c353e",
    "scope": "education",
    "where": "alt",
@@ -726,6 +738,12 @@
    "scope": "education",
    "where": "page",
    "text": "Learning tracks"
+  },
+  {
+   "key": "layout.education.e3ec26278c",
+   "scope": "education",
+   "where": "page",
+   "text": "The 2027 programme"
   },
   {
    "key": "layout.education.671182b36f",
@@ -774,6 +792,18 @@
    "scope": "education",
    "where": "page",
    "text": "Professional masterclasses"
+  },
+  {
+   "key": "layout.education.637af48d94",
+   "scope": "education",
+   "where": "page",
+   "text": "The 2027 programme."
+  },
+  {
+   "key": "layout.education.2d08435fe0",
+   "scope": "education",
+   "where": "page",
+   "text": "Sessions announced once confirmed"
   },
   {
    "key": "layout.education.3ac56a3e3c",
@@ -1376,12 +1406,6 @@
    "text": "Tickets & registration | HEBS Lagos 2027"
   },
   {
-   "key": "layout.travel.9742d008c4",
-   "scope": "travel",
-   "where": "page",
-   "text": "Nigeria"
-  },
-  {
    "key": "layout.travel.e0973fce7c",
    "scope": "travel",
    "where": "page",
@@ -1394,40 +1418,40 @@
    "text": "On this page"
   },
   {
-   "key": "layout.travel.8379d05871",
+   "key": "layout.travel.17bd7673cf",
    "scope": "travel",
    "where": "page",
-   "text": "Your journey"
+   "text": "Arriving"
   },
   {
-   "key": "layout.travel.efe7e1865e",
+   "key": "layout.travel.2280a45ade",
    "scope": "travel",
    "where": "page",
-   "text": "HEBS at NJS"
+   "text": "The venue"
   },
   {
-   "key": "layout.travel.3e195025b9",
+   "key": "layout.travel.b2ca1cb457",
    "scope": "travel",
    "where": "page",
-   "text": "Visas"
+   "text": "Accommodation"
   },
   {
-   "key": "layout.travel.e2f352903d",
+   "key": "layout.travel.be3e4e4120",
    "scope": "travel",
    "where": "page",
-   "text": "Travel questions"
+   "text": "Visas & questions"
   },
   {
-   "key": "layout.travel.40aff07beb",
+   "key": "layout.travel.d0ac585185",
    "scope": "travel",
    "where": "page",
-   "text": "Your journey to HEBS Lagos 2027."
+   "text": "HEBS Lagos 2027 · Your trip"
   },
   {
-   "key": "layout.travel.4c7b47f47d",
+   "key": "layout.travel.a814ef84f7",
    "scope": "travel",
    "where": "page",
-   "text": "01 · Arrive in Lagos"
+   "text": "Fly into"
   },
   {
    "key": "layout.travel.7ae98aef6d",
@@ -1436,16 +1460,46 @@
    "text": "LOS"
   },
   {
-   "key": "layout.travel.c70abd1787",
+   "key": "layout.travel.c0fd27ee64",
    "scope": "travel",
    "where": "page",
-   "text": "02 · The resort"
+   "text": "Stay and summit"
   },
   {
    "key": "layout.travel.9da33311f7",
    "scope": "travel",
    "where": "page",
    "text": "NJS"
+  },
+  {
+   "key": "layout.travel.10fca503b5",
+   "scope": "travel",
+   "where": "page",
+   "text": "Murtala Muhammed International Airport, Lagos"
+  },
+  {
+   "key": "layout.travel.1bd5fadc4d",
+   "scope": "travel",
+   "where": "page",
+   "text": "Friday July 23 Saturday July 24 Sunday July 25"
+  },
+  {
+   "key": "layout.travel.0e825f4e9b",
+   "scope": "travel",
+   "where": "page",
+   "text": "Your journey to HEBS Lagos 2027"
+  },
+  {
+   "key": "layout.travel.e13274341a",
+   "scope": "travel",
+   "where": "page",
+   "text": "01 · Arriving in Lagos"
+  },
+  {
+   "key": "layout.travel.d901db81b6",
+   "scope": "travel",
+   "where": "page",
+   "text": "02 · The venue"
   },
   {
    "key": "layout.travel.31b5730778",
@@ -1458,6 +1512,12 @@
    "scope": "travel",
    "where": "page",
    "text": "Stay"
+  },
+  {
+   "key": "layout.travel.5b60881cc3",
+   "scope": "travel",
+   "where": "page",
+   "text": "The venue · Lagos, Nigeria"
   },
   {
    "key": "layout.travel.3c8aa6694c",
