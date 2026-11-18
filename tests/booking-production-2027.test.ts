@@ -7,8 +7,9 @@ import { describe, expect, it } from "vitest";
 import { PRIVATE_TEST } from "../lib/forms-2027/private-test.mjs";
 import {
   bookingLink, COMPETITION_CODES, COMPETITION_CODE_PARAM, PRODUCTION_PORTAL, PRODUCTION_PORTAL_HOSTS,
-  productionOriginRefusal, STAGING_DATA_ENV, type ProductionPortal,
+  PORTAL_RETURN_ORIGIN, productionOriginRefusal, SITE_PARAM, STAGING_DATA_ENV, withSite, type ProductionPortal,
 } from "../lib/integrations/booking-2027";
+import contractV1 from "./fixtures/booking-contract-v1.0-competitions.json";
 
 const ORIGIN = "https://portal.example.test";
 const OPEN: ProductionPortal = {
@@ -88,5 +89,35 @@ describe("refusals", () => {
     const u = new URL(link("tickets", undefined, env)!);
     expect(u.origin).toBe("https://copy.example.test");
     expect(u.searchParams.get(STAGING_DATA_ENV.param)).toBe(STAGING_DATA_ENV.value);
+  });
+});
+
+describe("the proposed production contract (docs/launch/PRODUCTION-PORTAL-CONTRACT-2027.md)", () => {
+  it("sends exactly the contract parameters and nothing else", () => {
+    for (const j of ["tickets", "booking"] as const) expect(Array.from(new URL(link(j, undefined, PROD)!).searchParams.keys()), j).toEqual([]);
+    for (const slug of Object.keys(COMPETITION_CODES)) expect(Array.from(new URL(link("compete", slug, PROD)!).searchParams.keys()), slug).toEqual(["category"]);
+  });
+
+  it("uses the 13 codes of booking contract v1.0, unchanged", () => {
+    const sent = Object.keys(COMPETITION_CODES).map((s) => new URL(link("compete", s, PROD)!).searchParams.get("category")).sort();
+    expect(sent).toEqual(contractV1.competitions.map((c) => c.code).sort());
+    expect(COMPETITION_CODE_PARAM).toBe(contractV1.param);
+  });
+
+  it("refuses the 2026 live portal app as the 2027 production portal", () => {
+    expect(productionOriginRefusal(PROD, { ...OPEN, portal: { status: "approved", value: `https://app.example.test`, source: "t" }, hosts: ["app.example.test"] })).toBeNull();
+    const live = `https://${PRIVATE_TEST.liveAppId}.example.test`;
+    expect(productionOriginRefusal(PROD, { ...OPEN, portal: { status: "approved", value: live, source: "t" }, hosts: [new URL(live).hostname] })).not.toBeNull();
+  });
+
+  it("returns visitors to an origin the portal accepts: production with or without www, or the deployment's own host", () => {
+    for (const site of ["https://www.hebslagos.com", "https://hebslagos.com", "https://hebs-lagos-2026-2zxjsn661-veridion-systems-projects.vercel.app"]) {
+      const sent = new URL(withSite(link("tickets", undefined, PROD)!, `${site}/2027/tickets?_vercel_share=SECRET`)).searchParams.get(SITE_PARAM)!;
+      expect(sent, site).toBe(site);
+      expect(sent, site).toMatch(PORTAL_RETURN_ORIGIN);
+    }
+    for (const bad of ["https://hebs-lagos-2026-git-website-2027-veridion-systems-projects.vercel.app", "http://www.hebslagos.com", "https://hebslagos.com.evil.test", "https://www.hebslagos.com/2027"]) {
+      expect(bad).not.toMatch(PORTAL_RETURN_ORIGIN);
+    }
   });
 });

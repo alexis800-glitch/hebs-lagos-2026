@@ -116,6 +116,15 @@ export const PRODUCTION_PORTAL: Gated<string> = {
   note: "2027 production portal origin to be confirmed after joint website and portal acceptance.",
 };
 
+/**
+ * The website origins the portal's "Back to website" accepts as `site` (portal
+ * handoff, Claude Desktop, 17 Nov 2026): the production domain, with or without
+ * www, and a deployment's own Vercel host. A branch alias (…-git-…) is not
+ * accepted. The website sends window.location.origin (portal-site.ts), so on
+ * production that is https://www.hebslagos.com.
+ */
+export const PORTAL_RETURN_ORIGIN = /^https:\/\/((www\.)?hebslagos\.com|hebs-lagos-2026-[a-z0-9]+-veridion-systems-projects\.vercel\.app)$/;
+
 /** Hosts a production booking link may point at. Empty until the production portal is accepted. */
 export const PRODUCTION_PORTAL_HOSTS: readonly string[] = [];
 
@@ -147,6 +156,8 @@ export function productionOriginRefusal(env: Env = runtimeEnv(), p: ProductionPo
   if (u.username || u.password || u.search || u.hash || (u.pathname !== "/" && u.pathname !== "")) return "the portal origin must be an origin only";
   if (!p.hosts.includes(u.hostname)) return "the production portal host is not listed";
   if (u.hostname.startsWith("preview--") || p.portal.value.includes(PRIVATE_TEST.appId)) return "a test copy or Base44 preview is never the production portal";
+  // The 2027 production portal is its own Base44 app; the 2026 live app is never its address.
+  if (p.portal.value.includes(PRIVATE_TEST.liveAppId)) return "the 2026 live portal app is not the 2027 production portal";
   return null;
 }
 
