@@ -28,6 +28,7 @@ import { WatchFilms, hasWatchFilms } from "@/components/2027/site/watch";
 import { EXHIBITION, SUMMIT_DAYS, WATCH } from "@/lib/content/media-sections-2027";
 import { GalleryNav } from "./gallery-nav";
 import { LightboxGroup, LightboxTrigger, type LightboxItem } from "@/components/2027/site/lightbox";
+import { PortalReturn } from "@/components/2027/site/portal-return";
 import { COMPETITION_ANCHORS, Destination, EXPERIENCE_LINKS, FinalCta, PriorityList, ThreeDays, dayAnchor, type Targets } from "./sections";
 import { FormBlock, PageContents, PageHero, PageLink, Pending } from "./site";
 import { C, TONE, display, h2Style, sentenceCase } from "./tokens";
@@ -304,6 +305,8 @@ export function CompetitionsPage(props: PageProps) {
   const pathways = COPY.competitions.pathways.map((label, i) => ({ href: `#${COMPETITION_ANCHORS[i]}`, label }));
   return (
     <Shell page="competitions" opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
+      {/* Staging only: booking links carry the website's own origin back to the portal. */}
+      {bookingLink("tickets") ? <PortalReturn /> : null}
       <PageHero accent={2} media={HERO_MEDIA.competitions} title={sentenceCase(COPY.competitions.headline.text)} intro={PAGES.competitions.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={pathways} />
       </PageHero>
@@ -326,7 +329,7 @@ export function CompetitionsPage(props: PageProps) {
                     return (
                       <li key={c.slug} className="text-[17px] leading-snug">
                         {c.name}
-                        {register && <> <a href={register} className="ml-1 text-[14px] underline underline-offset-4">Register</a></>}
+                        {register && <> <a href={register} data-portal="" className="ml-1 text-[14px] underline underline-offset-4">Register</a></>}
                       </li>
                     );
                   })}
@@ -609,6 +612,8 @@ export function TicketsPage(props: PageProps) {
   const notes = [COPY_DRAFT, "Ticket categories, prices and payment gateway are approved separately (directive section 6). Payment collection is not authorised."];
   return (
     <Shell page="tickets" opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
+      {/* Staging only: booking links carry the website's own origin back to the portal. */}
+      {bookingLink("tickets") ? <PortalReturn /> : null}
       <PageHero accent={1} composition="dates" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button href={PRIORITY_HREF} className="mt-8">{PRIORITY_CTA}</Button>
@@ -620,8 +625,8 @@ export function TicketsPage(props: PageProps) {
           <div className="space-y-6 lg:col-span-6 lg:col-start-7">
             {buy ? (
               <div className="flex flex-wrap gap-3">
-                <Button href={buy} variant="outline" tone="light">Buy tickets</Button>
-                {myBooking && <Button href={myBooking} variant="link" tone="light">Find my booking</Button>}
+                <Button href={buy} variant="outline" tone="light" portal={buy === bookingLink("tickets")}>Buy tickets</Button>
+                {myBooking && <Button href={myBooking} variant="link" tone="light" portal>Find my booking</Button>}
               </div>
             ) : (
               <Pending>{t.status.text}</Pending>

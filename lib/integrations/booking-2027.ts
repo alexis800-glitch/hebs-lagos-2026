@@ -29,6 +29,8 @@
  * preview token is ever added: the tester's browser holds its own.
  */
 import { PRIVATE_TEST } from "../forms-2027/private-test.mjs";
+// The return link: the website's own origin, added in the browser (portal-site.ts, PortalReturn).
+export { SITE_PARAM, siteOrigin, withSite } from "./portal-site";
 import { COMPETITIONS } from "../competitions";
 
 export type BookingJourney = "tickets" | "compete" | "booking";
