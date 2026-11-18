@@ -14,6 +14,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { config as middlewareConfig, isWithheld } from "../middleware";
 import { PreferredHomepage } from "@/components/2027/home/HomePage";
 import { eventJsonLd } from "@/components/2027/site/EventJsonLd";
+import { MARK_2027_DIR } from "@/components/2027/site/mark";
 import { previewStatuses } from "@/lib/content/2027";
 import { PAGES } from "@/lib/content/2027-pages";
 import { EDITION_DAYS } from "@/lib/editions/2027";
@@ -25,6 +26,7 @@ import {
 import { FORMS_OPEN, PORTAL_2027 } from "@/lib/integrations/registration-2027";
 import {
   LAUNCH_2027, REVIEW_MEDIA_BY_PAGE, launchBlockers, pagePublished, pageReadiness, pageStatuses, pathPublished, site2027Open, type LaunchConfig, type LaunchInputs,
+  BRAND_DIR,
 } from "@/lib/launch-2027";
 import { PRIORITY_CTA, SITE_PAGES, type PageId } from "@/lib/site/2027";
 import { pageMetadata, sitemapXml } from "@/lib/site/seo-2027";
@@ -184,6 +186,17 @@ describe("public and private route separation", () => {
     }
     expect(pagePublished("gallery", "production", OPEN)).toBe(false);
     expect(pagePublished("gallery", "preview", OPEN)).toBe(true);
+  });
+
+  it("serves the approved logo every page shows once the site is open, and not before", () => {
+    const logo = readdirSync(join(__dirname, "../public/2027/brand")).filter((f) => f.endsWith(".webp"));
+    expect(logo.length).toBeGreaterThan(0);
+    for (const f of logo) {
+      expect(pathPublished(`/2027/brand/${f}`, "production", OPEN), f).toBe(true);
+      expect(pathPublished(`/2027/brand/${f}`, "production"), f).toBe(false);
+    }
+    expect(BRAND_DIR).toBe(MARK_2027_DIR);
+    expect(pathPublished("/2027/brand-study/a", "production", OPEN)).toBe(false);
   });
 });
 

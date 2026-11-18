@@ -218,6 +218,9 @@ export function pagePublished(id: PageId, environment: DeployEnvironment, inputs
   return (inputs.config ?? LAUNCH_2027).pages.includes(id);
 }
 
+/** The approved logo cuts (components/2027/site/mark.tsx). Not /2027/brand-study, which stays withheld. */
+export const BRAND_DIR = `${BASE}/brand/`;
+
 /** Addresses under /2027 that are not pages but belong to the published site. */
 const siteFiles = () => [`${BASE}/sitemap.xml`, `${BASE}/social-card`];
 
@@ -229,6 +232,8 @@ export function pathPublished(pathname: string, environment: DeployEnvironment, 
   if (siteFiles().includes(path)) return true;
   // Approved media, once the site is open: restricted media never has a file there.
   if (path.startsWith(MEDIA_DIR)) return true;
+  // The approved 2027 logo (D3), committed in public/2027/brand/ and shown in every header and footer.
+  if (path.startsWith(BRAND_DIR)) return true;
   const page = SITE_PAGES.find((p) => p.path === path);
   return page ? pagePublished(page.id, environment, inputs) : false;
 }
