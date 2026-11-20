@@ -992,6 +992,18 @@
    "text": "On this page"
   },
   {
+   "key": "layout.exhibitors.5efa288df1",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Become an exhibitor"
+  },
+  {
+   "key": "layout.exhibitors.0f2cbd3140",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Exhibitor applications are not open yet. Nothing can be sent."
+  },
+  {
    "key": "layout.exhibitors.502c03b93a",
    "scope": "exhibitors",
    "where": "page",
@@ -1044,12 +1056,6 @@
    "scope": "exhibitors",
    "where": "page",
    "text": "Tell us about your company and what you would show."
-  },
-  {
-   "key": "layout.exhibitors.0f2cbd3140",
-   "scope": "exhibitors",
-   "where": "page",
-   "text": "Exhibitor applications are not open yet. Nothing can be sent."
   },
   {
    "key": "layout.exhibitors.7c9fd14828",
@@ -1160,6 +1166,12 @@
    "text": "On this page"
   },
   {
+   "key": "layout.sponsorship.5efa288df1",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "Become an exhibitor"
+  },
+  {
    "key": "layout.sponsorship.bce680ea0d",
    "scope": "sponsorship",
    "where": "page",
@@ -1230,6 +1242,12 @@
    "scope": "sponsorship",
    "where": "page",
    "text": "Not open yet"
+  },
+  {
+   "key": "layout.sponsorship.3e11ec6e58",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "Sponsorship inquiries are not open yet. Nothing can be sent."
   },
   {
    "key": "layout.sponsorship.51b7a8a4c6",
