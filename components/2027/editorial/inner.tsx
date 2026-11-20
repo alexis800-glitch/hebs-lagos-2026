@@ -16,6 +16,7 @@ import {
 } from "@/lib/editions/2027";
 import { portalLink } from "@/lib/integrations/registration-2027";
 import { bookingLink } from "@/lib/integrations/booking-2027";
+import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
 import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
@@ -401,6 +402,7 @@ export function SponsorshipPage(props: PageProps) {
   return (
     <Shell page="sponsorship" opts={opts} notes={props.notes ?? "inline"} groups={[["Sponsorship & partnerships", notes]]}>
       <PageHero accent={2} media={HERO_MEDIA.sponsorship} title={sentenceCase(COPY.partners.headline.text)} intro={PAGES.sponsorship.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+        <InterestCtas first="sponsor" />
         <PageContents items={[{ href: "#opportunities", label: "Opportunities" }, { href: "#how-it-works", label: "How it works" }, { href: "#inquiry", label: "Inquiries" }]} />
       </PageHero>
       <ExhibitionFloor opts={opts} />
@@ -451,6 +453,36 @@ export function SponsorshipPage(props: PageProps) {
   );
 }
 
+/**
+ * The two ways in, at the top of the Sponsorship and Exhibitors pages: "Become a
+ * sponsor" leads to the sponsorship inquiry form, "Become an exhibitor" to the
+ * exhibitor application, the page's own first. Both forms submit only to the
+ * portal's evSubmitPublicForm (an EvSponsor or EvExhibitor record, never a
+ * booking or a payment). While the page's form is closed its section says so and
+ * collects nothing, and so does the line under the buttons. A link to a page that
+ * is not published is left out.
+ */
+const INTEREST = {
+  sponsor: { page: "sponsorship", hash: "inquiry", label: "Become a sponsor", closed: "Sponsorship inquiries are not open yet. Nothing can be sent." },
+  exhibitor: { page: "exhibitors", hash: "apply", label: "Become an exhibitor", closed: "Exhibitor applications are not open yet. Nothing can be sent." },
+} as const;
+
+function InterestCtas({ first }: { first: keyof typeof INTEREST }) {
+  const order = first === "sponsor" ? (["sponsor", "exhibitor"] as const) : (["exhibitor", "sponsor"] as const);
+  const open = formEnabled(first, submitConfig());
+  return (
+    <div className="mt-9">
+      <div className="flex flex-wrap gap-3">
+        {order.map((k, i) => {
+          const href = pageHref(INTEREST[k].page, INTEREST[k].hash);
+          return href ? <Button key={k} href={href} variant={i === 0 ? "primary" : "ghost"}>{INTEREST[k].label}</Button> : null;
+        })}
+      </div>
+      {!open && <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>{INTEREST[first].closed}</p>}
+    </div>
+  );
+}
+
 /* ── Exhibitors ─────────────────────────────────────────────────────── */
 
 export function ExhibitorsPage(props: PageProps) {
@@ -462,6 +494,7 @@ export function ExhibitorsPage(props: PageProps) {
   return (
     <Shell page="exhibitors" opts={opts} notes={props.notes ?? "inline"} groups={[["Exhibitors", notes]]}>
       <PageHero accent={2} media={HERO_MEDIA.exhibitors} title={PAGES.exhibitors.title.text} intro={PAGES.exhibitors.intro.text} opts={opts} notes={notes.slice(0, 1)}>
+        <InterestCtas first="exhibitor" />
         <PageContents items={[{ href: "#exhibit", label: "Ways to exhibit" }, { href: "#apply", label: "Applications" }, { href: "#brands", label: "Participating brands" }]} />
       </PageHero>
       <Section id="exhibit" ground="white" labelledBy="exhibit-title">
@@ -785,7 +818,7 @@ function ExhibitionFloor({ opts }: { opts: Opts }) {
   const ids = EXHIBITION.page.filter((id) => reviewMedia(id, opts.environment));
   if (ids.length < 4) return null;
   const sponsor = pageHref("sponsorship", "inquiry");
-  const exhibit = pageHref("exhibitors");
+  const exhibit = pageHref("exhibitors", "apply");
   return (
     <Section id="exhibition-2026" ground="ivory" labelledBy="exhibition-2026-title">
       <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
