@@ -80,7 +80,7 @@ describe("production publication controls", () => {
       ["pages-tickets", { ...OPEN, config: { ...LAUNCHED, pages: ["home"] } }],
       ["approvals-home", { ...OPEN, statuses: ["approved", "provisional"] }],
       ["approvals-tickets", { ...OPEN, statuses: ["approved", "awaiting-confirmation"] }],
-      ["media-release-home", { ...OPEN, reviewMedia: { home: ["hero-loop-wide"] } }],
+      ["media-release-home", { ...OPEN, reviewMedia: { home: ["hero-loop-wide"] }, mediaReleased: false }],
       ["form-priority", { ...OPEN, formsOpen: { ...FORMS_OPEN, priority: true } }],
       ["origin", { ...OPEN, config: { ...LAUNCHED, origin: { status: "provisional", value: "https://www.hebslagos.com", note: "D7" } } }],
       ["withhold", { ...OPEN, withhold: "on" }],
@@ -155,7 +155,7 @@ describe("image-usage authorisation", () => {
   it("blocks every page that shows media until the prepared files are in the release", () => {
     for (const page of ["home", "education", "gallery"] as const) {
       expect(REVIEW_MEDIA_BY_PAGE[page]?.length, page).toBeGreaterThan(0);
-      const blockers = launchBlockers({ ...OPEN, config: { ...LAUNCHED, pages: ["home", "tickets", page] }, reviewMedia: REVIEW_MEDIA_BY_PAGE });
+      const blockers = launchBlockers({ ...OPEN, config: { ...LAUNCHED, pages: ["home", "tickets", page] }, reviewMedia: REVIEW_MEDIA_BY_PAGE, mediaReleased: false });
       expect(ids(blockers), page).toContain(`media-release-${page}`);
       const released = launchBlockers({ ...OPEN, config: { ...LAUNCHED, pages: ["home", "tickets", page] }, reviewMedia: REVIEW_MEDIA_BY_PAGE, mediaReleased: true });
       expect(ids(released).filter((b) => b.startsWith("media-")), page).toEqual([]);

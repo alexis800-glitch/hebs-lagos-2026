@@ -14,7 +14,7 @@ import manifest from "./published-media-2027.json";
 import type { ReviewAsset } from "./home-2027-review";
 
 /** True only in the launch commit that adds public/2027/media/ to the repository. */
-export const MEDIA_RELEASED = false;
+export const MEDIA_RELEASED = true;
 
 export const PUBLISHED_MEDIA: Readonly<Record<string, string>> = manifest.files;
 

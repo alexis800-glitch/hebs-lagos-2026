@@ -166,7 +166,7 @@ describe("media", () => {
   });
 
   it("does not block a launch for paperwork; only restricted media or files still in the review folder", () => {
-    const b = launchBlockers({ config: { ...OPEN, pages: ["home", "tickets", "gallery"] }, statuses: ["approved"] }).map((x) => x.id);
+    const b = launchBlockers({ config: { ...OPEN, pages: ["home", "tickets", "gallery"] }, statuses: ["approved"], mediaReleased: false }).map((x) => x.id);
     expect(b).not.toContain("media-restricted-home");
     expect(b).not.toContain("media-restricted-gallery");
     expect(b).toContain("media-release-gallery");

@@ -43,7 +43,6 @@ next-env.d.ts
 /public/_review/
 
 # HEBS 2027 media prepared for publication: added only in the launch commit (lib/assets/published-media-2027.ts).
-public/2027/media
 
 # HEBS 2027 booking contract v1.0: private authoritative records, kept locally only (never in the public repo)
 /docs/integration/hebs-2027-booking-contract-v1.0/
