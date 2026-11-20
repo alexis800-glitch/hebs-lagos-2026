@@ -17,6 +17,7 @@ import {
 import { portalLink } from "@/lib/integrations/registration-2027";
 import { bookingLink, portalReturnRule } from "@/lib/integrations/booking-2027";
 import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
+import { CONTACTS_2027, publicContact } from "@/lib/site/contacts-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
 import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
@@ -440,7 +441,7 @@ export function SponsorshipPage(props: PageProps) {
           <div className="lg:col-span-5">
             <h2 id="inquiry-title" style={h2Style}>Sponsorship inquiries.</h2>
             <p className="mt-6 max-w-[40ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>Tell the HEBS team about your brand and how you want to take part.</p>
-            <div className="mt-8"><Pending>{PAGES.sponsorship.contact.text}</Pending></div>
+            <div className="mt-8">{publicContact("enquiries") ? <ContactEmails only={["enquiries"]} fallback={PAGES.sponsorship.contact.text} /> : <Pending>{PAGES.sponsorship.contact.text}</Pending>}</div>
             <SectionNotes notes={notes.slice(1, 2)} opts={opts} ground="ivory" className="mt-6" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
@@ -1005,6 +1006,28 @@ export function GalleryPage(props: PageProps) {
   );
 }
 
+/**
+ * The official 2027 email addresses that have passed their mail-flow tests
+ * (lib/site/contacts-2027.ts), or the page's "published once approved" line.
+ */
+function ContactEmails({ fallback, only = ["enquiries", "tickets"] }: { fallback: string; only?: ("enquiries" | "tickets")[] }) {
+  const shown = only.flatMap((id) => {
+    const address = publicContact(id);
+    return address ? [{ id, address, purpose: CONTACTS_2027[id].purpose }] : [];
+  });
+  if (shown.length === 0) return <Pending>{fallback}</Pending>;
+  return (
+    <ul className="space-y-2 text-[15px]">
+      {shown.map((e) => (
+        <li key={e.id}>
+          <span style={{ color: C.body }}>{e.purpose}: </span>
+          <a href={`mailto:${e.address}`} className={quietLink} style={{ color: C.black }}>{e.address}</a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /* ── Contact us ─────────────────────────────────────────────────────── */
 
 export function ContactPage(props: PageProps) {
@@ -1020,7 +1043,7 @@ export function ContactPage(props: PageProps) {
             <h2 id="message-title" style={h2Style}>Contact form.</h2>
             <div>
               <h3 className="text-[14px] font-semibold">Email</h3>
-              <div className="mt-3"><Pending>{c.emails.text}</Pending></div>
+              <div className="mt-3"><ContactEmails fallback={c.emails.text} /></div>
             </div>
             <div>
               <h3 className="text-[14px] font-semibold">Social media</h3>
