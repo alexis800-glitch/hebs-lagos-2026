@@ -102,17 +102,21 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Closing film of the 2026 styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Play the closing film | Image descriptions and labels | An accessible label: says what the control or region does. |
 
-## Tickets & registration: routine wording (10 items, reference 85b438b9)
+## Tickets & registration: routine wording (14 items, reference 62ab985b)
 
 | Wording | Where | Evidence |
 |---|---|---|
 | Tickets & registration | Page title | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
-| Tickets for HEBS Lagos 2027 are not on sale yet. Ticket categories, prices and registration open once they are officially approved. | Introduction | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
+| Tickets for HEBS Lagos 2027 are not on sale yet. Ticket categories and prices are below; registration opens once payment is ready. | Introduction | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Ticket sales are not open. No payment is taken through this website until ticket sales are officially opened. | Ticket status | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Ticket categories and prices are published here once approved. | Categories | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | July 2027 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Ticket sales. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Ticket categories. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| One Day Pass ₦15,000 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Two Days Pass ₦25,000 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Three Days Pass ₦75,000 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| VIP Experience ₦560,000 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | No payment is requested through the priority list. | Page layout | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Nothing can be submitted here for now, and no personal details are collected. When the list opens, the sign-up form appears in this section. | Page layout | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Tickets & registration \| HEBS Lagos 2027 | Search and social preview | Dates and days: owner directive sections 2 and 4C (CAMPAIGN, EDITION_DAYS in lib/editions/2027.ts). |

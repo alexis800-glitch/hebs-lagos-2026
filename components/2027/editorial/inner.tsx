@@ -18,6 +18,7 @@ import { portalLink } from "@/lib/integrations/registration-2027";
 import { bookingLink, portalReturnRule } from "@/lib/integrations/booking-2027";
 import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
 import { CONTACTS_2027, publicContact } from "@/lib/site/contacts-2027";
+import { TICKET_CATALOGUE_2027, formatNgn } from "@/lib/content/tickets-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
 import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
@@ -739,7 +740,23 @@ export function TicketsPage(props: PageProps) {
       <Section id="categories" ground="white" labelledBy="categories-title" innerClassName="lg:py-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <h2 id="categories-title" className="lg:col-span-5" style={h2Style}>Ticket categories.</h2>
-          <div className="lg:col-span-6 lg:col-start-7"><Pending>{t.categories.text}</Pending></div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            {TICKET_CATALOGUE_2027.status === "approved" ? (
+              <>
+                <ul className="border-t" style={{ borderColor: C.black }}>
+                  {TICKET_CATALOGUE_2027.value.map((c) => (
+                    <li key={c.id} className="flex items-baseline justify-between gap-6 border-b py-4" style={{ borderColor: "rgba(22,17,10,.16)" }}>
+                      <span style={{ ...display, fontWeight: 500, fontSize: "22px" }}>{c.name}</span>
+                      <span className="tabular-nums text-[17px]">{formatNgn(c.priceNgn)}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-[15px] leading-relaxed" style={{ color: C.body }}>{t.pricesNote.text}</p>
+              </>
+            ) : (
+              <Pending>{t.categories.text}</Pending>
+            )}
+          </div>
         </div>
       </Section>
       {/* What ticketing will offer is a business commitment: shown on production only once approved, and marked staging until then. */}

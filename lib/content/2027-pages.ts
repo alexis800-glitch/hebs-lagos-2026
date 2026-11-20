@@ -97,11 +97,12 @@ export const PAGES = {
   },
   tickets: {
     title: draft("Tickets & registration"),
-    intro: draft("Tickets for HEBS Lagos 2027 are not on sale yet. Ticket categories, prices and registration open once they are officially approved."),
+    intro: draft("Tickets for HEBS Lagos 2027 are not on sale yet. Ticket categories and prices are below; registration opens once payment is ready."),
     status: draft("Ticket sales are not open. No payment is taken through this website until ticket sales are officially opened."),
     categories: draft("Ticket categories and prices are published here once approved."),
+    pricesNote: draft("Prices are in naira. Tickets are sold only through the official HEBS Lagos booking portal, once sales open."),
     /** Directive section 6, what ticketing will support once released. */
-    willSupport: ["Different ticket categories", "Secure online payment", "Automatic confirmation emails", "A unique ticket reference and QR code", "Secure handling of attendee details"],
+    willSupport: ["Different ticket categories", "Payment by bank transfer in naira", "Automatic confirmation emails", "A unique ticket reference and QR code", "Secure handling of attendee details"],
     willSupportNote: draft("When tickets are released, registration will include:"),
   },
   gallery: {

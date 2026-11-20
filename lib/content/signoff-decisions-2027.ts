@@ -145,7 +145,8 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
     reference: "Veridion content verification of the first-launch routine wording, block reference 85b438b9; evidence per line in docs/launch/2027-veridion-verification.md. Verified by Claude at Veridion's instruction of 11 Nov 2026.",
     texts: {
       "pages.tickets.title": "Tickets & registration",
-      "pages.tickets.intro": "Tickets for HEBS Lagos 2027 are not on sale yet. Ticket categories, prices and registration open once they are officially approved.",
+      // "pages.tickets.intro" retired 21 Nov 2026: management approved the 2026 ticket prices, which the page now shows, so the
+      // old line ("…prices … open once they are officially approved") stopped being true. The new wording awaits approval.
       "pages.tickets.status": "Ticket sales are not open. No payment is taken through this website until ticket sales are officially opened.",
       "pages.tickets.categories": "Ticket categories and prices are published here once approved.",
       "layout.tickets.82cda900c5": "July 2027",
