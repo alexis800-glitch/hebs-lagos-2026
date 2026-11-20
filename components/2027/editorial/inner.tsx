@@ -15,7 +15,7 @@ import {
   CATEGORIES_2027, COMPETITIONS_2027, COMPETITION_COUNT_2027, EDITION_DAYS, PROGRAMME_2027, VENUE,
 } from "@/lib/editions/2027";
 import { portalLink } from "@/lib/integrations/registration-2027";
-import { bookingLink } from "@/lib/integrations/booking-2027";
+import { bookingLink, portalReturnRule } from "@/lib/integrations/booking-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
 import { REVIEW_ASSETS, findReviewAsset } from "@/lib/assets/home-2027-review";
@@ -311,7 +311,7 @@ export function CompetitionsPage(props: PageProps) {
   return (
     <Shell page="competitions" opts={opts} notes={props.notes ?? "inline"} groups={[["Competitions", notes]]}>
       {/* Booking links (staging, or the approved production portal) carry the website's own origin back to the portal. */}
-      {bookingLink("booking") ? <PortalReturn /> : null}
+      {bookingLink("booking") ? <PortalReturn allow={portalReturnRule()} /> : null}
       <PageHero accent={2} media={HERO_MEDIA.competitions} title={sentenceCase(COPY.competitions.headline.text)} intro={PAGES.competitions.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <PageContents items={pathways} />
       </PageHero>
@@ -680,7 +680,7 @@ export function TicketsPage(props: PageProps) {
   return (
     <Shell page="tickets" opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
       {/* Booking links (staging, or the approved production portal) carry the website's own origin back to the portal. */}
-      {bookingLink("booking") ? <PortalReturn /> : null}
+      {bookingLink("booking") ? <PortalReturn allow={portalReturnRule()} /> : null}
       <PageHero accent={1} composition="dates" title={t.title.text} intro={t.intro.text} opts={opts} notes={notes.slice(0, 1)}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Button href={PRIORITY_HREF} className="mt-8">{PRIORITY_CTA}</Button>
