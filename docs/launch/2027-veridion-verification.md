@@ -3,7 +3,7 @@
 Routine wording (category A) on the homepage, the Tickets page and the shared navigation and footer, checked against its source.
 Each block below is approved in signoff-decisions-2027.ts in exactly this wording. A line that changes later returns for verification.
 
-## Home: routine wording (94 items, reference 01dd7e05)
+## Home: routine wording (98 items, reference 2bf695b5)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -64,6 +64,8 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Watch HEBS 2026 | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Watch HEBS Lagos 2026. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Play | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| 2026 highlights HEBS Lagos 2026 in 35 seconds Cleared | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Styling The styling floor Cleared | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | HAIR · EDUCATION · BEAUTY · SUMMIT · LAGOS · | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Film of the 2026 styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Play the styling-floor film | Image descriptions and labels | An accessible label: says what the control or region does. |
@@ -90,6 +92,8 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | A braiding competitor at work, HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-main (House of Snapp, HEBS Lagos 2026). |
 | A winner celebrating beside the HEBS trophy, 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-trophy (House of Snapp, HEBS Lagos 2026). |
 | The seven categories | Image descriptions and labels | An accessible label: says what the control or region does. |
+| Play the film: HEBS Lagos 2026 in 35 seconds | Image descriptions and labels | An accessible label: says what the control or region does. |
+| Films | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Play the film: The styling floor | Image descriptions and labels | An accessible label: says what the control or region does. |
 | Enlarge photograph: A full session at HEBS Lagos 2026 | Image descriptions and labels | An accessible label: says what the control or region does. |
 | A full session at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: sp-hall (House of Snapp, HEBS Lagos 2026). |

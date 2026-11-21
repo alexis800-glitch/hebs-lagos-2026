@@ -33,7 +33,7 @@ export const WATCH = {
   label: "Watch HEBS 2026",
   title: "Watch",
   accent: "HEBS Lagos 2026.",
-  body: "Moments from the HEBS Lagos 2026 summit days, filmed by VMM. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.",
+  body: "Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.",
   /**
    * The film library, in order. Each film names its register assets and their pixel
    * sizes. A film's status follows its register entry: owner-approved and published,
@@ -41,6 +41,7 @@ export const WATCH = {
    * production). A film whose files are absent is simply left out.
    */
   films: [
+    { key: "recap-2026", category: "2026 highlights", title: "HEBS Lagos 2026 in 35 seconds", meta: "Filmed at NJS Royale Events Center, Lekki, Oct 2026 · 35 seconds, silent", wide: { id: "recap-2026-wide", w: 1280, h: 720 } },
     { key: "styling-floor", category: "Styling", title: "The styling floor", meta: "HEBS Lagos 2026 · Film by VMM · 12 seconds, silent", wide: { id: "hero-loop-wide", w: 960, h: 900 }, tall: { id: "hero-loop-tall", w: 720, h: 1280 } },
   ],
   /**

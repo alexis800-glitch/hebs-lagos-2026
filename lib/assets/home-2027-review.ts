@@ -22,7 +22,7 @@ export type ReviewBadge =
   | "brand"; // provisional HEBS mark
 
 /** Where review material came from, for its publication record (lib/content/signoff-2027.ts). */
-export type ReviewCollection = "house-of-snapp" | "vmm-summit" | "vmm-preparty" | "vmm-oct22" | "njs-concept" | "brand-mark";
+export type ReviewCollection = "house-of-snapp" | "vmm-summit" | "hebs-2026-film" | "vmm-preparty" | "vmm-oct22" | "njs-concept" | "brand-mark";
 
 export interface ReviewAsset extends AssetRecord {
   kind: "image" | "video";
@@ -154,6 +154,18 @@ export const OWNER_MEDIA_APPROVAL = {
   reference: "Owner's confirmation to Veridion, 11 Nov 2026, restated on later instructions",
 } as const;
 
+/**
+ * Permission to use the HEBS Lagos 2026 footage (the Day 1 and panel-session films
+ * delivered on flash drives) for the 2027 website and promotional presentation,
+ * confirmed by Mrs. Shuler and relayed by Gary on 21 Nov 2026.
+ */
+export const FOOTAGE_2026_APPROVAL = {
+  by: "Mrs. Shuler, event owner (relayed by Gary)",
+  date: "2026-11-21",
+  reference: "Owner's confirmation of 21 Nov 2026: HEBS Lagos 2026 footage authorised for the 2027 website and promotional presentation",
+} as const;
+const RECAP_2026 = "HEBS Lagos 2026 recap, edited by Veridion from the Day 1 Full Video and Panel Session Day 1 films (4K masters on the HEBS flash drives): opening title names the 2026 venue, closing card names the 2027 dates and venue; no cheque or prize-figure shots";
+
 /** Decision D3: the existing HEBS Lagos 2027 logo (2027 inside the gold continent) is approved. */
 export const MARK_APPROVAL = {
   by: "Mrs. Shuler, event owner",
@@ -167,11 +179,12 @@ const CHAMP_ALT = "HEBS Lagos 2026 prize presentation: recipients on stage with 
 const OCT22 =
   "VMM photograph of the 22 Oct 2026 gathering at a different Lagos hotel. Not confirmed as an official HEBS activity; never described as NJS";
 
-type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2" | "snapp-d1-floor" | "snapp-d2-floor", detail?: string];
+type Spec = [id: string, kind: "image" | "video", file: string, alt: string, badge: ReviewBadge, kindOf: "s06" | "preview" | "preparty" | "oct22" | "njs-ai" | "njs-unknown" | "mark" | "snapp-d1" | "snapp-d2" | "snapp-d1-floor" | "snapp-d2-floor" | "recap-2026", detail?: string];
 
 const SPECS: Spec[] = [
   ["hero-loop-wide", "video", "hair-wide.mp4", "", "photographed", "s06", "S06 0:32–0:35.5 and 0:01–0:04.5, half speed, colour graded"],
   ["hero-loop-tall", "video", "hair-tall.mp4", "", "photographed", "s06", "Phone crop of the same loop"],
+  ["recap-2026-wide", "video", "recap-2026-wide.mp4", "", "photographed", "recap-2026", "34.8 s silent recap edited from the Day 1 and panel-session films (21 Nov 2026)"],
   ["hero-poster", "image", "hero-poster.webp", "", "photographed", "s06"],
   ["x-hero-card-guest", "image", "x-hero-card-guest.webp", "A guest at the HEBS Lagos 2026 pre-party", "photographed", "preparty", "DSC00318"],
   ["x-hero-card-terrace", "image", "x-hero-card-terrace.webp", "Guests on the NJS terrace at the 2026 pre-party", "photographed", "preparty", "DSC00261"],
@@ -295,6 +308,7 @@ const SPECS: Spec[] = [
 function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset {
   const collection: ReviewCollection =
     kindOf === "s06" || kindOf === "preview" ? "vmm-summit"
+    : kindOf === "recap-2026" ? "hebs-2026-film"
     : kindOf === "preparty" ? "vmm-preparty"
     : kindOf === "oct22" ? "vmm-oct22"
     : kindOf === "njs-ai" || kindOf === "njs-unknown" ? "njs-concept"
@@ -304,7 +318,7 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
   // styling-floor film; D3 covers the 2027 logo. Everything else stays review-only.
   // Prize-presentation photographs (champ-*) stay review-only: the winners rail shows
   // them only in review until the organisers verify names, placings and prizes (D8).
-  const published = (collection === "house-of-snapp" && !id.startsWith("champ-")) || collection === "vmm-summit" || collection === "brand-mark";
+  const published = (collection === "house-of-snapp" && !id.startsWith("champ-")) || collection === "vmm-summit" || collection === "hebs-2026-film" || collection === "brand-mark";
   const dir = published ? MEDIA_DIR : REVIEW_DIR;
   const base = {
     id,
@@ -341,6 +355,21 @@ function record([id, kind, file, alt, badge, kindOf, detail]: Spec): ReviewAsset
         ownerApproval: OWNER_MEDIA_APPROVAL,
         followUp: "VMM's written licence for the film is not on file. No restriction on its use is known.",
         restriction: "Approved by the event owner. VMM licence to file for the records.",
+      };
+    case "recap-2026":
+      return {
+        ...base,
+        eventYear: 2026,
+        edition: "HEBS Lagos 2026",
+        location: "NJS Royale Events Center, Richland Garden Estate, Lekki-Epe Expressway, Lagos (2026 summit days; not NJS Beach Resort)",
+        origin: "hebs-lagos-event",
+        provenance: "hebs-event-photo",
+        rights: { holder: "HEBS (2026 event footage; filming crew to be credited)", permission: "not-recorded", peopleConsent: "unknown" },
+        permittedDepictions: ["real-event"],
+        source: RECAP_2026 + note,
+        ownerApproval: FOOTAGE_2026_APPROVAL,
+        followUp: "Attribution (the filming crew) and the licence paperwork are to be filed for the records.",
+        restriction: "Approved by the event owner for the 2027 website and promotion. It shows the 2026 summit venue in Lekki and must never be presented as NJS Beach Resort.",
       };
     case "preparty":
       return {

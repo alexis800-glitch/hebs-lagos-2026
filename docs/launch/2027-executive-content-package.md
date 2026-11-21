@@ -1,6 +1,6 @@
 # HEBS Lagos 2027 website: launch approval
 
-For Mrs. Shuler, from Veridion. Reference 8466e417.
+For Mrs. Shuler, from Veridion. Reference ae0c7a62.
 
 ## 1. What we are asking you to approve
 
@@ -26,11 +26,11 @@ In the order a visitor reads it. Reply to each passage with *Approved*, *Changes
 
 ### Homepage: Page layout
 
-> Moments from the HEBS Lagos 2026 summit days, filmed by VMM. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.
+> Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.
 
-> The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent Cleared for the website
+> HEBS Lagos 2026 in 35 seconds Filmed at NJS Royale Events Center, Lekki, Oct 2026 · 35 seconds, silent Cleared for the website
 
-<sub>Passage reference owner-home-page-layout / 940febb2</sub>
+<sub>Passage reference owner-home-page-layout / 86dd33a7</sub>
 
 ### Homepage: Page layout
 

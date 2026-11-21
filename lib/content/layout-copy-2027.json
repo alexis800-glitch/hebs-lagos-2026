@@ -230,10 +230,10 @@
    "text": "Watch HEBS Lagos 2026."
   },
   {
-   "key": "layout.home.b48ece4436",
+   "key": "layout.home.475242a137",
    "scope": "home",
    "where": "page",
-   "text": "Moments from the HEBS Lagos 2026 summit days, filmed by VMM. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication."
+   "text": "Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication."
   },
   {
    "key": "layout.home.5d12bd5355",
@@ -242,10 +242,22 @@
    "text": "Play"
   },
   {
-   "key": "layout.home.a183b6e21c",
+   "key": "layout.home.4a9d230a8d",
    "scope": "home",
    "where": "page",
-   "text": "The styling floor HEBS Lagos 2026 · Film by VMM · 12 seconds, silent Cleared for the website"
+   "text": "HEBS Lagos 2026 in 35 seconds Filmed at NJS Royale Events Center, Lekki, Oct 2026 · 35 seconds, silent Cleared for the website"
+  },
+  {
+   "key": "layout.home.5a84009891",
+   "scope": "home",
+   "where": "page",
+   "text": "2026 highlights HEBS Lagos 2026 in 35 seconds Cleared"
+  },
+  {
+   "key": "layout.home.ef4b996a9a",
+   "scope": "home",
+   "where": "page",
+   "text": "Styling The styling floor Cleared"
   },
   {
    "key": "layout.home.ec14ff3a08",
@@ -408,6 +420,18 @@
    "scope": "home",
    "where": "alt",
    "text": "The seven categories"
+  },
+  {
+   "key": "layout.home.31e6481387",
+   "scope": "home",
+   "where": "alt",
+   "text": "Play the film: HEBS Lagos 2026 in 35 seconds"
+  },
+  {
+   "key": "layout.home.9db12f3682",
+   "scope": "home",
+   "where": "alt",
+   "text": "Films"
   },
   {
    "key": "layout.home.a8f9773ba7",

@@ -84,3 +84,17 @@ describe("Travel: venue location and facilities (owner decisions, 21 Nov 2026)",
     expect(html).not.toContain("Development update.");
   });
 });
+
+describe("HEBS Lagos 2026 recap film (owner permission, 21 Nov 2026)", () => {
+  it("is labelled as the 2026 Lekki venue, published, and never shown on the Travel page", async () => {
+    const { WATCH } = await import("@/lib/content/media-sections-2027");
+    const { findReviewAsset } = await import("@/lib/assets/home-2027-review");
+    const film = WATCH.films.find((f) => f.key === "recap-2026");
+    expect(film?.meta).toMatch(/NJS Royale Events Center, Lekki/);
+    expect(film?.meta).not.toMatch(/Beach Resort/);
+    const a = findReviewAsset("recap-2026-wide");
+    expect(a?.published).toBe(true);
+    expect(a?.location).toMatch(/not NJS Beach Resort/);
+    expect(render("development")).not.toContain("recap-2026");
+  });
+});

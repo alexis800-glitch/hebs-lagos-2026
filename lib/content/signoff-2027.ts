@@ -471,6 +471,7 @@ export interface MediaRecord {
 const MEDIA_TITLE: Record<ReviewCollection, string> = {
   "house-of-snapp": "House of Snapp photographs, HEBS Lagos 2026 summit days",
   "vmm-summit": "VMM film of the 2026 styling floor",
+  "hebs-2026-film": "HEBS Lagos 2026 recap film (NJS Royale Events Center, Lekki)",
   "vmm-preparty": "VMM photographs of the 2026 Welcome Pre-Party (DSC00261–00353)",
   "vmm-oct22": "VMM photographs of the 22 Oct 2026 gathering",
   "njs-concept": "NJS concept films of the pool terrace and guests",
