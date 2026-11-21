@@ -44,9 +44,9 @@ export interface LaunchConfig {
 /** The launch switch. Changing it is a reviewed commit, never a setting. */
 export const LAUNCH_2027: LaunchConfig = {
   authorisation: {
-    by: "HEBS management (written launch approval to Veridion; Mrs. Shuler's separate written authorisation to be documented under the owner approval process)",
+    by: "HEBS management, within its authorised project responsibilities (not recorded as Mrs. Shuler's written approval)",
     on: "2026-11-21",
-    reference: "Launch decision of 21 Nov 2026: \"I approve the launch scope covering all 13 HEBS Lagos 2027 website pages\", with authority to finalise the website wording (docs/launch/2027-launch-record.md)",
+    reference: "Launch decision and explicit release instruction of 21 Nov 2026: \"PROCEED WITH THE HEBS LAGOS 2027 INFORMATION-ONLY WEBSITE LAUNCH\", all 13 pages (docs/launch/2027-launch-record.md)",
   },
   pages: ["home", "about", "experience", "programme", "education", "competitions", "speakers", "exhibitors", "sponsorship", "tickets", "travel", "gallery", "contact"],
   /** Launched without, and added when ready: NJS Beach Resort photography, the priority form, the QR code and partner inquiries. */

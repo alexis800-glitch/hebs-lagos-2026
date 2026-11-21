@@ -21,10 +21,13 @@ HEBS management's written launch decision to Veridion, 21 Nov 2026:
   - Excluded on purpose: `pages.tickets.willSupportNote` (what registration will include). Those are commitments that stay withheld while sales and payments are closed.
 - Forms stay closed (`FORMS_OPEN` all false). Production booking links stay closed (`PRODUCTION_PORTAL` awaiting Desktop's acceptance). Ticket prices are shown with sales closed.
 
-## Still required before production deployment
+## Release instruction (21 Nov 2026, late)
 
-1. Mrs. Shuler's written authorisation, documented under the owner approval process. Then an explicit instruction to deploy.
-2. The release branch pushed, a pull request into master reviewed, and the production rehearsal repeated on that exact build.
+HEBS management's explicit instruction: "PROCEED WITH THE HEBS LAGOS 2027 INFORMATION-ONLY WEBSITE LAUNCH." It covers all 13 pages, the final wording, the 2026 recap film, Travel & Accommodation and the design, and authorises pushing the release branch, merging into master and deploying to hebslagos.com once all production safety gates pass.
+
+It is given within HEBS management's authorised project responsibilities and is **not** recorded as Mrs. Shuler's written approval. No binding legal restriction on publication was identified. Mrs. Shuler's own written authorisation remains a records item under the owner approval process.
+
+Kept disabled: public registration, ticket sales, payments (portal EV_PAYMENTS_FROZEN), email-dependent forms, unverified email addresses, unapproved legal documents and unverified NJS information.
 
 ## Rollback
 
