@@ -17,6 +17,21 @@ const config: Config = {
         neutral: {
           950: "#050505",
         },
+        // HEBS 2027 design tokens. Namespaced so no 2026 class changes meaning.
+        // Contrast (WCAG): ivory/ink 17.4, champagne/ink 9.4, muted/ink 9.3,
+        // ocean/ivory 5.4. Champagne text is never used on ivory (1.8).
+        h27: {
+          ink: "#0A0907",
+          "ink-2": "#15130F",
+          line: "#2A261F",
+          champagne: "#C8B07A",
+          "champagne-light": "#E6D5A8",
+          ivory: "#F5EFE3",
+          muted: "#B9B0A0",
+          "muted-dark": "#5E574C",
+          ocean: "#2E6A73",
+          "ocean-light": "#7FB3BA",
+        },
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "sans-serif"],

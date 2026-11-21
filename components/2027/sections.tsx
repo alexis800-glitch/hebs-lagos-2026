@@ -1,0 +1,45 @@
+/**
+ * Chrome shared by every 2027 staging page: the preview banner, the header of
+ * the internal status page and the footer. The homepage and announcement page
+ * sections live in components/2027/editorial (Direction A).
+ */
+import Image from "next/image";
+import { StagingStrip } from "./site/ui";
+import { findAsset } from "@/lib/assets/register";
+
+/* ── Preview banner ─────────────────────────────────────────────────── */
+
+/** The staging notice: one design across the 2027 site (components/2027/site/ui.tsx). */
+export function PreviewBanner() {
+  return <StagingStrip />;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+
+export function Header2027({ home }: { home: string }) {
+  const logo = findAsset("hebs-logo-nav");
+  return (
+    <header className="sticky top-0 z-40 border-b border-h27-line bg-h27-ink/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 sm:px-8 py-3">
+        <a href={home} className="flex items-center gap-3" aria-label="HEBS Lagos 2027 preview home">
+          <Image src={logo.src} alt="" width={48} height={40} className="h-10 w-auto" />
+          <span className="font-serif text-lg text-h27-ivory">Lagos 2027</span>
+        </a>
+        <nav aria-label="2027 preview" className="hidden md:block">
+          <ul className="flex gap-6 text-xs uppercase tracking-[0.18em] text-h27-muted">
+            <li><a className="hover:text-h27-ivory" href="/2027/homepage#experience">Experience</a></li>
+            <li><a className="hover:text-h27-ivory" href="/2027/homepage#competitions">Competitions</a></li>
+            <li><a className="hover:text-h27-ivory" href="/2027/homepage#partners">Partners</a></li>
+          </ul>
+        </nav>
+        <a
+          href={`${home}#priority-list`}
+          className="hidden sm:inline-flex min-h-[44px] items-center border border-h27-champagne/60 px-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-h27-ivory hover:bg-h27-champagne/10"
+        >
+          Priority list
+        </a>
+      </div>
+    </header>
+  );
+}
+

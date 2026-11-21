@@ -1,0 +1,252 @@
+/**
+ * HEBS 2027 page content and traceability.
+ *
+ * Two deliverables, kept distinct (Phase 2A instruction 2):
+ *   - ANNOUNCEMENT_ITEMS: the eight launch requirements of directive section 11
+ *   - HOMEPAGE_SECTIONS: the ten homepage sections A-J of directive section 4
+ *
+ * Headlines quoted in the directive are `approved`. Body copy written for the
+ * preview from the directive's own wording is `provisional` until the owner
+ * signs it off. Nothing here states a fact the directive or the owner has not
+ * supplied: no speakers, sponsors, prices, times, amenities or figures.
+ */
+
+import { HOME_COPY_STATUS } from "./home-2027";
+import type { PublicationStatus } from "../publication";
+import { EDITION_DAYS, VENUE } from "../editions/2027";
+import { MEDIA_SLOTS, findAsset } from "../assets/register";
+import { PAGES } from "./2027-pages";
+import { DIRECTIVE_HEADLINES as D } from "./directive-headlines-2027";
+import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "./signoff-decisions-2027";
+
+export interface CopyBlock {
+  status: PublicationStatus;
+  text: string;
+}
+
+const directive = (text: string): CopyBlock => ({ status: "approved", text });
+const draft = (text: string): CopyBlock => ({ status: "provisional", text });
+
+export type HomepageSectionId = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J";
+
+export interface HomepageSection {
+  id: HomepageSectionId;
+  anchor: string;
+  name: string;
+  /** Phase in which the section is complete with approved content. */
+  completesIn: "2A" | "2B" | "3" | "4" | "5";
+  /** Structure is built in the Phase 2A preview. */
+  structureBuilt: boolean;
+  /** What still blocks the finished section. Empty = nothing. */
+  dependencies: string[];
+}
+
+/** Directive section 4, A-J. Completion phase per the Phase 2A plan. */
+export const HOMEPAGE_SECTIONS: HomepageSection[] = [
+  { id: "A", anchor: "hero", name: "Main hero", completesIn: "2B", structureBuilt: true,
+    dependencies: ["Approved resort hero media", "Priority list live (D1, D13)"] },
+  { id: "B", anchor: "welcome", name: "Welcome to HEBS 2027", completesIn: "2B", structureBuilt: true,
+    dependencies: ["Owner approval of body copy"] },
+  { id: "C", anchor: "three-days", name: "Three days, one extraordinary destination", completesIn: "4", structureBuilt: true,
+    dependencies: ["Day photography", "Event Program page (Phase 4)"] },
+  { id: "D", anchor: "experience", name: "The HEBS experience (six experiences)", completesIn: "4", structureBuilt: true,
+    dependencies: ["One approved image per experience", "Destination pages each card links to (Phase 4)", "Owner approval of body copy"] },
+  { id: "E", anchor: "destination", name: "The destination: Beauty meets paradise", completesIn: "2B", structureBuilt: true,
+    dependencies: ["NJS-approved photography and promotional video"] },
+  { id: "F", anchor: "competitions", name: "Competitions", completesIn: "4", structureBuilt: true,
+    dependencies: ["2027 rules, eligibility, fees, schedule and deadline approvals", "Prize currency presentation (D8)", "Application route (D1)"] },
+  { id: "G", anchor: "education", name: "Education and masterclasses", completesIn: "4", structureBuilt: true,
+    dependencies: ["Confirmed educators and sessions", "Education imagery"] },
+  { id: "H", anchor: "partners", name: "Sponsors and exhibitors", completesIn: "3", structureBuilt: true,
+    dependencies: ["Inquiry storage and administration (D1)", "Approved 2027 prospectus", "Public contacts (D10)"] },
+  { id: "I", anchor: "highlights-2026", name: "HEBS 2026 highlights", completesIn: "5", structureBuilt: true,
+    dependencies: ["Approved Lagos 2026 photos, video and testimonials", "2026 archive page (Phase 5)"] },
+  { id: "J", anchor: "final-cta", name: "Final call to action", completesIn: "2B", structureBuilt: true,
+    dependencies: ["Priority list live (D1, D13)"] },
+];
+
+export type AnnouncementId = "identity" | "dates" | "venue" | "overview" | "imagery" | "priority-form" | "qr" | "partner-inquiry";
+
+export interface AnnouncementItem {
+  id: AnnouncementId;
+  requirement: string;
+  where: string;
+  state: "built" | "built-pending-content" | "gated";
+  dependency: string;
+}
+
+/**
+ * An announcement item counts as approved once built, or once the owner's launch
+ * authorisation defers it (`deferred`: the ids LAUNCH_2027.deferred lists, in
+ * effect only once LAUNCH_2027.authorisation is recorded).
+ */
+export function announcementStatus(i: AnnouncementItem, deferred: readonly AnnouncementId[] = []): PublicationStatus {
+  return i.state === "built" || deferred.includes(i.id) ? "approved" : "awaiting-confirmation";
+}
+
+/** Directive section 11: the eight launch items. */
+export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
+  { id: "identity", requirement: "Official 2027 campaign identity", where: "Hero", state: "built", dependency: "" },
+  { id: "dates", requirement: "July 23–25, 2027 dates", where: "Hero, three-day overview, final CTA", state: "built", dependency: "" },
+  { id: "venue", requirement: "NJS Beach Resort venue", where: "Hero, destination", state: "built", dependency: "" },
+  { id: "overview", requirement: "Three-day event overview", where: "Three-day overview", state: "built", dependency: "" },
+  { id: "imagery", requirement: "Luxury promotional imagery", where: "Hero, destination", state: "built-pending-content", dependency: "photographs of the NJS Beach Resort itself (the approved photographs show the 2026 summit)" },
+  { id: "priority-form", requirement: "Working priority registration form", where: "Priority list", state: "gated", dependency: "Storage and administration (D1), privacy terms (D13)" },
+  { id: "qr", requirement: "QR code for immediate access", where: "QR block", state: "gated", dependency: "Publication date (the address, hebslagos.com/2027, is decided: D7)" },
+  { id: "partner-inquiry", requirement: "Sponsor/exhibitor inquiry option", where: "Partners", state: "gated", dependency: "Inquiry storage (D1), public contacts (D10)" },
+  // "Mobile-friendly presentation" is verified by the responsive checks, not rendered.
+];
+
+export const COPY = {
+  /** Search and social sharing: the homepage title and description, and pages without an intro. */
+  seo: {
+    homeTitle: draft("HEBS Lagos 2027 | Hair Education Beauty Summit"),
+    homeDescription: draft("The Hair Education Beauty Summit returns to Lagos, July 23–25, 2027: three days of education, competitions, exhibitions, networking and celebration."),
+    aboutDescription: draft("The Hair Education Beauty Summit: its history, mission and vision, from its United States editions to Lagos."),
+  },
+  welcome: {
+    headline: directive(D.welcome),
+    body: draft(
+      "HEBS brings together the beauty industry's professionals, educators, innovators, entrepreneurs and emerging talents. For three days in Lagos, the summit is built around education, professional development, excellence, collaboration and opportunity.",
+    ),
+  },
+  experience: {
+    headline: draft("THE HEBS EXPERIENCE"),
+    items: [
+      { slot: "exp-education", title: "Professional Beauty Education", body: draft("Hair education, technical training and live demonstrations led by working professionals.") },
+      { slot: "exp-competitions", title: "Hair and Beauty Competitions", body: draft("Competitions that recognise talent, creativity and technical excellence across every category.") },
+      { slot: "exp-exhibitions", title: "Exhibitions and Brand Showcases", body: draft("Brands and businesses presenting products, tools and services to the professionals who use them.") },
+      { slot: "exp-networking", title: "International Networking", body: draft("Built to bring together beauty professionals from Nigeria, across Africa, the United States, Europe and beyond.") },
+      { slot: "exp-entertainment", title: "Entertainment and Celebrations", body: draft("An opening celebration, live moments on stage and closing celebrations across the three days.") },
+      { slot: "exp-destination", title: "Luxury Destination Experiences", body: draft("A resort on the Atlantic coast that brings the whole summit together in one destination.") },
+    ],
+  },
+  destination: {
+    headline: directive(D.destination),
+    body: draft(
+      "For the first time, the entire HEBS experience takes place at NJS Beach Resort, on the Atlantic coast of Lagos: education, competitions, exhibitions, networking and celebrations in one destination.",
+    ),
+    restriction: "Rooms, packages, availability and amenities are published only once approved.",
+    /** The directive's own list of what the destination section introduces (4E). */
+    topics: ["The Atlantic coastline", "Resort atmosphere", "Hospitality", "Dining", "Planned event experiences"],
+    topicsNote: draft("Details of each are published as NJS Beach Resort confirms them."),
+  },
+  competitions: {
+    headline: directive(D.competitions),
+    body: draft(
+      "HEBS competitions recognise talent, creativity and professional excellence. The 2027 competition categories and prize values remain the same as 2026.",
+    ),
+    pending: "2027 rules, eligibility, schedule, entry fees and application dates will be published once approved.",
+    /** The five links directive 4F asks for; each becomes a link when its page exists. */
+    pathways: ["Competition categories", "Eligibility and requirements", "Competition rules", "Application or registration", "Awards and prizes"],
+  },
+  education: {
+    headline: draft("EDUCATION & MASTERCLASSES"),
+    body: draft(
+      "Professional education is one of HEBS's strongest foundations. Speakers and instructors are announced as they are officially confirmed.",
+    ),
+    tracks: ["Hair education", "Technical training", "Live demonstrations", "Beauty business development", "Professional masterclasses"],
+  },
+  partners: {
+    headline: directive(D.partners),
+    body: draft(
+      "Sponsorship, exhibition, brand activation and strategic partnership opportunities for businesses that want to reach the beauty industry in Lagos and beyond.",
+    ),
+    pathways: [
+      { title: "Sponsorship", body: draft("Put your brand beside the summit's education, competitions and celebrations.") },
+      { title: "Exhibitions", body: draft("Show products, tools and services to the professionals who choose them.") },
+      { title: "Brand activation", body: draft("Create moments guests take part in, at the resort and on stage.") },
+      { title: "Strategic partnerships", body: draft("Build a longer relationship with HEBS and its professional community.") },
+    ],
+    gate: draft("Partner inquiries and the 2027 sponsorship prospectus open once approved."),
+  },
+  highlights: {
+    headline: draft("HEBS LAGOS 2026 HIGHLIGHTS"),
+    body: draft(
+      "Photographs and films from the HEBS Lagos 2026 summit days. More are added as they are cleared.",
+    ),
+    /** Directive 4I, the kinds of material this section will hold. */
+    kinds: ["Photographs", "Videos", "Testimonials", "Competition highlights", "Major moments"],
+  },
+  finalCta: {
+    headline: directive(D.finalCta),
+    button: directive(D.finalButton),
+  },
+  priorityList: {
+    headline: directive(D.priorityList),
+    gateNotice:
+      "Preview only. The priority list is not collecting registrations yet. It opens once secure storage, administration and privacy terms are approved.",
+    intro: draft("Be first to hear when registration, tickets and the 2027 programme open."),
+  },
+  qr: {
+    headline: draft("Scan for instant access"),
+    body: draft("A QR code that opens this page is added once its permanent address is confirmed."),
+  },
+} as const;
+
+/* ------------------------------------------------------------------ */
+/* Approval states the preview pages render                            */
+/* ------------------------------------------------------------------ */
+
+export interface ContentEntry {
+  /** Where the copy lives, e.g. "partners.pathways.0.body". */
+  key: string;
+  status: PublicationStatus;
+  text: string;
+}
+
+/**
+ * A copy block's approval state: approved if written so (a directive headline),
+ * or if a recorded sign-off approved exactly this wording at this key
+ * (lib/content/signoff-decisions-2027.ts). Changing approved wording returns it
+ * to its written state, so an approval never covers words nobody saw.
+ */
+export function blockStatus(key: string, block: CopyBlock, decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): PublicationStatus {
+  if (block.status === "approved") return "approved";
+  return wordingApproved(key, block.text, decisions) ? "approved" : block.status;
+}
+
+/** Every copy block the 2027 pages render, with its approval state (the content register). */
+export function contentRegister(node: unknown = { ...COPY, pages: PAGES }, path = "", decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): ContentEntry[] {
+  if (!node || typeof node !== "object") return [];
+  if ("status" in node && "text" in node) {
+    const b = node as CopyBlock;
+    return [{ key: path, status: blockStatus(path, b, decisions), text: b.text }];
+  }
+  // An absent field is skipped, never walked: the default argument would stand in the whole register.
+  return Object.entries(node).filter(([, v]) => v != null).flatMap(([k, v]) => contentRegister(v, path ? `${path}.${k}` : k, decisions));
+}
+
+/** The approval states of every copy block under `node`, whose register key is `path`. */
+export function copyStatuses(node: unknown, path = ""): PublicationStatus[] {
+  return contentRegister(node, path).map((e) => e.status);
+}
+
+/**
+ * Every approval state rendered by the 2027 pages, derived from the content
+ * itself so it cannot fall out of date: all copy blocks, the venue name, the
+ * day hours, the logo, every media slot, and the gated items (priority list,
+ * QR, partner inquiries) that have no approved implementation yet.
+ * app/2027/layout.tsx withholds the pages in production unless all are approved.
+ */
+export function previewStatuses(): PublicationStatus[] {
+  return [
+    ...copyStatuses(COPY),
+    HOME_COPY_STATUS,
+    ...copyStatuses(PAGES, "pages"),
+    VENUE.name.status,
+    ...EDITION_DAYS.map((d) => d.hours.status),
+    findAsset("hebs-logo-nav").status,
+    ...MEDIA_SLOTS.map((s) => (s.assetId ? findAsset(s.assetId).status : "awaiting-confirmation" as const)),
+    ...ANNOUNCEMENT_ITEMS.map((i) => announcementStatus(i)),
+  ];
+}
+
+/**
+ * Whether the Tickets page may describe what registration will include (secure
+ * payment, confirmation emails, ticket references). That is a business
+ * commitment, so production shows it only once its wording is approved.
+ */
+export function ticketingDetailsApproved(decisions: readonly SignoffDecision[] = SIGNOFF_DECISIONS): boolean {
+  return blockStatus("pages.tickets.willSupportNote", PAGES.tickets.willSupportNote, decisions) === "approved";
+}

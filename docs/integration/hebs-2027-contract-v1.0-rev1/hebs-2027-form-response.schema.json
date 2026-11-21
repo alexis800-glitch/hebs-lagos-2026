@@ -1,0 +1,90 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "HEBS 2027 public form responses, contract v1.0",
+ "oneOf": [
+  {
+   "title": "201 created",
+   "type": "object",
+   "required": [
+    "reference"
+   ],
+   "properties": {
+    "reference": {
+     "type": "string",
+     "pattern": "^H27-(PRI|SPN|EXH|ENQ)-[2-9A-HJKMNP-Z]{6}$"
+    }
+   }
+  },
+  {
+   "title": "200 duplicate (same client_request_id)",
+   "type": "object",
+   "required": [
+    "reference",
+    "duplicate"
+   ],
+   "properties": {
+    "reference": {
+     "type": "string"
+    },
+    "duplicate": {
+     "const": true
+    }
+   }
+  },
+  {
+   "title": "200 already registered (priority, same email)",
+   "type": "object",
+   "required": [
+    "already_registered"
+   ],
+   "properties": {
+    "already_registered": {
+     "const": true
+    }
+   }
+  },
+  {
+   "title": "202 honeypot",
+   "type": "object",
+   "required": [
+    "accepted"
+   ],
+   "properties": {
+    "accepted": {
+     "const": true
+    }
+   }
+  },
+  {
+   "title": "4xx/5xx error",
+   "type": "object",
+   "required": [
+    "error"
+   ],
+   "properties": {
+    "error": {
+     "enum": [
+      "missing_field",
+      "invalid_email",
+      "client_request_id_required",
+      "unknown_form",
+      "unknown_edition",
+      "invalid_json",
+      "unauthorized",
+      "not_open",
+      "too_large",
+      "server_error",
+      "not_configured",
+      "edition_misconfigured"
+     ]
+    },
+    "field": {
+     "type": "string"
+    },
+    "form": {
+     "type": "string"
+    }
+   }
+  }
+ ]
+}
