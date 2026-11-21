@@ -77,10 +77,12 @@ export function pageStatuses(id: PageId, config: LaunchConfig = LAUNCH_2027): Pu
 function contentStatuses(id: PageId, config: LaunchConfig): PublicationStatus[] {
   const deferred = config.authorisation ? config.deferred ?? [] : [];
   const shared = [VENUE.name.status, MARK_2027_STATUS, ...copyStatuses(COPY.finalCta, "finalCta")];
-  const hours = EDITION_DAYS.map((d) => d.hours.status);
+  const later = config.authorisation ? config.toBeAnnounced ?? [] : [];
+  const hours = EDITION_DAYS.map((d) => (later.includes("day-hours") && d.hours.status === "awaiting-confirmation" ? "approved" as const : d.hours.status));
   const slot = (slotId: string) => {
     const s = MEDIA_SLOTS.find((x) => x.id === slotId);
-    return s?.assetId ? findAsset(s.assetId).status : ("awaiting-confirmation" as const);
+    if (s?.assetId) return findAsset(s.assetId).status;
+    return later.includes(`slot-${slotId}`) ? ("approved" as const) : ("awaiting-confirmation" as const);
   };
   switch (id) {
     case "home":

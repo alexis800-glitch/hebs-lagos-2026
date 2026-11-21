@@ -34,8 +34,9 @@ describe("launch candidate: homepage and Tickets", () => {
     const { LAUNCH_CANDIDATE } = await import("../lib/launch-2027-candidate");
     const real = await vi.importActual<typeof import("../lib/launch-2027-config")>("../lib/launch-2027-config");
     expect(LAUNCH_CANDIDATE.pages).toEqual(["home", "tickets"]);
-    expect(real.LAUNCH_2027.authorisation).toBeNull();
-    expect(real.LAUNCH_2027.pages).toEqual([]);
+    // Superseded on 21 Nov 2026 by the launch of all 13 pages: the candidate's pages are part of it.
+    expect(real.LAUNCH_2027.authorisation?.on).toBe("2026-11-21");
+    for (const p of LAUNCH_CANDIDATE.pages) expect(real.LAUNCH_2027.pages).toContain(p);
   });
 
   it("links only to published pages, the 2026 privacy notice and in-page anchors", async () => {

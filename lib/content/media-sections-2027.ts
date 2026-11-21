@@ -33,7 +33,7 @@ export const WATCH = {
   label: "Watch HEBS 2026",
   title: "Watch",
   accent: "HEBS Lagos 2026.",
-  body: "Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.",
+  body: "Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play.",
   /**
    * The film library, in order. Each film names its register assets and their pixel
    * sizes. A film's status follows its register entry: owner-approved and published,

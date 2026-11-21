@@ -35,11 +35,13 @@ describe("2027 contacts", () => {
     expect(MAIL_FLOW.tickets).toEqual({ inbound: null, reply: null });
     expect(publicContact("enquiries")).toBeNull();
     expect(publicContact("tickets")).toBeNull();
+    expect(publicContact("sponsors")).toBeNull();
+    expect(publicContact("exhibitors")).toBeNull();
     for (const Page of [ContactPage, SponsorshipPage]) {
       const html = renderToStaticMarkup(createElement(Page, { environment: "development" }));
-      expect(html).not.toMatch(/(enquiries|tickets)@hebslagos\.com/);
+      expect(html).not.toMatch(/(enquiries|sponsors|exhibitors|tickets)@hebslagos\.com/);
     }
-    const tested = { enquiries: { inbound: "2026-11-21", reply: null }, tickets: { inbound: "2026-11-21", reply: "2026-11-21" } };
+    const tested = { enquiries: { inbound: "2026-11-21", reply: null }, sponsors: { inbound: null, reply: null }, exhibitors: { inbound: null, reply: null }, tickets: { inbound: "2026-11-21", reply: "2026-11-21" } };
     expect(publicContact("enquiries", CONTACTS_2027, tested)).toBeNull();
     expect(publicContact("tickets", CONTACTS_2027, tested)).toBe("tickets@hebslagos.com");
     const unapproved = { ...CONTACTS_2027, tickets: { ...CONTACTS_2027.tickets, address: { status: "provisional" as const, value: "tickets@hebslagos.com", note: "t" } } };

@@ -14,6 +14,7 @@
  * Pure data with no imports from the content modules, so the content, the launch
  * gate (lib/launch-2027.ts) and the middleware can all read it.
  */
+import LAUNCH_WORDING from "./signoff-launch-2027.json";
 
 export type SignoffDecisionKind = "approved" | "revision-required" | "pending-decision";
 
@@ -196,6 +197,19 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
       "layout.site.94912f1544": "HEBS",
       "layout.site.64e0cfdcb9": "2027",
     },
+  },
+  // Launch wording, 21 Nov 2026. HEBS management approved the launch of all 13 pages and gave Veridion
+  // authority to finalise the website wording ("Do not repeatedly ask me for routine wording approval").
+  // Veridion reviewed every pending line against the approved facts first and corrected the four that
+  // implied unverified facilities or stays (pool terrace, "a place to stay"), then recorded the approval
+  // of each line's exact final text. Any later edit returns that line to review.
+  {
+    item: "launch:wording-2026-11-21",
+    decision: "approved",
+    by: "HEBS management (launch and wording authority given to Veridion)",
+    on: "2026-11-21",
+    reference: "Launch decision of 21 Nov 2026, item 2 \"WEBSITE WORDING — APPROVED\"; wording finalised and recorded by Veridion (docs/launch/2027-launch-record.md)",
+    texts: LAUNCH_WORDING.texts,
   },
 ];
 

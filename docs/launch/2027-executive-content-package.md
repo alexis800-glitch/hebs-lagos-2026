@@ -1,11 +1,11 @@
 # HEBS Lagos 2027 website: launch approval
 
-For Mrs. Shuler, from Veridion. Reference ae0c7a62.
+For Mrs. Shuler, from Veridion. Reference 811c9dc5.
 
 ## 1. What we are asking you to approve
 
 1. **Publish two pages** at hebslagos.com/2027: the 2027 homepage and the Tickets information page.
-2. **Approve the wording** in section 3: 11 short passages (26 lines). We recommend 2 changes, clearly marked.
+2. **Approve the wording** in section 3: 0 short passages (0 lines). We recommend 0 changes, clearly marked.
 3. **Launch without 4 features** that are not ready yet (section 4). Each is added when it is ready.
 4. **Approve a small update to the privacy notice** so it names the 2027 pages (section 5).
 5. **Give written authorisation** to publish (section 6).
@@ -23,122 +23,6 @@ Everything else on these two pages (menus, buttons, dates, captions and notices)
 ## 3. Wording for your approval
 
 In the order a visitor reads it. Reply to each passage with *Approved*, *Changes* (with the change), or *Hold*. If you accept a recommendation, say so and we will use that wording.
-
-### Homepage: Page layout
-
-> Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication.
-
-> HEBS Lagos 2026 in 35 seconds Filmed at NJS Royale Events Center, Lekki, Oct 2026 · 35 seconds, silent Cleared for the website
-
-<sub>Passage reference owner-home-page-layout / 86dd33a7</sub>
-
-### Homepage: Page layout
-
-> The 2026 hall Exhibitors and brands at HEBS Lagos 2026.
-
-<sub>Passage reference organisers-home-page-layout / 195b1190</sub>
-
-### 1. The opening screen
-
-> Three extraordinary days of beauty, education, innovation, competition, networking, and unforgettable luxury resort experiences.
-
-> The Hair Education Beauty Summit returns to Lagos, July 23–25, 2027: three days of education, competitions, exhibitions, networking and celebration.
-
-*Shown under the site's name in Google and other search results.*
-
-<sub>Passage reference owner-home-hero / 6cb26313</sub>
-
-### 2. Welcome
-
-> HEBS brings together the beauty industry's professionals, educators, innovators, entrepreneurs and emerging talent. For the first time, the whole experience takes place at one destination on the Atlantic: three days of learning, competition, business and celebration.
-
-<sub>Passage reference owner-home-welcome / 113123c1</sub>
-
-### 3. The summit in numbers
-
-> The summit, in three numbers.
-
-*One headline, set in two styles.*
-
-<sub>Passage reference owner-home-three-numbers / 2808e010</sub>
-
-### 4. The three days
-
-> Three days, one extraordinary destination.
-
-*One headline, set in two styles.*
-
-> From an opening celebration at the resort to two full summit days of education, competitions and exhibitions.
-
-<sub>Passage reference owner-home-three-days / cbaadc40</sub>
-
-### 5. Six experiences
-
-> Six ways to be part of it.
-
-*One headline, set in two styles.*
-
-> Masterclasses, demonstrations and technical training.
-
-*Under "Professional Beauty Education".*
-
-> Thirteen competitions across seven categories.
-
-*Under "Hair and Beauty Competitions".*
-
-> The brands shaping the industry.
-
-*Under "Exhibitions and Brand Showcases".*
-
-> Nigeria, Africa, the US, Europe and beyond.
-
-*Under "International Networking".*
-
-> Glamorous evenings at the resort.
-
-*Under "Entertainment and Celebrations".*
-
-**Our recommendation:** change this to "An opening celebration at the resort and closing celebrations on the final day." Only one evening event, the Welcome Pre-Party, is confirmed. "Evenings" promises more than one.
-
-> A resort setting for the whole summit.
-
-*Under "Luxury Destination Experiences".*
-
-<sub>Passage reference owner-home-six-experiences / a51b1021</sub>
-
-### 6. The destination
-
-> NJS Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.
-
-**Our recommendation:** change this to "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: all three days of the summit in one resort setting." The ocean-facing pool terrace is shown only in NJS concept visuals, not the completed property. Describe it once NJS confirms it is complete and part of the HEBS programme.
-
-<sub>Passage reference owner-home-the-destination / 65321d25</sub>
-
-### 7. Competitions
-
-> Thirteen competitions across seven categories. Categories and prizes remain the same as 2026.
-
-> Champions of HEBS Lagos 2026.
-
-*Heading of the 2026 winners panel, which appears only once the winners' names and photographs are verified. One headline, set in two styles.*
-
-<sub>Passage reference owner-home-competitions / 48b6c07d</sub>
-
-### 8. HEBS Lagos 2026 highlights
-
-> Lagos, 2026. The energy we carry forward.
-
-*One headline, set in two styles.*
-
-<sub>Passage reference owner-home-2026-highlights / 3181db28</sub>
-
-### 9. The Tickets page
-
-> Be first to hear when registration, tickets and the 2027 programme open.
-
-*Tickets page, beside the notice that the priority list is not open yet.*
-
-<sub>Passage reference owner-tickets / 966d21d6</sub>
 
 ## 4. Launching without these, for now
 

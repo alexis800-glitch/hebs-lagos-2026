@@ -118,7 +118,7 @@ export const COPY = {
       { slot: "exp-exhibitions", title: "Exhibitions and Brand Showcases", body: draft("Brands and businesses presenting products, tools and services to the professionals who use them.") },
       { slot: "exp-networking", title: "International Networking", body: draft("Built to bring together beauty professionals from Nigeria, across Africa, the United States, Europe and beyond.") },
       { slot: "exp-entertainment", title: "Entertainment and Celebrations", body: draft("An opening celebration, live moments on stage and closing celebrations across the three days.") },
-      { slot: "exp-destination", title: "Luxury Destination Experiences", body: draft("A resort on the Atlantic coast that turns a professional summit into a place to stay and enjoy.") },
+      { slot: "exp-destination", title: "Luxury Destination Experiences", body: draft("A resort on the Atlantic coast that brings the whole summit together in one destination.") },
     ],
   },
   destination: {
@@ -163,7 +163,7 @@ export const COPY = {
   highlights: {
     headline: draft("HEBS LAGOS 2026 HIGHLIGHTS"),
     body: draft(
-      "Photographs, videos, testimonials, competition highlights and major moments from HEBS Lagos 2026 will be added here once approved. The 2026 programme remains available in the archive.",
+      "Photographs and films from the HEBS Lagos 2026 summit days. More are added as they are cleared.",
     ),
     /** Directive 4I, the kinds of material this section will hold. */
     kinds: ["Photographs", "Videos", "Testimonials", "Competition highlights", "Major moments"],

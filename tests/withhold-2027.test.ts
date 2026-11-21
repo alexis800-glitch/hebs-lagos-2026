@@ -59,7 +59,7 @@ describe("withholding decision", () => {
   });
 
   it("never opens on production from approvals alone: launch must be authorised (lib/launch-2027.ts)", () => {
-    expect(isWithheld("/2027/tickets", "production", APPROVED)).toBe(true);
+    expect(isWithheld("/2027/tickets", "production", APPROVED, { config: { ...LAUNCHED, authorisation: null, pages: [] } })).toBe(true);
     const launched = { config: LAUNCHED, reviewMedia: {}, withhold: undefined };
     expect(isWithheld("/2027/tickets", "production", APPROVED, launched)).toBe(false);
     expect(isWithheld("/2027/tickets", "production", PENDING, launched)).toBe(true);
@@ -89,8 +89,11 @@ describe("withholding decision", () => {
 describe("middleware on a production deployment", () => {
   it("rewrites every 2027 route and review file to a path with no route, for page loads, RSC and prefetch alike", () => {
     process.env.VERCEL_ENV = "production";
-    const paths = [...routes2027(), "/2027/not-a-page", "/_review/home-2027/mark-2027-a.png"];
-    expect(paths.length).toBeGreaterThan(18);
+    // Since the launch commit (21 Nov 2026) the 13 pages and their site files are served; every
+    // other 2027 route and every review file is still rewritten.
+    const paths = [...routes2027(), "/2027/not-a-page", "/_review/home-2027/mark-2027-a.png"].filter((p) => isWithheld(p, "production"));
+    expect(paths).toEqual(expect.arrayContaining(["/2027/not-a-page", "/_review/home-2027/mark-2027-a.png", "/2027/review"]));
+    expect(isWithheld("/2027", "production")).toBe(false);
     for (const p of paths) {
       for (const headers of REQUEST_TYPES) {
         const res = run(`${p}?_rsc=abc&brand=mark`, { headers });

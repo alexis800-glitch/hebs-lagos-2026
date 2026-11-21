@@ -74,7 +74,7 @@ export const HOME = {
     label: "The destination",
     title: "Beauty meets",
     accent: "paradise.",
-    body: "NJS Beach Resort in Lagos is the official home of HEBS Lagos 2027: golden evenings around an ocean-facing pool terrace, with the energy of the summit all around you.",
+    body: "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: three days of the summit together in one destination.",
     cta: "Explore the destination",
     // Photographed scenes only: the NJS concept films and the pre-party photographs are restricted.
     scenes: [

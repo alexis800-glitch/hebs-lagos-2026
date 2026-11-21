@@ -218,6 +218,54 @@
    "text": "Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling"
   },
   {
+   "key": "layout.home.1a56ba8c1f",
+   "scope": "home",
+   "where": "page",
+   "text": "Explore the HEBS 2026 galleries"
+  },
+  {
+   "key": "layout.home.1884a919d5",
+   "scope": "home",
+   "where": "page",
+   "text": "All 39 photographs"
+  },
+  {
+   "key": "layout.home.6fcf24e31c",
+   "scope": "home",
+   "where": "page",
+   "text": "Hair and Barbering Competitions 11 photographs →"
+  },
+  {
+   "key": "layout.home.6757a36a67",
+   "scope": "home",
+   "where": "page",
+   "text": "Nails, Makeup and Beauty 3 photographs →"
+  },
+  {
+   "key": "layout.home.d6dae560cd",
+   "scope": "home",
+   "where": "page",
+   "text": "Education and Masterclasses 7 photographs →"
+  },
+  {
+   "key": "layout.home.92831fd229",
+   "scope": "home",
+   "where": "page",
+   "text": "Fashion and Runway 6 photographs →"
+  },
+  {
+   "key": "layout.home.7d204cb9bc",
+   "scope": "home",
+   "where": "page",
+   "text": "Exhibitions and Networking 8 photographs →"
+  },
+  {
+   "key": "layout.home.491aec01ed",
+   "scope": "home",
+   "where": "page",
+   "text": "Event Highlights and Celebrations 4 photographs →"
+  },
+  {
    "key": "layout.home.31b50e578a",
    "scope": "home",
    "where": "page",
@@ -230,10 +278,10 @@
    "text": "Watch HEBS Lagos 2026."
   },
   {
-   "key": "layout.home.475242a137",
+   "key": "layout.home.af6a231dfe",
    "scope": "home",
    "where": "page",
-   "text": "Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play. Films marked internal review are candidates for the team and are not cleared for publication."
+   "text": "Moments from the HEBS Lagos 2026 summit days at NJS Royale Events Center in Lekki. HEBS Lagos 2027 moves to NJS Beach Resort. Choose a film to play."
   },
   {
    "key": "layout.home.5d12bd5355",
@@ -314,16 +362,34 @@
    "text": "A performer singing on stage at HEBS Lagos 2026"
   },
   {
+   "key": "layout.home.589801feed",
+   "scope": "home",
+   "where": "alt",
+   "text": "The programme: July 23"
+  },
+  {
    "key": "layout.home.f4e3da7971",
    "scope": "home",
    "where": "alt",
    "text": "A stylist styling a client's hair at HEBS Lagos 2026"
   },
   {
+   "key": "layout.home.b604cb0110",
+   "scope": "home",
+   "where": "alt",
+   "text": "The programme: July 24"
+  },
+  {
    "key": "layout.home.7784311f31",
    "scope": "home",
    "where": "alt",
    "text": "A model in a feathered headdress and gown at HEBS Lagos 2026"
+  },
+  {
+   "key": "layout.home.bc5a5417c5",
+   "scope": "home",
+   "where": "alt",
+   "text": "The programme: July 25"
   },
   {
    "key": "layout.home.8e192d5eff",

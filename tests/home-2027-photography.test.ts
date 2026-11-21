@@ -104,8 +104,8 @@ describe("Education & Masterclasses photographs", () => {
   });
 
   it("shows no photograph where review media may not render, and keeps the page's structure", () => {
-    // Production refuses the page outright until launch (lib/launch-2027.ts).
-    expect(() => renderToStaticMarkup(createElement(EducationPage, { environment: "production" }))).toThrow(/NEXT_NOT_FOUND/);
+    // Production (launched 21 Nov 2026) never renders review-only media.
+    expect(renderToStaticMarkup(createElement(EducationPage, { environment: "production" }))).not.toContain("/_review/");
     for (const environment of ["preview"] as const) {
       const html = renderToStaticMarkup(createElement(EducationPage, { environment }));
       for (const id of EIGHT) expect(html, `${environment} ${id}`).not.toContain(findReviewAsset(id).src.replace(/\.webp$/, ""));
@@ -181,7 +181,7 @@ describe("Gallery & past events photographs", () => {
   });
 
   it("shows no photograph outside development and the review preview", () => {
-    expect(() => renderToStaticMarkup(createElement(GalleryPage, { environment: "production" }))).toThrow(/NEXT_NOT_FOUND/);
+    expect(renderToStaticMarkup(createElement(GalleryPage, { environment: "production" }))).not.toContain("/_review/");
     for (const environment of ["preview"] as const) {
       const html = renderToStaticMarkup(createElement(GalleryPage, { environment }));
       for (const id of ids) expect(html, `${environment} ${id}`).not.toContain(findReviewAsset(id).src.replace(/\.webp$/, ""));

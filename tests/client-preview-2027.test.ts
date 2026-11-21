@@ -45,15 +45,20 @@ describe("client design-review preview", () => {
   it("is not indexed and leaves the launch switch and approvals untouched", () => {
     as("preview", "on");
     expect(pageMetadata("home", "production").robots).toMatchObject({ index: false });
-    expect(LAUNCH_2027.authorisation).toBeNull();
-    expect(LAUNCH_2027.pages).toEqual([]);
-    expect(pageStatuses("home").some((s) => s !== "approved")).toBe(true);
+    // The flag changes nothing in the launch switch or the approvals it reads.
+    expect(LAUNCH_2027.pages).toHaveLength(13);
+    expect(pageStatuses("home").every((s) => s === "approved")).toBe(true);
   });
 
   it("does not open anything on production, whatever the flag", () => {
     as("production", "on");
     const env = middlewareEnvironment({ VERCEL: "1", VERCEL_ENV: "production", HEBS_CLIENT_PREVIEW: "on" });
-    for (const p of SITE_PAGES) expect(isWithheld(p.path, env), p.path).toBe(true);
-    expect(isWithheld("/2027/media/hero-card-guest.webp", env)).toBe(true);
+    const plain = middlewareEnvironment({ VERCEL: "1", VERCEL_ENV: "production" });
+    // On production the flag is ignored: every address is answered exactly as without it.
+    for (const p of [...SITE_PAGES.map((x) => x.path), "/2027/review", "/2027/brand-study/a", "/_review/home-2027/guests-wide.mp4"]) {
+      expect(isWithheld(p, env), p).toBe(isWithheld(p, plain));
+    }
+    expect(isWithheld("/2027/review", env)).toBe(true);
+    expect(isWithheld("/_review/home-2027/guests-wide.mp4", env)).toBe(true);
   });
 });

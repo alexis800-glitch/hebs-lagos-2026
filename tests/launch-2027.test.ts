@@ -47,21 +47,33 @@ afterEach(() => {
   process.env = { ...ENV };
 });
 
-describe("the launch switch today", () => {
-  it("is closed, with no authorisation and no pages chosen", () => {
-    expect(LAUNCH_2027.authorisation).toBeNull();
-    expect(LAUNCH_2027.pages).toEqual([]);
-    expect(site2027Open("production")).toBe(false);
+/** The switch as it was before the launch commit: nothing authorised, nothing chosen. */
+const CLOSED: LaunchInputs = { ...OPEN, config: { ...LAUNCHED, authorisation: null, pages: [] } };
+
+describe("the launch switch (launch commit, 21 Nov 2026)", () => {
+  it("records the written launch authorisation and all 13 pages", () => {
+    expect(LAUNCH_2027.authorisation?.by).toMatch(/HEBS management/);
+    expect(LAUNCH_2027.authorisation?.on).toBe("2026-11-21");
+    expect(LAUNCH_2027.authorisation?.reference.length).toBeGreaterThan(20);
+    expect([...LAUNCH_2027.pages].sort()).toEqual(SITE_PAGES.map((p) => p.id).sort());
+    expect(site2027Open("production")).toBe(true);
   });
 
-  it("lists today's launch blockers", () => {
-    expect(ids(launchBlockers())).toEqual(["authorisation", "pages"]);
+  it("has no launch blockers left", () => {
+    expect(ids(launchBlockers())).toEqual([]);
   });
 
-  it("withholds every 2027 address on production, pages and site files alike", () => {
-    for (const p of [...SITE_PAGES.map((x) => x.path), "/2027/sitemap.xml", "/2027/social-card", "/2027/status"]) {
-      expect(pathPublished(p, "production"), p).toBe(false);
-      expect(isWithheld(p, "production", previewStatuses()), p).toBe(true);
+  it("publishes every launched page on production and still withholds the internal pages", () => {
+    for (const p of SITE_PAGES.map((x) => x.path)) expect(pathPublished(p, "production"), p).toBe(true);
+    for (const p of ["/2027/review", "/2027/brand-study/a", "/2027/concepts/home", "/_review/home-2027/guests-wide.mp4"]) {
+      expect(isWithheld(p, "production"), p).toBe(true);
+    }
+  });
+
+  it("withheld everything while the switch was closed", () => {
+    expect(ids(launchBlockers(CLOSED))).toEqual(["authorisation", "pages"]);
+    for (const p of [...SITE_PAGES.map((x) => x.path), "/2027/sitemap.xml", "/2027/social-card"]) {
+      expect(pathPublished(p, "production", CLOSED), p).toBe(false);
     }
   });
 });
@@ -108,16 +120,16 @@ describe("production publication controls", () => {
 
 describe("page-by-page approvals", () => {
   it("judges each launched page on its own content only", () => {
-    const real = { ...OPEN, statuses: undefined };
-    const blockers = ids(launchBlockers({ ...real, config: { ...LAUNCHED, pages: ["home", "tickets"] } }));
-    expect(blockers).toContain("approvals-home");
-    expect(blockers).toContain("approvals-tickets");
-    // The gallery's unapproved copy does not hold back a launch that leaves it out.
-    expect(blockers.filter((b) => b.includes("gallery"))).toEqual([]);
+    // One unapproved page holds back only itself.
+    const blockers = ids(launchBlockers({ ...OPEN, statuses: undefined, config: { ...LAUNCH_2027, pages: ["home", "tickets", "gallery"] } }));
+    expect(blockers).toEqual([]);
+    const one = ids(launchBlockers({ ...OPEN, statuses: ["approved", "provisional"], config: { ...LAUNCHED, pages: ["home", "tickets"] } }));
+    expect(one).toEqual(["approvals-home", "approvals-tickets"]);
   });
 
   it("counts the homepage's own copy, which has no per-block states", () => {
-    expect(pageStatuses("home")).toContain("provisional");
+    expect(pageStatuses("home").length).toBeGreaterThan(50);
+    expect(pageStatuses("home").every((s) => s === "approved")).toBe(true);
   });
 
   it("summarises every page's readiness", () => {
@@ -193,7 +205,7 @@ describe("public and private route separation", () => {
     expect(logo.length).toBeGreaterThan(0);
     for (const f of logo) {
       expect(pathPublished(`/2027/brand/${f}`, "production", OPEN), f).toBe(true);
-      expect(pathPublished(`/2027/brand/${f}`, "production"), f).toBe(false);
+      expect(pathPublished(`/2027/brand/${f}`, "production", CLOSED), f).toBe(false);
     }
     expect(BRAND_DIR).toBe(MARK_2027_DIR);
     expect(pathPublished("/2027/brand-study/a", "production", OPEN)).toBe(false);
@@ -202,7 +214,7 @@ describe("public and private route separation", () => {
 
 describe("sitemap and metadata", () => {
   it("has no sitemap on production before launch, and only launched pages after", () => {
-    expect(sitemapXml("production")).toBeNull();
+    expect(sitemapXml("production", CLOSED)).toBeNull();
     const xml = sitemapXml("production", OPEN)!;
     const locs = Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g), (m) => m[1]);
     expect(locs).toEqual(["https://www.hebslagos.com/2027", "https://www.hebslagos.com/2027/about", "https://www.hebslagos.com/2027/tickets"]);
@@ -212,7 +224,7 @@ describe("sitemap and metadata", () => {
   });
 
   it("gives withheld pages no metadata, and launched pages a title, description, canonical address and social card", () => {
-    expect(pageMetadata("home", "production")).toEqual({});
+    expect(pageMetadata("home", "production", CLOSED)).toEqual({});
     for (const p of SITE_PAGES) {
       const m = pageMetadata(p.id, "production", { ...OPEN, config: { ...LAUNCHED, pages: SITE_PAGES.map((x) => x.id) } });
       const url = `https://www.hebslagos.com${p.path}`;

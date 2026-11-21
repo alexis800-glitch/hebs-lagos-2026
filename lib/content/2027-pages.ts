@@ -24,7 +24,7 @@ export const PAGES = {
       "exp-exhibitions": draft("Brands and businesses showing products, tools and services to the professionals who choose and use them."),
       "exp-networking": draft("Beauty professionals, educators, entrepreneurs and brands from Nigeria, across Africa, the United States, Europe and beyond, in one place for three days."),
       "exp-entertainment": draft("The Welcome Pre-Party opens the summit on July 23, and closing celebrations end it on July 25."),
-      "exp-destination": draft("For the first time, the whole summit takes place at one resort on the Atlantic coast, so the event is also a place to stay and enjoy."),
+      "exp-destination": draft("For the first time, the whole summit takes place at one resort on the Atlantic coast, so education, competitions and celebrations share one destination."),
     } as Record<string, CopyBlock>,
   },
   programme: {

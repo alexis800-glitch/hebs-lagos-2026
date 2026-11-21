@@ -10,6 +10,9 @@ import { blockStatus, contentRegister } from "../lib/content/2027";
 import { HOME, homeCopyBlocks, homeCopyStatus } from "../lib/content/home-2027";
 import { LAYOUT_COPY, layoutStatuses } from "../lib/content/layout-copy-2027";
 import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "../lib/content/signoff-decisions-2027";
+
+/** The decisions as they stood before the launch wording approval of 21 Nov 2026: the review workflow is tested against these. */
+const PRE_LAUNCH = SIGNOFF_DECISIONS.filter((d) => !d.item.startsWith("launch:"));
 import {
   FIRST_LAUNCH, PAGE_KIND, approvalBlocks, firstLaunchDecisions, mediaRecords, pendingDecisions, signoffCounts, signoffItems,
 } from "../lib/content/signoff-2027";
@@ -28,7 +31,7 @@ const OPEN: LaunchConfig = {
 const decided = (item: string, extra: Partial<SignoffDecision>): SignoffDecision => ({ item, decision: "approved", by: "Test", on: "2026-11-11", reference: "test", ...extra });
 
 describe("sign-off register", () => {
-  const items = signoffItems();
+  const items = signoffItems(PRE_LAUNCH);
 
   it("lists every unapproved copy block and every inventoried layout string, once", () => {
     const ids = items.map((i) => i.id);
@@ -80,23 +83,36 @@ describe("sign-off register", () => {
     const d = pendingDecisions(items).map((x) => x.decision).join(" ");
     expect(d).not.toMatch(/D9|D3|D7/);
     expect(firstLaunchDecisions(items).map((x) => x.decision).join(" ")).not.toMatch(/D9|D3|D7/);
-    expect(firstLaunchDecisions(items).map((x) => x.decision).join(" ")).toMatch(/Written launch authorisation/);
+    // The written launch authorisation is recorded (lib/launch-2027-config.ts, 21 Nov 2026).
+    expect(firstLaunchDecisions(items).map((x) => x.decision).join(" ")).not.toMatch(/Written launch authorisation/);
   });
 });
 
 describe("decisions", () => {
-  it("records only Veridion's verification so far, nothing on Mrs. Shuler's or the organisers' behalf", () => {
+  it("records Veridion's verification and the HEBS management launch wording decision, nothing on Mrs. Shuler's behalf", () => {
     expect(SIGNOFF_DECISIONS.length).toBeGreaterThan(0);
     for (const d of SIGNOFF_DECISIONS) {
+      expect(d.by).not.toMatch(/Shuler/);
+      if (d.item.startsWith("launch:")) {
+        expect(d.by).toMatch(/^HEBS management/);
+        expect(d.on).toBe("2026-11-21");
+        expect(d.reference).toMatch(/2027-launch-record\.md/);
+        continue;
+      }
       expect(d.by).toBe("Veridion");
       expect(d.reference).toMatch(/2027-veridion-verification\.md/);
       expect(d.item).toMatch(/^block:routine-/);
     }
   });
 
+  it("does not approve the ticketing commitments while sales and payments are closed", () => {
+    const launch = SIGNOFF_DECISIONS.find((d) => d.item.startsWith("launch:"))!;
+    expect(Object.keys(launch.texts ?? {}).filter((k) => k.startsWith("pages.tickets.willSupport"))).toEqual([]);
+  });
+
   it("Veridion's approvals cover only routine wording, still word for word as approved", () => {
-    const items = signoffItems();
-    for (const d of SIGNOFF_DECISIONS) {
+    const items = signoffItems(PRE_LAUNCH);
+    for (const d of SIGNOFF_DECISIONS.filter((x) => x.by === "Veridion")) {
       for (const [key, text] of Object.entries(d.texts ?? {})) {
         const i = items.find((x) => x.id === key);
         expect(i?.category, key).toBe("A");
@@ -116,7 +132,7 @@ describe("decisions", () => {
   });
 
   it("a block approval approves each line in its exact wording only", () => {
-    const b = approvalBlocks().find((x) => x.id === "owner-home-welcome")!;
+    const b = approvalBlocks(signoffItems(PRE_LAUNCH)).find((x) => x.id === "owner-home-welcome")!;
     const rec = [decided(`block:${b.id}`, { texts: b.texts })];
     for (const [k, t] of Object.entries(b.texts)) {
       expect(wordingApproved(k, t, rec)).toBe(true);
@@ -125,7 +141,8 @@ describe("decisions", () => {
   });
 
   it("the homepage copy is approved only when every listed line is", () => {
-    expect(homeCopyStatus()).toBe("provisional");
+    expect(homeCopyStatus(PRE_LAUNCH)).toBe("provisional");
+    expect(homeCopyStatus()).toBe("approved");
     const all = homeCopyBlocks().filter((b) => !b.directive).map((b) => decided(b.key, { text: b.text }));
     expect(homeCopyStatus(all)).toBe("approved");
     expect(homeCopyStatus(all.slice(1))).toBe("provisional");
