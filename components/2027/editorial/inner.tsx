@@ -18,6 +18,7 @@ import { portalLink } from "@/lib/integrations/registration-2027";
 import { bookingLink, portalReturnRule } from "@/lib/integrations/booking-2027";
 import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
 import { CONTACTS_2027, publicContact } from "@/lib/site/contacts-2027";
+import { DEVELOPMENT_UPDATE, VENUE_FACILITIES, VENUE_LOCATION, mapLinks, shown } from "@/lib/content/venue-2027";
 import { TICKET_CATALOGUE_2027, formatNgn } from "@/lib/content/tickets-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
 import { Pic, reviewMedia } from "@/components/2027/home/media";
@@ -557,6 +558,9 @@ const TRAVEL_SLOTS = {
   "travel-architecture": { need: "The resort's architecture or exterior, landscape" },
   "travel-arrival": { need: "The arrival area, colonnade or entrance, portrait" },
   "travel-room": { need: "An actual NJS guest room or suite (a scenic view only if verified)" },
+  /* Owner decision, 21 Nov 2026: one authentic, dated construction-progress photograph,
+     subject to NJS approval, shown only as a development update (lib/content/venue-2027.ts). */
+  "travel-progress": { need: "One dated NJS construction-progress photograph, approved by NJS, for a development update" },
 } as const;
 type TravelSlot = keyof typeof TRAVEL_SLOTS;
 export const TRAVEL_IMAGES_NEEDED = Object.values(TRAVEL_SLOTS).map((v) => v.need);
@@ -578,7 +582,7 @@ export function TravelPage(props: PageProps) {
   const t = PAGES.travel;
   const notes = [
     COPY_DRAFT,
-    "Venue name provisional, address and directions withheld until confirmed (D9).",
+    "Venue name NJS Beach Resort (D9). Address, map point and any resort facility name withheld until NJS confirms them in writing (lib/content/venue-2027.ts). Facilities split into in use / in development (owner, 21 Nov 2026); a dated development-update photo appears only once NJS approves one.",
     `No room, package or availability is offered until approved. Photographs needed from the owner: ${TRAVEL_IMAGES_NEEDED.join("; ")}.`,
     "Visitor support contacts pending (D10).",
     "New wording for approval: the heading \"Your HEBS Lagos Experience\" and the line \"Beauty, creativity and connection on the Atlantic coast of Lagos.\"",
@@ -614,14 +618,64 @@ export function TravelPage(props: PageProps) {
   );
 
   /* ── The venue ── */
+  const address = shown(VENUE_LOCATION.address, opts.environment);
+  const maps = mapLinks(opts.environment);
   const venueText = (
     <>
       <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: gold }}>The venue · {VENUE.locality}</p>
       <h2 id="venue-title" className="mt-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(40px, 4.6vw, 76px)", lineHeight: 1, color: C.ivory }}><span translate="no">{VENUE.name.value}</span></h2>
       <p id="resort" className="mt-6 max-w-[44ch] scroll-mt-28 text-[17px] leading-[1.65]" style={{ color: ivoryText }}>{t.venue.text}</p>
-      <p className="mt-3 max-w-[44ch] text-[14px] leading-[1.6]" style={{ color: "rgba(246,239,226,.6)" }}>{t.directions.text}</p>
-      <div className="mt-8"><Button href={VENUE.website} variant="ghost" tone="dark" external>Visit njsbeachresort.com</Button></div>
+      {address ? (
+        <address id="location" className="mt-4 max-w-[44ch] scroll-mt-28 text-[15px] not-italic leading-[1.6]" style={{ color: ivoryText }}>{address}</address>
+      ) : (
+        <p id="location" className="mt-3 max-w-[44ch] scroll-mt-28 text-[14px] leading-[1.6]" style={{ color: "rgba(246,239,226,.6)" }}>{t.directions.text}</p>
+      )}
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Button href={VENUE.website} variant="ghost" tone="dark" external>Visit njsbeachresort.com</Button>
+        {maps ? <Button href={maps.google} variant="ghost" tone="dark" external>Open in Google Maps</Button> : null}
+        {maps ? <Button href={maps.apple} variant="ghost" tone="dark" external>Open in Apple Maps</Button> : null}
+      </div>
     </>
+  );
+  /* ── At the resort: in use today vs in development (owner decision, 21 Nov 2026) ── */
+  const inUse = VENUE_FACILITIES.filter((f) => f.state === "in-use");
+  const inDev = VENUE_FACILITIES.filter((f) => f.state === "in-development");
+  const progressDate = shown(DEVELOPMENT_UPDATE, opts.environment);
+  const progress = progressDate && has("travel-progress") ? progressDate.date : null;
+  const facilityList = (items: typeof VENUE_FACILITIES, dated: boolean) => (
+    <ul className="mt-4 grid gap-3">
+      {items.map((f) => {
+        const opening = dated ? shown(f.opening, opts.environment) : null;
+        return (
+          <li key={f.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b pb-3" style={{ borderColor: "rgba(217,193,146,.18)" }}>
+            <span className="text-[17px]" style={{ color: C.ivory }}>{f.label}</span>
+            {dated ? <span className="text-[12px] uppercase tracking-[.16em]" style={{ color: gold }}>{opening ?? t.openingTbc.text}</span> : null}
+          </li>
+        );
+      })}
+    </ul>
+  );
+  const facilities = (
+    <div id="facilities" className="mt-16 grid scroll-mt-28 gap-10 border-t pt-10 lg:grid-cols-12 lg:gap-12" style={{ borderColor: "rgba(217,193,146,.25)" }}>
+      <div className="lg:col-span-4">
+        <h3 style={{ ...display, fontWeight: 500, fontSize: "clamp(28px, 2.6vw, 40px)", lineHeight: 1.05, color: C.ivory }}>{t.facilitiesTitle.text}</h3>
+        <p className="mt-4 max-w-[40ch] text-[14px] leading-[1.6]" style={{ color: "rgba(246,239,226,.66)" }}>{t.developmentNote.text}</p>
+      </div>
+      <div className="lg:col-span-4">
+        <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: gold }}>{t.inUse.text}</p>
+        {facilityList(inUse, false)}
+      </div>
+      <div className="lg:col-span-4">
+        <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: gold }}>{t.inDevelopment.text}</p>
+        {facilityList(inDev, true)}
+        {progress ? (
+          <figure className="mt-6">
+            <TravelPhoto slot="travel-progress" opts={opts} className="aspect-[16/10] w-full" sizes="(min-width: 1024px) 30vw, 100vw" />
+            <figcaption className="mt-2 text-[12.5px] leading-[1.5]" style={{ color: "rgba(246,239,226,.7)" }}>{t.developmentCaption.text} <span style={{ color: gold }}>{progress}</span></figcaption>
+          </figure>
+        ) : null}
+      </div>
+    </div>
   );
   const venue = (
     <Section id="venue" ground="black" labelledBy="venue-title" innerClassName="lg:py-24">
@@ -634,6 +688,7 @@ export function TravelPage(props: PageProps) {
           </div>
         ) : null}
       </div>
+      {facilities}
     </Section>
   );
 

@@ -58,7 +58,7 @@ export const REVIEW_MEDIA_BY_PAGE: Partial<Record<PageId, readonly string[]>> = 
   // The Travel page (Option B): its five reserved photograph positions, which render only
   // approved, registered assets (components/2027/editorial/inner.tsx, TRAVEL_SLOTS). None is
   // registered yet; each one counts here from the day it is.
-  out.travel = [...(out.travel ?? []), "travel-terrace", "travel-arrival", "travel-coast", "travel-architecture", "travel-room"];
+  out.travel = [...(out.travel ?? []), "travel-terrace", "travel-arrival", "travel-coast", "travel-architecture", "travel-room", "travel-progress"];
   return out;
 })();
 
