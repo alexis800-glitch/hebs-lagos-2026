@@ -699,10 +699,10 @@ export function TravelPage(props: PageProps) {
       <div className={`grid gap-10 lg:items-center lg:gap-14 ${room ? "lg:grid-cols-12" : ""}`}>
         {room ? <div className="lg:col-span-7"><TravelPhoto slot="travel-room" opts={opts} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 56vw, 100vw" /></div> : null}
         <div className={room ? "lg:col-span-5" : "max-w-[820px]"}>
-          <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: "#8C6B34" }}>Accommodation</p>
+          <p className="text-[12px] uppercase tracking-[.3em]" style={{ color: "#735626" }}>Accommodation</p>
           <h2 id="stay-title" className="mt-4" style={{ ...display, fontWeight: 500, fontSize: "clamp(36px, 4vw, 64px)", lineHeight: 1.02 }}>Stay at the resort.</h2>
           <p className="mt-6 text-[18px] leading-[1.65]" style={{ color: C.black }}>{t.accommodation.text}</p>
-          <p className="mt-6"><span className="inline-block rounded-full border px-4 py-1.5 text-[11.5px] uppercase tracking-[.18em]" style={{ borderColor: "rgba(140,107,52,.55)", color: "#8C6B34" }}>Arrangements to be announced</span></p>
+          <p className="mt-6"><span className="inline-block rounded-full border px-4 py-1.5 text-[11.5px] uppercase tracking-[.18em]" style={{ borderColor: "rgba(115,86,38,.55)", color: "#735626" }}>Arrangements to be announced</span></p>
           <SectionNotes notes={notes.slice(2, 3)} opts={opts} ground="ivory" className="mt-6" />
         </div>
       </div>
