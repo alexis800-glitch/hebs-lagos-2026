@@ -3,7 +3,7 @@
 Routine wording (category A) on the homepage, the Tickets page and the shared navigation and footer, checked against its source.
 Each block below is approved in signoff-decisions-2027.ts in exactly this wording. A line that changes later returns for verification.
 
-## Home: routine wording (109 items, reference 31b90dc1)
+## Home: routine wording (109 items, reference d094d8b8)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -61,7 +61,7 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | HEBS Lagos 2026, the styling floor Watch | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | – Days – Hours – Minutes – Seconds | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | NJS Beach Resort Lagos July 23–25, 2027 | Page layout | Venue name: decision D9 (VENUE.name, lib/editions/2027.ts); dates: owner directive (CAMPAIGN.datesDisplay). |
-| Lagos, on the Atlantic coast | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Lagos On the Atlantic coast | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling | Page layout | lib/competitions.ts (13 competitions in 7 categories) and the directive: categories and prize values unchanged from 2026. |
 | Where the industry learns. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Hair education | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
