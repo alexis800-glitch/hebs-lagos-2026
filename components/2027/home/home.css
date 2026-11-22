@@ -692,3 +692,4 @@ body:has(.hp-wrap) [data-preview-banner]{display:none}
 @media (max-width:900px){.hp .edh{padding:56px 22px}.hp .edh h2{font-size:38px}.hp .edh-list{grid-template-columns:1fr;gap:20px;margin-top:30px}}
 .hp .dsb .dtp .cap{padding:0}
 .hp .edh .btn.ln{color:#5E4A22;border-color:rgba(94,74,34,.6)}
+.hp .edh .lab{color:#735626}
