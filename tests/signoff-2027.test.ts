@@ -12,7 +12,7 @@ import { LAYOUT_COPY, layoutStatuses } from "../lib/content/layout-copy-2027";
 import { SIGNOFF_DECISIONS, wordingApproved, type SignoffDecision } from "../lib/content/signoff-decisions-2027";
 
 /** The decisions as they stood before the launch wording approval of 21 Nov 2026: the review workflow is tested against these. */
-const PRE_LAUNCH = SIGNOFF_DECISIONS.filter((d) => !d.item.startsWith("launch:"));
+const PRE_LAUNCH = SIGNOFF_DECISIONS.filter((d) => !d.item.startsWith("launch:") && !d.item.startsWith("correction:"));
 import {
   FIRST_LAUNCH, PAGE_KIND, approvalBlocks, firstLaunchDecisions, mediaRecords, pendingDecisions, signoffCounts, signoffItems,
 } from "../lib/content/signoff-2027";
@@ -93,6 +93,12 @@ describe("decisions", () => {
     expect(SIGNOFF_DECISIONS.length).toBeGreaterThan(0);
     for (const d of SIGNOFF_DECISIONS) {
       expect(d.by).not.toMatch(/Shuler/);
+      if (d.item.startsWith("correction:")) {
+        expect(d.by).toMatch(/^HEBS management/);
+        expect(d.on).toBe("2026-11-22");
+        expect(d.reference).toMatch(/2027-launch-record\.md/);
+        continue;
+      }
       if (d.item.startsWith("launch:")) {
         expect(d.by).toMatch(/^HEBS management/);
         expect(d.on).toBe("2026-11-21");
@@ -115,6 +121,8 @@ describe("decisions", () => {
     for (const d of SIGNOFF_DECISIONS.filter((x) => x.by === "Veridion")) {
       for (const [key, text] of Object.entries(d.texts ?? {})) {
         const i = items.find((x) => x.id === key);
+        // A line retired from the site since (the destination caption, 22 Nov 2026) has nothing left to check.
+        if (!i) continue;
         expect(i?.category, key).toBe("A");
         expect(i?.text, key).toBe(text);
         expect(i?.status, key).toBe("approved");

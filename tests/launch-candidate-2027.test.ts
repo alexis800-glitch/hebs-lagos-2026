@@ -4,6 +4,7 @@
  * The launch switch itself stays closed; this file substitutes the candidate
  * configuration only inside the test.
  */
+import { SOCIAL_2027 } from "@/lib/site/social-2027";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -42,7 +43,8 @@ describe("launch candidate: homepage and Tickets", () => {
   it("links only to published pages, the 2026 privacy notice and in-page anchors", async () => {
     for (const [name, html] of Object.entries(await pages())) {
       const hrefs = Array.from(html.matchAll(/<a\b[^>]*?href="([^"]*)"/g)).map((m) => m[1]);
-      for (const h of hrefs) expect(h, `${name}: ${h}`).toMatch(/^(\/2027(#[\w-]+)?|\/2027\/tickets(#[\w-]+)?|\/privacy|#[\w-]+)$/);
+      const external = new Set(["https://www.njsbeachresort.com", ...SOCIAL_2027.map((s) => s.url)]);
+      for (const h of hrefs) if (!external.has(h)) expect(h, `${name}: ${h}`).toMatch(/^(\/2027(#[\w-]+)?|\/2027\/tickets(#[\w-]+)?|\/privacy|#[\w-]+)$/);
       // No anchor without a destination: a launch that leaves a page out renders no button for it.
       expect(html, name).not.toMatch(/<a(?![^>]*href=)[^>]*>/);
     }

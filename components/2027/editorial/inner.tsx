@@ -18,6 +18,7 @@ import { portalLink } from "@/lib/integrations/registration-2027";
 import { bookingLink, portalReturnRule } from "@/lib/integrations/booking-2027";
 import { formEnabled, submitConfig } from "@/lib/forms-2027/config";
 import { CONTACTS_2027, publicContact, type ContactId } from "@/lib/site/contacts-2027";
+import { SOCIAL_2027 } from "@/lib/site/social-2027";
 import { DEVELOPMENT_UPDATE, VENUE_FACILITIES, VENUE_LOCATION, mapLinks, shown } from "@/lib/content/venue-2027";
 import { TICKET_CATALOGUE_2027, formatNgn } from "@/lib/content/tickets-2027";
 import { PRIORITY_CTA, PRIORITY_HREF, pageHref, type PageId } from "@/lib/site/2027";
@@ -1105,7 +1106,7 @@ function ContactEmails({ fallback, only = ["enquiries", "sponsors", "exhibitors"
 export function ContactPage(props: PageProps) {
   const opts = optsOf(props);
   const c = PAGES.contact;
-  const notes = [COPY_DRAFT, "Email addresses and social accounts withheld until public contacts are approved (D10). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
+  const notes = [COPY_DRAFT, "Email addresses withheld until each mailbox passes a send-and-receive test; social accounts are the official ones published on the live HEBS site (lib/site/social-2027.ts). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
   return (
     <Shell page="contact" opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
       <PageHero composition="lagos" title={c.title.text} intro={c.intro.text} opts={opts} notes={notes.slice(0, 1)} />
@@ -1119,7 +1120,15 @@ export function ContactPage(props: PageProps) {
             </div>
             <div>
               <h3 className="text-[14px] font-semibold">Social media</h3>
-              <div className="mt-3"><Pending>{c.social.text}</Pending></div>
+              <p className="mt-2 text-[15px]" style={{ color: C.body }}>{c.social.text}</p>
+              <ul className="mt-2 space-y-1 text-[15px]">
+                {SOCIAL_2027.map((s) => (
+                  <li key={s.id}>
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" className={quietLink} style={{ color: C.black }} aria-label={`HEBS on ${s.label}, ${s.handle} (opens in a new tab)`}>{s.label}</a>
+                    <span style={{ color: C.body }}> · {s.handle}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <div>
               <h3 className="text-[14px] font-semibold">Business inquiries</h3>

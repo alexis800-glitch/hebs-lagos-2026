@@ -51,9 +51,11 @@ describe("visual corrections", () => {
     const at = html.search(/<section class="ds[ab]"/);
     const ds = html.slice(at, html.indexOf("</section>", at));
     expect(ds).not.toContain('class="grade');
-    // One caption identifies the photographs as the 2026 event, not the resort.
-    expect(ds).toContain("PHOTOGRAPHED");
-    expect(ds).toContain("HEBS Lagos 2026 at the NJS Royale Events Center");
+    // Compliance audit, 22 Nov 2026: text-led. No 2026 photograph from the separate summit venue
+    // stands beside NJS Beach Resort; the resort's own site is linked and photographs follow from NJS.
+    expect(ds).not.toMatch(/<img\b/);
+    expect(ds).toContain('href="https://www.njsbeachresort.com"');
+    expect(ds).toContain("Photographs of NJS Beach Resort are added here once NJS supplies approved images.");
   });
 
   it("P1: Jost italic is not preloaded, and every italic Jost rule names its real italic face", () => {

@@ -3,7 +3,7 @@
 Routine wording (category A) on the homepage, the Tickets page and the shared navigation and footer, checked against its source.
 Each block below is approved in signoff-decisions-2027.ts in exactly this wording. A line that changes later returns for verification.
 
-## Home: routine wording (109 items, reference 9907d170)
+## Home: routine wording (109 items, reference 31b90dc1)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -12,6 +12,7 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | NJS Beach Resort, Lagos, Nigeria | Hero | Venue name: decision D9 (VENUE.name, lib/editions/2027.ts); dates: owner directive (CAMPAIGN.datesDisplay). |
 | HEBS Lagos 2026, the styling floor | Hero | Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts). |
 | Explore the experience | Hero | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Become a sponsor | Hero | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Welcome to HEBS 2027 | Welcome | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | HEBS Lagos 2027 | Three numbers | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Days | Three numbers | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
@@ -59,8 +60,15 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | HEBS Lagos 2027 \| Hair Education Beauty Summit | Hero | Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts). |
 | HEBS Lagos 2026, the styling floor Watch | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | – Days – Hours – Minutes – Seconds | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
-| PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp. | Page layout | Matches the media register record of what was photographed, where and when (lib/assets/home-2027-review.ts). |
+| NJS Beach Resort Lagos July 23–25, 2027 | Page layout | Venue name: decision D9 (VENUE.name, lib/editions/2027.ts); dates: owner directive (CAMPAIGN.datesDisplay). |
+| Lagos, on the Atlantic coast | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling | Page layout | lib/competitions.ts (13 competitions in 7 categories) and the directive: categories and prize values unchanged from 2026. |
+| Where the industry learns. | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Hair education | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Technical training | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Live demonstrations | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Beauty business development | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Professional masterclasses | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Explore the HEBS 2026 galleries | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | All 39 photographs | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Hair and Barbering Competitions 11 photographs → | Page layout | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
@@ -92,14 +100,6 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | An exhibitor presenting products at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: exp-exhibitions (House of Snapp, HEBS Lagos 2026). |
 | Two attendees greeting each other at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: exp-networking-desktop (House of Snapp, HEBS Lagos 2026). |
 | A speaker with a microphone on stage at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: exp-entertainment (House of Snapp, HEBS Lagos 2026). |
-| Models walking through the hall at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: exp-destination (House of Snapp, HEBS Lagos 2026). |
-| Destination scenes | Image descriptions and labels | An accessible label: says what the control or region does. |
-| Enlarge photograph: A session on stage at HEBS Lagos 2026, NJS Royale Events Center | Image descriptions and labels | An accessible label: says what the control or region does. |
-| A session on stage at HEBS Lagos 2026, NJS Royale Events Center | Image descriptions and labels | Checked against the photograph or film itself: dest-terrace (House of Snapp, HEBS Lagos 2026). |
-| Enlarge photograph: A speaker in front of the NJS crest at HEBS Lagos 2026 | Image descriptions and labels | An accessible label: says what the control or region does. |
-| A speaker in front of the NJS crest at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: dest-guest (House of Snapp, HEBS Lagos 2026). |
-| Enlarge photograph: A braider at work at HEBS Lagos 2026 | Image descriptions and labels | An accessible label: says what the control or region does. |
-| A braider at work at HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: dest-floor-b (House of Snapp, HEBS Lagos 2026). |
 | A braiding competitor at work, HEBS Lagos 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-main (House of Snapp, HEBS Lagos 2026). |
 | A winner celebrating beside the HEBS trophy, 2026 | Image descriptions and labels | Checked against the photograph or film itself: comp-trophy (House of Snapp, HEBS Lagos 2026). |
 | The seven categories | Image descriptions and labels | An accessible label: says what the control or region does. |
@@ -136,7 +136,7 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | Nothing can be submitted here for now, and no personal details are collected. When the list opens, the sign-up form appears in this section. | Page layout | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
 | Tickets & registration \| HEBS Lagos 2027 | Search and social preview | Dates and days: owner directive sections 2 and 4C (CAMPAIGN, EDITION_DAYS in lib/editions/2027.ts). |
 
-## Every page: routine wording (32 items, reference 72fadc69)
+## Every page: routine wording (36 items, reference 36bd544c)
 
 | Wording | Where | Evidence |
 |---|---|---|
@@ -160,15 +160,19 @@ Each block below is approved in signoff-decisions-2027.ts in exactly this wordin
 | All HEBS 2027 pages | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
 | Skip to content | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | The priority list is not open yet. | Navigation, footer and shared elements | True as long as forms, ticket sales and portal links are closed (FORMS_OPEN, TICKET_SALES, PORTAL_2027), which the tests check. |
-| Lagos | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | HEBS 2027 experience | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Take part | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Sponsorship & partnerships | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Plan your visit | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Follow HEBS | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Instagram | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| Facebook | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | © {year} Hair Education Beauty Summit. All rights reserved. | Navigation, footer and shared elements | Matches the live HEBS Lagos 2026 footer word for word (components/Footer.tsx). |
 | Privacy Policy | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Cookie Policy | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
 | Cookie preferences | Navigation, footer and shared elements | A label or heading that names its section or the page it leads to (site map, lib/site/2027.ts). |
+| HEBS on Instagram (opens in a new tab) | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
+| HEBS on Facebook (opens in a new tab) | Navigation, footer and shared elements | An accessible label: says what the control or region does. |
 | HEBS Lagos 2027, July 23–25, 2027 | Navigation, footer and shared elements | Dates and days: owner directive sections 2 and 4C (CAMPAIGN, EDITION_DAYS in lib/editions/2027.ts). |
 | HEBS | Navigation, footer and shared elements | Built from the page title and the directive's dates (lib/site/seo-2027.ts). |
 | 2027 | Navigation, footer and shared elements | Dates and days: owner directive sections 2 and 4C (CAMPAIGN, EDITION_DAYS in lib/editions/2027.ts). |

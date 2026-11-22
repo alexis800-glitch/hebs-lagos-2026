@@ -1,6 +1,7 @@
 /**
  * Responsive layout, media loading, the shared 2027 footer and cookie controls.
  */
+import { SOCIAL_2027 } from "@/lib/site/social-2027";
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -60,12 +61,17 @@ describe("2027 footer and cookie controls", () => {
     expect(renderToStaticMarkup(createElement(PreferredHomepage))).not.toMatch(/<footer/);
     expect(read("app/(edition)/2027/layout.tsx")).toContain("<SiteFooter />");
     const hrefs = Array.from(footer.matchAll(/href="([^"]+)"/g)).map((m) => m[1]);
-    for (const h of hrefs) expect(h === "/privacy" || h === "/2027" || h.startsWith("/2027/"), h).toBe(true);
+    const social = new Set(SOCIAL_2027.map((s) => s.url));
+    for (const h of hrefs) expect(h === "/privacy" || h === "/2027" || h.startsWith("/2027/") || social.has(h), h).toBe(true);
     expect(footer).toContain("Cookie preferences</button>");
   });
 
   it("invents no contact details, social accounts or legal wording", () => {
-    expect(footer).not.toMatch(/@|mailto:|tel:|wa\.me|instagram|facebook|youtube|tiktok/i);
+    // Only the official accounts already published on the live HEBS site (lib/site/social-2027.ts).
+    const social = Array.from(footer.matchAll(/href="(https:[^"]+)"/g), (m) => m[1]);
+    expect(social).toEqual(SOCIAL_2027.map((s) => s.url));
+    const rest = footer.replace(/<a[^>]*href="https:[^"]+"[^>]*>[^<]*<\/a>/g, "");
+    expect(rest).not.toMatch(/@|mailto:|tel:|wa\.me|youtube|tiktok/i);
     expect(footer).toMatch(/Terms &amp; Conditions<\/span> <span class="pend">Pending approval: A8/);
     expect(footer).not.toMatch(/<a[^>]*>Terms/);
   });

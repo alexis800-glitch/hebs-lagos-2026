@@ -27,6 +27,7 @@ export const HOME = {
     // The primary button is the site-wide priority-list call to action (PRIORITY_CTA in
     // lib/site/2027.ts): the directive's "Join the 2027 Priority List" only once the list is open.
     ctaSecondary: "Explore the experience",
+    ctaSponsor: "Become a sponsor",
   },
   /** The header links, as pages of the 2027 site map (lib/site/2027.ts). */
   nav: ["experience", "programme", "competitions", "education", "travel"],
@@ -66,8 +67,8 @@ export const HOME = {
       { title: "Hair and Beauty Competitions", text: "Thirteen competitions across seven categories.", media: "exp-competitions" },
       { title: "Exhibitions and Brand Showcases", text: "The brands shaping the industry.", media: "exp-exhibitions" },
       { title: "International Networking", text: "Nigeria, Africa, the US, Europe and beyond.", media: "exp-networking-desktop", phoneMedia: "exp-networking-phone" },
-      { title: "Entertainment and Celebrations", text: "Glamorous evenings at the resort.", media: "exp-entertainment" },
-      { title: "Luxury Destination Experiences", text: "A resort setting for the whole summit.", media: "exp-destination" },
+      { title: "Entertainment and Celebrations", text: "Celebrations across all three days, from the Welcome Pre-Party to the close.", media: "exp-entertainment" },
+      { title: "Luxury Destination Experiences", text: "One resort on the Atlantic coast of Lagos for the whole summit.", media: "" },
     ],
   },
   destination: {
@@ -76,6 +77,15 @@ export const HOME = {
     accent: "paradise.",
     body: "NJS Beach Resort, on the Atlantic coast of Lagos, is the official home of HEBS Lagos 2027: three days of the summit together in one destination.",
     cta: "Explore the destination",
+    /** Text-led until NJS supplies approved photographs of the resort (compliance audit, 22 Nov 2026). */
+    panel: {
+      kicker: "NJS Beach Resort",
+      place: "Lagos",
+      placeNote: "on the Atlantic coast",
+      facts: [["Dates", "July 23–25, 2027"], ["At the resort", "Education, competitions, exhibitions, networking and celebrations"]],
+      link: "Visit njsbeachresort.com",
+      note: "Photographs of NJS Beach Resort are added here once NJS supplies approved images.",
+    },
     // Photographed scenes only: the NJS concept films and the pre-party photographs are restricted.
     scenes: [
       { title: "HEBS at NJS, 2026", kind: "photographed", seconds: 6.0, pair: ["dest-terrace", "dest-guest"],
@@ -83,6 +93,12 @@ export const HOME = {
       { title: "The summit floor", kind: "photographed", seconds: 6.0, pair: ["dest-floor-a", "dest-floor-b"],
         note: "Live work on the HEBS Lagos 2026 summit floor, 24 Oct 2026. House of Snapp." },
     ],
+  },
+  education: {
+    label: "Education & masterclasses",
+    title: "Where the industry",
+    accent: "learns.",
+    cta: "Education & masterclasses",
   },
   competitions: {
     label: "Competitions",

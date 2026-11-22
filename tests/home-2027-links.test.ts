@@ -2,6 +2,7 @@
  * The preferred homepage's navigation and calls to action: real links and
  * controls, pointing only at built 2027 pages or at the closed priority list.
  */
+import { SOCIAL_2027 } from "@/lib/site/social-2027";
 import { PAGES } from "@/lib/content/2027-pages";
 import { describe, expect, it } from "vitest";
 import { readFileSync, readdirSync } from "node:fs";
@@ -49,6 +50,7 @@ describe("preferred homepage links", () => {
     expect(SITE_MENU).toHaveLength(12);
   });
 
+  const EXTERNAL_OK = new Set(["https://www.njsbeachresort.com", ...SOCIAL_2027.map((s) => s.url)]);
   it("points every link at a built 2027 page, a real section of it, or the priority list", () => {
     const paths = new Set(SITE_PAGES.filter((p) => p.built).map((p) => p.path));
     const anchors = knownAnchors();
@@ -57,6 +59,9 @@ describe("preferred homepage links", () => {
       // The footer links the live Privacy & Cookie Notice; nothing else outside /2027. The review
       // strip links the approval-status page, as the shared staging banner does (A3b).
       if (h === HOME_HREF || h === PRIORITY_HREF || h === "/privacy" || h === "/2027/status") continue;
+      // Approved external destinations only: the resort's own site (directive 4E) and the official
+      // HEBS social accounts (lib/site/social-2027.ts, compliance audit of 22 Nov 2026).
+      if (EXTERNAL_OK.has(h)) continue;
       const [path, hash] = h.split("#");
       expect(paths.has(path), h).toBe(true);
       if (hash) expect(anchors.has(hash), h).toBe(true);
