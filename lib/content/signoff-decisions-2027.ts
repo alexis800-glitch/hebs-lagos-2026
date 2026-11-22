@@ -15,6 +15,7 @@
  * gate (lib/launch-2027.ts) and the middleware can all read it.
  */
 import LAUNCH_WORDING from "./signoff-launch-2027.json";
+import CORRECTION_WORDING from "./signoff-corrections-2027.json";
 
 export type SignoffDecisionKind = "approved" | "revision-required" | "pending-decision";
 
@@ -210,6 +211,18 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
     on: "2026-11-21",
     reference: "Launch decision of 21 Nov 2026, item 2 \"WEBSITE WORDING — APPROVED\"; wording finalised and recorded by Veridion (docs/launch/2027-launch-record.md)",
     texts: LAUNCH_WORDING.texts,
+  },
+  // Directive compliance corrections, 22 Nov 2026: HEBS management instructed the corrections (venue
+  // imagery, official social links, homepage education block, hero sponsor button) under the wording
+  // authority of 21 Nov. Veridion checked each new line against approved facts (link labels, dates,
+  // the resort's name and coast, a note that photographs follow) and recorded its exact text.
+  {
+    item: "correction:wording-2026-11-22",
+    decision: "approved",
+    by: "HEBS management (corrections instruction to Veridion under the 21 Nov wording authority)",
+    on: "2026-11-22",
+    reference: "Corrections instruction of 22 Nov 2026 following the directive compliance audit (docs/launch/2027-launch-record.md)",
+    texts: CORRECTION_WORDING.texts,
   },
 ];
 

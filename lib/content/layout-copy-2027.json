@@ -122,12 +122,6 @@
    "text": "The priority list is not open yet."
   },
   {
-   "key": "layout.site.b6223b97ec",
-   "scope": "site",
-   "where": "page",
-   "text": "Lagos"
-  },
-  {
    "key": "layout.site.e7ce5ba37b",
    "scope": "site",
    "where": "page",
@@ -152,6 +146,24 @@
    "text": "Plan your visit"
   },
   {
+   "key": "layout.site.a2d43727ab",
+   "scope": "site",
+   "where": "page",
+   "text": "Follow HEBS"
+  },
+  {
+   "key": "layout.site.5721bbef40",
+   "scope": "site",
+   "where": "page",
+   "text": "Instagram"
+  },
+  {
+   "key": "layout.site.82da67b211",
+   "scope": "site",
+   "where": "page",
+   "text": "Facebook"
+  },
+  {
    "key": "layout.site.c9e85e00e6",
    "scope": "site",
    "where": "page",
@@ -174,6 +186,18 @@
    "scope": "site",
    "where": "page",
    "text": "Cookie preferences"
+  },
+  {
+   "key": "layout.site.99387d191c",
+   "scope": "site",
+   "where": "alt",
+   "text": "HEBS on Instagram (opens in a new tab)"
+  },
+  {
+   "key": "layout.site.fd972b138d",
+   "scope": "site",
+   "where": "alt",
+   "text": "HEBS on Facebook (opens in a new tab)"
   },
   {
    "key": "layout.site.b0651ff59c",
@@ -206,16 +230,58 @@
    "text": "– Days – Hours – Minutes – Seconds"
   },
   {
-   "key": "layout.home.0ea58db9e7",
+   "key": "layout.home.339b16b76e",
    "scope": "home",
    "where": "page",
-   "text": "PHOTOGRAPHED HEBS Lagos 2026 at the NJS Royale Events Center, 24 Oct 2026. House of Snapp."
+   "text": "NJS Beach Resort Lagos July 23–25, 2027"
+  },
+  {
+   "key": "layout.home.f2663c58a2",
+   "scope": "home",
+   "where": "page",
+   "text": "Lagos On the Atlantic coast"
   },
   {
    "key": "layout.home.1c2595a317",
    "scope": "home",
    "where": "page",
    "text": "Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling Barbering Braiding Hair Installation & Styling Beauty Fashion Culinary & Culture Loc/Styling"
+  },
+  {
+   "key": "layout.home.fdd5864f69",
+   "scope": "home",
+   "where": "page",
+   "text": "Where the industry learns."
+  },
+  {
+   "key": "layout.home.3f02bbec36",
+   "scope": "home",
+   "where": "page",
+   "text": "Hair education"
+  },
+  {
+   "key": "layout.home.f9b26dd7d3",
+   "scope": "home",
+   "where": "page",
+   "text": "Technical training"
+  },
+  {
+   "key": "layout.home.f7339a9796",
+   "scope": "home",
+   "where": "page",
+   "text": "Live demonstrations"
+  },
+  {
+   "key": "layout.home.b6dbe245a1",
+   "scope": "home",
+   "where": "page",
+   "text": "Beauty business development"
+  },
+  {
+   "key": "layout.home.fe069bee6a",
+   "scope": "home",
+   "where": "page",
+   "text": "Professional masterclasses"
   },
   {
    "key": "layout.home.1a56ba8c1f",
@@ -420,54 +486,6 @@
    "scope": "home",
    "where": "alt",
    "text": "A speaker with a microphone on stage at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.851fc4c9fb",
-   "scope": "home",
-   "where": "alt",
-   "text": "Models walking through the hall at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.41ca744484",
-   "scope": "home",
-   "where": "alt",
-   "text": "Destination scenes"
-  },
-  {
-   "key": "layout.home.28b7d3a694",
-   "scope": "home",
-   "where": "alt",
-   "text": "Enlarge photograph: A session on stage at HEBS Lagos 2026, NJS Royale Events Center"
-  },
-  {
-   "key": "layout.home.4fc180f0f3",
-   "scope": "home",
-   "where": "alt",
-   "text": "A session on stage at HEBS Lagos 2026, NJS Royale Events Center"
-  },
-  {
-   "key": "layout.home.c76860d6f1",
-   "scope": "home",
-   "where": "alt",
-   "text": "Enlarge photograph: A speaker in front of the NJS crest at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.ac42129e22",
-   "scope": "home",
-   "where": "alt",
-   "text": "A speaker in front of the NJS crest at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.1a013cd0df",
-   "scope": "home",
-   "where": "alt",
-   "text": "Enlarge photograph: A braider at work at HEBS Lagos 2026"
-  },
-  {
-   "key": "layout.home.737ad42d61",
-   "scope": "home",
-   "where": "alt",
-   "text": "A braider at work at HEBS Lagos 2026"
   },
   {
    "key": "layout.home.54f56a34be",
@@ -722,12 +740,6 @@
    "text": "Planned event experiences"
   },
   {
-   "key": "layout.experience.e0973fce7c",
-   "scope": "experience",
-   "where": "page",
-   "text": "Visit njsbeachresort.com"
-  },
-  {
    "key": "layout.experience.7e439c353e",
    "scope": "experience",
    "where": "alt",
@@ -800,6 +812,36 @@
    "text": "Event programme | HEBS Lagos 2027"
   },
   {
+   "key": "layout.education.3f02bbec36",
+   "scope": "education",
+   "where": "page",
+   "text": "Hair education"
+  },
+  {
+   "key": "layout.education.f9b26dd7d3",
+   "scope": "education",
+   "where": "page",
+   "text": "Technical training"
+  },
+  {
+   "key": "layout.education.f7339a9796",
+   "scope": "education",
+   "where": "page",
+   "text": "Live demonstrations"
+  },
+  {
+   "key": "layout.education.b6dbe245a1",
+   "scope": "education",
+   "where": "page",
+   "text": "Beauty business development"
+  },
+  {
+   "key": "layout.education.fe069bee6a",
+   "scope": "education",
+   "where": "page",
+   "text": "Professional masterclasses"
+  },
+  {
    "key": "layout.education.82cda900c5",
    "scope": "education",
    "where": "page",
@@ -852,36 +894,6 @@
    "scope": "education",
    "where": "page",
    "text": "Five ways to learn."
-  },
-  {
-   "key": "layout.education.3f02bbec36",
-   "scope": "education",
-   "where": "page",
-   "text": "Hair education"
-  },
-  {
-   "key": "layout.education.f9b26dd7d3",
-   "scope": "education",
-   "where": "page",
-   "text": "Technical training"
-  },
-  {
-   "key": "layout.education.f7339a9796",
-   "scope": "education",
-   "where": "page",
-   "text": "Live demonstrations"
-  },
-  {
-   "key": "layout.education.b6dbe245a1",
-   "scope": "education",
-   "where": "page",
-   "text": "Beauty business development"
-  },
-  {
-   "key": "layout.education.fe069bee6a",
-   "scope": "education",
-   "where": "page",
-   "text": "Professional masterclasses"
   },
   {
    "key": "layout.education.637af48d94",
@@ -1538,12 +1550,6 @@
    "text": "Tickets & registration | HEBS Lagos 2027"
   },
   {
-   "key": "layout.travel.e0973fce7c",
-   "scope": "travel",
-   "where": "page",
-   "text": "Visit njsbeachresort.com"
-  },
-  {
    "key": "layout.travel.ae2649aace",
    "scope": "travel",
    "where": "page",
@@ -1778,6 +1784,18 @@
    "text": "Social media"
   },
   {
+   "key": "layout.contact.68d71b7514",
+   "scope": "contact",
+   "where": "page",
+   "text": "Instagram · @haireducationbeautysummit"
+  },
+  {
+   "key": "layout.contact.01a16d1cb8",
+   "scope": "contact",
+   "where": "page",
+   "text": "Facebook · Hair Education Beauty Summit"
+  },
+  {
    "key": "layout.contact.9cb74c7c29",
    "scope": "contact",
    "where": "page",
@@ -1860,6 +1878,18 @@
    "scope": "contact",
    "where": "page",
    "text": "I understand HEBS will use these details to reply to my message, as described in the privacy notice."
+  },
+  {
+   "key": "layout.contact.7fd58d5c73",
+   "scope": "contact",
+   "where": "alt",
+   "text": "HEBS on Instagram, @haireducationbeautysummit (opens in a new tab)"
+  },
+  {
+   "key": "layout.contact.5be2da71c3",
+   "scope": "contact",
+   "where": "alt",
+   "text": "HEBS on Facebook, Hair Education Beauty Summit (opens in a new tab)"
   },
   {
    "key": "layout.contact.578997a707",

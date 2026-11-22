@@ -660,3 +660,36 @@ body:has(.hp-wrap) [data-preview-banner]{display:none}
 @keyframes hpbar{from{width:0}to{width:100%}}
 .hp .bar i.run,.hp .chap .bar i.run{animation:hpbar var(--dur,4s) linear forwards}
 .hp .bar i.done,.hp .chap .bar i.done{width:100%}
+
+/* Text-led destination (compliance audit, 22 Nov 2026): no 2026 photograph stands for NJS Beach Resort. */
+.hp .dsb .dtp{margin-top:56px;border-top:1px solid rgba(217,193,146,.28);padding-top:40px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px 80px;align-items:end}
+.hp .dsb .dtp .k{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#D9C192}
+.hp .dsb .dtp .big{font-family:var(--display);font-size:clamp(72px,9vw,150px);line-height:.9;margin-top:14px;color:var(--ivory)}
+.hp .dsb .dtp .big span{display:block;font-size:.22em;line-height:1.3;margin-top:10px;color:#EAD9AE}
+.hp .dsb .dtp-facts{display:grid;gap:18px;margin:0}
+.hp .dsb .dtp-facts dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#D9C192}
+.hp .dsb .dtp-facts dd{margin:6px 0 0;font-size:17px;font-weight:300;color:rgba(246,239,226,.9)}
+.hp .dsb .dtp-foot{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px}
+.hp .dsb .dtp .cap{font-size:12.5px;line-height:1.5;color:rgba(246,239,226,.72);margin:0}
+@media (max-width:900px){.hp .dsb .dtp{grid-template-columns:1fr;gap:26px;margin:28px 22px 0;padding-top:26px}}
+/* Text-led experience card */
+.hp .tlp{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:28px;background:radial-gradient(90% 90% at 70% 15%,#123F44 0%,#0B2629 55%,#071A1D 100%);color:var(--ivory)}
+.hp .tlp .k{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#D9C192}
+.hp .tlp .big{font-family:var(--display);font-size:clamp(64px,7vw,120px);line-height:.9}
+.hp .tlp .m{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#EAD9AE}
+
+/* Section G: education and masterclasses on the homepage (compliance audit, 22 Nov 2026) */
+.hp .edh{background:var(--ivory);color:var(--black);padding:104px 96px}
+.hp .edh .edh-hd{max-width:760px}
+.hp .edh h2{font-size:58px;margin-top:14px}
+.hp .edh p.b{margin-top:18px;font-size:17px;font-weight:300;line-height:1.65;color:#3B362F}
+.hp .edh-list{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px;border-top:1px solid rgba(13,11,8,.14);padding-top:28px}
+.hp .edh-list h3{font-family:var(--display);font-size:24px;line-height:1.15;font-weight:500}
+.hp .edh-list p{margin-top:10px;font-size:14.5px;line-height:1.6;color:#3B362F}
+.hp .edh-ft{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+.hp .edh-ft .n{font-size:14px;color:#5E5034;margin:0}
+@media (max-width:1100px){.hp .edh-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.hp .edh{padding:56px 22px}.hp .edh h2{font-size:38px}.hp .edh-list{grid-template-columns:1fr;gap:20px;margin-top:30px}}
+.hp .dsb .dtp .cap{padding:0}
+.hp .edh .btn.ln{color:#5E4A22;border-color:rgba(94,74,34,.6)}
+.hp .edh .lab{color:#735626}

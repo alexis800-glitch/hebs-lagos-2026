@@ -5,6 +5,7 @@ import { PRIORITY_CTA, PRIORITY_HREF, linkable, sitePage, type PageId } from "@/
 import { CookiePreferencesButton } from "@/components/2027/home/client";
 import { HOME_HREF } from "@/components/2027/home/links";
 import { Mark } from "./mark";
+import { SOCIAL_2027 } from "@/lib/site/social-2027";
 
 /**
  * The one footer of every 2027 page, the homepage included. It links only to
@@ -50,10 +51,18 @@ export function SiteFooter() {
             </ul>
           </nav>
         ))}
+        <nav aria-label="Follow HEBS">
+          <h2>Follow HEBS</h2>
+          <ul>
+            {SOCIAL_2027.map((s) => (
+              <li key={s.id}><a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={`HEBS on ${s.label} (opens in a new tab)`}>{s.label}</a></li>
+            ))}
+          </ul>
+        </nav>
         {review ? (
           <div data-staging="">
             <h2>Contact &amp; social</h2>
-            <p className="pf-note">Official 2027 email, phone and social accounts appear here once confirmed.</p>
+            <p className="pf-note">Official 2027 email addresses appear here once each mailbox passes a send-and-receive test.</p>
             <Pending>Pending approval: A7</Pending>
           </div>
         ) : null}

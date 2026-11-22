@@ -32,3 +32,17 @@ Kept disabled: public registration, ticket sales, payments (portal EV_PAYMENTS_F
 ## Rollback
 
 Set `HEBS_2027_WITHHOLD=on` in production and redeploy: every 2027 address returns to a missing page and the 2026 site is unaffected. See docs/launch/LAUNCH-2027.md.
+
+## Corrections, 22 Nov 2026 (private branch website/2027-corrections)
+
+HEBS management's instruction after the directive compliance audit:
+- **Venue imagery:** the 2026 photographs from NJS Royale Events Center (Lekki) no longer appear beside NJS Beach Resort.
+  - The "Beauty meets paradise" section is text-led: verified facts, a link to njsbeachresort.com, and a note that photographs follow.
+  - The "Luxury Destination Experiences" card is text-led.
+  - "Entertainment and Celebrations" no longer says "at the resort".
+- **Social links:** the official Instagram and Facebook accounts published on the live HEBS site appear on Contact and in the footer (`lib/site/social-2027.ts`).
+- **Directive section G:** the homepage has its own Education & Masterclasses block.
+- **Hero buttons:** the hero carries "Become a sponsor".
+- **Wording:** recorded as decision `correction:wording-2026-11-22`.
+
+Not deployed. Production changes need separate authorisation.

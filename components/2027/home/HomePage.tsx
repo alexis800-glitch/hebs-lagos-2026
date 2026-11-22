@@ -48,7 +48,7 @@ function Hero() {
         <div className="rule" />
         <p className="sub">{h.sub}</p>
         <p className="when">{h.when}<br />{h.where}</p>
-        <div className="ctas"><a className="btn pri" href={PRIORITY_HREF}>{PRIORITY_CTA}</a><To className="btn gh" href={pageHref("experience")}>{h.ctaSecondary}</To></div>
+        <div className="ctas"><a className="btn pri" href={PRIORITY_HREF}>{PRIORITY_CTA}</a><To className="btn gh" href={pageHref("experience")}>{h.ctaSecondary}</To><To className="btn gh" href={pageHref("sponsorship")}>{HOME.hero.ctaSponsor}</To></div>
         <LiveCountdown />
       </div>
     </section>
@@ -143,6 +143,19 @@ function Experiences() {
         ),
       };
     }
+    // Text-led card: no photograph stands for NJS Beach Resort until NJS supplies one.
+    if (!it.media) {
+      return {
+        className: "tl",
+        node: (
+          <div className="tlp" aria-hidden="true">
+            <span className="k">NJS Beach Resort</span>
+            <span className="big">Lagos</span>
+            <span className="m">July 23–25, 2027</span>
+          </div>
+        ),
+      };
+    }
     return { node: <Pic id={it.media} className="grade" sizes="(max-width: 600px) calc(100vw - 58px), 560px" style={it.media === "exp-education" ? { objectPosition: "45% 50%" } : undefined} /> };
   });
   return (
@@ -159,19 +172,16 @@ function Experiences() {
 }
 
 /**
- * The destination (Lex, 17 Nov 2026): HEBS Lagos 2026 photographed at NJS, never
- * presented as the resort's facilities, and the destination itself in type. No
- * resort photograph is shown until verified NJS photography is supplied.
- * Black editorial composition, three staggered photographs (Option B, Gary, 17 Nov 2026).
+ * The destination. Compliance audit of 22 Nov 2026 (HEBS management): the 2026
+ * summit photographs were taken at the separate 2026 summit venue, so they no
+ * longer appear beside NJS Beach Resort. The section is
+ * text-led, with the verified facts and a link to the resort's own site, until
+ * NJS supplies approved photographs of the resort itself.
  */
 
 function Destination() {
   const d = HOME.destination;
-  const note = d.scenes[0].note;
-  // Left to right: the session, the speaker before the NJS crest, the braider.
-  const ids = ["dest-terrace", "dest-guest", "dest-floor-b"];
-  const shown = ids.flatMap((id) => { const a = reviewMedia(id); return a ? [a] : []; });
-  if (shown.length !== ids.length) return null;
+  const p = d.panel;
   return (
     <section className="dsb" aria-labelledby="ds-title">
       <div className="hd">
@@ -185,16 +195,21 @@ function Destination() {
           <To className="btn gh" href={pageHref("experience", "destination")}>{d.cta}</To>
         </div>
       </div>
-      <LightboxGroup items={shown.map((a) => ({ src: a.src, alt: a.alt }))} label="HEBS Lagos 2026 at NJS">
-        <figure className="tri" role="group" aria-label="Destination scenes">
-          {shown.map((a, j) => (
-            <div className={`ph t${j}`} key={a.id}>
-              <LightboxTrigger index={j} label={a.alt}><Pic id={a.id} sizes={j === 1 ? "(max-width: 600px) 100vw, 560px" : "(max-width: 600px) 50vw, 420px"} /></LightboxTrigger>
-            </div>
+      <div className="dtp">
+        <div className="dtp-place">
+          <p className="k">{p.kicker}</p>
+          <p className="big">{p.place}<span>{p.placeNote}</span></p>
+        </div>
+        <dl className="dtp-facts">
+          {p.facts.map(([k, v]) => (
+            <div key={k}><dt>{k}</dt><dd>{v}</dd></div>
           ))}
-          <figcaption className="cap"><b>PHOTOGRAPHED</b> {note}</figcaption>
-        </figure>
-      </LightboxGroup>
+        </dl>
+        <div className="dtp-foot">
+          <a className="btn ln" href="https://www.njsbeachresort.com" target="_blank" rel="noopener noreferrer">{p.link}</a>
+          <p className="cap">{p.note}</p>
+        </div>
+      </div>
     </section>
   );
 }
@@ -461,6 +476,36 @@ function Final() {
 }
 
 /** The preferred HEBS Lagos 2027 homepage design, for owner review. */
+/**
+ * Section G of the directive: education and masterclasses as their own homepage
+ * block (compliance audit, 22 Nov 2026). The five tracks and the speakers line
+ * come from the Education page's content, so the two never disagree.
+ */
+function Education() {
+  const e = PAGES.education;
+  const g = HOME.education;
+  return (
+    <section className="edh" aria-labelledby="edh-title">
+      <div className="in">
+        <div className="edh-hd">
+          <p className="lab">{g.label}</p>
+          <h2 id="edh-title" className="disp">{g.title} <em className="it">{g.accent}</em></h2>
+          <p className="b">{e.intro.text}</p>
+        </div>
+        <ol className="edh-list">
+          {e.tracks.map((t) => (
+            <li key={t.id}><h3>{t.title}</h3><p>{t.body.text}</p></li>
+          ))}
+        </ol>
+        <div className="edh-ft">
+          <p className="n">{e.educators.text}</p>
+          <To className="btn ln" href={pageHref("education")}>{g.cta}</To>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function PreferredHomepage() {
   return (
     <div className="hp-wrap">
@@ -478,6 +523,7 @@ export function PreferredHomepage() {
         <Experiences />
         <Destination />
         <Competitions />
+        <Education />
         <Highlights />
         <Watch />
         <Sponsors />
