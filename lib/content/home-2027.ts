@@ -81,7 +81,7 @@ export const HOME = {
     panel: {
       kicker: "NJS Beach Resort",
       place: "Lagos",
-      placeNote: "on the Atlantic coast",
+      placeNote: "On the Atlantic coast",
       facts: [["Dates", "July 23–25, 2027"], ["At the resort", "Education, competitions, exhibitions, networking and celebrations"]],
       link: "Visit njsbeachresort.com",
       note: "Photographs of NJS Beach Resort are added here once NJS supplies approved images.",

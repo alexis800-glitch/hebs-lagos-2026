@@ -198,7 +198,7 @@ function Destination() {
       <div className="dtp">
         <div className="dtp-place">
           <p className="k">{p.kicker}</p>
-          <p className="big">{p.place}<span>, {p.placeNote}</span></p>
+          <p className="big">{p.place}<span>{p.placeNote}</span></p>
         </div>
         <dl className="dtp-facts">
           {p.facts.map(([k, v]) => (

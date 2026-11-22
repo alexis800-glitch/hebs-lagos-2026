@@ -62,7 +62,7 @@ export function SiteFooter() {
         {review ? (
           <div data-staging="">
             <h2>Contact &amp; social</h2>
-            <p className="pf-note">Official 2027 email, phone and social accounts appear here once confirmed.</p>
+            <p className="pf-note">Official 2027 email addresses appear here once each mailbox passes a send-and-receive test.</p>
             <Pending>Pending approval: A7</Pending>
           </div>
         ) : null}
