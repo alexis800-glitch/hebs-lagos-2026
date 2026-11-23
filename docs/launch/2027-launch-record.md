@@ -46,3 +46,18 @@ HEBS management's instruction after the directive compliance audit:
 - **Wording:** recorded as decision `correction:wording-2026-11-22`.
 
 Not deployed. Production changes need separate authorisation.
+
+## Contact emails, 23 Nov 2026 (branch website/2027-contact-emails)
+
+The instruction from HEBS management after the Microsoft 365 mailboxes passed testing:
+- **Mail flow:** enquiries@ and sponsors@hebslagos.com are Microsoft 365 shared mailboxes. On 23 Nov 2026 both passed real external tests: an outside message was received, and a message sent from the mailbox arrived with the HEBS sender name. Recorded in `MAIL_FLOW` (`lib/site/contacts-2027.ts`).
+- **Published, as mailto links:**
+  - enquiries@hebslagos.com, for general enquiries, tickets and visitor support;
+  - sponsors@hebslagos.com, for sponsorships, exhibitors and corporate partnerships.
+- **Where they appear:** Contact, Sponsorship, Exhibitors and the 2027 footer.
+- **Not published:** exhibitors@ and tickets@ are not configured mailboxes and are marked provisional.
+- **Forms:** every form stays closed. The sponsor and exhibitor lines say the online form is closed and give the email address.
+- **Wording:** recorded as decision `correction:contact-email-2026-11-23` (`lib/content/signoff-contact-2027.json`).
+- **Unchanged:** HEBS 2026 pages and their email addresses, Microsoft 365, DNS and MX/SPF/DKIM, and Resend.
+
+Not deployed. Production changes need separate authorisation.

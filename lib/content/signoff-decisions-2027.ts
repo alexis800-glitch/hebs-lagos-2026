@@ -16,6 +16,7 @@
  */
 import LAUNCH_WORDING from "./signoff-launch-2027.json";
 import CORRECTION_WORDING from "./signoff-corrections-2027.json";
+import CONTACT_WORDING from "./signoff-contact-2027.json";
 
 export type SignoffDecisionKind = "approved" | "revision-required" | "pending-decision";
 
@@ -223,6 +224,14 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
     on: "2026-11-22",
     reference: "Corrections instruction of 22 Nov 2026 following the directive compliance audit (docs/launch/2027-launch-record.md)",
     texts: CORRECTION_WORDING.texts,
+  },
+  {
+    item: "correction:contact-email-2026-11-23",
+    decision: "approved",
+    by: "HEBS management (contact-publication instruction to Veridion under the 21 Nov wording authority)",
+    on: "2026-11-23",
+    reference: "Contact email instruction of 23 Nov 2026: enquiries@ and sponsors@hebslagos.com passed external inbound and outbound tests; their publication, with the stated purposes, approved after review and testing; forms stay closed (docs/launch/2027-launch-record.md)",
+    texts: CONTACT_WORDING.texts,
   },
 ];
 

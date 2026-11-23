@@ -400,7 +400,7 @@ export function SponsorshipPage(props: PageProps) {
   const opts = optsOf(props);
   const notes = [
     COPY_DRAFT,
-    "No inquiry is collected. Submission follows INTEGRATION-CONTRACT-v1.1 (signed, server to Base44); the form stays closed until the private integration test and owner approval. Public contacts await D10.",
+    "No inquiry is collected. Submission follows INTEGRATION-CONTRACT-v1.1 (signed, server to Base44); the form stays closed until the private integration test and owner approval. Public email: sponsors@ and enquiries@hebslagos.com, tested 23 Nov 2026.",
     "The prospectus download appears with an approved 2027 prospectus.",
   ];
   return (
@@ -467,13 +467,15 @@ export function SponsorshipPage(props: PageProps) {
  * is not published is left out.
  */
 const INTEREST = {
-  sponsor: { page: "sponsorship", hash: "inquiry", label: "Become a sponsor", closed: "Sponsorship inquiries are not open yet. Nothing can be sent." },
-  exhibitor: { page: "exhibitors", hash: "apply", label: "Become an exhibitor", closed: "Exhibitor applications are not open yet. Nothing can be sent." },
+  sponsor: { page: "sponsorship", hash: "inquiry", label: "Become a sponsor", closed: "The online sponsorship inquiry form is not open yet. Nothing can be sent through this website." },
+  exhibitor: { page: "exhibitors", hash: "apply", label: "Become an exhibitor", closed: "The online exhibitor application form is not open yet. Nothing can be sent through this website." },
 } as const;
 
 function InterestCtas({ first }: { first: keyof typeof INTEREST }) {
   const order = first === "sponsor" ? (["sponsor", "exhibitor"] as const) : (["exhibitor", "sponsor"] as const);
   const open = formEnabled(first, submitConfig());
+  // Sponsors and exhibitors both write to sponsors@ (contacts-2027.ts), shown only once its mail flow passed.
+  const mail = publicContact("sponsors");
   return (
     <div className="mt-9">
       <div className="flex flex-wrap gap-3">
@@ -482,7 +484,12 @@ function InterestCtas({ first }: { first: keyof typeof INTEREST }) {
           return href ? <Button key={k} href={href} variant={i === 0 ? "primary" : "ghost"}>{INTEREST[k].label}</Button> : null;
         })}
       </div>
-      {!open && <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>{INTEREST[first].closed}</p>}
+      {!open && (
+        <p className="mt-4 text-[14px]" style={{ color: "rgba(245,239,228,.72)" }}>
+          {INTEREST[first].closed}
+          {mail ? <> To reach the team now, email <a href={`mailto:${mail}`} className={quietLink} style={{ color: C.ivory }}>{mail}</a>.</> : null}
+        </p>
+      )}
     </div>
   );
 }
@@ -520,6 +527,7 @@ export function ExhibitorsPage(props: PageProps) {
           <div className="lg:col-span-5">
             <h2 id="apply-title" style={h2Style}>Exhibitor applications.</h2>
             <p className="mt-6 max-w-[40ch] text-[17px] leading-[1.7]" style={{ color: C.body }}>Tell us about your company and what you would show.</p>
+            {publicContact("sponsors") ? <div className="mt-8"><ContactEmails only={["sponsors"]} fallback="" /></div> : null}
             <SectionNotes notes={notes.slice(1)} opts={opts} ground="ivory" className="mt-6" />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
@@ -1106,7 +1114,7 @@ function ContactEmails({ fallback, only = ["enquiries", "sponsors", "exhibitors"
 export function ContactPage(props: PageProps) {
   const opts = optsOf(props);
   const c = PAGES.contact;
-  const notes = [COPY_DRAFT, "Email addresses withheld until each mailbox passes a send-and-receive test; social accounts are the official ones published on the live HEBS site (lib/site/social-2027.ts). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
+  const notes = [COPY_DRAFT, "Email: enquiries@ and sponsors@hebslagos.com passed external send-and-receive tests on 23 Nov 2026 and are published (HEBS approval, 23 Nov 2026); exhibitors@ and tickets@ are not configured and stay unpublished. Social accounts are the official ones published on the live HEBS site (lib/site/social-2027.ts). No message is collected until storage (D1) and the privacy notice (D13) are approved."];
   return (
     <Shell page="contact" opts={opts} notes={props.notes ?? "inline"} groups={[["Contact us", notes]]}>
       <PageHero composition="lagos" title={c.title.text} intro={c.intro.text} opts={opts} notes={notes.slice(0, 1)} />

@@ -141,7 +141,7 @@ export const PAGES = {
   },
   contact: {
     title: draft("Contact us"),
-    intro: draft("Questions about HEBS Lagos 2027, partnerships or the press. Official contact details are published once approved."),
+    intro: draft("Questions about HEBS Lagos 2027, partnerships or the press."),
     emails: draft("Official HEBS 2027 email addresses are published here once approved."),
     social: draft("Follow HEBS for news, highlights and announcements."),
   },

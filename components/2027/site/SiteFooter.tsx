@@ -6,6 +6,7 @@ import { CookiePreferencesButton } from "@/components/2027/home/client";
 import { HOME_HREF } from "@/components/2027/home/links";
 import { Mark } from "./mark";
 import { SOCIAL_2027 } from "@/lib/site/social-2027";
+import { CONTACTS_2027, publicContact, type ContactId } from "@/lib/site/contacts-2027";
 
 /**
  * The one footer of every 2027 page, the homepage included. It links only to
@@ -14,7 +15,10 @@ import { SOCIAL_2027 } from "@/lib/site/social-2027";
  * Privacy & Cookie Notice is linked, and Cookie preferences opens the working
  * consent dialog. Items still awaiting approval appear only in internal review,
  * as plain text marked pending, never as links, and are absent from production.
+ * The email column lists only addresses that are approved and passed their mail-flow
+ * test (lib/site/contacts-2027.ts): enquiries@ and sponsors@hebslagos.com.
  */
+const FOOTER_CONTACTS: ContactId[] = ["enquiries", "sponsors"];
 const COLUMNS: { title: string; pages: PageId[] }[] = [
   { title: "The summit", pages: ["about", "experience", "programme", "education", "speakers"] },
   { title: "Take part", pages: ["competitions", "tickets", "exhibitors", "sponsorship"] },
@@ -27,6 +31,10 @@ function Pending({ children }: { children: string }) {
 
 export function SiteFooter() {
   const review = deployEnvironment() !== "production";
+  const emails = FOOTER_CONTACTS.flatMap((id) => {
+    const address = publicContact(id);
+    return address ? [{ id, address, purpose: CONTACTS_2027[id].purpose }] : [];
+  });
   return (
     <footer className="s27f"><div className="pf">
       <div className="pf-top">
@@ -59,7 +67,16 @@ export function SiteFooter() {
             ))}
           </ul>
         </nav>
-        {review ? (
+        {emails.length > 0 ? (
+          <div className="pf-contact">
+            <h2 id="pf-contact-title">Email HEBS</h2>
+            <ul aria-labelledby="pf-contact-title">
+              {emails.map((e) => (
+                <li key={e.id}><a href={`mailto:${e.address}`}>{e.address}</a><span className="pf-purpose">{e.purpose}</span></li>
+              ))}
+            </ul>
+          </div>
+        ) : review ? (
           <div data-staging="">
             <h2>Contact &amp; social</h2>
             <p className="pf-note">Official 2027 email addresses appear here once each mailbox passes a send-and-receive test.</p>

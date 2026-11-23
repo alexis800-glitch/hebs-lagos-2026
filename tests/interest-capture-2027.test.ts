@@ -43,12 +43,12 @@ describe("calls to action", () => {
     delete process.env.HEBS_FORMS_MODE;
     expect(FORMS_OPEN.sponsor).toBe(false);
     expect(FORMS_OPEN.exhibitor).toBe(false);
-    expect(render(SponsorshipPage)).toContain("Sponsorship inquiries are not open yet. Nothing can be sent.");
-    expect(render(ExhibitorsPage)).toContain("Exhibitor applications are not open yet. Nothing can be sent.");
+    expect(render(SponsorshipPage)).toContain("The online sponsorship inquiry form is not open yet. Nothing can be sent through this website.");
+    expect(render(ExhibitorsPage)).toContain("The online exhibitor application form is not open yet. Nothing can be sent through this website.");
     process.env.HEBS_FORMS_MODE = "mock"; // local development only: the forms under test are shown
     expect(formEnabled("sponsor", submitConfig())).toBe(true);
-    expect(render(SponsorshipPage)).not.toContain("Sponsorship inquiries are not open yet.");
-    expect(render(ExhibitorsPage)).not.toContain("Exhibitor applications are not open yet.");
+    expect(render(SponsorshipPage)).not.toContain("The online sponsorship inquiry form is not open yet.");
+    expect(render(ExhibitorsPage)).not.toContain("The online exhibitor application form is not open yet.");
   });
 });
 
