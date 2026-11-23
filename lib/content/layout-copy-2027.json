@@ -1550,28 +1550,28 @@
    "text": "Ticket categories."
   },
   {
-   "key": "layout.tickets.473db7863d",
+   "key": "layout.tickets.96b7dad64a",
    "scope": "tickets",
    "where": "page",
-   "text": "One Day Pass ₦15,000"
+   "text": "1 - Day Pass ₦15,000"
   },
   {
-   "key": "layout.tickets.ac63c7a940",
+   "key": "layout.tickets.c789f41dd1",
    "scope": "tickets",
    "where": "page",
-   "text": "Two Days Pass ₦25,000"
+   "text": "2 - Day Pass ₦25,000"
   },
   {
-   "key": "layout.tickets.5ff45c9cbd",
+   "key": "layout.tickets.a07c142a21",
    "scope": "tickets",
    "where": "page",
-   "text": "Three Days Pass ₦75,000"
+   "text": "3 - Day All - Inclusive ₦75,000"
   },
   {
-   "key": "layout.tickets.466d459c3e",
+   "key": "layout.tickets.67ef3b8d37",
    "scope": "tickets",
    "where": "page",
-   "text": "VIP Experience ₦560,000"
+   "text": "VIP Package Early Bird ₦640,000 Standard ₦960,000"
   },
   {
    "key": "layout.tickets.8e6cd6c289",

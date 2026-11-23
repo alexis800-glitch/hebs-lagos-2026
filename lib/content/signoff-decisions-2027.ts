@@ -17,6 +17,7 @@
 import LAUNCH_WORDING from "./signoff-launch-2027.json";
 import CORRECTION_WORDING from "./signoff-corrections-2027.json";
 import CONTACT_WORDING from "./signoff-contact-2027.json";
+import TICKETS_WORDING from "./signoff-tickets-2027.json";
 
 export type SignoffDecisionKind = "approved" | "revision-required" | "pending-decision";
 
@@ -232,6 +233,14 @@ export const SIGNOFF_DECISIONS: readonly SignoffDecision[] = [
     on: "2026-11-23",
     reference: "Contact email instruction of 23 Nov 2026: enquiries@ and sponsors@hebslagos.com passed external inbound and outbound tests; their publication, with the stated purposes, approved after review and testing; forms stay closed (docs/launch/2027-launch-record.md)",
     texts: CONTACT_WORDING.texts,
+  },
+  {
+    item: "correction:ticket-catalogue-2026-11-23",
+    decision: "approved",
+    by: "HEBS management (confirmed pricing decision to Veridion under the 21 Nov wording authority)",
+    on: "2026-11-23",
+    reference: "Final management decision on pricing, 23 Nov 2026: 2027 uses the 2026 Base44 portal catalogue (1-Day Pass ₦15,000, 2-Day Pass ₦25,000, 3-Day ₦75,000, VIP Early Bird ₦640,000 / Standard ₦960,000; entry fees ₦50,000); ₦560,000 withdrawn (docs/launch/2027-launch-record.md)",
+    texts: TICKETS_WORDING.texts,
   },
 ];
 

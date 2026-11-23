@@ -59,10 +59,10 @@ export const PORTAL_HOSTS: readonly string[] = [];
  * sales are active.
  */
 export const TICKET_SALES: { prices: boolean; payment: boolean; note: string } = {
-  // HEBS management, 21 Nov 2026: the established 2026 prices (lib/content/tickets-2027.ts).
+  // HEBS management, confirmed 23 Nov 2026: the 2026 portal catalogue and prices (lib/content/tickets-2027.ts).
   prices: true,
   payment: false,
-  note: "Prices approved (2026 prices, 21 Nov 2026). Payment method not yet approved or operational: no ticket is sold.",
+  note: "Prices approved (the 2026 portal catalogue, confirmed 23 Nov 2026). Payment method not yet approved or operational: no ticket is sold.",
 };
 
 /** The live portal address for a destination, or null ("Opens soon"). */

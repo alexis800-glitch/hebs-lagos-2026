@@ -810,8 +810,15 @@ export function TicketsPage(props: PageProps) {
                 <ul className="border-t" style={{ borderColor: C.black }}>
                   {TICKET_CATALOGUE_2027.value.map((c) => (
                     <li key={c.id} className="flex items-baseline justify-between gap-6 border-b py-4" style={{ borderColor: "rgba(22,17,10,.16)" }}>
-                      <span style={{ ...display, fontWeight: 500, fontSize: "22px" }}>{c.name}</span>
-                      <span className="tabular-nums text-[17px]">{formatNgn(c.priceNgn)}</span>
+                      <span style={{ ...display, fontWeight: 500, fontSize: "22px" }}><PassName name={c.name} /></span>
+                      {c.earlyBirdNgn === c.standardNgn ? (
+                        <span className="tabular-nums text-[17px]">{formatNgn(c.standardNgn)}</span>
+                      ) : (
+                        <span className="text-right text-[17px] leading-relaxed">
+                          <span className="block"><span className="text-[14px]" style={{ color: C.body }}>Early Bird </span><span className="tabular-nums">{formatNgn(c.earlyBirdNgn)}</span></span>
+                          <span className="block"><span className="text-[14px]" style={{ color: C.body }}>Standard </span><span className="tabular-nums">{formatNgn(c.standardNgn)}</span></span>
+                        </span>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -1106,6 +1113,29 @@ function ContactEmails({ fallback, only = ["enquiries", "sponsors", "exhibitors"
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * A ticket name with readable hyphens (D5, 23 Nov 2026). Bodoni Moda's hyphen is a
+ * hairline that nearly vanishes at display sizes, so each hyphen is set in Jost at
+ * text weight and a hyphenated word ("1-Day", "All-Inclusive") never breaks across
+ * lines. The text itself is unchanged.
+ */
+function PassName({ name }: { name: string }) {
+  return (
+    <>
+      {name.split(" ").map((word, i) => (
+        <span key={i}>
+          {i > 0 ? " " : ""}
+          {word.includes("-") ? (
+            <span style={{ whiteSpace: "nowrap" }}>
+              {word.split("-").map((part, j) => <span key={j}>{j > 0 ? <span style={{ fontFamily: "var(--c-jost), system-ui, sans-serif", fontWeight: 500, margin: "0 0.04em" }}>-</span> : null}{part}</span>)}
+            </span>
+          ) : word}
+        </span>
+      ))}
+    </>
   );
 }
 

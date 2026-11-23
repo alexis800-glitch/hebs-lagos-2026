@@ -1,0 +1,9 @@
+{
+ "note": "Ticket catalogue of 23 Nov 2026 (confirmed management decision): the 2026 Base44 portal catalogue, names and Early Bird/Standard prices; the ₦560,000 VIP figure is withdrawn. The inventory joins the hyphen spans with spaces; the page reads \"1-Day Pass\", \"3-Day All-Inclusive\". Each approval binds to this exact text.",
+ "texts": {
+  "layout.tickets.96b7dad64a": "1 - Day Pass ₦15,000",
+  "layout.tickets.c789f41dd1": "2 - Day Pass ₦25,000",
+  "layout.tickets.a07c142a21": "3 - Day All - Inclusive ₦75,000",
+  "layout.tickets.67ef3b8d37": "VIP Package Early Bird ₦640,000 Standard ₦960,000"
+ }
+}
