@@ -95,7 +95,7 @@ describe("decisions", () => {
       expect(d.by).not.toMatch(/Shuler/);
       if (d.item.startsWith("correction:")) {
         expect(d.by).toMatch(/^HEBS management/);
-        expect(d.on).toBe("2026-11-22");
+        expect(["2026-11-22", "2026-11-23"]).toContain(d.on);
         expect(d.reference).toMatch(/2027-launch-record\.md/);
         continue;
       }

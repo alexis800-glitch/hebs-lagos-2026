@@ -62,15 +62,18 @@ describe("2027 footer and cookie controls", () => {
     expect(read("app/(edition)/2027/layout.tsx")).toContain("<SiteFooter />");
     const hrefs = Array.from(footer.matchAll(/href="([^"]+)"/g)).map((m) => m[1]);
     const social = new Set(SOCIAL_2027.map((s) => s.url));
-    for (const h of hrefs) expect(h === "/privacy" || h === "/2027" || h.startsWith("/2027/") || social.has(h), h).toBe(true);
+    const mail = new Set(["mailto:enquiries@hebslagos.com", "mailto:sponsors@hebslagos.com"]); // tested 23 Nov 2026 (lib/site/contacts-2027.ts)
+    for (const h of hrefs) expect(h === "/privacy" || h === "/2027" || h.startsWith("/2027/") || social.has(h) || mail.has(h), h).toBe(true);
     expect(footer).toContain("Cookie preferences</button>");
   });
 
-  it("invents no contact details, social accounts or legal wording", () => {
+  it("invents no contact details, social accounts or legal wording: only the two tested 2027 mailboxes", () => {
     // Only the official accounts already published on the live HEBS site (lib/site/social-2027.ts).
     const social = Array.from(footer.matchAll(/href="(https:[^"]+)"/g), (m) => m[1]);
     expect(social).toEqual(SOCIAL_2027.map((s) => s.url));
-    const rest = footer.replace(/<a[^>]*href="https:[^"]+"[^>]*>[^<]*<\/a>/g, "");
+    const mail = Array.from(footer.matchAll(/href="(mailto:[^"]+)"/g), (m) => m[1]);
+    expect(mail).toEqual(["mailto:enquiries@hebslagos.com", "mailto:sponsors@hebslagos.com"]);
+    const rest = footer.replace(/<a[^>]*href="(https:|mailto:(enquiries|sponsors)@hebslagos\.com")[^"]*"?[^>]*>[^<]*<\/a>/g, "");
     expect(rest).not.toMatch(/@|mailto:|tel:|wa\.me|youtube|tiktok/i);
     expect(footer).toMatch(/Terms &amp; Conditions<\/span> <span class="pend">Pending approval: A8/);
     expect(footer).not.toMatch(/<a[^>]*>Terms/);

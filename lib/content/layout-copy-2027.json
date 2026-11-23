@@ -164,6 +164,24 @@
    "text": "Facebook"
   },
   {
+   "key": "layout.site.29a05f510e",
+   "scope": "site",
+   "where": "page",
+   "text": "Email HEBS"
+  },
+  {
+   "key": "layout.site.58bb703b27",
+   "scope": "site",
+   "where": "page",
+   "text": "enquiries@hebslagos.com General enquiries, tickets and visitor support"
+  },
+  {
+   "key": "layout.site.6b329faf50",
+   "scope": "site",
+   "where": "page",
+   "text": "sponsors@hebslagos.com Sponsorships, exhibitors and corporate partnerships"
+  },
+  {
    "key": "layout.site.c9e85e00e6",
    "scope": "site",
    "where": "page",
@@ -1100,10 +1118,10 @@
    "text": "Become an exhibitor"
   },
   {
-   "key": "layout.exhibitors.0f2cbd3140",
+   "key": "layout.exhibitors.15e29d0156",
    "scope": "exhibitors",
    "where": "page",
-   "text": "Exhibitor applications are not open yet. Nothing can be sent."
+   "text": "The online exhibitor application form is not open yet. Nothing can be sent through this website. To reach the team now, email sponsors@hebslagos.com."
   },
   {
    "key": "layout.exhibitors.502c03b93a",
@@ -1158,6 +1176,18 @@
    "scope": "exhibitors",
    "where": "page",
    "text": "Tell us about your company and what you would show."
+  },
+  {
+   "key": "layout.exhibitors.8f27d66c04",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Sponsorships, exhibitors and corporate partnerships: sponsors@hebslagos.com"
+  },
+  {
+   "key": "layout.exhibitors.0f2cbd3140",
+   "scope": "exhibitors",
+   "where": "page",
+   "text": "Exhibitor applications are not open yet. Nothing can be sent."
   },
   {
    "key": "layout.exhibitors.7c9fd14828",
@@ -1280,6 +1310,12 @@
    "text": "Brand activation"
   },
   {
+   "key": "layout.sponsorship.8f27d66c04",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "Sponsorships, exhibitors and corporate partnerships: sponsors@hebslagos.com"
+  },
+  {
    "key": "layout.sponsorship.726826e89d",
    "scope": "sponsorship",
    "where": "page",
@@ -1346,10 +1382,10 @@
    "text": "Not open yet"
   },
   {
-   "key": "layout.sponsorship.3e11ec6e58",
+   "key": "layout.sponsorship.226fd765e9",
    "scope": "sponsorship",
    "where": "page",
-   "text": "Sponsorship inquiries are not open yet. Nothing can be sent."
+   "text": "The online sponsorship inquiry form is not open yet. Nothing can be sent through this website. To reach the team now, email sponsors@hebslagos.com."
   },
   {
    "key": "layout.sponsorship.51b7a8a4c6",
@@ -1428,6 +1464,12 @@
    "scope": "sponsorship",
    "where": "page",
    "text": "Tell the HEBS team about your brand and how you want to take part."
+  },
+  {
+   "key": "layout.sponsorship.2cad90d446",
+   "scope": "sponsorship",
+   "where": "page",
+   "text": "General enquiries, tickets and visitor support: enquiries@hebslagos.com"
   },
   {
    "key": "layout.sponsorship.f348262f81",
@@ -1742,6 +1784,12 @@
    "text": "Nigeria"
   },
   {
+   "key": "layout.contact.8f27d66c04",
+   "scope": "contact",
+   "where": "page",
+   "text": "Sponsorships, exhibitors and corporate partnerships: sponsors@hebslagos.com"
+  },
+  {
    "key": "layout.contact.ab42293e29",
    "scope": "contact",
    "where": "page",
@@ -1758,6 +1806,12 @@
    "scope": "contact",
    "where": "page",
    "text": "Not open yet"
+  },
+  {
+   "key": "layout.contact.2cad90d446",
+   "scope": "contact",
+   "where": "page",
+   "text": "General enquiries, tickets and visitor support: enquiries@hebslagos.com"
   },
   {
    "key": "layout.contact.4238dc4122",
