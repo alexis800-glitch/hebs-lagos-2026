@@ -775,7 +775,7 @@ export function TicketsPage(props: PageProps) {
   // Staging: the test copy's booking pages (lib/integrations/booking-2027.ts). Production: closed until ticket sales are approved.
   const buy = bookingLink("tickets") ?? portalLink("tickets", opts.environment);
   const myBooking = bookingLink("booking");
-  const notes = [COPY_DRAFT, "Ticket categories, prices and payment gateway are approved separately (directive section 6). Payment collection is not authorised."];
+  const notes = [COPY_DRAFT, "Ticket categories and prices are approved (management decision, 23 Nov 2026: the 2026 portal catalogue). The payment method is not decided; ticket sales and payment collection are not authorised."];
   return (
     <Shell page="tickets" opts={opts} notes={props.notes ?? "inline"} groups={[["Tickets & registration", notes]]}>
       {/* Booking links (staging, or the approved production portal) carry the website's own origin back to the portal. */}

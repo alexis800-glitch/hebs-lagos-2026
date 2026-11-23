@@ -9,8 +9,9 @@
  * 2026 website) is withdrawn: the portal sold VIP at ₦640,000 Early Bird and
  * ₦960,000 Standard.
  *
- * Prices are in naira only: 2027 payment is by naira bank transfer. What each pass
- * includes, and the Early Bird dates, are not shown: they await 2027 confirmation.
+ * Prices are shown in naira only. The 2027 payment method is NOT decided
+ * (TICKET_SALES.payment = false): no ticket is sold and no payment is taken. What
+ * each pass includes, and the Early Bird dates, are not shown until confirmed.
  *
  * Showing prices does not open sales: "Buy tickets" also needs an approved, working
  * payment method (TICKET_SALES.payment) and the production portal.
