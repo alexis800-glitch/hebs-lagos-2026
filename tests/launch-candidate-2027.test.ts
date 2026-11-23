@@ -60,12 +60,12 @@ describe("launch candidate: homepage and Tickets", () => {
     }
   });
 
-  it("keeps Tickets informational: no sales or payment; only the approved naira prices (21 Nov 2026)", async () => {
+  it("keeps Tickets informational: no sales or payment; only the approved naira prices (portal catalogue, 23 Nov 2026)", async () => {
     const { tickets } = await pages();
-    const { TICKET_CATALOGUE_2027, formatNgn } = await import("../lib/content/tickets-2027");
+    const { TICKET_CATALOGUE_2027, formatNgn, ticketAmounts } = await import("../lib/content/tickets-2027");
     expect(tickets).toMatch(/not on sale/);
     expect(tickets).not.toMatch(/Buy tickets|Book now|Checkout|Add to cart|Pay now|\$\d|USD/i);
-    const approved = TICKET_CATALOGUE_2027.status === "approved" ? TICKET_CATALOGUE_2027.value.map((c) => formatNgn(c.priceNgn)) : [];
+    const approved = TICKET_CATALOGUE_2027.status === "approved" ? TICKET_CATALOGUE_2027.value.flatMap(ticketAmounts).map(formatNgn) : [];
     for (const amount of tickets.match(/₦[\d,]+/g) ?? []) expect(approved, amount).toContain(amount);
     expect(tickets).not.toMatch(/Secure online payment|How registration will work/);
     expect(tickets).not.toMatch(/<form|<input/);

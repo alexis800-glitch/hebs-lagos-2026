@@ -61,3 +61,23 @@ The instruction from HEBS management after the Microsoft 365 mailboxes passed te
 - **Unchanged:** HEBS 2026 pages and their email addresses, Microsoft 365, DNS and MX/SPF/DKIM, and Resend.
 
 Not deployed. Production changes need separate authorisation.
+
+## Ticket catalogue, 23 Nov 2026 (branch website/2027-ticket-catalogue)
+
+The final management decision on pricing: 2027 uses the same amounts as HEBS Lagos 2026, with the 2026 Base44 portal catalogue as the source of truth.
+- **Tickets, with the portal's names:**
+
+  | Ticket | Early Bird | Standard |
+  |---|---|---|
+  | 1-Day Pass | ₦15,000 | ₦15,000 |
+  | 2-Day Pass | ₦25,000 | ₦25,000 |
+  | 3-Day All-Inclusive | ₦75,000 | ₦75,000 |
+  | VIP Package | ₦640,000 | ₦960,000 |
+
+- **Withdrawn:** the ₦560,000 VIP planning figure.
+- **Entry fees:** ₦50,000 for each of the 13 competitions (unchanged, `lib/competitions.ts`).
+- **Typography:** hyphens in ticket names are set in Jost so they read clearly (D5).
+- **Wording:** recorded as decision `correction:ticket-catalogue-2026-11-23` (`lib/content/signoff-tickets-2027.json`).
+- **Unchanged:** sales, payment, registration and the HEBS 2026 pages.
+
+Not deployed. Production changes need separate authorisation.

@@ -42,8 +42,9 @@ export const PORTAL_2027: Record<PortalDestination, Gated<string>> = {
   "competition-application": PENDING_ROUTE("competition application"),
   "education-registration": PENDING_ROUTE("education registration"),
   contact: PENDING_ROUTE("contact message"),
-  // Directive section 6: ticket categories, prices and payment gateways are approved separately.
-  tickets: { status: "awaiting-confirmation", note: "Ticket sales not authorised; categories, prices and payment gateway awaiting approval." },
+  // Ticket categories and prices: approved (management decision, 23 Nov 2026; lib/content/tickets-2027.ts).
+  // Sales stay closed: the payment method is not decided and ticket sales are not authorised.
+  tickets: { status: "awaiting-confirmation", note: "Ticket sales not authorised: the payment method is not decided. Categories and prices are approved (23 Nov 2026)." },
 };
 
 /**
@@ -59,10 +60,10 @@ export const PORTAL_HOSTS: readonly string[] = [];
  * sales are active.
  */
 export const TICKET_SALES: { prices: boolean; payment: boolean; note: string } = {
-  // HEBS management, 21 Nov 2026: the established 2026 prices (lib/content/tickets-2027.ts).
+  // HEBS management, confirmed 23 Nov 2026: the 2026 portal catalogue and prices (lib/content/tickets-2027.ts).
   prices: true,
   payment: false,
-  note: "Prices approved (2026 prices, 21 Nov 2026). Payment method not yet approved or operational: no ticket is sold.",
+  note: "Prices approved (the 2026 portal catalogue, confirmed 23 Nov 2026). Payment method not yet approved or operational: no ticket is sold.",
 };
 
 /** The live portal address for a destination, or null ("Opens soon"). */
